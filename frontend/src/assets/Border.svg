@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 307.07 92.87">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: url(#New_Gradient_Swatch_1);
+        stroke-miterlimit: 10;
+        stroke-width: 4px;
+      }
+    </style>
+    <linearGradient id="New_Gradient_Swatch_1" data-name="New Gradient Swatch 1" x1="0" y1="46.44" x2="307.07" y2="46.44" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00a657"/>
+      <stop offset="1" stop-color="#00a2dc"/>
+    </linearGradient>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <rect class="cls-1" x="2" y="2" width="303.07" height="88.87" rx="44.44" ry="44.44"/>
+  </g>
+</svg>
