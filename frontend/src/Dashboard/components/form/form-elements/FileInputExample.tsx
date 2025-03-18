@@ -240,7 +240,7 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imag
               </div>
             </div>
 
-            <div className="col-3 grow-1  h-[60vh] flex justify-center items-center">
+            <div className="col-3 grow-1  h-[60vh] flex  items-center">
               {/* Upload Section */}
               <div className="flex justify-center ">
                 <div className="self-end">
@@ -266,15 +266,15 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imag
               </div>
 
               {/* All Images Section */}
-              <div className="flex flex-col px-2 h-[60vh] overflow-y-auto custom-scrollbar">
+              <div className="flex flex-col px-2 h-[60vh]  custom-scrollbar">
                 {showAllImagesSection && (
-                  <div className="overflow-x-auto">
+                  <div className="">
                     <h5 className="mb-4 text-xl lg:text-2xl">All Images</h5>
                     <div className="flex flex-wrap  gap-5">
                       {allImages.map((image, index) => (
                         <div
                           key={index}
-                          className={`relative cursor-pointer p-1 w-28 ${
+                          className={`relative cursor-pointer p-0.5 w-32 ${
                             selectedImageUrl === image.imageUrl
                               ? "border-(--blue) border-4"
                               : "border-gray-700 border"
@@ -286,7 +286,7 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imag
                           <img
                             src={`http://localhost:5300${image.imageUrl}`}
                             alt={`Image ${index + 1}`}
-                            className="w-28 h-28 object-contain"
+                            className="w-32 h-32 object-contain"
                           />
 
                           {selectedImageUrl === image.imageUrl && hoverIcons !== image.imageUrl && (
