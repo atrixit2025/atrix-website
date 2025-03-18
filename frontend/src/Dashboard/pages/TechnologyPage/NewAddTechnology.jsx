@@ -1,131 +1,3 @@
-// import React, { useState, useEffect } from "react";
-// import FileInputExample from "../../components/form/form-elements/FileInputExample";
-// import Button from "../../components/ui/button/Button";
-// import Checkbox from "../../components/form/input/Checkbox";
-// import Label from "../../components/form/Label";
-// import Input from "../../components/form/input/InputField";
-// import ComponentCategory from "../../components/common/ComponentCategoryCard";
-// import { ImageProvider } from "../../ContextApi/ImageApi";
-// import axios from "axios";
-// import { useNavigate } from "react-router-dom";
-
-// export default function NewAddTechnology() {
-//   const [selectedCategories, setSelectedCategories] = useState([]);
-//   const [title, setTitle] = useState("");
-//   const [imageId, setImageId] = useState(null);
-// const navigate = useNavigate()
-//   // Debugging: Log imageId whenever it changes
-//   useEffect(() => {
-//     console.log("Image ID Updated:", imageId);
-//   }, [imageId]);
-
-//   const handleCategoryChange = (category) => {
-//     setSelectedCategories((prev) => {
-//       if (prev.includes(category)) {
-//         return prev.filter((cat) => cat !== category);
-//       } else {
-//         return [...prev, category];
-//       }
-//     });
-//   };
-
-//   const handleSubmit = async () => {
-//     console.log("Title:", title);
-//     console.log("Selected Categories:", selectedCategories);
-//     console.log("Image ID:", imageId);
-
-//     if (!title || selectedCategories.length === 0 || !imageId) {
-//       alert("Title, category, and image are required!");
-//       return;
-//     }
-
-//     const technologyData = {
-//       title,
-//       category: selectedCategories.join(", "),
-//       imageId,
-//     };
-
-//     try {
-//       const response = await axios.post("http://localhost:5300/technology/add", technologyData, {
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//       });
-
-//       console.log("Technology created successfully:", response.data);
-//       alert("Technology created successfully!");
-//       navigate("/Technology")
-//     } catch (error) {
-//       console.error("Error creating technology:", error);
-//       alert("Error creating technology. Please try again.");
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <div className="flex justify-between items-center mb-10">
-//         <h1 className="text-4xl font-semibold text-gray-800 dark:text-white/90">
-//           Add New Technology
-//         </h1>
-//         <div>
-//           <Button
-//             size="sm"
-//             variant="outline"
-//             className="cursor-pointer"
-//             onClick={handleSubmit}
-//           >
-//             Publish
-//           </Button>
-//         </div>
-//       </div>
-//       <div className="grid grid-cols-[4fr_1fr] gap-6">
-//         <div>
-//           <Label htmlFor="input">Add Title</Label>
-//           <Input
-//             type="text"
-//             id="input"
-//             placeholder="Add Title"
-//             value={title}
-//             onChange={(e) => setTitle(e.target.value)}
-//           />
-//         </div>
-//         <div className="space-y-6">
-//           <div>
-//             <ComponentCategory title="Category">
-//               <div className="items-center gap-4 space-y-5">
-//                 <div className="flex items-center gap-3">
-//                   <Checkbox
-//                     checked={selectedCategories.includes("Frontend")}
-//                     onChange={() => handleCategoryChange("Frontend")}
-//                   />
-//                   <span className="block text-sm font-medium text-gray-700 dark:text-gray-400">
-//                     Frontend
-//                   </span>
-//                 </div>
-//                 <div className="flex items-center gap-3">
-//                   <Checkbox
-//                     checked={selectedCategories.includes("Backend")}
-//                     onChange={() => handleCategoryChange("Backend")}
-//                   />
-//                   <span className="block text-sm font-medium text-gray-700 dark:text-gray-400">
-//                     Backend
-//                   </span>
-//                 </div>
-//               </div>
-//             </ComponentCategory>
-//           </div>
-//           <ImageProvider>
-//             <FileInputExample onImageUpload={setImageId} />
-//           </ImageProvider>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-
-
-
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FileInputExample from "../../components/form/form-elements/FileInputExample";
@@ -156,13 +28,6 @@ export default function NewAddTechnology() {
     }
   }, [technology]);
 
-  // useEffect(() => {
-  //   if (technology) {
-  //     setTitle(technology.title); // Pre-fill the title
-  //     setSelectedCategories(technology.category.split(", ")); // Pre-fill the categories
-  //     setImageId(technology.imageId); // Pre-fill the image ID
-  //   }
-  // }, [technology]);
 
   // Handle category selection
   const handleCategoryChange = (category) => {
@@ -265,6 +130,7 @@ export default function NewAddTechnology() {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
+          
         </div>
         <div className="space-y-6">
           <div>
@@ -295,7 +161,8 @@ export default function NewAddTechnology() {
             </ComponentCategory>
           </div>
           <ImageProvider>
-            <FileInputExample onImageUpload={setImageId} imageId={imageId} />
+            <FileInputExample  onImageUpload={(imageId) => setImageId(imageId)} // Callback to update the imageId in the parent component
+  imageId={technology?.imageId} />
           </ImageProvider>
         </div>
       </div>

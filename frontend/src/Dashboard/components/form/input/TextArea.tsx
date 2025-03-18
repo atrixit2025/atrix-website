@@ -1,10 +1,11 @@
 import React from "react";
 
 interface TextareaProps {
+  id?: string; // ID for the textarea
   placeholder?: string; // Placeholder text
   rows?: number; // Number of rows
   value?: string; // Current value
-  onChange?: (value: string) => void; // Change handler
+  onChange?: (id: string, value: string) => void; // Change handler with ID
   className?: string; // Additional CSS classes
   disabled?: boolean; // Disabled state
   error?: boolean; // Error state
@@ -12,6 +13,7 @@ interface TextareaProps {
 }
 
 const TextArea: React.FC<TextareaProps> = ({
+  id = "", // Default ID
   placeholder = "Enter your message", // Default placeholder
   rows = 3, // Default number of rows
   value = "", // Default value
@@ -21,9 +23,9 @@ const TextArea: React.FC<TextareaProps> = ({
   error = false, // Error state
   hint = "", // Default hint text
 }) => {
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChanges = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (onChange) {
-      onChange(e.target.value);
+      onChange(id, e.target.value); // Pass the ID and value to the parent
     }
   };
 
@@ -40,10 +42,11 @@ const TextArea: React.FC<TextareaProps> = ({
   return (
     <div className="relative">
       <textarea
+        id={id} 
         placeholder={placeholder}
         rows={rows}
         value={value}
-        onChange={handleChange}
+        onChange={handleChanges}
         disabled={disabled}
         className={textareaClasses}
       />

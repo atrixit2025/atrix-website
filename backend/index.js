@@ -6,6 +6,7 @@ import connectDB from './DB/db.js';
 // import TechnologyRouter from './Routes/Technology.js';
 import ImageRouter from './Routes/Image.js';
 import TechnologyRouter from './Routes/Technology.js';
+import CategoryRouter from './Routes/Category.js';
 
 const __filename = fileURLToPath(import.meta.url); 
 const __dirname = path.dirname(__filename);
@@ -19,18 +20,20 @@ connectDB();
 
 // Serve static files from the uploads directory
 app.use('/technology', express.static(path.join(__dirname, 'uploads', 'technology')), (req, res, next) => {
-  console.log(`Request received for: ${req.url}`);
+  // console.log(`Request received for: ${req.url}`);
   next();
 });
 
 app.use("/technology", TechnologyRouter);
 
 app.use('/Image', express.static(path.join(__dirname, 'uploads', 'Image')), (req, res, next) => {
-  console.log(`Request received for: ${req.url}`);
+  // console.log(`Request received for: ${req.url}`);
   next();
 });
 
 app.use("/Image", ImageRouter);
+app.use("/Category", CategoryRouter);
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

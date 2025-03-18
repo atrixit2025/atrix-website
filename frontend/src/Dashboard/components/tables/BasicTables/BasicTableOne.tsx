@@ -56,6 +56,25 @@ const navigate = useNavigate()
     fetchData();
   }, []);
 
+  const handleDelete = async (id: number, title: string, category: string) => {
+    try {
+      // Send a DELETE request to the server
+      const response = await axios.delete("http://localhost:5300/technology/delete", {
+        data: { title, category }, // Send title and category in the request body
+      });
+  
+      if (response.status === 200) {
+        // Remove the deleted technology from the tableData state
+        setTableData((prevData) => prevData.filter((order) => order.id !== id));
+        alert("Technology deleted successfully!");
+      }
+    } catch (error) {
+      console.error("Error deleting technology:", error);
+      alert("Error deleting technology. Please try again.");
+    }
+  };
+
+
   // Handle individual row selection
   const handleRowSelect = (id: number) => {
     if (selectedRows.includes(id)) {
@@ -175,7 +194,7 @@ const navigate = useNavigate()
                   <TableCell className="px-4 py-3 text-gray-500 text-theme-sm dark:text-gray-400">
                     <div className="flex gap-2">
                       <BiEdit className="cursor-pointer text-gray-500 hover:text-gray-700 text-2xl" onClick={() => handleEdit(order)}/>
-                      <MdDelete className="cursor-pointer text-gray-500 hover:text-red-500 text-2xl" />
+                      <MdDelete className="cursor-pointer text-gray-500 hover:text-red-500 text-2xl" onClick={() => handleDelete(order.id, order.name, order.Category)}/>
                     </div>
                   </TableCell>
                 </TableRow>
