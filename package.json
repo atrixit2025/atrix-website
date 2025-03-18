@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "i": "^0.3.7",
-    "npm": "^11.2.0",
-    "react-fast-marquee": "^1.6.5"
-  }
-}
