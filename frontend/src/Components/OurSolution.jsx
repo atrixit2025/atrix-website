@@ -59,7 +59,7 @@ const OurSolution = () => {
 
                 <div className='row  py-14 md:py-28'>
                     <div className=" grid md:grid-cols-3 grid-cols-1  gap-10  ">
-                        <h2 className="text-6xl font-bold md:mb-8    md:text-end    tracking-wider">Our Solution <br />Process</h2>
+                        <h2 className="text-6xl font-bold md:mb-8    md:text-end    tracking-wider">Our Solution <br />Process </h2>
 
                         <div className='w-full max-w- flex items-end'>
                             <svg className='' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477 65">

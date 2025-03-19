@@ -206,7 +206,7 @@ const About = () => {
             <h3 className="pt-6 text-xl md:text-2xl font-bold">
               Agile Solutions
             </h3>
-            <p className="pt-2 text-gray-500 text-sm md:text-base">
+            <p className="pt-2 text-gray-500  text-sm md:text-base">
               Ethical solutions and guided by a moral compass we add value to
               our client's lives through our products and solutions.
             </p>
