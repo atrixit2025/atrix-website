@@ -14,7 +14,6 @@ const OurSolution = React.lazy(() => import('../Components/OurSolution'));
 const OurPortfolio = React.lazy(() => import('../Components/OurPortfolio'));
 const Technology = React.lazy(() => import('../Components/Technology'));
 const LetterMarquee = React.lazy(() => import('../Components/marqueelogo/letterMarquee'));
-import video from "../assets/atrix office shoot comressed.mp4"
 
 
 const Home = () => {

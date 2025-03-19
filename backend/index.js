@@ -7,6 +7,8 @@ import connectDB from './DB/db.js';
 import ImageRouter from './Routes/Image.js';
 import TechnologyRouter from './Routes/Technology.js';
 import CategoryRouter from './Routes/Category.js';
+import BlogRouter from './Routes/Blog/Blog.js';
+import BlogCategoryRouter from './Routes/Blog/BlogCategory.js';
 
 const __filename = fileURLToPath(import.meta.url); 
 const __dirname = path.dirname(__filename);
@@ -18,7 +20,6 @@ app.use(express.json());
 app.use(cors());
 connectDB();
 
-// Serve static files from the uploads directory
 app.use('/technology', express.static(path.join(__dirname, 'uploads', 'technology')), (req, res, next) => {
   // console.log(`Request received for: ${req.url}`);
   next();
@@ -33,6 +34,11 @@ app.use('/Image', express.static(path.join(__dirname, 'uploads', 'Image')), (req
 
 app.use("/Image", ImageRouter);
 app.use("/Category", CategoryRouter);
+
+
+app.use("/Blog", BlogRouter);
+app.use("/BlogCategory", BlogCategoryRouter);
+
 
 
 app.listen(PORT, () => {

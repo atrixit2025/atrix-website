@@ -1,26 +1,44 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ComponentCard from "../../components/common/ComponentCard";
 import NewPageBreadcrumb from "../../components/common/NewPageBreadcrumb";
 import Label from "../../components/form/Label";
 import Input from "../../components/form/input/InputField";
 import TextArea from "../../components/form/input/TextArea";
 import Button from "../../components/ui/button/Button";
-import { CategoryContext } from "../../ContextApi/CategoryContextApi";
-import CategoryTable from "./CategoryTable";
+import CategoryBlogTable from "./CategoryBlogTable";
+import { BlogCategoryContext } from "../../ContextApi/BlogCategoryContextApi";
+import axios from "axios";
+import Select from "../../components/form/Select";
 
-export default function CategoryTechnology() {
-  const { addCategory, editCategory } = useContext(CategoryContext);
+export default function CategoryBlog() {
+  const { addBlogCategory, editBlogCategory } = useContext(BlogCategoryContext);
   const [formData, setFormData] = useState({
     name: "",
     description: "",
     customSlug: "",
     autoSlug: "",
+    ParentCategory: "", // Add ParentCategory to the form state
   });
-  const [editingCategory, setEditingCategory] = useState(null); // Track the category being edited
+  const [categories, setCategories] = useState([]); // Fetch all categories for the dropdown
+  const [editingCategory, setEditingCategory] = useState(null);
+
+  // Fetch categories for the dropdown
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get("http://localhost:5300/BlogCategory/blog/category/get");
+        setCategories(response.data.categories);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   // Handle form submission
   const handleSubmit = async () => {
-    const { name, description, customSlug, autoSlug } = formData;
+    const { name, description, customSlug, autoSlug, ParentCategory } = formData;
 
     if (!name || !description) {
       alert("Name and Description are required!");
@@ -30,17 +48,19 @@ export default function CategoryTechnology() {
     try {
       if (editingCategory) {
         // If editing, call the editCategory function
-        await editCategory(editingCategory.Name, {
+        await editBlogCategory(editingCategory.Name, {
           Name: name,
           Description: description,
           Slug: customSlug || autoSlug,
+          ParentCategory: ParentCategory || null,
         });
       } else {
         // If adding, call the addCategory function
-        await addCategory({
+        await addBlogCategory({
           Name: name,
           Description: description,
           Slug: customSlug || autoSlug,
+          ParentCategory: ParentCategory || null,
         });
       }
 
@@ -50,14 +70,15 @@ export default function CategoryTechnology() {
         description: "",
         customSlug: "",
         autoSlug: "",
+        ParentCategory: "",
       });
       setEditingCategory(null);
 
-      // alert(
-      //   editingCategory
-      //     ? "Category updated successfully!"
-      //     : "Category created successfully!"
-      // );
+    //   alert(
+    //     editingCategory
+    //       ? "Category updated successfully!"
+    //       : "Category created successfully!"
+    //   );
     } catch (error) {
       console.error("Error:", error);
       alert(
@@ -83,7 +104,7 @@ export default function CategoryTechnology() {
     }));
   };
 
-  // Handle changes for other fields (description and custom slug)
+  // Handle changes for other fields (description, custom slug, and parent category)
   const handleChange = (id, value) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -99,12 +120,19 @@ export default function CategoryTechnology() {
       description: category.Description,
       customSlug: category.Slug,
       autoSlug: category.Slug,
+      ParentCategory: category.ParentCategory || "", // Set ParentCategory if it exists
     });
   };
 
+  // Map categories to options for the Select component
+  const categoryOptions = categories.map((category) => ({
+    value: category._id,
+    label: category.Name,
+  }));
+
   return (
     <>
-      <NewPageBreadcrumb pageTitle="Category" />
+      <NewPageBreadcrumb pageTitle="Category Blog" />
       <div className="space-y-3 grid grid-cols-[3fr_2fr] gap-6">
         <div className="space-y-6">
           <h4>{editingCategory ? "Edit Category" : "Add New Category"}</h4>
@@ -129,14 +157,25 @@ export default function CategoryTechnology() {
             />
           </div>
           <div>
+            <Label htmlFor="parentCategory">Parent Category</Label>
+            <Select
+              options={categoryOptions} // Pass the mapped options
+              placeholder="Select Parent Category"
+              onChange={(value) => handleChange("ParentCategory", value)}
+              className="w-full p-2 border rounded-lg"
+              defaultValue={formData.ParentCategory}
+            />
+          </div>
+          <div>
             <Label htmlFor="description">Add Description</Label>
             <TextArea
               id="description"
               value={formData.description}
-              onChange={(value) => handleChange("description", value)} // Pass the value directly
+              onChange={(value) => handleChange("description", value)}
             />
           </div>
-          <div className="cursor-pointer  justify-start">
+       
+          <div className="cursor-pointer justify-start">
             <Button
               size="sm"
               variant="outline"
@@ -145,12 +184,11 @@ export default function CategoryTechnology() {
             >
               {editingCategory ? "Update" : "Publish"}
             </Button>
-           
           </div>
         </div>
         <div>
           <ComponentCard title="Category Table">
-            <CategoryTable onEditClick={handleEditClick} />
+            <CategoryBlogTable onEditClick={handleEditClick} />
           </ComponentCard>
         </div>
       </div>

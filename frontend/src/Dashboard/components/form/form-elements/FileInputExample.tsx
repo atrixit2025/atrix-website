@@ -39,7 +39,7 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imag
           imageId: item._id, // MongoDB ObjectId
           imageUrl: item.image, // Image URL
         }));
-        setAllImages(images); // Update state with both imageId and imageUrl
+        setAllImages(images); 
       } else {
         console.error("Error fetching images:", response.data.message);
       }
@@ -48,20 +48,20 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imag
     }
   };
 
-  // Set the selected image when the component mounts or imageId changes
+ 
   useEffect(() => {
     if (imageId) {
       const fetchImageData = async () => {
         try {
           const response = await axios.get(`http://localhost:5300/Image/get/${imageId}`);
           const imageData = response.data.Image;
-  
+
           if (imageData) {
-            setSelectedImage(imageData.image); // Set the selected image URL for display
-            setSelectedImageUrl(imageData.image); // Set the selected image URL for the modal
-            console.log("Fetching image data for imageId:", imageId);
-const response = await axios.get(`http://localhost:5300/Image/get/${imageId}`);
-console.log("Response from backend:", response.data);
+            setSelectedImage(imageData.image); 
+            setSelectedImageUrl(imageData.image);
+            // console.log("Fetching image data for imageId:", imageId);
+            const response = await axios.get(`http://localhost:5300/Image/get/${imageId}`);
+            console.log("Response from backend:", response.data);
           } else {
             console.error("No imageData found for imageId:", imageId);
           }
@@ -69,7 +69,7 @@ console.log("Response from backend:", response.data);
           console.error("Error fetching image data:", error);
         }
       };
-  
+
       fetchImageData();
     }
   }, [imageId]);
@@ -92,8 +92,8 @@ console.log("Response from backend:", response.data);
         const imageId = uploadedImage._id; // MongoDB ObjectId
         const imageUrl = uploadedImage.image; // Image URL
 
-        console.log("imageId:", imageId); // Log the imageId
-        console.log("imageUrl:", imageUrl); // Log the imageUrl
+        // console.log("imageId:", imageId); // Log the imageId
+        // console.log("imageUrl:", imageUrl); // Log the imageUrl
 
         setShowUploadSection(false);
         setShowAllImagesSection(true);
@@ -118,7 +118,7 @@ console.log("Response from backend:", response.data);
         if (selectedImageUrl === imageUrl) {
           setSelectedImageUrl(null); // Clear selected image if deleted
         }
-        console.log("Image deleted successfully");
+        // console.log("Image deleted successfully");
       }
     } catch (error) {
       console.error("Error deleting image:", error);
@@ -160,9 +160,9 @@ console.log("Response from backend:", response.data);
   // Handle image selection in the modal
   const handleImageClick = (imageUrl: string) => {
     if (selectedImageUrl === imageUrl) {
-      setSelectedImageUrl(null); // Unselect if already selected
+      setSelectedImageUrl(null);
     } else {
-      setSelectedImageUrl(imageUrl); // Select if not selected
+      setSelectedImageUrl(imageUrl);
     }
   };
 
@@ -176,7 +176,7 @@ console.log("Response from backend:", response.data);
               alt="Featured"
               className="w-32 h-32 object-contain"
             />
-            <div className="mt-5 ">{imageId}</div>
+            {/* <div className="mt-5 ">{imageId}</div> */}
             <button
               onClick={handleRemoveImage}
               className="mt-2 text-red-600 hover:text-red-800"
@@ -243,7 +243,7 @@ console.log("Response from backend:", response.data);
                 <div className="cursor-pointer text-center  h-[60vh] flex justify-center items-center  ">
                   <div className="border-2 border-dashed border-(--blue) p-6 rounded-lg  hover:bg-(--blue) transition ">
                     <label className="cursor-pointer">
-                      <input 
+                      <input
                         type="file"
                         onChange={handleUpload}
                         accept="image/*"
@@ -270,8 +270,8 @@ console.log("Response from backend:", response.data);
                         <div
                           key={index}
                           className={`relative cursor-pointer p-0.5 w-32 ${selectedImageUrl === image.imageUrl
-                              ? "border-(--blue) outline-4 outline-(--blue)"
-                              : "border-gray-700 border"
+                            ? "border-(--blue) outline-4 outline-(--blue)"
+                            : "border-gray-700 border"
                             }`}
                           onClick={() => handleImageClick(image.imageUrl)}
                           onMouseEnter={() => setHoveredImage(image.imageUrl)}
@@ -284,7 +284,7 @@ console.log("Response from backend:", response.data);
                           />
 
                           {selectedImageUrl === image.imageUrl && hoverIcons !== image.imageUrl && (
-                            <div 
+                            <div
                               onMouseEnter={() => setHoverIcons(image.imageUrl)}
                               onMouseLeave={() => setHoverIcons(null)}
                             >
@@ -296,7 +296,7 @@ console.log("Response from backend:", response.data);
                           )}
 
                           {hoverIcons === image.imageUrl && (
-                            <div 
+                            <div
                               onMouseEnter={() => setHoverIcons(image.imageUrl)}
                               onMouseLeave={() => setHoverIcons(null)}
                             >
