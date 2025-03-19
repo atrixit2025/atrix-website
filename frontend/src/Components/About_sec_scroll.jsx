@@ -10,7 +10,7 @@ const About_sec_scroll = () => {
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6  ">
         {/* Image Grid (Left Side) */}
         <div className="md:col-span-5 relative ml-10 ">
-          <div className="grid grid-cols-2 gap-4 md:sticky md:top-36">
+          <div className="grid grid-cols-2  gap-4 md:sticky md:top-36">
             <div>
               <div className="aspect-[4/5] rounded-3xl overflow-hidden p-2">
                 <img src={img1} alt="" className="w-full h-full object-cover rounded-2xl" />

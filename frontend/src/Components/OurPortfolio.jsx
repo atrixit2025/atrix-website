@@ -80,8 +80,8 @@ const OurPortfolio = () => {
         ]
     };
     return (
-        <div className="Protfolio-section bg-(--darkblack) text-(--whitelight)  relative overflow-hidden">
-             <div className='container mx-auto max-w-[1280px] w-[90%]'>
+        <div className="Protfolio-section  bg-(--darkblack) text-(--whitelight)  relative overflow-hidden">
+             <div className='container  mx-auto max-w-[1280px] w-[90%]'>
                 <div className=' py-14 md:py-28'>
                 <div className="md:flex justify-center  gap-10 ">
                     <div className=' font-extrabold md:text-end'>

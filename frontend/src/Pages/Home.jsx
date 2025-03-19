@@ -222,7 +222,7 @@ const Home = () => {
             <VideoSection />
           </Suspense>
         ) : (
-          <div className="text-(--white) text-center py-20"></div>
+          <div className="text-(--white) text-center py-20 "></div>
         )}
       </div>
 
