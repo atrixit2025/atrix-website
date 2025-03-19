@@ -62,7 +62,7 @@ const services = [
     id: 5,
     image: video,
     icon: Asset4,
-    title: "Photo/Videography",
+    title: "Photo/Videography ",
     description:
       "Your moments deserve the spotlight! At Atrix IT Solutions, we specialize in photo and videography that showcases your vision in the most stunning way. From events and branding to creative projects, our team ensures every shot is perfect. With high-quality photography and dynamic videography, we make your ideas come to life. Ready to capture the perfect shot? Partner with Atrix IT Solutions and let’s create something amazing together!",
     button: ["CORPORATE SHOOT", "PRODUCT SHOOT","FOOD PHOTOGRAPHY","COMMERCIAL SHOOT "],
