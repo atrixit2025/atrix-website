@@ -11,7 +11,7 @@ const navigation = [
   { name: 'Our Services', path: '#', current: false },
   { name: 'Portfolio', path: '#', current: false },
   { name: 'Blog', path: '#', current: false },
-  { name: 'Contact Us', path: '#', current: false },
+  { name: 'Contact Us', path: '/ContactUs', current: false },
 ]
 
 export default function Navbar() {
