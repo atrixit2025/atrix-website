@@ -129,13 +129,11 @@ export default function CategoryTechnology() {
             />
           </div>
           <div>
-            <Label htmlFor="description">Description</Label>
+            <Label htmlFor="description">Add Description</Label>
             <TextArea
               id="description"
-              hint=""
               value={formData.description}
-              // onChange=handleChange()
-              onChange={handleChange}
+              onChange={(value) => handleChange("description", value)} // Pass the value directly
             />
           </div>
           <div className="cursor-pointer  justify-start">

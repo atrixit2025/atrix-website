@@ -10,7 +10,11 @@ export default function Technology() {
     <>
    
       <div></div>
-      <PageBreadcrumb pageTitle="Technology" />
+      <PageBreadcrumb
+        pageTitle="Technology"
+        buttonText="New Add Technology" // Custom button text
+        buttonLink="/AddNewTechnology" // Custom button link
+      />
       <div className="space-y-6">
         {/* <ComponentCard title="Technology"> */}
           <BasicTableOne />

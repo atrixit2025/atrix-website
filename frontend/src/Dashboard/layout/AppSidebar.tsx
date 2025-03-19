@@ -17,6 +17,7 @@ import { FaChevronDown } from "react-icons/fa6";
 import { GrTechnology } from "react-icons/gr";
 import Logo from "../../assets/ais-logo-3.png";
 import favIcons from "/favicon_ais-logo-2.png";
+import { FaBloggerB } from "react-icons/fa6";
 type NavItem = {
   name: string;
   icon: React.ReactNode;
@@ -49,29 +50,40 @@ const navItems: NavItem[] = [
     ],
   },
   {
-    icon: <FaUser />, // User profile icon
-    name: "User Profile",
-    path: "/profile",
-  },
-  
-  {
-    name: "Forms",
-    icon: <FaWpforms />, // List icon
-    subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
-  },
-  {
-    name: "Tables",
-    icon: <TbTableShare />, // Table icon
-    subItems: [{ name: "Basic Tables", path: "/basic-tables", pro: false }],
-  },
-  {
-    name: "Pages",
-    icon: <RiPagesLine />, // Page icon
+    name: "Blog",
+    icon: <FaBloggerB />, // List icon
     subItems: [
-      { name: "Blank Page", path: "/blank", pro: false },
-      { name: "404 Error", path: "/error-404", pro: false },
+      { name: "All Blog", path: "/Blog", pro: false },
+      { name: "Add New Blog ", path: "/AddNewBlog", pro: false },
+      { name: "Category Blog", path: "/CategoryBlog", pro: false },
+
+
     ],
   },
+  // {
+  //   icon: <FaUser />, // User profile icon
+  //   name: "User Profile",
+  //   path: "/profile",
+  // },
+  
+  // {
+  //   name: "Forms",
+  //   icon: <FaWpforms />, // List icon
+  //   subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
+  // },
+  // {
+  //   name: "Tables",
+  //   icon: <TbTableShare />,
+  //   subItems: [{ name: "Basic Tables", path: "/basic-tables", pro: false }],
+  // },
+  // {
+  //   name: "Pages",
+  //   icon: <RiPagesLine />, // Page icon
+  //   subItems: [
+  //     { name: "Blank Page", path: "/blank", pro: false },
+  //     { name: "404 Error", path: "/error-404", pro: false },
+  //   ],
+  // },
 ];
 
 const othersItems: NavItem[] = [

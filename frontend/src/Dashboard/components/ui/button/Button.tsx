@@ -2,7 +2,7 @@ import React,{ ReactNode } from "react";
 
 interface ButtonProps {
   children: ReactNode; 
-  size?: "sm" | "md"; // Button size
+  size?: "sm" | "md"; 
   variant?: "primary" | "outline"; // Button variant
   startIcon?: ReactNode; // Icon before the text
   endIcon?: ReactNode; // Icon after the text

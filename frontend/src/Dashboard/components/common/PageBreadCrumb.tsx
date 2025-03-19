@@ -1,35 +1,35 @@
 import React from "react";
-
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import Button from "../ui/button/Button";
 
 interface BreadcrumbProps {
   pageTitle: string;
+  buttonText?: string; // New prop for button text
+  buttonLink?: string; // New prop for button link
 }
 
-const PageBreadcrumb: React.FC<BreadcrumbProps> = ({ pageTitle }) => {
-
+const PageBreadcrumb: React.FC<BreadcrumbProps> = ({
+  pageTitle,
+  buttonText = "New Add", // Default button text
+  buttonLink = "/", // Default button link
+}) => {
   return (
     <div className="flex flex-wrap items-center justify-between gap-3 mb-20">
       <div className="flex gap-5">
-      <h2
-        className="text-4xl font-semibold text-gray-800 dark:text-white/90 "
-        x-text="pageName"
-      >
-        {pageTitle}
+        <h2 className="text-4xl font-semibold text-gray-800 dark:text-white/90">
+          {pageTitle}
         </h2>
         <div className="cursor-pointer">
-                <Link to="/AddNewTechnology"><Button
-                size="sm"
-                variant="outline"
-                // startIcon={<span>🚀</span>}
-                // onClick={() => alert('New Technology Added!')}
-                className="cursor-pointer"
+          <Link to={buttonLink}>
+            <Button
+              size="sm"
+              variant="outline"
+              className="cursor-pointer"
             >
-                             New Add Technology
-                           </Button></Link>
-                           </div>
-      
+              {buttonText}
+            </Button>
+          </Link>
+        </div>
       </div>
       <nav>
         <ol className="flex items-center gap-1.5">

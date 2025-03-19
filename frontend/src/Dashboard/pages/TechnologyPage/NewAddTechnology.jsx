@@ -88,7 +88,7 @@ export default function NewAddTechnology() {
         });
 
         console.log("Update Response:", response.data);
-        alert("Technology updated successfully!");
+        // alert("Technology updated successfully!");
       } else {
         // Log the payload for debugging
         console.log("Create Payload:", technologyData);
@@ -97,14 +97,14 @@ export default function NewAddTechnology() {
         const response = await axios.post("http://localhost:5300/technology/add", technologyData);
 
         console.log("Create Response:", response.data);
-        alert("Technology created successfully!");
+        // alert("Technology created successfully!");
       }
 
-      navigate("/Technology"); // Navigate back to the Technology list
+      navigate("/Technology"); 
     } catch (error) {
       console.error("Error saving technology:", error);
       if (error.response) {
-        console.error("Server Response:", error.response.data); // Log the server's error response
+        console.error("Server Response:", error.response.data); 
       }
       alert("Error saving technology. Please try again.");
     }
