@@ -66,7 +66,26 @@ const storage = multer.diskStorage({
     }
   })
 
-
+  
+  ImageRouter.get("/get/:imageId", async (req, res) => {
+    try {
+      const { imageId } = req.params;
+  
+      // Find the image by its ID
+      const image = await Image.findById(imageId);
+  
+      if (!image) {
+        return res.status(404).json({ message: "Image not found" });
+      }
+  
+      // Return the image data
+      return res.json({ Image: image });
+    } catch (error) {
+      console.error("Error fetching image:", error);
+      return res.status(500).json({ message: "Error fetching image", error: error.message });
+    }
+  }); 
+  
   ImageRouter.delete("/delete", async (req, res) => {
     try {
       const { ImageUrl } = req.body;

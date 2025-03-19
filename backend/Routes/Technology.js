@@ -87,8 +87,7 @@ app.use(express.json());
 const TechnologyRouter = express.Router();
 
 TechnologyRouter.post("/add", async (req, res) => {
-  const { title, category, imageId } = req.body; // `imageId` is the _id of the image in the Image collection
-
+  const { title, category, imageId } = req.body; 
   if (!title || !category || !imageId) {
     return res.status(400).json({ message: "Title, category, and imageId are required" });
   }
@@ -97,7 +96,7 @@ TechnologyRouter.post("/add", async (req, res) => {
     const newTechnology = new Technology({
       title,
       category,
-      image: imageId, // Reference the image by its _id
+      image: imageId, 
     });
 
     await newTechnology.save();
@@ -110,7 +109,7 @@ TechnologyRouter.post("/add", async (req, res) => {
 
 TechnologyRouter.get("/get", async (req, res) => {
   try {
-    const technology = await Technology.find({}).populate('image'); // Populate the image field
+    const technology = await Technology.find({}).populate('image'); 
     if (!technology.length) {
       return res.status(404).json({ message: "No technologies found" });
     }
@@ -123,32 +122,50 @@ TechnologyRouter.get("/get", async (req, res) => {
 
 
 TechnologyRouter.put("/edit", async (req, res) => {
-  const { id, title, category, imageId } = req.body; // Get ID and updated fields from the request body
+  const { id, title, category, imageId } = req.body; 
 
   if (!id || !title || !category || !imageId) {
     return res.status(400).json({ message: "ID, title, category, and imageId are required" });
   }
 
   try {
-    // Find the existing technology document by ID
+
     const existingTechnology = await Technology.findById(id);
     if (!existingTechnology) {
       return res.status(404).json({ message: "Technology not found" });
     }
 
-    // Update the fields
     existingTechnology.title = title;
     existingTechnology.category = category;
     existingTechnology.image = imageId;
 
-    // Save the updated document
     const updatedTechnology = await existingTechnology.save();
 
-    // Return the updated document
     res.status(200).json({ message: "Technology updated successfully", technology: updatedTechnology });
   } catch (error) {
     console.error("Error updating Technology:", error);
     res.status(500).json({ message: "Error updating Technology", error: error.message });
+  }
+});
+
+TechnologyRouter.delete("/delete", async (req, res) => {
+  const { title, category } = req.body;
+
+  if (!title || !category) {
+    return res.status(400).json({ message: "Title and category are required" });
+  }
+
+  try {
+    const deletedTechnology = await Technology.findOneAndDelete({ title, category });
+
+    if (!deletedTechnology) {
+      return res.status(404).json({ message: "Technology not found" });
+    }
+
+    res.status(200).json({ message: "Technology deleted successfully", technology: deletedTechnology });
+  } catch (error) {
+    console.error("Error deleting Technology:", error);
+    res.status(500).json({ message: "Error deleting Technology", error: error.message });
   }
 });
 
@@ -157,68 +174,3 @@ export default TechnologyRouter;
 
 
 
-
-// import express from "express";
-// import Technology from "../models/TechnologyModel.js";
-
-// const TechnologyRouter = express.Router();
-
-// // Add a new technology
-// TechnologyRouter.post("/add", async (req, res) => {
-//   const { title, category, imageId } = req.body;
-
-//   try {
-//     const newTechnology = new Technology({
-//       title,
-//       category,
-//       imageId, // Save the imageId in the database
-//     });
-
-//     await newTechnology.save();
-//     res.status(201).json({ message: "Technology created successfully", technology: newTechnology });
-//   } catch (error) {
-//     console.error("Error creating technology:", error);
-//     res.status(500).json({ message: "Error creating technology", error: error.message });
-//   }
-// });
-
-// // Update an existing technology
-// TechnologyRouter.put("/edit", async (req, res) => {
-//   const { id, title, category, imageId } = req.body;
-
-//   try {
-//     const updatedTechnology = await Technology.findByIdAndUpdate(
-//       id,
-//       { title, category, imageId }, // Update the imageId in the database
-//       { new: true } // Return the updated document
-//     );
-
-//     if (!updatedTechnology) {
-//       return res.status(404).json({ message: "Technology not found" });
-//     }
-
-//     res.status(200).json({ message: "Technology updated successfully", technology: updatedTechnology });
-//   } catch (error) {
-//     console.error("Error updating technology:", error);
-//     res.status(500).json({ message: "Error updating technology", error: error.message });
-//   }
-// });
-
-// // Get a technology by ID
-// TechnologyRouter.get("/:id", async (req, res) => {
-//   const { id } = req.params;
-
-//   try {
-//     const technology = await Technology.findById(id);
-//     if (!technology) {
-//       return res.status(404).json({ message: "Technology not found" });
-//     }
-
-//     res.status(200).json({ technology });
-//   } catch (error) {
-//     console.error("Error fetching technology:", error);
-//     res.status(500).json({ message: "Error fetching technology", error: error.message });
-//   }
-// });
-
-// export default TechnologyRouter;

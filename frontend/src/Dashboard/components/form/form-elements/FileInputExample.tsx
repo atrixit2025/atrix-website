@@ -32,7 +32,7 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imag
 
   // Fetch all images from the server
   const fetchAllImages = async () => {
-    try { 
+    try {
       const response = await axios.get("http://localhost:5300/Image/get");
       if (response.status === 200) {
         const images: Image[] = response.data.Image.map((item: any) => ({
@@ -51,17 +51,26 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imag
   // Set the selected image when the component mounts or imageId changes
   useEffect(() => {
     if (imageId) {
-      const storedImageData: Image[] = JSON.parse(localStorage.getItem("imageData") || "[]");
-      console.log("storedImageData:", storedImageData); // Log the stored data
-      const imageData = storedImageData.find((image) => image.imageId === imageId); // Compare with imageId
-      console.log("imageData:", imageData); // Log the found imageData
-
-      if (imageData) {
-        setSelectedImageUrl(imageData.imageUrl); // Use imageUrl for display
-        setSelectedImage(imageData.imageUrl);
-      } else {
-        console.error("No imageData found for imageId:", imageId);
-      }
+      const fetchImageData = async () => {
+        try {
+          const response = await axios.get(`http://localhost:5300/Image/get/${imageId}`);
+          const imageData = response.data.Image;
+  
+          if (imageData) {
+            setSelectedImage(imageData.image); // Set the selected image URL for display
+            setSelectedImageUrl(imageData.image); // Set the selected image URL for the modal
+            console.log("Fetching image data for imageId:", imageId);
+const response = await axios.get(`http://localhost:5300/Image/get/${imageId}`);
+console.log("Response from backend:", response.data);
+          } else {
+            console.error("No imageData found for imageId:", imageId);
+          }
+        } catch (error) {
+          console.error("Error fetching image data:", error);
+        }
+      };
+  
+      fetchImageData();
     }
   }, [imageId]);
 
@@ -83,17 +92,12 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imag
         const imageId = uploadedImage._id; // MongoDB ObjectId
         const imageUrl = uploadedImage.image; // Image URL
 
-        // Store the image data in localStorage
-        const storedImageData: Image[] = JSON.parse(localStorage.getItem("imageData") || "[]");
-        storedImageData.push({ imageId: imageId, imageUrl: imageUrl }); // Use consistent field names
-        localStorage.setItem("imageData", JSON.stringify(storedImageData));
-
         console.log("imageId:", imageId); // Log the imageId
         console.log("imageUrl:", imageUrl); // Log the imageUrl
 
         setShowUploadSection(false);
         setShowAllImagesSection(true);
-        fetchAllImages();
+        fetchAllImages(); // Fetch all images again to update the list
         setSelectedImageUrl(imageUrl);
       } catch (error) {
         console.error("Error uploading image:", error);
@@ -114,11 +118,6 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imag
         if (selectedImageUrl === imageUrl) {
           setSelectedImageUrl(null); // Clear selected image if deleted
         }
-
-        const storedImageData: Image[] = JSON.parse(localStorage.getItem("imageData") || "[]");
-        const updatedImageData = storedImageData.filter((image) => image.imageUrl !== imageUrl);
-        localStorage.setItem("imageData", JSON.stringify(updatedImageData));
-
         console.log("Image deleted successfully");
       }
     } catch (error) {
@@ -129,7 +128,6 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imag
   // Handle setting a featured image
   const handleSetFeaturedImage = (imageUrl: string) => {
     const imageData = allImages.find((image) => image.imageUrl === imageUrl); // Find the image data
-    console.log("imageData:", imageData); // Debugging
     if (imageData) {
       setSelectedImage(imageUrl); // Set the selected image URL for display
       onImageUpload(imageData.imageId); // Pass the MongoDB ObjectId to the parent component
@@ -166,7 +164,6 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imag
     } else {
       setSelectedImageUrl(imageUrl); // Select if not selected
     }
-    console.log("selectedImageUrl:", selectedImageUrl); // Debugging
   };
 
   return (
@@ -200,7 +197,7 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imag
         <Modal
           isOpen={isOpen}
           onClose={closeModal}
-          className={isFullscreen ? "w-[80%] h-full" : "container mx-auto max-w-[1850px] w-[80%] p-6 bg-black"}
+          className={isFullscreen ? "w-[80%] h-full" : "container mx-auto max-w-[1850px]  w-[80%] p-6 bg-black"}
           isFullscreen={isFullscreen}
         >
           <div className="row flex flex-col flex-wrap">
@@ -240,45 +237,42 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imag
               </div>
             </div>
 
-            <div className="col-3 grow-1  h-[60vh] flex justify-center items-center">
+            <div className="col-3   ">
               {/* Upload Section */}
-              <div className="flex justify-center ">
-                <div className="self-end">
-                  {showUploadSection && (
-                    <div className="cursor-pointer text-center ">
-                      <div className="border-2 border-dashed border-(--blue) p-6 rounded-lg  hover:bg-(--blue) transition ">
-                        <label className="cursor-pointer">
-                          <input
-                            type="file"
-                            onChange={handleUpload}
-                            accept="image/*"
-                            className="hidden"
-                          />
-                          <div className="flex flex-col items-center">
-                            <FaUpload className="text-(--lightwhite) text-3xl" />
-                            <p className="text-(--lightwhite) font-bold">Click to upload or drag & drop</p>
-                          </div>
-                        </label>
+              {showUploadSection && (
+                <div className="cursor-pointer text-center  h-[60vh] flex justify-center items-center  ">
+                  <div className="border-2 border-dashed border-(--blue) p-6 rounded-lg  hover:bg-(--blue) transition ">
+                    <label className="cursor-pointer">
+                      <input 
+                        type="file"
+                        onChange={handleUpload}
+                        accept="image/*"
+                        className="hidden"
+                      />
+                      <div className="flex flex-col items-center">
+                        <FaUpload className="text-(--lightwhite) text-3xl" />
+                        <p className="text-(--lightwhite) font-bold">Click to upload or drag & drop</p>
                       </div>
-                    </div>
-                  )}
+                    </label>
+                  </div>
                 </div>
-              </div>
+              )}
+
 
               {/* All Images Section */}
-              <div className="flex flex-col px-2 h-[60vh] overflow-y-auto custom-scrollbar">
-                {showAllImagesSection && (
-                  <div className="overflow-x-auto">
+              {showAllImagesSection && (
+                <div className="flex-1 flex-col px-2  h-[60vh]  custom-scrollbar">
+
+                  <div className="">
                     <h5 className="mb-4 text-xl lg:text-2xl">All Images</h5>
                     <div className="flex flex-wrap  gap-5">
                       {allImages.map((image, index) => (
                         <div
                           key={index}
-                          className={`relative cursor-pointer p-1 w-28 ${
-                            selectedImageUrl === image.imageUrl
-                              ? "border-(--blue) border-4"
+                          className={`relative cursor-pointer p-0.5 w-32 ${selectedImageUrl === image.imageUrl
+                              ? "border-(--blue) outline-4 outline-(--blue)"
                               : "border-gray-700 border"
-                          }`}
+                            }`}
                           onClick={() => handleImageClick(image.imageUrl)}
                           onMouseEnter={() => setHoveredImage(image.imageUrl)}
                           onMouseLeave={() => setHoveredImage(null)}
@@ -286,11 +280,11 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imag
                           <img
                             src={`http://localhost:5300${image.imageUrl}`}
                             alt={`Image ${index + 1}`}
-                            className="w-28 h-28 object-contain"
+                            className="w-32 h-32 object-contain"
                           />
 
                           {selectedImageUrl === image.imageUrl && hoverIcons !== image.imageUrl && (
-                            <div
+                            <div 
                               onMouseEnter={() => setHoverIcons(image.imageUrl)}
                               onMouseLeave={() => setHoverIcons(null)}
                             >
@@ -302,7 +296,7 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imag
                           )}
 
                           {hoverIcons === image.imageUrl && (
-                            <div
+                            <div 
                               onMouseEnter={() => setHoverIcons(image.imageUrl)}
                               onMouseLeave={() => setHoverIcons(null)}
                             >
@@ -328,8 +322,9 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imag
                       ))}
                     </div>
                   </div>
-                )}
-              </div>
+                </div>
+
+              )}
             </div>
 
             <div className="col-3 mt-auto">

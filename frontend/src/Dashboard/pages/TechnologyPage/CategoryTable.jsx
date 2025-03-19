@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { CategoryContext } from "../../ContextApi/CategoryContextApi";
 import {
   Table,
   TableBody,
@@ -6,53 +7,16 @@ import {
   TableHeader,
   TableRow,
 } from "../../components/ui/table";
-
 import Checkbox from "../../components/form/input/Checkbox";
+import { BiEdit } from "react-icons/bi";
+import { MdDelete } from "react-icons/md";
 
-interface Order {
-  id: number;
-  name: string;
-  Category: string;
-  projectName: string;
-  team: {
-    images: string[];
-  };
-  status: string;
-  count: number;
-}
-
-
-const tableData: Order[] = [
-  {
-    id: 1,
-
-    name: "React Js",
-    Category: "Frontend",
-    projectName: "06/03/2025",
-    team: {
-      images: ["/images/user/user-22.jpg"],
-    },
-    count:"0"
-
-  },
-  {
-    id: 2,
-    name: "Node Js",
-    Category: "Backend",
-    projectName: "07/03/2025",
-    team: {
-      images: ["/images/user/user-22.jpg"],
-    },
-    count:"0"
-
-  },
-];
-
-export default function CategoryTable() {
-  const [selectedRows, setSelectedRows] = useState<number[]>([]);
+export default function CategoryTable({ onEditClick }) {
+  const { categories, deleteCategory } = useContext(CategoryContext);
+  const [selectedRows, setSelectedRows] = useState([]);
 
   // Handle individual row selection
-  const handleRowSelect = (id: number) => {
+  const handleRowSelect = (id) => {
     if (selectedRows.includes(id)) {
       setSelectedRows(selectedRows.filter((rowId) => rowId !== id));
     } else {
@@ -62,10 +26,17 @@ export default function CategoryTable() {
 
   // Handle "Select All" functionality
   const handleSelectAll = () => {
-    if (selectedRows.length === tableData.length) {
+    if (selectedRows.length === categories.length) {
       setSelectedRows([]);
     } else {
-      setSelectedRows(tableData.map((order) => order.id));
+      setSelectedRows(categories.map((category) => category._id));
+    }
+  };
+
+  // Handle delete action
+  const handleDelete = (name) => {
+    if (window.confirm("Are you sure you want to delete this category?")) {
+      deleteCategory(name);
     }
   };
 
@@ -81,10 +52,10 @@ export default function CategoryTable() {
                   isHeader
                   className="px-6 py-4 font-medium text-gray-500 text-start text-theme-xl dark:text-gray-400"
                 >
-                  <Checkbox checked={selectedRows.length === tableData.length}
-                    onChange={handleSelectAll} />
-
-
+                  <Checkbox
+                    checked={selectedRows.length === categories.length}
+                    onChange={handleSelectAll}
+                  />
                 </TableCell>
                 <TableCell
                   isHeader
@@ -110,42 +81,55 @@ export default function CategoryTable() {
                 >
                   Count
                 </TableCell>
-
-               
+                <TableCell
+                  isHeader
+                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                >
+                  Action
+                </TableCell>
               </TableRow>
             </TableHeader>
 
             {/* Table Body */}
             <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
-              {tableData.map((order) => (
-                <TableRow key={order.id}>
+              {categories.map((category) => (
+                <TableRow key={category._id}>
                   <TableCell className="px-5 py-4 sm:px-6 text-start">
-                    <Checkbox checked={selectedRows.includes(order.id)}
-                      onChange={() => handleRowSelect(order.id)} />
-
+                    <Checkbox
+                      checked={selectedRows.includes(category._id)}
+                      onChange={() => handleRowSelect(category._id)}
+                    />
                   </TableCell>
                   <TableCell className="px-5 py-4 sm:px-6 text-start">
                     <div className="flex items-center gap-3">
                       <div>
                         <span className="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
-                          {order.name}
+                          {category.Name}
                         </span>
-
                       </div>
                     </div>
                   </TableCell>
-              
                   <TableCell className="px-6 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.Category}
+                    {category.Description}
                   </TableCell>
                   <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.projectName}
+                    {category.Slug}
                   </TableCell>
                   <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.count}
+                    {category.count || 0}
                   </TableCell>
-
-                 
+                  <TableCell className="px-4 py-3 text-gray-500 text-theme-sm dark:text-gray-400">
+                    <div className="flex gap-2">
+                      <BiEdit
+                        className="cursor-pointer text-gray-500 hover:text-gray-700 text-2xl"
+                        onClick={() => onEditClick(category)}
+                      />
+                      <MdDelete
+                        className="cursor-pointer text-gray-500 hover:text-red-500 text-2xl"
+                        onClick={() => handleDelete(category.Name)}
+                      />
+                    </div>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
