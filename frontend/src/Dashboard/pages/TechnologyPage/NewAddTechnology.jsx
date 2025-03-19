@@ -10,24 +10,38 @@ import { ImageProvider } from "../../ContextApi/ImageApi";
 import axios from "axios";
 
 export default function NewAddTechnology() {
-  const location = useLocation(); 
+  const location = useLocation();
   const navigate = useNavigate();
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [title, setTitle] = useState("");
   const [imageId, setImageId] = useState(null);
+  const [categories, setCategories] = useState([]); // State to store fetched categories
 
   // Get the technology object from the state
   const { technology } = location.state || {};
 
+  // Fetch categories from the backend API
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get("http://localhost:5300/category/get");
+        setCategories(response.data.categories); // Store fetched categories in state
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
   // Pre-fill the form if in edit mode
   useEffect(() => {
     if (technology) {
-      setTitle(technology.name); 
-      setSelectedCategories(technology.Category.split(", ")); 
-      setImageId(technology.team.images[0]); 
+      setTitle(technology.name);
+      setSelectedCategories(technology.Category.split(", "));
+      setImageId(technology.imageId); // Use imageId instead of imageUrl
     }
   }, [technology]);
-
 
   // Handle category selection
   const handleCategoryChange = (category) => {
@@ -41,31 +55,24 @@ export default function NewAddTechnology() {
       }
     });
   };
-  useEffect(() => {
-    if (technology) {
-      setTitle(technology.name);
-      setSelectedCategories(technology.Category.split(", "));
-      setImageId(technology.imageId); // Use imageId instead of imageUrl
-    }
-  }, [technology]);
 
   // Handle form submission
   const handleSubmit = async () => {
     console.log("Title:", title);
     console.log("Selected Categories:", selectedCategories);
     console.log("Image ID:", imageId);
-  
+
     if (!title || selectedCategories.length === 0 || !imageId) {
       alert("Title, category, and image are required!");
       return;
     }
-  
+
     const technologyData = {
       title,
       category: selectedCategories.join(", "),
       imageId, // Ensure this is correctly formatted
     };
-  
+
     try {
       if (technology) {
         // Log the payload for debugging
@@ -73,26 +80,26 @@ export default function NewAddTechnology() {
           id: technology.id,
           ...technologyData,
         });
-  
+
         // Update existing technology
         const response = await axios.put(`http://localhost:5300/technology/edit`, {
           id: technology.id, // Include the ID in the request body
           ...technologyData,
         });
-  
+
         console.log("Update Response:", response.data);
         alert("Technology updated successfully!");
       } else {
         // Log the payload for debugging
         console.log("Create Payload:", technologyData);
-  
+
         // Create new technology
         const response = await axios.post("http://localhost:5300/technology/add", technologyData);
-        
+
         console.log("Create Response:", response.data);
         alert("Technology created successfully!");
       }
-  
+
       navigate("/Technology"); // Navigate back to the Technology list
     } catch (error) {
       console.error("Error saving technology:", error);
@@ -130,39 +137,31 @@ export default function NewAddTechnology() {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          
         </div>
         <div className="space-y-6">
           <div>
             <ComponentCategory title="Category">
               <div className="items-center gap-4 space-y-5">
-                {/* Frontend Checkbox */}
-                <div className="flex items-center gap-3">
-                  <Checkbox
-                    checked={selectedCategories.includes("Frontend")} // Check if "Frontend" is selected
-                    onChange={() => handleCategoryChange("Frontend")} // Call handleCategoryChange when the checkbox state changes
-                  />
-                  <span className="block text-sm font-medium text-gray-700 dark:text-gray-400">
-                    Frontend
-                  </span>
-                </div>
-
-                {/* Backend Checkbox */}
-                <div className="flex items-center gap-3">
-                  <Checkbox
-                    checked={selectedCategories.includes("Backend")} // Check if "Backend" is selected
-                    onChange={() => handleCategoryChange("Backend")} // Call handleCategoryChange when the checkbox state changes
-                  />
-                  <span className="block text-sm font-medium text-gray-700 dark:text-gray-400">
-                    Backend
-                  </span>
-                </div>
+                {/* Dynamically render checkboxes for categories */}
+                {categories.map((category) => (
+                  <div key={category._id} className="flex items-center gap-3">
+                    <Checkbox
+                      checked={selectedCategories.includes(category.Name)}
+                      onChange={() => handleCategoryChange(category.Name)}
+                    />
+                    <span className="block text-sm font-medium text-gray-700 dark:text-gray-400">
+                      {category.Name}
+                    </span>
+                  </div>
+                ))}
               </div>
             </ComponentCategory>
           </div>
           <ImageProvider>
-            <FileInputExample  onImageUpload={(imageId) => setImageId(imageId)} // Callback to update the imageId in the parent component
-  imageId={technology?.imageId} />
+            <FileInputExample
+              onImageUpload={(imageId) => setImageId(imageId)}
+              imageId={technology?.imageId}
+            />
           </ImageProvider>
         </div>
       </div>

@@ -17,8 +17,8 @@ createRoot(document.getElementById('root')).render(
     <ThemeProvider>
       <AppWrapper>
         <CategoryProvider>
-      <App />
-      </CategoryProvider>
+          <App />
+        </CategoryProvider>
       </AppWrapper>
     </ThemeProvider>
   </StrictMode>,

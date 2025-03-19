@@ -53,11 +53,11 @@ export default function CategoryTechnology() {
       });
       setEditingCategory(null);
 
-      alert(
-        editingCategory
-          ? "Category updated successfully!"
-          : "Category created successfully!"
-      );
+      // alert(
+      //   editingCategory
+      //     ? "Category updated successfully!"
+      //     : "Category created successfully!"
+      // );
     } catch (error) {
       console.error("Error:", error);
       alert(
@@ -134,7 +134,8 @@ export default function CategoryTechnology() {
               id="description"
               hint=""
               value={formData.description}
-              onChange={(e) => handleChange("description", e.target.value)}
+              // onChange=handleChange()
+              onChange={handleChange}
             />
           </div>
           <div className="cursor-pointer  justify-start">
@@ -146,16 +147,7 @@ export default function CategoryTechnology() {
             >
               {editingCategory ? "Update" : "Publish"}
             </Button>
-            {editingCategory && (
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={() => setEditingCategory(null)} // Cancel edit mode
-                className="cursor-pointer mt-5 w-[100px]"
-              >
-                Cancel
-              </Button>
-            )}
+           
           </div>
         </div>
         <div>
