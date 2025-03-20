@@ -16,9 +16,9 @@ const BlogCategorySchema = new mongoose.Schema({
     trim: true,
   },
   ParentCategory: {
-    type: mongoose.Schema.Types.ObjectId, // Reference to another BlogCategory
-    ref: "BlogCategory", // Reference the same model
-    default: null, // No parent by default
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: "BlogCategory", 
+    default: null, 
   },
 });
 

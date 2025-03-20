@@ -140,7 +140,7 @@ export default function NewAddTechnology() {
         </div>
         <div className="space-y-6">
           <div>
-            <ComponentCategory title="Category">
+            <ComponentCategory title="Category" link="/CategoryTechnology">
               <div className="items-center gap-4 space-y-5">
                 {/* Dynamically render checkboxes for categories */}
                 {categories.map((category) => (

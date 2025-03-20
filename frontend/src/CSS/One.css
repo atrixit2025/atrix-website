@@ -96,3 +96,7 @@
   background: linear-gradient(45deg, var(--blue) 20%, var(--green) 80%);
   color: var(--whitelight);
 }
+
+.gradient-button {
+  background: linear-gradient(45deg, var(--blue) 20%, var(--green) 80%);
+}
