@@ -290,6 +290,10 @@
  --manropefont:"Manrope", serif;
 }
 
+.keys-sec img{
+ filter: grayscale(1) brightness(200);
+}
+
 /* body{
   font-size: 16px;
 } */

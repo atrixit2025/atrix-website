@@ -27,7 +27,7 @@ const services = [
     title: "Branding/graphic design",
     description:
       "Did you know? 94% of first impressions are design-related! That’s why strong visuals are key to brand success. Graphic design isn’t just about looks - it’s about delivering your message effectively. At Atrix IT Solutions, we bring your vision to life with top-notch designs tailored to your needs. Whether it’s branding, websites, infographics, or eBooks, our expert team creates visually captivating content that engages and inspires. Let’s design something impactful!",
-    button: ["BRANDING", "LOGO DESIGN", "PACKAGING", "PRODUCT DESIGN", "PRINT MEDIA", "ADVERTISEMENT","UI/UX","SOCIAL MEDIA DESIGN"],
+    button: ["Branding", "Logo Design", "Packaging", "Product Design", "Print Media", "Advertisement","Ui/Ux","Social Media Design"],
   },
   {
     id: 2,
@@ -36,7 +36,7 @@ const services = [
     title: "Web Development",
     description:
       "Create stunning, user-friendly websites that captivate, engage, and drive real results with our experts! Whether you need a new website, a redesign, or custom development, we ensure a seamless experience with modern, responsive designs tailored to your brand. Our expert team focuses on creating visually appealing and high-performing websites that boost visibility, attract customers, and grow your business effortlessly. So, take your online presence to the next level!",
-    button: ["AI", "METAVERSE", "SALESFORCE", "CRM", "CMS", "PHP","LARAVEL","REACT JS","NODE JS "],
+    button: ["AI", "Metaverse", "Salesforce", "CRM", "CMS", "PHP","Laravel","React Js","Node Js "],
 
   },
   {
@@ -46,7 +46,7 @@ const services = [
     title: "Digital Marketing",
     description:
       "At Atrix IT Solutions, get your own digital marketing strategy built from scratch. Our expert team crafts tailored campaigns to drive traffic, engage customers, and convert leads into loyal clients. Whether it’s SEO, social media marketing, or content creation, we focus on delivering real, measurable results that help your brand stand out. Ready to take your business to the next level? Partner with us today and watch your online presence grow!",
-    button: ["MARKETING", "STRATEGY", "SEO", "SMO", "DIGITAL ADS", "CONTENT CREATION"],
+    button: ["Marketing", "Strategy", "SEO", "SMO", "Digital Ads", "Content Creation"],
   },
   {
     id: 4,
@@ -55,17 +55,17 @@ const services = [
     title: "Visual Effects",
     description:
       "Looking to bring your ideas to life with stunning visual effects? At Atrix IT Solutions, we specialize in creating eye-catching VFX that captivate and engage your audience. Whether it's for film, advertisements, or digital media, our expert team delivers cutting-edge effects that enhance your project and leave a lasting impact. Transform your vision into reality with Atrix IT Solutions today and make your visuals unforgettable!  ",
-    button: ["VFX", "SFX", "MOTION GRAPHICS", "EDITING", "COMPOSITION", "GRADING","3D"],
+    button: ["VFX", "SFX", "Motion Graphics", "Editing", "Composition", "Grading","3D"],
 
   },
   {
     id: 5,
     image: video,
     icon: Asset4,
-    title: "Photo/Videography ",
+    title: "Photo/Video Production ",
     description:
       "Your moments deserve the spotlight! At Atrix IT Solutions, we specialize in photo and videography that showcases your vision in the most stunning way. From events and branding to creative projects, our team ensures every shot is perfect. With high-quality photography and dynamic videography, we make your ideas come to life. Ready to capture the perfect shot? Partner with Atrix IT Solutions and let’s create something amazing together!",
-    button: ["CORPORATE SHOOT", "PRODUCT SHOOT","FOOD PHOTOGRAPHY","COMMERCIAL SHOOT "],
+    button: ["Corporate Shoot", "Product Shoot","Food Photography","Commercial Shoot "],
   },
   {
     id: 6,
@@ -74,7 +74,7 @@ const services = [
     title: "Staffing",
     description:
       "Ready to boost your business with a flexible workforce? Our solution helps you create a staffing plan that adapts to your needs, saving you money and ensuring compliance. With our platform, you can improve efficiency, reduce costs, and stay ahead in today’s fast-paced market. Empower your business with a staffing strategy designed to grow and succeed!",
-    button: ["US STAFFING", "US RECRUITER", "PAYROLL", "TALENT ACQUISITION ", "US HIRING"],
+    button: ["Us Staffing", "Us Recruiter", "Payroll", "Talent Acquisition ", "Us Hiring"]
 
   },
   {
@@ -84,7 +84,7 @@ const services = [
     title: "Logistics ",
     description:
       "Atrix is a modern logistics firm dedicated to providing our clients throughout the world with outstanding service and cutting-edge solutions. Having worked in the transportation and logistics industry for five years, we have made a name for ourselves as a reliable partner. Road freight is in our extensive service offering, which enables us to satisfy the varied demands of companies in a number of sectors.",
-    button: ["OTR", "DRAYAGE", "JCTRANS"],
+    button: ["OTR", "Drayage", "Jctrans"],
 
   },
 ];
