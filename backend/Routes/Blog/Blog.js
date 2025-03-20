@@ -46,7 +46,7 @@ BlogRouter.get("/get", async (req, res) => {
 BlogRouter.put("/edit", async (req, res) => {
   const { id, title, category,description, imageId } = req.body; 
 
-  if (!id || !title || !category || description|| !imageId) {
+  if (!id || !title || !category ||! description|| !imageId) {
     return res.status(400).json({ message: "ID, title, category,description, and imageId are required" });
   }
 

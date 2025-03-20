@@ -1,11 +1,11 @@
 import React from 'react'
 
-const BlogTable = () => {
+const Portfolio = () => {
   return (
     <div>
-      
+      asd
     </div>
   )
 }
 
-export default BlogTable
+export default Portfolio

@@ -1,10 +1,7 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useSidebar } from "../context/SidebarContext";
-import { ThemeToggleButton } from "../components/common/ThemeToggleButton";
-import NotificationDropdown from "../components/header/NotificationDropdown";
-import UserDropdown from "../components/header/UserDropdown";
 import Logo from "../../assets/ais-logo-3.png";
 
 
@@ -41,6 +38,17 @@ const AppHeader: React.FC = () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
+
+
+  const username = localStorage.getItem("username");
+  const navgiate = useNavigate();
+
+  const handleSignin = () => {
+    localStorage.removeItem("token")
+    localStorage.removeItem("username");
+    navgiate("/AISLogin")
+  }
+
 
   return (
     <header className="sticky top-0 flex w-full bg-white border-gray-200 z-99999 dark:border-gray-700 dark:bg-(--black) lg:border-b">
@@ -154,19 +162,29 @@ const AppHeader: React.FC = () => {
           </div>
         </div>
         <div
-          className={`${
-            isApplicationMenuOpen ? "flex" : "hidden"
-          } items-center justify-between w-full gap-4 px-5 py-4 lg:flex shadow-theme-md lg:justify-end lg:px-0 lg:shadow-none`}
+          className={`${isApplicationMenuOpen ? "flex" : "hidden"
+            } items-center justify-between w-full gap-4 px-5 py-4 lg:flex shadow-theme-md lg:justify-end lg:px-0 lg:shadow-none`}
         >
           <div className="flex items-center gap-2 2xsm:gap-3">
+            {/* <h2 className="text-xl font-bold">{username}</h2> */}
+
+
+
+            <button
+              onClick={handleSignin}
+              className="cursor-pointer font-bold  border px-2 py-1 rounded-sm" >
+              Signout
+            </button>
+
+
             {/* <!-- Dark Mode Toggler --> */}
             {/* <ThemeToggleButton /> */}
             {/* <!-- Dark Mode Toggler --> */}
-            <NotificationDropdown />
+            {/* <NotificationDropdown /> */}
             {/* <!-- Notification Menu Area --> */}
           </div>
           {/* <!-- User Area --> */}
-          <UserDropdown />
+          {/* <UserDropdown /> */}
         </div>
       </div>
     </header>
