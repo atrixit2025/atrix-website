@@ -19,7 +19,7 @@ export default function AddNewBlog() {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    selectedCategories: [],
+    selectedCategories: [], // Default to an empty array
     imageId: null,
   });
 
@@ -42,10 +42,11 @@ export default function AddNewBlog() {
   // Pre-fill the form if in edit mode
   useEffect(() => {
     if (blog) {
+      console.log("Blog data:", blog); // Debug the blog object
       setFormData({
         title: blog.name,
         description: blog.description || "",
-        selectedCategories: (blog.category.split(", ")) ,
+        selectedCategories: blog.Category ? blog.Category.split(", ") : [], // Split into an array
         imageId: blog.imageId,
       });
     }
@@ -56,8 +57,8 @@ export default function AddNewBlog() {
     setFormData((prev) => ({
       ...prev,
       selectedCategories: prev.selectedCategories.includes(category)
-        ? prev.selectedCategories.filter((cat) => cat !== category)
-        : [...prev.selectedCategories, category],
+        ? prev.selectedCategories.filter((cat) => cat !== category) // Deselect
+        : [...prev.selectedCategories, category], // Select
     }));
   };
 
@@ -73,17 +74,19 @@ export default function AddNewBlog() {
     const blogData = {
       title,
       description,
-      category: selectedCategories.join(", "),
+      category: selectedCategories.join(", "), // Join into a string
       imageId,
     };
 
     try {
       if (blog) {
         // Update existing blog
-        const response = await axios.put(`http://localhost:5300/Blog/edit`, {
-          id: blog.id,
+        const payload = {
+          id: blog.id, // Ensure this is included
           ...blogData,
-        });
+        };
+        console.log("Payload:", payload); // Debug the payload
+        const response = await axios.put(`http://localhost:5300/Blog/edit`, payload);
         console.log("Update Response:", response.data);
       } else {
         // Create new blog
@@ -145,17 +148,16 @@ export default function AddNewBlog() {
         </div>
         <div className="space-y-6">
           <div>
-            <ComponentCategory title="Category">
+            <ComponentCategory title="Category" link="/CategoryBlog">
               <div className="items-center gap-4 space-y-5">
                 {categories.map((category) => (
                   <div key={category._id} className="flex items-center gap-3">
                     <Checkbox
-                      checked={formData.selectedCategories.includes(category.Name)}
-                      onChange={() => handleCategoryChange(category.Name)}
+                      id={`category-${category._id}`}
+                      checked={formData.selectedCategories.includes(category.Name)} // Check if selected
+                      onChange={() => handleCategoryChange(category.Name)} // Handle selection
+                      label={category.Name}
                     />
-                    <span className="block text-sm font-medium text-gray-700 dark:text-gray-400">
-                      {category.Name}
-                    </span>
                   </div>
                 ))}
               </div>

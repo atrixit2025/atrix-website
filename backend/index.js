@@ -9,6 +9,8 @@ import TechnologyRouter from './Routes/Technology.js';
 import CategoryRouter from './Routes/Category.js';
 import BlogRouter from './Routes/Blog/Blog.js';
 import BlogCategoryRouter from './Routes/Blog/BlogCategory.js';
+import userRouter from './Routes/user.js';
+import PortfolioCategoryRouter from './Routes/Portfolio/PortfolioCategory.js';
 
 const __filename = fileURLToPath(import.meta.url); 
 const __dirname = path.dirname(__filename);
@@ -38,6 +40,10 @@ app.use("/Category", CategoryRouter);
 
 app.use("/Blog", BlogRouter);
 app.use("/BlogCategory", BlogCategoryRouter);
+
+app.use("/user", userRouter);
+
+app.use("/PortfolioCategory", PortfolioCategoryRouter);
 
 
 

@@ -3,6 +3,7 @@ import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
 interface ComponentCardProps {
   title: string;
+  link: string;
   children: React.ReactNode;
   className?: string; // Additional custom classes for styling
   desc?: string; // Description text
@@ -10,6 +11,7 @@ interface ComponentCardProps {
 
 const ComponentCategory: React.FC<ComponentCardProps> = ({
   title,
+  link,
   children,
   className = "",
   desc = "",
@@ -23,10 +25,10 @@ const ComponentCategory: React.FC<ComponentCardProps> = ({
         <h3 className="text-base font-medium text-gray-800 dark:text-white/90">
           {title}
         </h3>
-       
-       <div>
-        <Link to="/CategoryTechnology"><FiPlus  className="cursor-pointer"/></Link>
-       </div>
+
+        <div>
+          <Link to={link}><FiPlus className="cursor-pointer" /></Link>
+        </div>
       </div>
 
       {/* Card Body */}
