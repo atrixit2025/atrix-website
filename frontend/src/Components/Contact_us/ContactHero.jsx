@@ -5,8 +5,8 @@ const ContactHero = () => {
     return (
         <div className='bg-no-repeat bg-cover bg-[bottom center] ' style={{ backgroundImage: `url(${bg_img})`, backgroundPosition: 'bottom center', backgroundSize: '1000px auto', }} >
             <div className="container w-[90%] mx-auto text-center pt-40 pb-28 " >
-                <h1 className='text-6xl  font-black'>Contact Us</h1>
-                <p className='max-w-[800px] mx-auto mt-2'>
+                <h1 className='font-bold text-4xl md:text-6xl lg:text-9xl'>Contact Us</h1>
+                <p className='mx-auto max-w-3xl text-sm md:text-base lg:text-lg text-white/55 mt-4'>
                     Every Project start with a Plan
                 </p>
             </div>

@@ -37,8 +37,6 @@ const quickLinks = [
 ]
 
 
-
-
 const Footer = () => {
     return (
         <footer className="bg-cs_theme_black">
@@ -73,13 +71,13 @@ const Footer = () => {
                 </div>
                 <div className="md:w-3/4 flex flex-wrap ">
                     <div className="w-full md:w-3/6 uppercase ">
-                        <h4 className=" mt-10 md:mt-0 text-2xl font-bold inline-block pb-2 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-cs_white after:to-cs_theme_black">
+                        <h4 className=" mt-10 md:mt-0 text-2xl font-bold inline-block pb-2 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-cs_white after:to-cs_theme_black  ">
                             Our Services
                         </h4>
 
-                        <ul className="mt-5 text-sm columns-2  space-y-4 ">
+                        <ul className="mt-5 text-sm columns-2  space-y-4  ">
                             {ourServices.map((item, index) => (
-                                <li className="hover:text-(--blue)" key={index}> <a href={item.url}>{item.service_name}</a> </li>
+                                <li className="hover:text-(--blue) hover:font-bold duration-150 " key={index}> <a href={item.url}>{item.service_name}</a> </li>
 
                             ))}
 
@@ -93,7 +91,7 @@ const Footer = () => {
                             <ul className="mt-5 text-sm md:columns-1 columns-2 space-y-4 uppercase ">
 
                                 {quickLinks.map((item, index) => (
-                                    <li className="hover:text-(--blue)" key={index}>
+                                    <li className="hover:text-(--blue) hover:font-bold duration-150" key={index}>
                                         <a href={item.url}>{item.link_name}</a>
                                     </li>
                                 ))}

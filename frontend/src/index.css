@@ -346,38 +346,5 @@ body:before {
   pointer-events: none;
   z-index: -1;
 }
-/* .hometext{
-  font-size: 150px;
-} */
 
-/* .greencolor{
-  font-family:" Neue Leiden",;
-  font-weight: bold;
-  color: #00A657 ;
-}
-.bggreencolor{
-  background-color: #00A657;
-}
-:hover.bghovergreencolor{
-  background-color: #00A657;
-}
-.bluecolor{
-  color: #00A2DC;
 
-}
-.bgbluecolor{
-  background-color: #00A2DC;
-}
-.whitecolor{
-  color: #D8D8D8;
-}
-.bgwhitecolor{
-  background-color: #D8D8D8;
-}
-.blackcolor{
-  color: #262626;
-}
-.bgblackcolor{
-  background-color: #262626;
-
-} */
