@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 
+
 import OurSolution from "../Components/OurSolution";
 import OurPortfolio from "../Components/OurPortfolio";
 import Marquee from "react-fast-marquee";
@@ -17,8 +18,12 @@ import icon8 from "../assets/AboutUs/keys-sec/Kindness.svg";
 import icon9 from "../assets/AboutUs/keys-sec/value.svg";
 import icon10 from "../assets/AboutUs/keys-sec/Agile-Solutions.svg";
 import About_video from "../assets/ATRIX COMPRESS 540.mp4";
-// import CardCarousel from "../Components/card-carousel";
+import CardCarousel from "../Components/card-carousel";
 import About_sec_scroll from "../Components/About_sec_scroll";
+
+import Ccarousel from "../Components/Ccarousel";
+
+
 
 const cards = [
   { id: 1, title: "Card 1", color: "bg-red-500" },
@@ -70,9 +75,7 @@ const About = () => {
         <h1 className="font-bold text-4xl md:text-6xl lg:text-9xl">About Us</h1>
         <p className="mx-auto max-w-3xl text-sm md:text-base lg:text-lg text-white/55 mt-4">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Id nihil
-          suscipit autem accusamus provident magnam, cum, consequatur vel illo
-          ullam aspernatur consequuntur quod excepturi? Similique nostrum dicta
-          exercitationem earum saepe!
+          suscipit autem accusamus provident magnam, 
         </p>
       </div>
 
@@ -269,6 +272,11 @@ const About = () => {
       </div>
 
       {/* card-carousel-section */}
+     <CardCarousel/>
+
+     {/* <Ccarousel/> */}
+     
+
     </>
   );
 };
