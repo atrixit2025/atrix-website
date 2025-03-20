@@ -100,9 +100,10 @@ const Home = () => {
   }, []);
 
   const lines = [
-    '  innovative,growing,creative',
-    '  building the future',
-    '  empowering your ideas',
+    '  Visionary, Innovative',
+    ' Global. Professional',
+    ' Accessible, User-centric ',
+    'Empowering, Trustworthy'
   ];
 
 
@@ -142,6 +143,7 @@ const Home = () => {
                         speed={170}
                         deleteSpeed={100}
                         delay={1500}
+                       
                       />
                     </div>
                     </div>
@@ -152,12 +154,19 @@ const Home = () => {
                     <div className="font-bold tracking-wider ">solutions</div>
                     <img src={Assetarrow}  className='w-auto lg:h-22 h-12 md:ml-5 ml-2 mt-1 moveWithMouse'/>
                     </div>
+
                     <div className="absolute -bottom-[25%] md:bottom-[10%] md:-left-[25%] text-center z-0 animateFromTop tracking-normal">
                       <p className="bg-(--blue) text-(--black) border   font-body border-transparent rounded-4xl md:px-8  px-2 py-1 text-sm md:text-2xl rotate-12 font-bold moveWithMouse">
                         Brand Identity
-                      </p>
-                      
+                      </p> 
                     </div>
+
+                    <div className="absolute -bottom-[25%] md:-bottom-[5%] md:left-[68%] text-center z-0 animateFromTop tracking-normal">
+                      <p className="bg-(--green) text-(--black) border   font-body border-transparent rounded-4xl md:px-8  px-2 py-1 text-sm md:text-2xl rotate-12 font-bold moveWithMouse">
+                        Visual
+                      </p> 
+                    </div>
+
                   </div>
                 </h1>
 
@@ -192,12 +201,21 @@ const Home = () => {
                     /> */}
             </div>
             <div className="text-(--white) lg:-ml-16  relative w-full lg:max-w-[40%] px-5 ">
-              <p className="text-xl sm:text-md font-semibold text-(--gray) mb-2">Our Vision</p>
+              <p className="text-xl sm:text-md font-semibold text-(--gray) mb-2">Who We Are</p>
               <h5 className="lg:text-5xl text-2xl font-bold mb-5">Unlock Revenue Growth for Your Business</h5>
-              <h6 className="lg:text-2xl text-xl sm:text:lg font-semibold mb-10">Our goal is to make it as easy as possible for you to walk away with the solution that suits your needs perfectly.</h6>
-              <div className="border border-(--black) mb-5"></div>
-              <p className="text-md text-(--gray) mb-4">Through our years of experience, we’ve also learned that while each channel has its own set of advantages, they all work best when strategically paired with other channels. This is the main factor that sets us apart from our competition and allows us to deliver a specialist business consultancy service.</p>
-              <Button mybtn={"Learn More"} />
+            
+              <p className="text-md text-(--gray) pb-4">Struggling to keep up in today’s fast-changing digital world? Don’t worry!, Atrix IT Solutions is here to help your business succeed!
+              </p>
+              <p className="text-md text-(--gray) pb-4">We do more than just offer IT services - we create smart solutions that drive real success. With a passion for innovation, we’ve built a team of experts dedicated to helping businesses grow and stay ahead in the digital world.
+              </p>
+              <p className="text-md text-(--gray) pb-4">From custom software development to strong IT infrastructure and reliable support, we provide solutions tailored to your needs, ensuring smooth growth and long-term success.
+              </p>
+              <p className="text-md text-(--gray) pb-10 ">Look no further! Let’s turn your vision into reality together.
+
+              </p>
+
+              <Button btnLink={"/about"} mybtn={"Learn More"} />
+
             </div>
           </div>
         </div>

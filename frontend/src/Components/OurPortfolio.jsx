@@ -84,9 +84,9 @@ const OurPortfolio = () => {
              <div className='container  mx-auto max-w-[1280px] w-[90%]'>
                 <div className=' py-14 md:py-28'>
                 <div className="md:flex justify-center  gap-10 ">
-                    <div className=' font-extrabold md:text-end'>
+                    <div className=' font-extrabold '>
                         <p className='text-gray '>OUR PORTFOLIO</p>
-                        <h2 className="text-6xl font-bold ">Our Work</h2>
+                        <h2 className="text-6xl font-bold w-[380px] "> Our Work Your Success</h2>
                     </div>
 
                     <div className='w-full max-w-[550px] mt-14'>
@@ -99,7 +99,7 @@ const OurPortfolio = () => {
                             <Button className="" mybtn={"View All Portfolio"} />
                         </div>
                         <p className='md:w-86 text-gray font-bold mt-4'>
-                            Offer a wide range of services to help businesses establish and enhance their online presence.
+                        At Atrix IT Solutions, every project we deliver is a step toward your success. Our expertise turns ideas into powerful solutions, helping businesses grow, innovate, and stand out. 
                         </p>
                     </div>
                 </div>

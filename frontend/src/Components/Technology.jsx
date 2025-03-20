@@ -19,7 +19,7 @@ const Technology = () => {
                         </div>
                         <div className='mt-10 '>
                             <p className='md:w-86 md:text-end text-gray font-bold mt-4'>
-                                Offer a wide range of services to help businesses establish and enhance their online presence.
+                            We use the latest tools and innovations to deliver smart, efficient, and reliable solutions that help your business grow and stay competitive in the digital world.
                             </p>
                         </div>
 

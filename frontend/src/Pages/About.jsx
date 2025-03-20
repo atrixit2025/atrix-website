@@ -1,11 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-// import img1 from "../assets/AboutUs/imgpsh_fullsize_ani.png";
-// import img2 from "../assets/AboutUs/imgpsh_fullsize_anim2.png";
-// import img3 from "../assets/AboutUs/imgpsh_fullsize_anim1.png";
-// import img4 from "../assets/AboutUs/imgpsh_fullsize_anim4.png";
-// import img5 from "../assets/AboutUs/imgpsh_fullsize_anim5.png";
-// import img6 from "../assets/AboutUs/imgpsh_fullsize_anim3.png";
+
 import OurSolution from "../Components/OurSolution";
 import OurPortfolio from "../Components/OurPortfolio";
 import Marquee from "react-fast-marquee";
@@ -48,6 +43,10 @@ const About = () => {
       setIndex(index - 1);
     }
   };
+  useEffect(()=>{
+ window.scroll(0,0)
+  })
+
   return (
     <>
       {/* video-section */}
@@ -65,43 +64,6 @@ const About = () => {
         </div>
       </div>
 
-      {/* <div className="container mx-auto pt-42 max-w-[1600px] w-[80%]">
-        <div className="row flex gap-3  mx-[-15px] ">
-          <div className="col-6  ">
-            <div className="img">
-              <img src={img1} alt="" />
-            </div>
-          </div>
-          <div className="col-3 ">
-            <div className="img">
-              <img src={img2} alt="" />
-            </div>
-          </div>
-          <div className="col-3 ">
-            <div className="img">
-              <img src={img3} alt="" />
-            </div>
-          </div>
-        </div>
-
-        <div className="row flex gap-3 mt-4 mx-[-15px] ">
-          <div className="col-3  ">
-            <div className="img">
-              <img src={img4} alt="" />
-            </div>
-          </div>
-          <div className="col-6  ">
-            <div className="img">
-              <img src={img5} alt="" />
-            </div>
-          </div>
-          <div className="col-3  ">
-            <div className="img">
-              <img src={img6} alt="" />
-            </div>
-          </div>
-        </div>
-      </div> */}
 
       {/* About-heading and img-tex section */}
       <div className="Page-heading text-center mt-8 px-4">
@@ -117,15 +79,9 @@ const About = () => {
       <About_sec_scroll />
 
       {/* text-marquee-section */}
-      <div className="relative marquee-sec text-6xl font-bold mt-22 -rotate-1  ">
-        {/* <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-10 ">
-        <div className="absolute left-0 top-0 h-full w-200 bg-gradient-to-r from-black to-transparent"></div>
-        <div className="absolute right-0 top-0 h-full w-200 bg-gradient-to-l from-black to-transparent"></div>
-      </div> */}
-
-        <div>
+      <div className="relative marquee-sec text-6xl font-bold mt-22 ">   <div>
           <Marquee speed={30} className="overflow-hidden">
-            VISIONARY . INNOVATIVE . EFFICIENT . GL ROFESSIONAL . ACCESSIBLE .
+            VISIONARY . INNOVATIVE . EFFICIENT . GL PROFESSIONAL . ACCESSIBLE .
             USER-CENTR EMPOWERING . TRUSTWORTHY . SCALABLE
           </Marquee>
         </div>
@@ -150,11 +106,12 @@ const About = () => {
       </div>
 
       {/* Our Keys section */}
-      <div className="container mx-auto mt-28 max-w-[1600px] w-[90%] px-4">
+
+      <div className="container keys-sec mx-auto mt-28 max-w-[1600px] w-[80%] ">
         {/* Heading */}
         <div className="grid grid-cols-12">
           <div className="col-span-12 text-center">
-            <p className="text-lg md:text-xl">Our Keys</p>
+            <p className="text-lg md:text-xl pb-2">Our Keys</p>
             <h2 className="font-bold text-3xl md:text-5xl">
               What sets us apart
             </h2>
@@ -163,8 +120,8 @@ const About = () => {
 
         {/* First Row */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pt-10">
-          <div className="text-center bg-transparent hover:bg-gray-200/10 p-8 transition duration-300 ">
-            <div className="w-[80px] mx-auto">
+          <div className="text-center bg-transparent hover:bg-gray-200/10 p-8 transition duration-300 h-[350px]">
+            <div className="w-[80px] mx-auto  pt-10">
               <img src={icon5} alt="Values" />
             </div>
             <h3 className="pt-6 text-xl md:text-2xl font-bold">Values</h3>
@@ -175,7 +132,7 @@ const About = () => {
           </div>
 
           <div className="text-center bg-gray-100/5 hover:bg-gray-200/10 p-8 transition duration-300 ">
-            <div className="w-[80px] mx-auto">
+            <div className="w-[80px] mx-auto pt-10">
               <img src={icon6} alt="Innovation" />
             </div>
             <h3 className="pt-6 text-xl md:text-2xl font-bold">Innovation</h3>
@@ -186,7 +143,7 @@ const About = () => {
           </div>
 
           <div className="text-center bg-transparent hover:bg-gray-200/10 p-8 transition duration-300 ">
-            <div className="w-[80px] mx-auto">
+            <div className="w-[80px] mx-auto pt-10">
               <img src={icon7} alt="Integrity" />
             </div>
             <h3 className="pt-6 text-xl md:text-2xl font-bold">Integrity</h3>
@@ -199,8 +156,8 @@ const About = () => {
 
         {/* Second Row */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
-          <div className="text-center  bg-gray-100/5 hover:bg-gray-200/10 p-8 transition duration-300 ">
-            <div className="w-[70px] mx-auto">
+          <div className="text-center  bg-gray-100/5 hover:bg-gray-200/10 p-8 transition duration-300 h-[350px] ">
+            <div className="w-[70px] mx-auto pt-10">
               <img src={icon8} alt="Agile Solutions" />
             </div>
             <h3 className="pt-6 text-xl md:text-2xl font-bold">
@@ -213,7 +170,7 @@ const About = () => {
           </div>
 
           <div className="text-center bg-transparent hover:bg-gray-200/10 p-8 transition duration-300 ">
-            <div className="w-[80px] mx-auto">
+            <div className="w-[80px] mx-auto pt-10">
               <img src={icon9} alt="Culture" />
             </div>
             <h3 className="pt-6 text-xl md:text-2xl font-bold">Culture</h3>
@@ -224,7 +181,7 @@ const About = () => {
           </div>
 
           <div className="text-center bg-gray-100/5 hover:bg-gray-200/10 p-8 transition duration-300 ">
-            <div className="w-[80px] mx-auto">
+            <div className="w-[80px] mx-auto pt-10">
               <img src={icon10} alt="Kindness" />
             </div>
             <h3 className="pt-6 text-xl md:text-2xl font-bold">Kindness</h3>
@@ -248,7 +205,7 @@ const About = () => {
     </div>
     
     {/* Button Section */}
-    <div className="md:col-span-2 col-span-12 flex justify-center md:justify-end mt-4 md:mt-0">
+    <div className="md:col-span-2 col-span-12 flex justify-center md:justify-end mt-4 md:mt-0 ">
       <Button mybtn={"Learn More"}></Button>
     </div>
 
@@ -261,7 +218,7 @@ const About = () => {
         <div className="container mx-auto mt-28 max-w-[1600px] w-[80%] ">
           <div className="row text-center pb-10 ">
             <div className="col">
-              <p className="text-xl">Visiontrek Environment</p>
+              <p className="text-xl pb-4">Atrix Environment</p>
               <h2 className="font-bold text-5xl">
                 What let us thrive together
               </h2>

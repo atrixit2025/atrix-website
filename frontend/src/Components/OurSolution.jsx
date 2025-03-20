@@ -59,7 +59,7 @@ const OurSolution = () => {
 
                 <div className='row  py-14 md:py-28'>
                     <div className=" grid md:grid-cols-3 grid-cols-1  gap-10  ">
-                        <h2 className="text-6xl font-bold md:mb-8    md:text-end    tracking-wider">Our Solution <br />Process </h2>
+                        <h2 className="text-6xl font-bold  tracking-wider">Our Step by step process</h2>
 
                         <div className='w-full max-w- flex items-end'>
                             <svg className='' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477 65">
@@ -67,7 +67,7 @@ const OurSolution = () => {
                             </svg>
                         </div>
                         <p className=' md:px-2 px-1 text-(--gray)  flex items-end  justify-start font-bold'>
-                            Digital agencies can vary in size and specialization. Some may focus on specific niches, such as healthcare or e-commerce, while others may offer a comprehensive.
+                        Success doesn’t happen by chance, it follows a well-planned process! At Atrix IT Solutions, we follow a strategic approach to ensure smooth execution. Here are the key steps we take to drive your business forward.
                         </p>
                     </div>
                 <div className='col-1 grid md:grid-cols-2 grid-cols-1 items-start relative mt-32 '>
@@ -119,29 +119,29 @@ const blurbContent = [
         id: 1,
         image: icons1,
         title: "Discovery and Consultation.",
-        description: "Understand the client's goals, challenges, and requirements through initial meetings and consultations.",
-        additionalText: ["Client Meeting", "Needs Assessment", "Strategic Planning"]
+        description: "We start by listening to your goals and challenges to create a plan that fits your busines",
+        additionalText: ["Client Meeting", "Identifying Requirements", "Strategic Planning"]
     },
     {
         id: 2,
         image: icons2,
         title: "Design and Architecture.",
-        description: "If applicable, create a user-centric design for software interfaces, websites, or applications.",
+        description: "If needed, we create a user-friendly design for software, websites, or apps before development begins.",
         additionalText: ["Wireframing", "Design Mockups", "Implementation."]
     },
     {
         id: 3,
         image: icons3,
         title: "Development.",
-        description: "Understand the client's goals, challenges, and requirements through initial meetings and consultations.",
-        additionalText: ["Testing Plans.", "Bug Fixing.", "Agile Development."]
+        description: "Our team builds and refines the solution, ensuring smooth functionality and performance.",
+        additionalText: ["Coding & Development", "Testing & Bug Fixing.", "Agile Development."]
     },
     {
         id: 4,
         image: icons4,
         title: "Documentation & Launch.",
-        description: "Understand the client's goals, challenges, and requirements through initial meetings and consultations.",
-        additionalText: ["Testing Plans.", "Bug Fixing.", "Agile Development."]
+        description: "Before going live, we run final tests, fix any issues, and ensure everything runs perfectly.",
+        additionalText: ["Quality Testing", "Documentation", "Launch & Deployment"]
     },
 
 
