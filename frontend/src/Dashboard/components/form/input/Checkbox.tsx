@@ -19,6 +19,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
 }) => {
   return (
     <label
+    htmlFor={id} 
       className={`flex items-center space-x-3 group cursor-pointer ${
         disabled ? "cursor-not-allowed opacity-60" : ""
       }`}
@@ -71,7 +72,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
         )}
       </div>
       {label && (
-        <span className="text-sm font-medium text-gray-800 dark:text-gray-200">
+        <span className="text-sm font-medium text-gray-800 dark:text-gray-200 cursor-pointer">
           {label}
         </span>
       )}

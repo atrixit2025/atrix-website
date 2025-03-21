@@ -1,31 +1,31 @@
 import React from "react";
 
 interface TextareaProps {
-  id?: string; // ID for the textarea
-  placeholder?: string; // Placeholder text
-  rows?: number; // Number of rows
-  value?: string; // Current value
-  onChange?: (id: string, value: string) => void; // Change handler with ID
-  className?: string; // Additional CSS classes
-  disabled?: boolean; // Disabled state
-  error?: boolean; // Error state
-  hint?: string; // Hint text to display
+  id?: string;
+  placeholder?: string;
+  rows?: number;
+  value?: string;
+  onChange?: (value: string) => void; // Simplified onChange
+  className?: string;
+  disabled?: boolean;
+  error?: boolean;
+  hint?: string;
 }
 
 const TextArea: React.FC<TextareaProps> = ({
-  id = "", // Default ID
-  placeholder = "Enter your message", // Default placeholder
-  rows = 3, // Default number of rows
-  value = "", // Default value
-  onChange, // Callback for changes
-  className = "", // Additional custom styles
-  disabled = false, // Disabled state
-  error = false, // Error state
-  hint = "", // Default hint text
+  id = "",
+  placeholder = "Enter your message",
+  rows = 3,
+  value = "",
+  onChange,
+  className = "",
+  disabled = false,
+  error = false,
+  hint = "",
 }) => {
   const handleChanges = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (onChange) {
-      onChange(id, e.target.value); // Pass the ID and value to the parent
+      onChange(e.target.value); // Pass only the value
     }
   };
 
@@ -42,7 +42,7 @@ const TextArea: React.FC<TextareaProps> = ({
   return (
     <div className="relative">
       <textarea
-        id={id} 
+        id={id}
         placeholder={placeholder}
         rows={rows}
         value={value}

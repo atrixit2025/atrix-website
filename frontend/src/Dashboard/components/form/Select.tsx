@@ -1,4 +1,4 @@
-import React,{ useState } from "react";
+import React, { useState } from "react";
 
 interface Option {
   value: string;
@@ -6,7 +6,7 @@ interface Option {
 }
 
 interface SelectProps {
-  options: Option[];
+  options?: Option[]; // Make options optional
   placeholder?: string;
   onChange: (value: string) => void;
   className?: string;
@@ -14,7 +14,7 @@ interface SelectProps {
 }
 
 const Select: React.FC<SelectProps> = ({
-  options,
+  options = [], // Default to an empty array
   placeholder = "Select an option",
   onChange,
   className = "",

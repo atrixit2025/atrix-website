@@ -1,8 +1,8 @@
 import React,{ useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
-  FcMenu, // Horizontal dots icon
-} from "react-icons/fc"; // Import icons from react-icons/fc
+  FcMenu, 
+} from "react-icons/fc"; 
 import { MdOutlineDashboard } from "react-icons/md";
 import { useSidebar } from "../context/SidebarContext";
 import SidebarWidget from "./SidebarWidget";
@@ -17,6 +17,8 @@ import { FaChevronDown } from "react-icons/fa6";
 import { GrTechnology } from "react-icons/gr";
 import Logo from "../../assets/ais-logo-3.png";
 import favIcons from "/favicon_ais-logo-2.png";
+import { FaBloggerB } from "react-icons/fa6";
+import { FaImagePortrait } from "react-icons/fa6";
 type NavItem = {
   name: string;
   icon: React.ReactNode;
@@ -25,11 +27,6 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-  // {
-  //   icon: <FcGrid />, 
-  //   name: "Dashboard",
-  //   subItems: [{ name: "Ecommerce", path: "/", pro: false }],
-  // },
 
   {
     icon: <MdOutlineDashboard />, // Calendar icon
@@ -39,7 +36,7 @@ const navItems: NavItem[] = [
 
   {
     name: "Technology",
-    icon: <GrTechnology />, // List icon
+    icon: <GrTechnology />, 
     subItems: [
       { name: "All Technology", path: "/Technology", pro: false },
       { name: "Add New Technology ", path: "/AddNewTechnology", pro: false },
@@ -49,29 +46,51 @@ const navItems: NavItem[] = [
     ],
   },
   {
-    icon: <FaUser />, // User profile icon
-    name: "User Profile",
-    path: "/profile",
-  },
-  
-  {
-    name: "Forms",
-    icon: <FaWpforms />, // List icon
-    subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
-  },
-  {
-    name: "Tables",
-    icon: <TbTableShare />, // Table icon
-    subItems: [{ name: "Basic Tables", path: "/basic-tables", pro: false }],
-  },
-  {
-    name: "Pages",
-    icon: <RiPagesLine />, // Page icon
+    name: "Blog",
+    icon: <FaBloggerB />, 
     subItems: [
-      { name: "Blank Page", path: "/blank", pro: false },
-      { name: "404 Error", path: "/error-404", pro: false },
+      { name: "All Blog", path: "/Blog", pro: false },
+      { name: "Add New Blog ", path: "/AddNewBlog", pro: false },
+      { name: "Category Blog", path: "/CategoryBlog", pro: false },
+
+
     ],
   },
+  {
+    name: "Portfolio",
+    icon: <FaImagePortrait />, 
+    subItems: [
+      { name: "All Portfolio", path: "/Portfolio", pro: false },
+      { name: "Add New Portfolio ", path: "/AddNewPortfolio", pro: false },
+      { name: "Category Portfolio", path: "/CategoryPortfolio", pro: false },
+
+
+    ],
+  },
+  // {
+  //   icon: <FaUser />, // User profile icon
+  //   name: "User Profile",
+  //   path: "/profile",
+  // },
+  
+  // {
+  //   name: "Forms",
+  //   icon: <FaWpforms />, // List icon
+  //   subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
+  // },
+  // {
+  //   name: "Tables",
+  //   icon: <TbTableShare />,
+  //   subItems: [{ name: "Basic Tables", path: "/basic-tables", pro: false }],
+  // },
+  // {
+  //   name: "Pages",
+  //   icon: <RiPagesLine />, // Page icon
+  //   subItems: [
+  //     { name: "Blank Page", path: "/blank", pro: false },
+  //     { name: "404 Error", path: "/error-404", pro: false },
+  //   ],
+  // },
 ];
 
 const othersItems: NavItem[] = [

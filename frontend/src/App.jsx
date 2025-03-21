@@ -9,8 +9,19 @@ import DashboardHome from "./Dashboard/pages/DashboardHome/HomePage";
 import Technology from "./Dashboard/pages/TechnologyPage/Technology"
 import NewAddTechnology from "./Dashboard/pages/TechnologyPage/NewAddTechnology";
 import CategoryTechnology from "./Dashboard/pages/TechnologyPage/categoryTechnology";
-import SignInForm from "./Dashboard/components/auth/SignInForm"
+
+
+// import SignInForm from "./Dashboard/components/auth/SignInForm"
 import ContactUs from './Pages/ContactUs';
+import Blog from './Dashboard/pages/BlogPage/Blog';
+import AddNewBlog from './Dashboard/pages/BlogPage/AddNewBlog';
+import CategoryBlog from './Dashboard/pages/BlogPage/CategoryBlog';
+import SignInForm from './Dashboard/components/auth/SignInForm';
+import ProtectedRoute from './Dashboard/ProtectedRoutePage';
+import Portfolio from './Dashboard/pages/Portfolio/Portfolio';
+import AddNewPortfolio from './Dashboard/pages/Portfolio/AddNewPortfolio';
+import CategoryPortfolio from './Dashboard/pages/Portfolio/CategoryPortfolio';
+
 
 
 
@@ -31,11 +42,22 @@ export default function App() {
 
       <Routes>
         {/* Dashboard Layout */}
+        <Route element={<ProtectedRoute />}>
         <Route element={<AppLayout />}>
           <Route index path="/Dashboard" element={<DashboardHome />} />
           <Route path="/Technology" element={<Technology />} />
           <Route path="/AddNewTechnology" element={<NewAddTechnology />} />
           <Route path="/CategoryTechnology" element={<CategoryTechnology />} />
+          
+          <Route path="/Blog" element={<Blog />} />
+          <Route path="/AddNewBlog" element={<AddNewBlog />} />
+          <Route path="/CategoryBlog" element={<CategoryBlog />} />
+
+          <Route path="/Portfolio" element={<Portfolio />} />
+          <Route path="/AddNewPortfolio" element={<AddNewPortfolio />} />
+          <Route path="/CategoryPortfolio" element={<CategoryPortfolio />} />
+
+        </Route>
         </Route>
         <Route path="/AISLogin" element={<SignInForm />} />
       </Routes>
