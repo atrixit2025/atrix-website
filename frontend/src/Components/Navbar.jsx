@@ -10,8 +10,12 @@ const navigation = [
   { name: 'About Us', path: '/about', current: false },
   { name: 'Our Services', path: '#', current: false },
   { name: 'Portfolio', path: '#', current: false },
+  { name: 'Career', path: '/careers', current: false },
   { name: 'Blog', path: '#', current: false },
   { name: 'Contact Us', path: '/contact-us', current: false },
+
+
+
 ]
 
 export default function Navbar() {
@@ -38,9 +42,8 @@ export default function Navbar() {
                   key={item.name}
                   to={item.path}
                   aria-current={location.pathname === item.path ? 'page' : undefined}
-                  className={`${
-                    location.pathname === item.path ? 'bg-(--navbarUlbgcolor) text-(--blue)' : 'text-(--white) hover:bg-(--navbarUlbgcolor) hover:text-(--blue)'
-                  } rounded-md px-3 py-1 lg:text-lg md:text-sm sm:text-sm text-[2px] font-bold`}
+                  className={`${location.pathname === item.path ? 'bg-(--navbarUlbgcolor) text-(--blue)' : 'text-(--white) hover:bg-(--navbarUlbgcolor) hover:text-(--blue)'
+                    } rounded-md px-3 py-1 lg:text-lg md:text-sm sm:text-sm text-[2px] font-bold`}
                 >
                   {item.name}
                 </Link>
@@ -71,9 +74,8 @@ export default function Navbar() {
               as={Link}
               to={item.path}
               aria-current={location.pathname === item.path ? 'page' : undefined}
-              className={`${
-                location.pathname === item.path ? 'bg-(--navbarUlbgcolor) text-(--blue)' : 'text-(--white) hover:bg-(--navbarUlbgcolor) hover:text-(--blue)'
-              } block rounded-md px-3 py-2 text-base font-medium`}
+              className={`${location.pathname === item.path ? 'bg-(--navbarUlbgcolor) text-(--blue)' : 'text-(--white) hover:bg-(--navbarUlbgcolor) hover:text-(--blue)'
+                } block rounded-md px-3 py-2 text-base font-medium`}
             >
               {item.name}
             </DisclosureButton>
