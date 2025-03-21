@@ -88,7 +88,13 @@ PortfolioCategoryRouter.get("/Portfolio/category/get", async (req, res) => {
   
       if (newName) Portfoliocategory.Name = newName;
       if (Description) Portfoliocategory.Description = Description;
-      if (ParentCategory) Portfoliocategory.ParentCategory = ParentCategory;
+  
+      // Validate ParentCategory
+      if (ParentCategory && mongoose.Types.ObjectId.isValid(ParentCategory)) {
+        Portfoliocategory.ParentCategory = ParentCategory;
+      } else {
+        Portfoliocategory.ParentCategory = null; // Set to null if invalid
+      }
   
       if (newSlug) {
         const slugExists = await PortfolioCategory.findOne({ Slug: newSlug });
@@ -111,13 +117,23 @@ PortfolioCategoryRouter.get("/Portfolio/category/get", async (req, res) => {
     const { name } = req.params;
   
     try {
-      const Portfoliocategory = await PortfolioCategory.findOneAndDelete({ Name: name });
+      // Find the category to be deleted
+      const categoryToDelete = await PortfolioCategory.findOne({ Name: name });
   
-      if (!Portfoliocategory) {
+      if (!categoryToDelete) {
         return res.status(404).json({ message: "PortfolioCategory not found" });
       }
   
-      res.status(200).json({ message: "PortfolioCategory deleted successfully", Portfoliocategory });
+      // Remove the reference to this category from other categories' ParentCategory fields
+      await PortfolioCategory.updateMany(
+        { ParentCategory: categoryToDelete._id }, // Find all categories where ParentCategory is the one being deleted
+        { $set: { ParentCategory: null } } // Set their ParentCategory to null
+      );
+  
+      // Delete the category
+      await PortfolioCategory.findOneAndDelete({ Name: name });
+  
+      res.status(200).json({ message: "PortfolioCategory deleted successfully", categoryToDelete });
     } catch (error) {
       console.error("Error deleting Portfoliocategory:", error);
       res.status(500).json({ message: "Error deleting Portfoliocategory", error: error.message });

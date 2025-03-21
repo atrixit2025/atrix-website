@@ -35,27 +35,39 @@ export const PortfolioCategoryProvider = ({ children }) => {
       const response = await axios.put(`http://localhost:5300/PortfolioCategory/Portfolio/category/name/${name}`, updatedData);
       setCategories((prevCategories) =>
         prevCategories.map((Portfoliocategory) =>
-          Portfoliocategory.Name === name ? response.data.Portfoliocategory : category
+          Portfoliocategory.name === name ? response.data.Portfoliocategory : category
         )
       );
+      console.log("edit",response)
     } catch (error) {
       console.error("Error editing Portfoliocategory:", error);
       throw error;
     }
   };
 
+  const fetchParentCategories = async () => {
+    try {
+      const response = await axios.get("http://localhost:5300/PortfolioCategory/Portfolio/category/get");
+      setCategories(response.data.categories);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
   // Delete a Portfoliocategory
   const deletePortfolioCategory = async (name) => {
     try {
       await axios.delete(`http://localhost:5300/PortfolioCategory/Portfolio/category/name/${name}`);
-      setCategories((prevCategories) =>
-        prevCategories.filter((Portfoliocategory) => Portfoliocategory.Name !== name)
-      );
+      await fetchParentCategories(); 
     } catch (error) {
       console.error("Error deleting Portfoliocategory:", error);
       throw error;
     }
   };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
 
   // Fetch categories when the provider mounts
   useEffect(() => {
@@ -63,7 +75,7 @@ export const PortfolioCategoryProvider = ({ children }) => {
   }, []);
 
   return (
-    <PortfolioCategoryContext.Provider value={{ categories, fetchCategories, addPortfolioCategory, editPortfolioCategory, deletePortfolioCategory }}>
+    <PortfolioCategoryContext.Provider value={{ categories, fetchCategories, addPortfolioCategory,fetchParentCategories, editPortfolioCategory, deletePortfolioCategory }}>
       {children}
     </PortfolioCategoryContext.Provider>
   );

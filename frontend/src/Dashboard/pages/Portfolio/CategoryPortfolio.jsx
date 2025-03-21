@@ -7,11 +7,10 @@ import TextArea from "../../components/form/input/TextArea";
 import Button from "../../components/ui/button/Button";
 import CategoryPortfolioTable from "./CategoryPortfolioTable";
 import { PortfolioCategoryContext } from "../../ContextApi/PortfolioCategoryContextApi";
-import axios from "axios";
 import Select from "../../components/form/Select";
 
 export default function CategoryPortfolio() {
-  const { addPortfolioCategory, editPortfolioCategory } = useContext(PortfolioCategoryContext);
+  const { addPortfolioCategory, editPortfolioCategory, fetchParentCategories, categories } = useContext(PortfolioCategoryContext);
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -19,21 +18,11 @@ export default function CategoryPortfolio() {
     autoSlug: "",
     ParentCategory: "", // Add ParentCategory to the form state
   });
-  const [categories, setCategories] = useState([]); // Fetch all categories for the dropdown
   const [editingCategory, setEditingCategory] = useState(null);
 
-  // Fetch categories for the dropdown
+  // Fetch categories when the component mounts
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await axios.get("http://localhost:5300/PortfolioCategory/Portfolio/category/get");
-        setCategories(response.data.categories);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    };
-
-    fetchCategories();
+    fetchParentCategories();
   }, []);
 
   // Handle form submission
@@ -52,7 +41,7 @@ export default function CategoryPortfolio() {
           Name: name,
           Description: description,
           Slug: customSlug || autoSlug,
-          ParentCategory: ParentCategory || null,
+          ParentCategory: ParentCategory || null, // Ensure ParentCategory is included
         });
       } else {
         // If adding, call the addCategory function
@@ -60,7 +49,7 @@ export default function CategoryPortfolio() {
           Name: name,
           Description: description,
           Slug: customSlug || autoSlug,
-          ParentCategory: ParentCategory || null,
+          ParentCategory: ParentCategory || null, // Ensure ParentCategory is included
         });
       }
 
@@ -70,15 +59,12 @@ export default function CategoryPortfolio() {
         description: "",
         customSlug: "",
         autoSlug: "",
-        ParentCategory: "",
+        ParentCategory: "", // Reset ParentCategory to empty string
       });
       setEditingCategory(null);
 
-    //   alert(
-    //     editingCategory
-    //       ? "Category updated successfully!"
-    //       : "Category created successfully!"
-    //   );
+      // Optionally, fetch the updated list of categories
+      await fetchParentCategories();
     } catch (error) {
       console.error("Error:", error);
       alert(
@@ -120,14 +106,14 @@ export default function CategoryPortfolio() {
       description: category.Description,
       customSlug: category.Slug,
       autoSlug: category.Slug,
-      ParentCategory: category.ParentCategory || "", // Set ParentCategory if it exists
+      ParentCategory: category.ParentCategory ? category.ParentCategory._id : "", // Set ParentCategory if it exists
     });
   };
 
   // Map categories to options for the Select component
   const categoryOptions = categories.map((category) => ({
-    value: category._id,
-    label: category.Name,
+    value: category._id, // Use _id as the value
+    label: category.Name, // Use Name as the label
   }));
 
   return (
@@ -163,7 +149,7 @@ export default function CategoryPortfolio() {
               placeholder="Select Parent Category"
               onChange={(value) => handleChange("ParentCategory", value)}
               className="w-full p-2 border rounded-lg"
-              defaultValue={formData.ParentCategory}
+              value={formData.ParentCategory} // Use value instead of defaultValue
             />
           </div>
           <div>
@@ -174,7 +160,6 @@ export default function CategoryPortfolio() {
               onChange={(value) => handleChange("description", value)}
             />
           </div>
-       
           <div className="cursor-pointer justify-start">
             <Button
               size="sm"
