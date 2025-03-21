@@ -13,8 +13,6 @@ import CategoryTechnology from "./Dashboard/pages/TechnologyPage/categoryTechnol
 
 // import SignInForm from "./Dashboard/components/auth/SignInForm"
 import ContactUs from './Pages/ContactUs';
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 import Blog from './Dashboard/pages/BlogPage/Blog';
 import AddNewBlog from './Dashboard/pages/BlogPage/AddNewBlog';
 import CategoryBlog from './Dashboard/pages/BlogPage/CategoryBlog';
@@ -28,12 +26,7 @@ import Careers from './Pages/Careers';
 
 
 
-=======
-import Careers from './Pages/careers';
->>>>>>> Stashed changes
-=======
-import Careers from './Pages/careers';
->>>>>>> Stashed changes
+
 
 
 
@@ -48,13 +41,7 @@ export default function App() {
           <Route path='/about' element={<About />} />
           <Route path='/contact-us' element={<ContactUs />} />
           <Route path='/careers' element={<Careers />} />
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
         </Route>
       </Routes>
 
