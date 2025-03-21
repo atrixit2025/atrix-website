@@ -31,7 +31,7 @@ const PerksAtrix = () => {
     return (
         <div>
 
-            <div className="container mx-auto  max-w-[90%] pt-32">
+            <div className="container mx-auto  max-w-[90%] pt-40">
                 <div> <h2 className=' text-6xl text-center font-bold mb-12 ' >Perks At Atrix</h2> </div>
                 <div className="contact-cards-wrapper grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4  ">
                     {PerksCardContent.map((item, index) => (

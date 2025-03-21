@@ -7,7 +7,7 @@ import hire_img from '../../assets/career/hire.svg'
 
 const CareerFormSec = () => {
     return (
-        <div className="pt-24">
+        <div className="pt-40 pb-20 ">
 
 
 
