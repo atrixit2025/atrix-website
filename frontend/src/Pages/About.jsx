@@ -18,10 +18,10 @@ import icon8 from "../assets/AboutUs/keys-sec/Kindness.svg";
 import icon9 from "../assets/AboutUs/keys-sec/value.svg";
 import icon10 from "../assets/AboutUs/keys-sec/Agile-Solutions.svg";
 import About_video from "../assets/ATRIX COMPRESS 540.mp4";
-import CardCarousel from "../Components/card-carousel";
+// import CardCarousel from "../Components/card-carousel";
 import About_sec_scroll from "../Components/About_sec_scroll";
 
-import Ccarousel from "../Components/Ccarousel";
+// import Ccarousel from "../Components/Ccarousel";
 
 
 
@@ -272,7 +272,7 @@ const About = () => {
       </div>
 
       {/* card-carousel-section */}
-     <CardCarousel/>
+     {/* <CardCarousel/> */}
 
      {/* <Ccarousel/> */}
      
