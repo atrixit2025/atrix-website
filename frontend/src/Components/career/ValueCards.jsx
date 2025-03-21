@@ -48,7 +48,7 @@ const ValueCards = () => {
     return (
         <div>
 
-            <div className="container mx-auto  max-w-[90%] pt-32">
+            <div className="container mx-auto  w-[90%] pt-32">
                 <div> <h2 className=' text-6xl text-center font-bold mb-12 ' >Our Values</h2> </div>
                 <div className="contact-cards-wrapper grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  ">
                     {ValueCardContent.map((item, index) => (

@@ -8,7 +8,7 @@ const RiseWithUs = () => {
     return (
         <div>
             <div>
-                <div className="container mx-auto  max-w-[90%] py-24">
+                <div className="container mx-auto  w-[90%] py-24">
                     <div className=' grid grid-cols-1 lg:grid-cols-2'>
                         <div className='pr-36  pt-8' >
                             <h2 className=' text-5xl font-bold '>Rise With Us</h2>
