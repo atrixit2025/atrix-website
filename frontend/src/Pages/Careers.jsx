@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React from 'react';
 import RiseWithUs from '../Components/career/RiseWithUs';
 import CounterSec from '../Components/career/CounterSec';
@@ -29,3 +30,21 @@ const Careers = () => {
 };
 
 export default Careers;
+=======
+import React from 'react'
+import RiseWithUs from '../Components/careers/RiseWithUs'
+
+const Careers = () => {
+    return (
+        <>
+            <div className="container mx-auto max-w-[90%] pt-44 ">
+                <h1 className=' text-7xl text-center' >Career</h1>
+            </div>
+            <RiseWithUs></RiseWithUs>
+        </>
+
+    )
+}
+
+export default Careers
+>>>>>>> Stashed changes
