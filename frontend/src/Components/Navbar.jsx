@@ -13,9 +13,7 @@ const navigation = [
   { name: 'Career', path: '/careers', current: false },
   { name: 'Blog', path: '#', current: false },
   { name: 'Contact Us', path: '/contact-us', current: false },
-  { name: 'Careers', path: '/careers', current: false },
-  { name: 'Blog', path: '#', current: false },
-  { name: 'Contact Us', path: '#', current: false },
+
 
 
 ]
