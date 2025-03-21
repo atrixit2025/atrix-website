@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import React from 'react';
 import RiseWithUs from '../Components/career/RiseWithUs';
 import CounterSec from '../Components/career/CounterSec';
@@ -31,6 +32,8 @@ const Careers = () => {
 
 export default Careers;
 =======
+=======
+>>>>>>> Stashed changes
 import React from 'react'
 import RiseWithUs from '../Components/careers/RiseWithUs'
 
@@ -46,5 +49,9 @@ const Careers = () => {
     )
 }
 
+<<<<<<< Updated upstream
+export default Careers
+>>>>>>> Stashed changes
+=======
 export default Careers
 >>>>>>> Stashed changes
