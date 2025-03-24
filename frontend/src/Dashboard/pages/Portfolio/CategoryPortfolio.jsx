@@ -41,15 +41,16 @@ export default function CategoryPortfolio() {
           Name: name,
           Description: description,
           Slug: customSlug || autoSlug,
-          ParentCategory: ParentCategory || null, // Ensure ParentCategory is included
+          ParentCategory: ParentCategory || null, 
         });
+        
       } else {
         // If adding, call the addCategory function
         await addPortfolioCategory({
           Name: name,
           Description: description,
           Slug: customSlug || autoSlug,
-          ParentCategory: ParentCategory || null, // Ensure ParentCategory is included
+          ParentCategory: ParentCategory || null, 
         });
       }
 
@@ -119,7 +120,7 @@ export default function CategoryPortfolio() {
   return (
     <>
       <NewPageBreadcrumb pageTitle="Category Portfolio" />
-      <div className="space-y-3 grid grid-cols-[3fr_2fr] gap-6">
+      <div className="space-y-3 xl:grid grid-cols-[3fr_2fr] gap-6">
         <div className="space-y-6">
           <h4>{editingCategory ? "Edit Category" : "Add New Category"}</h4>
           <div>
@@ -172,9 +173,9 @@ export default function CategoryPortfolio() {
           </div>
         </div>
         <div>
-          <ComponentCard title="Category Table">
+          {/* <ComponentCard title="Category Table"> */}
             <CategoryPortfolioTable onEditClick={handleEditClick} />
-          </ComponentCard>
+          {/* </ComponentCard> */}
         </div>
       </div>
     </>

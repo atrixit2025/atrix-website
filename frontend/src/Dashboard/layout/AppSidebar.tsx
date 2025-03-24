@@ -19,6 +19,7 @@ import Logo from "../../assets/ais-logo-3.png";
 import favIcons from "/favicon_ais-logo-2.png";
 import { FaBloggerB } from "react-icons/fa6";
 import { FaImagePortrait } from "react-icons/fa6";
+import { TbMarquee } from "react-icons/tb";
 type NavItem = {
   name: string;
   icon: React.ReactNode;
@@ -63,6 +64,16 @@ const navItems: NavItem[] = [
       { name: "All Portfolio", path: "/Portfolio", pro: false },
       { name: "Add New Portfolio ", path: "/AddNewPortfolio", pro: false },
       { name: "Category Portfolio", path: "/CategoryPortfolio", pro: false },
+
+
+    ],
+  },
+  {
+    name: "Brand",
+    icon: <TbMarquee />, 
+    subItems: [
+      { name: "All Brand", path: "/Brand", pro: false },
+      { name: "Add New Brand ", path: "/AddNewBrand", pro: false },
 
 
     ],

@@ -72,26 +72,76 @@ BlogRouter.put("/edit", async (req, res) => {
   }
 });
 
+
 BlogRouter.delete("/delete", async (req, res) => {
-  const { title, category, description,} = req.body;
-
-  if (!title || !category ||!description) {
-    return res.status(400).json({ message: "Title and category description,are required" });
-  }
-
-  try {
-    const deletedBlog = await Blog.findOneAndDelete({ title, category, description});
-
-    if (!deletedBlog) {
-      return res.status(404).json({ message: "Blog not found" });
+    const { titles, categories } = req.body;
+  
+    // Handle bulk delete
+    if (Array.isArray(titles) && Array.isArray(categories)) {
+      if (titles.length === 0 || categories.length === 0) {
+        return res.status(400).json({ message: "Titles and categories arrays cannot be empty" });
+      }
+      if (titles.length !== categories.length) {
+        return res.status(400).json({ message: "Titles and categories arrays must be the same length" });
+      }
+  
+      try {
+        const deleteOperations = titles.map((title, index) => ({
+          deleteOne: {
+            filter: { title, category: categories[index] }
+          }
+        }));
+  
+        const result = await Blog.bulkWrite(deleteOperations);
+        
+        return res.status(200).json({ 
+          message: `${result.deletedCount} technologies deleted successfully`,
+          result
+        });
+      } catch (error) {
+        console.error("Error bulk deleting technologies:", error);
+        return res.status(500).json({ message: "Error bulk deleting technologies", error: error.message });
+      }
     }
+  
+    // Handle single delete (original functionality)
+    const { title, category } = req.body;
+    if (!title || !category) {
+      return res.status(400).json({ message: "Title and category are required" });
+    }
+  
+    try {
+      const deletedBlog = await Blog.findOneAndDelete({ title, category });
+      if (!deletedBlog) {
+        return res.status(404).json({ message: "Blog not found" });
+      }
+      res.status(200).json({ message: "Blog deleted successfully", blog: deletedBlog });
+    } catch (error) {
+      console.error("Error deleting Blog:", error);
+      res.status(500).json({ message: "Error deleting Blog", error: error.message });
+    }
+  });
 
-    res.status(200).json({ message: "Blog deleted successfully", Blog: deletedBlog });
-  } catch (error) {
-    console.error("Error deleting Blog:", error);
-    res.status(500).json({ message: "Error deleting Blog", error: error.message });
-  }
-});
+// BlogRouter.delete("/delete", async (req, res) => {
+//   const { title, category, description,} = req.body;
+
+//   if (!title || !category ||!description) {
+//     return res.status(400).json({ message: "Title and category description,are required" });
+//   }
+
+//   try {
+//     const deletedBlog = await Blog.findOneAndDelete({ title, category, description});
+
+//     if (!deletedBlog) {
+//       return res.status(404).json({ message: "Blog not found" });
+//     }
+
+//     res.status(200).json({ message: "Blog deleted successfully", Blog: deletedBlog });
+//   } catch (error) {
+//     console.error("Error deleting Blog:", error);
+//     res.status(500).json({ message: "Error deleting Blog", error: error.message });
+//   }
+// });
 
 export default BlogRouter;
 

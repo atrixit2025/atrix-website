@@ -22,6 +22,10 @@ import Portfolio from './Dashboard/pages/Portfolio/Portfolio';
 import AddNewPortfolio from './Dashboard/pages/Portfolio/AddNewPortfolio';
 import CategoryPortfolio from './Dashboard/pages/Portfolio/CategoryPortfolio';
 import Careers from './Pages/Careers';
+import LogoMarquee from './Dashboard/pages/BrandPage/Brand';
+import AddNewLogoMarquee from './Dashboard/pages/BrandPage/AddNewBrand';
+import AddNewBrand from './Dashboard/pages/BrandPage/AddNewBrand';
+import Brand from './Dashboard/pages/BrandPage/Brand';
 // import Careers from './Pages/careers';
 
 
@@ -62,6 +66,11 @@ export default function App() {
             <Route path="/Portfolio" element={<Portfolio />} />
             <Route path="/AddNewPortfolio" element={<AddNewPortfolio />} />
             <Route path="/CategoryPortfolio" element={<CategoryPortfolio />} />
+
+
+            <Route path="/Brand" element={<Brand />} />
+            <Route path="/AddNewBrand" element={<AddNewBrand/>} />
+
 
           </Route>
         </Route>

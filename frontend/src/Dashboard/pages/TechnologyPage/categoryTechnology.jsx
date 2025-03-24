@@ -149,9 +149,9 @@ export default function CategoryTechnology() {
           </div>
         </div>
         <div>
-          <ComponentCard title="Category Table">
+          {/* <ComponentCard title="Category Table"> */}
             <CategoryTable onEditClick={handleEditClick} />
-          </ComponentCard>
+          {/* </ComponentCard> */}
         </div>
       </div>
     </>
