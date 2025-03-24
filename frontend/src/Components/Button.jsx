@@ -1,5 +1,5 @@
-import React from 'react'
-import { RxArrowTopRight } from "react-icons/rx";
+import React from "react";
+
 import { Link } from "react-router-dom"
 
 const Button = ({ mybtn, btnLink }) => {
@@ -9,7 +9,7 @@ const Button = ({ mybtn, btnLink }) => {
         {mybtn} <span className=''><RxArrowTopRight className='' /></span>
       </button>  </Link>
     </div>
-  )
-}
+  );
+};
 
-export default Button
+export default Button;
