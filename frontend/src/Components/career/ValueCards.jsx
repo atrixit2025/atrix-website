@@ -1,50 +1,7 @@
 import React from 'react'
-import value from '../../assets/value.svg'
-import date_icon from '../../assets/career/date.svg'
 
-const ValueCardContent = [
-    {
-        icon: date_icon,
-        title: "One",
-        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
-    },
-    {
-        icon: date_icon,
-        title: "One",
-        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
-
-    },
-    {
-        icon: date_icon,
-        title: "One",
-        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
-
-
-    },
-    {
-        icon: date_icon,
-        title: "One",
-        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
-
-
-    },
-    {
-        icon: date_icon,
-        title: "One",
-        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
-
-    },
-    {
-        icon: date_icon,
-        title: "One",
-        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
-
-    },
-
-
-]
-
-const ValueCards = () => {
+const ValueCards = ({ ValueCardContent , ValueCardheadings }  ) => {
+    console.log(ValueCardheadings )
     return (
         <div>
 

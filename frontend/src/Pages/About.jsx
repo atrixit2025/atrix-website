@@ -17,13 +17,12 @@ import icon7 from "../assets/AboutUs/keys-sec/Integrity.svg";
 import icon8 from "../assets/AboutUs/keys-sec/Kindness.svg";
 import icon9 from "../assets/AboutUs/keys-sec/value.svg";
 import icon10 from "../assets/AboutUs/keys-sec/Agile-Solutions.svg";
-import About_video from "../assets/ATRIX COMPRESS 540.mp4";
-// import CardCarousel from "../Components/card-carousel";
+import About_video from "../assets/Final Website cmpress Apatrix video.mp4";
+
 import About_sec_scroll from "../Components/About_sec_scroll";
+import ValueCards from "../Components/career/ValueCards";
 
-// import Ccarousel from "../Components/Ccarousel";
-
-
+import { RxArrowTopRight } from "react-icons/rx";
 
 const cards = [
   { id: 1, title: "Card 1", color: "bg-red-500" },
@@ -48,13 +47,57 @@ const About = () => {
       setIndex(index - 1);
     }
   };
+  
   useEffect(()=>{
  window.scroll(0,0)
   })
 
+
+  const ValueCardheading =[
+    { 
+        secHeading:"Our Keys",
+        secSubHeading:"What sets us apart"
+    }
+]
+
+const ValueCardContent = [
+  {
+    icon: icon5,
+    title: "Values",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
+  },
+  {
+    icon: icon6,
+    title: "Innovation ",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
+  },
+  {
+    icon: icon7,
+    title: "Integrity",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
+  },
+  {
+    icon: icon8,
+    title: "Agile Solutions",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
+  },
+  {
+    icon: icon9,
+    title: "Culture",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
+  },
+  {
+    icon: icon10,
+    title: "Kindness",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
+  },
+];
+
+
   return (
     <>
       {/* video-section */}
+      
       <div className="video-sec mx-6 pt-38">
         <div className="pointer-events-none  ">
           <video
@@ -110,95 +153,13 @@ const About = () => {
 
       {/* Our Keys section */}
 
-      <div className="container keys-sec mx-auto mt-28 max-w-[1600px] w-[80%] ">
-        {/* Heading */}
-        <div className="grid grid-cols-12">
-          <div className="col-span-12 text-center">
-            <p className="text-lg md:text-xl pb-2">Our Keys</p>
-            <h2 className="font-bold text-3xl md:text-5xl">
-              What sets us apart
-            </h2>
-          </div>
-        </div>
-
-        {/* First Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pt-10">
-          <div className="text-center bg-transparent hover:bg-gray-200/10 p-8 transition duration-300 h-[350px]">
-            <div className="w-[80px] mx-auto  pt-10">
-              <img src={icon5} alt="Values" />
-            </div>
-            <h3 className="pt-6 text-xl md:text-2xl font-bold">Values</h3>
-            <p className="pt-2 text-gray-500 text-sm md:text-base">
-              Ethical solutions and guided by a moral compass we add value to
-              our client's lives through our products and solutions.
-            </p>
-          </div>
-
-          <div className="text-center bg-gray-100/5 hover:bg-gray-200/10 p-8 transition duration-300 ">
-            <div className="w-[80px] mx-auto pt-10">
-              <img src={icon6} alt="Innovation" />
-            </div>
-            <h3 className="pt-6 text-xl md:text-2xl font-bold">Innovation</h3>
-            <p className="pt-2 text-gray-500 text-sm md:text-base">
-              Ethical solutions and guided by a moral compass we add value to
-              our client's lives through our products and solutions.
-            </p>
-          </div>
-
-          <div className="text-center bg-transparent hover:bg-gray-200/10 p-8 transition duration-300 ">
-            <div className="w-[80px] mx-auto pt-10">
-              <img src={icon7} alt="Integrity" />
-            </div>
-            <h3 className="pt-6 text-xl md:text-2xl font-bold">Integrity</h3>
-            <p className="pt-2 text-gray-500 text-sm md:text-base">
-              Ethical solutions and guided by a moral compass we add value to
-              our client's lives through our products and solutions.
-            </p>
-          </div>
-        </div>
-
-        {/* Second Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
-          <div className="text-center  bg-gray-100/5 hover:bg-gray-200/10 p-8 transition duration-300 h-[350px] ">
-            <div className="w-[70px] mx-auto pt-10">
-              <img src={icon8} alt="Agile Solutions" />
-            </div>
-            <h3 className="pt-6 text-xl md:text-2xl font-bold">
-              Agile Solutions
-            </h3>
-            <p className="pt-2 text-gray-500  text-sm md:text-base">
-              Ethical solutions and guided by a moral compass we add value to
-              our client's lives through our products and solutions.
-            </p>
-          </div>
-
-          <div className="text-center bg-transparent hover:bg-gray-200/10 p-8 transition duration-300 ">
-            <div className="w-[80px] mx-auto pt-10">
-              <img src={icon9} alt="Culture" />
-            </div>
-            <h3 className="pt-6 text-xl md:text-2xl font-bold">Culture</h3>
-            <p className="pt-2 text-gray-500 text-sm md:text-base">
-              Ethical solutions and guided by a moral compass we add value to
-              our client's lives through our products and solutions.
-            </p>
-          </div>
-
-          <div className="text-center bg-gray-100/5 hover:bg-gray-200/10 p-8 transition duration-300 ">
-            <div className="w-[80px] mx-auto pt-10">
-              <img src={icon10} alt="Kindness" />
-            </div>
-            <h3 className="pt-6 text-xl md:text-2xl font-bold">Kindness</h3>
-            <p className="pt-2 text-gray-500 text-sm md:text-base">
-              Ethical solutions and guided by a moral compass we add value to
-              our client's lives through our products and solutions.
-            </p>
-          </div>
-        </div>
-      </div>
+    
+        {/* Heading */}          
+          <ValueCards ValueCardContent={ValueCardContent } ValueCardheadings={ValueCardheading} />
 
       {/* CTA-section */}
-      <div className="container mx-auto mt-28 max-w-[1600px] w-[80%]">
-  <div className="row grid grid-cols-1 md:grid-cols-12 mt-10 bg-white/15 rounded-sm p-6 md:p-10">
+      <div className="container mx-auto mt-28 ">
+  <div className="row grid grid-cols-1 md:grid-cols-12 mt-10 bg-(--blue) rounded-sm p-6 md:p-10">
     
     {/* Text Section */}
     <div className="md:col-span-10 col-span-12 text-center md:text-left">
@@ -209,7 +170,9 @@ const About = () => {
     
     {/* Button Section */}
     <div className="md:col-span-2 col-span-12 flex justify-center md:justify-end mt-4 md:mt-0 ">
-      <Button mybtn={"Learn More"}></Button>
+    <button className="bg-(--white)  font-extrabold text-(--blue) px-4 py-2  duration-300  rounded-lg  cursor-pointer  flex items-center gap-2">Learn More  <span className="">
+                <RxArrowTopRight className="" />
+              </span></button>
     </div>
 
   </div>
@@ -218,7 +181,7 @@ const About = () => {
 
       {/* Environment-section */}
       <div className="Environment-sec">
-        <div className="container mx-auto mt-28 max-w-[1600px] w-[80%] ">
+        <div className="container mx-auto mt-28 ">
           <div className="row text-center pb-10 ">
             <div className="col">
               <p className="text-xl pb-4">Atrix Environment</p>

@@ -28,6 +28,11 @@ import AddNewBrand from './Dashboard/pages/BrandPage/AddNewBrand';
 import Brand from './Dashboard/pages/BrandPage/Brand';
 // import Careers from './Pages/careers';
 
+import Faqs from './Pages/faqs';
+import PrivacyPolicy from './Pages/PrivacyPolicy';
+import TermsAndConditions from './Pages/TermsAndConditions';
+
+
 
 
 
@@ -45,7 +50,10 @@ export default function App() {
           <Route path='/about' element={<About />} />
           <Route path='/contact-us' element={<ContactUs />} />
           <Route path='/careers' element={<Careers />} />
-
+          <Route path='/faqs' element={<Faqs />} />
+          <Route path='/privacy-policy' element={< PrivacyPolicy />} />
+          <Route path='/terms-and-conditions' element={< TermsAndConditions />} />
+          <Route path='/portfolio' element={< Portfolio />} />
         </Route>
       </Routes>
 

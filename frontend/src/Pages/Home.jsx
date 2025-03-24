@@ -7,6 +7,7 @@ import LogoSlider from '../Components/marqueelogo/LogoSlider';
 import Button from '../Components/Button';
 import useIntersectionObserver from '../Components/useIntersectionObserver';
 import AboutImage from "../assets/AboutImage.jpg";
+// import About_Video from "../assets/Atrix Website 4 compress Full szie video .mp4"
 import Assetarrow from "../assets/Asset 1arrow.svg"
 const OurServices = React.lazy(() => import('../Components/OurServices'));
 const VideoSection = React.lazy(() => import('../Components/VideoSection'));
@@ -100,10 +101,10 @@ const Home = () => {
   }, []);
 
   const lines = [
-    '  Visionary, Innovative',
+    '  Empowering, Innovative',
     ' Global. Professional',
     ' Accessible, User-centric ',
-    'Empowering, Trustworthy'
+    'Visionary, Trustworthy'
   ];
 
 
@@ -114,7 +115,7 @@ const Home = () => {
           <div className="pointer-events-none absolute inset-0 h-full">
             <ParticleEffect />
           </div>
-          <div className='container mx-auto  max-w-[1280px] w-[90%]'>
+          <div className='container mx-auto '>
             <div className="flex justify-center items-center md:min-h-screen md:py-46 py-40 ">
               <div className="text-center relative">
                 <h1 className="text-(--whitelight) mt-5 text-6xl md:text-8xl lg:text-9xl">
@@ -191,7 +192,7 @@ const Home = () => {
             <div className='inline-block relative max-w-[100%]'>
               <img src={AboutImage} className="h-full  w-auto min-h-[600px] object-cover relative max-w-[100%]" alt="About Us" />
               {/* <video
-                      src={video}
+                      src={About_Video}
                       autoPlay 
                       muted 
                       loop 

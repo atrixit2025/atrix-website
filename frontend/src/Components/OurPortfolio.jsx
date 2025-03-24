@@ -4,10 +4,10 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { MdOutlineArrowOutward } from "react-icons/md";
-import project1 from "../assets/PortfolioImage/project1.jpeg";
-import project2 from "../assets/PortfolioImage/project2.jpeg";
-import project3 from "../assets/PortfolioImage/project3.jpeg";
-import project4 from "../assets/PortfolioImage/project4.jpeg";
+import project1 from "../assets/PortfolioImage/imgpsh_fullsize_anim (1).png";
+import project2 from "../assets/PortfolioImage/imgpsh_fullsize_anim (2).png";
+import project3 from "../assets/PortfolioImage/imgpsh_fullsize_anim (3).png";
+import project4 from "../assets/PortfolioImage/imgpsh_fullsize_anim.png";
 
 
 
@@ -81,15 +81,15 @@ const OurPortfolio = () => {
     };
     return (
         <div className="Protfolio-section  bg-(--darkblack) text-(--whitelight)  relative overflow-hidden">
-             <div className='container  mx-auto max-w-[1280px] w-[90%]'>
+             <div className='container  mx-auto '>
                 <div className=' py-14 md:py-28'>
-                <div className="md:flex justify-center  gap-10 ">
+                <div className="md:flex justify-between  gap-10 ">
                     <div className=' font-extrabold '>
                         <p className='text-gray '>OUR PORTFOLIO</p>
                         <h2 className="text-6xl font-bold w-[380px] "> Our Work Your Success</h2>
                     </div>
 
-                    <div className='w-full max-w-[550px] mt-14'>
+                    <div className='w-full  mt-14'>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477 65">
                             <path fill="#2f2f2f" d="M0.333333 3C0.333333 4.47276 1.52724 5.66667 3 5.66667C4.47276 5.66667 5.66667 4.47276 5.66667 3C5.66667 1.52724 4.47276 0.333333 3 0.333333C1.52724 0.333333 0.333333 1.52724 0.333333 3ZM475 3L475.255 3.42984L476.82 2.5H475V3ZM438.668 65L441.872 60.197L436.111 59.8239L438.668 65ZM3 3.5H475V2.5H3V3.5ZM474.745 2.57016C459.928 11.3742 441.341 27.8789 438.461 60.47L439.457 60.5581C442.3 28.3895 460.613 12.1303 475.255 3.42984L474.745 2.57016Z"></path>
                         </svg>
@@ -159,7 +159,7 @@ const OurPortfolio = () => {
                                             ))}
                                         </ul>
                                         <div className='relative'>
-                                            <img src={item.img} alt={item.title} className="w-full h-72 object-cover mt-5" />
+                                            <img src={item.img} alt={item.title} className="w-full  object-cover mt-5" />
                                             <button className='bg-(--black)  rounded-full px-2 py-2 text-3xl absolute -bottom-5 right-10 hover:rotate-45 transform duration-300  cursor-pointer hover:bg-(--green)'><MdOutlineArrowOutward /></button>
                                         </div>
                                     </div>
@@ -180,5 +180,3 @@ const OurPortfolio = () => {
 export default OurPortfolio;
 
 
-
-// hover:scale-105 transition-transform duration-300
