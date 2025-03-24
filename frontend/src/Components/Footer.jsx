@@ -5,6 +5,7 @@ import { FaXTwitter } from "react-icons/fa6";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import Button from "./Button";
+import { Link } from "react-router-dom";
 
 
 const ourServices = [
@@ -27,13 +28,13 @@ const ourServices = [
     { service_name: "Unity 3D Game Development", url: "#" },
 ]
 const quickLinks = [
-    { link_name: "Home", url: "#" },
-    { link_name: "About", url: "#" },
+    { link_name: "Home", url: "/" },
+    { link_name: "About", url: "/about" },
     { link_name: "Our Blog", url: "#" },
-    { link_name: "Our Portfolio", url: "#" },
-    { link_name: "FAQ", url: "#" },
-    { link_name: "Career", url: "#" },
-    { link_name: "Contact Us", url: "#" },
+    { link_name: "Our Portfolio", url: "/portfolio" },
+    { link_name: "FAQ", url: "/faqs" },
+    { link_name: "Career", url: "/careers" },
+    { link_name: "Contact Us", url: "/contact-us" },
 ]
 
 
@@ -92,7 +93,7 @@ const Footer = () => {
 
                                 {quickLinks.map((item, index) => (
                                     <li className="hover:text-(--blue) hover:font-bold duration-150" key={index}>
-                                        <a href={item.url}>{item.link_name}</a>
+                                        <Link to={item.url}>{item.link_name}</Link>
                                     </li>
                                 ))}
 
@@ -102,7 +103,7 @@ const Footer = () => {
                             <h2 className=" text-xl md:text-3xl font-bold">We are dedicated to find the right solution for you.</h2>
                             <div className=" mt-5 ">
                                 {/* <CsButton mybtn="Get in Touch"></CsButton> */}
-                                <Button mybtn="Get in Touch"></Button>
+                                <Button mybtn="Get in Touch" btnLink={"/contact-us"} ></Button>
                             </div>
                         </div>
                     </div>
@@ -119,12 +120,12 @@ const Footer = () => {
                             <p className="border-r pr-4 text-sm">Support Policy </p>
                         </li>
                         <li>
-                            <a href="#" className="border-r pr-4">
+                            <Link to="terms-and-conditions" className="border-r pr-4">
                                 Terms & Conditions{" "}
-                            </a>
+                            </Link>
                         </li>
                         <li className="">
-                            <a href="#"> Privacy Policy</a>
+                            <Link to="/privacy-policy"> Privacy Policy</Link>
                         </li>
                     </ul>
                 </div>

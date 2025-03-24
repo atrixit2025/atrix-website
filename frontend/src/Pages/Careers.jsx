@@ -10,6 +10,7 @@ import HeroCommon from "../Components/HeroCommon";
 import icon from "../assets/career/date.svg";
 
 const herodata = [
+
   {
     title: "Careers",
     desc: "",
@@ -20,6 +21,8 @@ const ValueCardheading =[
     { 
         secHeading:"Our Values",
         secSubHeading:""
+
+  
     }
 ]
 
