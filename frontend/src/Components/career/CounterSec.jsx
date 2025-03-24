@@ -9,7 +9,7 @@ const counterData = [
 
 const CounterSec = () => {
     return (
-        <div className="container mx-auto w-[90%] pt-24">
+        <div className="container mx-auto  pt-24">
             <div className="grid grid-cols-3 gap-6">
                 {counterData.map((item, index) => (
                     <div key={index} className="flex flex-col gap-5">

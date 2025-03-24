@@ -1,5 +1,4 @@
-import React from 'react'
-import value from '../../assets/calendar_icon.png'
+import React from 'react';
 import cup_icon from '../../assets/career/cup.svg'
 import date_icon from '../../assets/career/date.svg'
 import ppl_icon from '../../assets/career/ppl.svg'
@@ -31,7 +30,7 @@ const PerksAtrix = () => {
     return (
         <div>
 
-            <div className="container mx-auto  max-w-[90%] pt-40">
+            <div className="container mx-auto   pt-40">
 
                 <div> <h2 className=' text-6xl text-center font-bold mb-12 ' >Perks At Atrix</h2> </div>
                 <div className="contact-cards-wrapper grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4  ">
