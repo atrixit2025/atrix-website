@@ -33,8 +33,8 @@ const PerksAtrix = () => {
 
             <div className="container mx-auto  max-w-[90%] pt-40">
 
-                <div> <h2 className=' text-6xl text-center font-bold mb-12 ' >Perks At Atrix</h2> </div>
-                <div className="contact-cards-wrapper grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4  ">
+                <div> <h2 className=' text-4xl md:text-6xl text-center font-bold mb-12 ' >Perks At Atrix</h2> </div>
+                <div className="contact-cards-wrapper grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4  ">
                     {PerksCardContent.map((item, index) => (
                         <div className="contact-card  py-10 px-8  " >
                             <div className=' max-w-16 h-auto mb-6 mx-auto '> <img src={item.icon} alt="" className=' w-full h-full' /> </div>

@@ -8,7 +8,7 @@ import Roles from '../Components/career/Roles';
 import CareerFormSec from '../Components/career/FormSec';
 import HeroCommon from '../Components/HeroCommon';
 
-const herodata = [ // ✅ Added "const"
+const herodata = [
     {
         title: "Careers",
         desc: "",

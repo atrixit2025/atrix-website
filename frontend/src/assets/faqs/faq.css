@@ -1,0 +1,39 @@
+.accordian {
+  border: 1px solid #292929;
+  margin-bottom: 8px;
+  border-radius: 6px;
+}
+.accordian .accordian-title {
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  gap: 20px;
+  font-weight: 600;
+  font-size: 18px;
+  font-family: var(--manropefont);
+  letter-spacing: 0;
+  line-height: normal;
+  cursor: pointer;
+}
+.bodyContent {
+  padding: 20px 20px;
+}
+.accordian-title.active {
+  background-color: #292929;
+  /* background-color: #614040; */
+}
+.faqCatHeading {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.faqCatHeading::before,
+.faqCatHeading::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  width: 100%;
+  background-color: #fff;
+  opacity: 0.1;
+}
