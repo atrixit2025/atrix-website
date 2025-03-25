@@ -27,11 +27,16 @@ import AddNewLogoMarquee from './Dashboard/pages/BrandPage/AddNewBrand';
 import AddNewBrand from './Dashboard/pages/BrandPage/AddNewBrand';
 import Brand from './Dashboard/pages/BrandPage/Brand';
 // import Careers from './Pages/careers';
-
 import Faqs from './Pages/faqs';
 import PrivacyPolicy from './Pages/PrivacyPolicy';
 import TermsAndConditions from './Pages/TermsAndConditions';
+
 import Services from './Dashboard/pages/ServicesPage/Services';
+
+import BlogUS from './Pages/BlogUS';
+import BlogContant from './Components/BlogContant';
+import Portfolio_page from './Pages/Portfolio';
+
 
 
 
@@ -55,8 +60,13 @@ export default function App() {
           <Route path='/privacy-policy' element={< PrivacyPolicy />} />
           <Route path='/terms-and-conditions' element={< TermsAndConditions />} />
           <Route path='/portfolio' element={< Portfolio />} />
-        </Route>
-      </Routes>
+          <Route path='/BlogUs' element={< BlogUS />} />
+          <Route path='/BlogContant' element={< BlogContant />} />
+          {/* <Route path='/portfolio' element={< Portfolio />} /> */}
+          <Route path='/portfolio-page' element={< Portfolio_page />} />
+
+        </Route >
+      </Routes >
 
 
       <Routes>
@@ -83,12 +93,14 @@ export default function App() {
 
             <Route path="/DashboardServices" element={<Services/>} />
 
+           
+
 
           </Route>
         </Route>
         <Route path="/AISLogin" element={<SignInForm />} />
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter >
 
   )
 }

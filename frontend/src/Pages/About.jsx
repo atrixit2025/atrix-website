@@ -20,9 +20,10 @@ import icon10 from "../assets/AboutUs/keys-sec/Agile-Solutions.svg";
 import About_video from "../assets/Final Website cmpress Apatrix video.mp4";
 
 import About_sec_scroll from "../Components/About_sec_scroll";
-import ValueCards from "../Components/career/ValueCards";
+
 
 import { RxArrowTopRight } from "react-icons/rx";
+import ValueCards from "../Components/career/ValueCards";
 
 const cards = [
   { id: 1, title: "Card 1", color: "bg-red-500" },
@@ -47,57 +48,57 @@ const About = () => {
       setIndex(index - 1);
     }
   };
-  
-  useEffect(()=>{
- window.scroll(0,0)
+
+  useEffect(() => {
+    window.scroll(0, 0)
   })
 
 
-  const ValueCardheading =[
-    { 
-        secHeading:"Our Keys",
-        secSubHeading:"What sets us apart"
+  const ValueCardheading = [
+    {
+      secHeading: "Our Keys",
+      secSubHeading: "What sets us apart"
     }
-]
+  ]
 
-const ValueCardContent = [
-  {
-    icon: icon5,
-    title: "Values",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
-  },
-  {
-    icon: icon6,
-    title: "Innovation ",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
-  },
-  {
-    icon: icon7,
-    title: "Integrity",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
-  },
-  {
-    icon: icon8,
-    title: "Agile Solutions",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
-  },
-  {
-    icon: icon9,
-    title: "Culture",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
-  },
-  {
-    icon: icon10,
-    title: "Kindness",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
-  },
-];
+  const ValueCardContent = [
+    {
+      icon: icon5,
+      title: "Values",
+      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
+    },
+    {
+      icon: icon6,
+      title: "Innovation ",
+      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
+    },
+    {
+      icon: icon7,
+      title: "Integrity",
+      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
+    },
+    {
+      icon: icon8,
+      title: "Agile Solutions",
+      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
+    },
+    {
+      icon: icon9,
+      title: "Culture",
+      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
+    },
+    {
+      icon: icon10,
+      title: "Kindness",
+      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
+    },
+  ];
 
 
   return (
     <>
       {/* video-section */}
-      
+
       <div className="video-sec mx-6 pt-38">
         <div className="pointer-events-none  ">
           <video
@@ -118,7 +119,7 @@ const ValueCardContent = [
         <h1 className="font-bold text-4xl md:text-6xl lg:text-9xl">About Us</h1>
         <p className="mx-auto max-w-3xl text-sm md:text-base lg:text-lg text-white/55 mt-4">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Id nihil
-          suscipit autem accusamus provident magnam, 
+          suscipit autem accusamus provident magnam,
         </p>
       </div>
 
@@ -126,17 +127,17 @@ const ValueCardContent = [
 
       {/* text-marquee-section */}
       <div className="relative marquee-sec text-6xl font-bold mt-22 ">   <div>
-          <Marquee speed={30} className="overflow-hidden">
-            VISIONARY . INNOVATIVE . EFFICIENT . GL PROFESSIONAL . ACCESSIBLE .
-            USER-CENTR EMPOWERING . TRUSTWORTHY . SCALABLE
-          </Marquee>
-        </div>
+        <Marquee speed={30} className="overflow-hidden">
+          VISIONARY . INNOVATIVE . EFFICIENT . GL PROFESSIONAL . ACCESSIBLE .
+          USER-CENTR EMPOWERING . TRUSTWORTHY . SCALABLE
+        </Marquee>
+      </div>
 
         <div>
           <Marquee
             speed={30}
             direction="right"
-            className="overflow-hidden mt-3"
+            className="overflow-hidden mt-1"
           >
             VISIONARY . INNOVATIVE . EFFICIENT . GL ROFESSIONAL . ACCESSIBLE .
             USER-CENTR EMPOWERING . TRUSTWORTHY . SCALABLE
@@ -144,7 +145,7 @@ const ValueCardContent = [
         </div>
 
         <div>
-          <Marquee speed={30} className="overflow-hidden mt-3">
+          <Marquee speed={30} className="overflow-hidden mt-1">
             ACCESSIBLE . USER-CENTR EMPOWERING . TRUSTWORTHY . SCALABLE .
             VISIONARY . INNOVATIVE . EFFICIENT . GL ROFESSIONAL .
           </Marquee>
@@ -153,30 +154,30 @@ const ValueCardContent = [
 
       {/* Our Keys section */}
 
-    
-        {/* Heading */}          
-          <ValueCards ValueCardContent={ValueCardContent } ValueCardheadings={ValueCardheading} />
+
+      {/* Heading */}
+      <ValueCards />
 
       {/* CTA-section */}
       <div className="container mx-auto mt-28 ">
-  <div className="row grid grid-cols-1 md:grid-cols-12 mt-10 bg-(--blue) rounded-sm p-6 md:p-10">
-    
-    {/* Text Section */}
-    <div className="md:col-span-10 col-span-12 text-center md:text-left">
-      <h3 className="text-white text-3xl md:text-4xl font-bold">
-        We are always on the lookout for new talent!
-      </h3>
-    </div>
-    
-    {/* Button Section */}
-    <div className="md:col-span-2 col-span-12 flex justify-center md:justify-end mt-4 md:mt-0 ">
-    <button className="bg-(--white)  font-extrabold text-(--blue) px-4 py-2  duration-300  rounded-lg  cursor-pointer  flex items-center gap-2">Learn More  <span className="">
-                <RxArrowTopRight className="" />
-              </span></button>
-    </div>
+        <div className="row grid grid-cols-1 md:grid-cols-12 mt-10 bg-(--blue) rounded-sm p-6 md:p-10">
 
-  </div>
-</div>
+          {/* Text Section */}
+          <div className="md:col-span-10 col-span-12 text-center md:text-left">
+            <h3 className="text-white text-3xl md:text-4xl font-bold">
+              We are always on the lookout for new talent!
+            </h3>
+          </div>
+
+          {/* Button Section */}
+          <div className="md:col-span-2 col-span-12 flex justify-center md:justify-end mt-4 md:mt-0 ">
+            <button className="bg-(--white)  font-extrabold text-(--blue) px-4 py-2  duration-300  rounded-lg  cursor-pointer  flex items-center gap-2">Learn More  <span className="">
+              <RxArrowTopRight className="" />
+            </span></button>
+          </div>
+
+        </div>
+      </div>
 
 
       {/* Environment-section */}
@@ -235,10 +236,10 @@ const ValueCardContent = [
       </div>
 
       {/* card-carousel-section */}
-     {/* <CardCarousel/> */}
+      {/* <CardCarousel/> */}
 
-     {/* <Ccarousel/> */}
-     
+      {/* <Ccarousel/> */}
+
 
     </>
   );
