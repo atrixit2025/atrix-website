@@ -18,7 +18,7 @@ const ContactForm = () => {
                         <p className="mt-5 mb-6 max-w-[350px]">
                             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi, perferendis. Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         </p>
-                        <Link to="#" className="text-[var(--blue)] font-medium flex gap-1">
+                        <Link to="/faqs" className="text-[var(--blue)] font-medium flex gap-1">
                             Read Our FAQ <div className="icon pt-0.5 text-xl"> <IoIosArrowForward /> </div>
                         </Link>
                         <div className='mt-6'>

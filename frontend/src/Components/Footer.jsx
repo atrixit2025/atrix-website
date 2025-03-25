@@ -31,7 +31,7 @@ const quickLinks = [
     { link_name: "Home", url: "/" },
     { link_name: "About", url: "/about" },
     { link_name: "Our Blog", url: "#" },
-    { link_name: "Our Portfolio", url: "/portfolio" },
+    { link_name: "Our Portfolio", url: "/portfolio-page" },
     { link_name: "FAQ", url: "/faqs" },
     { link_name: "Career", url: "/careers" },
     { link_name: "Contact Us", url: "/contact-us" },

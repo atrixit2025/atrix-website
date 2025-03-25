@@ -17,13 +17,13 @@ const herodata = [
   },
 ];
 
-const ValueCardheading =[
-    { 
-        secHeading:"Our Values",
-        secSubHeading:""
+const ValueCardheading = [
+  {
+    secHeading: "Our Values",
+    secSubHeading: ""
 
-  
-    }
+
+  }
 ]
 
 const ValueCardContent = [
@@ -65,7 +65,7 @@ const Careers = () => {
       <HeroCommon heroData={herodata[0]} />
       <RiseWithUs />
       <CounterSec />
-      <ValueCards ValueCardContent={ValueCardContent } ValueCardheadings={ValueCardheading} />
+      <ValueCards />
       <PerksAtrix />
       <Roles />
       <CareerFormSec />
@@ -73,4 +73,4 @@ const Careers = () => {
   );
 };
 
-export default Careers;
+export default Careers; 

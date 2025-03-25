@@ -27,12 +27,13 @@ import AddNewLogoMarquee from './Dashboard/pages/BrandPage/AddNewBrand';
 import AddNewBrand from './Dashboard/pages/BrandPage/AddNewBrand';
 import Brand from './Dashboard/pages/BrandPage/Brand';
 // import Careers from './Pages/careers';
-
 import Faqs from './Pages/faqs';
 import PrivacyPolicy from './Pages/PrivacyPolicy';
 import TermsAndConditions from './Pages/TermsAndConditions';
 import BlogUS from './Pages/BlogUS';
 import BlogContant from './Components/BlogContant';
+import Portfolio_page from './Pages/Portfolio';
+
 
 
 
@@ -58,8 +59,11 @@ export default function App() {
           <Route path='/portfolio' element={< Portfolio />} />
           <Route path='/BlogUs' element={< BlogUS />} />
           <Route path='/BlogContant' element={< BlogContant />} />
-        </Route>
-      </Routes>
+          {/* <Route path='/portfolio' element={< Portfolio />} /> */}
+          <Route path='/portfolio-page' element={< Portfolio_page />} />
+
+        </Route >
+      </Routes >
 
 
       <Routes>
@@ -81,14 +85,14 @@ export default function App() {
 
 
             <Route path="/Brand" element={<Brand />} />
-            <Route path="/AddNewBrand" element={<AddNewBrand/>} />
+            <Route path="/AddNewBrand" element={<AddNewBrand />} />
 
 
           </Route>
         </Route>
         <Route path="/AISLogin" element={<SignInForm />} />
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter >
 
   )
 }
