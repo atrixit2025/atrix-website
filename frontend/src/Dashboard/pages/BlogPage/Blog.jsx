@@ -138,15 +138,15 @@ export default function Blog() {
     };
 
     const handleEdit = (order) => {
-        navigate("/AddNewBlog", {
+        navigate("/DashboardAddNewBlog", {
             state: { blog: order },
         });
     };
     return (
         <>
             <PageBreadcrumb pageTitle="Blog"
-                buttonText="New Add Blog"
-                buttonLink="/AddNewBlog" />
+                buttonText="Add New Blog"
+                buttonLink="/DashboardAddNewBlog" />
             <div className="space-y-6">
                 <div className="flex items-center gap-4">
                     <div className="">
@@ -200,12 +200,12 @@ export default function Blog() {
                                         >
                                             Category
                                         </TableCell>
-                                        <TableCell
+                                        {/* <TableCell
                                             isHeader
                                             className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                                         >
                                             Description
-                                        </TableCell>
+                                        </TableCell> */}
                                         <TableCell
                                             isHeader
                                             className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
@@ -249,9 +249,9 @@ export default function Blog() {
                                             <TableCell className="px-6 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                                                 {order.Category}
                                             </TableCell>
-                                            <TableCell className="px-6 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                                            {/* <TableCell className="px-6 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                                                 {order.description}
-                                            </TableCell>
+                                            </TableCell> */}
 
                                             <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                                                 <div className="flex -space-x-2">

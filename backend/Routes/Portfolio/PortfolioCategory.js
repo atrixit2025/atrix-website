@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import PortfolioCategory from "../../Modal/PortfolioModals/PortfolioCategoryModal.js";
-
+import mongoose from "mongoose";
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -16,46 +16,74 @@ const generateSlug = (name) => {
 };
 
 PortfolioCategoryRouter.post("/Portfolio/category/add", async (req, res) => {
-    const { Name, Description, Slug: customSlug, ParentCategory } = req.body;
-  
-    if (!Name || !Description) {
-      return res.status(400).json({ message: "Name and Description are required" });
+  const { Name, Description, Slug: customSlug, ParentCategory } = req.body;
+
+  if (!Name || !Description) {
+    return res.status(400).json({ message: "Name and Description are required" });
+  }
+
+  try {
+    let slug = customSlug || generateSlug(Name);
+
+    let slugExists = await PortfolioCategory.findOne({ Slug: slug });
+    if (slugExists) {
+      slug = `${slug}-${Date.now()}`;
     }
-  
-    try {
-      let slug = customSlug || generateSlug(Name);
-  
-      let slugExists = await PortfolioCategory.findOne({ Slug: slug });
-      if (slugExists) {
-        slug = `${slug}-${Date.now()}`;
-      }
-  
-      const newPortfolioCategory = new PortfolioCategory({
-        Name,
-        Description,
-        Slug: slug,
-        ParentCategory: ParentCategory || null, 
-      });
-  
-      await newPortfolioCategory.save();
-      res.status(201).json({ message: "PortfolioCategory created successfully", PortfolioCategory: newPortfolioCategory });
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({ message: "Error creating PortfolioCategory", error: error.message });
-    }
-  });
+
+    const newPortfolioCategory = new PortfolioCategory({
+      Name,
+      Description,
+      Slug: slug,
+      ParentCategory: ParentCategory || null, 
+    });
+
+    await newPortfolioCategory.save();
+
+    // Get the count of subcategories for this new category
+    const subcategoryCount = await PortfolioCategory.countDocuments({
+      ParentCategory: newPortfolioCategory._id
+    });
+
+    // Create the response object with count included
+    const responseData = {
+      ...newPortfolioCategory.toObject(),
+      CountPortfolioCategory: subcategoryCount
+    };
+
+    res.status(201).json({ 
+      message: "PortfolioCategory created successfully", 
+      PortfolioCategory: responseData 
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error creating PortfolioCategory", error: error.message });
+  }
+});
 
 
 
 PortfolioCategoryRouter.get("/Portfolio/category/get", async (req, res) => {
-    try {
-      const categories = await PortfolioCategory.find({});
-      res.status(200).json({ message: "Categories fetched successfully", categories });
-    } catch (error) {
-      console.error("Error fetching categories:", error);
-      res.status(500).json({ message: "Error fetching categories", error: error.message });
-    }
-  });
+  try {
+    const categories = await PortfolioCategory.find();
+    
+    // Enhance categories with their counts
+    const categoriesWithCounts = await Promise.all(
+      categories.map(async (category) => {
+        const count = await PortfolioCategory.countDocuments({
+          ParentCategory: category._id
+        });
+        return {
+          ...category.toObject(),
+          CountPortfolioCategory: count
+        };
+      })
+    );
+
+    res.status(200).json({ categories: categoriesWithCounts });
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching categories", error });
+  }
+});
   
   
   PortfolioCategoryRouter.get("/Portfolio/category/name/:name", async (req, res) => {
@@ -166,5 +194,42 @@ PortfolioCategoryRouter.get("/Portfolio/category/get", async (req, res) => {
               error: error.message 
           });
       }
+  });
+
+
+
+
+  PortfolioCategoryRouter.get("/Portfolio/category/count/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      
+      // Validate ID
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ message: "Invalid category ID" });
+      }
+  
+      const category = await PortfolioCategory.findById(id);
+      
+      if (!category) {
+        return res.status(404).json({ message: "Category not found" });
+      }
+  
+      // Get subcategory count
+      const subcategoryCount = await PortfolioCategory.countDocuments({
+        ParentCategory: id
+      });
+  
+      res.status(200).json({
+        success: true,
+        subcategoryCount
+      });
+    } catch (error) {
+      console.error("Error getting category count:", error);
+      res.status(500).json({ 
+        success: false,
+        message: "Error getting category count", 
+        error: error.message 
+      });
+    }
   });
 export default PortfolioCategoryRouter;

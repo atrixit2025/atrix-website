@@ -91,7 +91,7 @@ export default function AddNewPortfolio() {
         console.log("Create Response:", response.data);
       }
 
-      navigate("/portfolio");
+      navigate("/Dashboardportfolio");
     } catch (error) {
       console.error("Error saving portfolio:", error);
       if (error.response) {
@@ -105,7 +105,7 @@ export default function AddNewPortfolio() {
     <div>
       <div className="flex justify-between items-center mb-10">
         <h1 className="text-4xl font-semibold text-gray-800 dark:text-white/90">
-          {portfolio ? "Edit Portfolio" : "Add New portfolio"}
+          {portfolio ? "Edit Portfolio" : "Add New Portfolio"}
         </h1>
         <div>
           <Button

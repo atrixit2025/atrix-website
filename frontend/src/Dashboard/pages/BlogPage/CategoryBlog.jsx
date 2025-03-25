@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-import ComponentCard from "../../components/common/ComponentCard";
 import NewPageBreadcrumb from "../../components/common/NewPageBreadcrumb";
 import Label from "../../components/form/Label";
 import Input from "../../components/form/input/InputField";
@@ -7,11 +6,10 @@ import TextArea from "../../components/form/input/TextArea";
 import Button from "../../components/ui/button/Button";
 import CategoryBlogTable from "./CategoryBlogTable";
 import { BlogCategoryContext } from "../../ContextApi/BlogCategoryContextApi";
-import axios from "axios";
 import Select from "../../components/form/Select";
 
 export default function CategoryBlog() {
-  const { addBlogCategory, editBlogCategory } = useContext(BlogCategoryContext);
+  const { addBlogCategory, editBlogCategory,fetchParentCategories,categories } = useContext(BlogCategoryContext);
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -19,24 +17,15 @@ export default function CategoryBlog() {
     autoSlug: "",
     ParentCategory: "", // Add ParentCategory to the form state
   });
-  const [categories, setCategories] = useState([]); // Fetch all categories for the dropdown
+ 
   const [editingCategory, setEditingCategory] = useState(null);
 
   // Fetch categories for the dropdown
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await axios.get("http://localhost:5300/BlogCategory/blog/category/get");
-        setCategories(response.data.categories);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    };
-
-    fetchCategories();
+    fetchParentCategories();
   }, []);
 
-  // Handle form submission
+  
   const handleSubmit = async () => {
     const { name, description, customSlug, autoSlug, ParentCategory } = formData;
 
@@ -48,6 +37,7 @@ export default function CategoryBlog() {
     try {
       if (editingCategory) {
         // If editing, call the editCategory function
+        
         await editBlogCategory(editingCategory.Name, {
           Name: name,
           Description: description,
@@ -73,7 +63,7 @@ export default function CategoryBlog() {
         ParentCategory: "",
       });
       setEditingCategory(null);
-
+      await fetchParentCategories();
     //   alert(
     //     editingCategory
     //       ? "Category updated successfully!"
@@ -114,13 +104,13 @@ export default function CategoryBlog() {
 
   // Handle edit button click from the table
   const handleEditClick = (category) => {
-    setEditingCategory(category); // Set the category being edited
+    setEditingCategory(category);
     setFormData({
       name: category.Name,
       description: category.Description,
       customSlug: category.Slug,
       autoSlug: category.Slug,
-      ParentCategory: category.ParentCategory || "", // Set ParentCategory if it exists
+      ParentCategory: category.ParentCategory?._id || category.ParentCategory || "",
     });
   };
 
@@ -163,7 +153,7 @@ export default function CategoryBlog() {
               placeholder="Select Parent Category"
               onChange={(value) => handleChange("ParentCategory", value)}
               className="w-full p-2 border rounded-lg"
-              defaultValue={formData.ParentCategory}
+              value={formData.ParentCategory} // Use value instead of defaultValue
             />
           </div>
           <div>
