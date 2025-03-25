@@ -31,6 +31,7 @@ import Brand from './Dashboard/pages/BrandPage/Brand';
 import Faqs from './Pages/faqs';
 import PrivacyPolicy from './Pages/PrivacyPolicy';
 import TermsAndConditions from './Pages/TermsAndConditions';
+import Portfolio_page from './Pages/Portfolio';
 
 
 
@@ -53,7 +54,8 @@ export default function App() {
           <Route path='/faqs' element={<Faqs />} />
           <Route path='/privacy-policy' element={< PrivacyPolicy />} />
           <Route path='/terms-and-conditions' element={< TermsAndConditions />} />
-          <Route path='/portfolio' element={< Portfolio />} />
+          {/* <Route path='/portfolio' element={< Portfolio />} /> */}
+          <Route path='/portfolio-page' element={< Portfolio_page />} />
         </Route>
       </Routes>
 
@@ -77,7 +79,7 @@ export default function App() {
 
 
             <Route path="/Brand" element={<Brand />} />
-            <Route path="/AddNewBrand" element={<AddNewBrand/>} />
+            <Route path="/AddNewBrand" element={<AddNewBrand />} />
 
 
           </Route>
