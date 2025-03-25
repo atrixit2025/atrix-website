@@ -59,9 +59,9 @@ export default function SignInForm() {
 
   return (
     <div>
-      <div className="container mx-auto max-w-full">
-        <div className="row flex flex-wrap">
-          <div className="col-6 min-h-screen w-full max-w-[50%]">
+      <div className="container mx-auto max-w-full ">
+        <div className="row min-h-screen flex flex-wrap md:p-0 p-10">
+          <div className="col-6   hidden md:block md:w-[50%]">
             <img src={ImageSignin} className="h-full w-full object-cover" />
           </div>
           <div className="col-6 flex flex-col flex-1 justify-center items-center">
@@ -73,7 +73,7 @@ export default function SignInForm() {
                   Welcome to Atrix IT Solutions
                 </h3>
               </div>
-              <form onSubmit={handleSubmit}>
+              <form  onSubmit={handleSubmit}>
                 <div className="space-y-6">
                   <div>
                     <Label>

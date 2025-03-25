@@ -105,7 +105,7 @@ export default function CategoryTechnology() {
   return (
     <>
       <NewPageBreadcrumb pageTitle="Category" />
-      <div className="space-y-3 grid grid-cols-[3fr_2fr] gap-6">
+      <div className="space-y-3 xl:grid grid-cols-[3fr_2fr] gap-6">
         <div className="space-y-6">
           <h4>{editingCategory ? "Edit Category" : "Add New Category"}</h4>
           <div>
@@ -149,9 +149,9 @@ export default function CategoryTechnology() {
           </div>
         </div>
         <div>
-          <ComponentCard title="Category Table">
+          {/* <ComponentCard title="Category Table"> */}
             <CategoryTable onEditClick={handleEditClick} />
-          </ComponentCard>
+          {/* </ComponentCard> */}
         </div>
       </div>
     </>

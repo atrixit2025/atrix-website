@@ -121,4 +121,33 @@ CategoryRouter.get("/get", async (req, res) => {
       res.status(500).json({ message: "Error deleting category", error: error.message });
     }
   });
+
+
+
+  CategoryRouter.delete("/delete-many", async (req, res) => {
+        const { ids } = req.body;
+      
+        if (!ids || !Array.isArray(ids)) {
+            return res.status(400).json({ message: "Array of IDs is required" });
+        }
+      
+        try {
+            const result = await  Category.deleteMany({ _id: { $in: ids } });
+      
+            if (result.deletedCount === 0) {
+                return res.status(404).json({ message: "No categories found to delete" });
+            }
+      
+            res.status(200).json({ 
+                message: `${result.deletedCount} categories deleted successfully`,
+                deletedCount: result.deletedCount
+            });
+        } catch (error) {
+            console.error("Bulk delete error:", error);
+            res.status(500).json({ 
+                message: "Bulk delete failed", 
+                error: error.message 
+            });
+        }
+    });
 export default CategoryRouter;

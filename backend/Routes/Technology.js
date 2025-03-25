@@ -149,19 +149,47 @@ TechnologyRouter.put("/edit", async (req, res) => {
 });
 
 TechnologyRouter.delete("/delete", async (req, res) => {
-  const { title, category } = req.body;
+  const { titles, categories } = req.body;
 
+  // Handle bulk delete
+  if (Array.isArray(titles) && Array.isArray(categories)) {
+    if (titles.length === 0 || categories.length === 0) {
+      return res.status(400).json({ message: "Titles and categories arrays cannot be empty" });
+    }
+    if (titles.length !== categories.length) {
+      return res.status(400).json({ message: "Titles and categories arrays must be the same length" });
+    }
+
+    try {
+      const deleteOperations = titles.map((title, index) => ({
+        deleteOne: {
+          filter: { title, category: categories[index] }
+        }
+      }));
+
+      const result = await Technology.bulkWrite(deleteOperations);
+      
+      return res.status(200).json({ 
+        message: `${result.deletedCount} technologies deleted successfully`,
+        result
+      });
+    } catch (error) {
+      console.error("Error bulk deleting technologies:", error);
+      return res.status(500).json({ message: "Error bulk deleting technologies", error: error.message });
+    }
+  }
+
+  // Handle single delete (original functionality)
+  const { title, category } = req.body;
   if (!title || !category) {
     return res.status(400).json({ message: "Title and category are required" });
   }
 
   try {
     const deletedTechnology = await Technology.findOneAndDelete({ title, category });
-
     if (!deletedTechnology) {
       return res.status(404).json({ message: "Technology not found" });
     }
-
     res.status(200).json({ message: "Technology deleted successfully", technology: deletedTechnology });
   } catch (error) {
     console.error("Error deleting Technology:", error);

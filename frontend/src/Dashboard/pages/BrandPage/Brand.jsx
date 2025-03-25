@@ -8,106 +8,106 @@ import {
 } from "../../components/ui/table";
 import { BiEdit } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
-// import Checkbox from "../../form/input/Checkbox";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Checkbox from "../../components/form/input/Checkbox";
 import PageBreadcrumb from "../../components/common/PageBreadCrumb";
+import Select from "../../components/form/Select";
+import SelectBUlk from "../../components/form/SelectBulk";
 import SelectBulk from "../../components/form/SelectBulk";
 
-
-
-export default function Blog() {
+export default function Brand() {
     const [selectedRows, setSelectedRows] = useState([]);
-    const [tableData, setTableData] = useState([]); 
+    const [tableData, setTableData] = useState([]);
     const [bulkAction, setBulkAction] = useState('');
+    const navigate = useNavigate();
 
-    const navigate = useNavigate()
-    // Fetch data from the API
+    // Fetch data
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:5300/Blog/get");
-                const blogs = response.data.Blog;
-
-                // Map the fetched data to the tableData format
-                const mappedData = blogs.map((tech, index) => ({
+                const response = await axios.get("http://localhost:5300/Brand/get");
+                const brands = response.data.Brand;
+                const mappedData = brands.map((tech) => ({
                     id: tech._id,
                     name: tech.title,
                     Category: tech.category,
-                    description: tech.description,
-                    Date: new Date(tech.updatedAt).toLocaleDateString(), // Format date
+                    Date: new Date(tech.updatedAt).toLocaleDateString(),
                     team: {
-                        images: [tech.image?.image || "/images/user/user-22.jpg"], // Use the image URL or a fallback
+                        images: [tech.image?.image || "/images/user/user-22.jpg"],
                     },
-                    imageId: tech.image?._id, // Add the imageId to the order object
+                    imageId: tech.image?._id,
                 }));
-
                 setTableData(mappedData);
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
         };
-
         fetchData();
     }, []);
 
-    const handleDelete = async (id, title, category, description) => {
+    // Single delete
+    const handleDelete = async (id) => {
         try {
-            // Send a DELETE request to the server
-            const response = await axios.delete("http://localhost:5300/Blog/delete", {
-                data: { title, category, description },
+            const response = await axios.delete("http://localhost:5300/Brand/delete", {
+                data: { id }
             });
 
             if (response.status === 200) {
-                // Remove the deleted Blog from the tableData state
-                setTableData((prevData) => prevData.filter((order) => order.id !== id));
-                alert("Blog deleted successfully!");
+                setTableData(prev => prev.filter(order => order.id !== id));
+                alert("Brand deleted successfully!");
             }
         } catch (error) {
-            console.error("Error deleting Blog:", error);
-            alert("Error deleting Blog. Please try again.");
+            console.error("Error deleting Brand:", error);
+            alert(error.response?.data?.message || "Error deleting Brand. Please try again.");
         }
     };
 
-
     const handleBulkDelete = async () => {
         if (selectedRows.length === 0) {
-          alert('Please select at least one item');
-          return;
+            alert('Please select at least one item');
+            return;
         }
-      
-        if (!window.confirm(`Are you sure you want to delete ${selectedRows.length} items?`)) {
-          return;
-        }
-      
-        try {
-          // Get the selected items from tableData
-          const selectedItems = tableData.filter(item => selectedRows.includes(item.id));
-          
-          // Prepare data for bulk delete
-          const deleteData = {
-            titles: selectedItems.map(item => item.name),
-            categories: selectedItems.map(item => item.Category)
-          };
-      
-          const response = await axios.delete("http://localhost:5300/Blog/delete", {
-            data: deleteData
-          });
-      
-          if (response.status === 200) {
-            setTableData(prev => prev.filter(item => !selectedRows.includes(item.id)));
-            setSelectedRows([]);
-            setBulkAction('');
-            alert(response.data.message);
-          }
-        } catch (error) {
-          console.error("Error in bulk delete:", error);
-          alert(error.response?.data?.message || "Error deleting items. Please try again.");
-        }
-      };
 
-    // Handle bulk action selection
+        if (!window.confirm(`Are you sure you want to delete ${selectedRows.length} items?`)) {
+            return;
+        }
+
+        try {
+            const response = await axios.delete("http://localhost:5300/Brand/delete", {
+                data: { id: selectedRows }
+            });
+
+            if (response.status === 200) {
+                setTableData(prev => prev.filter(item => !selectedRows.includes(item.id)));
+                setSelectedRows([]);
+                setBulkAction('');
+                alert(response.data.message);
+            }
+        } catch (error) {
+            console.error("Error in bulk delete:", error);
+            alert(error.response?.data?.message || "Error deleting items. Please try again.");
+        }
+    };
+
+    const handleRowSelect = (id) => {
+        setSelectedRows(prev =>
+            prev.includes(id) ? prev.filter(rowId => rowId !== id) : [...prev, id]
+        );
+    };
+
+    const handleSelectAll = () => {
+        setSelectedRows(prev =>
+            prev.length === tableData.length ? [] : tableData.map(order => order.id)
+        );
+    };
+
+    const handleEdit = (order) => {
+        navigate("/AddNewBrand", {
+            state: { brand: order },
+        });
+    };
+
     const bulkOptions = [
         { value: 'BulkActions', label: 'Bulk Actions' },
         { value: 'delete', label: 'Delete' },
@@ -119,35 +119,17 @@ export default function Blog() {
         setBulkAction(action);
     };
 
-    // Handle individual row selection
-    const handleRowSelect = (id) => {
-        if (selectedRows.includes(id)) {
-            setSelectedRows(selectedRows.filter((rowId) => rowId !== id));
-        } else {
-            setSelectedRows([...selectedRows, id]);
-        }
-    };
 
-    // Handle "Select All" functionality
-    const handleSelectAll = () => {
-        if (selectedRows.length === tableData.length) {
-            setSelectedRows([]);
-        } else {
-            setSelectedRows(tableData.map((order) => order.id));
-        }
-    };
-
-    const handleEdit = (order) => {
-        navigate("/AddNewBlog", {
-            state: { blog: order },
-        });
-    };
     return (
         <>
-            <PageBreadcrumb pageTitle="Blog"
-                buttonText="New Add Blog"
-                buttonLink="/AddNewBlog" />
+            <PageBreadcrumb
+                pageTitle="Brand"
+                buttonText=" Add New Brand"
+                buttonLink="/AddNewBrand"
+            />
+
             <div className="space-y-6">
+                {/* Bulk Actions Section */}
                 <div className="flex items-center gap-4">
                     <div className="">
                         <SelectBulk
@@ -163,16 +145,19 @@ export default function Blog() {
                         <button
                             onClick={handleBulkDelete}
                             disabled={selectedRows.length === 0}
-                            className={`px-4 py-2 rounded ${selectedRows.length > 0
+                            className={`px-4 py-2 rounded ${
+                                selectedRows.length > 0
                                     ? 'bg-red-500 text-white hover:bg-red-600'
                                     : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                                }`}
+                            }`}
                         >
                             {selectedRows.length > 0 ? `Apply (${selectedRows.length})` : 'Apply'}
                         </button>
                     )}
                 </div>
-                <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03] ">
+
+                {/* Table */}
+                <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
                     <div className="max-w-full overflow-x-auto">
                         <div className="2xl:min-w-[1102px]">
                             <Table>
@@ -188,24 +173,7 @@ export default function Blog() {
                                                 onChange={handleSelectAll}
                                             />
                                         </TableCell>
-                                        <TableCell
-                                            isHeader
-                                            className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                                        >
-                                            Title
-                                        </TableCell>
-                                        <TableCell
-                                            isHeader
-                                            className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                                        >
-                                            Category
-                                        </TableCell>
-                                        <TableCell
-                                            isHeader
-                                            className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                                        >
-                                            Description
-                                        </TableCell>
+
                                         <TableCell
                                             isHeader
                                             className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
@@ -237,21 +205,6 @@ export default function Blog() {
                                                     onChange={() => handleRowSelect(order.id)}
                                                 />
                                             </TableCell>
-                                            <TableCell className="px-5 py-4 sm:px-6 text-start">
-                                                <div className="flex items-center gap-3">
-                                                    <div>
-                                                        <span className="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
-                                                            {order.name}
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </TableCell>
-                                            <TableCell className="px-6 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                {order.Category}
-                                            </TableCell>
-                                            <TableCell className="px-6 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                {order.description}
-                                            </TableCell>
 
                                             <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                                                 <div className="flex -space-x-2">
@@ -263,7 +216,7 @@ export default function Blog() {
                                                             <img
                                                                 width={20}
                                                                 height={20}
-                                                                src={`http://localhost:5300${teamImage}`} // Use the full image URL
+                                                                src={`http://localhost:5300${teamImage}`}
                                                                 alt={`Team member ${index + 1}`}
                                                                 className="w-full size-11 "
                                                             />
@@ -277,7 +230,7 @@ export default function Blog() {
                                             <TableCell className="px-4 py-3 text-gray-500 text-theme-sm dark:text-gray-400">
                                                 <div className="flex gap-2">
                                                     <BiEdit className="cursor-pointer text-gray-500 hover:text-gray-700 text-2xl" onClick={() => handleEdit(order)} />
-                                                    <MdDelete className="cursor-pointer text-gray-500 hover:text-red-500 text-2xl" onClick={() => handleDelete(order.id, order.name, order.Category, order.description)} />
+                                                    <MdDelete className="cursor-pointer text-gray-500 hover:text-red-500 text-2xl" onClick={() => handleDelete(order.id)} />
                                                 </div>
                                             </TableCell>
                                         </TableRow>
@@ -289,6 +242,5 @@ export default function Blog() {
                 </div>
             </div>
         </>
-
     );
 }

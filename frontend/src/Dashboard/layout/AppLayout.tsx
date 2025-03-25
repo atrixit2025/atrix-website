@@ -9,7 +9,7 @@ const LayoutContent: React.FC = () => {
   const { isExpanded, isHovered, isMobileOpen } = useSidebar();
 
   return (
-    <div className="min-h-screen xl:flex">
+    <div className="container max-auto min-h-screen max-w-full">
       <div>
         <AppSidebar />
         <Backdrop />
