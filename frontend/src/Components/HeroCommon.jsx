@@ -1,8 +1,5 @@
-import React from 'react'
+import React from 'react';
 import bg_img from '../assets/about-bg.svg';
-
-
-
 
 
 const HeroCommon = ({ heroData }) => {
@@ -18,4 +15,4 @@ const HeroCommon = ({ heroData }) => {
     )
 }
 
-export default HeroCommon
+export default HeroCommon;

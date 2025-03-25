@@ -136,7 +136,7 @@ const ValueCardContent = [
           <Marquee
             speed={30}
             direction="right"
-            className="overflow-hidden mt-3"
+            className="overflow-hidden mt-1"
           >
             VISIONARY . INNOVATIVE . EFFICIENT . GL ROFESSIONAL . ACCESSIBLE .
             USER-CENTR EMPOWERING . TRUSTWORTHY . SCALABLE
@@ -144,7 +144,7 @@ const ValueCardContent = [
         </div>
 
         <div>
-          <Marquee speed={30} className="overflow-hidden mt-3">
+          <Marquee speed={30} className="overflow-hidden mt-1">
             ACCESSIBLE . USER-CENTR EMPOWERING . TRUSTWORTHY . SCALABLE .
             VISIONARY . INNOVATIVE . EFFICIENT . GL ROFESSIONAL .
           </Marquee>

@@ -31,6 +31,8 @@ import Brand from './Dashboard/pages/BrandPage/Brand';
 import Faqs from './Pages/faqs';
 import PrivacyPolicy from './Pages/PrivacyPolicy';
 import TermsAndConditions from './Pages/TermsAndConditions';
+import BlogUS from './Pages/BlogUS';
+import BlogContant from './Components/BlogContant';
 
 
 
@@ -54,6 +56,8 @@ export default function App() {
           <Route path='/privacy-policy' element={< PrivacyPolicy />} />
           <Route path='/terms-and-conditions' element={< TermsAndConditions />} />
           <Route path='/portfolio' element={< Portfolio />} />
+          <Route path='/BlogUs' element={< BlogUS />} />
+          <Route path='/BlogContant' element={< BlogContant />} />
         </Route>
       </Routes>
 
