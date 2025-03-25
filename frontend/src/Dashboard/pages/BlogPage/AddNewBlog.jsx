@@ -94,7 +94,7 @@ export default function AddNewBlog() {
         console.log("Create Response:", response.data);
       }
 
-      navigate("/blog");
+      navigate("/Dashboardblog");
     } catch (error) {
       console.error("Error saving blog:", error);
       if (error.response) {

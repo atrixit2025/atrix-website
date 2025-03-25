@@ -101,13 +101,13 @@ export default function CategoryPortfolio() {
 
   // Handle edit button click from the table
   const handleEditClick = (category) => {
-    setEditingCategory(category); // Set the category being edited
+    setEditingCategory(category);
     setFormData({
       name: category.Name,
       description: category.Description,
       customSlug: category.Slug,
       autoSlug: category.Slug,
-      ParentCategory: category.ParentCategory ? category.ParentCategory._id : "", // Set ParentCategory if it exists
+      ParentCategory: category.ParentCategory?._id || category.ParentCategory || "",
     });
   };
 

@@ -100,7 +100,7 @@ export default function NewAddTechnology() {
         // alert("Technology created successfully!");
       }
 
-      navigate("/Technology"); 
+      navigate("/DashboardTechnology"); 
     } catch (error) {
       console.error("Error saving technology:", error);
       if (error.response) {

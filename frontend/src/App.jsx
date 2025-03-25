@@ -30,6 +30,9 @@ import Brand from './Dashboard/pages/BrandPage/Brand';
 import Faqs from './Pages/faqs';
 import PrivacyPolicy from './Pages/PrivacyPolicy';
 import TermsAndConditions from './Pages/TermsAndConditions';
+
+import Services from './Dashboard/pages/ServicesPage/Services';
+
 import BlogUS from './Pages/BlogUS';
 import BlogContant from './Components/BlogContant';
 import Portfolio_page from './Pages/Portfolio';
@@ -71,21 +74,26 @@ export default function App() {
         <Route element={<ProtectedRoute />}>
           <Route element={<AppLayout />}>
             <Route index path="/Dashboard" element={<DashboardHome />} />
-            <Route path="/Technology" element={<Technology />} />
-            <Route path="/AddNewTechnology" element={<NewAddTechnology />} />
-            <Route path="/CategoryTechnology" element={<CategoryTechnology />} />
+            <Route path="/DashboardTechnology" element={<Technology />} />
+            <Route path="/DashboardAddNewTechnology" element={<NewAddTechnology />} />
+            <Route path="/DashboardCategoryTechnology" element={<CategoryTechnology />} />
 
-            <Route path="/Blog" element={<Blog />} />
-            <Route path="/AddNewBlog" element={<AddNewBlog />} />
-            <Route path="/CategoryBlog" element={<CategoryBlog />} />
+            <Route path="/DashboardBlog" element={<Blog />} />
+            <Route path="/DashboardAddNewBlog" element={<AddNewBlog />} />
+            <Route path="/DashboardCategoryBlog" element={<CategoryBlog />} />
 
-            <Route path="/Portfolio" element={<Portfolio />} />
-            <Route path="/AddNewPortfolio" element={<AddNewPortfolio />} />
-            <Route path="/CategoryPortfolio" element={<CategoryPortfolio />} />
+            <Route path="/DashboardPortfolio" element={<Portfolio />} />
+            <Route path="/DashboardAddNewPortfolio" element={<AddNewPortfolio />} />
+            <Route path="/DashboardCategoryPortfolio" element={<CategoryPortfolio />} />
 
 
-            <Route path="/Brand" element={<Brand />} />
-            <Route path="/AddNewBrand" element={<AddNewBrand />} />
+            <Route path="/DashboardBrand" element={<Brand />} />
+            <Route path="/DashboardAddNewBrand" element={<AddNewBrand/>} />
+
+
+            <Route path="/DashboardServices" element={<Services/>} />
+
+           
 
 
           </Route>

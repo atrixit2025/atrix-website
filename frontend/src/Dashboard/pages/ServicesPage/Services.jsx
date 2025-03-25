@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import PageBreadcrumb from "../../components/common/PageBreadCrumb";
+import PageBreadcrumb from "../../components/common/PageBreadCrumb";;
 import GenericDataTable from "../../components/GenericDataTable/GenericDataTable";
-
-export default function Portfolio() {
+export default function Services() {
   const [tableData, setTableData] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5300/Portfolio/get");
-        const portfolios = response.data.Portfolio.map((tech) => ({
+        const response = await axios.get("http://localhost:5300/Services/get");
+        const services = response.data.Services.map((tech) => ({
           id: tech._id,
           name: tech.title,
           Category: tech.category,
@@ -22,8 +21,7 @@ export default function Portfolio() {
           },
           imageId: tech.image?._id,
         }));
-        
-        setTableData(portfolios);
+        setTableData(services);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -33,14 +31,14 @@ export default function Portfolio() {
 
   const handleDelete = async (id, title, category) => {
     try {
-      await axios.delete("http://localhost:5300/Portfolio/delete", {
+      await axios.delete("http://localhost:5300/Services/delete", {
         data: { title, category },
       });
       setTableData(prev => prev.filter(item => item.id !== id));
-      alert("Portfolio deleted successfully!");
+      alert("Service deleted successfully!");
     } catch (error) {
-      console.error("Error deleting Portfolio:", error);
-      alert("Error deleting Portfolio. Please try again.");
+      console.error("Error deleting Service:", error);
+      alert("Error deleting Service. Please try again.");
     }
   };
 
@@ -52,9 +50,9 @@ export default function Portfolio() {
     };
 
     try {
-      await axios.delete("http://localhost:5300/Portfolio/delete", { data: deleteData });
+      await axios.delete("http://localhost:5300/Services/delete", { data: deleteData });
       setTableData(prev => prev.filter(item => !selectedIds.includes(item.id)));
-      alert("Selected portfolios deleted successfully!");
+      alert("Selected services deleted successfully!");
     } catch (error) {
       console.error("Error in bulk delete:", error);
       alert(error.response?.data?.message || "Error deleting items. Please try again.");
@@ -62,7 +60,7 @@ export default function Portfolio() {
   };
 
   const handleEdit = (item) => {
-    navigate("/DashboardAddNewPortfolio", { state: { portfolio: item } });
+    navigate("/DashboardAddNewServices", { state: { Services: item } });
   };
 
   const columns = [
@@ -91,9 +89,9 @@ export default function Portfolio() {
   return (
     <>
       <PageBreadcrumb 
-        pageTitle="Portfolio"
-        buttonText="Add New Portfolio"
-        buttonLink="/DashboardAddNewPortfolio" 
+        pageTitle="Services"
+        buttonText="Add New Service"
+        buttonLink="/DashboardAddNewServices" 
       />
       <GenericDataTable
         data={tableData}
