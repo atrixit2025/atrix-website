@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import RiseWithUs from "../Components/career/RiseWithUs";
 import CounterSec from "../Components/career/CounterSec";
 import ValueCards from "../Components/career/ValueCards";
@@ -9,8 +9,9 @@ import HeroCommon from "../Components/HeroCommon";
 
 import icon from "../assets/career/date.svg";
 
-const herodata = [
 
+
+const herodata = [
   {
     title: "Careers",
     desc: "",
@@ -21,8 +22,6 @@ const ValueCardheading = [
   {
     secHeading: "Our Values",
     secSubHeading: ""
-
-
   }
 ]
 
@@ -60,6 +59,11 @@ const ValueCardContent = [
 ];
 
 const Careers = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div>
       <HeroCommon heroData={herodata[0]} />

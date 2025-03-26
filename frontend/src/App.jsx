@@ -41,13 +41,6 @@ import CategoryServices from './Dashboard/pages/ServicesPage/CategoryServices';
 import Demo from './Dashboard/pages/BlogPage/demo';
 
 
-
-
-
-
-
-
-
 export default function App() {
   return (
 
@@ -64,7 +57,7 @@ export default function App() {
           <Route path='/terms-and-conditions' element={< TermsAndConditions />} />
           {/* <Route path='/portfolio' element={< Portfolio />} /> */}
           <Route path='/BlogUs' element={< BlogUS />} />
-          <Route path='/BlogContant' element={< BlogContant />} />
+          <Route path='/blog/:id' element={< BlogContant />} />
           {/* <Route path='/portfolio' element={< Portfolio />} /> */}
           <Route path='/portfolio-page' element={< Portfolio_page />} />
 
@@ -107,6 +100,8 @@ export default function App() {
         </Route>
         <Route path="/AISLogin" element={<SignInForm />} />
       </Routes>
+
+      
     </BrowserRouter >
 
   )
