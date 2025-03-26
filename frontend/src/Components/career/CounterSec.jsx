@@ -2,9 +2,9 @@ import React from "react";
 import CountUp from "react-countup";
 
 const counterData = [
-    { title: "Clients", count: 100, suffix: "+" },
+    { title: "Clients", count: 350, suffix: "+" },
     { title: "Departments", count: 4, suffix: "" },
-    { title: "Talents", count: 50, suffix: "" },
+    { title: "Talents", count: 80, suffix: "+" },
 ];
 
 const CounterSec = () => {

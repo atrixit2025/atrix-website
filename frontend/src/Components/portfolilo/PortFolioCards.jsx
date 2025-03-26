@@ -16,7 +16,7 @@ const portfoData = [
         ]
     },
     {
-        Category: "Graphic Designing",
+        Category: "Branding",
         cardData: [
             { title: "Photoshop", desc: "Lorem ipsum dolor sit amet.", image: project2, tags: ["Branding", "logo Design", " web Design"] },
             { title: "Illustrator", desc: "Lorem ipsum dolor sit amet.", image: project1, tags: ["Branding", "logo Design", " web Design"] },
@@ -26,6 +26,15 @@ const portfoData = [
     },
     {
         Category: "3D Animation",
+        cardData: [
+            { title: "Maya", desc: "Lorem ipsum dolor sit amet.", image: project4, tags: ["Branding", "logo Design", " web Design"] },
+            { title: "Illustrator", desc: "Lorem ipsum dolor sit amet.", image: project3, tags: ["Branding", "logo Design", " web Design"] },
+            { title: "Adobe", desc: "Lorem ipsum dolor sit amet.", image: project2, tags: ["Branding", "logo Design", " web Design"] },
+            { title: "Canva", desc: "Lorem ipsum dolor sit amet.", image: project1, tags: ["Branding", "logo Design", " web Design"] },
+        ]
+    },
+    {
+        Category: "Production",
         cardData: [
             { title: "Maya", desc: "Lorem ipsum dolor sit amet.", image: project4, tags: ["Branding", "logo Design", " web Design"] },
             { title: "Illustrator", desc: "Lorem ipsum dolor sit amet.", image: project3, tags: ["Branding", "logo Design", " web Design"] },
@@ -47,7 +56,7 @@ const PortFolioCards = () => {
         <div className='py-32'>
             <div className="container w-[90%] mx-auto">
                 {/* Category Buttons */}
-                <div className="category-btns flex flex-wrap justify-start  md:justify-center gap-2 md:gap-10">
+                <div className="category-btns flex flex-wrap justify-start  md:justify-center gap-3 ">
                     <button
                         className={`py-2 px-8 rounded-3xl cursor-pointer font-bold   ${activeCat === "All" ? "bg-gradient-to-r from-(--blue) to-(--green) text-black" : ""} bg-black relative before:absolute before:-inset-[1px] before:bg-gradient-to-r before:from-(--blue) before:to-(--green)  before:-z-1 before:rounded-3xl`}
                         onClick={() => setActiveCat("All")}

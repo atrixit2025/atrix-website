@@ -52,7 +52,7 @@ const ValueCards = () => {
                 <div> <h2 className=' text-6xl text-center font-bold mb-12 ' >Our Values</h2> </div>
                 <div className="contact-cards-wrapper grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  ">
                     {ValueCardContent.map((item, index) => (
-                        <div key={index} className="contact-card bg-[#444343] py-10 px-8 rounded-3xl shadow-2xl shadow-white/5 " >
+                        <div key={index} className="contact-card bg-(--black) py-10 px-8 rounded-3xl shadow-2xl shadow-white/5 " >
                             <div className=' max-w-16 h-auto mb-5  '>
                                 <img src={item.icon} alt="" className=' w-full h-full' style={{ filter: 'grayscale(1) brightness(20.255)' }} />
                                 {/* <img src={item.icon} alt="" className="w-full h-full invert" /> */}
