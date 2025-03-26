@@ -33,16 +33,18 @@ const About_sec_scroll = () => {
 
         {/* Text Section (Right Side) */}
         <div className="md:col-span-6 flex flex-col  ml-20">
-    
-            <div className="w-full py-48">
-              {blurbContent.map((item, index) => (
-                <div key={index} className="p-6 md:p-10 mt-10">
-                  <p className="text-lg font-medium text-white">{item.title}</p>
-                  <h1 className="mb-5 text-2xl md:text-5xl font-bold">{item.description}</h1>
-                  <p className="text-white/55">{item.pText}</p>
-                </div>
-              ))}
-            </div>
+
+          <div className="w-full py-48">
+            {blurbContent.map((item, index) => (
+              <div key={index} className="p-6 md:p-10 mt-10">
+                <p className="text-lg font-medium text-white">{item.title}</p>
+                <h1 className="mb-5 text-2xl md:text-5xl font-bold">{item.description}</h1>
+                <p className="text-white/55">{item.pText}</p><br />
+                <p className="text-white/55">{item.pText1}</p>
+
+              </div>
+            ))}
+          </div>
 
         </div>
       </div>
@@ -57,19 +59,20 @@ const blurbContent = [
     id: 1,
     description: "Our Story",
     pText:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde labore atque a reprehenderit dolor dolore ullam molestiae quis non! Ea molestiae totam, numquam beatae excepturi similique reiciendis tenetur quae earum Aspernatur consequuntur sed iste quod tenetur sequi iusto inventore libero quae perferendis facere explicabo, labore odit sapiente illum quam dolor hic facilis optio quidem, quo suscipit harum! Vero, alias. Ex?",
+      "Established in 2020 with a vision to serve the best and most affordable digital solutions designed to deliver results. We have a team of expert designers, developers, and marketing executives who combine their individual skills to form a strong and successful team. Our team is passionate about using the latest technologies and best practices to deliver real results.",
+    pText1: "We offer a wide range of services, including web development, branding, digital marketing, visual effects, photo and video production, staffing, and logistics. Every solution we create is designed to help businesses grow, improve their online presence, and stay ahead in today’s fast-changing digital world."
   },
   {
     id: 2,
-    description: "Mission",
+    description: " Mission",
     pText:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde labore atque a reprehenderit dolor dolore ullam molestiae quis non! Ea molestiae totam, numquam beatae excepturi similique reiciendis tenetur quae earum Aspernatur consequuntur sed iste quod tenetur sequi iusto inventore libero quae perferendis facere explicabo, labore odit sapiente illum quam dolor hic facilis optio quidem, quo suscipit harum! Vero, alias. Ex?",
+      "Our mission is to create high-performance digital solutions that are effective in facilitating the success of a business. By using the latest technology, our team supports clients in maximizing their online performance potential for long-term success. ",
   },
   {
     id: 3,
-    description: "Vision",
+    description: " Vision",
     pText:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde labore atque a reprehenderit dolor dolore ullam molestiae quis non! Ea molestiae totam, numquam beatae excepturi similique reiciendis tenetur quae earum Aspernatur consequuntur sed iste quod tenetur sequi iusto inventore libero quae perferendis facere explicabo, labore odit sapiente illum quam dolor hic facilis optio quidem, quo suscipit harum! Vero, alias. Ex?",
+      "Through innovative, smart, and reliable digital solutions, we aim to empower businesses towards success. Our vision is to help businesses succeed in an ever-evolving digital world through advanced technology and professional guidance.",
   },
- 
+
 ];

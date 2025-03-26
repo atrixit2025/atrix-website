@@ -30,16 +30,14 @@ import Brand from './Dashboard/pages/BrandPage/Brand';
 import Faqs from './Pages/faqs';
 import PrivacyPolicy from './Pages/PrivacyPolicy';
 import TermsAndConditions from './Pages/TermsAndConditions';
-
 import Services from './Dashboard/pages/ServicesPage/Services';
-
 import BlogUS from './Pages/BlogUS';
 import BlogContant from './Components/BlogContant';
 import Portfolio_page from './Pages/Portfolio';
 import AddNewServices from './Dashboard/pages/ServicesPage/AddNewServices';
 import CategoryServices from './Dashboard/pages/ServicesPage/CategoryServices';
 import Demo from './Dashboard/pages/BlogPage/demo';
-
+import PortfolioSingle from './Pages/PortfolioSingle';
 
 export default function App() {
   return (
@@ -60,11 +58,9 @@ export default function App() {
           <Route path='/blog/:id' element={< BlogContant />} />
           {/* <Route path='/portfolio' element={< Portfolio />} /> */}
           <Route path='/portfolio-page' element={< Portfolio_page />} />
-
+          <Route path='/portfolio-single' element={< PortfolioSingle />} />
         </Route >
       </Routes >
-
-
       <Routes>
         {/* Dashboard Layout */}
         <Route element={<ProtectedRoute />}>
@@ -84,16 +80,14 @@ export default function App() {
 
 
             <Route path="/Dashboard/Brand" element={<Brand />} />
-            <Route path="/Dashboard/AddNewBrand" element={<AddNewBrand/>} />
+            <Route path="/Dashboard/AddNewBrand" element={<AddNewBrand />} />
 
 
-            <Route path="/Dashboard/Services" element={<Services/>} />
-            <Route path="/Dashboard/AddNewServices" element={<AddNewServices/>} />
-            <Route path="/Dashboard/CategoryServices" element={<CategoryServices/>} />
+            <Route path="/Dashboard/Services" element={<Services />} />
+            <Route path="/Dashboard/AddNewServices" element={<AddNewServices />} />
+            <Route path="/Dashboard/CategoryServices" element={<CategoryServices />} />
 
-            <Route path="/Dashboard/Demo" element={<Demo/>} />
-
-           
+            <Route path="/Dashboard/Demo" element={<Demo />} />
 
 
           </Route>
@@ -101,7 +95,7 @@ export default function App() {
         <Route path="/AISLogin" element={<SignInForm />} />
       </Routes>
 
-      
+
     </BrowserRouter >
 
   )

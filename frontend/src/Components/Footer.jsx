@@ -56,18 +56,18 @@ const Footer = () => {
 
                     <h4 className=" text-(--blue) mt-5 font-bold text-lg  ">Social Just You Connected Us!</h4>
                     <ul className=" flex gap-3 mt-3 md:justify-start  ">
-                        <li className="w-8 h-8 border border-(--black)  bg-(--black) hover:bg-gradient-to-r from-(--blue) to-(--green) flex justify-center items-center rounded-full cursor-pointer ">
+                        <Link className="w-8 h-8 border border-(--black)  bg-(--black) hover:bg-gradient-to-r from-(--blue) to-(--green) flex justify-center items-center rounded-full cursor-pointer ">
                             <FaFacebookF />
-                        </li>
-                        <li className="w-8 h-8 border border-(--black)  bg-(--black) hover:bg-gradient-to-r from-(--blue) to-(--green) flex justify-center items-center rounded-full cursor-pointer ">
+                        </Link>
+                        <Link to="https://x.com/AtrixIT_S" className="w-8 h-8 border border-(--black)  bg-(--black) hover:bg-gradient-to-r from-(--blue) to-(--green) flex justify-center items-center rounded-full cursor-pointer ">
                             <FaXTwitter />
-                        </li>
-                        <li className="w-8 h-8 border border-(--black)  bg-(--black) hover:bg-gradient-to-r from-(--blue) to-(--green) flex justify-center items-center rounded-full cursor-pointer">
+                        </Link>
+                        <Link to="https://www.linkedin.com/company/atrixitsolutions/" className="w-8 h-8 border border-(--black)  bg-(--black) hover:bg-gradient-to-r from-(--blue) to-(--green) flex justify-center items-center rounded-full cursor-pointer">
                             <FaLinkedinIn />
-                        </li>
-                        <li className="w-8 h-8 border border-(--black)  bg-(--black) hover:bg-gradient-to-r from-(--blue) to-(--green) flex justify-center items-center rounded-full cursor-pointer">
+                        </Link>
+                        <Link to="https://www.instagram.com/atrixit.solutions/" className="w-8 h-8 border border-(--black)  bg-(--black) hover:bg-gradient-to-r from-(--blue) to-(--green) flex justify-center items-center rounded-full cursor-pointer">
                             <FaInstagram />
-                        </li>
+                        </Link>
                     </ul>
                 </div>
                 <div className="md:w-3/4 flex flex-wrap ">
