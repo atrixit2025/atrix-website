@@ -15,7 +15,9 @@ const OurSolution = React.lazy(() => import('../Components/OurSolution'));
 const OurPortfolio = React.lazy(() => import('../Components/OurPortfolio'));
 const Technology = React.lazy(() => import('../Components/Technology'));
 const LetterMarquee = React.lazy(() => import('../Components/marqueelogo/letterMarquee'));
-
+import video_circle from '../assets/video_circle.svg'
+import { MdOutlineSlowMotionVideo } from "react-icons/md";
+import { CiPlay1 } from "react-icons/ci";
 
 const Home = () => {
   const ourServicesRef = useRef(null);
@@ -138,34 +140,34 @@ const Home = () => {
                       </div>
                     </div>
                     <div className='flex justify-center'>
-                    <div className="relative typewiter-wraper   md:text-5xl text-lg md:w-[45rem] w-[20rem]  font-normal rounded-full md:px-16 px-3 mt- font-body">
-                      <TypewriterEffect
-                        lines={lines}
-                        speed={170}
-                        deleteSpeed={100}
-                        delay={1500}
-                       
-                      />
-                    </div>
+                      <div className="relative typewiter-wraper   md:text-5xl text-lg md:w-[45rem] w-[20rem]  font-normal rounded-full md:px-16 px-3 mt- font-body">
+                        <TypewriterEffect
+                          lines={lines}
+                          speed={170}
+                          deleteSpeed={100}
+                          delay={1500}
+
+                        />
+                      </div>
                     </div>
                   </div>
 
                   <div className="relative inline-block">
                     <div className='flex '>
-                    <div className="font-bold tracking-wider ">solutions</div>
-                    <img src={Assetarrow}  className='w-auto lg:h-22 h-12 md:ml-5 ml-2 mt-1 moveWithMouse'/>
+                      <div className="font-bold tracking-wider ">solutions</div>
+                      <img src={Assetarrow} className='w-auto lg:h-22 h-12 md:ml-5 ml-2 mt-1 moveWithMouse' />
                     </div>
 
                     <div className="absolute -bottom-[25%] md:bottom-[10%] md:-left-[25%] text-center z-0 animateFromTop tracking-normal">
                       <p className="bg-(--blue) text-(--black) border   font-body border-transparent rounded-4xl md:px-8  px-2 py-1 text-sm md:text-2xl rotate-12 font-bold moveWithMouse">
                         Brand Identity
-                      </p> 
+                      </p>
                     </div>
 
                     <div className="absolute -bottom-[25%] md:-bottom-[5%] md:left-[68%] text-center z-0 animateFromTop tracking-normal">
                       <p className="bg-(--green) text-(--black) border   font-body border-transparent rounded-4xl md:px-8  px-2 py-1 text-sm md:text-2xl rotate-12 font-bold moveWithMouse">
                         Visual
-                      </p> 
+                      </p>
                     </div>
 
                   </div>
@@ -189,8 +191,17 @@ const Home = () => {
         <div className=" ">
           <h1 className="font-bold flex justify-center lg:right-60 top-14 relative text-8xl md:text-9xl text-transparent z-10" style={{ WebkitTextStroke: "1px white" }}>About us</h1>
           <div className="lg:flex items-center ">
-            <div className='inline-block relative max-w-[100%]'>
+            <div className='inline-block relative max-w-[100%] '>
               <img src={AboutImage} className="h-full  w-auto min-h-[600px] object-cover relative max-w-[100%]" alt="About Us" />
+
+              <div className='video-button-sec' >
+                <div className="video-circle">
+                  <img src={video_circle} alt="" className='w-full h-full object-cover' />
+                </div>
+                <div className='video-icon text-6xl text-white ml-[5px]'>
+                  <CiPlay1 />
+                </div>
+              </div>
               {/* <video
                       src={About_Video}
                       autoPlay 
@@ -203,8 +214,8 @@ const Home = () => {
             </div>
             <div className="text-(--white) lg:-ml-16  relative w-full lg:max-w-[40%] px-5 ">
               <p className="text-xl sm:text-md font-semibold text-(--gray) mb-2">Who We Are</p>
-              <h5 className="lg:text-5xl text-2xl font-bold mb-5">Unlock Revenue Growth for Your Business</h5>
-            
+              <h5 className="lg:text-5xl text-2xl font-bold mb-5">Trusted Experts in Taking Your Business Higher</h5>
+
               <p className="text-md text-(--gray) pb-4">Struggling to keep up in today’s fast-changing digital world? Don’t worry!, Atrix IT Solutions is here to help your business succeed!
               </p>
               <p className="text-md text-(--gray) pb-4">We do more than just offer IT services - we create smart solutions that drive real success. With a passion for innovation, we’ve built a team of experts dedicated to helping businesses grow and stay ahead in the digital world.
@@ -229,7 +240,7 @@ const Home = () => {
           </Suspense>
         ) : (
           <div className="text-(--white) text-center py-20">
-           
+
           </div>
         )}
       </div>

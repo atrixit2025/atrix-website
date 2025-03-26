@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 
 import OurSolution from "../Components/OurSolution";
 import OurPortfolio from "../Components/OurPortfolio";
@@ -24,6 +24,7 @@ import About_sec_scroll from "../Components/About_sec_scroll";
 
 import { RxArrowTopRight } from "react-icons/rx";
 import ValueCards from "../Components/career/ValueCards";
+
 
 const cards = [
   { id: 1, title: "Card 1", color: "bg-red-500" },
@@ -118,8 +119,7 @@ const About = () => {
       <div className="Page-heading text-center mt-8 px-4">
         <h1 className="font-bold text-4xl md:text-6xl lg:text-9xl">About Us</h1>
         <p className="mx-auto max-w-3xl text-sm md:text-base lg:text-lg text-white/55 mt-4">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Id nihil
-          suscipit autem accusamus provident magnam,
+          We develop creative solutions that generate actual results. With tailored technology solutions, our team of experts is committed to helping your company grow and achieve long-term success.
         </p>
       </div>
 
@@ -165,15 +165,15 @@ const About = () => {
           {/* Text Section */}
           <div className="md:col-span-10 col-span-12 text-center md:text-left">
             <h3 className="text-white text-3xl md:text-4xl font-bold">
-              We are always on the lookout for new talent!
+              Say Goodbye to IT Hassles – Get Expert Solutions Now!
             </h3>
           </div>
 
           {/* Button Section */}
           <div className="md:col-span-2 col-span-12 flex justify-center md:justify-end mt-4 md:mt-0 ">
-            <button className="bg-(--white)  font-extrabold text-(--blue) px-4 py-2  duration-300  rounded-lg  cursor-pointer  flex items-center gap-2">Learn More  <span className="">
+            <Link to='/contact-us' className="bg-(--white)  font-extrabold text-(--blue) px-4 py-2  duration-300  rounded-lg  cursor-pointer  flex items-center gap-2">Contact us!<span className="">
               <RxArrowTopRight className="" />
-            </span></button>
+            </span></Link>
           </div>
 
         </div>
@@ -185,9 +185,9 @@ const About = () => {
         <div className="container mx-auto mt-28 ">
           <div className="row text-center pb-10 ">
             <div className="col">
-              <p className="text-xl pb-4">Atrix Environment</p>
+              <p className="text-xl pb-4"> Atrix Environment</p>
               <h2 className="font-bold text-5xl">
-                What let us thrive together
+                Thriving Together for a Better Future!
               </h2>
             </div>
           </div>
@@ -209,7 +209,7 @@ const About = () => {
               <div className="image w-20 brightness-[2.5] mb-2 ">
                 <img src={icon3} alt="" />
               </div>
-              <p className="mt-2">Growth & support</p>
+              <p className="mt-2">Growth & support  </p>
             </div>
             <div className="col-span-3 flex items-center flex-col  ">
               <div className="image w-20 brightness-[2.5] mb-2 ">
@@ -218,22 +218,22 @@ const About = () => {
               <p className="mt-2">Transparency</p>
             </div>
           </div>
-        </div>
-      </div>
+        </div >
+      </div >
 
       {/* OurSolution-section */}
-      <div className=" mt-28 ">
+      < div className=" mt-28 " >
         <div className="row  flex-col grid grid-cols-12 space-x-96  ">
           <div className=" Our Solution Process col-span-12 ">
             <OurSolution />
           </div>
         </div>
-      </div>
+      </div >
 
       {/* OurPortfolio-section */}
-      <div className="Our Solution Process  ">
+      < div className="Our Solution Process  " >
         <OurPortfolio />
-      </div>
+      </div >
 
       {/* card-carousel-section */}
       {/* <CardCarousel/> */}

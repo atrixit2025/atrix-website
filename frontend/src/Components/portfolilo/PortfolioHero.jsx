@@ -3,7 +3,7 @@ import hero_img from '../../assets/portfolio_banner.png'
 const PortfolioHero = () => {
     return (
         <div>
-            <div className=" w-[95%] mx-auto ">
+            <div className=" mx-auto px-5 sm:px-6 lg:px-8">
                 <div className='grid grid-cols-1' >
                     <div className=' relative' >
                         <img src={hero_img} alt="" className=' w-full h-auto ' />
@@ -18,7 +18,7 @@ const PortfolioHero = () => {
                     </div>
                 </div>
             </div>
-        </div >
+        </div>
     )
 }
 

@@ -11,33 +11,33 @@ import icon10 from "../../assets/AboutUs/keys-sec/Agile-Solutions.svg";
 const ValueCardContent = [
     {
         icon: icon5,
-        title: "Values",
-        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
+        title: "Loyalty",
+        desc: "We believe in creating long-lasting relationships based on commitment and trust. Our team is committed to providing reliable support and solutions.",
     },
     {
         icon: icon6,
-        title: "Innovation ",
-        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
+        title: " Innovation ",
+        desc: "We support innovative, inspiring, and well-considered ideas to keep everyone on the cutting edge.",
     },
     {
         icon: icon7,
-        title: "Integrity",
-        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
+        title: " Integrity",
+        desc: "Everything we do is based on honesty and openness. To build trust, we uphold strong ethical values.",
     },
     {
         icon: icon8,
-        title: "Agile Solutions",
-        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
+        title: "Agile solutions ",
+        desc: "We provide smart and flexible solutions, quickly adjusting to any changes. This helps businesses grow easily and succeed over time.",
     },
     {
         icon: icon9,
-        title: "Culture",
-        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
+        title: " Culture ",
+        desc: "We create a friendly workplace where people work together, share ideas, and keep learning. A happy team leads to better results.",
     },
     {
         icon: icon10,
-        title: "Kindness",
-        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
+        title: " Kindness",
+        desc: "We treat our client with respect and care. Being kind helps us build strong and lasting relationships.",
     },
 ];
 
@@ -49,7 +49,10 @@ const ValueCards = () => {
     return (
         <div>
             <div className="container mx-auto  w-[90%] pt-32">
-                <div> <h2 className=' text-6xl text-center font-bold mb-12 ' >Our Values</h2> </div>
+                <div>
+                    <h2 className=' text-6xl text-center font-bold mb-4 ' >Our Values</h2>
+                    <p className='mb-12 text-center ' >Our values shape how we work, delivering results you can trust.</p>
+                </div>
                 <div className="contact-cards-wrapper grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  ">
                     {ValueCardContent.map((item, index) => (
                         <div key={index} className="contact-card bg-[#444343] py-10 px-8 rounded-3xl shadow-2xl shadow-white/5 " >

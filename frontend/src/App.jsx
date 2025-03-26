@@ -33,12 +33,7 @@ import TermsAndConditions from './Pages/TermsAndConditions';
 import BlogUS from './Pages/BlogUS';
 import BlogContant from './Components/BlogContant';
 import Portfolio_page from './Pages/Portfolio';
-
-
-
-
-
-
+import PortfolioSingle from './Pages/PortfolioSingle';
 
 
 
@@ -61,11 +56,9 @@ export default function App() {
           <Route path='/BlogContant' element={< BlogContant />} />
           {/* <Route path='/portfolio' element={< Portfolio />} /> */}
           <Route path='/portfolio-page' element={< Portfolio_page />} />
-
+          <Route path='/portfolio-single' element={< PortfolioSingle />} />
         </Route >
       </Routes >
-
-
       <Routes>
         {/* Dashboard Layout */}
         <Route element={<ProtectedRoute />}>
@@ -74,20 +67,14 @@ export default function App() {
             <Route path="/Technology" element={<Technology />} />
             <Route path="/AddNewTechnology" element={<NewAddTechnology />} />
             <Route path="/CategoryTechnology" element={<CategoryTechnology />} />
-
             <Route path="/Blog" element={<Blog />} />
             <Route path="/AddNewBlog" element={<AddNewBlog />} />
             <Route path="/CategoryBlog" element={<CategoryBlog />} />
-
             <Route path="/Portfolio" element={<Portfolio />} />
             <Route path="/AddNewPortfolio" element={<AddNewPortfolio />} />
             <Route path="/CategoryPortfolio" element={<CategoryPortfolio />} />
-
-
             <Route path="/Brand" element={<Brand />} />
             <Route path="/AddNewBrand" element={<AddNewBrand />} />
-
-
           </Route>
         </Route>
         <Route path="/AISLogin" element={<SignInForm />} />
