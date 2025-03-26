@@ -147,7 +147,7 @@ export default function BasicTableOne() {
   };
 
   const handleEdit = (order: Order) => {
-    navigate("/DashboardAddNewTechnology", {
+    navigate("/Dashboard/AddNewTechnology", {
       state: { technology: order }, // Pass the entire order object as state
     });
   };

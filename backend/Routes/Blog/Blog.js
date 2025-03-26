@@ -33,7 +33,7 @@ BlogRouter.get("/get", async (req, res) => {
   try {
     const blog = await Blog.find({}).populate('image'); 
     if (!blog.length) {
-      return res.status(404).json({ message: "No technologies found" });
+      return res.status(404).json({ message: "No Blogs found" });
     }
     return res.json({ Blog: blog });
   } catch (error) {
@@ -95,12 +95,12 @@ BlogRouter.delete("/delete", async (req, res) => {
         const result = await Blog.bulkWrite(deleteOperations);
         
         return res.status(200).json({ 
-          message: `${result.deletedCount} technologies deleted successfully`,
+          message: `${result.deletedCount} Blogs deleted successfully`,
           result
         });
       } catch (error) {
-        console.error("Error bulk deleting technologies:", error);
-        return res.status(500).json({ message: "Error bulk deleting technologies", error: error.message });
+        console.error("Error bulk deleting Blogs:", error);
+        return res.status(500).json({ message: "Error bulk deleting Blogs", error: error.message });
       }
     }
   
@@ -122,26 +122,35 @@ BlogRouter.delete("/delete", async (req, res) => {
     }
   });
 
-// BlogRouter.delete("/delete", async (req, res) => {
-//   const { title, category, description,} = req.body;
-
-//   if (!title || !category ||!description) {
-//     return res.status(400).json({ message: "Title and category description,are required" });
-//   }
-
-//   try {
-//     const deletedBlog = await Blog.findOneAndDelete({ title, category, description});
-
-//     if (!deletedBlog) {
-//       return res.status(404).json({ message: "Blog not found" });
-//     }
-
-//     res.status(200).json({ message: "Blog deleted successfully", Blog: deletedBlog });
-//   } catch (error) {
-//     console.error("Error deleting Blog:", error);
-//     res.status(500).json({ message: "Error deleting Blog", error: error.message });
-//   }
-// });
+  BlogRouter.get("/count/category", async (req, res) => {
+    try {
+      const Blogs = await Blog.find({});
+      
+      // Create a map to count categories
+      const categoryCounts = {};
+      
+      Blogs.forEach(tech => {
+        const categories = tech.category.split(", ");
+        categories.forEach(cat => {
+          categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+        });
+      });
+  
+      // Convert to array format
+      const result = Object.keys(categoryCounts).map(category => ({
+        category,
+        count: categoryCounts[category]
+      }));
+  
+      res.status(200).json({ categoryCounts: result });
+    } catch (error) {
+      console.error("Error counting Blogs by category:", error);
+      res.status(500).json({ 
+        message: "Error counting Blogs by category", 
+        error: error.message 
+      });
+    }
+  });
 
 export default BlogRouter;
 

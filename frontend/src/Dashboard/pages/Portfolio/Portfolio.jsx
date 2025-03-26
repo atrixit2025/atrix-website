@@ -8,6 +8,7 @@ export default function Portfolio() {
   const [tableData, setTableData] = useState([]);
   const navigate = useNavigate();
 
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -22,7 +23,7 @@ export default function Portfolio() {
           },
           imageId: tech.image?._id,
         }));
-        
+
         setTableData(portfolios);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -37,10 +38,10 @@ export default function Portfolio() {
         data: { title, category },
       });
       setTableData(prev => prev.filter(item => item.id !== id));
-      alert("Portfolio deleted successfully!");
+      return true
     } catch (error) {
       console.error("Error deleting Portfolio:", error);
-      alert("Error deleting Portfolio. Please try again.");
+      throw error;
     }
   };
 
@@ -54,22 +55,22 @@ export default function Portfolio() {
     try {
       await axios.delete("http://localhost:5300/Portfolio/delete", { data: deleteData });
       setTableData(prev => prev.filter(item => !selectedIds.includes(item.id)));
-      alert("Selected portfolios deleted successfully!");
+      return true
     } catch (error) {
       console.error("Error in bulk delete:", error);
-      alert(error.response?.data?.message || "Error deleting items. Please try again.");
+      throw error;
     }
   };
 
   const handleEdit = (item) => {
-    navigate("/DashboardAddNewPortfolio", { state: { portfolio: item } });
+    navigate("/Dashboard/AddNewPortfolio", { state: { portfolio: item } });
   };
 
   const columns = [
     { key: "name", title: "Title" },
     { key: "Category", title: "Category" },
-    { 
-      key: "team", 
+    {
+      key: "team",
       title: "Images",
       render: (item) => (
         <div className="flex -space-x-2">
@@ -90,10 +91,10 @@ export default function Portfolio() {
 
   return (
     <>
-      <PageBreadcrumb 
+      <PageBreadcrumb
         pageTitle="Portfolio"
         buttonText="Add New Portfolio"
-        buttonLink="/DashboardAddNewPortfolio" 
+        buttonLink="/Dashboard/AddNewPortfolio"
       />
       <GenericDataTable
         data={tableData}
@@ -102,6 +103,7 @@ export default function Portfolio() {
         onEdit={handleEdit}
         onBulkDelete={handleBulkDelete}
       />
+ 
     </>
   );
 }

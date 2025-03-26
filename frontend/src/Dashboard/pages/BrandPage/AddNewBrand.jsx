@@ -58,7 +58,7 @@ export default function AddNewBrand() {
         console.log("Create Response:", response.data);
       }
 
-      navigate("/Dashboardbrand");
+      navigate("/Dashboard/brand");
     } catch (error) {
       console.error("Error saving brand:", error);
       if (error.response) {

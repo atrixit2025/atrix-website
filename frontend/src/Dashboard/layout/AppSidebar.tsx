@@ -40,9 +40,9 @@ const navItems: NavItem[] = [
     name: "Technology",
     icon: <GrTechnology />, 
     subItems: [
-      { name: "All Technology", path: "/DashboardTechnology", pro: false },
-      { name: "Add New Technology ", path: "/DashboardAddNewTechnology", pro: false },
-      { name: "Category", path: "/DashboardCategoryTechnology", pro: false },
+      { name: "All Technology", path: "/Dashboard/Technology", pro: false },
+      { name: "Add New Technology ", path: "/Dashboard/AddNewTechnology", pro: false },
+      { name: "Category", path: "/Dashboard/CategoryTechnology", pro: false },
 
 
     ],
@@ -51,9 +51,9 @@ const navItems: NavItem[] = [
     name: "Blog",
     icon: <FaBloggerB />, 
     subItems: [
-      { name: "All Blog", path: "/DashboardBlog", pro: false },
-      { name: "Add New Blog ", path: "/DashboardAddNewBlog", pro: false },
-      { name: "Category Blog", path: "/DashboardCategoryBlog", pro: false },
+      { name: "All Blog", path: "/Dashboard/Blog", pro: false },
+      { name: "Add New Blog ", path: "/Dashboard/AddNewBlog", pro: false },
+      { name: "Category Blog", path: "/Dashboard/CategoryBlog", pro: false },
 
 
     ],
@@ -62,9 +62,9 @@ const navItems: NavItem[] = [
     name: "Portfolio",
     icon: <FaImagePortrait />, 
     subItems: [
-      { name: "All Portfolio", path: "/DashboardPortfolio", pro: false },
-      { name: "Add New Portfolio ", path: "/DashboardAddNewPortfolio", pro: false },
-      { name: "Category Portfolio", path: "/DashboardCategoryPortfolio", pro: false },
+      { name: "All Portfolio", path: "/Dashboard/Portfolio", pro: false },
+      { name: "Add New Portfolio ", path: "/Dashboard/AddNewPortfolio", pro: false },
+      { name: "Category Portfolio", path: "/Dashboard/CategoryPortfolio", pro: false },
 
 
     ],
@@ -73,8 +73,8 @@ const navItems: NavItem[] = [
     name: "Brand",
     icon: <TbMarquee />, 
     subItems: [
-      { name: "All Brand", path: "/DashboardBrand", pro: false },
-      { name: "Add New Brand ", path: "/DashboardAddNewBrand", pro: false },
+      { name: "All Brand", path: "/Dashboard/Brand", pro: false },
+      { name: "Add New Brand ", path: "/Dashboard/AddNewBrand", pro: false },
 
 
     ],
@@ -83,9 +83,9 @@ const navItems: NavItem[] = [
     name: "Services ",
     icon: <FaHandshakeSimple />, 
     subItems: [
-      { name: "All Services", path: "/DashboardServices", pro: false },
-      { name: "Add New Services ", path: "/DashboardAddNewServices", pro: false },
-      { name: "Category Services", path: "/DashboardCategoryServices", pro: false },
+      { name: "All Services", path: "/Dashboard/Services", pro: false },
+      { name: "Add New Services ", path: "/Dashboard/AddNewServices", pro: false },
+      { name: "Category Services", path: "/Dashboard/CategoryServices", pro: false },
 
 
     ],

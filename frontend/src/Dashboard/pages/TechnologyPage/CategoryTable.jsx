@@ -14,7 +14,7 @@ import axios from "axios";
 import SelectBulk from "../../components/form/SelectBulk";
 
 export default function CategoryTable({ onEditClick }) {
-  const { categories, deleteCategory, fetchCategories } = useContext(CategoryContext);
+  const { categories, deleteCategory, fetchCategories,fetchCategoryCounts ,categoryCounts} = useContext(CategoryContext);
   const [selectedRows, setSelectedRows] = useState([]);
   const [bulkAction, setBulkAction] = useState('');
 
@@ -58,6 +58,7 @@ export default function CategoryTable({ onEditClick }) {
       try {
         await deleteCategory(id);
         await fetchCategories();
+        await fetchCategoryCounts();
       } catch (error) {
         console.error("Error deleting category:", error);
         alert("Error deleting category. Please try again.");
@@ -204,7 +205,7 @@ export default function CategoryTable({ onEditClick }) {
                         {category.Slug}
                       </TableCell>
                       <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                        {category.count || 0}
+                      {categoryCounts[category.Name] || 0}
                       </TableCell>
                       <TableCell className="px-4 py-3 text-gray-500 text-theme-sm dark:text-gray-400">
                         <div className="flex gap-2">

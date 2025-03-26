@@ -35,10 +35,10 @@ export default function Services() {
         data: { title, category },
       });
       setTableData(prev => prev.filter(item => item.id !== id));
-      alert("Service deleted successfully!");
+      return true
     } catch (error) {
       console.error("Error deleting Service:", error);
-      alert("Error deleting Service. Please try again.");
+      throw error;
     }
   };
 
@@ -52,15 +52,15 @@ export default function Services() {
     try {
       await axios.delete("http://localhost:5300/Services/delete", { data: deleteData });
       setTableData(prev => prev.filter(item => !selectedIds.includes(item.id)));
-      alert("Selected services deleted successfully!");
+      return true
     } catch (error) {
       console.error("Error in bulk delete:", error);
-      alert(error.response?.data?.message || "Error deleting items. Please try again.");
+      throw error; 
     }
   };
 
   const handleEdit = (item) => {
-    navigate("/DashboardAddNewServices", { state: { Services: item } });
+    navigate("/Dashboard/AddNewServices", { state: { Services: item } });
   };
 
   const columns = [
@@ -91,7 +91,7 @@ export default function Services() {
       <PageBreadcrumb 
         pageTitle="Services"
         buttonText="Add New Service"
-        buttonLink="/DashboardAddNewServices" 
+        buttonLink="/Dashboard/AddNewServices" 
       />
       <GenericDataTable
         data={tableData}

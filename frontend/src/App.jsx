@@ -36,6 +36,9 @@ import Services from './Dashboard/pages/ServicesPage/Services';
 import BlogUS from './Pages/BlogUS';
 import BlogContant from './Components/BlogContant';
 import Portfolio_page from './Pages/Portfolio';
+import AddNewServices from './Dashboard/pages/ServicesPage/AddNewServices';
+import CategoryServices from './Dashboard/pages/ServicesPage/CategoryServices';
+import Demo from './Dashboard/pages/BlogPage/demo';
 
 
 
@@ -59,7 +62,7 @@ export default function App() {
           <Route path='/faqs' element={<Faqs />} />
           <Route path='/privacy-policy' element={< PrivacyPolicy />} />
           <Route path='/terms-and-conditions' element={< TermsAndConditions />} />
-          <Route path='/portfolio' element={< Portfolio />} />
+          {/* <Route path='/portfolio' element={< Portfolio />} /> */}
           <Route path='/BlogUs' element={< BlogUS />} />
           <Route path='/BlogContant' element={< BlogContant />} />
           {/* <Route path='/portfolio' element={< Portfolio />} /> */}
@@ -74,24 +77,28 @@ export default function App() {
         <Route element={<ProtectedRoute />}>
           <Route element={<AppLayout />}>
             <Route index path="/Dashboard" element={<DashboardHome />} />
-            <Route path="/DashboardTechnology" element={<Technology />} />
-            <Route path="/DashboardAddNewTechnology" element={<NewAddTechnology />} />
-            <Route path="/DashboardCategoryTechnology" element={<CategoryTechnology />} />
+            <Route path="/Dashboard/Technology" element={<Technology />} />
+            <Route path="/Dashboard/AddNewTechnology" element={<NewAddTechnology />} />
+            <Route path="/Dashboard/CategoryTechnology" element={<CategoryTechnology />} />
 
-            <Route path="/DashboardBlog" element={<Blog />} />
-            <Route path="/DashboardAddNewBlog" element={<AddNewBlog />} />
-            <Route path="/DashboardCategoryBlog" element={<CategoryBlog />} />
+            <Route path="/Dashboard/Blog" element={<Blog />} />
+            <Route path="/Dashboard/AddNewBlog" element={<AddNewBlog />} />
+            <Route path="/Dashboard/CategoryBlog" element={<CategoryBlog />} />
 
-            <Route path="/DashboardPortfolio" element={<Portfolio />} />
-            <Route path="/DashboardAddNewPortfolio" element={<AddNewPortfolio />} />
-            <Route path="/DashboardCategoryPortfolio" element={<CategoryPortfolio />} />
-
-
-            <Route path="/DashboardBrand" element={<Brand />} />
-            <Route path="/DashboardAddNewBrand" element={<AddNewBrand/>} />
+            <Route path="/Dashboard/Portfolio" element={<Portfolio />} />
+            <Route path="/Dashboard/AddNewPortfolio" element={<AddNewPortfolio />} />
+            <Route path="/Dashboard/CategoryPortfolio" element={<CategoryPortfolio />} />
 
 
-            <Route path="/DashboardServices" element={<Services/>} />
+            <Route path="/Dashboard/Brand" element={<Brand />} />
+            <Route path="/Dashboard/AddNewBrand" element={<AddNewBrand/>} />
+
+
+            <Route path="/Dashboard/Services" element={<Services/>} />
+            <Route path="/Dashboard/AddNewServices" element={<AddNewServices/>} />
+            <Route path="/Dashboard/CategoryServices" element={<CategoryServices/>} />
+
+            <Route path="/Dashboard/Demo" element={<Demo/>} />
 
            
 

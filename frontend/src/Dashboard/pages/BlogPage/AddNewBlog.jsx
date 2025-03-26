@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FileInputExample from "../../components/form/form-elements/FileInputExample";
 import Button from "../../components/ui/button/Button";
@@ -9,11 +9,13 @@ import ComponentCategory from "../../components/common/ComponentCategoryCard";
 import { ImageProvider } from "../../ContextApi/ImageApi";
 import axios from "axios";
 import TextArea from "../../components/form/input/TextArea";
+import { BlogCategoryContext } from "../../ContextApi/BlogCategoryContextApi";
 
 export default function AddNewBlog() {
   const location = useLocation();
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
+  const { fetchCategoryCounts} = useContext(BlogCategoryContext);
 
   // Single state object for form data
   const [formData, setFormData] = useState({
@@ -85,16 +87,16 @@ export default function AddNewBlog() {
           id: blog.id, // Ensure this is included
           ...blogData,
         };
-        console.log("Payload:", payload); // Debug the payload
+        // console.log("Payload:", payload); // Debug the payload
         const response = await axios.put(`http://localhost:5300/Blog/edit`, payload);
-        console.log("Update Response:", response.data);
+        // console.log("Update Response:", response.data);
       } else {
         // Create new blog
         const response = await axios.post("http://localhost:5300/Blog/add", blogData);
-        console.log("Create Response:", response.data);
+        // console.log("Create Response:", response.data);
       }
-
-      navigate("/Dashboardblog");
+         await fetchCategoryCounts()
+      navigate("/Dashboard/Blog");
     } catch (error) {
       console.error("Error saving blog:", error);
       if (error.response) {

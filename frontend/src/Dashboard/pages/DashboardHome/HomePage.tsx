@@ -11,7 +11,7 @@ export default function DashboardHome() {
   return (
     <>
     <div className="text-(--white)">
-      <h1>OAUHsdfSdfiash</h1>
+      <h1>DashboardHome</h1>
       {/* <PageMeta 
         title="React.js Ecommerce Dashboard | TailAdmin - React.js Admin Dashboard Template"
         description="This is React.js Ecommerce Dashboard page for TailAdmin - React.js Tailwind CSS Admin Dashboard Template"

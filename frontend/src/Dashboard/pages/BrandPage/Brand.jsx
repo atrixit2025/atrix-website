@@ -103,7 +103,7 @@ export default function Brand() {
     };
 
     const handleEdit = (order) => {
-        navigate("/DashboardAddNewBrand", {
+        navigate("/Dashboard/AddNewBrand", {
             state: { brand: order },
         });
     };
@@ -125,7 +125,7 @@ export default function Brand() {
             <PageBreadcrumb
                 pageTitle="Brand"
                 buttonText=" Add New Brand"
-                buttonLink="/DashboardAddNewBrand"
+                buttonLink="/Dashboard/AddNewBrand"
             />
 
             <div className="space-y-6">
