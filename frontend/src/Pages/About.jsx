@@ -24,6 +24,7 @@ import About_sec_scroll from "../Components/About_sec_scroll";
 
 import { RxArrowTopRight } from "react-icons/rx";
 import ValueCards from "../Components/career/ValueCards";
+import TestimonialsCards from "../Components/TestimonialsCards";
 
 
 const cards = [
@@ -182,7 +183,7 @@ const About = () => {
 
       {/* Environment-section */}
       <div className="Environment-sec">
-        <div className="container mx-auto mt-28 ">
+        <div className="container mx-auto w-[90%] mt-28 ">
           <div className="row text-center pb-10 ">
             <div className="col">
               <p className="text-xl pb-4"> Atrix Environment</p>
@@ -235,10 +236,9 @@ const About = () => {
         <OurPortfolio />
       </div >
 
-      {/* card-carousel-section */}
-      {/* <CardCarousel/> */}
-
-      {/* <Ccarousel/> */}
+      {/* Testimonial-Section */}
+      <TestimonialsCards/>
+    
 
 
     </>

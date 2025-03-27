@@ -3,17 +3,17 @@ import "../Components/SingleBlog.css";
 
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import HeroCommon from "./HeroCommon";
-import { TiSocialFacebook, TiSocialLinkedin } from "react-icons/ti";
-import { AiOutlineTwitter } from "react-icons/ai";
 import { FaArrowLeft } from "react-icons/fa6";
 import { blogData } from "../Pages/BlogUS";
 import Card from "react-bootstrap/Card";
 import { GoCalendar } from "react-icons/go";
 import Button from "react-bootstrap/Button";
 import { FaArrowRight } from "react-icons/fa6";
-import { LiaInstagram } from "react-icons/lia";
-import { FaPinterestP } from "react-icons/fa";
-
+import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { Link } from "react-router-dom";
+import { LiaTwitter } from "react-icons/lia";
+import { LiaPinterestP } from "react-icons/lia";
 
 const BolgContant = () => {
   const location = useLocation();
@@ -28,74 +28,97 @@ const BolgContant = () => {
   const shuffleArray = (array) => {
     return array.sort(() => Math.random() - 0.5);
   };
-  
-  const relatedBlogs = shuffleArray(blogData.filter((b) => b.id !== blog?.id)).slice(0, 3);
-  
-  
+
+  const relatedBlogs = shuffleArray(
+    blogData.filter((b) => b.id !== blog?.id)
+  ).slice(0, 3);
 
   return (
-    <>
+    <div className="">
       <div className="Blog-header">
-        <HeroCommon
-          heroData={{ title: blog?.title || "Blog Not Found", desc: "" }}
-        />
+        <div className="container mx-auto w-[90%]">
+          <HeroCommon
+            heroData={{ title: blog?.title || "Blog Not Found", desc: "" }}
+          />
+        </div>
       </div>
 
-      <div className="container mx-auto">
+      <div className="container mx-auto w-[90%]">
         <div className="row flex justify-between pt-5">
           <div
             onClick={() => navigate("/BlogUs")}
-            className="col-4 flex group items-center gap-2 text-[14px] cursor-pointer"
-          >
-            <div className="icon text-[16px] border rounded-[50%] p-1 cursor-pointer group-hover:bg-(--blue) ">
-              <FaArrowLeft />
+           className="font-bold pt-2 flex items-center  cursor-pointer hover:text-(--blue) gap-2   group ">
+              
+            <div className="flex items-center gap-2">
+              <span className='border border-white/45 ml-2 flex justify-center items-center h-6 w-6 rounded-full  rotate-45 text-[var(--blue)] group-hover:rotate-1 group-hover:bg-(--blue) group-hover:text-(--white) group-hover:border-(--blue)   duration-300' > <FaArrowLeft /> </span>
+               Back to main blog
+              
             </div>
-            Back to main blog
+         
           </div>
 
           <div className="category-sec flex gap-5 items-center ">
             <div className="col-4  flex text-[14px]">
-            {blog.Published}
-            {blog.date}
+              {blog.Published}
+              {blog.date}
             </div>
 
-             <hr className="border w-16 border-white/35  "  />
+            <hr className="border w-16 border-white/35  " />
 
-           <div className="cat-center-sec flex gap-2 items-center ">
-              
-           Category: <div className=" bg-white/25 rounded-[14px] px-2.5 py-1  ">
-               {blog.Category1} 
+            <div className="cat-center-sec flex gap-2 items-center ">
+              Category:{" "}
+              <div className=" bg-white/25 rounded-[14px] px-2.5 py-1  ">
+                {blog.Category1}
+              </div>
+              <div className=" bg-white/25 rounded-[14px] px-2.5 py-1  ">
+                {blog.Category2}
+              </div>
             </div>
-
-             <div className=" bg-white/25 rounded-[14px] px-2.5 py-1  ">
-                {blog.Category2} 
-                </div>
-
-             </div>
-           </div>
-
-         
-
-          <div className="social-media-icons col-4 text-[16px] flex gap-3 items-center">
-            <span className="border rounded-[50%] p-1 cursor-pointer hover:bg-(--blue)">
-              <TiSocialFacebook />
-            </span>
-            <span className="border   rounded-[50%] p-1 cursor-pointer hover:bg-(--blue)">
-              <AiOutlineTwitter />
-            </span>
-            <span className="border rounded-[50%] p-1 cursor-pointer hover:bg-(--blue)">
-              <TiSocialLinkedin />
-            </span>
-            <span className="border rounded-[50%] p-1 cursor-pointer hover:bg-(--blue)">
-            <LiaInstagram />
-
-            </span>
-            <span className="border rounded-[50%] p-1 cursor-pointer hover:bg-(--blue)">
-            <FaPinterestP />
-
-            </span>
           </div>
 
+          <div className="social-media-icons col-4 text-[16px] flex items-center">
+            <div className="py-2.5">
+              <ul className="flex gap-2 mt-3  md:justify-start">
+                {[
+                  { icon: <FaFacebookF />, id: "fb", link: "" },
+                  {
+                    icon: <LiaTwitter />,
+                    id: "twitter",
+                    link: "https://x.com/AtrixIT_S",
+                  },
+                  {
+                    icon: <FaLinkedinIn />,
+                    id: "linkedin",
+                    link: "https://www.linkedin.com/company/atrixitsolutions/",
+                  },
+                  {
+                    icon: <FaInstagram />,
+                    id: "insta",
+                    link: "https://www.instagram.com/atrixit.solutions/",
+                  },
+                  {
+                    icon: <LiaPinterestP />,
+                    id: "insta",
+                    link: "https://www.instagram.com/atrixit.solutions/",
+                  },
+                ].map((item) => (
+                  <li
+                    key={item.id}
+                    className="relative w-10 h-10 p-1 rounded-full cursor-pointer flex justify-center items-center bg-black text-white"
+                  >
+                    <Link
+                      to={item.link}
+                      className="absolute inset-0 rounded-full border-transparent bg-gradient-to-r from-blue-400 to-green-400 p-[1px]"
+                    >
+                      <div className="w-full h-full flex justify-center items-center bg-black hover:bg-gradient-to-r from-blue-400 to-green-400 rounded-full">
+                        {item.icon}
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -123,16 +146,41 @@ const BolgContant = () => {
         {[0].map(() => (
           <div key={0} className="flex gap-10 pt-10">
             {relatedBlogs.slice(0, 3).map((relatedBlog) => (
-              <div key={relatedBlog.id} className="w-[33.3%] flex flex-col">
-                <Card.Img variant="top rounded-t-lg " src={relatedBlog.img} />
+              <div key={relatedBlog.id} className="w-[33.3%] flex flex-col  ">
+                <Card.Img
+                  onClick={() =>
+                    navigate(
+                      `/blog/${relatedBlog.title
+                        .replace(/\s+/g, "-")
+                        .toLowerCase()}`,
+                      {
+                        state: relatedBlog,
+                      }
+                    )
+                  }
+                  variant="top rounded-t-lg  cursor-pointer"
+                  src={relatedBlog.img}
+                />
 
-                <Card.Body className="border border-white/15 p-6 flex-1 flex flex-col">
-                  <Card.Title className="flex items-center gap-2">
+                <Card.Body className="border border-white/15 p-6 flex-1 flex flex-col ">
+                  <Card.Title className="flex items-center gap-2  ">
                     <GoCalendar />
                     {relatedBlog.date}
                   </Card.Title>
 
-                  <Card.Text className="font-extrabold text-2xl pt-2 flex-1">
+                  <Card.Text
+                    onClick={() =>
+                      navigate(
+                        `/blog/${relatedBlog.title
+                          .replace(/\s+/g, "-")
+                          .toLowerCase()}`,
+                        {
+                          state: relatedBlog,
+                        }
+                      )
+                    }
+                    className="font-extrabold text-2xl pt-2 flex-1 hover:text-(--blue) cursor-pointer"
+                  >
                     {relatedBlog.title}
                   </Card.Text>
 
@@ -147,17 +195,16 @@ const BolgContant = () => {
                         }
                       )
                     }
-                    className="font-bold pt-2 flex items-center gap-2 cursor-pointer hover:text-(--blue)"
-                  >
-                    Read More <FaArrowRight />
-                  </Button>
+                    className="font-bold pt-4 flex items-center  cursor-pointer hover:text-(--blue) self-start  group "
+                  > Read More <span className='border border-white/45 ml-2 flex justify-center items-center h-6 w-6 rounded-full  -rotate-45 text-[var(--blue)] group-hover:rotate-1 group-hover:bg-(--blue) group-hover:text-(--white) group-hover:border-(--blue)   duration-300' ><FaArrowRight /></span>
+                    </Button>
                 </Card.Body>
               </div>
             ))}
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

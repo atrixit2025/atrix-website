@@ -13,13 +13,12 @@ import img3 from "../assets/BlogCrads/blog-st-img12-600x400-1.webp";
 
 const herodata = [{ title: "Blog", desc: "" }];
 
-
 const blogData = [
   {
     id: 1,
     img: img1,
-    Category1:"blog",
-    Category2:" educartion",
+    Category1: "blog",
+    Category2: " educartion",
     Published: "Published on :",
     date: "15 August, 2024",
     title: "Welcome To our Blog1",
@@ -28,8 +27,8 @@ const blogData = [
   {
     id: 2,
     img: img2,
-    Category1:"blog",
-    Category2:" educartion",
+    Category1: "blog",
+    Category2: " educartion",
     Published: "Published on :",
     date: "15 August, 2024",
     title: "Welcome To our Blog2",
@@ -38,8 +37,8 @@ const blogData = [
   {
     id: 3,
     img: img3,
-    Category1:"blog",
-    Category2:" educartion",
+    Category1: "blog",
+    Category2: " educartion",
     Published: "Published on :",
     date: "15 August, 2024",
     title: "Welcome To our Blog3",
@@ -48,8 +47,8 @@ const blogData = [
   {
     id: 4,
     img: img1,
-    Category1:"blog",
-    Category2:" educartion",
+    Category1: "blog",
+    Category2: " educartion",
     Published: "Published on :",
     date: "15 August, 2024",
     title: "Welcome To our Blog85",
@@ -58,8 +57,8 @@ const blogData = [
   {
     id: 5,
     img: img2,
-    Category1:"blog",
-    Category2:" educartion",
+    Category1: "blog",
+    Category2: " educartion",
     Published: "Published on :",
     date: "15 August, 2024",
     title: "Welcome To our Blog7",
@@ -68,8 +67,8 @@ const blogData = [
   {
     id: 6,
     img: img3,
-    Category1:"blog",
-    Category2:" educartion",
+    Category1: "blog",
+    Category2: " educartion",
     Published: "Published on :",
     date: "15 August, 2024",
     title: "Welcome To our Blog587",
@@ -78,8 +77,8 @@ const blogData = [
   {
     id: 7,
     img: img1,
-    Category1:"blog",
-    Category2:" educartion",
+    Category1: "blog",
+    Category2: " educartion",
     Published: "Published on :",
     date: "16 August, 2024",
     title: "Welcome To our Blog8",
@@ -88,8 +87,8 @@ const blogData = [
   {
     id: 8,
     img: img3,
-    Category1:"blog",
-    Category2:" educartion",
+    Category1: "blog",
+    Category2: " educartion",
     Published: "Published on :",
     date: "16 August, 2024",
     title: "Welcome To our Blog9",
@@ -98,8 +97,8 @@ const blogData = [
   {
     id: 9,
     img: img2,
-    Category1:"blog",
-    Category2:" educartion",
+    Category1: "blog",
+    Category2: " educartion",
     Published: "Published on :",
     date: "16 August, 2024",
     title: "Welcome To our Blog10",
@@ -108,8 +107,8 @@ const blogData = [
   {
     id: 10,
     img: img3,
-    Category1:"blog",
-    Category2:" educartion",
+    Category1: "blog",
+    Category2: " educartion",
     Published: "Published on :",
     date: "16 August, 2024",
     title: "Welcome To our Blog10",
@@ -118,8 +117,8 @@ const blogData = [
   {
     id: 11,
     img: img1,
-    Category1:"blog",
-    Category2:" educartion",
+    Category1: "blog",
+    Category2: " educartion",
     Published: "Published on :",
     date: "16 August, 2024",
     title: "Welcome To our Blog10",
@@ -128,8 +127,8 @@ const blogData = [
   {
     id: 12,
     img: img2,
-    Category1:"blog",
-    Category2:" educartion",
+    Category1: "blog",
+    Category2: " educartion",
     Published: "Published on :",
     date: "16 August, 2024",
     title: "Welcome To our Blog10",
@@ -138,8 +137,8 @@ const blogData = [
   {
     id: 13,
     img: img3,
-    Category1:"blog",
-    Category2:" educartion",
+    Category1: "blog",
+    Category2: " educartion",
     Published: "Published on :",
     date: "16 August, 2024",
     title: "Welcome To our Blog10",
@@ -148,8 +147,8 @@ const blogData = [
   {
     id: 14,
     img: img1,
-    Category1:"blog",
-    Category2:" educartion",
+    Category1: "blog",
+    Category2: " educartion",
     Published: "Published on :",
     date: "16 August, 2024",
     title: "Welcome To our Blog10",
@@ -171,29 +170,52 @@ const BlogUS = () => {
   return (
     <>
       <HeroCommon heroData={herodata[0]} />
-      <div className="container mx-auto pt-10 px-10">
-        <div className="grid grid-cols-3 gap-10">
+      <div className="container mx-auto w-[90%] pt-10 px-10">
+        <div className="grid grid-cols-3 top  gap-10 -mx-10">
           {currentBlogs.map((blog) => (
             <div key={blog.id} className="w-full flex flex-col">
-              <Card.Img variant="top rounded-t-lg  " src={blog.img} />
+
+<Card.Img  
+  onClick={() =>
+    navigate(
+      `/blog/${blog.title.replace(/\s+/g, "-").toLowerCase()}`,
+      { state: blog }
+    )}
+  className="rounded-t-lg w-full object-cover !important cursor-pointer"   
+  variant="top" 
+  src={blog.img} 
+/>
+
               <Card.Body className="border border-white/15 p-6 flex-1 flex flex-col">
                 <Card.Title className="flex items-center gap-2">
-                 <GoCalendar /> {blog.date}
+                  <GoCalendar /> {blog.date}
                 </Card.Title>
-                <Card.Text className="font-extrabold text-2xl pt-2 flex-1">
+                <Card.Text onClick={() =>
+                    navigate(
+                      `/blog/${blog.title.replace(/\s+/g, "-").toLowerCase()}`,
+                      { state: blog }
+                    )
+                    }
+                    className="font-extrabold  text-2xl pt-2 flex-1 hover:text-(--blue) cursor-pointer">
                   {blog.title}
                 </Card.Text>
-                <Button
+
+                <p 
                   onClick={() =>
                     navigate(
                       `/blog/${blog.title.replace(/\s+/g, "-").toLowerCase()}`,
                       { state: blog }
                     )
                   }
-                  className="font-bold pt-2 flex items-center gap-2 cursor-pointer hover:text-(--blue)"
+                  className="font-bold pt-4 self-start  flex items-center  cursor-pointer hover:text-(--blue)   group "
                 >
-                  Read More <FaArrowRight />
-                </Button>
+                  {" "}
+                  Read More{" "}
+                  <span className="border border-white/45 ml-2 flex justify-center items-center h-6 w-6 rounded-full  -rotate-45 text-[var(--blue)] group-hover:rotate-1 group-hover:bg-(--blue) group-hover:text-(--white) group-hover:border-(--blue)   duration-300">
+                    <FaArrowRight />
+                  </span>
+                </p>
+
               </Card.Body>
             </div>
           ))}

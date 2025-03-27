@@ -22,8 +22,7 @@ import Portfolio from './Dashboard/pages/Portfolio/Portfolio';
 import AddNewPortfolio from './Dashboard/pages/Portfolio/AddNewPortfolio';
 import CategoryPortfolio from './Dashboard/pages/Portfolio/CategoryPortfolio';
 import Careers from './Pages/Careers';
-import LogoMarquee from './Dashboard/pages/BrandPage/Brand';
-import AddNewLogoMarquee from './Dashboard/pages/BrandPage/AddNewBrand';
+
 import AddNewBrand from './Dashboard/pages/BrandPage/AddNewBrand';
 import Brand from './Dashboard/pages/BrandPage/Brand';
 // import Careers from './Pages/careers';
@@ -38,6 +37,7 @@ import AddNewServices from './Dashboard/pages/ServicesPage/AddNewServices';
 import CategoryServices from './Dashboard/pages/ServicesPage/CategoryServices';
 import Demo from './Dashboard/pages/BlogPage/demo';
 import PortfolioSingle from './Pages/PortfolioSingle';
+
 
 export default function App() {
   return (
@@ -56,7 +56,6 @@ export default function App() {
           {/* <Route path='/portfolio' element={< Portfolio />} /> */}
           <Route path='/BlogUs' element={< BlogUS />} />
           <Route path='/blog/:id' element={< BlogContant />} />
-          {/* <Route path='/portfolio' element={< Portfolio />} /> */}
           <Route path='/portfolio-page' element={< Portfolio_page />} />
           <Route path='/portfolio-single' element={< PortfolioSingle />} />
         </Route >

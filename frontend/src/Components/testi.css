@@ -1,0 +1,20 @@
+.testimonial-slider .slick-arrow {
+    display: block !important;  
+    z-index: 1000 !important;   
+  }
+  
+  .testimonial-slider .slick-next {
+    right: 200px !important; 
+    top: 70%;
+    transform: translateY(-50%) scale(2.2);
+    color: red !important;
+ 
+  }
+  
+  .testimonial-slider .slick-prev {
+    left: 1250px !important; 
+    top: 70%;
+    transform: translateY(-50%) scale(2.2);
+    color: red !important;
+  }
+  

@@ -122,7 +122,7 @@ const OurServices = () => {
   }, []);
 
   return (
-    <div className="Services-section  text-(--whitelight) ">
+    <div className="Services-section container mx-auto w-[90%]  text-(--whitelight) ">
 
       <div className="container mx-auto ">
         <div className=" py-14 md:py-32 ">
@@ -131,11 +131,12 @@ const OurServices = () => {
         <h2 className=" text-4xl md:text-6xl font-bold">Our <br/>Services</h2>
 
 
-                    <div className='w-full max-w-[750px] mt-14'>
+                    <div className='flex-1 mt-14'>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477 65">
                             <path fill="#2f2f2f" d="M0.333333 3C0.333333 4.47276 1.52724 5.66667 3 5.66667C4.47276 5.66667 5.66667 4.47276 5.66667 3C5.66667 1.52724 4.47276 0.333333 3 0.333333C1.52724 0.333333 0.333333 1.52724 0.333333 3ZM475 3L475.255 3.42984L476.82 2.5H475V3ZM438.668 65L441.872 60.197L436.111 59.8239L438.668 65ZM3 3.5H475V2.5H3V3.5ZM474.745 2.57016C459.928 11.3742 441.341 27.8789 438.461 60.47L439.457 60.5581C442.3 28.3895 460.613 12.1303 475.255 3.42984L474.745 2.57016Z"></path>
                         </svg>
                     </div>
+
                     <div className='mt-1  md:text-end'>
                         <div className=' flex md:justify-end'>
                             <Button className="" mybtn={"View All Services"} />
