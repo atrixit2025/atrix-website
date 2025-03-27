@@ -38,6 +38,7 @@ import AddNewServices from './Dashboard/pages/ServicesPage/AddNewServices';
 import CategoryServices from './Dashboard/pages/ServicesPage/CategoryServices';
 import Demo from './Dashboard/pages/BlogPage/demo';
 import PortfolioSingle from './Pages/PortfolioSingle';
+// import Ckeditor from './Dashboard/Ckeditors/ckeditors';
 
 export default function App() {
   return (
@@ -88,6 +89,8 @@ export default function App() {
             <Route path="/Dashboard/CategoryServices" element={<CategoryServices />} />
 
             <Route path="/Dashboard/Demo" element={<Demo />} />
+
+            {/* <Route path="/Dashboard/Ckeditor" element={<Ckeditor />} /> */}
 
 
           </Route>

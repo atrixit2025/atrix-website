@@ -8,17 +8,19 @@ app.use(express.json());
 const BlogRouter = express.Router();
 
 BlogRouter.post("/add", async (req, res) => {
-  const { title, category,description, imageId } = req.body; 
-  if (!title || !category ||! description|| !imageId) {
-    return res.status(400).json({ message: "Title, category,description, and imageId are required" });
+  const { title, category,text, imageId,fullImageId,bigImageId } = req.body; 
+  if (!title || !category || !imageId) {
+    return res.status(400).json({ message: "Title, category,text, and imageId are required" });
   }
 
   try {
     const newBlog = new Blog({
       title,
       category,
-      description,
+      text,
       image: imageId, 
+      fullImage: fullImageId || undefined ,
+      bigImage: bigImageId || undefined
     });
 
     await newBlog.save();
@@ -44,10 +46,10 @@ BlogRouter.get("/get", async (req, res) => {
 
 
 BlogRouter.put("/edit", async (req, res) => {
-  const { id, title, category,description, imageId } = req.body; 
+  const { id, title, category,text, imageId } = req.body; 
 
-  if (!id || !title || !category ||! description|| !imageId) {
-    return res.status(400).json({ message: "ID, title, category,description, and imageId are required" });
+  if (!id || !title || !category ||! text|| !imageId) {
+    return res.status(400).json({ message: "ID, title, category,text, and imageId are required" });
   }
 
   try {
@@ -59,7 +61,7 @@ BlogRouter.put("/edit", async (req, res) => {
 
     existingBlog.title = title;
     existingBlog.category = category;
-    existingBlog.description = description;
+    existingBlog.text = text;
 
     existingBlog.image = imageId;
 
