@@ -1,33 +1,33 @@
 import mongoose from "mongoose";
 
-const BlogSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        require: true
+const DemoSchema = new mongoose.Schema({
+    title:{
+        type:String,
+        require:true
     },
-   
-    category: {
-        type: String,
-        require: true
+  
+    category:{
+        type:String,
+        require:true
     },
-
-    image: {
+ 
+    image:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Image',
         required: true
 
     },
-    text: {
-        type: String,
-        require: false
+    text:{
+        type:String,
+        require:false
     },
-    fullImage: {
+    fullImage:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Image',
         required: false
 
     },
-    bigImage: {
+    bigImage:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Image',
         required: false
@@ -36,9 +36,9 @@ const BlogSchema = new mongoose.Schema({
     updatedAt: {
         type: Date,
         default: Date.now
-    }
+      }
 })
 
-const Blog = mongoose.model("Blog", BlogSchema)
+const Demo = mongoose.model("Demo",DemoSchema)
 
-export default Blog;
+export default Demo;

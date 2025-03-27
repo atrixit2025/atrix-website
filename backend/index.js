@@ -14,6 +14,7 @@ import PortfolioCategoryRouter from './Routes/Portfolio/PortfolioCategory.js';
 import PortfolioRouter from './Routes/Portfolio/Portfolio.js';
 import LogoMarqueeRouter from './Routes/Brand/Brand.js';
 import BrandRouter from './Routes/Brand/Brand.js';
+import DemoRouter from './Routes/Demo/Demo.js';
 
 const __filename = fileURLToPath(import.meta.url); 
 const __dirname = path.dirname(__filename);
@@ -50,6 +51,9 @@ app.use("/PortfolioCategory", PortfolioCategoryRouter);
 app.use("/Portfolio",PortfolioRouter)
 app.use("/Brand",BrandRouter)
 
+
+
+app.use("/demo",DemoRouter)
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

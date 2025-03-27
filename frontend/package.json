@@ -17,6 +17,7 @@
     "axios": "^1.8.2",
     "bootstrap": "^5.3.3",
     "framer-motion": "^12.4.2",
+    "jodit-react": "^5.2.18",
     "lucide-react": "^0.483.0",
     "modal-video": "^2.4.8",
     "react": "^18.3.1",
