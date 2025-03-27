@@ -14,7 +14,7 @@ const Socialcons = () => {
                     { icon: <FaInstagram />, id: "insta", link: "https://www.instagram.com/atrixit.solutions/" },
                 ].map((item) => (
                     <li key={item.id} className="relative w-10 h-10 p-1 rounded-full cursor-pointer flex justify-center items-center bg-black text-white">
-                        <Link to={item.link} className="absolute inset-0 rounded-full  border-transparent bg-gradient-to-r from-blue-400 to-green-400 p-[1px]">
+                        <Link to={item.link} target="_blank" className="absolute inset-0 rounded-full  border-transparent bg-gradient-to-r from-blue-400 to-green-400 p-[1px]">
                             <div className="w-full h-full flex justify-center items-center bg-black hover:bg-gradient-to-r from-blue-400 to-green-400 rounded-full">
                                 {item.icon}
                             </div>

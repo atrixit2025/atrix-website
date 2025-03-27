@@ -18,6 +18,10 @@ const LetterMarquee = React.lazy(() => import('../Components/marqueelogo/letterM
 import video_circle from '../assets/video_circle.svg'
 import { MdOutlineSlowMotionVideo } from "react-icons/md";
 import { CiPlay1 } from "react-icons/ci";
+import ModalVideo from 'react-modal-video';
+import 'react-modal-video/css/modal-video.css';
+import about_video from '../assets/About_video.mp4'
+import './modal-video-custom.css'; // Replace the default import
 
 const Home = () => {
   const ourServicesRef = useRef(null);
@@ -110,6 +114,27 @@ const Home = () => {
   ];
 
 
+  // const [isOpen, setIsOpen] = useState(false);
+
+  // popup video js 
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isOpen]);
+
+
+
+
+
   return (
     <div >
 
@@ -199,10 +224,34 @@ const Home = () => {
                 <div className="video-circle">
                   <img src={video_circle} alt="" className='w-full h-full object-cover' />
                 </div>
-                <div className='video-icon text-6xl text-white ml-[5px]'>
+
+                <button className="js-modal-btn hover:text-(--blue)    transition-all  video-icon text-6xl text-white ml-[5px] cursor-pointer" onClick={() => setIsOpen(true)}>
                   <CiPlay1 />
-                </div>
+                </button>
+                <ModalVideo
+                  channel="custom"
+                  isOpen={isOpen}
+                  url={about_video}
+                  onClose={() => setIsOpen(false)}
+                  allowFullScreen={true}
+                  animationSpeed={300}
+                  modalStyle={{
+                    content: {
+                      width: '90%',
+                      maxWidth: '1200px',
+                      margin: '0 auto',
+                      padding: 0,
+                      border: 'none',
+                      background: 'transparent'
+                    },
+                    overlay: {
+                      backgroundColor: 'rgba(0, 0, 0, 0.8)!important',
+                      zIndex: 1000
+                    }
+                  }}
+                />
               </div>
+
               {/* <video
                       src={About_Video}
                       autoPlay 
@@ -213,6 +262,8 @@ const Home = () => {
                      className=" w-auto  object-cover relative max-w-[100%]"
                     /> */}
             </div>
+
+
             <div className="text-(--white) lg:-ml-16  relative w-full lg:max-w-[40%] px-5 ">
               <p className="text-xl sm:text-md font-semibold text-(--gray) mb-2">Who We Are</p>
               <h5 className="lg:text-5xl text-2xl font-bold mb-5">Trusted Experts in Taking Your Business Higher</h5>
