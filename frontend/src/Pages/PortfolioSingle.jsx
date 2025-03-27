@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import feature_img from '../assets/portfolio/project.avif';
 import large_img from '../assets/portfolio/project1.jpg';
@@ -115,6 +115,13 @@ const portfolioData = [
 
 
 const PortfolioSingle = () => {
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
+
+
     const renderContent = (content) => {
         return content.map((item, index) => {
             switch (item.type) {

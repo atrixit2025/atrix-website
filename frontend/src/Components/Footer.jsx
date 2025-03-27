@@ -59,13 +59,13 @@ const Footer = () => {
                         <Link className="w-8 h-8 border border-(--black)  bg-(--black) hover:bg-gradient-to-r from-(--blue) to-(--green) flex justify-center items-center rounded-full cursor-pointer ">
                             <FaFacebookF />
                         </Link>
-                        <Link to="https://x.com/AtrixIT_S" className="w-8 h-8 border border-(--black)  bg-(--black) hover:bg-gradient-to-r from-(--blue) to-(--green) flex justify-center items-center rounded-full cursor-pointer ">
+                        <Link to="https://x.com/AtrixIT_S" target="_blank" className="w-8 h-8 border border-(--black)  bg-(--black) hover:bg-gradient-to-r from-(--blue) to-(--green) flex justify-center items-center rounded-full cursor-pointer ">
                             <FaXTwitter />
                         </Link>
-                        <Link to="https://www.linkedin.com/company/atrixitsolutions/" className="w-8 h-8 border border-(--black)  bg-(--black) hover:bg-gradient-to-r from-(--blue) to-(--green) flex justify-center items-center rounded-full cursor-pointer">
+                        <Link to="https://www.linkedin.com/company/atrixitsolutions/" target="_blank" className="w-8 h-8 border border-(--black)  bg-(--black) hover:bg-gradient-to-r from-(--blue) to-(--green) flex justify-center items-center rounded-full cursor-pointer">
                             <FaLinkedinIn />
                         </Link>
-                        <Link to="https://www.instagram.com/atrixit.solutions/" className="w-8 h-8 border border-(--black)  bg-(--black) hover:bg-gradient-to-r from-(--blue) to-(--green) flex justify-center items-center rounded-full cursor-pointer">
+                        <Link to="https://www.instagram.com/atrixit.solutions/" target="_blank" className="w-8 h-8 border border-(--black)  bg-(--black) hover:bg-gradient-to-r from-(--blue) to-(--green) flex justify-center items-center rounded-full cursor-pointer">
                             <FaInstagram />
                         </Link>
                     </ul>
