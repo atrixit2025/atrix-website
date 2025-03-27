@@ -33,10 +33,11 @@ import TermsAndConditions from './Pages/TermsAndConditions';
 import Services from './Dashboard/pages/ServicesPage/Services';
 import BlogUS from './Pages/BlogUS';
 import BlogContant from './Components/BlogContant';
-import Portfolio_page from './Pages/Portfolio';
+
 import AddNewServices from './Dashboard/pages/ServicesPage/AddNewServices';
 import CategoryServices from './Dashboard/pages/ServicesPage/CategoryServices';
 import Demo from './Dashboard/pages/BlogPage/demo';
+import Portfolio_page from './Pages/Portfolio';
 import PortfolioSingle from './Pages/PortfolioSingle';
 
 export default function App() {
@@ -57,8 +58,10 @@ export default function App() {
           <Route path='/BlogUs' element={< BlogUS />} />
           <Route path='/blog/:id' element={< BlogContant />} />
           {/* <Route path='/portfolio' element={< Portfolio />} /> */}
-          <Route path='/portfolio-page' element={< Portfolio_page />} />
-          <Route path='/portfolio-single' element={< PortfolioSingle />} />
+          {/* <Route path='/portfolio-page' element={< Portfolio_page />} />
+          <Route path='/portfolio-single' element={< PortfolioSingle />} /> */}
+          <Route path="/portfolio" element={< Portfolio_page />} />
+          <Route path="/portfolio/:project_id" element={< PortfolioSingle />} />
         </Route >
       </Routes >
       <Routes>

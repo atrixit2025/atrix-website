@@ -10,7 +10,7 @@ const navigation = [
   { name: 'About Us', path: '/about', current: false },
   { name: 'Our Services', path: '#', current: false },
   { name: 'Blog', path: '/BlogUs', current: false },
-  { name: 'Portfolio', path: '/portfolio-page', current: false },
+  { name: 'Portfolio', path: '/portfolio', current: false },
   { name: 'Contact Us', path: '/contact-us', current: false },
 
 

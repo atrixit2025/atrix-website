@@ -1,20 +1,9 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import feature_img from '../assets/portfolio/project.avif';
-import large_img from '../assets/portfolio/project1.jpg';
-import full_image from '../assets/portfolio/project1.jpg';
-import half_image_1 from '../assets/portfolio/project1.jpg';
-import half_image_2 from '../assets/portfolio/project1.jpg';
-import './PortfolioSingle.css';
-import { useParams } from "react-router-dom";
-
-import project1 from "../assets/PortfolioImage/imgpsh_fullsize_anim (1).png";
-import project2 from "../assets/PortfolioImage/imgpsh_fullsize_anim (2).png";
-import project3 from "../assets/PortfolioImage/imgpsh_fullsize_anim (3).png";
-import project4 from "../assets/PortfolioImage/imgpsh_fullsize_anim.png";
 
 
-const portfolioAllData = [
+import React from "react"
+
+
+export const PortfolioData = [
     {
         id: 1,
         project_id: "project1",
@@ -248,7 +237,6 @@ const portfolioAllData = [
         project_id: "project3",
         image: project3,
         title: "Frontend Frameworks",
-        Category: "Web Development",
         desc: "Lorem ipsum dolor sit amet.",
         tags: ["Branding", "logo Design", "web Design"],
         portData: [
@@ -360,7 +348,6 @@ const portfolioAllData = [
     {
         id: 4,
         project_id: "project4",
-        Category: "Branding",
         image: project4,
         title: "Frontend Frameworks",
         desc: "Lorem ipsum dolor sit amet.",
@@ -474,7 +461,6 @@ const portfolioAllData = [
     {
         id: 5,
         project_id: "project5",
-        Category: "Branding",
         image: project1,
         title: "Frontend Frameworks",
         desc: "Lorem ipsum dolor sit amet.",
@@ -588,7 +574,6 @@ const portfolioAllData = [
     {
         id: 6,
         project_id: "project6",
-        Category: "Branding",
         image: project2,
         title: "Frontend Frameworks",
         desc: "Lorem ipsum dolor sit amet.",
@@ -702,7 +687,6 @@ const portfolioAllData = [
     {
         id: 7,
         project_id: "project7",
-        Category: "Branding",
         image: project3,
         title: "Frontend Frameworks",
         desc: "Lorem ipsum dolor sit amet.",
@@ -816,7 +800,6 @@ const portfolioAllData = [
     {
         id: 8,
         project_id: "project8",
-        Category: "3D Animation",
         image: project4,
         title: "Frontend Frameworks",
         desc: "Lorem ipsum dolor sit amet.",
@@ -930,7 +913,6 @@ const portfolioAllData = [
     {
         id: 9,
         project_id: "project9",
-        Category: "3D Animation",
         image: project1,
         title: "Frontend Frameworks",
         desc: "Lorem ipsum dolor sit amet.",
@@ -1044,7 +1026,6 @@ const portfolioAllData = [
     {
         id: 10,
         project_id: "project10",
-        Category: "3D Animation",
         image: project2,
         title: "Frontend Frameworks",
         desc: "Lorem ipsum dolor sit amet.",
@@ -1158,7 +1139,6 @@ const portfolioAllData = [
     {
         id: 11,
         project_id: "project11",
-        Category: "3D Animation",
         image: project1,
         title: "Frontend Frameworks",
         desc: "Lorem ipsum dolor sit amet.",
@@ -1272,7 +1252,6 @@ const portfolioAllData = [
     {
         id: 12,
         project_id: "project12",
-        Category: "Production",
         image: project3,
         title: "Frontend Frameworks",
         desc: "Lorem ipsum dolor sit amet.",
@@ -1386,7 +1365,6 @@ const portfolioAllData = [
     {
         id: 13,
         project_id: "project13",
-        Category: "Production",
         image: project4,
         title: "Frontend Frameworks",
         desc: "Lorem ipsum dolor sit amet.",
@@ -1500,7 +1478,6 @@ const portfolioAllData = [
     {
         id: 14,
         project_id: "project14",
-        Category: "Production",
         image: project3,
         title: "Frontend Frameworks",
         desc: "Lorem ipsum dolor sit amet.",
@@ -1614,131 +1591,3 @@ const portfolioAllData = [
 
 
 ]
-
-
-
-
-
-const PortfolioSingle = () => {
-
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
-
-
-    const { project_id } = useParams();
-    console.log("parm id is ", project_id)
-    // const project = portfolioAllData.find((p) => p.id === parseInt(id));
-
-    const portfolioItem = portfolioAllData.find(item => item.project_id === project_id).portData;
-    console.log(portfolioItem)
-
-
-    const renderContent = (content) => {
-        return content.map((item, index) => {
-            switch (item.type) {
-                case 'paragraph':
-                    return <p key={index} className="leading-relaxed mb-4">{item.text}</p>;
-                case 'list':
-                    return (
-                        <ul key={index} className="list-disc pl-6 mb-4 space-y-2">
-                            {item.items.map((listItem, i) => (
-                                <li key={i}>{listItem}</li>
-                            ))}
-                        </ul>
-                    );
-                default:
-                    return null;
-            }
-        });
-    };
-
-
-
-    return (
-        <div className="single-Port">
-            {portfolioItem.map((section) => {
-                switch (section.type) {
-                    case 'hero':
-                        return (
-                            <div key={section.id} className="mx-auto px-5 sm:px-6 lg:px-8 pt-40">
-                                <div className="feature-image_wrapper">
-                                    <img
-                                        src={section.image}
-                                        alt={section.alt}
-                                        className="w-full h-full object-cover rounded-lg"
-                                        loading="lazy"
-                                    />
-                                </div>
-                            </div>
-                        );
-
-                    case 'overview':
-                        return (
-                            <div key={section.id} className="container mx-auto py-16">
-                                <div className="port-heading-wrapper text-center">
-                                    <Link
-                                        to={section.viewLink}
-                                        className="uppercase text-blue-600 font-bold hover:text-blue-800 transition-colors"
-                                    >
-                                        View the Project
-                                    </Link>
-                                    <h1 className="main-heading text-3xl md:text-4xl font-bold mt-4">
-                                        {section.title}
-                                    </h1>
-                                    <div className="flex gap-3 justify-center mt-6 flex-wrap">
-                                        {section.tags.map((tag, index) => (
-                                            <span key={index} className="project-tag px-4 py-2 bg-gray-100 rounded-full">
-                                                {tag}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                        );
-
-                    case 'description':
-                        return (
-                            <div key={section.id} className="project-desc max-w-[800px] mx-auto  px-4">
-                                <h2 className="text-2xl font-bold mb-6">{section.title}</h2>
-                                <div>{renderContent(section.content)}</div>
-                            </div>
-                        );
-
-                    case 'image':
-                        return (
-                            <div key={section.id} className={section.className}>
-                                <img
-                                    src={section.image}
-                                    alt={section.alt}
-                                    className="w-full h-auto object-cover rounded-lg"
-                                    loading="lazy"
-                                />
-                            </div>
-                        );
-
-                    case 'half-images':
-                        return (
-                            <div key={section.id} className="grid grid-cols-1 md:grid-cols-2 max-w-[1100px] mx-auto my-24 gap-6 px-4">
-                                {section.images.map((image, index) => (
-                                    <div key={index} className="image-wrapper aspect-[4/3] overflow-hidden rounded-lg">
-                                        <img
-                                            src={image.src}
-                                            alt={image.alt}
-                                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                                            loading="lazy"
-                                        />
-                                    </div>
-                                ))}
-                            </div>
-                        );
-
-                    default:
-                        return null;
-                }
-            })}
-        </div>
-    );
-};
-
-export default PortfolioSingle;   

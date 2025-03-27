@@ -10,39 +10,44 @@ const portfoData = [
     {
         Category: "Web Development",
         cardData: [
-            { title: "Frontend Frameworks", desc: "Lorem ipsum dolor sit amet.", image: project1, tags: ["Branding", "logo Design", " web Design"] },
-            { title: "Backend", desc: "Lorem ipsum dolor sit amet.", image: project3, tags: ["Branding", "logo Design", " web Design"] },
-            { title: "React", desc: "Lorem ipsum dolor sit amet.", image: project4, tags: ["Branding", "logo Design", " web Design"] },
+            { id: 1, project_id: "project1", title: "Frontend Frameworks", desc: "Lorem ipsum dolor sit amet.", image: project1, tags: ["Branding", "logo Design", "web Design"] },
+            { id: 2, project_id: "project2", title: "Backend", desc: "Lorem ipsum dolor sit amet.", image: project3, tags: ["Branding", "logo Design", "web Design"] },
+            { id: 3, project_id: "project3", title: "React", desc: "Lorem ipsum dolor sit amet.", image: project4, tags: ["Branding", "logo Design", "web Design"] },
         ]
     },
     {
         Category: "Branding",
         cardData: [
-            { title: "Photoshop", desc: "Lorem ipsum dolor sit amet.", image: project2, tags: ["Branding", "logo Design", " web Design"] },
-            { title: "Illustrator", desc: "Lorem ipsum dolor sit amet.", image: project1, tags: ["Branding", "logo Design", " web Design"] },
-            { title: "Figma", desc: "Lorem ipsum dolor sit amet.", image: project3, tags: ["Branding", "logo Design", " web Design"] },
-            { title: "Canva", desc: "Lorem ipsum dolor sit amet.", image: project4, tags: ["Branding", "logo Design", " web Design"] },
+            { id: 4, project_id: "project4", title: "Photoshop", desc: "Lorem ipsum dolor sit amet.", image: project2, tags: ["Branding", "logo Design", "web Design"] },
+            { id: 5, project_id: "project5", title: "Illustrator", desc: "Lorem ipsum dolor sit amet.", image: project1, tags: ["Branding", "logo Design", "web Design"] },
+            { id: 6, project_id: "project6", title: "Figma", desc: "Lorem ipsum dolor sit amet.", image: project3, tags: ["Branding", "logo Design", "web Design"] },
+            { id: 7, project_id: "project7", title: "Canva", desc: "Lorem ipsum dolor sit amet.", image: project4, tags: ["Branding", "logo Design", "web Design"] },
         ]
     },
     {
         Category: "3D Animation",
         cardData: [
-            { title: "Maya", desc: "Lorem ipsum dolor sit amet.", image: project4, tags: ["Branding", "logo Design", " web Design"] },
-            { title: "Illustrator", desc: "Lorem ipsum dolor sit amet.", image: project3, tags: ["Branding", "logo Design", " web Design"] },
-            { title: "Adobe", desc: "Lorem ipsum dolor sit amet.", image: project2, tags: ["Branding", "logo Design", " web Design"] },
-            { title: "Canva", desc: "Lorem ipsum dolor sit amet.", image: project1, tags: ["Branding", "logo Design", " web Design"] },
+            { id: 8, project_id: "project8", title: "Maya", desc: "Lorem ipsum dolor sit amet.", image: project4, tags: ["Branding", "logo Design", "web Design"] },
+            { id: 9, project_id: "project9", title: "Illustrator", desc: "Lorem ipsum dolor sit amet.", image: project3, tags: ["Branding", "logo Design", "web Design"] },
+            { id: 10, project_id: "project10", title: "Adobe", desc: "Lorem ipsum dolor sit amet.", image: project2, tags: ["Branding", "logo Design", "web Design"] },
+            { id: 11, project_id: "project11", title: "Canva", desc: "Lorem ipsum dolor sit amet.", image: project1, tags: ["Branding", "logo Design", "web Design"] },
         ]
     },
     {
         Category: "Production",
         cardData: [
-            { title: "Maya", desc: "Lorem ipsum dolor sit amet.", image: project4, tags: ["Branding", "logo Design", " web Design"] },
-            { title: "Illustrator", desc: "Lorem ipsum dolor sit amet.", image: project3, tags: ["Branding", "logo Design", " web Design"] },
-            { title: "Adobe", desc: "Lorem ipsum dolor sit amet.", image: project2, tags: ["Branding", "logo Design", " web Design"] },
-            { title: "Canva", desc: "Lorem ipsum dolor sit amet.", image: project1, tags: ["Branding", "logo Design", " web Design"] },
+            { id: 12, project_id: "project12", title: "Maya", desc: "Lorem ipsum dolor sit amet.", image: project4, tags: ["Branding", "logo Design", "web Design"] },
+            { id: 13, project_id: "project13", title: "Illustrator", desc: "Lorem ipsum dolor sit amet.", image: project3, tags: ["Branding", "logo Design", "web Design"] },
+            { id: 14, project_id: "project14", title: "Adobe", desc: "Lorem ipsum dolor sit amet.", image: project2, tags: ["Branding", "logo Design", "web Design"] },
+            { id: 15, project_id: "project15", title: "Canva", desc: "Lorem ipsum dolor sit amet.", image: project1, tags: ["Branding", "logo Design", "web Design"] },
         ]
     },
 ];
+
+
+
+
+
 
 const PortFolioCards = () => {
     const [activeCat, setActiveCat] = useState("All");
@@ -51,6 +56,9 @@ const PortFolioCards = () => {
     const filteredData = activeCat === "All"
         ? portfoData.flatMap(item => item.cardData) // Show all if "All" is selected
         : portfoData.find(item => item.Category === activeCat)?.cardData || [];
+
+
+    // console.log(filteredData)
 
     return (
         <div className='py-32'>
@@ -77,7 +85,7 @@ const PortFolioCards = () => {
                 {/* Portfolio Cards */}
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-y-14 gap-x-14 my-10'>
                     {filteredData.map((item, index) => (
-                        <Link to="#" key={index} className='group'  >
+                        <Link to={`/portfolio/${item.project_id}`} key={item.id} className='group'  >
                             <div className="portfo-card-img w-full aspect-[16/9] border border-white/35 rounded-xl overflow-hidden">
                                 <img src={item.image} alt={item.title} className='w-full h-full object-cover' />
                             </div>
