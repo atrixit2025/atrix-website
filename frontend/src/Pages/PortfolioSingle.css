@@ -4,6 +4,11 @@
   border-radius: 24px;
   overflow: hidden;
 }
+.single-Port .feature-image_wrapper img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
 
 .single-Port h1,
 .single-Port h2,
