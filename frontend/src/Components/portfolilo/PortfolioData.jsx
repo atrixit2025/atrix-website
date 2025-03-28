@@ -3,7 +3,7 @@
 import React from "react"
 
 
-export const PortfolioData = [
+export const Portfoliodata = [
     {
         id: 1,
         project_id: "project1",
