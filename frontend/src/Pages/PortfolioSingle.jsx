@@ -25,7 +25,6 @@ const PortfolioSingle = () => {
                         <img
                             src={filteredProject.featured_image}
                             alt="feature image"
-                            className="w-full h-full object-cover rounded-lg"
                             loading="lazy"
                         />
                     </div>
@@ -37,7 +36,7 @@ const PortfolioSingle = () => {
                     <div className="port-heading-wrapper text-center">
                         <Link
                             to={filteredProject.project_link}
-                            className="uppercase text-blue-600 font-bold hover:text-blue-800 transition-colors"
+                            className="uppercase text-(--blue) font-bold hover:text-[#0283b1] transition-colors"
                         >
                             View the Project
                         </Link>
@@ -82,7 +81,7 @@ const PortfolioSingle = () => {
                                 <img
                                     src={item.full_image}
                                     alt="full screen image"
-                                    className="w-full h-auto object-cover rounded-lg port-full-img"
+                                    className="w-full h-auto object-cover  port-full-img"
                                     loading="lazy"
 
                                 />
@@ -113,9 +112,7 @@ const PortfolioSingle = () => {
                                         loading="lazy"
                                     />
                                 </div>
-
                             </div>
-
 
                         </>
                     ))
