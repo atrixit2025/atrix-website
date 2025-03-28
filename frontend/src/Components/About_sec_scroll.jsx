@@ -6,7 +6,7 @@ import img4 from "../assets/AboutUs/project-sec/about_img4-jpg.webp";
 
 const About_sec_scroll = () => {
   return (
-    <div className="container mx-auto w-[90%] pb-24 mt-28   ">
+    <div className="container mx-auto  pb-24 mt-8   ">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 -mx-2  ">
         {/* Image Grid (Left Side) */}
         <div className="md:col-span-5 relative  ">

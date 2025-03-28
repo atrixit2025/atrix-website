@@ -117,7 +117,7 @@ const About = () => {
 
 
       {/* About-heading and img-tex section */}
-      <div className="Page-heading text-center mt-8 px-4">
+      <div className="Page-heading text-center mt-22 px-4">
         <h1 className="font-bold text-4xl md:text-6xl lg:text-9xl">About Us</h1>
         <p className="mx-auto max-w-3xl text-sm md:text-base lg:text-lg text-white/55 mt-4">
           We develop creative solutions that generate actual results. With tailored technology solutions, our team of experts is committed to helping your company grow and achieve long-term success.
@@ -129,8 +129,7 @@ const About = () => {
       {/* text-marquee-section */}
       <div className="relative marquee-sec text-6xl font-bold mt-22 ">   <div>
         <Marquee speed={30} className="overflow-hidden">
-          VISIONARY . INNOVATIVE . EFFICIENT . GL PROFESSIONAL . ACCESSIBLE .
-          USER-CENTR EMPOWERING . TRUSTWORTHY . SCALABLE
+        VISIONARY . INNOVATIVE . EFFICIENT . GLOBAL . PROFESSIONAL . ACCESSIBLE . USER-CENTRIC . EMPOWERING . TRUSTWORTHY . SCALABLE.
         </Marquee>
       </div>
 
@@ -140,15 +139,13 @@ const About = () => {
             direction="right"
             className="overflow-hidden mt-1"
           >
-            VISIONARY . INNOVATIVE . EFFICIENT . GL ROFESSIONAL . ACCESSIBLE .
-            USER-CENTR EMPOWERING . TRUSTWORTHY . SCALABLE
+           VISIONARY . INNOVATIVE . EFFICIENT . GLOBAL . PROFESSIONAL . ACCESSIBLE . USER-CENTRIC . EMPOWERING . TRUSTWORTHY . SCALABLE.
           </Marquee>
         </div>
 
         <div>
           <Marquee speed={30} className="overflow-hidden mt-1">
-            ACCESSIBLE . USER-CENTR EMPOWERING . TRUSTWORTHY . SCALABLE .
-            VISIONARY . INNOVATIVE . EFFICIENT . GL ROFESSIONAL .
+          VISIONARY . INNOVATIVE . EFFICIENT . GLOBAL . PROFESSIONAL . ACCESSIBLE . USER-CENTRIC . EMPOWERING . TRUSTWORTHY . SCALABLE.
           </Marquee>
         </div>
       </div>
@@ -183,7 +180,7 @@ const About = () => {
 
       {/* Environment-section */}
       <div className="Environment-sec">
-        <div className="container mx-auto w-[90%] mt-28 ">
+        <div className="container mx-auto  mt-28 ">
           <div className="row text-center pb-10 ">
             <div className="col">
               <p className="text-xl pb-4"> Atrix Environment</p>

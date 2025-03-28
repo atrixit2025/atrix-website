@@ -45,40 +45,54 @@ const TestimonialsCards = () => {
     autoplaySpeed: 10000,
     centerMode: true,
     centerPadding: "0px",
-    arrows: true,  
+    arrows: true,
     responsive: [
       {
         breakpoint: 1024,
-        settings: { slidesToShow: 2, slidesToScroll: 1, dots: true, arrows: true }
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          dots: true,
+          arrows: true,
+        },
       },
       {
         breakpoint: 600,
-        settings: { slidesToShow: 1, slidesToScroll: 1, dots: true, arrows: true }
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          dots: true,
+          arrows: true,
+        },
       },
       {
         breakpoint: 480,
-        settings: { slidesToShow: 1, slidesToScroll: 1, dots: true, arrows: true }
-      }
-    ]
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          dots: true,
+          arrows: true,
+        },
+      },
+    ],
   };
-  
 
   return (
     <div className="testimonial-container bg-darkblack text-whitelight relative overflow-hidden">
-      <div className="container mx-auto w-[90%] ">
-        <div className="py-14 md:py-28">
+      <div className="container mx-auto pt-10 ">
+        <div className="py-10 md:py-22">
           <div className="testimonial-heading text-center">
             <p className="text-xl">Our Testimonials</p>
             <h1 className="text-6xl font-bold pt-2">What Our Clients Say</h1>
           </div>
 
-          <div className="testimonial-slider mt-22">
+          <div className="testimonial-slider pt-5">
             <style>
               {`
               .testimonial-slider .slick-arrow { margin-top: 200px; }
               .testimonial-slider .slick-list { overflow: visible; pointer-events: none; }
               .testimonial-slider .slick-slide { opacity: 0.2; transform: translateY(-50px); transition: transform 0.5s ease-in-out; }
-              .testimonial-slider .slick-active { transform: translateY(-150px); opacity: 1; pointer-events: auto; }
+              .testimonial-slider .slick-active { transform: translateY(-110px); opacity: 1; pointer-events: auto; }
               .testimonial-slider .slick-center { transform: translateY(-50px); transition: transform 0.6s ease-in-out; }
               `}
             </style>
@@ -103,18 +117,13 @@ const TestimonialsCards = () => {
                     <p className="testimonial-text text-white/50 mt-3">
                       {item.text}
                     </p>
-                 
                   </div>
-                 
                 </div>
-                 
               ))}
             </Slider>
-           
           </div>
           <hr className="  -z-10 relative mt-9" />
         </div>
-      
       </div>
     </div>
   );

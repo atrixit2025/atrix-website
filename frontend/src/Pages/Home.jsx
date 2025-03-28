@@ -143,7 +143,7 @@ const Home = () => {
           <div className="pointer-events-none absolute inset-0 h-full">
             <ParticleEffect />
           </div>
-          <div className='container mx-auto  w-[90%] '>
+          <div className='container mx-auto   '>
             <div className="flex justify-center items-center md:min-h-screen md:py-46 py-40 ">
               <div className="text-center relative">
                 <h1 className="text-(--whitelight) mt-5 text-6xl md:text-8xl lg:text-9xl">
@@ -212,7 +212,7 @@ const Home = () => {
 
 
       <LogoSlider className="max-w-full" />
-      <div className=" py-10  container mx-auto w-[90%] ">
+      <div className=" py-10  container mx-auto  ">
 
         <div className=" ">
           <h1 className="font-bold flex justify-center lg:right-60 top-14 relative text-8xl md:text-9xl text-transparent z-10" style={{ WebkitTextStroke: "1px white" }}>About us</h1>
