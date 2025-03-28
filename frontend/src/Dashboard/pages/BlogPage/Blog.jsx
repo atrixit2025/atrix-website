@@ -307,25 +307,42 @@ import { BlogCategoryContext } from "../../ContextApi/BlogCategoryContextApi";
 export default function Blog() {
   const [tableData, setTableData] = useState([]);
   const navigate = useNavigate();
-  const { fetchCategoryCounts} = useContext(BlogCategoryContext);
+  const { fetchCategoryCounts } = useContext(BlogCategoryContext);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:5300/Blog/get");
-        const Blogs = response.data.Blog.map((tech) => ({
-          id: tech._id,
-          name: tech.title,
-          Category: tech.category,
-          description: tech.description,
-          Date: new Date(tech.updatedAt).toLocaleDateString(),
-          team: {
-            images: [tech.image?.image || "/images/user/user-22.jpg"],
-          },
-          imageId: tech.image?._id,
-        }));
         
-        setTableData(Blogs);
+        // Fetch featured images for all blogs in parallel
+        const blogsWithImages = await Promise.all(
+          response.data.Blog.map(async (tech) => {
+            let featuredImageUrl = "/images/user/user-22.jpg"; // default fallback
+            
+            if (tech.FeaturedImage) {
+              try {
+                const imgResponse = await axios.get(
+                  `http://localhost:5300/Image/get/${tech.FeaturedImage}`
+                );
+                featuredImageUrl = imgResponse.data.Image?.image || featuredImageUrl;
+              } catch (error) {
+                console.error("Error fetching featured image:", error);
+              }
+            }
+            
+            return {
+              id: tech._id,
+              name: tech.title,
+              Category: tech.category,
+              description: tech.text, // Changed from tech.description to tech.text
+              Date: new Date(tech.updatedAt).toLocaleDateString(),
+              featuredImage: featuredImageUrl,
+              FeaturedImageId: tech.FeaturedImage,
+            };
+          })
+        );
+        
+        setTableData(blogsWithImages);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -339,12 +356,11 @@ export default function Blog() {
         data: { title, category },
       });
       setTableData(prev => prev.filter(item => item.id !== id));
-      await fetchCategoryCounts()
-      return true
+      await fetchCategoryCounts();
+      return true;
     } catch (error) {
       console.error("Error deleting Blog:", error);
-        throw error;
-    //   alert("Error deleting Blog. Please try again.");
+      throw error;
     }
   };
 
@@ -358,37 +374,38 @@ export default function Blog() {
     try {
       await axios.delete("http://localhost:5300/Blog/delete", { data: deleteData });
       setTableData(prev => prev.filter(item => !selectedIds.includes(item.id)));
-      await fetchCategoryCounts()
-
-      return true
+      await fetchCategoryCounts();
+      return true;
     } catch (error) {
       console.error("Error in bulk delete:", error);
-        throw error;
-    //   alert(error.response?.data?.message || "Error deleting items. Please try again.");
+      throw error;
     }
   };
 
   const handleEdit = (item) => {
-    navigate("/Dashboard/AddNewBlog", { state: { blog: item } });
+    navigate("/Dashboard/AddNewBlog", { 
+      state: { 
+        blog: {
+          ...item,
+          imageId: item.FeaturedImageId // Make sure this matches what AddNewBlog expects
+        } 
+      } 
+    });
   };
 
   const columns = [
     { key: "name", title: "Title" },
     { key: "Category", title: "Category" },
     { 
-      key: "team", 
-      title: "Images",
+      key: "featuredImage", 
+      title: "Featured Image",
       render: (item) => (
-        <div className="flex -space-x-2">
-          {item.team.images.map((img, i) => (
-            <div key={i} className="w-12 h-12 overflow-hidden">
-              <img
-                src={`http://localhost:5300${img}`}
-                alt={`Image ${i}`}
-                className="w-full size-11"
-              />
-            </div>
-          ))}
+        <div className="w-16 h-16 overflow-hidden  rounded">
+          <img
+            src={`http://localhost:5300${item.featuredImage}`}
+            alt="Featured"
+            className="w-full h-full object-cover"
+          />
         </div>
       )
     },
@@ -409,6 +426,9 @@ export default function Blog() {
         onEdit={handleEdit}
         onBulkDelete={handleBulkDelete}
       />
+
+
+      <div></div>
     </>
   );
 }

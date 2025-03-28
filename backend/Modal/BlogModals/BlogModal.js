@@ -3,35 +3,28 @@ import mongoose from "mongoose";
 const BlogSchema = new mongoose.Schema({
     title: {
         type: String,
-        require: true
+        required: true
     },
-   
     category: {
         type: String,
-        require: true
-    },
-
-    image: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Image',
         required: true
-
     },
-    text: {
+    text:{
         type: String,
-        require: false
+        default: ""
     },
+    FeaturedImage: {
+        type: String,
+        required: true
+    },
+    image: {
+        type: String
+    }, 
     fullImage: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Image',
-        required: false
-
+        type: String
     },
     bigImage: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Image',
-        required: false
-
+        type: String
     },
     updatedAt: {
         type: Date,

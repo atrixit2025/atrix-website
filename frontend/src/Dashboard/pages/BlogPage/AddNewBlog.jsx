@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FileInputExample from "../../components/form/form-elements/FileInputExample";
 import Button from "../../components/ui/button/Button";
@@ -18,8 +18,14 @@ export default function AddNewBlog() {
   const location = useLocation();
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
-  const { fetchCategoryCounts} = useContext(BlogCategoryContext);
-
+  const { fetchCategoryCounts } = useContext(BlogCategoryContext);
+  const editor = useRef(null);
+  const [content, setContent] = useState('');
+  const [imageFields, setImageFields] = useState({
+    image: null,
+    fullImage: null,
+    bigImage: null
+  });
   // Single state object for form data
   const [formData, setFormData] = useState({
     title: "",
@@ -47,16 +53,20 @@ export default function AddNewBlog() {
   // Pre-fill the form if in edit mode
   useEffect(() => {
     if (blog) {
-      console.log("Blog data:", blog); // Debug the blog object
       setFormData({
         title: blog.name,
         text: blog.text || "",
-        selectedCategories: blog.Category ? blog.Category.split(", ") : [], // Split into an array
-        imageId: blog.imageId,
+        selectedCategories: blog.Category ? blog.Category.split(", ") : [],
+        imageId: blog.FeaturedImage
+      });
+
+      setImageFields({
+        image: blog.image || null,
+        fullImage: blog.fullImage || null,
+        bigImage: blog.bigImage || null
       });
     }
   }, [blog]);
-
   // Handle category selection
   const handleCategoryChange = (category) => {
     setFormData((prev) => ({
@@ -69,114 +79,146 @@ export default function AddNewBlog() {
 
   // Handle form submission
   const handleSubmit = async () => {
-    const { title, text, selectedCategories, imageId } = formData;
+    const { title, selectedCategories, imageId } = formData;
 
-    if (!title || selectedCategories.length === 0 || !imageId) {
-      alert("Title, category, and image are required!");
+    // Validate required fields
+    if (!title) {
+      alert("Title is required!");
+      return;
+    }
+    if (selectedCategories.length === 0) {
+      alert("At least one category must be selected!");
+      return;
+    }
+    if (!imageId) {
+      
+      alert("Featured image is required!");
       return;
     }
 
+    // Prepare data for submission - field names match backend
     const blogData = {
       title,
-      text,
-      category: selectedCategories.join(", "), // Join into a string
-      imageId,
+      text: content,
+      category: selectedCategories.join(", "),
+      FeaturedImageId: imageId,
+      image: imageFields.image,
+      fullImage: imageFields.fullImage,
+      bigImage: imageFields.bigImage
     };
 
+    //     console.log("Submitting blog data:", blogData);
+    // console.log("Final imageFields state:", imageFields);
+    // console.log("Final imageFields:", {
+    //   image: imageFields.image,
+    //   fullImage: imageFields.fullImage,
+    //   bigImage: imageFields.bigImage
+    // });
     try {
       if (blog) {
-        // Update existing blog
-        const payload = {
-          id: blog.id, // Ensure this is included
-          ...blogData,
-        };
-        // console.log("Payload:", payload); // Debug the payload
-        const response = await axios.put(`http://localhost:5300/Blog/edit`, payload);
-        // console.log("Update Response:", response.data);
+        await axios.put(`http://localhost:5300/Blog/edit`, {
+          id: blog.id,
+          ...blogData
+        });
       } else {
-        // Create new blog
-        const response = await axios.post("http://localhost:5300/Blog/add", blogData);
-        // console.log("Create Response:", response.data);
+        await axios.post("http://localhost:5300/Blog/add", blogData);
       }
-         await fetchCategoryCounts()
+
+      await fetchCategoryCounts();
       navigate("/Dashboard/Blog");
     } catch (error) {
       console.error("Error saving blog:", error);
-      if (error.response) {
-        console.error("Server Response:", error.response.data);
-      }
-      alert("Error saving blog. Please try again.");
+      alert(error.response?.data?.message || "Error saving blog. Please try again.");
     }
   };
 
 
-   const [selectFields, setSelectFields] = useState(() => {
-      return  [
-        {
-          id: 1,
-          value: "",
-          options: [
-            { value: "", label: "Select Option" },
-            { value: "text", label: "Text" },
-            { value: "image", label: "Image" },
-            { value: "full-image", label: "Full Image" },
-            { value: "big-image", label: "Big Image" }
-          ],
-          textValue: "",
-          imageFile: null
-        }
-      ];
-    });
-  
-  
-  
-  
-    const addSelectField = () => {
-      const newId = selectFields.length > 0 ? Math.max(...selectFields.map(f => f.id)) + 1 : 1;
-      setSelectFields([
-        ...selectFields,
-        {
-          id: newId,
-          value: "",
-          options: [
-            { value: "", label: "Select Option" },
-            { value: "text", label: "Text" },
-            { value: "image", label: "Image" },
-            { value: "full-image", label: "Full Image" },
-            { value: "big-image", label: "Big Image" }
-          ],
-          textValue: "",
-          imageFile: null
-        }
-      ]);
-    };
-  
-  
-    const handleSelectChange = (id, value) => {
-      // console.log(`Field ${id} changed to:`, value);
-      setSelectFields(selectFields.map(field =>
-        field.id === id ? { ...field, value } : field
-      ));
-    };
-  
-  
-    const removeSelectField = (id) => {
-      if (selectFields.length > 1) {
-        setSelectFields(selectFields.filter(field => field.id !== id));
+
+  const [selectFields, setSelectFields] = useState(() => {
+    return [
+      {
+        id: 1,
+        value: "",
+        options: [
+          { value: "", label: "Select Option" },
+          { value: "text", label: "Text" },
+          { value: "image", label: "Image" },
+          { value: "full-image", label: "Full Image" },
+          { value: "big-image", label: "Big Image" }
+        ],
+        textValue: "",
+        imageFile: null
       }
-    };
-  
-    const handleTextChange = (id, textValue) => {
-      setSelectFields(selectFields.map(field =>
-        field.id === id ? { ...field, textValue } : field
-      ));
-    };
-  
-    const handleImageChange = (id, imageFile) => {
-      setSelectFields(selectFields.map(field =>
-        field.id === id ? { ...field, imageFile } : field
-      ));
-    };
+    ];
+  });
+
+
+
+
+  const addSelectField = () => {
+    const newId = selectFields.length > 0 ? Math.max(...selectFields.map(f => f.id)) + 1 : 1;
+    setSelectFields([
+      ...selectFields,
+      {
+        id: newId,
+        value: "",
+        options: [
+          { value: "", label: "Select Option" },
+          { value: "text", label: "Text" },
+          { value: "image", label: "Image" },
+          { value: "full-image", label: "Full Image" },
+          { value: "big-image", label: "Big Image" }
+        ],
+        textValue: "",
+        imageFile: null
+      }
+    ]);
+  };
+
+
+  const handleSelectChange = (id, value) => {
+    // console.log(`Field ${id} changed to:`, value);
+    setSelectFields(selectFields.map(field =>
+      field.id === id ? { ...field, value } : field
+    ));
+  };
+
+
+  const removeSelectField = (id) => {
+    if (selectFields.length > 1) {
+      setSelectFields(selectFields.filter(field => field.id !== id));
+    }
+  };
+
+
+  const handleImageChange = (id, imageId, fieldType) => {
+    const stateFieldName = fieldType === "full-image" ? "fullImage" :
+      fieldType === "big-image" ? "bigImage" :
+        fieldType;
+
+    // console.log(`Image changed - Type: ${stateFieldName}, ID: ${imageId}`);
+
+    setSelectFields(selectFields.map(field => {
+      if (field.id === id) {
+        return {
+          ...field,
+          imageFile: {
+            id: imageId,
+            name: "Uploaded image",
+            type: fieldType
+          }
+        };
+      }
+      return field;
+    }));
+
+    setImageFields(prev => ({
+      ...prev,
+      [stateFieldName]: imageId
+    }));
+  };
+
+
 
   return (
     <div>
@@ -217,12 +259,13 @@ export default function AddNewBlog() {
             />
           </div> */}
 
-          
+
           {selectFields.map((field, index) => (
             <div key={field.id} className="card mb-3 border-2 px-4 py-2 rounded-xl border-gray-700">
               <div className="card-header ">
                 <h4 className="card-title flex justify-between items-center mb-2">
-                  Select Field {index + 1}
+                  Select Field 
+                  {/* {index + 1} */}
                   <div className="flex items-center gap-5">
                     {/* Show minus button only if not the first field */}
                     {index > 0 && (
@@ -264,8 +307,25 @@ export default function AddNewBlog() {
                       onChange={(value) => handleTextChange(field.id, value)}
                       placeholder="Enter your text content"
                     /> */}
-                    <JoditEditor 
-              
+                    <JoditEditor
+                      ref={editor}
+                      value={content}
+                      onChange={(newContent) => setContent(newContent)}
+                    //  config={{
+                    //    readonly: false,
+                    //    toolbar: true,
+                    //    spellcheck: true,
+                    //    language: 'en',
+                    //    toolbarButtonSize: 'medium',
+                    //  buttons: [
+                    //    'bold', 'italic', 'underline', 'strikethrough',
+                    //    'ul', 'ol', 'outdent', 'indent',
+                    //    'font', 'fontsize', 'brush', 'paragraph',
+                    //    'image', 'table', 'link', 'align',
+                    //    'undo', 'redo', 'hr', 'eraser',
+                    //    'copyformat', 'fullsize'
+                    //  ]
+                    //  }}
                     />
                   </div>
                 )}
@@ -274,9 +334,21 @@ export default function AddNewBlog() {
                   <div className="form-group">
                     {/* <Label>Image Upload</Label> */}
                     <SelectFileInput
-                      onImageUpload={(file) => handleImageChange(field.id, file)}
-                      existingImage={field.imageFile}
+                      onImageUpload={(imageId) => handleImageChange(field.id, imageId, field.value?.value)}
+                      existingImage={
+                        blog ? {
+                          id: blog[field.value?.value === "image" ? "image" :
+                            field.value?.value === "full-image" ? "fullImage" :
+                              "bigImage"],
+                          name: "Existing image"
+                        } : field.imageFile
+                      }
                     />
+                    {field.imageFile && (
+                      <div className="mt-2 text-sm text-green-600">
+                        {field.value?.value.replace(/-/g, " ")} uploaded
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
