@@ -8,26 +8,41 @@ app.use(express.json());
 const BlogRouter = express.Router();
 
 BlogRouter.post("/add", async (req, res) => {
-  const { title, category,text, imageId,fullImageId,bigImageId } = req.body; 
-  if (!title || !category || !imageId) {
-    return res.status(400).json({ message: "Title, category,text, and imageId are required" });
+  // console.log("Received data:", req.body); // Debug log
+  
+  const { title, category, text, FeaturedImageId, image, fullImage, bigImage } = req.body;
+  
+  if (!title || !category || !FeaturedImageId) {
+    return res.status(400).json({ 
+      message: "Title, category, and featured image are required",
+      received: req.body 
+    });
   }
 
   try {
     const newBlog = new Blog({
       title,
       category,
-      text,
-      image: imageId, 
-      fullImage: fullImageId || undefined ,
-      bigImage: bigImageId || undefined
+      text: text || "",
+      FeaturedImage: FeaturedImageId,
+      image: image || undefined,
+      fullImage: fullImage || undefined,
+      bigImage: bigImage || undefined
     });
 
-    await newBlog.save();
-    res.status(201).json({ message: 'Blog created successfully', Blog: newBlog });
+    console.log("Blog to be saved:", newBlog); // Debug log
+    
+    const savedBlog = await newBlog.save();
+    res.status(201).json({ 
+      message: 'Blog created successfully', 
+      blog: savedBlog 
+    });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: 'Error creating Blog', error: error.message });
+    console.error("Save error:", error);
+    res.status(500).json({ 
+      message: 'Error creating blog', 
+      error: error.message 
+    });
   }
 });
 
@@ -45,32 +60,64 @@ BlogRouter.get("/get", async (req, res) => {
 });
 
 
-BlogRouter.put("/edit", async (req, res) => {
-  const { id, title, category,text, imageId } = req.body; 
+// BlogRouter.put("/edit", async (req, res) => {
+//   const { id, title, category,text, imageId } = req.body; 
 
-  if (!id || !title || !category ||! text|| !imageId) {
-    return res.status(400).json({ message: "ID, title, category,text, and imageId are required" });
+//   if (!id || !title || !category ||! text|| !imageId) {
+//     return res.status(400).json({ message: "ID, title, category,text, and imageId are required" });
+//   }
+
+//   try {
+
+//     const existingBlog = await Blog.findById(id);
+//     if (!existingBlog) {
+//       return res.status(404).json({ message: "Blog not found" });
+//     }
+
+//     existingBlog.title = title;
+//     existingBlog.category = category;
+//     existingBlog.text = text;
+
+//     existingBlog.image = imageId;
+
+//     const updatedBlog = await existingBlog.save();
+
+//     res.status(200).json({ message: "Blog updated successfully", Blog: updatedBlog });
+//   } catch (error) {
+//     console.error("Error updating Blog:", error);
+//     res.status(500).json({ message: "Error updating Blog", error: error.message });
+//   }
+// });
+
+BlogRouter.put("/edit", async (req, res) => {
+  const { id, title, category, text, FeaturedImageId, image, fullImageId, bigImageId } = req.body;
+
+  // Required fields validation
+  if (!id || !title || !category || !text || !FeaturedImageId) {
+    return res.status(400).json({ message: "All required fields must be provided" });
   }
 
   try {
+    const updateData = {
+      title,
+      category,
+      text,
+      FeaturedImage: FeaturedImageId,
+      ...(image && { image }),
+      ...(fullImageId && { fullImage: fullImageId }),
+      ...(bigImageId && { bigImage: bigImageId })
+    };
 
-    const existingBlog = await Blog.findById(id);
-    if (!existingBlog) {
+    const updatedBlog = await Blog.findByIdAndUpdate(id, updateData, { new: true });
+
+    if (!updatedBlog) {
       return res.status(404).json({ message: "Blog not found" });
     }
 
-    existingBlog.title = title;
-    existingBlog.category = category;
-    existingBlog.text = text;
-
-    existingBlog.image = imageId;
-
-    const updatedBlog = await existingBlog.save();
-
-    res.status(200).json({ message: "Blog updated successfully", Blog: updatedBlog });
+    res.status(200).json({ message: "Blog updated successfully", blog: updatedBlog });
   } catch (error) {
-    console.error("Error updating Blog:", error);
-    res.status(500).json({ message: "Error updating Blog", error: error.message });
+    console.error("Error updating blog:", error);
+    res.status(500).json({ message: "Error updating blog", error: error.message });
   }
 });
 

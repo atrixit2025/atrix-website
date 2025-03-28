@@ -10,7 +10,7 @@ import { GrFormSubtract } from "react-icons/gr";
 
 
 
-const SelectFileInput = ({ onImageUpload, imageId }) => {
+const SelectFileInput = ({ onImageUpload, imageId,existingImage  }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [showUploadSection, setShowUploadSection] = useState(true);
@@ -342,7 +342,7 @@ const SelectFileInput = ({ onImageUpload, imageId }) => {
                                 disabled={!selectedImageUrl}
                                 className="btn btn-success cursor-pointer flex w-full justify-center rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-600 sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                Set Featured Image
+                                Set Select Image
                             </Button>
                         </div>
                     </div>
