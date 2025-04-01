@@ -108,9 +108,9 @@ const Home = () => {
 
   const lines = [
     '  Empowering, Innovative',
-    ' Global. Professional',
+    ' Global, Professional',
     ' Accessible, User-centric ',
-    'Visionary, Trustworthy'
+    ' Visionary, Trustworthy'
   ];
 
 
