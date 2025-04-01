@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './PortfolioSingle.css';
 import { useParams } from "react-router-dom";
 import projectsData from '../data/projectsData';
+import ProjectsGallery from '../Components/portfolilo/ProjectsGallery';
 
 const PortfolioSingle = () => {
 
@@ -119,6 +120,7 @@ const PortfolioSingle = () => {
                 }
             </>
             }
+            <ProjectsGallery></ProjectsGallery>
         </div>
     );
 };

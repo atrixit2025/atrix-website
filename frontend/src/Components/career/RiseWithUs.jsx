@@ -13,7 +13,7 @@ const RiseWithUs = () => {
                         <div className='md:pr-36  pt-8' >
                             <h2 className=' text-4xl  md:text-5xl font-bold '>Rise With Us</h2>
                             <p className='mt-4 mb-10'> Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum cum reiciendis quibusdam dolores. Itaque aut dolore at. Voluptatem, suscipit perferendis? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Debitis ipsum, corrupti fugiat itaque iste officia doloribus soluta accusantium impedit officiis. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, excepturi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, dolor. </p>
-                            <SimpleButton buttonName={"Open Roles"} ></SimpleButton>
+                            <SimpleButton buttonName={"Open Vacancies"} ></SimpleButton>
                         </div>
                         <div className=' md:pl-36 '>
                             <div className="img-wraper rounded-2xl overflow-hidden ">

@@ -30,10 +30,10 @@ const rolesData = [
 
 const Roles = () => {
     return (
-        <div>
+        <div id='vacancies-sec'>
             <div className="container mx-auto  pt-32">
                 <div className='mb-12  ' >
-                    <h2 className=' text-4xl md:text-6xl text-center font-bold mb-5' >Our vacancies</h2>
+                    <h2 className=' text-4xl md:text-6xl text-center font-bold mb-5' >Our Vacancies</h2>
                     <p className=' max-w-[600px] mx-auto text-center '>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, ipsa. Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, molestias!</p>
                 </div>
                 <div className="role-cards-wrapper">
