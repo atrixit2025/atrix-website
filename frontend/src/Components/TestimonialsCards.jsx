@@ -87,15 +87,7 @@ const TestimonialsCards = () => {
           </div>
 
           <div className="testimonial-slider pt-5">
-            <style>
-              {`
-              .testimonial-slider .slick-arrow { margin-top: 200px; }
-              .testimonial-slider .slick-list { overflow: visible; pointer-events: none; }
-              .testimonial-slider .slick-slide { opacity: 0.2; transform: translateY(-50px); transition: transform 0.5s ease-in-out; }
-              .testimonial-slider .slick-active { transform: translateY(-110px); opacity: 1; pointer-events: auto; }
-              .testimonial-slider .slick-center { transform: translateY(-50px); transition: transform 0.6s ease-in-out; }
-              `}
-            </style>
+
 
             <Slider {...settings}>
               {testimonials.map((item, index) => (
@@ -104,13 +96,13 @@ const TestimonialsCards = () => {
                   className="testimonial-card md:px-4 px-1 mt-46"
                 >
                   <div className="border border-black rounded-2xl p-6 bg-white/10 ">
-                    <div className="flex items-center gap-5">
+                    <div className="flex items-center gap-3">
                       <img
                         src={item.img}
                         className="w-12 h-12 rounded-full object-cover"
                       />
-                      <div>
-                        <h2 className="text-xl font-bold">{item.UserName}</h2>
+                      <div className=" flex flex-col justify-center items-start">
+                        <h2 className="text-xl/4 font-bold ">{item.UserName}</h2>
                         <p className="text-white/70 mt-1">{item.Subheading}</p>
                       </div>
                     </div>
@@ -122,7 +114,7 @@ const TestimonialsCards = () => {
               ))}
             </Slider>
           </div>
-          <hr className="  -z-10 relative mt-9" />
+          {/* <hr className="  -z-10 relative mt-9" /> */}
         </div>
       </div>
     </div>
