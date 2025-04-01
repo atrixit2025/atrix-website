@@ -12,13 +12,12 @@ import img2 from "../assets/BlogCrads/blog-st-img11-600x400-1.webp";
 import img3 from "../assets/BlogCrads/blog-st-img12-600x400-1.webp";
 
 const herodata = [{ title: "Blog", desc: "" }];
-
 const blogData = [
   {
     id: 1,
     img: img1,
-    Category1: "blog",
-    Category2: " educartion",
+    Category1: "Blog",
+    Category2: "Educartion",
     Published: "Published on :",
     date: "15 August, 2024",
     title: "Welcome To our Blog1",
@@ -27,8 +26,8 @@ const blogData = [
   {
     id: 2,
     img: img2,
-    Category1: "blog",
-    Category2: " educartion",
+    Category1: "Blog",
+    Category2: "Educartion",
     Published: "Published on :",
     date: "15 August, 2024",
     title: "Welcome To our Blog2",
@@ -37,8 +36,8 @@ const blogData = [
   {
     id: 3,
     img: img3,
-    Category1: "blog",
-    Category2: " educartion",
+    Category1: "Blog",
+    Category2: "Educartion",
     Published: "Published on :",
     date: "15 August, 2024",
     title: "Welcome To our Blog3",
@@ -47,8 +46,8 @@ const blogData = [
   {
     id: 4,
     img: img1,
-    Category1: "blog",
-    Category2: " educartion",
+    Category1: "Blog",
+    Category2: "Educartion",
     Published: "Published on :",
     date: "15 August, 2024",
     title: "Welcome To our Blog85",
@@ -57,8 +56,8 @@ const blogData = [
   {
     id: 5,
     img: img2,
-    Category1: "blog",
-    Category2: " educartion",
+    Category1: "Blog",
+    Category2: "Educartion",
     Published: "Published on :",
     date: "15 August, 2024",
     title: "Welcome To our Blog7",
@@ -67,8 +66,8 @@ const blogData = [
   {
     id: 6,
     img: img3,
-    Category1: "blog",
-    Category2: " educartion",
+    Category1: "Blog",
+    Category2: "Educartion",
     Published: "Published on :",
     date: "15 August, 2024",
     title: "Welcome To our Blog587",
@@ -77,8 +76,8 @@ const blogData = [
   {
     id: 7,
     img: img1,
-    Category1: "blog",
-    Category2: " educartion",
+    Category1: "Blog",
+    Category2: "Educartion",
     Published: "Published on :",
     date: "16 August, 2024",
     title: "Welcome To our Blog8",
@@ -87,8 +86,8 @@ const blogData = [
   {
     id: 8,
     img: img3,
-    Category1: "blog",
-    Category2: " educartion",
+    Category1: "Blog",
+    Category2: "Educartion",
     Published: "Published on :",
     date: "16 August, 2024",
     title: "Welcome To our Blog9",
@@ -97,8 +96,8 @@ const blogData = [
   {
     id: 9,
     img: img2,
-    Category1: "blog",
-    Category2: " educartion",
+    Category1: "Blog",
+    Category2: "Educartion",
     Published: "Published on :",
     date: "16 August, 2024",
     title: "Welcome To our Blog10",
@@ -107,8 +106,8 @@ const blogData = [
   {
     id: 10,
     img: img3,
-    Category1: "blog",
-    Category2: " educartion",
+    Category1: "Blog",
+    Category2: "Educartion",
     Published: "Published on :",
     date: "16 August, 2024",
     title: "Welcome To our Blog10",
@@ -117,8 +116,8 @@ const blogData = [
   {
     id: 11,
     img: img1,
-    Category1: "blog",
-    Category2: " educartion",
+    Category1: "Blog",
+    Category2: "Educartion",
     Published: "Published on :",
     date: "16 August, 2024",
     title: "Welcome To our Blog10",
@@ -127,8 +126,8 @@ const blogData = [
   {
     id: 12,
     img: img2,
-    Category1: "blog",
-    Category2: " educartion",
+    Category1: "Blog",
+    Category2: "Educartion",
     Published: "Published on :",
     date: "16 August, 2024",
     title: "Welcome To our Blog10",
@@ -137,8 +136,8 @@ const blogData = [
   {
     id: 13,
     img: img3,
-    Category1: "blog",
-    Category2: " educartion",
+    Category1: "Blog",
+    Category2: "Educartion",
     Published: "Published on :",
     date: "16 August, 2024",
     title: "Welcome To our Blog10",
@@ -147,8 +146,8 @@ const blogData = [
   {
     id: 14,
     img: img1,
-    Category1: "blog",
-    Category2: " educartion",
+    Category1: "Blog",
+    Category2: "Educartion",
     Published: "Published on :",
     date: "16 August, 2024",
     title: "Welcome To our Blog10",
@@ -174,33 +173,35 @@ const BlogUS = () => {
         <div className="grid grid-cols-3 top  gap-10 -mx-10">
           {currentBlogs.map((blog) => (
             <div key={blog.id} className="w-full flex flex-col">
-
-<Card.Img  
-  onClick={() =>
-    navigate(
-      `/blog/${blog.title.replace(/\s+/g, "-").toLowerCase()}`,
-      { state: blog }
-    )}
-  className="rounded-t-lg w-full object-cover !important cursor-pointer"   
-  variant="top" 
-  src={blog.img} 
-/>
+              <Card.Img
+                onClick={() =>
+                  navigate(
+                    `/blog/${blog.title.replace(/\s+/g, "-").toLowerCase()}`,
+                    { state: blog }
+                  )
+                }
+                className="rounded-t-lg w-full object-cover !important cursor-pointer"
+                variant="top"
+                src={blog.img}
+              />
 
               <Card.Body className="border border-white/15 p-6 flex-1 flex flex-col">
                 <Card.Title className="flex items-center gap-2">
                   <GoCalendar /> {blog.date}
                 </Card.Title>
-                <Card.Text onClick={() =>
+                <Card.Text
+                  onClick={() =>
                     navigate(
                       `/blog/${blog.title.replace(/\s+/g, "-").toLowerCase()}`,
                       { state: blog }
                     )
-                    }
-                    className="font-extrabold  text-2xl pt-2 flex-1 hover:text-(--blue) cursor-pointer">
+                  }
+                  className="font-extrabold  text-2xl pt-2 flex-1 hover:text-(--blue) cursor-pointer"
+                >
                   {blog.title}
                 </Card.Text>
 
-                <p 
+                <p
                   onClick={() =>
                     navigate(
                       `/blog/${blog.title.replace(/\s+/g, "-").toLowerCase()}`,
@@ -215,7 +216,6 @@ const BlogUS = () => {
                     <FaArrowRight />
                   </span>
                 </p>
-
               </Card.Body>
             </div>
           ))}
