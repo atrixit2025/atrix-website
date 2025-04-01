@@ -8,6 +8,7 @@ import project2 from "../assets/PortfolioImage/imgpsh_fullsize_anim (2).png";
 import project3 from "../assets/PortfolioImage/imgpsh_fullsize_anim (3).png";
 import project4 from "../assets/PortfolioImage/imgpsh_fullsize_anim.png";
 
+
 const TestimonialsCards = () => {
   const testimonials = [
     {
@@ -104,6 +105,7 @@ const TestimonialsCards = () => {
                       <div className=" flex flex-col justify-center items-start">
                         <h2 className="text-xl/4 font-bold ">{item.UserName}</h2>
                         <p className="text-white/70 mt-1">{item.Subheading}</p>
+                        <span className="absolute right-20 text-5xl text-white/15" ><i class="fa-solid fa-quote-right"></i></span>
                       </div>
                     </div>
                     <p className="testimonial-text text-white/50 mt-3">
