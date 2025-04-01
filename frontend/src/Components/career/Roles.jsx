@@ -33,8 +33,9 @@ const Roles = () => {
         <div id='vacancies-sec'>
             <div className="container mx-auto  pt-32">
                 <div className='mb-12  ' >
-                    <h2 className=' text-4xl md:text-6xl text-center font-bold mb-5' >Our Vacancies</h2>
-                    <p className=' max-w-[600px] mx-auto text-center '>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, ipsa. Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, molestias!</p>
+                    <h2 className=' text-4xl md:text-6xl text-center font-bold mb-5' > Job Vacancies</h2>
+                    <p className=' max-w-[600px] mx-auto text-center '>Explore exciting job opportunities and take the next step in your career. Find the right role that matches your skills and passion!
+                    </p>
                 </div>
                 <div className="role-cards-wrapper">
                     {rolesData.map((item, index) => (

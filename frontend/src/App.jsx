@@ -38,6 +38,7 @@ import CategoryServices from './Dashboard/pages/ServicesPage/CategoryServices';
 import Demo from './Dashboard/pages/BlogPage/demo';
 import Portfolio_page from './Pages/Portfolio';
 import PortfolioSingle from './Pages/PortfolioSingle';
+import Service from './Pages/Service';
 // import Ckeditor from './Dashboard/Ckeditors/ckeditors';
 
 
@@ -64,6 +65,7 @@ export default function App() {
           <Route path='/portfolio-single' element={< PortfolioSingle />} /> */}
           <Route path="/portfolio" element={< Portfolio_page />} />
           <Route path="/portfolio/:project_id" element={< PortfolioSingle />} />
+          <Route path="/Service" element={< Service />} />
 
         </Route >
       </Routes >

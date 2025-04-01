@@ -2,6 +2,7 @@ import React from 'react';
 import bg_img from '../assets/about-bg.svg';
 
 
+
 const HeroCommon = ({ heroData }) => {
     return (
         <div className='bg-no-repeat bg-cover bg-[bottom center] ' style={{ backgroundImage: `url(${bg_img})`, backgroundPosition: 'bottom center', backgroundSize: '1000px auto', }} >

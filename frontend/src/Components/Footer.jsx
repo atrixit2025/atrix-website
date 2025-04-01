@@ -48,7 +48,7 @@ const Footer = () => {
                         <img src={logo} alt="" />
                     </div>
                     <h4 className=" text-(--blue) mt-5 font-bold text-lg">Address</h4>
-                    <p className="  uppercase" > PLOT C – 203 , PHASE – 8 B, MOHALI, MOHALI, SAS Nagar , 26-Punjab, 91-INDIA, 160070</p>
+                    <p className="  uppercase" >D-179 Phase, 8B, Phase 8B, Industrial Area, Sector 74, S.A.S Nagar, Punjab 140501</p>
 
 
                     <h4 className="  text-(--blue) mt-5 font-bold text-lg">Email</h4>

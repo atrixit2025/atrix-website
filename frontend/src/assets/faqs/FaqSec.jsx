@@ -94,105 +94,180 @@ export default () => {
 
     const faqsData = [
         {
-            category: "Web designing",
+            category: "Graphic Designing",
             content: [
                 {
-                    q: "What are some random questions to ask?",
-                    a: "That's exactly the reason we created this random question generator. There are hundreds of random questions to choose from so you're able to find the perfect random question.",
+                    q: "What is graphic design?",
+                    a: "Graphic design is the process of creating visual content to communicate messages. It includes designing logos, advertisements, websites, and more.",
                 },
                 {
-                    q: "Do you include common questions?",
-                    a: "This generator doesn't include most common questions. The thought is that you can come up with common questions on your own so most of the questions in this generator.",
+                    q: " What are the types of graphic design?",
+                    a: "Common types include branding, web design, print design, and motion graphics. Each type serves a different purpose in marketing and communication.",
                 },
                 {
-                    q: "Can I use this for 21 questions?",
-                    a: "Yes! there are two ways that you can use this question generator depending on what you're after. You can indicate that you want 21 questions generated.",
+                    q: " What tools do graphic designers use?",
+                    a: "Designers use software like Adobe Photoshop, Illustrator, and Canva. These tools help create high-quality visuals for different platforms.",
                 },
                 {
-                    q: "Are these questions for girls or for boys?",
-                    a: "The questions in this generator are gender neutral and can be used to ask either male of females (or any other gender the person identifies with).",
+                    q: "Why is graphic design important for businesses?",
+                    a: "It helps businesses build a strong brand identity and attract customers. A well-designed logo or website makes a lasting impression.",
                 },
                 {
-                    q: "What do you wish you had more talent doing?",
-                    a: "If you've been searching for a way to get random questions, you've landed on the correct webpage. We created the Random Question Generator to ask you as many random questions as your heart desires.",
+                    q: "What makes a good logo design?",
+                    a: "A good logo is simple, memorable, and represents your brand identity. It should work well on different platforms and sizes.",
                 },
             ]
         },
         {
-            category: "Graphic designing",
+            category: "Web Development ",
             content: [
                 {
-                    q: "What are some random questions to ask?",
-                    a: "That's exactly the reason we created this random question generator. There are hundreds of random questions to choose from so you're able to find the perfect random question.",
+                    q: "Will my website be mobile-friendly??",
+                    a: " Yes! We design websites that adjust to all screen sizes, ensuring a smooth user experience. A mobile-friendly site also helps improve search rankings.",
                 },
                 {
-                    q: "Do you include common questions?",
-                    a: "This generator doesn't include most common questions. The thought is that you can come up with common questions on your own so most of the questions in this generator.",
+                    q: "How long does it take to build a website?",
+                    a: " It typically takes 1 to 4 months, depending on the complexity and features required. The process includes planning, design, development, and testing.",
                 },
                 {
-                    q: "Can I use this for 21 questions?",
-                    a: "Yes! there are two ways that you can use this question generator depending on what you're after. You can indicate that you want 21 questions generated.",
+                    q: "What’s the difference between a website and a web app?",
+                    a: "A website provides information, while a web app allows user interaction. Web apps often have advanced features like forms and dashboards.",
                 },
                 {
-                    q: "Are these questions for girls or for boys?",
-                    a: "The questions in this generator are gender neutral and can be used to ask either male of females (or any other gender the person identifies with).",
+                    q: "What programming languages are used in web development?",
+                    a: " Common languages include HTML, CSS, JavaScript, and Python. The choice depends on the project requirements and functionality needed.",
                 },
                 {
-                    q: "What do you wish you had more talent doing?",
-                    a: "If you've been searching for a way to get random questions, you've landed on the correct webpage. We created the Random Question Generator to ask you as many random questions as your heart desires.",
+                    q: "How much does it cost to develop a website?",
+                    a: "The cost varies based on complexity, features, and design. Simple websites cost less, while custom-built sites are more expensive.",
                 },
             ]
         },
         {
-            category: "Graphic designing",
+            category: "Digital Marketing",
             content: [
                 {
-                    q: "What are some random questions to ask?",
-                    a: "That's exactly the reason we created this random question generator. There are hundreds of random questions to choose from so you're able to find the perfect random question.",
+                    q: "What is digital marketing?",
+                    a: "Digital marketing is the promotion of products or services online. It includes SEO, social media, paid ads, and content marketing.",
                 },
                 {
-                    q: "Do you include common questions?",
-                    a: "This generator doesn't include most common questions. The thought is that you can come up with common questions on your own so most of the questions in this generator.",
+                    q: "What are the main types of digital marketing?",
+                    a: "Key types include SEO, PPC, social media, email, and content marketing. Each type targets different audiences and business goals.",
                 },
                 {
-                    q: "Can I use this for 21 questions?",
-                    a: "Yes! there are two ways that you can use this question generator depending on what you're after. You can indicate that you want 21 questions generated.",
+                    q: "How cost-effective is digital marketing compared with traditional marketing?",
+                    a: "Digital marketing is more affordable and targeted than traditional marketing. It reaches the right audience at the right time, reducing unnecessary costs.",
                 },
                 {
-                    q: "Are these questions for girls or for boys?",
-                    a: "The questions in this generator are gender neutral and can be used to ask either male of females (or any other gender the person identifies with).",
+                    q: "How do you identify a successful digital marketing company?",
+                    a: "A good agency focuses on your goals, offers clear reporting, and has proven results. Avoid companies that promise instant success.",
                 },
                 {
-                    q: "What do you wish you had more talent doing?",
-                    a: "If you've been searching for a way to get random questions, you've landed on the correct webpage. We created the Random Question Generator to ask you as many random questions as your heart desires.",
+                    q: "How long does it take to see results from digital marketing?",
+                    a: "SEO takes months to show results, while paid ads work quickly. The timeline depends on strategy, competition, and industry trends.",
                 },
             ]
         },
         {
-            category: "Graphic designing",
+            category: "Visual Effects (VFX)",
             content: [
                 {
-                    q: "What are some random questions to ask?",
-                    a: "That's exactly the reason we created this random question generator. There are hundreds of random questions to choose from so you're able to find the perfect random question.",
+                    q: " What’s the difference between VFX and special effects (SFX)?",
+                    a: "VFX is made using computers, while SFX includes real things like fire, smoke, and props. VFX is added after filming, but SFX happens during filming.",
                 },
                 {
-                    q: "Do you include common questions?",
-                    a: "This generator doesn't include most common questions. The thought is that you can come up with common questions on your own so most of the questions in this generator.",
+                    q: "Can VFX be used in social media videos?",
+                    a: "Yes, VFX can make social media videos more fun with cool effects and animations. It helps videos look more creative and get more views.",
                 },
                 {
-                    q: "Can I use this for 21 questions?",
-                    a: "Yes! there are two ways that you can use this question generator depending on what you're after. You can indicate that you want 21 questions generated.",
+                    q: "Is VFX expensive to create?",
+                    a: "The cost depends on how simple or advanced the effects are. Basic effects are cheaper, but big, detailed ones cost more.",
                 },
                 {
-                    q: "Are these questions for girls or for boys?",
-                    a: "The questions in this generator are gender neutral and can be used to ask either male of females (or any other gender the person identifies with).",
+                    q: "Which software is used for VFX?",
+                    a: "Popular VFX tools include After Effects, Maya, Blender, and Nuke. These programs help create stunning effects for films and ads.",
                 },
                 {
-                    q: "What do you wish you had more talent doing?",
-                    a: "If you've been searching for a way to get random questions, you've landed on the correct webpage. We created the Random Question Generator to ask you as many random questions as your heart desires.",
+                    q: " Where is VFX used?",
+                    a: "VFX is used in movies, gaming, commercials, and social media videos. It enhances visual storytelling and creates engaging content.",
                 },
             ]
-        }
+        },
+        {
+            category: " Photo/Videography ",
+            content: [
+                {
+                    q: "  What are the types of photography?",
+                    a: "Common types include portrait, product, event, and landscape photography. Each serves different purposes in storytelling and branding.",
+                },
+                {
+                    q: "What’s the difference between DSLR and mirrorless cameras?",
+                    a: "DSLRs use mirrors to capture images, while mirrorless cameras don’t. Mirrorless cameras are lighter and better for video recording.",
+                },
+                {
+                    q: "How can professional photography make my brand stand out?",
+                    a: "High-quality photos create a strong first impression and make your brand look more professional and trustworthy.",
+                },
+                {
+                    q: "What’s the difference between a highlight video and a full-length video?",
+                    a: "A highlight video is a short, engaging recap, while a full-length video captures all the details of your event.",
+                },
+                {
+                    q: " Can I remove unwanted objects or people from my photos?",
+                    a: "Yes, advanced editing tools can remove unwanted objects or people. This helps make the photo look clean and professional.",
+                },
+            ]
+        },
+        {
+            category: "Staffing ",
+            content: [
+                {
+                    q: " How does a staffing agency work?",
+                    a: "A staffing agency connects employers with qualified candidates. It handles recruitment, interviews, and job placements.",
+                },
+                {
+                    q: "What are the types of staffing?",
+                    a: " Staffing includes temporary, permanent, contract, and remote hiring. Different types suit different business requirements.",
+                },
+                {
+                    q: "What are the benefits of using a staffing agency?",
+                    a: " It saves time, reduces hiring costs, and ensures skilled employees. Businesses get access to a wider talent pool.",
+                },
+                {
+                    q: "What industries use staffing services?",
+                    a: " IT, healthcare, logistics, and customer service rely on staffing. Agencies help find professionals in various fields.",
+                },
+                {
+                    q: "  Do staffing agencies handle employee payroll?",
+                    a: "Some agencies manage payroll and benefits, while others only assist in hiring.",
+                },
+            ]
+        },
+        {
+            category: " Logistics ",
+            content: [
+                {
+                    q: "  What is logistics?",
+                    a: "Logistics is the process of managing the transportation and storage of goods. It ensures products are delivered efficiently.",
+                },
+                {
+                    q: "What are the types of logistics?",
+                    a: "Types include inbound, outbound, third-party (3PL), and reverse logistics. Each focuses on different supply chain needs.",
+                },
+                {
+                    q: "What’s the difference between supply chain and logistics?",
+                    a: "Logistics deals with transportation and storage, while the supply chain includes the entire production and distribution process.",
+                },
+                {
+                    q: " Why is logistics important?",
+                    a: "It ensures smooth delivery, reduces costs, and improves efficiency. Businesses rely on logistics for timely operations.",
+                },
+                {
+                    q: " What are the key components of logistics?",
+                    a: "Logistics includes transportation, warehousing, inventory management, and order fulfillment. These ensure a seamless supply chain.",
+                },
+            ]
+        },
 
     ];
 

@@ -6,6 +6,7 @@ import PerksAtrix from "../Components/career/PerksAtrix";
 import Roles from "../Components/career/Roles";
 import CareerFormSec from "../Components/career/FormSec";
 import HeroCommon from "../Components/HeroCommon";
+import "./career.css"
 
 import icon from "../assets/career/date.svg";
 
@@ -13,7 +14,7 @@ import icon from "../assets/career/date.svg";
 
 const herodata = [
   {
-    title: "Careers",
+    title: "Unlock new opportunities and build a strong career with us.",
     desc: "",
   },
 ];
@@ -65,7 +66,7 @@ const Careers = () => {
   }, []);
 
   return (
-    <div>
+    <div className="career-page" >
       <HeroCommon heroData={herodata[0]} />
       <RiseWithUs />
       <CounterSec />

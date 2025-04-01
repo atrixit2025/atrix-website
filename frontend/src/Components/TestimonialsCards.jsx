@@ -97,12 +97,15 @@ const TestimonialsCards = () => {
                 >
                   <div className="border border-black rounded-2xl p-6 bg-white/10 ">
                     <div className="flex items-center gap-3">
-                      <img
-                        src={item.img}
-                        className="w-12 h-12 rounded-full object-cover"
-                      />
-                      <div className=" flex flex-col justify-center items-start">
-                        <h2 className="text-xl/4 font-bold ">{item.UserName}</h2>
+                      <div>
+                        <img
+                          src={item.img}
+                          className="w-12 h-12 rounded-full object-cover"
+                        />
+                      </div>
+
+                      <div className="flex flex-col justify-center">
+                        <h2 className="text-xl font-bold tracking-tighter leading-2 mt-2 ">{item.UserName}</h2>
                         <p className="text-white/70 mt-1">{item.Subheading}</p>
                       </div>
                     </div>
