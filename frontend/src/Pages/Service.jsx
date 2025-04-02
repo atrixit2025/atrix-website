@@ -3,9 +3,8 @@ import ServiceHeroSlider from '../Components/services/ServiceHeroSlider'
 
 const Service = () => {
     return (
-        <div className=' pt-[120px] '>
+        <div className="pt-[150px] ">
             <ServiceHeroSlider></ServiceHeroSlider>
-
         </div>
     )
 }

@@ -14,7 +14,7 @@ import icon from "../assets/career/date.svg";
 
 const herodata = [
   {
-    title: "Unlock new opportunities and build a strong career with us.",
+    title: "Career",
     desc: "",
   },
 ];
