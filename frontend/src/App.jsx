@@ -57,7 +57,7 @@ export default function App() {
           <Route path='/privacy-policy' element={< PrivacyPolicy />} />
           <Route path='/terms-and-conditions' element={< TermsAndConditions />} />
           {/* <Route path='/portfolio' element={< Portfolio />} /> */}
-          <Route path='/BlogUs' element={< BlogUS />} />
+          <Route path='/Blog' element={< BlogUS />} />
           <Route path='/blog/:id' element={< BlogContant />} />
 
           {/* <Route path='/portfolio' element={< Portfolio />} /> */}

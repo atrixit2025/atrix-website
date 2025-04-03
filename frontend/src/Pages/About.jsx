@@ -127,9 +127,9 @@ const About = () => {
       <About_sec_scroll />
 
       {/* text-marquee-section */}
-      <div className="relative marquee-sec text-6xl font-bold mt-22 ">   <div>
-        <Marquee speed={30} className="overflow-hidden">
-        VISIONARY . INNOVATIVE . EFFICIENT . GLOBAL . PROFESSIONAL . ACCESSIBLE . USER-CENTRIC . EMPOWERING . TRUSTWORTHY . SCALABLE.
+      <div className="relative marquee-sec text-6xl font-bold mt-22  ">   <div>
+        <Marquee speed={30} className="overflow-hidden text-[#565656]">
+         VISIONARY . INNOVATIVE . EFFICIENT . GLOBAL . PROFESSIONAL . ACCESSIBLE . USER-CENTRIC . EMPOWERING . TRUSTWORTHY . SCALABLE. 
         </Marquee>
       </div>
 
@@ -137,15 +137,14 @@ const About = () => {
           <Marquee
             speed={30}
             direction="right"
-            className="overflow-hidden mt-1"
-          >
-           VISIONARY . INNOVATIVE . EFFICIENT . GLOBAL . PROFESSIONAL . ACCESSIBLE . USER-CENTRIC . EMPOWERING . TRUSTWORTHY . SCALABLE.
+            className="overflow-hidden mt-1 text-[#565656]"
+          > &nbsp; VISIONARY . INNOVATIVE . EFFICIENT . GLOBAL . PROFESSIONAL . ACCESSIBLE . USER-CENTRIC . EMPOWERING . TRUSTWORTHY . SCALABLE .  
           </Marquee>
         </div>
 
         <div>
-          <Marquee speed={30} className="overflow-hidden mt-1">
-          VISIONARY . INNOVATIVE . EFFICIENT . GLOBAL . PROFESSIONAL . ACCESSIBLE . USER-CENTRIC . EMPOWERING . TRUSTWORTHY . SCALABLE.
+          <Marquee speed={30} className="overflow-hidden mt-1 text-[#565656]">
+           USER-CENTRIC . EMPOWERING . TRUSTWORTHY . SCALABLE . VISIONARY . INNOVATIVE . EFFICIENT . GLOBAL . PROFESSIONAL . ACCESSIBLE . 
           </Marquee>
         </div>
       </div>

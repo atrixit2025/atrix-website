@@ -30,7 +30,7 @@ const ourServices = [
 const quickLinks = [
     { link_name: "Home", url: "/" },
     { link_name: "About", url: "/about" },
-    { link_name: "Our Blog", url: "#" },
+    { link_name: "Our Blog", url: "/blog" },
     { link_name: "Our Portfolio", url: "/portfolio" },
     { link_name: "FAQ", url: "/faqs" },
     { link_name: "Career", url: "/careers" },
@@ -129,7 +129,7 @@ const Footer = () => {
                             <Link to="/privacy-policy"> Privacy Policy</Link>
                         </li>
                     </ul>
-                </div>
+                </div> 
             </div>
         </footer>
     );

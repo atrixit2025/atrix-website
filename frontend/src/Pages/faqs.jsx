@@ -5,7 +5,7 @@ import FaqSec from '../assets/faqs/FaqSec';
 const herodata = [
     {
         title: "Frequently asked questions",
-        desc: "Got a question? We have the answers you need. Check out our FAQs for clear and easy explanations.",
+        desc: "",
     }
 ];
 
