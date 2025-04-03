@@ -35,13 +35,13 @@ const PortFolioCards = () => {
                                 <img src={item.featured_image} alt='featured_image' className='w-full h-full object-cover' />
                             </div>
                             <div className="portfo-card-content relative py-4 ps-2 pr-16">
-                                <h3 className='text-4xl font-bold'>{item.project_title}</h3>
+                                <h3 className='text-4xl font-bold mb-2'>{item.project_title}</h3>
                                 <p>
                                     {item.tags.map((item, index) => (
                                         <span>{item} /  </span>
                                     ))}
                                 </p>
-                                <span className="border border-white/35 items-center h-12 w-12 rounded-full flex justify-center -rotate-45 text-[var(--blue)] group-hover:text-white duration-300 group-hover:rotate-1 bg-black text-2xl absolute right-8 -top-2 ">
+                                <span className="border border-white/35 items-center h-12 w-12 rounded-full flex justify-center -rotate-45  group-hover:text-white duration-300 group-hover:rotate-1 group-hover:bg-[var(--blue)] bg-black text-2xl absolute right-8 -top-2 ">
                                     <FaArrowRight />
                                 </span>
                             </div>

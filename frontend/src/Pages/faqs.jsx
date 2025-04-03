@@ -4,7 +4,7 @@ import FaqSec from '../assets/faqs/FaqSec';
 
 const herodata = [
     {
-        title: "Frequently Asked Questions",
+        title: "Frequently asked questions",
         desc: "",
     }
 ];

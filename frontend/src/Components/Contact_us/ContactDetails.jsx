@@ -23,7 +23,7 @@ const cardsContent = [
   {
     link: "https://maps.app.goo.gl/3kZmdKfvDvsaVdSeA",
     title: "Our Location",
-    desc: "Visit us at our  office PLOT C – 203 , PHASE – 8 B, MOHALI, MOHALI, SAS Nagar , 26-Punjab, 91-INDIA, 160070 We’re here to connect and support your business needs.",
+    desc: "Visit us at our office. We’re here to connect and support your business needs.",
     btn_name: "Google Map",
   },
 ];
@@ -38,8 +38,7 @@ const ContactDetails = () => {
             <p className=" flex-1 mt-4 mb-10">{item.desc}</p>
 
             <Link target={item.btn_name === "Google Map" ? "_blank" : '_self'} to={item.link} className="font-bold pt-4 flex items-center  cursor-pointer hover:text-(--blue) self-start  group ">
-            {item.btn_name} <span className='border border-white/45 ml-2 flex justify-center items-center h-6 w-6 rounded-full  -rotate-45 text-[var(--blue)] group-hover:rotate-1 group-hover:bg-(--blue) group-hover:text-(--white) group-hover:border-(--blue)   duration-300' ><FaArrowRight /></span>
-            </Link>
+            {item.btn_name} <span className='border border-white/45 ml-2 flex justify-center items-center h-6 w-6 rounded-full  -rotate-45 text-[var(--blue)] group-hover:rotate-1 group-hover:bg-(--blue) group-hover:text-(--white) group-hover:border-(--blue)   duration-300' ><FaArrowRight /></span></Link>
           </div>
         ))}
       </div>

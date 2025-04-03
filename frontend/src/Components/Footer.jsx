@@ -30,11 +30,12 @@ const ourServices = [
 const quickLinks = [
     { link_name: "Home", url: "/" },
     { link_name: "About", url: "/about" },
-    { link_name: "Our Blog", url: "#" },
+    { link_name: "Our Blog", url: "/blog" },
     { link_name: "Our Portfolio", url: "/portfolio" },
     { link_name: "FAQ", url: "/faqs" },
     { link_name: "Career", url: "/careers" },
     { link_name: "Contact Us", url: "/contact-us" },
+    { link_name: "Services", url: "/Service" },
 ]
 
 
@@ -48,7 +49,7 @@ const Footer = () => {
                         <img src={logo} alt="" />
                     </div>
                     <h4 className=" text-(--blue) mt-5 font-bold text-lg">Address</h4>
-                    <p className="  uppercase" > PLOT C – 203 , PHASE – 8 B, MOHALI, MOHALI, SAS Nagar , 26-Punjab, 91-INDIA, 160070</p>
+                    <p className="  uppercase" >D-179 Phase, 8B, Phase 8B, Industrial Area, Sector 74, S.A.S Nagar, Punjab 140501</p>
 
 
                     <h4 className="  text-(--blue) mt-5 font-bold text-lg">Email</h4>
@@ -128,7 +129,7 @@ const Footer = () => {
                             <Link to="/privacy-policy"> Privacy Policy</Link>
                         </li>
                     </ul>
-                </div>
+                </div> 
             </div>
         </footer>
     );
