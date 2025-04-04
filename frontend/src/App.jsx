@@ -39,14 +39,12 @@ import Demo from './Dashboard/pages/BlogPage/demo';
 import Portfolio_page from './Pages/Portfolio';
 import PortfolioSingle from './Pages/PortfolioSingle';
 import Service from './Pages/Service';
-// import Ckeditor from './Dashboard/Ckeditors/ckeditors';
-
 
 export default function App() {
   return (
 
     <BrowserRouter>
-
+    
       <Routes>
         <Route path="/" element={<OutLet />}>
           <Route index element={<Home />} />

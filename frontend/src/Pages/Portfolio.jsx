@@ -7,6 +7,7 @@ import PortfolioCard from '../Components/portfolilo/PortFolioCards'
 
 
 
+
 const Portfolio = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -15,7 +16,7 @@ const Portfolio = () => {
         <div className='pt-40'>
             <PortfolioHero></PortfolioHero>
             <PortfolioCard></PortfolioCard>
-
+           
         </div>
     )
 }

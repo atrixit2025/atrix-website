@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import HeroCommon from '../Components/HeroCommon'
 
 
@@ -12,9 +12,6 @@ const herodata = [
 const PrivacyPolicy = () => {
 
 
-    useEffect(() => {
-        window.scroll(0, 0)
-    })
 
     return (
         <div>

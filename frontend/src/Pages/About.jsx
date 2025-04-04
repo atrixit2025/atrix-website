@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -51,10 +51,7 @@ const About = () => {
     }
   };
 
-  useEffect(() => {
-    window.scroll(0, 0)
-  })
-
+ 
 
   const ValueCardheading = [
     {

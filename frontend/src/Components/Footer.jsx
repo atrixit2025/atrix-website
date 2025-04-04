@@ -35,7 +35,7 @@ const quickLinks = [
     { link_name: "FAQ", url: "/faqs" },
     { link_name: "Career", url: "/careers" },
     { link_name: "Contact Us", url: "/contact-us" },
-    { link_name: "Services", url: "/Service" },
+    
 ]
 
 

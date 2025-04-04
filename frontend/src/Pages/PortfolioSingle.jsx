@@ -13,9 +13,7 @@ const PortfolioSingle = () => {
     const filteredProject = projectsData.find(item => item.project_id === project_id)
 
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+
 
     return (
         <div className="single-Port">

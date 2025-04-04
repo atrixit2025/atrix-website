@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import HeroCommon from '../Components/HeroCommon';
 import FaqSec from '../assets/faqs/FaqSec';
 
@@ -12,11 +12,6 @@ const herodata = [
 
 
 const faqs = () => {
-
-    useEffect(() => {
-        window.scroll(0, 0)
-    })
-
     return (
         <div>
             <HeroCommon heroData={herodata[0]} />

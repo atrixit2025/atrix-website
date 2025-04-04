@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Logo from "../assets/white_ais-logo-2.png"
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
@@ -13,11 +13,12 @@ const navigation = [
   { name: 'Portfolio', path: '/portfolio', current: false },
   { name: 'Contact Us', path: '/contact-us', current: false },
 
-
-
 ]
 
+
+
 export default function Navbar() {
+  
   const location = useLocation();
 
   return (

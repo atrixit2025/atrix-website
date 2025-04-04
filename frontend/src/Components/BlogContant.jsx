@@ -46,7 +46,7 @@ const BolgContant = () => {
       <div className="container mx-auto w-[90%]">
         <div className="row flex justify-between pt-5">
           <div
-            onClick={() => navigate("/BlogUs")}
+            onClick={() => navigate("/blog")}
            className="font-bold pt-2 flex items-center  cursor-pointer hover:text-(--blue) gap-2   group ">
               
             <div className="flex items-center gap-2">

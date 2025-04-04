@@ -34,6 +34,7 @@
     "react-popup-alert": "^2.0.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.1.5",
+    "react-scroll-up": "^1.4.0",
     "react-slick": "^0.30.3",
     "react-typewriter-effect": "^1.1.0",
     "slick-carousel": "^1.8.1",
