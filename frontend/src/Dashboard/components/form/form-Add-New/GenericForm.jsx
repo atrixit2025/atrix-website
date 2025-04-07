@@ -1,36 +1,70 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { ImageProvider } from "../../../ContextApi/ImageApi";
+import React, { useState, useEffect, useContext, useRef } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import FileInputExample from "../form-elements/FileInputExample";
-import ComponentCategory from "../../common/ComponentCategoryCard";
-import Checkbox from "../input/Checkbox";
-import Input from "../input/InputField";
-import Label from "../Label";
 import Button from "../../ui/button/Button";
+import Checkbox from "../input/Checkbox";
+import Label from "../Label";
+import Input from "../input/InputField";
+import ComponentCategory from "../../common/ComponentCategoryCard";
 import axios from "axios";
+import SelectBulk from "../SelectBulk";
+import JoditEditor from 'jodit-react';
+import SelectFileInput from "../form-elements/SelectFileInput";
+import { BlogCategoryContext } from "../../../ContextApi/BlogCategoryContextApi";
+import { PortfolioCategoryContext } from "../../../ContextApi/PortfolioCategoryContextApi";
 
+import { ImageProvider } from "../../../ContextApi/ImageApi";
+import { TechnologyCategoryContext } from "../../../ContextApi/CategoryContextApi";
 
 const GenericForm = ({
-  // Props to customize the form
   title,
   editTitle,
   apiEndpoint,
   categoryEndpoint,
   redirectPath,
-  categoryLink,
-  initialData,
+  
+  
+  hasContentSections = true,
+  hasRichText = true,
+  contentType = 'blog' || 'portfolio' || 'technology', 
   onSuccess,
 }) => {
+  const location = useLocation();
   const navigate = useNavigate();
+  const editor = useRef(null);
   const [categories, setCategories] = useState([]);
+  const [content, setContent] = useState('');
+  const [imageFields, setImageFields] = useState({});
+  const [selectFields, setSelectFields] = useState([{
+    id: 1,
+    value: "",
+    options: [
+      { value: "", label: "Select Option" },
+      { value: "text", label: "Text" },
+      { value: "image", label: "Image" },
+      { value: "full-image", label: "Full Image" },
+      { value: "big-image", label: "Big Image" }
+    ],
+    textContent: "",
+    imageFile: null
+  }]);
+
+  const { item } = location.state || {};
+  const CategoryContext = contentType === 'blog' || 'portfolio' || 'technology' ? 
+    useContext(BlogCategoryContext) : 
+    useContext(PortfolioCategoryContext);
+    useContext(TechnologyCategoryContext);
+
+  const { fetchCategoryCounts } = CategoryContext || {};
+
+  // Form data state
   const [formData, setFormData] = useState({
     title: "",
     selectedCategories: [],
     imageId: null,
   });
-  
 
-  // Fetch categories from API
+  // Fetch categories
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -40,66 +74,157 @@ const GenericForm = ({
         console.error("Error fetching categories:", error);
       }
     };
-
     fetchCategories();
   }, [categoryEndpoint]);
 
-  // Pre-fill form if in edit mode
+  // Pre-fill form in edit mode
   useEffect(() => {
-    if (initialData) {
+    if (item) {
       setFormData({
-        title: initialData.name || "",
-        selectedCategories: initialData.Category ? initialData.Category.split(", ") : [],
-        imageId: initialData.imageId || null,
+        title: item.title || item.name || "",
+        selectedCategories: item.category ? item.category.split(", ") : [],
+        imageId: item.FeaturedImage || item.imageId || null,
       });
-    }
-  }, [initialData]);
 
+      if (hasContentSections && item.contentSections) {
+        const transformedFields = item.contentSections.map((section, index) => ({
+          id: index + 1,
+          value: { 
+            value: section.type, 
+            label: section.type === 'text' ? 'Text' : 
+                   section.type === 'image' ? 'Image' :
+                   section.type === 'full-image' ? 'Full Image' : 'Big Image' 
+          },
+          options: [
+            { value: "", label: "Select Option" },
+            { value: "text", label: "Text" },
+            { value: "image", label: "Image" },
+            { value: "full-image", label: "Full Image" },
+            { value: "big-image", label: "Big Image" }
+          ],
+          textContent: section.type === 'text' ? section.content : "",
+          imageFile: section.type !== 'text' ? { 
+            id: section.imageId, 
+            name: "Existing image",
+            type: section.type 
+          } : null
+        }));
+        setSelectFields(transformedFields);
+      }
+    }
+  }, [item, hasContentSections]);
+
+  // Handlers
   const handleCategoryChange = (category) => {
-    setFormData((prev) => ({
+    setFormData(prev => ({
       ...prev,
       selectedCategories: prev.selectedCategories.includes(category)
-        ? prev.selectedCategories.filter((cat) => cat !== category)
+        ? prev.selectedCategories.filter(cat => cat !== category)
         : [...prev.selectedCategories, category],
     }));
   };
 
   const handleSubmit = async () => {
     const { title, selectedCategories, imageId } = formData;
-
+  
     if (!title || selectedCategories.length === 0 || !imageId) {
       alert("Title, category, and image are required!");
       return;
     }
-
+  
     const payload = {
       title,
       category: selectedCategories.join(", "),
-      imageId,
-      ...(initialData?.id && { id: initialData.id }), // Include ID if editing
+      FeaturedImageId: imageId,
+      ...(hasContentSections && { 
+        contentSections: selectFields.map(field => ({
+          type: field.value.value,
+          ...(field.value.value === 'text' ? { content: field.textContent } : 
+              { imageId: field.imageFile?.id || null })
+        }))
+      }
+    )
     };
-
+  
+    // Add ID to payload if in edit mode
+    if (item?.id) {
+      payload.id = item.id;
+    }
+  
     try {
-      if (initialData) {
-        await axios.put(`${apiEndpoint}/edit`, payload);
-      } else {
-        await axios.post(`${apiEndpoint}/add`, payload);
-      }
-      if (onSuccess) {
-        await onSuccess();
-      }
+      const response = item 
+        ? await axios.put(`${apiEndpoint}/edit`, payload)
+        : await axios.post(`${apiEndpoint}/add`, payload);
+  
+      if (fetchCategoryCounts) await fetchCategoryCounts();
+      if (onSuccess) await onSuccess();
       navigate(redirectPath);
     } catch (error) {
-      console.error("Error saving data:", error);
-      alert(`Error saving data. Please try again. ${error.response?.data?.message || ""}`);
+      console.error("Error saving item:", {
+        error: error.response?.data || error.message,
+        payload: payload
+      });
+      alert(error.response?.data?.message || "Error saving. Please try again.");
     }
+  };
+
+  // Content section handlers
+  const addSelectField = () => {
+    const newId = selectFields.length > 0 ? Math.max(...selectFields.map(f => f.id)) + 1 : 1;
+    setSelectFields([...selectFields, {
+      id: newId,
+      value: "",
+      options: [
+        { value: "", label: "Select Option" },
+        { value: "text", label: "Text" },
+        { value: "image", label: "Image" },
+        { value: "full-image", label: "Full Image" },
+        { value: "big-image", label: "Big Image" }
+      ],
+      textContent: "",
+      imageFile: null
+    }]);
+  };
+
+  const removeSelectField = (id) => {
+    if (selectFields.length > 1) {
+      setSelectFields(selectFields.filter(field => field.id !== id));
+    }
+  };
+
+  const handleSelectChange = (id, value) => {
+    setSelectFields(selectFields.map(field =>
+      field.id === id ? { ...field, value } : field
+    ));
+  };
+
+  const handleTextChange = (id, newContent) => {
+    setSelectFields(selectFields.map(field => 
+      field.id === id ? { ...field, textContent: newContent } : field
+    ));
+  };
+
+  const handleImageChange = (id, imageId, fieldType) => {
+    setSelectFields(selectFields.map(field => {
+      if (field.id === id) {
+        return {
+          ...field,
+          imageFile: {
+            id: imageId,
+            name: "Uploaded image",
+            type: fieldType
+          }
+        };
+      }
+      return field;
+    }));
   };
 
   return (
     <div>
       <div className="flex justify-between items-center mb-10">
         <h1 className="text-4xl font-semibold text-gray-800 dark:text-white/90">
-          {initialData ? editTitle : title}
+          {item ? editTitle : title}
         </h1>
         <div>
           <Button
@@ -108,10 +233,11 @@ const GenericForm = ({
             className="cursor-pointer"
             onClick={handleSubmit}
           >
-            {initialData ? "Update" : "Publish"}
+            {item ? "Update" : "Publish"}
           </Button>
         </div>
       </div>
+      
       <div className="grid grid-cols-[4fr_1fr] gap-6">
         <div className="space-y-10">
           <div>
@@ -122,14 +248,83 @@ const GenericForm = ({
               placeholder="Add Title"
               value={formData.title}
               onChange={(e) =>
-                setFormData((prev) => ({ ...prev, title: e.target.value }))
+                setFormData(prev => ({ ...prev, title: e.target.value }))
               }
             />
           </div>
+
+          {hasContentSections && selectFields.map((field, index) => (
+            <div key={field.id} className="card mb-3 border-2 px-4 py-2 rounded-xl border-gray-700">
+              <div className="card-header">
+                <h4 className="card-title flex justify-between items-center mb-2">
+                  Content Section
+                  <div className="flex items-center gap-5">
+                    {index > 0 && (
+                      <button
+                        onClick={() => removeSelectField(field.id)}
+                        className="text-red-500 text-3xl mt-3"
+                      >
+                        -
+                      </button>
+                    )}
+                    {index === selectFields.length - 1 && (
+                      <button
+                        onClick={addSelectField}
+                        className="flex items-center gap-2 text-blue-500 mt-4"
+                      >
+                        <span className="text-3xl">+</span>
+                      </button>
+                    )}
+                  </div>
+                </h4>
+              </div>
+              <div className="card-body">
+                <div className="form-group mb-3">
+                  <SelectBulk
+                    options={field.options}
+                    value={field.value}
+                    onChange={(value) => handleSelectChange(field.id, value)}
+                    className="form-control"
+                  />
+                </div>
+                
+                {field.value?.value === "text" && (
+                  <div className="form-group text-black">
+                    
+                      <JoditEditor
+                        ref={editor}
+                        value={field.textContent || ""}
+                        onChange={(newContent) => handleTextChange(field.id, newContent)}
+                      />
+                  
+                  </div>
+                )}
+
+                {(field.value?.value === "image" || 
+                  field.value?.value === "full-image" || 
+                  field.value?.value === "big-image") && (
+                  <div className="form-group">
+                    <SelectFileInput
+                      onImageUpload={(imageId) => 
+                        handleImageChange(field.id, imageId, field.value?.value)
+                      }
+                      existingImage={
+                        item ? {
+                          id: item[field.value?.value.replace('-', '')],
+                          name: "Existing image"
+                        } : field.imageFile
+                      }
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
+
         <div className="space-y-6">
           <div>
-            <ComponentCategory title="Category" link={categoryLink}>
+            <ComponentCategory title="Category" link={`/Dashboard/Category${contentType.charAt(0).toUpperCase() + contentType.slice(1)}`}>
               <div className="items-center gap-4 space-y-5">
                 {categories.map((category) => (
                   <div key={category._id} className="flex items-center gap-3">
@@ -144,12 +339,13 @@ const GenericForm = ({
               </div>
             </ComponentCategory>
           </div>
+          
           <ImageProvider>
             <FileInputExample
               onImageUpload={(imageId) =>
-                setFormData((prev) => ({ ...prev, imageId }))
+                setFormData(prev => ({ ...prev, imageId }))
               }
-              imageId={initialData?.imageId}
+              imageId={item?.imageId || item?.FeaturedImage}
             />
           </ImageProvider>
         </div>

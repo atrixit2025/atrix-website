@@ -61,7 +61,7 @@ export const BlogCategoryProvider = ({ children }) => {
   };
 
   // Delete a Blogcategory
-  const deleteBlogCategory = async (name) => {
+  const deleteCategory = async (name) => {
     try {
       await axios.delete(`http://localhost:5300/BlogCategory/blog/category/name/${name}`);
       setCategories((prevCategories) =>
@@ -104,7 +104,7 @@ export const BlogCategoryProvider = ({ children }) => {
   }, []);
 
   return (
-    <BlogCategoryContext.Provider value={{ categories, fetchCategories, addBlogCategory, editBlogCategory, deleteBlogCategory, fetchParentCategories, fetchCategoryCounts, categoryCounts }}>
+    <BlogCategoryContext.Provider value={{ categories, fetchCategories, addBlogCategory, editBlogCategory, deleteCategory, fetchParentCategories, fetchCategoryCounts, categoryCounts }}>
       {children}
     </BlogCategoryContext.Provider>
   );

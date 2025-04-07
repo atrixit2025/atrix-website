@@ -8,37 +8,83 @@ app.use(express.json());
 const PortfolioRouter = express.Router();
 
 PortfolioRouter.post("/add", async (req, res) => {
-  const { title, category, imageId } = req.body; 
-  if (!title || !category || !imageId) {
-    return res.status(400).json({ message: "Title, category, and imageId are required" });
+  const { title, category, FeaturedImageId, contentSections } = req.body;
+  // console.log("Received body:", req.body);
+  if (!title || !category || !FeaturedImageId) {
+    return res.status(400).json({ 
+      message: "Title, category, and featured image are required"
+    });
+  }
+
+  // Validate contentSections exists and is an array
+  if (!Array.isArray(contentSections)) {
+    return res.status(400).json({
+      message: "contentSections must be an array",
+      received: contentSections
+    });
   }
 
   try {
     const newPortfolio = new Portfolio({
       title,
       category,
-      
-      image: imageId, 
+      FeaturedImage: FeaturedImageId,
+      contentSections: contentSections.map(section => {
+        // Validate each section has a type
+        if (!section.type) {
+          throw new Error("Each content section must have a type");
+        }
+
+        if (section.type === 'text') {
+          return {
+            type: 'text',
+            content: section.content || "" // Default to empty string
+          };
+        } else {
+          if (!section.imageId) {
+            throw new Error(`Image section must have an imageId`);
+          }
+          return {
+            type: section.type,
+            imageId: section.imageId
+          };
+        }
+      }),
+      updatedAt: new Date()
     });
 
-    await newPortfolio.save();
-    res.status(201).json({ message: 'Portfolio created successfully', Portfolio: newPortfolio });
+    const savedPortfolio = await newPortfolio.save();
+    res.status(201).json({ 
+      message: 'Portfolio created successfully', 
+      Portfolio: savedPortfolio 
+    });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: 'Error creating Portfolio', error: error.message });
+    console.error("Save error:", error);
+    res.status(500).json({ 
+      message: 'Error creating Portfolio', 
+      error: error.message,
+      details: error.errors // This will show validation errors if any
+    });
   }
 });
 
 PortfolioRouter.get("/get", async (req, res) => {
   try {
-    const portfolio = await Portfolio.find({}).populate('image'); 
-    if (!portfolio.length) {
-      return res.status(404).json({ message: "No technologies found" });
+    const portfolios = await Portfolio.find({}).populate('FeaturedImage', 'url'); // Assuming you have a reference
+    if (!portfolios.length) {
+      return res.status(404).json({ message: "No portfolios found" });
     }
-    return res.json({ Portfolio: portfolio });
+    
+    // Map portfolios to include image URLs
+    const portfoliosWithUrls = portfolios.map(portfolio => ({
+      ...portfolio.toObject(),
+      FeaturedImageUrl: portfolio.FeaturedImage?.url || null
+    }));
+    
+    return res.json({ Portfolio: portfoliosWithUrls });
   } catch (error) {
-    console.error("Error fetching Portfolio:", error);
-    return res.status(500).json({ message: "Error fetching Portfolio", error: error.message });
+    console.error("Error fetching portfolio:", error);
+    return res.status(500).json({ message: "Error fetching portfolio", error: error.message });
   }
 });
 
@@ -119,6 +165,37 @@ PortfolioRouter.delete("/delete", async (req, res) => {
       res.status(500).json({ message: "Error deleting Portfolio", error: error.message });
     }
   });
+
+
+    PortfolioRouter.get("/count/category", async (req, res) => {
+      try {
+        const Portfolios = await Portfolio.find({});
+        
+        // Create a map to count categories
+        const categoryCounts = {};
+        
+        Portfolios.forEach(tech => {
+          const categories = tech.category.split(", ");
+          categories.forEach(cat => {
+            categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+          });
+        });
+    
+        // Convert to array format
+        const result = Object.keys(categoryCounts).map(category => ({
+          category,
+          count: categoryCounts[category]
+        }));
+    
+        res.status(200).json({ categoryCounts: result });
+      } catch (error) {
+        console.error("Error counting Portfolios by category:", error);
+        res.status(500).json({ 
+          message: "Error counting Portfolios by category", 
+          error: error.message 
+        });
+      }
+    });
 
 export default PortfolioRouter;
 

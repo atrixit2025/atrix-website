@@ -382,16 +382,33 @@ export default function Blog() {
     }
   };
 
-  const handleEdit = (item) => {
-    navigate("/Dashboard/AddNewBlog", { 
-      state: { 
-        blog: {
-          ...item,
-          imageId: item.FeaturedImageId // Make sure this matches what AddNewBlog expects
-        } 
-      } 
-    });
-  };
+// In Blog.js
+// const handleEdit = (item) => {
+//   console.log("Edit handler received:", item);
+//   navigate("/Dashboard/AddNewBlog", { 
+//     state: { 
+//       blog: {
+//         id: item.id,
+//         title: item.name,
+//         category: item.Category,
+//         FeaturedImage: item.FeaturedImageId,
+//         // Include content sections if available
+//         contentSections: item.contentSections || [],
+//         // Include any other fields your form needs
+//         text: item.description // If you have a text field
+//       } 
+//     } 
+//   });
+// };
+const handleEdit = (item) => {
+  console.log("Edit handler received:", item);
+  navigate("/Dashboard/AddNewBlog", { 
+    state: { 
+      blog: item // pass the full item with all necessary fields
+    } 
+  });
+};
+
 
   const columns = [
     { key: "name", title: "Title" },
@@ -427,8 +444,6 @@ export default function Blog() {
         onBulkDelete={handleBulkDelete}
       />
 
-
-      <div></div>
     </>
   );
 }

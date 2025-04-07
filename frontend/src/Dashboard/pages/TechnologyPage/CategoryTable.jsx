@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { CategoryContext } from "../../ContextApi/CategoryContextApi";
+import { TechnologyCategoryContext } from "../../ContextApi/CategoryContextApi";
 import {
   Table,
   TableBody,
@@ -14,7 +14,7 @@ import axios from "axios";
 import SelectBulk from "../../components/form/SelectBulk";
 
 export default function CategoryTable({ onEditClick }) {
-  const { categories, deleteCategory, fetchCategories,fetchCategoryCounts ,categoryCounts} = useContext(CategoryContext);
+  const { categories, deleteCategory, fetchCategories,fetchCategoryCounts ,categoryCounts} = useContext(TechnologyCategoryContext);
   const [selectedRows, setSelectedRows] = useState([]);
   const [bulkAction, setBulkAction] = useState('');
 

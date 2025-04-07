@@ -1,5 +1,11 @@
 import mongoose from "mongoose";
 
+const contentSectionSchema = new mongoose.Schema({
+    type: { type: String, enum: ['text', 'image', 'full-image', 'big-image'], required: true },
+    content: { type: String }, 
+    imageId: { type: String }  
+  });
+
 const BlogSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -9,23 +15,14 @@ const BlogSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    text:{
-        type: String,
-        default: ""
-    },
+    
     FeaturedImage: {
         type: String,
         required: true
     },
-    image: {
-        type: String
-    }, 
-    fullImage: {
-        type: String
-    },
-    bigImage: {
-        type: String
-    },
+
+    contentSections: [contentSectionSchema],
+    
     updatedAt: {
         type: Date,
         default: Date.now

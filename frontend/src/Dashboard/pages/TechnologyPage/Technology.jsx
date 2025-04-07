@@ -25,31 +25,48 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import PageBreadcrumb from "../../components/common/PageBreadCrumb";
 import GenericDataTable from "../../components/GenericDataTable/GenericDataTable";
-import { CategoryContext } from "../../ContextApi/CategoryContextApi";
+import { TechnologyCategoryContext } from "../../ContextApi/CategoryContextApi";
 
 export default function Technology() {
   const [tableData, setTableData] = useState([]);
   const navigate = useNavigate();
-  const {fetchCategoryCounts ,categoryCounts} = useContext(CategoryContext);
+  const {fetchCategoryCounts ,categoryCounts} = useContext(TechnologyCategoryContext);
 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:5300/Technology/get");
-        const Technologys = response.data.Technology.map((tech) => ({
-          id: tech._id,
-          name: tech.title,
-          Category: tech.category,
-          Date: new Date(tech.updatedAt).toLocaleDateString(),
-          team: {
-            images: [tech.image?.image || "/images/user/user-22.jpg"],
-          },
-          imageId: tech.image?._id,
-        }));
-
-        setTableData(Technologys);
-        await fetchCategoryCounts();
+        
+        // Fetch featured images for all Technologys in parallel
+        const TechnologysWithImages = await Promise.all(
+          response.data.Technology.map(async (tech) => {
+            let featuredImageUrl = "/images/user/user-22.jpg"; // default fallback
+            
+            if (tech.FeaturedImage) {
+              try {
+                const imgResponse = await axios.get(
+                  `http://localhost:5300/Image/get/${tech.FeaturedImage}`
+                );
+                featuredImageUrl = imgResponse.data.Image?.image || featuredImageUrl;
+              } catch (error) {
+                console.error("Error fetching featured image:", error);
+              }
+            }
+            
+            return {
+              id: tech._id,
+              name: tech.title,
+              Category: tech.category,
+              description: tech.text, // Changed from tech.description to tech.text
+              Date: new Date(tech.updatedAt).toLocaleDateString(),
+              featuredImage: featuredImageUrl,
+              FeaturedImageId: tech.FeaturedImage,
+            };
+          })
+        );
+        
+        setTableData(TechnologysWithImages);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -96,20 +113,16 @@ export default function Technology() {
   const columns = [
     { key: "name", title: "Title" },
     { key: "Category", title: "Category" },
-    {
-      key: "team",
-      title: "Images",
+    { 
+      key: "featuredImage", 
+      title: "Featured Image",
       render: (item) => (
-        <div className="flex -space-x-2">
-          {item.team.images.map((img, i) => (
-            <div key={i} className="w-12 h-12 overflow-hidden">
-              <img
-                src={`http://localhost:5300${img}`}
-                alt={`Image ${i}`}
-                className="w-full size-11"
-              />
-            </div>
-          ))}
+        <div className="w-16 h-16 overflow-hidden  rounded">
+          <img
+            src={`http://localhost:5300${item.featuredImage}`}
+            alt="Featured"
+            className="w-full h-full object-cover"
+          />
         </div>
       )
     },

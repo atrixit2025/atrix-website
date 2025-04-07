@@ -173,21 +173,14 @@
 import React, { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import GenericForm from "../../components/form/form-Add-New/GenericForm";
-import { CategoryContext } from "../../ContextApi/CategoryContextApi";
+import { TechnologyCategoryContext } from "../../ContextApi/CategoryContextApi";
 
 export default function NewAddTechnology() {
   const location = useLocation();
   const { technology } = location.state || {};
-  const { fetchCategoryCounts } = useContext(CategoryContext);
+  const { fetchCategoryCounts } = useContext(TechnologyCategoryContext);
 
-  // Function to pass to GenericForm that will be called after successful submission
-  const handleSuccess = async () => {
-    try {
-      await fetchCategoryCounts(); // Update category counts after successful operation
-    } catch (error) {
-      console.error("Error updating category counts:", error);
-    }
-  };
+
 
   return (
     <GenericForm
@@ -197,8 +190,10 @@ export default function NewAddTechnology() {
       categoryEndpoint="http://localhost:5300/category/get"
       redirectPath="/Dashboard/Technology"
       categoryLink="/Dashboard/CategoryTechnology"
+      contentType="technology"
       initialData={technology}
-      onSuccess={handleSuccess} // Pass the success handler
+      hasContentSections={true}
+      hasRichText={false} 
     />
   );
 }
