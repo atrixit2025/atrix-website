@@ -42,7 +42,7 @@ export default function Navbar() {
                   key={item.name}
                   to={item.path}
                   aria-current={location.pathname === item.path ? 'page' : undefined}
-                  className={`${location.pathname === item.path ? 'bg-(--navbarUlbgcolor) text-(--blue)' : 'text-(--white) hover:bg-(--navbarUlbgcolor) hover:text-(--blue)'
+                  className={`${location.pathname === item.path ? 'bg-(--black) text-(--blue)' : 'text-(--white) hover:bg-(--black) hover:text-(--blue)'
                     } rounded-md px-3 py-1 lg:text-lg md:text-sm sm:text-sm text-[2px] font-bold`}
                 >
                   {item.name}
@@ -56,25 +56,25 @@ export default function Navbar() {
           </div>
 
           <div className="left-0 flex items-center justify-end xl:hidden">
-            <DisclosureButton className="group relative inline-flex items-center justify-end rounded-md p-2 text-(--white) bg-(--navbarUlbgcolor) hover:bg-(--black) hover:text-(--white) focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset">
+            <DisclosureButton className="group relative inline-flex items-center justify-end rounded-md p-2 text-(--white) bg-(--black) hover:bg-(--black) hover:text-(--white) focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset">
               <span className="absolute -inset-0.5" />
               <span className="sr-only">Open main menu</span>
-              <Bars3Icon aria-hidden="true" className="block size-6 group-data-open:hidden bg-(--navbarUlbgcolor)" />
-              <XMarkIcon aria-hidden="true" className="hidden size-6 group-data-open:block bg-(--navbarUlbgcolor)" />
+              <Bars3Icon aria-hidden="true" className="block size-6 group-data-open:hidden bg-(--black)" />
+              <XMarkIcon aria-hidden="true" className="hidden size-6 group-data-open:block bg-(--black)" />
             </DisclosureButton>
           </div>
         </div>
       </div>
 
       <DisclosurePanel className="xl:hidden ">
-        <div className="space-y-1 px-2 pt-2 pb-3 bg-(--navbarUlbgcolor) z-50">
+        <div className="space-y-1 px-2 pt-2 pb-3 bg-(--black) z-50">
           {navigation.map((item) => (
             <DisclosureButton
               key={item.name}
               as={Link}
               to={item.path}
               aria-current={location.pathname === item.path ? 'page' : undefined}
-              className={`${location.pathname === item.path ? 'bg-(--navbarUlbgcolor) text-(--blue)' : 'text-(--white) hover:bg-(--navbarUlbgcolor) hover:text-(--blue)'
+              className={`${location.pathname === item.path ? 'bg-(--black) text-(--blue)' : 'text-(--white) hover:bg-(--black) hover:text-(--blue)'
                 } block rounded-md px-3 py-2 text-base font-medium`}
             >
               {item.name}

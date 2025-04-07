@@ -50,7 +50,7 @@ const CareerFormSec = () => {
                     {/* Contact Form Section */}
                     <div>
                         <h3 className='text-4xl mb-10 '>Apply For the Role</h3>
-                        <form className="role-form bg-[#444343] rounded-3xl p-12 shadow-lg">
+                        <form className="role-form bg-(--black) rounded-3xl p-12 shadow-lg">
                             <input type="text" placeholder="Full Name" className=" text-lg w-full bg-transparent  py-2 border-b border-gray-600 text-gray-400  outline-none mb-10" />
                             <input type="email" placeholder="Email ID" className=" text-lg w-full bg-transparent b py-2 border-b border-gray-600 text-gray-400 outline-none mb-10" />
                             <input type="tel" placeholder="Phone No." className=" text-lg  w-full bg-transparent py-2  border-b border-gray-600 text-gray-400 outline-none mb-10" />
@@ -76,7 +76,6 @@ const CareerFormSec = () => {
                             <button type="submit" className=" bg-gradient-to-r from-blue-400 to-green-400 text-white py-1     px-9 rounded-full text-lg cursor-pointer mt-20 ">Submit</button>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>

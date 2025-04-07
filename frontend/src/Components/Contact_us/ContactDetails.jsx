@@ -33,7 +33,7 @@ const ContactDetails = () => {
     <div className=" container mx-auto w-[90%]">
       <div className="contact-cards-wrapper grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4  ">
         {cardsContent.map((item, index) => (
-          <div className="contact-card flex flex-col bg-[#444343] py-10 px-8 rounded-3xl shadow-2xl shadow-white/5 ">
+          <div className="contact-card flex flex-col bg-(--black) py-10 px-8 rounded-3xl shadow-2xl shadow-white/5 ">
             <h3 className="text-2xl font-bold ">{item.title}</h3>
             <p className=" flex-1 mt-4 mb-10">{item.desc}</p>
             <Link target={item.btn_name === "Google Map" ? "_blank" : '_self'} to={item.link} className="font-bold pt-4 flex items-center  cursor-pointer hover:text-(--blue) self-start  group ">
@@ -46,4 +46,4 @@ const ContactDetails = () => {
 };
 
 export default ContactDetails;
-
+  

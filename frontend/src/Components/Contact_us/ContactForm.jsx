@@ -28,7 +28,7 @@ const ContactForm = () => {
                     </div>
 
                     {/* Contact Form Section */}
-                    <div className="contact-form bg-[#444343] rounded-3xl p-12 shadow-lg">
+                    <div className="contact-form  rounded-3xl p-12 shadow-lg bg-(--black)">
                         <form>
 
 
