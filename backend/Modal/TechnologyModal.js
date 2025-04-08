@@ -1,34 +1,26 @@
 import mongoose from "mongoose";
 
-const contentSectionSchema = new mongoose.Schema({
-    type: { type: String, enum: ['text', 'image', 'full-image', 'big-image'], required: true },
-    content: { type: String }, 
-    imageId: { type: String }  
-  });
-
 const TechnologySchema = new mongoose.Schema({
-    title: {
-        type: String,
-        required: true
+    title:{
+        type:String,
+        require:true
     },
-    category: {
-        type: String,
-        required: true
+    category:{
+        type:String,
+        require:true
     },
-    
-    FeaturedImage: {
-        type: String,
+    image:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Image',
         required: true
-    },
 
-    contentSections: [contentSectionSchema],
-    
+    },
     updatedAt: {
         type: Date,
         default: Date.now
-    }
+      }
 })
 
-const Technology = mongoose.model("Technology", TechnologySchema)
+const Technology = mongoose.model("Technology",TechnologySchema)
 
 export default Technology;

@@ -440,7 +440,7 @@ import { PortfolioCategoryContext } from "../../ContextApi/PortfolioCategoryCont
 export default function AddNewPortfolio() {
   const location = useLocation();
   const { portfolio } = location.state || {};
-
+  // console.log("portfolio", portfolio);
   return (
     <GenericForm
       title="Add New Portfolio"
@@ -449,6 +449,8 @@ export default function AddNewPortfolio() {
       categoryEndpoint="http://localhost:5300/PortfolioCategory/portfolio/category/get"
       redirectPath="/Dashboard/Portfolio"
       contentType="portfolio"
+      item={portfolio}
+
       hasContentSections={true}
       hasRichText={false} // Example: Portfolios might not need rich text
       initialData={portfolio}

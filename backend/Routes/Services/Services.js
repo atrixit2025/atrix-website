@@ -1,13 +1,13 @@
 import express from "express";
 import cors from "cors";
-import Portfolio from "../../Modal/PortfolioModals/PortfolioModals.js";
+import Services from "../../Modal/ServicesModals/ServicesModals.js";
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-const PortfolioRouter = express.Router();
+const ServicesRouter = express.Router();
 
-PortfolioRouter.post("/add", async (req, res) => {
+ServicesRouter.post("/add", async (req, res) => {
   const { title, category, FeaturedImageId, contentSections } = req.body;
   // console.log("Received body:", req.body);
   if (!title || !category || !FeaturedImageId) {
@@ -25,7 +25,7 @@ PortfolioRouter.post("/add", async (req, res) => {
   }
 
   try {
-    const newPortfolio = new Portfolio({
+    const newServices = new Services({
       title,
       category,
       FeaturedImage: FeaturedImageId,
@@ -53,43 +53,72 @@ PortfolioRouter.post("/add", async (req, res) => {
       updatedAt: new Date()
     });
 
-    const savedPortfolio = await newPortfolio.save();
+    const savedServices = await newServices.save();
     res.status(201).json({ 
-      message: 'Portfolio created successfully', 
-      Portfolio: savedPortfolio 
+      message: 'Services created successfully', 
+      Services: savedServices 
     });
   } catch (error) {
     console.error("Save error:", error);
     res.status(500).json({ 
-      message: 'Error creating Portfolio', 
+      message: 'Error creating Services', 
       error: error.message,
       details: error.errors // This will show validation errors if any
     });
   }
 });
 
-PortfolioRouter.get("/get", async (req, res) => {
+ServicesRouter.get("/get", async (req, res) => {
   try {
-    const portfolios = await Portfolio.find({}).populate('FeaturedImage', 'url'); // Assuming you have a reference
-    if (!portfolios.length) {
-      return res.status(404).json({ message: "No portfolios found" });
+    const Servicess = await Services.find({}).populate('FeaturedImage', 'url'); // Assuming you have a reference
+    if (!Servicess.length) {
+      return res.status(404).json({ message: "No Servicess found" });
     }
     
-    // Map portfolios to include image URLs
-    const portfoliosWithUrls = portfolios.map(portfolio => ({
-      ...portfolio.toObject(),
-      FeaturedImageUrl: portfolio.FeaturedImage?.url || null
+    // Map Servicess to include image URLs
+    const ServicessWithUrls = Servicess.map(Services => ({
+      ...Services.toObject(),
+      FeaturedImageUrl: Services.FeaturedImage?.url || null
     }));
     
-    return res.json({ Portfolio: portfoliosWithUrls });
+    return res.json({ Services: ServicessWithUrls });
   } catch (error) {
-    console.error("Error fetching portfolio:", error);
-    return res.status(500).json({ message: "Error fetching portfolio", error: error.message });
+    console.error("Error fetching Services:", error);
+    return res.status(500).json({ message: "Error fetching Services", error: error.message });
   }
 });
 
 
-PortfolioRouter.put("/edit", async (req, res) => {
+// ServicesRouter.put("/edit", async (req, res) => {
+//   const { id, title, category,text, imageId } = req.body; 
+
+//   if (!id || !title || !category ||! text|| !imageId) {
+//     return res.status(400).json({ message: "ID, title, category,text, and imageId are required" });
+//   }
+
+//   try {
+
+//     const existingServices = await Services.findById(id);
+//     if (!existingServices) {
+//       return res.status(404).json({ message: "Services not found" });
+//     }
+
+//     existingServices.title = title;
+//     existingServices.category = category;
+//     existingServices.text = text;
+
+//     existingServices.image = imageId;
+
+//     const updatedServices = await existingServices.save();
+
+//     res.status(200).json({ message: "Services updated successfully", Services: updatedServices });
+//   } catch (error) {
+//     console.error("Error updating Services:", error);
+//     res.status(500).json({ message: "Error updating Services", error: error.message });
+//   }
+// });
+
+ServicesRouter.put("/edit", async (req, res) => {
   const { 
     id, // Now coming from request body instead of URL params
     title, 
@@ -100,7 +129,7 @@ PortfolioRouter.put("/edit", async (req, res) => {
 
   // Basic validation
   if (!id) {
-    return res.status(400).json({ message: "Portfolio ID is required in the request body" });
+    return res.status(400).json({ message: "Services ID is required in the request body" });
   }
 
   if (!title || !category || !FeaturedImageId) {
@@ -117,10 +146,10 @@ PortfolioRouter.put("/edit", async (req, res) => {
   }
 
   try {
-    // Find the existing Portfolio
-    const existingPortfolio = await Portfolio.findById(id);
-    if (!existingPortfolio) {
-      return res.status(404).json({ message: "Portfolio not found" });
+    // Find the existing Services
+    const existingServices = await Services.findById(id);
+    if (!existingServices) {
+      return res.status(404).json({ message: "Services not found" });
     }
 
     // Prepare update data
@@ -155,28 +184,29 @@ PortfolioRouter.put("/edit", async (req, res) => {
       });
     }
 
-    // Update the Portfolio
-    const updatedPortfolio = await Portfolio.findByIdAndUpdate(
+    // Update the Services
+    const updatedServices = await Services.findByIdAndUpdate(
       id, 
       updateData, 
       { new: true } // Return the updated document
     );
 
     res.status(200).json({ 
-      message: "Portfolio updated successfully", 
-      Portfolio: updatedPortfolio 
+      message: "Services updated successfully", 
+      Services: updatedServices 
     });
   } catch (error) {
-    console.error("Error updating Portfolio:", error);
+    console.error("Error updating Services:", error);
     res.status(500).json({ 
-      message: "Error updating Portfolio", 
+      message: "Error updating Services", 
       error: error.message,
       ...(error.errors && { details: error.errors })
     });
   }
 });
 
-PortfolioRouter.delete("/delete", async (req, res) => {
+
+ServicesRouter.delete("/delete", async (req, res) => {
     const { titles, categories } = req.body;
   
     // Handle bulk delete
@@ -195,15 +225,15 @@ PortfolioRouter.delete("/delete", async (req, res) => {
           }
         }));
   
-        const result = await Portfolio.bulkWrite(deleteOperations);
+        const result = await Services.bulkWrite(deleteOperations);
         
         return res.status(200).json({ 
-          message: `${result.deletedCount} technologies deleted successfully`,
+          message: `${result.deletedCount} Servicess deleted successfully`,
           result
         });
       } catch (error) {
-        console.error("Error bulk deleting technologies:", error);
-        return res.status(500).json({ message: "Error bulk deleting technologies", error: error.message });
+        console.error("Error bulk deleting Servicess:", error);
+        return res.status(500).json({ message: "Error bulk deleting Servicess", error: error.message });
       }
     }
   
@@ -214,49 +244,48 @@ PortfolioRouter.delete("/delete", async (req, res) => {
     }
   
     try {
-      const deletedPortfolio = await Portfolio.findOneAndDelete({ title, category });
-      if (!deletedPortfolio) {
-        return res.status(404).json({ message: "Portfolio not found" });
+      const deletedServices = await Services.findOneAndDelete({ title, category });
+      if (!deletedServices) {
+        return res.status(404).json({ message: "Services not found" });
       }
-      res.status(200).json({ message: "Portfolio deleted successfully", portfolio: deletedPortfolio });
+      res.status(200).json({ message: "Services deleted successfully", Services: deletedServices });
     } catch (error) {
-      console.error("Error deleting Portfolio:", error);
-      res.status(500).json({ message: "Error deleting Portfolio", error: error.message });
+      console.error("Error deleting Services:", error);
+      res.status(500).json({ message: "Error deleting Services", error: error.message });
     }
   });
 
-
-    PortfolioRouter.get("/count/category", async (req, res) => {
-      try {
-        const Portfolios = await Portfolio.find({});
-        
-        // Create a map to count categories
-        const categoryCounts = {};
-        
-        Portfolios.forEach(tech => {
-          const categories = tech.category.split(", ");
-          categories.forEach(cat => {
-            categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
-          });
+  ServicesRouter.get("/count/category", async (req, res) => {
+    try {
+      const Servicess = await Services.find({});
+      
+      // Create a map to count categories
+      const categoryCounts = {};
+      
+      Servicess.forEach(tech => {
+        const categories = tech.category.split(", ");
+        categories.forEach(cat => {
+          categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
         });
-    
-        // Convert to array format
-        const result = Object.keys(categoryCounts).map(category => ({
-          category,
-          count: categoryCounts[category]
-        }));
-    
-        res.status(200).json({ categoryCounts: result });
-      } catch (error) {
-        console.error("Error counting Portfolios by category:", error);
-        res.status(500).json({ 
-          message: "Error counting Portfolios by category", 
-          error: error.message 
-        });
-      }
-    });
+      });
+  
+      // Convert to array format
+      const result = Object.keys(categoryCounts).map(category => ({
+        category,
+        count: categoryCounts[category]
+      }));
+  
+      res.status(200).json({ categoryCounts: result });
+    } catch (error) {
+      console.error("Error counting Servicess by category:", error);
+      res.status(500).json({ 
+        message: "Error counting Servicess by category", 
+        error: error.message 
+      });
+    }
+  });
 
-export default PortfolioRouter;
+export default ServicesRouter;
 
 
 

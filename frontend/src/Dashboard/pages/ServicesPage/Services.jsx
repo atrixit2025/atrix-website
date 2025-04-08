@@ -11,17 +11,41 @@ export default function Services() {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:5300/Services/get");
-        const services = response.data.Services.map((tech) => ({
-          id: tech._id,
-          name: tech.title,
-          Category: tech.category,
-          Date: new Date(tech.updatedAt).toLocaleDateString(),
-          team: {
-            images: [tech.image?.image || "/images/user/user-22.jpg"],
-          },
-          imageId: tech.image?._id,
-        }));
-        setTableData(services);
+        
+        const ServicessWithImages = await Promise.all(
+          response.data.Services.map(async (services) => {
+            let featuredImageUrl = "/images/user/user-22.jpg";
+            
+            if (services.FeaturedImage) {
+              try {
+                const imgResponse = await axios.get(
+                  `http://localhost:5300/Image/get/${services.FeaturedImage}`
+                );
+                featuredImageUrl = imgResponse.data.Image?.image || featuredImageUrl;
+              } catch (error) {
+                console.error("Error fetching featured image:", error);
+              }
+            }
+            
+            return {
+              id: services._id,
+              name: services.title,
+              Category: services.category,
+              description: services.text,
+              Date: new Date(services.updatedAt).toLocaleDateString(),
+              featuredImage: featuredImageUrl,
+              FeaturedImageId: services.FeaturedImage,
+              // Include all the content sections
+              contentSections: services.contentSections || [],
+              // Include any other fields you need
+              updatedAt: services.updatedAt,
+              // Add other fields as needed
+              
+            };
+          })
+        );
+        
+        setTableData(ServicessWithImages);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -60,29 +84,49 @@ export default function Services() {
   };
 
   const handleEdit = (item) => {
-    navigate("/Dashboard/AddNewServices", { state: { Services: item } });
+    navigate("/Dashboard/AddNewServices", { 
+      state: { 
+        item: {
+          id: item.id,
+          title: item.name,
+          category: item.Category,
+          FeaturedImage: item.FeaturedImageId,
+          featuredImageUrl: item.featuredImage,
+          contentSections: item.contentSections.map(section => ({
+            ...section,
+            // Add imageUrl if you have it, or we'll fetch it in the form
+            imageUrl: section.imageId ? `http://localhost:5300/Image/get/${section.imageId}` : null
+          })),
+          text: item.description,
+        } 
+      } 
+    });
   };
+ 
 
   const columns = [
     { key: "name", title: "Title" },
     { key: "Category", title: "Category" },
     { 
-      key: "team", 
-      title: "Images",
+      key: "featuredImage", 
+      title: "Featured Image",
       render: (item) => (
-        <div className="flex -space-x-2">
-          {item.team.images.map((img, i) => (
-            <div key={i} className="w-12 h-12 overflow-hidden">
-              <img
-                src={`http://localhost:5300${img}`}
-                alt={`Image ${i}`}
-                className="w-full size-11"
-              />
-            </div>
-          ))}
+        <div className="w-16 h-16 overflow-hidden rounded">
+          <img
+            src={`http://localhost:5300${item.featuredImage}`}
+            alt="Featured"
+            className="w-full h-full object-cover"
+          />
         </div>
       )
     },
+    // { 
+    //   key: "contentSections", 
+    //   title: "Sections",
+    //   render: (item) => (
+    //     <span>{item.contentSections?.length || 0} sections</span>
+    //   )
+    // },
     { key: "Date", title: "Date" }
   ];
 

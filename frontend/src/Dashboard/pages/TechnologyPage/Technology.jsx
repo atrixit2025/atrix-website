@@ -37,36 +37,26 @@ export default function Technology() {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:5300/Technology/get");
-        
-        // Fetch featured images for all Technologys in parallel
-        const TechnologysWithImages = await Promise.all(
-          response.data.Technology.map(async (tech) => {
-            let featuredImageUrl = "/images/user/user-22.jpg"; // default fallback
-            
-            if (tech.FeaturedImage) {
-              try {
-                const imgResponse = await axios.get(
-                  `http://localhost:5300/Image/get/${tech.FeaturedImage}`
-                );
-                featuredImageUrl = imgResponse.data.Image?.image || featuredImageUrl;
-              } catch (error) {
-                console.error("Error fetching featured image:", error);
-              }
-            }
-            
-            return {
-              id: tech._id,
-              name: tech.title,
-              Category: tech.category,
-              description: tech.text, // Changed from tech.description to tech.text
-              Date: new Date(tech.updatedAt).toLocaleDateString(),
-              featuredImage: featuredImageUrl,
-              FeaturedImageId: tech.FeaturedImage,
-            };
-          })
-        );
-        
-        setTableData(TechnologysWithImages);
+        const Technologys = response.data.Technology.map((tech) => {
+          // Check if image data is populated
+          const imageUrl = tech.image?.image 
+            ? tech.image.image 
+            : "/images/user/user-22.jpg"; // Fallback image
+          
+          return {
+            id: tech._id,
+            name: tech.title,
+            Category: tech.category,
+            Date: new Date(tech.updatedAt).toLocaleDateString(),
+            team: {
+              images: [imageUrl], // Use the proper image URL
+            },
+            imageId: tech.image?._id,
+          };
+        });
+  
+        setTableData(Technologys);
+        await fetchCategoryCounts();
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -113,15 +103,19 @@ export default function Technology() {
   const columns = [
     { key: "name", title: "Title" },
     { key: "Category", title: "Category" },
-    { 
-      key: "featuredImage", 
-      title: "Featured Image",
+    {
+      key: "team",
+      title: "Image",
       render: (item) => (
-        <div className="w-16 h-16 overflow-hidden  rounded">
+        <div className="w-16 h-16 overflow-hidden rounded">
           <img
-            src={`http://localhost:5300${item.featuredImage}`}
-            alt="Featured"
+            src={`http://localhost:5300${item.team.images[0]}`}
+            alt="Technology"
             className="w-full h-full object-cover"
+            onError={(e) => {
+              e.target.onerror = null; 
+              e.target.src = "/images/user/user-22.jpg";
+            }}
           />
         </div>
       )

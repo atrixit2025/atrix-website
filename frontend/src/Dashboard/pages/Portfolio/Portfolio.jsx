@@ -16,13 +16,13 @@ export default function Portfolio() {
         const response = await axios.get("http://localhost:5300/Portfolio/get");
         
         const PortfoliosWithImages = await Promise.all(
-          response.data.Portfolio.map(async (tech) => {
+          response.data.Portfolio.map(async (portfolio) => {
             let featuredImageUrl = "/images/user/user-22.jpg";
             
-            if (tech.FeaturedImage) {
+            if (portfolio.FeaturedImage) {
               try {
                 const imgResponse = await axios.get(
-                  `http://localhost:5300/Image/get/${tech.FeaturedImage}`
+                  `http://localhost:5300/Image/get/${portfolio.FeaturedImage}`
                 );
                 featuredImageUrl = imgResponse.data.Image?.image || featuredImageUrl;
               } catch (error) {
@@ -31,13 +31,19 @@ export default function Portfolio() {
             }
             
             return {
-              id: tech._id,
-              name: tech.title,
-              Category: tech.category,
-              description: tech.text, // Changed from tech.description to tech.text
-              Date: new Date(tech.updatedAt).toLocaleDateString(),
+              id: portfolio._id,
+              name: portfolio.title,
+              Category: portfolio.category,
+              description: portfolio.text,
+              Date: new Date(portfolio.updatedAt).toLocaleDateString(),
               featuredImage: featuredImageUrl,
-              FeaturedImageId: tech.FeaturedImage,
+              FeaturedImageId: portfolio.FeaturedImage,
+              // Include all the content sections
+              contentSections: portfolio.contentSections || [],
+              // Include any other fields you need
+              updatedAt: portfolio.updatedAt,
+              // Add other fields as needed
+              
             };
           })
         );
@@ -81,13 +87,21 @@ export default function Portfolio() {
       throw error;
     }
   };
-
   const handleEdit = (item) => {
     navigate("/Dashboard/AddNewPortfolio", { 
       state: { 
-        Portfolio: {
-          ...item,
-          imageId: item.FeaturedImageId // Make sure this matches what AddNewPortfolio expects
+        item: {
+          id: item.id,
+          title: item.name,
+          category: item.Category,
+          FeaturedImage: item.FeaturedImageId,
+          featuredImageUrl: item.featuredImage,
+          contentSections: item.contentSections.map(section => ({
+            ...section,
+            // Add imageUrl if you have it, or we'll fetch it in the form
+            imageUrl: section.imageId ? `http://localhost:5300/Image/get/${section.imageId}` : null
+          })),
+          text: item.description,
         } 
       } 
     });
@@ -100,7 +114,7 @@ export default function Portfolio() {
       key: "featuredImage", 
       title: "Featured Image",
       render: (item) => (
-        <div className="w-16 h-16 overflow-hidden  rounded">
+        <div className="w-16 h-16 overflow-hidden rounded">
           <img
             src={`http://localhost:5300${item.featuredImage}`}
             alt="Featured"
@@ -109,6 +123,13 @@ export default function Portfolio() {
         </div>
       )
     },
+    // { 
+    //   key: "contentSections", 
+    //   title: "Sections",
+    //   render: (item) => (
+    //     <span>{item.contentSections?.length || 0} sections</span>
+    //   )
+    // },
     { key: "Date", title: "Date" }
   ];
 

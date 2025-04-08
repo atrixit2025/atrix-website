@@ -10,12 +10,15 @@ import { GrFormSubtract } from "react-icons/gr";
 
 
 
-const SelectFileInput = ({ onImageUpload, imageId,existingImage  }) => {
+const SelectFileInput = ({ onImageUpload, imageId, imageType, existingImage }) => {
+    const [previewUrl, setPreviewUrl] = useState(existingImage?.url || null);
     const [isOpen, setIsOpen] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [showUploadSection, setShowUploadSection] = useState(true);
     const [showAllImagesSection, setShowAllImagesSection] = useState(false);
-    const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedImage, setSelectedImage] = useState(
+        existingImage?.url || (imageId ? `http://localhost:5300/Image/get/${imageId}` : null)
+    );
     const [allImages, setAllImages] = useState([]);
     const [selectedImageUrl, setSelectedImageUrl] = useState(null);
     const [hoveredImage, setHoveredImage] = useState(null);
@@ -40,30 +43,46 @@ const SelectFileInput = ({ onImageUpload, imageId,existingImage  }) => {
     };
 
 
+    // useEffect(() => {
+    //     if (imageId) {
+    //         const fetchImageData = async () => {
+    //             try {
+    //                 const response = await axios.get(`http://localhost:5300/Image/get/${imageId}`);
+    //                 const imageData = response.data.Image;
+
+    //                 if (imageData) {
+    //                     setSelectedImage(imageData.image);
+    //                     setSelectedImageUrl(imageData.image);
+    //                     // console.log("Fetching image data for imageId:", imageId);
+    //                     const response = await axios.get(`http://localhost:5300/Image/get/${imageId}`);
+    //                     console.log("Response from backend:", response.data);
+    //                 } else {
+    //                     console.error("No imageData found for imageId:", imageId);
+    //                 }
+    //             } catch (error) {
+    //                 console.error("Error fetching image data:", error);
+    //             }
+    //         };
+
+    //         fetchImageData();
+    //     }
+    // }, [imageId]);
     useEffect(() => {
-        if (imageId) {
-            const fetchImageData = async () => {
+        const fetchImage = async () => {
+            if (imageId && !existingImage?.url) {
                 try {
                     const response = await axios.get(`http://localhost:5300/Image/get/${imageId}`);
-                    const imageData = response.data.Image;
-
-                    if (imageData) {
-                        setSelectedImage(imageData.image);
-                        setSelectedImageUrl(imageData.image);
-                        // console.log("Fetching image data for imageId:", imageId);
-                        const response = await axios.get(`http://localhost:5300/Image/get/${imageId}`);
-                        console.log("Response from backend:", response.data);
-                    } else {
-                        console.error("No imageData found for imageId:", imageId);
+                    if (response.data.Image) {
+                        setSelectedImage(response.data.Image.image);
                     }
                 } catch (error) {
-                    console.error("Error fetching image data:", error);
+                    console.error("Error fetching image:", error);
                 }
-            };
+            }
+        };
 
-            fetchImageData();
-        }
-    }, [imageId]);
+        fetchImage();
+    }, [imageId, existingImage]);
 
     // Handle image upload
     const handleUpload = async (event) => {
@@ -118,11 +137,22 @@ const SelectFileInput = ({ onImageUpload, imageId,existingImage  }) => {
 
     // Handle setting a featured image
     const handleSetFeaturedImage = (imageUrl) => {
-        const imageData = allImages.find((image) => image.imageUrl === imageUrl); // Find the image data
+        if (!imageUrl) return;
+        
+        // If we're using an existing image from the content sections
+        if (existingImage) {
+            onImageUpload(existingImage.id, existingImage.type);
+            setSelectedImage(imageUrl);
+            closeModal();
+            return;
+        }
+        
+        // For newly selected images from the modal
+        const imageData = allImages.find((image) => image.imageUrl === imageUrl);
         if (imageData) {
-            setSelectedImage(imageUrl); // Set the selected image URL for display
-            onImageUpload(imageData.imageId); // Pass the MongoDB ObjectId to the parent component
-            closeModal(); // Close the modal
+            setSelectedImage(imageUrl);
+            onImageUpload(imageData.imageId, 'image'); // Default type if not specified
+            closeModal();
         }
     };
 
@@ -168,16 +198,16 @@ const SelectFileInput = ({ onImageUpload, imageId,existingImage  }) => {
                             alt="Featured"
                             className="w-52 h-52 object-contain border-gray-700 border p-1"
                         />
-                             <button
-                        onClick={handleRemoveImage}
+                        <button
+                            onClick={handleRemoveImage}
 
-                        className="absolute  cursor-pointer top-1  right-1 p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600"
-                    >
-                        <FaTrash size={14} />
-                    </button>
+                            className="absolute  cursor-pointer top-1  right-1 p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600"
+                        >
+                            <FaTrash size={14} />
+                        </button>
                     </div>
                     {/* <div className="mt-5 ">{imageId}</div> */}
-               
+
                     {/* <button
                         onClick={handleRemoveImage}
                         className="mt-2 text-red-600 hover:text-red-800"
@@ -196,7 +226,23 @@ const SelectFileInput = ({ onImageUpload, imageId,existingImage  }) => {
             )}
 
 
-
+            {previewUrl && (
+                <div className="mt-4">
+                    <p className="text-sm text-gray-500 mb-2">
+                        {imageType === 'full-image' ? 'Full Width Image' :
+                            imageType === 'big-image' ? 'Large Image' : 'Regular Image'}
+                    </p>
+                    <div className={`overflow-hidden rounded-lg border ${imageType === 'full-image' ? 'w-full' :
+                            imageType === 'big-image' ? 'w-3/4' : 'w-1/2'
+                        }`}>
+                        <img
+                            src={previewUrl.startsWith('data:') ? previewUrl : `http://localhost:5300${previewUrl}`}
+                            alt="Preview"
+                            className="w-full h-auto"
+                        />
+                    </div>
+                </div>
+            )}
 
 
             {/* Modal for Uploading and Selecting Images */}

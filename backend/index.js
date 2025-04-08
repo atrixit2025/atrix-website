@@ -12,9 +12,10 @@ import BlogCategoryRouter from './Routes/Blog/BlogCategory.js';
 import userRouter from './Routes/user.js';
 import PortfolioCategoryRouter from './Routes/Portfolio/PortfolioCategory.js';
 import PortfolioRouter from './Routes/Portfolio/Portfolio.js';
-import LogoMarqueeRouter from './Routes/Brand/Brand.js';
 import BrandRouter from './Routes/Brand/Brand.js';
 import DemoRouter from './Routes/Demo/Demo.js';
+import ServicesCategoryRouter from './Routes/Services/ServicesCategory.js';
+import ServicesRouter from './Routes/Services/Services.js';
 
 const __filename = fileURLToPath(import.meta.url); 
 const __dirname = path.dirname(__filename);
@@ -49,8 +50,12 @@ app.use("/user", userRouter);
 
 app.use("/PortfolioCategory", PortfolioCategoryRouter);
 app.use("/Portfolio",PortfolioRouter)
+
+
 app.use("/Brand",BrandRouter)
 
+app.use("/ServicesCategory", ServicesCategoryRouter);
+app.use("/Services", ServicesRouter);
 
 
 app.use("/demo",DemoRouter)

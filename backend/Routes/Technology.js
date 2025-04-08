@@ -87,83 +87,36 @@ app.use(express.json());
 const TechnologyRouter = express.Router();
 
 TechnologyRouter.post("/add", async (req, res) => {
-  const { title, category, FeaturedImageId, contentSections } = req.body;
-  // console.log("Received body:", req.body);
-  if (!title || !category || !FeaturedImageId) {
-    return res.status(400).json({ 
-      message: "Title, category, and featured image are required"
-    });
-  }
-
-  // Validate contentSections exists and is an array
-  if (!Array.isArray(contentSections)) {
-    return res.status(400).json({
-      message: "contentSections must be an array",
-      received: contentSections
-    });
+  const { title, category, imageId } = req.body; 
+  if (!title || !category || !imageId) {
+    return res.status(400).json({ message: "Title, category, and imageId are required" });
   }
 
   try {
     const newTechnology = new Technology({
       title,
       category,
-      FeaturedImage: FeaturedImageId,
-      contentSections: contentSections.map(section => {
-        // Validate each section has a type
-        if (!section.type) {
-          throw new Error("Each content section must have a type");
-        }
-
-        if (section.type === 'text') {
-          return {
-            type: 'text',
-            content: section.content || "" // Default to empty string
-          };
-        } else {
-          if (!section.imageId) {
-            throw new Error(`Image section must have an imageId`);
-          }
-          return {
-            type: section.type,
-            imageId: section.imageId
-          };
-        }
-      }),
-      updatedAt: new Date()
+      image: imageId, 
     });
 
-    const savedTechnology = await newTechnology.save();
-    res.status(201).json({ 
-      message: 'Technology created successfully', 
-      Technology: savedTechnology 
-    });
+    await newTechnology.save();
+    res.status(201).json({ message: 'Technology created successfully', technology: newTechnology });
   } catch (error) {
-    console.error("Save error:", error);
-    res.status(500).json({ 
-      message: 'Error creating Technology', 
-      error: error.message,
-      details: error.errors // This will show validation errors if any
-    });
+    console.log(error);
+    res.status(500).json({ message: 'Error creating Technology', error: error.message });
   }
 });
 
 TechnologyRouter.get("/get", async (req, res) => {
   try {
-    const technologys = await Technology.find({}).populate('FeaturedImage', 'url'); // Assuming you have a reference
-    if (!technologys.length) {
-      return res.status(404).json({ message: "No technologys found" });
+    const technology = await Technology.find({}).populate('image'); 
+    if (!technology.length) {
+      return res.status(404).json({ message: "No technologies found" });
     }
-    
-    // Map technologys to include image URLs
-    const technologysWithUrls = technologys.map(technology => ({
-      ...technology.toObject(),
-      FeaturedImageUrl: technology.FeaturedImage?.url || null
-    }));
-    
-    return res.json({ Technology: technologysWithUrls });
+    return res.json({ Technology: technology });
   } catch (error) {
-    console.error("Error fetching technology:", error);
-    return res.status(500).json({ message: "Error fetching technology", error: error.message });
+    console.error("Error fetching Technology:", error);
+    return res.status(500).json({ message: "Error fetching Technology", error: error.message });
   }
 });
 

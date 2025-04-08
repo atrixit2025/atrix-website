@@ -15,6 +15,7 @@ import { PortfolioCategoryContext } from "../../../ContextApi/PortfolioCategoryC
 
 import { ImageProvider } from "../../../ContextApi/ImageApi";
 import { TechnologyCategoryContext } from "../../../ContextApi/CategoryContextApi";
+import { ServicesCategoryContext } from "../../../ContextApi/ServicesCategoryContextApi";
 
 const GenericForm = ({
   title,
@@ -22,11 +23,11 @@ const GenericForm = ({
   apiEndpoint,
   categoryEndpoint,
   redirectPath,
-  
-  
+
+
   hasContentSections = true,
   hasRichText = true,
-  contentType = 'blog' || 'portfolio' || 'technology', 
+  contentType = 'blog' || 'portfolio' || 'technology' || 'services',
   onSuccess,
 }) => {
   const location = useLocation();
@@ -50,10 +51,11 @@ const GenericForm = ({
   }]);
 
   const { item } = location.state || {};
-  const CategoryContext = contentType === 'blog' || 'portfolio' || 'technology' ? 
-    useContext(BlogCategoryContext) : 
+  const CategoryContext = contentType === 'blog' || 'portfolio' || 'technology' || 'services' ?
+    useContext(BlogCategoryContext) :
     useContext(PortfolioCategoryContext);
-    useContext(TechnologyCategoryContext);
+  useContext(TechnologyCategoryContext);
+  useContext(ServicesCategoryContext);
 
   const { fetchCategoryCounts } = CategoryContext || {};
 
@@ -86,30 +88,44 @@ const GenericForm = ({
         imageId: item.FeaturedImage || item.imageId || null,
       });
 
-      if (hasContentSections && item.contentSections) {
-        const transformedFields = item.contentSections.map((section, index) => ({
-          id: index + 1,
-          value: { 
-            value: section.type, 
-            label: section.type === 'text' ? 'Text' : 
-                   section.type === 'image' ? 'Image' :
-                   section.type === 'full-image' ? 'Full Image' : 'Big Image' 
-          },
-          options: [
-            { value: "", label: "Select Option" },
-            { value: "text", label: "Text" },
-            { value: "image", label: "Image" },
-            { value: "full-image", label: "Full Image" },
-            { value: "big-image", label: "Big Image" }
-          ],
-          textContent: section.type === 'text' ? section.content : "",
-          imageFile: section.type !== 'text' ? { 
-            id: section.imageId, 
-            name: "Existing image",
-            type: section.type 
-          } : null
-        }));
-        setSelectFields(transformedFields);
+      // Initialize content sections if needed
+      if (hasContentSections) {
+        const initialFields = item.contentSections?.length > 0
+          ? item.contentSections.map((section, index) => ({
+            id: index + 1,
+            value: {
+              value: section.type,
+              label: section.type.charAt(0).toUpperCase() + section.type.slice(1)
+            },
+            options: [
+              { value: "", label: "Select Option" },
+              { value: "text", label: "Text" },
+              { value: "image", label: "Image" },
+              { value: "full-image", label: "Full Image" },
+              { value: "big-image", label: "Big Image" }
+            ],
+            textContent: section.type === 'text' ? section.content : "",
+            imageFile: section.type !== 'text' ? {
+              id: section.imageId,
+              name: "Existing image",
+              type: section.type
+            } : null
+          }))
+          : [{
+            id: 1,
+            value: "",
+            options: [
+              { value: "", label: "Select Option" },
+              { value: "text", label: "Text" },
+              { value: "image", label: "Image" },
+              { value: "full-image", label: "Full Image" },
+              { value: "big-image", label: "Big Image" }
+            ],
+            textContent: "",
+            imageFile: null
+          }];
+
+        setSelectFields(initialFields);
       }
     }
   }, [item, hasContentSections]);
@@ -126,36 +142,36 @@ const GenericForm = ({
 
   const handleSubmit = async () => {
     const { title, selectedCategories, imageId } = formData;
-  
+
     if (!title || selectedCategories.length === 0 || !imageId) {
       alert("Title, category, and image are required!");
       return;
     }
-  
+
     const payload = {
       title,
       category: selectedCategories.join(", "),
       FeaturedImageId: imageId,
-      ...(hasContentSections && { 
+      ...(hasContentSections && {
         contentSections: selectFields.map(field => ({
           type: field.value.value,
-          ...(field.value.value === 'text' ? { content: field.textContent } : 
-              { imageId: field.imageFile?.id || null })
+          ...(field.value.value === 'text' ? { content: field.textContent } :
+            { imageId: field.imageFile?.id || null })
         }))
       }
-    )
+      )
     };
-  
+
     // Add ID to payload if in edit mode
     if (item?.id) {
       payload.id = item.id;
     }
-  
+
     try {
-      const response = item 
+      const response = item
         ? await axios.put(`${apiEndpoint}/edit`, payload)
         : await axios.post(`${apiEndpoint}/add`, payload);
-  
+
       if (fetchCategoryCounts) await fetchCategoryCounts();
       if (onSuccess) await onSuccess();
       navigate(redirectPath);
@@ -199,7 +215,7 @@ const GenericForm = ({
   };
 
   const handleTextChange = (id, newContent) => {
-    setSelectFields(selectFields.map(field => 
+    setSelectFields(selectFields.map(field =>
       field.id === id ? { ...field, textContent: newContent } : field
     ));
   };
@@ -211,8 +227,9 @@ const GenericForm = ({
           ...field,
           imageFile: {
             id: imageId,
-            name: "Uploaded image",
-            type: fieldType
+            url: imageId ? `http://localhost:5300/Image/get/${imageId}` : null,
+            type: fieldType,
+            name: "Uploaded image"
           }
         };
       }
@@ -237,7 +254,7 @@ const GenericForm = ({
           </Button>
         </div>
       </div>
-      
+
       <div className="grid grid-cols-[4fr_1fr] gap-6">
         <div className="space-y-10">
           <div>
@@ -287,37 +304,39 @@ const GenericForm = ({
                     className="form-control"
                   />
                 </div>
-                
+
                 {field.value?.value === "text" && (
                   <div className="form-group text-black">
-                    
-                      <JoditEditor
-                        ref={editor}
-                        value={field.textContent || ""}
-                        onChange={(newContent) => handleTextChange(field.id, newContent)}
-                      />
-                  
+
+                    <JoditEditor
+                      ref={editor}
+                      value={field.textContent || ""}
+                      onChange={(newContent) => handleTextChange(field.id, newContent)}
+                    />
+
                   </div>
                 )}
 
-                {(field.value?.value === "image" || 
-                  field.value?.value === "full-image" || 
+                {(field.value?.value === "image" ||
+                  field.value?.value === "full-image" ||
                   field.value?.value === "big-image") && (
-                  <div className="form-group">
-                    <SelectFileInput
-                      onImageUpload={(imageId) => 
-                        handleImageChange(field.id, imageId, field.value?.value)
-                      }
-                      existingImage={
-                        item ? {
-                          id: item[field.value?.value.replace('-', '')],
-                          name: "Existing image"
-                        } : field.imageFile
-                      }
-                    />
-                  </div>
-                )}
-              </div>
+                    <div className="form-group">
+                      <SelectFileInput
+                        onImageUpload={(imageId, imageType) =>
+                          handleImageChange(field.id, imageId, imageType || field.value?.value)
+                        }
+                        imageId={field.imageFile?.id}
+                        existingImage={field.imageFile}
+                      />
+
+                      {/* Optional: Show image type indicator */}
+                      {field.imageFile?.type && (
+                        <div className="mt-2 text-sm text-gray-500">
+                          Image Type: {field.imageFile.type}
+                        </div>
+                      )}
+                    </div>
+                  )}         </div>
             </div>
           ))}
         </div>
@@ -339,7 +358,7 @@ const GenericForm = ({
               </div>
             </ComponentCategory>
           </div>
-          
+
           <ImageProvider>
             <FileInputExample
               onImageUpload={(imageId) =>

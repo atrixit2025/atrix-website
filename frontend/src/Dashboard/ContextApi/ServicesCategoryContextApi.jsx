@@ -2,17 +2,17 @@ import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
 
-export const BlogCategoryContext = createContext();
+export const ServicesCategoryContext = createContext();
 
 
-export const BlogCategoryProvider = ({ children }) => {
+export const ServicesCategoryProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
   const [categoryCounts, setCategoryCounts] = useState({});
 
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("http://localhost:5300/BlogCategory/blog/category/get");
+      const response = await axios.get("http://localhost:5300/ServicesCategory/Services/category/get");
       setCategories(response.data.categories);
       await fetchCategoryCounts();
 
@@ -22,24 +22,24 @@ export const BlogCategoryProvider = ({ children }) => {
     }
   };
 
-  // Add a new Blogcategory
-  const addCategory = async (BlogcategoryData) => {
+  // Add a new Servicescategory
+  const addCategory = async (ServicescategoryData) => {
     try {
-      const response = await axios.post("http://localhost:5300/BlogCategory/blog/category/add", BlogcategoryData);
-      setCategories((prevCategories) => [...prevCategories, response.data.BlogCategory]);
+      const response = await axios.post("http://localhost:5300/ServicesCategory/Services/category/add", ServicescategoryData);
+      setCategories((prevCategories) => [...prevCategories, response.data.ServicesCategory]);
       await fetchCategoryCounts();
 
     } catch (error) {
-      console.error("Error adding Blogcategory:", error);
+      console.error("Error adding Servicescategory:", error);
       throw error; // Re-throw the error to handle it in the component
     }
   };
 
-  // Edit a Blogcategory
+  // Edit a Servicescategory
   const editCategory = async (name, updatedData) => {
     try {
       const response = await axios.put(
-        `http://localhost:5300/BlogCategory/blog/category/name/${name}`,
+        `http://localhost:5300/ServicesCategory/Services/category/name/${name}`,
         updatedData
       );
 
@@ -60,17 +60,17 @@ export const BlogCategoryProvider = ({ children }) => {
 
   };
 
-  // Delete a Blogcategory
+  // Delete a Servicescategory
   const deleteCategory = async (name) => {
     try {
-      await axios.delete(`http://localhost:5300/BlogCategory/blog/category/name/${name}`);
+      await axios.delete(`http://localhost:5300/ServicesCategory/Services/category/name/${name}`);
       setCategories((prevCategories) =>
-        prevCategories.filter((Blogcategory) => Blogcategory.Name !== name)
+        prevCategories.filter((Servicescategory) => Servicescategory.Name !== name)
       );
       await fetchCategoryCounts();
 
     } catch (error) {
-      console.error("Error deleting Blogcategory:", error);
+      console.error("Error deleting Servicescategory:", error);
       throw error;
     }
   };
@@ -78,7 +78,7 @@ export const BlogCategoryProvider = ({ children }) => {
 
   const fetchParentCategories = async () => {
     try {
-      const response = await axios.get("http://localhost:5300/BlogCategory/blog/category/get");
+      const response = await axios.get("http://localhost:5300/ServicesCategory/Services/category/get");
       setCategories(response.data.categories);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -88,7 +88,7 @@ export const BlogCategoryProvider = ({ children }) => {
 
   const fetchCategoryCounts = async () => {
     try {
-      const response = await axios.get('http://localhost:5300/Blog/count/category');
+      const response = await axios.get('http://localhost:5300/Services/count/category');
       // Convert array to object for easier lookup
       const countsObj = response.data.categoryCounts.reduce((acc, curr) => {
         acc[curr.category] = curr.count;
@@ -104,8 +104,8 @@ export const BlogCategoryProvider = ({ children }) => {
   }, []);
 
   return (
-    <BlogCategoryContext.Provider value={{ categories, fetchCategories, addCategory, editCategory, deleteCategory, fetchParentCategories, fetchCategoryCounts, categoryCounts }}>
+    <ServicesCategoryContext.Provider value={{ categories, fetchCategories, addCategory, editCategory, deleteCategory, fetchParentCategories, fetchCategoryCounts, categoryCounts }}>
       {children}
-    </BlogCategoryContext.Provider>
+    </ServicesCategoryContext.Provider>
   );
 };
