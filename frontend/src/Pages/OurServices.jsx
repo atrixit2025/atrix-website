@@ -1,102 +1,84 @@
 import React from "react";
-import img1 from "../assets/ServicesImage/DTS_Daniel.jpg";
-import img2 from ".././assets/ServicesImage/web-development.webp";
-import img3 from "../assets/ServicesImage/web-development2.webp";
 import OurServiceCard from "../Components/services/OurServiceCard";
-import OurServicesDiscovery from "../Components/services/OurServicesDiscovery";
-import OurServicesCase from "../Components/services/OurServicesCase";
-import OurServicesTestimonial from "../Components/services/OurServicesTestimonial";
 import Button from "../Components/Button";
-import img4 from "../assets/ServicesImage/chess.webp";
-import imgleft from "../assets/ServicesImage/design-hero-left.jpeg";
-import imgright from "../assets/ServicesImage/design-hero-right.jpeg";
-
+import img5 from "../assets/ServicesImage/chess_1.png";
 import "./ourServices.css";
 
 const OurServices = () => {
   return (
     <>
-      <div className="services-hero relative  bg-black/60 pt-55 pb-20  ">
-        <div className="services-hero-text container mx-auto ">
-          <h1 className="text-9xl font-[900]">
+      <div className="services-hero relative h-full w-full z-0  pt-55 pb-20  ">
+        <div className="services-hero-text  container mx-auto ">
+          <h1 className="text-9xl font-[900]  ">
             WEBSITE <br />
             DESIGN AND <br />
             DEVELOPMENT
           </h1>
-        
-
-        <div className="hero-img-sec absolute h-[100%] top-0 right-0 w-[50%] overflow-hidden z-1 ">
-          <div className="img-left overflow-hidden ">
-            <img className="absolute left-0 top-0" src={imgleft} alt="" />
-          </div>
-         
-        </div>
-
-        <div className=" hero-img-sec2 absolute h-[90%] top-0 right-0 w-[50%] overflow-hidden -z-1 ">
-        <div className="img-right overflow-hidden ">
-            <img className="absolute right-0 top-0 " src={imgright} alt="" />
-          </div>
-      
-        </div>
-
-
         </div>
       </div>
 
       <div className="Brand-Experience container flex  justify-between  mx-auto mt-22">
-        <h2 className="w-3xl text-4xl  ">
-          Web Development Creates a Digital Home That Sets the Foundation to
-          Transform Your Brand Experience.
+        <h2 className=" text-2xl  ">
+          Crafted by our team of experts and powered by cutting-edge AI
+          technology, our services deliver measurable, impactful results that
+          drive growth and elevate your business.
         </h2>
-        <div className="Brand-Experience-img">
-          <img src={img1} alt="" />
-        </div>
       </div>
 
-      <div className="web-development container mx-auto">
-        <div className="web-development-img flex gap-3 ">
-          <div className="img mt-30 w-[50%]">
-            <img className="w-full h-full" src={img2} alt="" />
-          </div>
-          <div className="img-2 mb-30 w-[50%]">
-            <img className="w-full h-full " src={img3} alt="" />
-          </div>
-          <div className="web-development-text w-4xl text-xl flex items-end bottom-0 pl-20">
-            <h5>
-              Your website is representative of everything your brand stands
-              for—a beacon for your digital presence that everyone will refer
-              to. That’s a tall order, which is why we ground ourselves in
-              understanding who you are before we tackle web development.
-            </h5>
-          </div>
-        </div>
-      </div>
-
-      <div className=" pt-55 pb-4 ">
-        <div className="services-hero-text container mx-auto ">
-          <h1 className="text-9xl font-[900]">
-            WHY DO I NEED A <br /> NEW WEBSITE?
-          </h1>
-        </div>
-      </div>
       <OurServiceCard />
 
-      <OurServicesDiscovery />
+      {/* HOW WE DO IT */}
 
-      <OurServicesCase />
-
-      <OurServicesTestimonial />
-
-      <div className="container mx-auto my-15 ">
-        <div className="row-span-12 flex justify-around p-15 bg-white/95 rounded-2xl  ">
-          <div className="col-span-6 flex justify-center items-center">
-            <div className="img-sec  w-[50%]">
-              <img src={img4} alt="" />
-            </div>
+      <div className="container mx-auto mt-25 ">
+        <h1 className="text-9xl text-center font-extrabold py-15 "> HOW WE DO IT</h1>
+        <div className="row-span-12 flex gap-9 ">
+          <div className="col-span-4 border-t-1 border-white/20 w-[33.3%] ">
+            <h1 className="text-5xl font-extrabold  pt-10">
+              START WITH <br />
+              UNDERSTANDING
+            </h1>
+            <p className="text-lg leading-8 tracking-[0.2rem] pt-3 ">
+              Every partnership begins with an ask. But our magic is in the
+              understanding, finding the root of what needs to be solved—your
+              Pivotal Problem. Pivotal Problems are the inflection point—the
+              main challenge that’s impeding your progress. While not uncommon,
+              they are unique to your business. Then we move with purpose
+              towards elevation and meaningful opportunity.
+            </p>
           </div>
 
-          <div className="col-span-6 flex justify-start items-center text-center">
-            <div className="brand-text-sec  text-black  ">
+          <div className="col-span-4 border-t-1 border-white/20 w-[33.3%] ">
+            <h1 className="text-5xl font-extrabold  pt-10">
+              CRAFT <br />
+              FOR IMPACT
+            </h1>
+            <p className="text-lg leading-8 tracking-[0.2rem] pt-3 ">
+              With our focus clear, we build a strategic framework for brand
+              positioning and messaging at the core. From there, we craft
+              impactful, audience-aligned solutions designed to resonate and
+              drive results.
+            </p>
+          </div>
+
+          <div className="col-span-4 border-t-1 border-white/20 w-[33.3%] ">
+            <h1 className="text-5xl font-extrabold  pt-10">
+              ACCELERATE FOR <br />
+              GROWTHG
+            </h1>
+            <p className="text-lg leading-8 tracking-[0.2rem] pt-3 ">
+              We never set it and forget it. We constantly monitor our
+              ecosystem, analyze performance, optimize, and refine strategies
+              for continuous improvement and scalability.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* CTA SECTION */}
+      <div className="container mx-auto mt-35 mb-11 ">
+        <div className="row-span-12 flex justify-around p-15 bg-[#262626] rounded-2xl  ">
+          <div className="col-span-6 flex justify-start items-center ">
+            <div className="brand-text-sec   ">
               <h2 className="text-6xl font-[900]">
                 READY TO ELEVATE <br /> YOUR BRAND?
               </h2>
@@ -104,13 +86,21 @@ const OurServices = () => {
                 Let’s connect so we can understand your business objectives and
                 craft a plan to exceed them.
               </p>
-              <div className="btn  flex justify-center items-center mt-10">
+              <div className="btn   mt-10">
                 <Button mybtn={"LET'S TALK"} />
               </div>
             </div>
           </div>
+
+          <div className="col-span-6 flex justify-center items-center">
+            <div className="img-sec  w-[50%]">
+              <img src={img5} alt="" />
+            </div>
+          </div>
         </div>
       </div>
+
+      {/* <OurPortfolio /> */}
     </>
   );
 };

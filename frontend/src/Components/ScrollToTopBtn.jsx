@@ -43,7 +43,7 @@ const ScrollToTopBtn = () => {
     return (
         <button
             onClick={handleOnClick}
-            className="h-12 w-12 bg-black/50 text-white flex justify-center items-center cursor-pointer fixed bottom-8 rounded-full text-2xl z-50 hover:bg-black transition-all duration-700"
+            className="h-12 w-12 bg-black/50 hover:bg-(--green) hover:scale-120  text-white flex justify-center items-center cursor-pointer fixed bottom-8 rounded-full text-2xl z-50  transition-all duration-500 "
             style={{ right: `${btnPosition}px` }}
         >
             <FaArrowUp />
