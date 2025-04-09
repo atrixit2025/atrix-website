@@ -8,7 +8,7 @@ import Button from './Button';
 const navigation = [
   { name: 'Home', path: '/', current: true },
   { name: 'About Us', path: '/about', current: false },
-  { name: 'Our Services', path: '#', current: false },
+  { name: 'Our Services', path: '/OurServices', current: false },
   { name: 'Blog', path: '/Blog', current: false },
   { name: 'Portfolio', path: '/portfolio', current: false },
   { name: 'Contact Us', path: '/contact-us', current: false },
@@ -26,12 +26,15 @@ export default function Navbar() {
       <div className="mx-auto px-5 sm:px-6 lg:px-8 py-2">
         <div className="relative flex h-32 items-center justify-between">
           <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
+
             <div className="flex shrink-0 items-center">
-              <img
+             <Link  to="/">
+             <img
                 alt="Your Company"
                 src={Logo}
                 className="w-auto h-16 md:h-32"
-              />
+              /> </Link>
+
             </div>
           </div>
 
@@ -42,7 +45,9 @@ export default function Navbar() {
                   key={item.name}
                   to={item.path}
                   aria-current={location.pathname === item.path ? 'page' : undefined}
-                  className={`${location.pathname === item.path ? 'bg-(--black) text-(--blue)' : 'text-(--white) hover:bg-(--black) hover:text-(--blue)'
+
+                  className={`${location.pathname === item.path ? 'bg-(--blue) ' : 'text-(--white) hover:bg-(--blue) hover:scale-108 duration-150 '
+
                     } rounded-md px-3 py-1 lg:text-lg md:text-sm sm:text-sm text-[2px] font-bold`}
                 >
                   {item.name}
