@@ -15,7 +15,9 @@ export default function Services() {
         const ServicessWithImages = await Promise.all(
           response.data.Services.map(async (services) => {
             let featuredImageUrl = "/images/user/user-22.jpg";
+            let iconImageUrl = "/images/default-icon.png"; // Define default icon image
             
+            // Fetch featured image if exists
             if (services.FeaturedImage) {
               try {
                 const imgResponse = await axios.get(
@@ -27,6 +29,18 @@ export default function Services() {
               }
             }
             
+            // Fetch icon image if exists
+            if (services.iconImageId) {
+              try {
+                const iconResponse = await axios.get(
+                  `http://localhost:5300/Image/get/${services.iconImageId}`
+                );
+                iconImageUrl = iconResponse.data.Image?.image || iconImageUrl;
+              } catch (error) {
+                console.error("Error fetching icon image:", error);
+              }
+            }
+            
             return {
               id: services._id,
               name: services.title,
@@ -35,12 +49,12 @@ export default function Services() {
               Date: new Date(services.updatedAt).toLocaleDateString(),
               featuredImage: featuredImageUrl,
               FeaturedImageId: services.FeaturedImage,
-              // Include all the content sections
+              iconImage: iconImageUrl, // Now properly defined
+              iconImageId: services.iconImageId,
               contentSections: services.contentSections || [],
-              // Include any other fields you need
+              tags: services.tags || [],
+              portfolioCategories: services.portfolioCategories || [],
               updatedAt: services.updatedAt,
-              // Add other fields as needed
-              
             };
           })
         );
@@ -86,18 +100,21 @@ export default function Services() {
   const handleEdit = (item) => {
     navigate("/Dashboard/AddNewServices", { 
       state: { 
-        item: {
+        Services: {
           id: item.id,
           title: item.name,
           category: item.Category,
           FeaturedImage: item.FeaturedImageId,
           featuredImageUrl: item.featuredImage,
+          iconImage: item.iconImage, // Pass the iconImage URL
+          iconImageId: item.iconImageId,
           contentSections: item.contentSections.map(section => ({
             ...section,
-            // Add imageUrl if you have it, or we'll fetch it in the form
             imageUrl: section.imageId ? `http://localhost:5300/Image/get/${section.imageId}` : null
           })),
           text: item.description,
+          tags: item.tags || [], // Pass tags
+          portfolioCategories: item.portfolioCategories || [] // Pass portfolio categories
         } 
       } 
     });
@@ -120,13 +137,7 @@ export default function Services() {
         </div>
       )
     },
-    // { 
-    //   key: "contentSections", 
-    //   title: "Sections",
-    //   render: (item) => (
-    //     <span>{item.contentSections?.length || 0} sections</span>
-    //   )
-    // },
+ 
     { key: "Date", title: "Date" }
   ];
 

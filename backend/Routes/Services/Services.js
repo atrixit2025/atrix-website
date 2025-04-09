@@ -8,8 +8,8 @@ app.use(express.json());
 const ServicesRouter = express.Router();
 
 ServicesRouter.post("/add", async (req, res) => {
-  const { title, category, FeaturedImageId, contentSections } = req.body;
-  // console.log("Received body:", req.body);
+  const { title, category, tags, portfolioCategories, iconImageId, FeaturedImageId, contentSections } = req.body;
+  console.log("Incoming request body:", req.body);
   if (!title || !category || !FeaturedImageId) {
     return res.status(400).json({ 
       message: "Title, category, and featured image are required"
@@ -24,11 +24,23 @@ ServicesRouter.post("/add", async (req, res) => {
     });
   }
 
+  const sanitizedPortfolioCategories = Array.isArray(portfolioCategories) 
+  ? portfolioCategories 
+  : [portfolioCategories].filter(Boolean);
+
+const sanitizedTags = Array.isArray(tags) 
+  ? tags 
+  : [tags].filter(Boolean);
   try {
     const newServices = new Services({
       title,
       category,
+      portfolioCategories: sanitizedPortfolioCategories,
+      tags: sanitizedTags,
+      iconImageId: iconImageId || null,
       FeaturedImage: FeaturedImageId,
+     
+  
       contentSections: contentSections.map(section => {
         // Validate each section has a type
         if (!section.type) {
@@ -120,75 +132,63 @@ ServicesRouter.get("/get", async (req, res) => {
 
 ServicesRouter.put("/edit", async (req, res) => {
   const { 
-    id, // Now coming from request body instead of URL params
+    id,
     title, 
-    category, 
+    category,
+    tags = [], // Default empty array
+    portfolioCategories = [], // Default empty array
+    iconImageId,
     FeaturedImageId, 
     contentSections 
   } = req.body;
 
   // Basic validation
-  if (!id) {
-    return res.status(400).json({ message: "Services ID is required in the request body" });
-  }
-
+  if (!id) return res.status(400).json({ message: "Services ID is required" });
   if (!title || !category || !FeaturedImageId) {
     return res.status(400).json({ 
       message: "Title, category, and featured image are required"
     });
   }
 
-  // Validate contentSections if provided
-  if (contentSections && !Array.isArray(contentSections)) {
-    return res.status(400).json({
-      message: "contentSections must be an array if provided"
-    });
-  }
+  // Ensure arrays
+  const sanitizedTags = Array.isArray(tags) ? tags : [];
+  const sanitizedPortfolioCategories = Array.isArray(portfolioCategories) 
+    ? portfolioCategories 
+    : [];
 
   try {
-    // Find the existing Services
-    const existingServices = await Services.findById(id);
-    if (!existingServices) {
-      return res.status(404).json({ message: "Services not found" });
-    }
-
-    // Prepare update data
     const updateData = {
       title,
       category,
+      tags: sanitizedTags,
+      portfolioCategories: sanitizedPortfolioCategories,
+      iconImageId: iconImageId || null,
       FeaturedImage: FeaturedImageId,
       updatedAt: new Date()
     };
 
-    // Only update contentSections if provided
+    // Handle content sections if provided
     if (contentSections) {
+      if (!Array.isArray(contentSections)) {
+        return res.status(400).json({ message: "contentSections must be an array" });
+      }
+      
       updateData.contentSections = contentSections.map(section => {
-        if (!section.type) {
-          throw new Error("Each content section must have a type");
-        }
-
+        if (!section.type) throw new Error("Each section must have a type");
+        
         if (section.type === 'text') {
-          return {
-            type: 'text',
-            content: section.content || ""
-          };
+          return { type: 'text', content: section.content || "" };
         } else {
-          if (!section.imageId) {
-            throw new Error(`Image section must have an imageId`);
-          }
-          return {
-            type: section.type,
-            imageId: section.imageId
-          };
+          if (!section.imageId) throw new Error(`Image section must have an imageId`);
+          return { type: section.type, imageId: section.imageId };
         }
       });
     }
 
-    // Update the Services
     const updatedServices = await Services.findByIdAndUpdate(
       id, 
       updateData, 
-      { new: true } // Return the updated document
+      { new: true }
     );
 
     res.status(200).json({ 

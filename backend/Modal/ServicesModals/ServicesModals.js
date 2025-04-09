@@ -6,7 +6,7 @@ const contentSectionSchema = new mongoose.Schema({
     imageId: { type: String }  
   });
 
-const ServicesSchema = new mongoose.Schema({
+  const ServicesSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true
@@ -15,19 +15,31 @@ const ServicesSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    
+    tags: {
+        type: [String],  // Array of strings
+        default: []      // Default empty array
+    },
+    portfolioCategories: {
+        type: [String],  // Array of strings
+        default: []      // Default empty array
+        // If referencing PortfolioCategory documents:
+        // type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'PortfolioCategory' }]
+    },
+    iconImageId: {
+        type: String,
+        required: true
+
+    },
     FeaturedImage: {
         type: String,
         required: true
     },
-
     contentSections: [contentSectionSchema],
-    
     updatedAt: {
         type: Date,
         default: Date.now
     }
-})
+});
 
 const Services = mongoose.model("Services", ServicesSchema)
 
