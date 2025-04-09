@@ -90,6 +90,8 @@ const navItems: NavItem[] = [
 
     ],
   },
+
+  
   // {
   //   icon: <FaUser />, // User profile icon
   //   name: "User Profile",
@@ -114,6 +116,8 @@ const navItems: NavItem[] = [
   //     { name: "404 Error", path: "/error-404", pro: false },
   //   ],
   // },
+
+
 ];
 
 const othersItems: NavItem[] = [
