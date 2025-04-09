@@ -8,17 +8,20 @@ app.use(express.json());
 
 const BrandRouter = express.Router();
 
+// Create a new brand
 BrandRouter.post("/add", async (req, res) => {
-  const {  imageId } = req.body; 
-  if ( !imageId) {
-    return res.status(400).json({ message: " and imageId are required" });
+  const { title, imageId, link } = req.body;
+
+  if (!title || !imageId  ) {
+    return res.status(400).json({ message: "Title, imageId are required" });
   }
 
   try {
     const newBrand = new Brand({
- 
-      
-      image: imageId, 
+      title,
+      image: imageId,
+      link,
+     
     });
 
     await newBrand.save();
@@ -29,11 +32,13 @@ BrandRouter.post("/add", async (req, res) => {
   }
 });
 
+
+// Get brands
 BrandRouter.get("/get", async (req, res) => {
   try {
-    const brand = await Brand.find({}).populate('image'); 
+    const brand = await Brand.find({}).populate('image'); // Get the brand details with the image
     if (!brand.length) {
-      return res.status(404).json({ message: "No technologies found" });
+      return res.status(404).json({ message: "No brands found" });
     }
     return res.json({ Brand: brand });
   } catch (error) {
@@ -42,24 +47,25 @@ BrandRouter.get("/get", async (req, res) => {
   }
 });
 
-
+// Edit brand
 BrandRouter.put("/edit", async (req, res) => {
-  const { id,  imageId } = req.body; 
+  const { id, title, imageId, link } = req.body;
 
-  if (!id ||  !imageId) {
-    return res.status(400).json({ message: "ID,  and imageId are required" });
+  if (!id || !title || !imageId  ) {
+    return res.status(400).json({ message: "ID, title, imageId are required" });
   }
 
   try {
-
     const existingBrand = await Brand.findById(id);
     if (!existingBrand) {
       return res.status(404).json({ message: "Brand not found" });
     }
 
-
-
+    // Update the brand fields
+    existingBrand.title = title;
     existingBrand.image = imageId;
+    existingBrand.link = link;
+   
 
     const updatedBrand = await existingBrand.save();
 
@@ -70,35 +76,33 @@ BrandRouter.put("/edit", async (req, res) => {
   }
 });
 
+
+// Delete brand
 BrandRouter.delete("/delete", async (req, res) => {
-    const { id } = req.body; // Change to use id instead of image
-  
-    if (!id) {
-      return res.status(400).json({ message: "ID is required" });
+  const { id } = req.body;
+
+  if (!id) {
+    return res.status(400).json({ message: "ID is required" });
+  }
+
+  try {
+    const deletedBrand = await Brand.findByIdAndDelete(id);
+
+    if (!deletedBrand) {
+      return res.status(404).json({ message: "Brand not found" });
     }
-  
-    try {
-      const deletedBrand = await Brand.findByIdAndDelete(id);
-  
-      if (!deletedBrand) {
-        return res.status(404).json({ message: "Brand not found" });
-      }
-  
-      res.status(200).json({ 
-        message: "Brand deleted successfully", 
-        Brand: deletedBrand 
-      });
-    } catch (error) {
-      console.error("Error deleting Brand:", error);
-      res.status(500).json({ 
-        message: "Error deleting Brand", 
-        error: error.message 
-      });
-    }
-  });
+
+    res.status(200).json({
+      message: "Brand deleted successfully",
+      Brand: deletedBrand,
+    });
+  } catch (error) {
+    console.error("Error deleting Brand:", error);
+    res.status(500).json({
+      message: "Error deleting Brand",
+      error: error.message,
+    });
+  }
+});
 
 export default BrandRouter;
-
-
-
-

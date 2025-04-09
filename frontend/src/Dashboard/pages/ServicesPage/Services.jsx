@@ -11,17 +11,55 @@ export default function Services() {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:5300/Services/get");
-        const services = response.data.Services.map((tech) => ({
-          id: tech._id,
-          name: tech.title,
-          Category: tech.category,
-          Date: new Date(tech.updatedAt).toLocaleDateString(),
-          team: {
-            images: [tech.image?.image || "/images/user/user-22.jpg"],
-          },
-          imageId: tech.image?._id,
-        }));
-        setTableData(services);
+        
+        const ServicessWithImages = await Promise.all(
+          response.data.Services.map(async (services) => {
+            let featuredImageUrl = "/images/user/user-22.jpg";
+            let iconImageUrl = "/images/default-icon.png"; // Define default icon image
+            
+            // Fetch featured image if exists
+            if (services.FeaturedImage) {
+              try {
+                const imgResponse = await axios.get(
+                  `http://localhost:5300/Image/get/${services.FeaturedImage}`
+                );
+                featuredImageUrl = imgResponse.data.Image?.image || featuredImageUrl;
+              } catch (error) {
+                console.error("Error fetching featured image:", error);
+              }
+            }
+            
+            // Fetch icon image if exists
+            if (services.iconImageId) {
+              try {
+                const iconResponse = await axios.get(
+                  `http://localhost:5300/Image/get/${services.iconImageId}`
+                );
+                iconImageUrl = iconResponse.data.Image?.image || iconImageUrl;
+              } catch (error) {
+                console.error("Error fetching icon image:", error);
+              }
+            }
+            
+            return {
+              id: services._id,
+              name: services.title,
+              Category: services.category,
+              description: services.text,
+              Date: new Date(services.updatedAt).toLocaleDateString(),
+              featuredImage: featuredImageUrl,
+              FeaturedImageId: services.FeaturedImage,
+              iconImage: iconImageUrl, // Now properly defined
+              iconImageId: services.iconImageId,
+              contentSections: services.contentSections || [],
+              tags: services.tags || [],
+              portfolioCategories: services.portfolioCategories || [],
+              updatedAt: services.updatedAt,
+            };
+          })
+        );
+        
+        setTableData(ServicessWithImages);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -60,29 +98,46 @@ export default function Services() {
   };
 
   const handleEdit = (item) => {
-    navigate("/Dashboard/AddNewServices", { state: { Services: item } });
+    navigate("/Dashboard/AddNewServices", { 
+      state: { 
+        Services: {
+          id: item.id,
+          title: item.name,
+          category: item.Category,
+          FeaturedImage: item.FeaturedImageId,
+          featuredImageUrl: item.featuredImage,
+          iconImage: item.iconImage, // Pass the iconImage URL
+          iconImageId: item.iconImageId,
+          contentSections: item.contentSections.map(section => ({
+            ...section,
+            imageUrl: section.imageId ? `http://localhost:5300/Image/get/${section.imageId}` : null
+          })),
+          text: item.description,
+          tags: item.tags || [], // Pass tags
+          portfolioCategories: item.portfolioCategories || [] // Pass portfolio categories
+        } 
+      } 
+    });
   };
+ 
 
   const columns = [
     { key: "name", title: "Title" },
     { key: "Category", title: "Category" },
     { 
-      key: "team", 
-      title: "Images",
+      key: "featuredImage", 
+      title: "Featured Image",
       render: (item) => (
-        <div className="flex -space-x-2">
-          {item.team.images.map((img, i) => (
-            <div key={i} className="w-12 h-12 overflow-hidden">
-              <img
-                src={`http://localhost:5300${img}`}
-                alt={`Image ${i}`}
-                className="w-full size-11"
-              />
-            </div>
-          ))}
+        <div className="w-16 h-16 overflow-hidden rounded">
+          <img
+            src={`http://localhost:5300${item.featuredImage}`}
+            alt="Featured"
+            className="w-full h-full object-cover"
+          />
         </div>
       )
     },
+ 
     { key: "Date", title: "Date" }
   ];
 

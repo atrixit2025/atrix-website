@@ -7,35 +7,26 @@ import axios from "axios";
 import { ImCheckboxChecked } from "react-icons/im";
 import { GrFormSubtract } from "react-icons/gr";
 
-// Define the type for the image object
-type Image = {
-  imageId: string; // MongoDB ObjectId
-  imageUrl: string; // Image URL
-};
 
-// Define the props for the FileInputExample component
-interface FileInputExampleProps {
-  onImageUpload: (imageId: string | null) => void; // Callback to pass the imageId to the parent
-  imageId: string | null; // The selected imageId (MongoDB ObjectId)
-}
 
-const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imageId }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
-  const [showUploadSection, setShowUploadSection] = useState<boolean>(true);
-  const [showAllImagesSection, setShowAllImagesSection] = useState<boolean>(false);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [allImages, setAllImages] = useState<Image[]>([]);
-  const [selectedImageUrl, setSelectedImageUrl] = useState<string | null>(null);
-  const [hoveredImage, setHoveredImage] = useState<string | null>(null);
-  const [hoverIcons, setHoverIcons] = useState<string | null>(null);
+
+const IconsInputExample = ({ onImageUpload, imageId }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [showUploadSection, setShowUploadSection] = useState(true);
+  const [showAllImagesSection, setShowAllImagesSection] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [allImages, setAllImages] = useState([]);
+  const [selectedImageUrl, setSelectedImageUrl] = useState(null);
+  const [hoveredImage, setHoveredImage] = useState(null);
+  const [hoverIcons, setHoverIcons] = useState(null);
 
   // Fetch all images from the server
   const fetchAllImages = async () => {
     try {
       const response = await axios.get("http://localhost:5300/Image/get");
       if (response.status === 200) {
-        const images: Image[] = response.data.Image.map((item: any) => ({
+        const images = response.data.Image.map((item) => ({
           imageId: item._id, // MongoDB ObjectId
           imageUrl: item.image, // Image URL
         }));
@@ -75,7 +66,7 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imag
   }, [imageId]);
 
   // Handle image upload
-  const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUpload = async (event) => {
     const file = event.target.files?.[0];
     if (file) {
       const formData = new FormData();
@@ -107,7 +98,7 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imag
   };
 
   // Handle image deletion
-  const handleDeleteImage = async (imageUrl: string) => {
+  const handleDeleteImage = async (imageUrl) => {
     try {
       const response = await axios.delete("http://localhost:5300/Image/delete", {
         data: { ImageUrl: imageUrl },
@@ -126,7 +117,7 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imag
   };
 
   // Handle setting a featured image
-  const handleSetFeaturedImage = (imageUrl: string) => {
+  const handleSetFeaturedImage = (imageUrl) => {
     const imageData = allImages.find((image) => image.imageUrl === imageUrl); // Find the image data
     if (imageData) {
       setSelectedImage(imageUrl); // Set the selected image URL for display
@@ -158,7 +149,7 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imag
   };
 
   // Handle image selection in the modal
-  const handleImageClick = (imageUrl: string) => {
+  const handleImageClick = (imageUrl) => {
     if (selectedImageUrl === imageUrl) {
       setSelectedImageUrl(null);
     } else {
@@ -167,7 +158,7 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imag
   };
 
   return (
-    <ComponentCard title="Featured Image">
+    <ComponentCard title="Icons Image">
       <div>
         {selectedImage ? (
           <div className="flex flex-col items-center">
@@ -189,7 +180,7 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imag
             className="text-(--blue) cursor-pointer underline"
             onClick={openModal}
           >
-            Set Featured Image
+            Set Icons Image
           </p>
         )}
 
@@ -332,7 +323,7 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imag
                 <Button
                   size="sm"
                   variant="outline"
-                  onClick={() => handleSetFeaturedImage(selectedImageUrl!)}
+                  onClick={() => handleSetFeaturedImage(selectedImageUrl)}
                   disabled={!selectedImageUrl}
                   className="btn btn-success cursor-pointer flex w-full justify-center rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-600 sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
                 >
@@ -347,4 +338,4 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imag
   );
 };
 
-export default FileInputExample;
+export default IconsInputExample;

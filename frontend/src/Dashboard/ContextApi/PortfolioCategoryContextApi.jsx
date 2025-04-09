@@ -7,6 +7,7 @@ export const PortfolioCategoryContext = createContext();
 
 export const PortfolioCategoryProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
+  const [categoryCounts, setCategoryCounts] = useState({});
 
 
   const fetchCategories = async () => {
@@ -14,44 +15,15 @@ export const PortfolioCategoryProvider = ({ children }) => {
       const response = await axios.get("http://localhost:5300/PortfolioCategory/Portfolio/category/get");
       // First set the categories
       setCategories(response.data.categories);
+      await fetchCategoryCounts();
       
-      // Then fetch counts for each category
-      response.data.categories.forEach(async (category) => {
-        await CountPortfolioCategory(category._id);
-      });
+      
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
   };
   
-  const CountPortfolioCategory = async (id) => {
-    if (!id) {
-      console.error("Cannot fetch count - no ID provided");
-      return 0;
-    }
-    
-    try {
-      const response = await axios.get(
-        `http://localhost:5300/PortfolioCategory/Portfolio/category/count/${id}`
-      );
-      
-      setCategories(prevCategories => 
-        prevCategories.map(category => 
-          category._id === id 
-            ? { 
-                ...category, 
-                CountPortfolioCategory: response.data.subcategoryCount || 0 
-              }
-            : category
-        )
-      );
-      
-      return response.data.subcategoryCount || 0;
-    } catch (error) {
-      console.error("Error fetching category count:", error);
-      return 0;
-    }
-  };
+
 
   // Add a new Portfoliocategory
   const addPortfolioCategory = async (PortfoliocategoryData) => {
@@ -60,22 +32,9 @@ export const PortfolioCategoryProvider = ({ children }) => {
         "http://localhost:5300/PortfolioCategory/Portfolio/category/add", 
         PortfoliocategoryData
       );
-      
-      const newCategory = response.data.PortfolioCategory;
-      
-      // Initialize count to 0 immediately
-      const categoryWithCount = { 
-        ...newCategory, 
-        CountPortfolioCategory: 0 
-      };
-      
-      // Add the new category to state with initial count
-      setCategories(prevCategories => [...prevCategories, categoryWithCount]);
-      
-      // Now fetch the actual count (this will update it when response comes)
-      await CountPortfolioCategory(newCategory._id);
-      
-      return newCategory;
+      setCategories(prevCategories => [...prevCategories, response.data.PortfolioCategory]);
+      await fetchCategoryCounts();
+
     } catch (error) {
       console.error("Error adding Portfoliocategory:", error);
       throw error;
@@ -96,7 +55,8 @@ export const PortfolioCategoryProvider = ({ children }) => {
         )
       );
       
-      console.log("edit", response);
+      await fetchCategoryCounts();
+
       return response.data;
     } catch (error) {
       console.error("Error editing Portfolio category:", error);
@@ -113,44 +73,30 @@ export const PortfolioCategoryProvider = ({ children }) => {
     }
   };
   // Delete a Portfoliocategory
-  const deletePortfolioCategory = async (name) => {
+  const deleteCategory = async (name) => {
     try {
       await axios.delete(`http://localhost:5300/PortfolioCategory/Portfolio/category/name/${name}`);
-      await fetchParentCategories(); 
+      await fetchCategoryCounts();
+
     } catch (error) {
       console.error("Error deleting Portfoliocategory:", error);
       throw error;
     }
   };
 
-// Update the CountPortfolioCategory method
-
-
-
-// const [countCategories, setCountCategories] = useState([])
-
- 
-
-// const CountPortfolioCategory = async (id) => {
-//   console.log("Fetching count for category:", id);
-  
-//   try {
-//     const response = await axios.get(
-//       `http://localhost:5300/PortfolioCategory/Portfolio/category/count/${id}`
-//     );
-    
-//     if (response.data && typeof response.data.count === 'number') {
-//       setCategories(response.data.count);
-//   } else {
-//       console.error("Unexpected response format:", response.data);
-//   }
-    
-//     return response.data.subcategoryCount;
-//   } catch (error) {
-//     console.error("Error fetching category count:", error);
-    
-//   }
-// };
+  const fetchCategoryCounts = async () => {
+    try {
+      const response = await axios.get('http://localhost:5300/Portfolio/count/category');
+      // Convert array to object for easier lookup
+      const countsObj = response.data.categoryCounts.reduce((acc, curr) => {
+        acc[curr.category] = curr.count;
+        return acc;
+      }, {});
+      setCategoryCounts(countsObj);
+    } catch (error) {
+      console.error('Error fetching category counts:', error);
+    }
+  };
   
 
 
@@ -159,7 +105,7 @@ export const PortfolioCategoryProvider = ({ children }) => {
   }, []);
 
   return (
-    <PortfolioCategoryContext.Provider value={{ categories, fetchCategories, addPortfolioCategory,fetchParentCategories, editPortfolioCategory, deletePortfolioCategory,CountPortfolioCategory }}>
+    <PortfolioCategoryContext.Provider value={{ categories,categoryCounts, fetchCategories, addPortfolioCategory,fetchCategoryCounts,fetchParentCategories, editPortfolioCategory, deleteCategory }}>
       {children}
     </PortfolioCategoryContext.Provider>
   );

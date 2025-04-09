@@ -314,15 +314,14 @@ export default function Blog() {
       try {
         const response = await axios.get("http://localhost:5300/Blog/get");
         
-        // Fetch featured images for all blogs in parallel
-        const blogsWithImages = await Promise.all(
-          response.data.Blog.map(async (tech) => {
-            let featuredImageUrl = "/images/user/user-22.jpg"; // default fallback
+        const BlogsWithImages = await Promise.all(
+          response.data.Blog.map(async (blog) => {
+            let featuredImageUrl = "/images/user/user-22.jpg";
             
-            if (tech.FeaturedImage) {
+            if (blog.FeaturedImage) {
               try {
                 const imgResponse = await axios.get(
-                  `http://localhost:5300/Image/get/${tech.FeaturedImage}`
+                  `http://localhost:5300/Image/get/${blog.FeaturedImage}`
                 );
                 featuredImageUrl = imgResponse.data.Image?.image || featuredImageUrl;
               } catch (error) {
@@ -331,18 +330,24 @@ export default function Blog() {
             }
             
             return {
-              id: tech._id,
-              name: tech.title,
-              Category: tech.category,
-              description: tech.text, // Changed from tech.description to tech.text
-              Date: new Date(tech.updatedAt).toLocaleDateString(),
+              id: blog._id,
+              name: blog.title,
+              Category: blog.category,
+              description: blog.text,
+              Date: new Date(blog.updatedAt).toLocaleDateString(),
               featuredImage: featuredImageUrl,
-              FeaturedImageId: tech.FeaturedImage,
+              FeaturedImageId: blog.FeaturedImage,
+              // Include all the content sections
+              contentSections: blog.contentSections || [],
+              // Include any other fields you need
+              updatedAt: blog.updatedAt,
+              // Add other fields as needed
+              
             };
           })
         );
         
-        setTableData(blogsWithImages);
+        setTableData(BlogsWithImages);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -382,35 +387,70 @@ export default function Blog() {
     }
   };
 
-  const handleEdit = (item) => {
-    navigate("/Dashboard/AddNewBlog", { 
-      state: { 
-        blog: {
-          ...item,
-          imageId: item.FeaturedImageId // Make sure this matches what AddNewBlog expects
-        } 
+// In Blog.js
+// const handleEdit = (item) => {
+//   console.log("Edit handler received:", item);
+//   navigate("/Dashboard/AddNewBlog", { 
+//     state: { 
+//       blog: {
+//         id: item.id,
+//         title: item.name,
+//         category: item.Category,
+//         FeaturedImage: item.FeaturedImageId,
+//         // Include content sections if available
+//         contentSections: item.contentSections || [],
+//         // Include any other fields your form needs
+//         text: item.description // If you have a text field
+//       } 
+//     } 
+//   });
+// };
+const handleEdit = (item) => {
+  navigate("/Dashboard/AddNewBlog", { 
+    state: { 
+      item: {
+        id: item.id,
+        title: item.name,
+        category: item.Category,
+        FeaturedImage: item.FeaturedImageId,
+        featuredImageUrl: item.featuredImage,
+        contentSections: item.contentSections.map(section => ({
+          ...section,
+          // Add imageUrl if you have it, or we'll fetch it in the form
+          imageUrl: section.imageId ? `http://localhost:5300/Image/get/${section.imageId}` : null
+        })),
+        text: item.description,
       } 
-    });
-  };
+    } 
+  });
+};
 
-  const columns = [
-    { key: "name", title: "Title" },
-    { key: "Category", title: "Category" },
-    { 
-      key: "featuredImage", 
-      title: "Featured Image",
-      render: (item) => (
-        <div className="w-16 h-16 overflow-hidden  rounded">
-          <img
-            src={`http://localhost:5300${item.featuredImage}`}
-            alt="Featured"
-            className="w-full h-full object-cover"
-          />
-        </div>
-      )
-    },
-    { key: "Date", title: "Date" }
-  ];
+
+const columns = [
+  { key: "name", title: "Title" },
+  { key: "Category", title: "Category" },
+  { 
+    key: "featuredImage", 
+    title: "Featured Image",
+    render: (item) => (
+      <div className="w-16 h-16 overflow-hidden rounded">
+        <img
+          src={`http://localhost:5300${item.featuredImage}`}
+          alt="Featured"
+          className="w-full h-full object-cover"
+        />
+      </div>
+    )
+  },
+  // { 
+  //   key: "contentSections", 
+  //   title: "Sections",
+  //   render: (item) => (
+  //     <span>{item.contentSections?.length || 0} sections</span>
+  //   )
+  // },
+  { key: "Date", title: "Date" }
+];
 
   return (
     <>
@@ -427,8 +467,6 @@ export default function Blog() {
         onBulkDelete={handleBulkDelete}
       />
 
-
-      <div></div>
     </>
   );
 }

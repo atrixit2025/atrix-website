@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
 // Create the context
-export const CategoryContext = createContext();
+export const TechnologyCategoryContext = createContext();
 
 // Create the provider component
 export const CategoryProvider = ({ children }) => {
@@ -30,6 +30,7 @@ export const CategoryProvider = ({ children }) => {
       setCategories((prevCategories) => [...prevCategories, response.data.Category]);
    
       await fetchCategoryCounts()
+      return response.data;
     } catch (error) {
       console.error("Error adding category:", error);
       throw error; // Re-throw the error to handle it in the component
@@ -87,8 +88,8 @@ export const CategoryProvider = ({ children }) => {
   }, []);
 
   return (
-    <CategoryContext.Provider value={{ categories, fetchCategories, addCategory, editCategory, deleteCategory ,fetchCategoryCounts,categoryCounts}}>
+    <TechnologyCategoryContext.Provider value={{ categories, fetchCategories, addCategory, editCategory, deleteCategory ,fetchCategoryCounts,categoryCounts}}>
       {children}
-    </CategoryContext.Provider>
+    </TechnologyCategoryContext.Provider>
   );
 };

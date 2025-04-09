@@ -53,7 +53,7 @@
 //     try {
 //       const technology = await Technology.find({})
 //       if (!technology.length) {
-//         return res.status(404).json({ message: "No blogs found" });
+//         return res.status(404).json({ message: "No Technologys found" });
 //     }
 //     return res.json({ Technology: technology });
 

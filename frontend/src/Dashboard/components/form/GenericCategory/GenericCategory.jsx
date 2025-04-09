@@ -1,26 +1,47 @@
-import React, { useState, useContext } from "react";
-import ComponentCard from "../../components/common/ComponentCard";
-import NewPageBreadcrumb from "../../components/common/NewPageBreadcrumb";
-import Label from "../../components/form/Label";
-import Input from "../../components/form/input/InputField";
-import TextArea from "../../components/form/input/TextArea";
-import Button from "../../components/ui/button/Button";
-import CategoryTable from "./CategoryTable";
-import { TechnologyCategoryContext } from "../../ContextApi/CategoryContextApi";
+import React, { useState, useContext, useEffect } from "react";
+import NewPageBreadcrumb from "../../common/NewPageBreadcrumb";
+import Label from "../Label";
+import Input from "../input/InputField";
+import Select from "../Select";
+import TextArea from "../input/TextArea";
+import Button from "../../ui/button/Button";
+// import NewPageBreadcrumb from "../../components/common/NewPageBreadcrumb";
+// import Label from "../../components/form/Label";
+// import Input from "../../components/form/input/InputField";
+// import TextArea from "../../components/form/input/TextArea";
+// import Button from "../../components/ui/button/Button";
+// import Select from "../../components/form/Select";
 
-export default function CategoryTechnology() {
-  const { addCategory, editCategory } = useContext(TechnologyCategoryContext);
+export default function GenericCategory({
+  contextApi,
+  pageTitle,
+  TableComponent,
+  categoryType
+}) {
+  const { 
+    addCategory, 
+    editCategory,
+    fetchParentCategories,
+    categories 
+  } = useContext(contextApi);
+  
   const [formData, setFormData] = useState({
     name: "",
     description: "",
     customSlug: "",
     autoSlug: "",
+    ParentCategory: "",
   });
-  const [editingCategory, setEditingCategory] = useState(null); // Track the category being edited
+ 
+  const [editingCategory, setEditingCategory] = useState(null);
 
-  // Handle form submission
+  // Fetch categories for the dropdown
+  useEffect(() => {
+    fetchParentCategories();
+  }, []);
+
   const handleSubmit = async () => {
-    const { name, description, customSlug, autoSlug } = formData;
+    const { name, description, customSlug, autoSlug, ParentCategory } = formData;
 
     if (!name || !description) {
       alert("Name and Description are required!");
@@ -29,18 +50,18 @@ export default function CategoryTechnology() {
 
     try {
       if (editingCategory) {
-        // If editing, call the editCategory function
         await editCategory(editingCategory.Name, {
           Name: name,
           Description: description,
           Slug: customSlug || autoSlug,
+          ParentCategory: ParentCategory || null,
         });
       } else {
-        // If adding, call the addCategory function
         await addCategory({
           Name: name,
           Description: description,
           Slug: customSlug || autoSlug,
+          ParentCategory: ParentCategory || null,
         });
       }
 
@@ -50,25 +71,20 @@ export default function CategoryTechnology() {
         description: "",
         customSlug: "",
         autoSlug: "",
+        ParentCategory: "",
       });
       setEditingCategory(null);
-
-      // alert(
-      //   editingCategory
-      //     ? "Category updated successfully!"
-      //     : "Category created successfully!"
-      // );
+      await fetchParentCategories();
     } catch (error) {
       console.error("Error:", error);
       alert(
         editingCategory
-          ? "Error updating category. Please try again."
-          : "Error creating category. Please try again."
+          ? `Error updating ${categoryType} category. Please try again.`
+          : `Error creating ${categoryType} category. Please try again.`
       );
     }
   };
 
-  // Automatically generate the slug when the name changes
   const handleNameChange = (e) => {
     const newName = e.target.value;
     const newAutoSlug = newName
@@ -83,7 +99,6 @@ export default function CategoryTechnology() {
     }));
   };
 
-  // Handle changes for other fields (description and custom slug)
   const handleChange = (id, value) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -91,20 +106,25 @@ export default function CategoryTechnology() {
     }));
   };
 
-  // Handle edit button click from the table
   const handleEditClick = (category) => {
-    setEditingCategory(category); // Set the category being edited
+    setEditingCategory(category);
     setFormData({
       name: category.Name,
       description: category.Description,
       customSlug: category.Slug,
       autoSlug: category.Slug,
+      ParentCategory: category.ParentCategory?._id || category.ParentCategory || "",
     });
   };
 
+  const categoryOptions = categories.map((category) => ({
+    value: category._id,
+    label: category.Name,
+  }));
+
   return (
     <>
-      <NewPageBreadcrumb pageTitle="Category" />
+      <NewPageBreadcrumb pageTitle={pageTitle} />
       <div className="space-y-3 xl:grid grid-cols-[3fr_2fr] gap-6">
         <div className="space-y-6">
           <h4>{editingCategory ? "Edit Category" : "Add New Category"}</h4>
@@ -129,14 +149,25 @@ export default function CategoryTechnology() {
             />
           </div>
           <div>
+            <Label htmlFor="parentCategory">Parent Category</Label>
+            <Select
+              options={categoryOptions}
+              placeholder="Select Parent Category"
+              onChange={(value) => handleChange("ParentCategory", value)}
+              className="w-full p-2 border rounded-lg"
+              value={formData.ParentCategory}
+            />
+          </div>
+          <div>
             <Label htmlFor="description">Add Description</Label>
             <TextArea
               id="description"
               value={formData.description}
-              onChange={(value) => handleChange("description", value)} // Pass the value directly
+              onChange={(value) => handleChange("description", value)}
             />
           </div>
-          <div className="cursor-pointer  justify-start">
+       
+          <div className="cursor-pointer justify-start">
             <Button
               size="sm"
               variant="outline"
@@ -145,13 +176,10 @@ export default function CategoryTechnology() {
             >
               {editingCategory ? "Update" : "Publish"}
             </Button>
-           
           </div>
         </div>
         <div>
-          {/* <ComponentCard title="Category Table"> */}
-            <CategoryTable onEditClick={handleEditClick} />
-          {/* </ComponentCard> */}
+          <TableComponent onEditClick={handleEditClick} />
         </div>
       </div>
     </>

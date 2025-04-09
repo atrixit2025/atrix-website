@@ -15,6 +15,8 @@ import PageBreadcrumb from "../../components/common/PageBreadCrumb";
 import Select from "../../components/form/Select";
 import SelectBUlk from "../../components/form/SelectBulk";
 import SelectBulk from "../../components/form/SelectBulk";
+import CustomAlert from "../../components/Alert/Alert";
+// import CustomAlert from "./CustomAlert"; 
 
 export default function Brand() {
     const [selectedRows, setSelectedRows] = useState([]);
@@ -22,6 +24,13 @@ export default function Brand() {
     const [bulkAction, setBulkAction] = useState('');
     const navigate = useNavigate();
 
+    const [alert, setAlert] = useState({
+        show: false,
+        type: '', // 'success' or 'error'
+        message: ''
+    });
+    const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+    const [currentDeleteAction, setCurrentDeleteAction] = useState(null);
     // Fetch data
     useEffect(() => {
         const fetchData = async () => {
@@ -30,8 +39,8 @@ export default function Brand() {
                 const brands = response.data.Brand;
                 const mappedData = brands.map((tech) => ({
                     id: tech._id,
-                    name: tech.title,
-                    Category: tech.category,
+                    title: tech.title,
+                    link: tech.link,
                     Date: new Date(tech.updatedAt).toLocaleDateString(),
                     team: {
                         images: [tech.image?.image || "/images/user/user-22.jpg"],
@@ -40,11 +49,26 @@ export default function Brand() {
                 }));
                 setTableData(mappedData);
             } catch (error) {
+                showAlert('error', "Error fetching data. Please try again.");
                 console.error("Error fetching data:", error);
             }
         };
         fetchData();
     }, []);
+
+    // Helper function to show alerts
+    const showAlert = (type, message) => {
+        setAlert({
+            show: true,
+            type,
+            message
+        });
+    };
+
+    // Close alert
+    const closeAlert = () => {
+        setAlert(prev => ({ ...prev, show: false }));
+    };
 
     // Single delete
     const handleDelete = async (id) => {
@@ -55,40 +79,50 @@ export default function Brand() {
 
             if (response.status === 200) {
                 setTableData(prev => prev.filter(order => order.id !== id));
-                alert("Brand deleted successfully!");
+                showAlert('success', "Brand deleted successfully!");
             }
         } catch (error) {
+            showAlert('error', error.response?.data?.message || "Error deleting Brand. Please try again.");
             console.error("Error deleting Brand:", error);
-            alert(error.response?.data?.message || "Error deleting Brand. Please try again.");
         }
     };
 
-    const handleBulkDelete = async () => {
+    const handleBulkDelete = () => {
         if (selectedRows.length === 0) {
-            alert('Please select at least one item');
+            showAlert('error', 'Please select at least one item');
             return;
         }
 
-        if (!window.confirm(`Are you sure you want to delete ${selectedRows.length} items?`)) {
-            return;
-        }
+        // Set up the delete action that will be executed after confirmation
+        setCurrentDeleteAction(() => async () => {
+            try {
+                const response = await axios.delete("http://localhost:5300/Brand/delete", {
+                    data: { id: selectedRows }
+                });
 
-        try {
-            const response = await axios.delete("http://localhost:5300/Brand/delete", {
-                data: { id: selectedRows }
-            });
-
-            if (response.status === 200) {
-                setTableData(prev => prev.filter(item => !selectedRows.includes(item.id)));
-                setSelectedRows([]);
-                setBulkAction('');
-                alert(response.data.message);
+                if (response.status === 200) {
+                    setTableData(prev => prev.filter(item => !selectedRows.includes(item.id)));
+                    setSelectedRows([]);
+                    setBulkAction('');
+                    showAlert('success', `${selectedRows.length} items deleted successfully!`);
+                }
+            } catch (error) {
+                console.error("Error in bulk delete:", error);
+                showAlert('error', error.response?.data?.message || "Error deleting items. Please try again.");
             }
-        } catch (error) {
-            console.error("Error in bulk delete:", error);
-            alert(error.response?.data?.message || "Error deleting items. Please try again.");
+        });
+
+        // Show the confirmation dialog
+        setShowConfirmDialog(true);
+    };
+
+    const executeDelete = async () => {
+        setShowConfirmDialog(false);
+        if (currentDeleteAction) {
+            await currentDeleteAction();
         }
     };
+
 
     const handleRowSelect = (id) => {
         setSelectedRows(prev =>
@@ -127,7 +161,12 @@ export default function Brand() {
                 buttonText=" Add New Brand"
                 buttonLink="/Dashboard/AddNewBrand"
             />
-
+            <CustomAlert
+                type={alert.type}
+                message={alert.message}
+                onClose={closeAlert}
+                show={alert.show}
+            />
             <div className="space-y-6">
                 {/* Bulk Actions Section */}
                 <div className="flex items-center gap-4">
@@ -140,16 +179,36 @@ export default function Brand() {
                             value={bulkOptions.find(option => option.value === bulkAction) || null}
                         />
                     </div>
-
+                    {showConfirmDialog && (
+                        <div className="fixed inset-0 bg-gray-400/50 backdrop-blur-[18px] bg-opacity-90 flex items-center justify-center z-99999 min-h-screen">
+                            <div className="bg-(--black) p-6 rounded-lg shadow-xl max-w-md w-full">
+                                <h3 className="text-lg font-medium mb-4">Confirm Bulk Deletion</h3>
+                                <p className="mb-6">Are you sure you want to delete {selectedRows.length} selected items? This action cannot be undone.</p>
+                                <div className="flex justify-end gap-3">
+                                    <button
+                                        onClick={() => setShowConfirmDialog(false)}
+                                        className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        onClick={executeDelete}
+                                        className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                                    >
+                                        Confirm Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                     {bulkAction === 'delete' && (
                         <button
                             onClick={handleBulkDelete}
                             disabled={selectedRows.length === 0}
-                            className={`px-4 py-2 rounded ${
-                                selectedRows.length > 0
-                                    ? 'bg-red-500 text-white hover:bg-red-600'
-                                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                            }`}
+                            className={`px-4 py-2 rounded ${selectedRows.length > 0
+                                ? 'bg-red-500 text-white hover:bg-red-600'
+                                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                                }`}
                         >
                             {selectedRows.length > 0 ? `Apply (${selectedRows.length})` : 'Apply'}
                         </button>
@@ -173,7 +232,12 @@ export default function Brand() {
                                                 onChange={handleSelectAll}
                                             />
                                         </TableCell>
-
+                                        <TableCell
+                                            isHeader
+                                            className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                                        >
+                                            Title
+                                        </TableCell>
                                         <TableCell
                                             isHeader
                                             className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
@@ -205,7 +269,15 @@ export default function Brand() {
                                                     onChange={() => handleRowSelect(order.id)}
                                                 />
                                             </TableCell>
-
+                                            <TableCell className="px-5 py-4 sm:px-6 text-start">
+                                                <div className="flex items-center gap-3">
+                                                    <div>
+                                                        <span className="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
+                                                            {order.title}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </TableCell>
                                             <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                                                 <div className="flex -space-x-2">
                                                     {order.team.images.map((teamImage, index) => (

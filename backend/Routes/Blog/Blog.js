@@ -8,14 +8,19 @@ app.use(express.json());
 const BlogRouter = express.Router();
 
 BlogRouter.post("/add", async (req, res) => {
-  // console.log("Received data:", req.body); // Debug log
-  
-  const { title, category, text, FeaturedImageId, image, fullImage, bigImage } = req.body;
-  
+  const { title, category, FeaturedImageId, contentSections } = req.body;
+  // console.log("Received body:", req.body);
   if (!title || !category || !FeaturedImageId) {
     return res.status(400).json({ 
-      message: "Title, category, and featured image are required",
-      received: req.body 
+      message: "Title, category, and featured image are required"
+    });
+  }
+
+  // Validate contentSections exists and is an array
+  if (!Array.isArray(contentSections)) {
+    return res.status(400).json({
+      message: "contentSections must be an array",
+      received: contentSections
     });
   }
 
@@ -23,15 +28,31 @@ BlogRouter.post("/add", async (req, res) => {
     const newBlog = new Blog({
       title,
       category,
-      text: text || "",
       FeaturedImage: FeaturedImageId,
-      image: image || undefined,
-      fullImage: fullImage || undefined,
-      bigImage: bigImage || undefined
+      contentSections: contentSections.map(section => {
+        // Validate each section has a type
+        if (!section.type) {
+          throw new Error("Each content section must have a type");
+        }
+
+        if (section.type === 'text') {
+          return {
+            type: 'text',
+            content: section.content || "" // Default to empty string
+          };
+        } else {
+          if (!section.imageId) {
+            throw new Error(`Image section must have an imageId`);
+          }
+          return {
+            type: section.type,
+            imageId: section.imageId
+          };
+        }
+      }),
+      updatedAt: new Date()
     });
 
-    console.log("Blog to be saved:", newBlog); // Debug log
-    
     const savedBlog = await newBlog.save();
     res.status(201).json({ 
       message: 'Blog created successfully', 
@@ -41,18 +62,26 @@ BlogRouter.post("/add", async (req, res) => {
     console.error("Save error:", error);
     res.status(500).json({ 
       message: 'Error creating blog', 
-      error: error.message 
+      error: error.message,
+      details: error.errors // This will show validation errors if any
     });
   }
 });
 
 BlogRouter.get("/get", async (req, res) => {
   try {
-    const blog = await Blog.find({}).populate('image'); 
-    if (!blog.length) {
+    const blogs = await Blog.find({}).populate('FeaturedImage', 'url'); // Assuming you have a reference
+    if (!blogs.length) {
       return res.status(404).json({ message: "No Blogs found" });
     }
-    return res.json({ Blog: blog });
+    
+    // Map blogs to include image URLs
+    const blogsWithUrls = blogs.map(blog => ({
+      ...blog.toObject(),
+      FeaturedImageUrl: blog.FeaturedImage?.url || null
+    }));
+    
+    return res.json({ Blog: blogsWithUrls });
   } catch (error) {
     console.error("Error fetching Blog:", error);
     return res.status(500).json({ message: "Error fetching Blog", error: error.message });
@@ -90,34 +119,89 @@ BlogRouter.get("/get", async (req, res) => {
 // });
 
 BlogRouter.put("/edit", async (req, res) => {
-  const { id, title, category, text, FeaturedImageId, image, fullImageId, bigImageId } = req.body;
+  const { 
+    id, // Now coming from request body instead of URL params
+    title, 
+    category, 
+    FeaturedImageId, 
+    contentSections 
+  } = req.body;
 
-  // Required fields validation
-  if (!id || !title || !category || !text || !FeaturedImageId) {
-    return res.status(400).json({ message: "All required fields must be provided" });
+  // Basic validation
+  if (!id) {
+    return res.status(400).json({ message: "Blog ID is required in the request body" });
+  }
+
+  if (!title || !category || !FeaturedImageId) {
+    return res.status(400).json({ 
+      message: "Title, category, and featured image are required"
+    });
+  }
+
+  // Validate contentSections if provided
+  if (contentSections && !Array.isArray(contentSections)) {
+    return res.status(400).json({
+      message: "contentSections must be an array if provided"
+    });
   }
 
   try {
-    const updateData = {
-      title,
-      category,
-      text,
-      FeaturedImage: FeaturedImageId,
-      ...(image && { image }),
-      ...(fullImageId && { fullImage: fullImageId }),
-      ...(bigImageId && { bigImage: bigImageId })
-    };
-
-    const updatedBlog = await Blog.findByIdAndUpdate(id, updateData, { new: true });
-
-    if (!updatedBlog) {
+    // Find the existing blog
+    const existingBlog = await Blog.findById(id);
+    if (!existingBlog) {
       return res.status(404).json({ message: "Blog not found" });
     }
 
-    res.status(200).json({ message: "Blog updated successfully", blog: updatedBlog });
+    // Prepare update data
+    const updateData = {
+      title,
+      category,
+      FeaturedImage: FeaturedImageId,
+      updatedAt: new Date()
+    };
+
+    // Only update contentSections if provided
+    if (contentSections) {
+      updateData.contentSections = contentSections.map(section => {
+        if (!section.type) {
+          throw new Error("Each content section must have a type");
+        }
+
+        if (section.type === 'text') {
+          return {
+            type: 'text',
+            content: section.content || ""
+          };
+        } else {
+          if (!section.imageId) {
+            throw new Error(`Image section must have an imageId`);
+          }
+          return {
+            type: section.type,
+            imageId: section.imageId
+          };
+        }
+      });
+    }
+
+    // Update the blog
+    const updatedBlog = await Blog.findByIdAndUpdate(
+      id, 
+      updateData, 
+      { new: true } // Return the updated document
+    );
+
+    res.status(200).json({ 
+      message: "Blog updated successfully", 
+      blog: updatedBlog 
+    });
   } catch (error) {
     console.error("Error updating blog:", error);
-    res.status(500).json({ message: "Error updating blog", error: error.message });
+    res.status(500).json({ 
+      message: "Error updating blog", 
+      error: error.message,
+      ...(error.errors && { details: error.errors })
+    });
   }
 });
 

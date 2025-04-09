@@ -5,7 +5,7 @@ interface TextareaProps {
   placeholder?: string;
   rows?: number;
   value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChange?: (value: string) => void; 
   className?: string;
   disabled?: boolean;
   error?: boolean;
@@ -25,10 +25,9 @@ const TextArea: React.FC<TextareaProps> = ({
 }) => {
   const handleChanges = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (onChange) {
-      onChange(e); // Pass only the value
+      onChange(e.target.value); // Pass only the value
     }
   };
-
   let textareaClasses = `w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs focus:outline-hidden ${className} `;
 
   if (disabled) {
