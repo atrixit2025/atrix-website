@@ -20,7 +20,7 @@ const WhyNeedBranding = () => {
     return (
         <div className='why-need-branding my-20' >
             <div className="container mx-auto ">
-                <h2 className='text-6xl text-center mb-10 ' >Why do you need branding</h2>
+                <h2 className='text-6xl font-bold text-center mb-14 ' >Why do you need branding</h2>
                 <div className="branding-Cards grid grid-cols-3 gap-5">
                     {brandingCardData.map((item, index) => (
                         <div className="branding-card p-12 bg-(--black) rounded-2xl">

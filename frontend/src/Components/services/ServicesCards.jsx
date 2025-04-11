@@ -59,7 +59,7 @@ const ServicesCards = () => {
     };
 
     return (
-        <div className="services-sec">
+        <div className="services-sec mt-20">
 
             <div className="container mx-auto">
                 <div className="service-cards-wapper grid grid-cols-1 gap-10">

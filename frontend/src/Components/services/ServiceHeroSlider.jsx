@@ -8,6 +8,9 @@ import image_3 from '../../assets/service-img2.jpg'
 import image_4 from '../../assets/service-img2.jpg'
 import image_5 from '../../assets/service-img2.jpg'
 import ColoredButton from "../ColoredButton";
+import styles from './ServiceHeroSlider.module.css'
+
+
 
 
 
@@ -21,13 +24,16 @@ const ServiceHeroSlider = () => {
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
+
+
     };
 
     return (
-        <div className="ServiceHeroSlider relative overflow-hidden " >
+
+        <div className={`${styles.ServiceHeroSlider} relative overflow-hidden`}>
             <Slider {...settings}>
                 {sliderImages.map((image, index) => (
-                    <div className="aspect-[16/4] overflow-hidden relative"  >
+                    <div key={index} className="aspect-[16/6] overflow-hidden relative"  >
                         {/* <div className="w-full h-full flex justify-center items-end" >
                         </div> */}
                         <div className="absolute inset-0  z-10 " > <img src={image} alt="" className="w-full h-full object-cover" /> </div>
@@ -36,9 +42,9 @@ const ServiceHeroSlider = () => {
                 ))}
             </Slider>
             <div className=" absolute z-20 bottom-12 left-1/2 -translate-x-1/2 " >
-                <ColoredButton buttonName={"Let's Talk"} buttonLink={"#"}  ></ColoredButton>
+                {/* <ColoredButton buttonName={"Let's Talk"} buttonLink={"#"}  ></ColoredButton> */}
             </div>
-
+            {/* <h1 className={styles.heading} > fsdfsdfds</h1> */}
         </div>
     )
 }
