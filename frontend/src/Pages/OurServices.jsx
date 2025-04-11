@@ -30,14 +30,14 @@ const OurServices = () => {
       {/* HOW WE DO IT */}
 
       <div className="container mx-auto mt-25 ">
-        <h1 className="text-9xl text-center font-extrabold py-15 "> HOW WE DO IT</h1>
+        <h2 className="text-9xl text-center font-extrabold py-15 "> HOW WE DO IT</h2>
         <div className="row-span-12 flex gap-9 ">
           <div className="col-span-4 border-t-1 border-white/20 w-[33.3%] ">
-            <h1 className="text-5xl font-extrabold  pt-10">
+            <h2 className="text-5xl font-extrabold  pt-10">
               START WITH <br />
               UNDERSTANDING
-            </h1>
-            <p className="text-lg leading-8 tracking-[0.2rem] pt-3 ">
+            </h2>
+            <p className="text-lg tracking-[0.1rem] pt-3 ">
               Every partnership begins with an ask. But our magic is in the
               understanding, finding the root of what needs to be solved—your
               Pivotal Problem. Pivotal Problems are the inflection point—the
@@ -48,11 +48,11 @@ const OurServices = () => {
           </div>
 
           <div className="col-span-4 border-t-1 border-white/20 w-[33.3%] ">
-            <h1 className="text-5xl font-extrabold  pt-10">
+            <h2 className="text-5xl font-extrabold  pt-10">
               CRAFT <br />
               FOR IMPACT
-            </h1>
-            <p className="text-lg leading-8 tracking-[0.2rem] pt-3 ">
+            </h2>
+            <p className="text-lg tracking-[0.1rem] pt-3 ">
               With our focus clear, we build a strategic framework for brand
               positioning and messaging at the core. From there, we craft
               impactful, audience-aligned solutions designed to resonate and
@@ -61,11 +61,11 @@ const OurServices = () => {
           </div>
 
           <div className="col-span-4 border-t-1 border-white/20 w-[33.3%] ">
-            <h1 className="text-5xl font-extrabold  pt-10">
+            <h2 className="text-5xl font-extrabold  pt-10">
               ACCELERATE FOR <br />
               GROWTHG
-            </h1>
-            <p className="text-lg leading-8 tracking-[0.2rem] pt-3 ">
+            </h2>
+            <p className="text-lg  tracking-[0.1rem] pt-3 ">
               We never set it and forget it. We constantly monitor our
               ecosystem, analyze performance, optimize, and refine strategies
               for continuous improvement and scalability.
