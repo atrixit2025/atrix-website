@@ -47,6 +47,11 @@ import JoditEditor from 'jodit-react';
 import SelectFileInput from "../../components/form/form-elements/SelectFileInput";
 import TagsInput from "../../components/form/TagsInput";
 import IconsInputExample from "../../components/form/form-elements/IconsInputExample";
+import Banner from "../../components/Services/Banner";
+import WhydoNeed from "../../components/Services/WhydoNeed";
+import WhyAtrix from "../../components/Services/WhyAtrix";
+import Process from "../../components/Services/Process";
+import MoreContent from "../../components/Services/MoreContent";
 
 export default function AddNewServices() {
   const location = useLocation();
@@ -65,12 +70,20 @@ export default function AddNewServices() {
   // Single state object for form data
   const [formData, setFormData] = useState({
     title: "",
+    description: "",
+    Servicesquote: "",
     text: "",
     selectedCategories: [],
     selectedPortfolioCategories: [],
     tags: [],
     iconImageId: null,
     imageId: null,
+    Banner: [],
+    WhydoNeed: [],
+    WhyAtrix: [],
+    Process: [],
+    servicescontent: [],
+    contentSections: []
   });
 
   const { Services } = location.state || {};
@@ -107,11 +120,20 @@ export default function AddNewServices() {
     if (Services) {
       setFormData({
         title: Services.title,
+        description: Services.description || "",
+        Servicesquote: Services.Servicesquote || "",
         selectedCategories: Services.category ? Services.category.split(", ") : [],
-        selectedPortfolioCategories: Services.portfolioCategories || [],
+        selectedPortfolioCategories: Services.portfolioCategories 
+        ? Services.portfolioCategories.split(", ") 
+        : [],
         tags: Services.tags || [],
         iconImageId: Services.iconImageId || null,
-        imageId: Services.FeaturedImage
+        imageId: Services.FeaturedImage || null,
+        Banner: Services.Banner || [],
+        WhydoNeed: Services.WhydoNeed || [],
+        WhyAtrix: Services.WhyAtrix || [],
+        Process: Services.Process || [],
+        servicescontent: Services.servicescontent || []
       });
 
       // Transform contentSections to selectFields
@@ -163,12 +185,19 @@ export default function AddNewServices() {
   const handleSubmit = async () => {
     const {
       title,
+      description,
       selectedCategories,
-      selectedPortfolioCategories,
+      portfolioCategories,
       tags,
       iconImageId,
-      imageId
+      imageId,
+      Banner,
+      WhydoNeed,
+      WhyAtrix,
+      Process,
+      servicescontent
     } = formData;
+
     console.log("Submitting with data:", {
       title: formData.title,
       selectedCategories: formData.selectedCategories,
@@ -182,6 +211,12 @@ export default function AddNewServices() {
         imageId: field.imageFile?.id
       }))
     });
+    // Validate required fields
+    if (!title || !description || selectedCategories.length === 0 || !imageId) {
+      alert("Title, description, at least one category, and featured image are required!");
+      return;
+    }
+
     const contentSections = selectFields.map(field => {
       if (field.value.value === 'text') {
         return {
@@ -195,39 +230,41 @@ export default function AddNewServices() {
         };
       }
     });
-    // Validate required fields
-    if (!title) {
-      alert("Title is required!");
-      return;
-    }
-    if (selectedCategories.length === 0) {
-      alert("At least one category must be selected!");
-      return;
-    }
-    if (!imageId) {
 
-      alert("Featured image is required!");
-      return;
-    }
-
-    // Prepare data for submission - field names match backend
+    const Bannerdata = (formData.Banner || [])
+    .filter(item => item.type && item.imageId) // Only include complete items
+    .map(item => ({
+      type: item.type,
+      imageId: item.imageId
+    }));
+  
+  console.log("Processed Bannerdata:", Bannerdata); // Verify before submission
+    
+   // Add these logs to verify data:
+console.log("Raw Banner data from form:", formData.Banner);
     const ServicesData = {
       title,
+      description,
+      Servicesquote: formData.Servicesquote || "",
       category: selectedCategories.join(", "),
-      portfolioCategories: selectedPortfolioCategories,
+      portfolioCategories: formData.selectedPortfolioCategories,
       tags: tags.filter(tag => tag.trim() !== ""),
       iconImageId,
       FeaturedImageId: imageId,
+      Bannerdata,
+      WhydoNeed,
+      WhyAtrix,
+      Process,
+      servicescontent: formData.servicescontent.map(item => ({
+        type: item.type || 'content', 
+        heading: item.heading || "",
+        cardheading: item.cardheading || "",
+        description: item.description || "",
+        ...(item.imageId && { imageId: item.imageId })
+      })),
       contentSections
     };
 
-    //     console.log("Submitting Services data:", ServicesData);
-    // console.log("Final imageFields state:", imageFields);
-    // console.log("Final imageFields:", {
-    //   image: imageFields.image,
-    //   fullImage: imageFields.fullImage,
-    //   bigImage: imageFields.bigImage
-    // });
     try {
       if (Services) {
         await axios.put(`http://localhost:5300/Services/edit`, {
@@ -339,6 +376,30 @@ export default function AddNewServices() {
     }));
   };
 
+  // Banner handler
+  const handleBannerChange = (bannerData) => {
+    setFormData(prev => ({ ...prev, Banner: bannerData }));
+  };
+
+  // WhyDoNeed handler
+  const handleWhyDoNeedChange = (whyData) => {
+    setFormData(prev => ({ ...prev, WhydoNeed: whyData }));
+  };
+
+  // WhyAtrix handler
+  const handleWhyAtrixChange = (atrixData) => {
+    setFormData(prev => ({ ...prev, WhyAtrix: atrixData }));
+  };
+
+  // Process handler
+  const handleProcessChange = (processData) => {
+    setFormData(prev => ({ ...prev, Process: processData }));
+  };
+
+  // MoreContent handler
+  const handleMoreContentChange = (contentData) => {
+    setFormData(prev => ({ ...prev, servicescontent: contentData }));
+  };
 
 
   return (
@@ -373,10 +434,61 @@ export default function AddNewServices() {
             />
           </div>
           <div>
+            <Label htmlFor={`description-${formData.id}`}>Description</Label>
+            <TextArea
+              type="text"
+              id={`description-${formData.id}`}
+              placeholder="Description"
+              value={formData.description}
+              onChange={(value) =>
+                setFormData((prev) => ({ ...prev, description: value }))
+              }
+            />
+          </div>
+
+
+          <div>
+            <Label htmlFor={`Servicesquote-${formData.id}`}>Services quote</Label>
+            <TextArea
+              type="text"
+              id={`Servicesquote-${formData.id}`}
+              placeholder="Services quote"
+              value={formData.Servicesquote}
+              onChange={(value) =>
+                setFormData((prev) => ({ ...prev, Servicesquote: value }))
+              }
+            />
+          </div>
+          <div>
             <TagsInput
               initialTags={formData.tags}
               onChange={handleTagsChange}
             />
+          </div>
+
+          <div>
+            <Label htmlFor="input"> Select Field</Label>
+
+
+            <Banner onChange={handleBannerChange} initialData={Services?.Banner} />
+          </div>
+
+          <div>
+            <Label>Why do you need</Label>
+            <WhydoNeed onChange={handleWhyDoNeedChange} initialData={Services?.WhydoNeed} />
+          </div>
+
+          <div>
+            <Label>Why Atrix</Label>
+            <WhyAtrix onChange={handleWhyAtrixChange} initialData={Services?.WhyAtrix} />
+          </div>
+
+          <div>
+            <Process onChange={handleProcessChange} initialData={Services?.Process} />
+          </div>
+
+          <div>
+            <MoreContent onChange={handleMoreContentChange} initialData={Services?.servicescontent} />
           </div>
 
 
@@ -435,6 +547,7 @@ export default function AddNewServices() {
                   field.value?.value === "big-image") && (
                     <div className="form-group">
                       <SelectFileInput
+                        NameOffield="Image"
                         onImageUpload={(imageId, imageType) =>
                           handleImageChange(field.id, imageId, imageType || field.value?.value)
                         }
@@ -463,8 +576,8 @@ export default function AddNewServices() {
                   <div key={category._id} className="flex items-center gap-3">
                     <Checkbox
                       id={`category-${category._id}`}
-                      checked={formData.selectedCategories.includes(category.Name)} // Check if selected
-                      onChange={() => handleCategoryChange(category.Name)} // Handle selection
+                      checked={formData.selectedCategories?.includes(category.Name) || false}
+                      onChange={() => handleCategoryChange(category.Name)}
                       label={category.Name}
                     />
                   </div>
@@ -494,16 +607,16 @@ export default function AddNewServices() {
           <div>
             <ComponentCategory title="Portfolio Category" link="/CategoryPortfolio">
               <div className="items-center gap-4 space-y-5">
-                {portfolioCategory.map((category) => (
-                  <div key={category._id} className="flex items-center gap-3">
-                    <Checkbox
-                      id={`portfolio-category-${category._id}`}
-                      checked={formData.selectedPortfolioCategories.includes(category.Name)}
-                      onChange={() => handlePortfolioCategoryChange(category.Name)}
-                      label={category.Name}
-                    />
-                  </div>
-                ))}
+              {portfolioCategory.map((category) => (
+  <div key={category._id} className="flex items-center gap-3">
+    <Checkbox
+      id={`portfolio-category-${category._id}`}
+      checked={formData.selectedPortfolioCategories.includes(category.Name)}
+      onChange={() => handlePortfolioCategoryChange(category.Name)}
+      label={category.Name}
+    />
+  </div>
+))}
               </div>
             </ComponentCategory>
           </div>

@@ -298,6 +298,7 @@ const GenericForm = ({
               <div className="card-body">
                 <div className="form-group mb-3">
                   <SelectBulk
+                  
                     options={field.options}
                     value={field.value}
                     onChange={(value) => handleSelectChange(field.id, value)}
@@ -322,6 +323,7 @@ const GenericForm = ({
                   field.value?.value === "big-image") && (
                     <div className="form-group">
                       <SelectFileInput
+                      NameOffield="Image"
                         onImageUpload={(imageId, imageType) =>
                           handleImageChange(field.id, imageId, imageType || field.value?.value)
                         }

@@ -41,6 +41,9 @@ import PortfolioSingle from './Pages/PortfolioSingle';
 import Service from './Pages/Service';
 import OurServices from './Pages/OurServices';
 
+import WhyAtrix from './Dashboard/components/Services/WhyAtrix';
+import MoreContent from './Dashboard/components/Services/MoreContent';
+
 export default function App() {
   return (
 
@@ -94,7 +97,7 @@ export default function App() {
             <Route path="/Dashboard/AddNewServices" element={<AddNewServices />} />
             <Route path="/Dashboard/CategoryServices" element={<CategoryServices />} />
 
-            <Route path="/Dashboard/Demo" element={<Demo />} />
+            <Route path="/Dashboard/Demo" element={<MoreContent />} />
 
             {/* <Route path="/Dashboard/Ckeditor" element={<Ckeditor />} /> */}
 
