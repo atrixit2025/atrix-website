@@ -1,29 +1,32 @@
-
 import React, { useEffect, useRef, useState } from "react";
-// import './faq.css';
-
 
 const FaqsCard = (props) => {
     const answerElRef = useRef();
-    const [state, setState] = useState(false);
     const [answerH, setAnswerH] = useState("0px");
-    const { faqsList, idx } = props;
+    const { faqsList, idx, isOpen, onClick } = props;
 
     const handleOpenAnswer = () => {
-        const answerElH = answerElRef.current.childNodes[0].offsetHeight;
-        setState(!state);
-        setAnswerH(`${answerElH + 0}px`);
+        onClick(idx); // Notify parent about the click
     };
 
+    useEffect(() => {
+        // Update height when open state changes
+        if (isOpen) {
+            const answerElH = answerElRef.current.childNodes[0].offsetHeight;
+            setAnswerH(`${answerElH + 0}px`);
+        } else {
+            setAnswerH("0px");
+        }
+    }, [isOpen]);
+
     return (
-        <div
-            className="accordian overflow-hidden"
-            key={idx}
-        >
-            <h4 className={`accordian-title ${state ? "active" : ""}`}
-                onClick={handleOpenAnswer}>
+        <div className="accordian overflow-hidden" key={idx}>
+            <h4 
+                className={`accordian-title ${isOpen ? "active" : ""}`}
+                onClick={handleOpenAnswer}
+            >
                 {faqsList.q}
-                {state ? (
+                {isOpen ? (
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-5 w-5 text-gray-100 ml-2"
@@ -32,9 +35,9 @@ const FaqsCard = (props) => {
                         stroke="currentColor"
                     >
                         <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
                             d="M20 12H4"
                         />
                     </svg>
@@ -58,7 +61,7 @@ const FaqsCard = (props) => {
             <div
                 ref={answerElRef}
                 className="duration-300"
-                style={state ? { height: answerH } : { height: "0px" }}
+                style={{ height: answerH }}
             >
                 <div className="bodyContent">
                     <p>{faqsList.a}</p>
@@ -68,13 +71,12 @@ const FaqsCard = (props) => {
     );
 };
 
-
 const faqsData = [
-   {
+    {
         category: "Frequently Asked Questions ",
         content: [
             {
-                q: "Will my website be mobile-friendly??",
+                q: "Will my website be mobile-friendly?",
                 a: " Yes! We design websites that adjust to all screen sizes, ensuring a smooth user experience. A mobile-friendly site also helps improve search rankings.",
             },
             {
@@ -82,7 +84,7 @@ const faqsData = [
                 a: " It typically takes 1 to 4 months, depending on the complexity and features required. The process includes planning, design, development, and testing.",
             },
             {
-                q: "What’s the difference between a website and a web app?",
+                q: "What's the difference between a website and a web app?",
                 a: "A website provides information, while a web app allows user interaction. Web apps often have advanced features like forms and dashboards.",
             },
             {
@@ -97,36 +99,41 @@ const faqsData = [
     },
 ];
 
-
-
-
-
 const FaqSection = () => {
-  return (
-    <>
-            <section className="faqsec my-20">
-                <div className="container mx-auto">
-                    <div className=" grid grid-cols-1 gap-y-15 gap-x-15">
-                        {faqsData.map((item, index) => (
-                            <div className="leading-relaxed mt-12">
-                                <div className="space-y-3 text-center">
-                                    <h2 className="text-4xl faqCatHeading  font-semibold mb-10">
-                                        {item.category}
-                                    </h2>
-                                </div>
-                                <div className="mt-16">
-                                    {item.content.map((item, idx) => (
-                                        <FaqsCard idx={idx} faqsList={item} />
-                                    ))}
-                                </div>
+    const [openIndex, setOpenIndex] = useState(null);
+
+    const handleToggle = (idx) => {
+        setOpenIndex(openIndex === idx ? null : idx);
+    };
+
+    return (
+        <section className="faqsec my-36">
+            <div className="container mx-auto">
+                <div className="grid grid-cols-1 gap-y-15 gap-x-15 max-w-[900px] mx-auto">
+                    {faqsData.map((item, index) => (
+                        <div className="leading-relaxed mt-12" key={index}>
+                            <div className="space-y-3 text-center">
+                                <h2 className="text-4xl faqCatHeading font-semibold mb-10">
+                                    {item.category}
+                                </h2>
                             </div>
-                        ))}
-                    </div>
+                            <div className="mt-16">
+                                {item.content.map((faq, idx) => (
+                                    <FaqsCard 
+                                        key={idx}
+                                        idx={idx} 
+                                        faqsList={faq} 
+                                        isOpen={openIndex === idx}
+                                        onClick={handleToggle}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    ))}
                 </div>
-            </section>
+            </div>
+        </section>
+    );
+};
 
-        </>
-  )
-}
-
-export default FaqSection
+export default FaqSection;
