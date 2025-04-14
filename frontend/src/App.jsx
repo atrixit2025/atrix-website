@@ -69,7 +69,11 @@ export default function App() {
           <Route path="/portfolio" element={< Portfolio_page />} />
           <Route path="/portfolio/:project_id" element={< PortfolioSingle />} />
           <Route path="/OurServices" element={<OurServices/>} />
+
           <Route path="/Behance" element={<Behance/>} />
+
+          <Route path="/Service" element={<Service/>} />
+
 
         </Route >
       </Routes >
