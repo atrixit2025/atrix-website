@@ -10,7 +10,7 @@ export default function Process({onChange,initialData}) {
                 id: 1,
                 value: "",
                 description: "",
-                heading: "",
+                // heading: "",
                 cardheading: ""
             }
         ];
@@ -21,7 +21,7 @@ export default function Process({onChange,initialData}) {
             if (initialData && Array.isArray(initialData)) {
               setSelectFields(initialData.map((item, index) => ({
                 id: index + 1,
-                heading: item.heading || "",
+                // heading: item.heading || "",
                 cardheading: item.cardheading || item.cardheding || "", // handle both spellings
                 description: item.description || ""
               })));
@@ -30,7 +30,7 @@ export default function Process({onChange,initialData}) {
           useEffect(() => {
             if (onChange) {
               onChange(selectFields.map(field => ({
-                heading: field.heading,
+                // heading: field.heading,
                 cardheading: field.cardheading,
                 description: field.description
               })));
@@ -44,7 +44,7 @@ export default function Process({onChange,initialData}) {
                 id: newId,
                 value: "",
                 description: "",
-                heading: "",
+                // heading: "",
                 cardheading: ""
             }
         ]);
@@ -108,7 +108,7 @@ export default function Process({onChange,initialData}) {
                         </div>
                         
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
+                            {/* <div>
                                 <Label htmlFor={`heading-${field.id}`}>Heading</Label>
                                 <Input
                                     type="text"
@@ -117,7 +117,7 @@ export default function Process({onChange,initialData}) {
                                     value={field.heading}
                                     onChange={(e) => handleHeadingChange(field.id, e.target.value)}
                                 />
-                            </div>
+                            </div> */}
 
                             <div>
                                 <Label htmlFor={`card-heading-${field.id}`}>Card Heading</Label>

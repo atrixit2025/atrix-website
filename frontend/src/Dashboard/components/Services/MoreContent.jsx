@@ -36,7 +36,7 @@ export default function MoreContent({onChange,initialData}) {
             ],
             description: item.description || "",
             imageFile: item.imageFile || null,
-            heading: item.heading || "",
+            // heading: item.heading || "",
             cardheading: item.cardheading || ""
           }));
       
@@ -45,7 +45,7 @@ export default function MoreContent({onChange,initialData}) {
           // Optional: if there's "content" data, set content fields too
           const contentFields = mappedFields.filter(f => f.value.value === "content").map((item, index) => ({
             id: index + 1,
-            heading: item.heading || "",
+            // heading: item.heading || "",
             cardheading: item.cardheading || "",
             description: item.description || ""
           }));
@@ -67,7 +67,7 @@ export default function MoreContent({onChange,initialData}) {
           const mapped = selectFields.map(field => ({
             value: field.value?.value || "",
             description: field.description,
-            heading: field.heading || "",
+            // heading: field.heading || "",
             cardheading: field.cardheading || "",
             imageFile: field.imageFile || null
           }));
@@ -101,7 +101,7 @@ export default function MoreContent({onChange,initialData}) {
                 id: 1,
                 value: "",
                 description: "",
-                heading: "",
+                // heading: "",
                 cardheading: ""
             }
         ];
@@ -115,7 +115,7 @@ export default function MoreContent({onChange,initialData}) {
                 id: newId,
                 value: "",
                 description: "",
-                heading: "",
+                // heading: "",
                 cardheading: ""
             }
         ]);
@@ -264,7 +264,7 @@ export default function MoreContent({onChange,initialData}) {
                                             </div>
 
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                <div>
+                                                {/* <div>
                                                     <Label htmlFor={`heading-${contentField.id}`}>Heading</Label>
                                                     <Input
                                                         type="text"
@@ -273,7 +273,7 @@ export default function MoreContent({onChange,initialData}) {
                                                         value={contentField.heading}
                                                         onChange={(e) => handleHeadingChange(contentField.id, e.target.value)}
                                                     />
-                                                </div>
+                                                </div> */}
 
                                                 <div>
                                                     <Label htmlFor={`card-heading-${contentField.id}`}>Card Heading</Label>

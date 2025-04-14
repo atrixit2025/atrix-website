@@ -8,29 +8,25 @@ const contentSectionSchema = new mongoose.Schema({
 
 const servicescontentSectionSchema = new mongoose.Schema({
     type: { type: String, enum: ['content', 'gallery'], required: true },
-    heading: { type: String },
     cardheading: { type: String },
     description: { type: String },
     imageId: { type: String }
 });
 
 const WhydoNeedSectionSchema = new mongoose.Schema({
-    type: { type: String, required: false }, // Made optional
-    heading: { type: String },
+    type: { type: String, required: false },
     cardheading: { type: String },
     description: { type: String },
 });
 
 const ProcessSectionSchema = new mongoose.Schema({
-    type: { type: String, required: false }, // Made optional
-    heading: { type: String },
+    type: { type: String, required: false },
     cardheading: { type: String },
     description: { type: String },
 });
 
 const WhyAtrixSectionSchema = new mongoose.Schema({
-    type: { type: String, required: false }, // Made optional
-    heading: { type: String },
+    type: { type: String, required: false }, 
     title: { type: String },
     description: { type: String },
 });

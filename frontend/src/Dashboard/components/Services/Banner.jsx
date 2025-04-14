@@ -2,14 +2,14 @@ import React, { useState, useEffect, useContext } from "react";
 import SelectBulk from "../../components/form/SelectBulk";
 import SelectFileInput from "../form/form-elements/SelectFileInput";
 
-export default function Banner({onChange,initialData}) {
+export default function Banner({ onChange, initialData }) {
     const [selectFields, setSelectFields] = useState(() => [
         {
             id: 1,
             value: "",
             options: [
                 { value: "", label: "Select Option" },
-                { value: "Banner", label: "Banner" },
+                { value: "banner", label: "Banner" },
                 { value: "video", label: "video" },
                 { value: "sider-image", label: "sider-image" },
             ],
@@ -21,36 +21,36 @@ export default function Banner({onChange,initialData}) {
 
     useEffect(() => {
         if (initialData && Array.isArray(initialData)) {
-          const mapped = initialData.map((item, index) => ({
-            id: index + 1,
-            value: item.value ? { value: item.value, label: item.value } : "",
-            options: [
-              { value: "", label: "Select Option" },
-              { value: "Banner", label: "Banner" },
-              { value: "video", label: "video" },
-              { value: "sider-image", label: "sider-image" },
-            ],
-            textValue: item.textValue || "",
-            imageFile: item.imageFile || null,
-            siderImages: item.siderImages || [],
-          }));
-      
-          setSelectFields(mapped);
-        }
-      }, [initialData]);
+            const mapped = initialData.map((item, index) => ({
+                id: index + 1,
+                type: item.type ? { value: item.value, label: item.value } : "",
+                options: [
+                    { value: "", label: "Select Option" },
+                    { value: "banner", label: "Banner" },
+                    { value: "video", label: "video" },
+                    { value: "sider-image", label: "sider-image" },
+                ],
+                textValue: item.textValue || "",
+                imageFile: item.imageFile || null,
+                siderImages: item.siderImages || [],
+            }));
 
-      useEffect(() => {
-        if (onChange) {
-          const mapped = selectFields.map(field => ({
-            value: field.value?.value || "",
-            textValue: field.textValue || "",
-            imageFile: field.imageFile || null,
-            siderImages: field.siderImages || []
-          }));
-          onChange(mapped);
+            setSelectFields(mapped);
         }
-      }, [selectFields]);
-      
+    }, [initialData]);
+
+    useEffect(() => {
+        if (onChange) {
+            const mapped = selectFields.map(field => ({
+                type: field.type || "",
+                // textValue: field.textValue || "",
+                imageFile: field.imageFile || null,
+                siderImages: field.siderImages || []
+            }));
+            onChange(mapped);
+        }
+    }, [selectFields]);
+
     const handleSelectChange = (id, value) => {
         // console.log(`Field ${id} changed to:`, value);
         setSelectFields(selectFields.map(field =>
@@ -58,7 +58,24 @@ export default function Banner({onChange,initialData}) {
         ));
     };
 
-
+    const handleTypeChange = (id, selectedOption) => {
+        setSelectFields(prevFields =>
+            prevFields.map(field =>
+                field.id === id
+                    ? { ...field, type: selectedOption.value, imageId: null }
+                    : field
+            )
+        );
+    };
+    const handleImageUpload = (id, imageId) => {
+        setSelectFields(prevFields => 
+            prevFields.map(field => 
+                field.id === id 
+                    ? { ...field, imageId }
+                    : field
+            )
+        );
+    };
     const handleImageChange = (id, imageFile) => {
         setSelectFields(selectFields.map(field =>
             field.id === id ? { ...field, imageFile } : field
@@ -95,18 +112,40 @@ export default function Banner({onChange,initialData}) {
                     {selectFields.map((field, index) => (
                         <div key={field.id} className="card mb-3 border-2 px-4 py-2 rounded-xl border-gray-700">
                             <div className="card-header ">
-                            
+
                             </div>
                             <div className="card-body">
-                                <div className="form-group ">
+                                <div className="form-group mb-4">
                                     <SelectBulk
                                         options={field.options}
-                                        value={field.value}
-                                        onChange={(value) => handleSelectChange(field.id, value)}
-                                        className="form-control"
+                                        value={field.options.find(opt => opt.value === field.type) || ""}
+                                        onChange={(selected) => handleTypeChange(field.id, selected)}
                                     />
                                 </div>
-                                {field.value?.value === "Banner" && (
+
+                                {(field.type === "banner" || field.type === "video") && (
+                                    <SelectFileInput
+                                        selected="No image selected"
+
+                                        NameOffield={`Add ${field.type === "banner" ? "Image" : "Video"}`}
+                                        onImageUpload={(imageId) => handleImageUpload(field.id, imageId)}
+                                        imageId={field.imageId}
+                                    />
+                                )}
+                                {field.type === "sider-image" && (
+                                    <div className="grid grid-cols-2 gap-4">
+                                        {[1, 2, 3, 4].map((item) => (
+                                            <div key={item} className="border border-gray-700 h-52 flex justify-center items-center">
+                                                <SelectFileInput
+                                                    NameOffield="+"
+                                                    onImageUpload={(imageId) => handleImageUpload(field.id, imageId)}
+                                                    imageId={field.imageId}
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                                {/* {field.value?.value === "Banner" && (
                                     <div className="form-group mt-3">
                                         <SelectFileInput
                                           selected= "No image selected"
@@ -128,19 +167,12 @@ export default function Banner({onChange,initialData}) {
                                             existingImage={field.imageFile}
                                         />
                                     </div>
-                                )}
+                                )} */}
 
-                                {field.value?.value === "sider-image" && (
+                                {/* {field.value?.value === "sider-image" && (
                                     <div className="form-group">
 
-                                        {/* <input
-                                            type="file"
-                                            multiple
-                                            accept="image/*"
-                                            onChange={(e) => handleSiderImageChange(field.id, e.target.files)}
-                                        /> */}
-
-                                        {/* Preview uploaded images */}
+                                       
                                         <div className="flex flex-wrap 
                                         
                                         gap-2 mt-4">
@@ -179,8 +211,8 @@ export default function Banner({onChange,initialData}) {
                                                     onImageUpload={(file) => handleImageChange(field.id, file)}
                                                     existingImage={field.imageFile}
                                                 />
-                                            </div>
-                                            {/* {field.siderImages?.map((image, i) => (
+                                            </div> */}
+                                {/* {field.siderImages?.map((image, i) => (
                                                 <div key={i} className="relative">
                                                     <img
                                                         src={URL.createObjectURL(image)}
@@ -196,9 +228,9 @@ export default function Banner({onChange,initialData}) {
                                                     </button>
                                                 </div>
                                             ))} */}
-                                        </div>
+                                {/* </div>
                                     </div>
-                                )}
+                                )} */}
 
 
                             </div>

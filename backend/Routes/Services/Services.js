@@ -121,7 +121,7 @@ function validateServicesContentSection(section) {
   if (section.type === 'content') {
     return {
       type: section.type,
-      heading: section.heading || "",
+      // heading: section.heading || "",
       cardheading: section.cardheading || "",
       description: section.description || ""
     };

@@ -198,19 +198,19 @@ export default function AddNewServices() {
       servicescontent
     } = formData;
 
-    console.log("Submitting with data:", {
-      title: formData.title,
-      selectedCategories: formData.selectedCategories,
-      selectedPortfolioCategories: formData.selectedPortfolioCategories,
-      tags: formData.tags,
-      iconImageId: formData.iconImageId,
-      imageId: formData.imageId,
-      contentSections: selectFields.map(field => ({
-        type: field.value?.value,
-        content: field.textContent,
-        imageId: field.imageFile?.id
-      }))
-    });
+    // console.log("Submitting with data:", {
+    //   title: formData.title,
+    //   selectedCategories: formData.selectedCategories,
+    //   selectedPortfolioCategories: formData.selectedPortfolioCategories,
+    //   tags: formData.tags,
+    //   iconImageId: formData.iconImageId,
+    //   imageId: formData.imageId,
+    //   contentSections: selectFields.map(field => ({
+    //     type: field.value?.value,
+    //     content: field.textContent,
+    //     imageId: field.imageFile?.id
+    //   }))
+    // });
     // Validate required fields
     if (!title || !description || selectedCategories.length === 0 || !imageId) {
       alert("Title, description, at least one category, and featured image are required!");
@@ -234,11 +234,11 @@ export default function AddNewServices() {
     const Bannerdata = (formData.Banner || [])
     .filter(item => item.type && item.imageId) // Only include complete items
     .map(item => ({
-      type: item.type,
-      imageId: item.imageId
+        type: item.type,
+        imageId: item.imageId
     }));
-  
-  console.log("Processed Bannerdata:", Bannerdata); // Verify before submission
+
+console.log("Processed Banner Data:", Bannerdata);
     
    // Add these logs to verify data:
 console.log("Raw Banner data from form:", formData.Banner);

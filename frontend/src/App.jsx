@@ -43,6 +43,7 @@ import OurServices from './Pages/OurServices';
 
 import WhyAtrix from './Dashboard/components/Services/WhyAtrix';
 import MoreContent from './Dashboard/components/Services/MoreContent';
+import Behance from './Components/Behanceshowpost/Behance';
 
 export default function App() {
   return (
@@ -68,6 +69,7 @@ export default function App() {
           <Route path="/portfolio" element={< Portfolio_page />} />
           <Route path="/portfolio/:project_id" element={< PortfolioSingle />} />
           <Route path="/OurServices" element={<OurServices/>} />
+          <Route path="/Behance" element={<Behance/>} />
 
         </Route >
       </Routes >
