@@ -1,138 +1,151 @@
 import React from "react";
 import logo from "../assets/ais-logo-3.png";
-import { FaFacebookF } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
-import { FaLinkedinIn } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa";
 import Button from "./Button";
 import { Link } from "react-router-dom";
-
+import { FaArrowRight } from "react-icons/fa6";
+import Atrix_img from "../assets/footer/Asset 24.svg";
 
 const ourServices = [
-    { service_name: "3D Animation", url: "#" },
-    { service_name: "CRM Development", url: "#" },
-    { service_name: "Web Development", url: "#" },
-    { service_name: "MLM Software", url: "#" },
-    { service_name: "Graphic Designing", url: "#" },
-    { service_name: "Metaverse Development", url: "#" },
-    { service_name: "Digital Marketing", url: "#" },
-    { service_name: "App Development", url: "#" },
-    { service_name: "UI/UX Design & Development", url: "#" },
-    { service_name: "Salesforce Development", url: "#" },
-    { service_name: "AI Development", url: "#" },
-    { service_name: "Software Development", url: "#" },
-    { service_name: "IoT Development", url: "#" },
-    { service_name: "Hire Developers", url: "#" },
-    { service_name: "SAP Business One", url: "#" },
-    { service_name: "AEM Development", url: "#" },
-    { service_name: "Unity 3D Game Development", url: "#" },
-]
-const quickLinks = [
-    { link_name: "Home", url: "/" },
-    { link_name: "About", url: "/about" },
-    { link_name: "Our Blog", url: "/blog" },
-    { link_name: "Our Portfolio", url: "/portfolio" },
-    { link_name: "FAQ", url: "/faqs" },
-    { link_name: "Career", url: "/careers" },
-    { link_name: "Contact Us", url: "/contact-us" },
-    
-]
+  { service_name: "Home", url: "/" },
+  { service_name: "About US", url: "/about" },
+  { service_name: "Services", url: "/service" },
+  { service_name: "Our Portfolio", url: "/portfolio" },
+  { service_name: "Career", url: "/careers" },
+  { service_name: "Our Blog", url: "/blog" },
+  { service_name: "FAQ", url: "/faqs" },
+  { service_name: "Contact Us", url: "/contact-us" },
+];
 
+const cardsContent = [
+  {
+    link: "#",
+    btn_name: "Facebook",
+  },
+  {
+    link: "mailto:info@atrixitsolutions.com",
+    btn_name: "Instagram",
+  },
+  {
+    link: "#",
+    btn_name: "Behance",
+  },
+  {
+    btn_name: "Twitter",
+  },
+  {
+    btn_name: "Linked In",
+  },
+];
 
 const Footer = () => {
-    return (
-        <footer className="bg-cs_theme_black">
-            <div className=" max-w-[90%] mx-auto flex flex-wrap md:pt-28 pt-14 md:pb-24 pb-10 ">
-                <div className=" md:w-1/4 md:pr-16 ">
-                    <div className=" h-16 md:h-32 w-auto md:m-0  flex ">
-
-                        <img src={logo} alt="" />
-                    </div>
-                    <h4 className=" text-(--blue) mt-5 font-bold text-lg">Address</h4>
-                    <p className="  uppercase" >D-179 Phase, 8B, Phase 8B, Industrial Area, Sector 74, S.A.S Nagar, Punjab 140501</p>
-
-
-                    <h4 className="  text-(--blue) mt-5 font-bold text-lg">Email</h4>
-                    <p className="break-words">info@atrixitsolutions.com</p>
-
-                    <h4 className=" text-(--blue) mt-5 font-bold text-lg  ">Social Just You Connected Us!</h4>
-                    <ul className=" flex gap-3 mt-3 md:justify-start  ">
-                        <Link className="w-8 h-8 border border-(--black)  bg-(--black) hover:bg-gradient-to-r from-(--blue) to-(--green) flex justify-center items-center rounded-full cursor-pointer ">
-                            <FaFacebookF />
-                        </Link>
-                        <Link to="https://x.com/AtrixIT_S" target="_blank" className="w-8 h-8 border border-(--black)  bg-(--black) hover:bg-gradient-to-r from-(--blue) to-(--green) flex justify-center items-center rounded-full cursor-pointer ">
-                            <FaXTwitter />
-                        </Link>
-                        <Link to="https://www.linkedin.com/company/atrixitsolutions/" target="_blank" className="w-8 h-8 border border-(--black)  bg-(--black) hover:bg-gradient-to-r from-(--blue) to-(--green) flex justify-center items-center rounded-full cursor-pointer">
-                            <FaLinkedinIn />
-                        </Link>
-                        <Link to="https://www.instagram.com/atrixit.solutions/" target="_blank" className="w-8 h-8 border border-(--black)  bg-(--black) hover:bg-gradient-to-r from-(--blue) to-(--green) flex justify-center items-center rounded-full cursor-pointer">
-                            <FaInstagram />
-                        </Link>
-                    </ul>
-                </div>
-                <div className="md:w-3/4 flex flex-wrap ">
-                    <div className="w-full md:w-3/6 uppercase ">
-                        <h4 className=" mt-10 md:mt-0 text-2xl font-bold inline-block pb-2 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-cs_white after:to-cs_theme_black  ">
-                            Our Services
-                        </h4>
-
-                        <ul className="mt-5 text-sm columns-2  space-y-4  ">
-                            {ourServices.map((item, index) => (
-                                <li className="hover:text-(--blue) hover:font-bold duration-150 " key={index}> <a href={item.url}>{item.service_name}</a> </li>
-
-                            ))}
-
-                        </ul>
-                    </div>
-                    <div className="md:w-2/4 flex flex-col md:flex-row ">
-                        <div className="w-full md:w-1/3  ">
-                            <h4 className="  mt-10 md:mt-0 text-2xl font-bold inline-block pb-2 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-cs_white after:to-cs_theme_black">
-                                Quick Links
-                            </h4>
-                            <ul className="mt-5 text-sm md:columns-1 columns-2 space-y-4 uppercase ">
-
-                                {quickLinks.map((item, index) => (
-                                    <li className="hover:text-(--blue) hover:font-bold duration-150" key={index}>
-                                        <Link to={item.url}>{item.link_name}</Link>
-                                    </li>
-                                ))}
-
-                            </ul>
-                        </div>
-                        <div className="mt-10 md:mt-0 w-full md:w-2/3   lg:pl-7 pl-0">
-                            <h2 className=" text-xl md:text-3xl font-bold">We are dedicated to find the right solution for you.</h2>
-                            <div className=" mt-5 ">
-                                {/* <CsButton mybtn="Get in Touch"></CsButton> */}
-                                <Button mybtn="Get in Touch" btnLink={"/contact-us"} ></Button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  return (
+    <footer className="bg-cs_theme_black">
+      <div className="max-w-[90%] mx-auto py-14 md:py-28 ">
+        {/* Main Footer Content */}
+        <div className="flex flex-col md:flex-row justify-between border-t border-gray-700 pt-10 ">
+          {/* Logo Column */}
+          <div className=" w-[200px] flex flex-col gap-5">
+            <div className="img-sec">
+              <img
+                src={logo}
+                alt="Atrix IT Solutions Logo"
+                className="h-full"
+              />
             </div>
-            <div className="bg-cs_theme_black  max-w-[90%] mx-auto ">
-                <div className="border-t border-(--black) py-8 flex justify-between flex-col md:flex-row text-cs_white  max-w-[100%]  ">
-                    <div className="">
-                        {" "}
-                        <p className="text-sm md:text-left text-center">© Copyright 2025 Atrix IT Solutions | All Right Reserved.</p>
-                    </div>
-                    <ul className=" flex flex-wrap gap-4 text-sm md:justify-end justify-center md:mt-0 mt-2 ">
-                        <li>
-                            <p className="border-r pr-4 text-sm">Support Policy </p>
-                        </li>
-                        <li>
-                            <Link to="terms-and-conditions" className="border-r pr-4">
-                                Terms & Conditions{" "}
-                            </Link>
-                        </li>
-                        <li className="">
-                            <Link to="/privacy-policy"> Privacy Policy</Link>
-                        </li>
-                    </ul>
-                </div> 
+          </div>
+
+          {/* Contact Info Column */}
+          <div className="md:w-1/4 flex flex-col gap-1">
+            <h4 className="text-blue-400 font-bold text-lg">Email</h4>
+            <p className="break-words">info@atrixitsolutions.com</p>
+
+            <h4 className="text-blue-400 font-bold text-lg mt-4">Address</h4>
+            <p className="uppercase">
+              D-179 Phase, 8B, Phase 8B, Industrial Area, Sector 74, S.A.S
+              Nagar, Punjab 140501
+            </p>
+          </div>
+
+          {/* Navigation Links Column */}
+          <div className="md:w-[250px]">
+            <ul className="grid grid-cols-2 gap-4 ">
+              {ourServices.map((item, index) => (
+                <li
+                  key={index}
+                  className="hover:text-blue-400 transition-colors hover:font-extrabold  "
+                >
+                  <Link to={item.url}>{item.service_name}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* CTA Column */}
+          <div className="md:w-1/4 flex flex-col  gap-4">
+            <h2 className="text-xl md:text-6xl font-bold">
+              Ready to Elevate Your Brand?
+            </h2>
+            <div className="mt-2  ">
+              <Button mybtn="Lets' Talk" btnLink="/contact-us" />
             </div>
-        </footer>
-    );
+          </div>
+        </div>
+
+        <div className="row max-w-[70%] mx-auto mt-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-1 pb-5">
+            {cardsContent.map((item, index) => (
+              <div className="link-div flex">
+                <Link key={index} to={item.link} className=" ">
+                  <div className="titel cursor-pointer hover:text-blue-500  group font-bold flex items-center justify-center   self-start ">
+                    {item.btn_name}
+
+                    <span className="border border-gray-400 ml-2 flex justify-center items-center h-6 w-6 rounded-full -rotate-45 group-hover:rotate-1 group-hover:bg-blue-500 group-hover:text-white group-hover:border-blue-500 duration-300">
+                      <FaArrowRight size={12} />
+                    </span>
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="row  mx-auto border-t-1 border-gray-700 py-20  ">
+          <img src={Atrix_img} alt="" />
+        </div>
+
+        {/* Footer Bottom */}
+        <div className="border-t border-gray-700  pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm">
+            © Copyright 2025 Atrix IT Solutions | All Right Reserved.
+          </p>
+
+          <ul className="flex flex-wrap gap-4 text-sm">
+            <li>
+              <Link to="#" className="hover:text-blue-400 transition-colors">
+                Support Policy
+              </Link>
+            </li>
+            <li className="border-l border-gray-500 pl-4">
+              <Link
+                to="terms-and-conditions"
+                className="hover:text-blue-400 transition-colors"
+              >
+                Terms & Conditions
+              </Link>
+            </li>
+            <li className="border-l border-gray-500 pl-4">
+              <Link
+                to="/privacy-policy"
+                className="hover:text-blue-400 transition-colors"
+              >
+                Privacy Policy
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  );
 };
 
 export default Footer;
