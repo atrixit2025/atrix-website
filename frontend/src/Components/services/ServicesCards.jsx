@@ -33,6 +33,7 @@ const serviceCardsData = [
             'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam ut laborum architecto provident tempore recusandae at exercitationem! Praesentium blanditiis laborum quas repellendus. Ab, sed quidem! Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, id.',
         hover_image: hover_img,
     },
+    
 ];
 
 const ServicesCards = () => {
@@ -72,20 +73,20 @@ const ServicesCards = () => {
                 </div>
             </div>
             <div>
-                <div className="service-cards-wapper grid grid-cols-1 gap-10">
+                <div className="service-cards-wapper grid grid-cols-1  ">
                     {serviceCardsData.map((item, index) => (
                         <div className='border-b ' >
                             <div
                                 key={index}
-                                className="service-card grid lg:grid-cols-2 gap-10 p-10 relative container mx-auto"
+                                className="service-card grid lg:grid-cols-2 gap-10 pb-12 pt-15 relative container mx-auto"
                                 onMouseEnter={handleMouseEnter}
                                 onMouseMove={handleMouseMove}
                                 onMouseLeave={mouseResetValue}
                             >
 
-                                <div className="service-title">
+                                <div className="service-title flex  items-center relative ml-12 ">
                                     <h2 className="text-5xl font-bold">{item.service_title}</h2>
-                                    <span className="absolute top-3 left-3 font-bold text-xl">{index + 1}</span>
+                                    <span className="absolute -top-2 -left-12 font-bold text-xl">{index < 9 ? "0" : ""}{index + 1}</span>
                                 </div>
                                 <div className="service-desc">
                                     <p>{item.service_desc}</p>
