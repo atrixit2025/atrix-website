@@ -40,7 +40,7 @@ const cardsContent = [
 const Footer = () => {
   return (
     <footer className="bg-cs_theme_black">
-      <div className="max-w-[90%] mx-auto py-14 md:py-28 ">
+      <div className=" container  mx-auto py-14 md:py-8 ">
         {/* Main Footer Content */}
         <div className="flex flex-col md:flex-row justify-between border-t border-gray-700 pt-10 ">
           {/* Logo Column */}
@@ -55,7 +55,7 @@ const Footer = () => {
           </div>
 
           {/* Contact Info Column */}
-          <div className="md:w-1/4 flex flex-col gap-1">
+          <div className="md:w-[280px] flex flex-col gap-1">
             <h4 className="text-blue-400 font-bold text-lg">Email</h4>
             <p className="break-words">info@atrixitsolutions.com</p>
 
@@ -92,7 +92,7 @@ const Footer = () => {
         </div>
 
         <div className="row max-w-[70%] mx-auto mt-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-1 pb-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-1 pb-10">
             {cardsContent.map((item, index) => (
               <div className="link-div flex">
                 <Link key={index} to={item.link} className=" ">

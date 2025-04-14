@@ -25,6 +25,7 @@ import About_sec_scroll from "../Components/About_sec_scroll";
 import { RxArrowTopRight } from "react-icons/rx";
 import ValueCards from "../Components/career/ValueCards";
 import TestimonialsCards from "../Components/TestimonialsCards";
+import Behance from "../Components/Behanceshowpost/Behance";
 
 
 const cards = [
@@ -232,6 +233,8 @@ const About = () => {
       {/* Testimonial-Section */}
       <TestimonialsCards/>
     
+      {/* Behance-section */}
+        <Behance/>
 
 
     </>
