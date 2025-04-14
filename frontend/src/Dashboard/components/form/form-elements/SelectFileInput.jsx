@@ -10,7 +10,7 @@ import { GrFormSubtract } from "react-icons/gr";
 
 
 
-const SelectFileInput = ({ onImageUpload, imageId, imageType, existingImage }) => {
+const SelectFileInput = ({ onImageUpload, imageId, imageType, existingImage,NameOffield,selected }) => {
     const [previewUrl, setPreviewUrl] = useState(existingImage?.url || null);
     const [isOpen, setIsOpen] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
@@ -191,17 +191,17 @@ const SelectFileInput = ({ onImageUpload, imageId, imageType, existingImage }) =
 
         <div>
             {selectedImage ? (
-                <div className="flex flex-col items-center relative">
+                <div className="flex flex-col  relative">
                     <div className="relative">
                         <img
                             src={`http://localhost:5300${selectedImage}`}
                             alt="Featured"
-                            className="w-52 h-52 object-contain border-gray-700 border p-1"
+                            className="w-52 h-52 object-contain border-gray-700 border p-1 relative"
                         />
                         <button
                             onClick={handleRemoveImage}
 
-                            className="absolute  cursor-pointer top-1  right-1 p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600"
+                            className="absolute  cursor-pointer top-1  left -1 p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600"
                         >
                             <FaTrash size={14} />
                         </button>
@@ -220,7 +220,7 @@ const SelectFileInput = ({ onImageUpload, imageId, imageType, existingImage }) =
                     className=" cursor-pointer"
 
                 >
-                    No image selected <button onClick={openModal} className=" border-(--blue) border px-4 py-2 text-(--blue) rounded-lg ml-2">Add Image</button>
+                    {selected} <button onClick={openModal} className=" border-(--blue) border px-4 py-2 text-(--blue) rounded-lg ml-2"> {NameOffield}</button>
                 </p>
 
             )}

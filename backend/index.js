@@ -16,6 +16,7 @@ import BrandRouter from './Routes/Brand/Brand.js';
 import DemoRouter from './Routes/Demo/Demo.js';
 import ServicesCategoryRouter from './Routes/Services/ServicesCategory.js';
 import ServicesRouter from './Routes/Services/Services.js';
+import BehanceRouter from './BehanceApi/Behance.js';
 
 const __filename = fileURLToPath(import.meta.url); 
 const __dirname = path.dirname(__filename);
@@ -57,6 +58,7 @@ app.use("/Brand",BrandRouter)
 app.use("/ServicesCategory", ServicesCategoryRouter);
 app.use("/Services", ServicesRouter);
 
+app.use("/Behance", BehanceRouter);
 
 app.use("/demo",DemoRouter)
 app.listen(PORT, () => {

@@ -8,74 +8,184 @@ app.use(express.json());
 const ServicesRouter = express.Router();
 
 ServicesRouter.post("/add", async (req, res) => {
-  const { title, category, tags, portfolioCategories, iconImageId, FeaturedImageId, contentSections } = req.body;
-  console.log("Incoming request body:", req.body);
-  if (!title || !category || !FeaturedImageId) {
+  const { 
+    title,
+    description, // Added
+    Servicesquote, // Added
+    category, 
+    tags, 
+    portfolioCategories, 
+    iconImageId, 
+    FeaturedImageId,
+    Bannerdata, // Added
+    WhydoNeed, // Added
+    Process,
+    WhyAtrix, // Added
+    servicescontent, // Added
+    contentSections 
+  } = req.body;
+
+  // Enhanced validation
+  if (!title || !description || !category || !FeaturedImageId) {
     return res.status(400).json({ 
-      message: "Title, category, and featured image are required"
+      message: "Title, description, category, and featured image are required"
     });
   }
 
-  // Validate contentSections exists and is an array
-  if (!Array.isArray(contentSections)) {
-    return res.status(400).json({
-      message: "contentSections must be an array",
-      received: contentSections
-    });
-  }
+  // Validate content arrays
+  const validateArray = (arr, fieldName) => {
+    if (arr && !Array.isArray(arr)) {
+      throw new Error(`${fieldName} must be an array if provided`);
+    }
+    return Array.isArray(arr) ? arr : [];
+  };
 
-  const sanitizedPortfolioCategories = Array.isArray(portfolioCategories) 
-  ? portfolioCategories 
-  : [portfolioCategories].filter(Boolean);
-
-const sanitizedTags = Array.isArray(tags) 
-  ? tags 
-  : [tags].filter(Boolean);
   try {
+    // Sanitize all array inputs
+    const sanitized = {
+      portfolioCategories: validateArray(portfolioCategories, 'portfolioCategories'),
+      tags: validateArray(tags, 'tags'),
+      Bannerdata: validateArray(Bannerdata, 'Bannerdata'),
+      WhydoNeed: validateArray(WhydoNeed, 'WhydoNeed'),
+      Process: validateArray(Process, 'Process'),
+
+      
+      WhyAtrix: validateArray(WhyAtrix, 'WhyAtrix'),
+      servicescontent: validateArray(servicescontent, 'servicescontent'),
+      contentSections: validateArray(contentSections, 'contentSections')
+    };
+
+    // Create new service document
     const newServices = new Services({
       title,
+      description,
+      Servicesquote: Servicesquote || "",
       category,
-      portfolioCategories: sanitizedPortfolioCategories,
-      tags: sanitizedTags,
+      tags: sanitized.tags,
+      Bannerdata: validateBannerdata(sanitized.Bannerdata),
+      WhydoNeed: sanitized.WhydoNeed,
+      Process: sanitized.Process,
+      WhyAtrix: sanitized.WhyAtrix,
+      portfolioCategories: sanitized.portfolioCategories,
       iconImageId: iconImageId || null,
       FeaturedImage: FeaturedImageId,
-     
-  
-      contentSections: contentSections.map(section => {
-        // Validate each section has a type
-        if (!section.type) {
-          throw new Error("Each content section must have a type");
-        }
-
-        if (section.type === 'text') {
-          return {
-            type: 'text',
-            content: section.content || "" // Default to empty string
-          };
-        } else {
-          if (!section.imageId) {
-            throw new Error(`Image section must have an imageId`);
-          }
-          return {
-            type: section.type,
-            imageId: section.imageId
-          };
-        }
-      }),
+      servicescontent: sanitized.servicescontent.map(validateServicesContentSection),
+      contentSections: sanitized.contentSections.map(validateContentSection),
       updatedAt: new Date()
     });
 
+    // Helper function to validate content sections
+    // 🔹 For contentSections
+    function validateContentSection(section) {
+      // Skip validation if section is empty
+      if (!section) return null;
+      
+      // If section exists but has no type, provide a default
+      if (!section.type) {
+        return {
+          type: 'text', // Default type
+          content: section.content || ""
+        };
+      }
+    
+      const validTypes = ['text', 'image', 'full-image', 'big-image'];
+      if (!validTypes.includes(section.type)) {
+        throw new Error(`Invalid type for contentSection: ${section.type}`);
+      }
+    
+      if (section.type === 'text') {
+        return {
+          type: section.type,
+          content: section.content || ""
+        };
+      } else {
+        if (!section.imageId) {
+          throw new Error(`${section.type} section must have an imageId`);
+        }
+        return {
+          type: section.type,
+          imageId: section.imageId
+        };
+      }
+    }
+
+// 🔹 For servicescontent
+function validateServicesContentSection(section) {
+  if (!section || !section.type) return null;
+
+  const validTypes = ['content', 'gallery'];
+  if (!validTypes.includes(section.type)) {
+    throw new Error(`Invalid type for servicescontent: ${section.type}`);
+  }
+
+  if (section.type === 'content') {
+    return {
+      type: section.type,
+      // heading: section.heading || "",
+      cardheading: section.cardheading || "",
+      description: section.description || ""
+    };
+  } else {
+    if (!section.imageId) {
+      throw new Error(`'gallery' type must include imageId`);
+    }
+    return {
+      type: section.type,
+      imageId: section.imageId
+    };
+  }
+}
+
+function validateBannerdata(bannerDataArr) {
+  if (!Array.isArray(bannerDataArr)) throw new Error("Bannerdata must be an array");
+
+  // Check types
+  const allowedTypes = ['sider-image', 'video', 'Banner'];
+  const types = bannerDataArr.map(b => b.type);
+
+  const invalidTypes = types.filter(t => !allowedTypes.includes(t));
+  if (invalidTypes.length > 0) {
+    throw new Error(`Invalid Bannerdata types: ${invalidTypes.join(", ")}`);
+  }
+
+  // Count types
+  const typeCounts = types.reduce((acc, t) => {
+    acc[t] = (acc[t] || 0) + 1;
+    return acc;
+  }, {});
+
+  if ((typeCounts['video'] || 0) > 1) {
+    throw new Error("Only one 'video' Bannerdata allowed");
+  }
+
+  if ((typeCounts['Banner'] || 0) > 1) {
+    throw new Error("Only one 'Banner' Bannerdata allowed");
+  }
+
+  // Validate imageId
+  bannerDataArr.forEach((item, index) => {
+    if (!item.imageId) {
+      throw new Error(`Bannerdata[${index}] missing imageId`);
+    }
+  });
+
+  return bannerDataArr;
+}
+
+
+
     const savedServices = await newServices.save();
     res.status(201).json({ 
-      message: 'Services created successfully', 
-      Services: savedServices 
+      message: 'Service created successfully', 
+      service: savedServices 
     });
+
   } catch (error) {
     console.error("Save error:", error);
     res.status(500).json({ 
-      message: 'Error creating Services', 
+      message: 'Error creating service', 
       error: error.message,
-      details: error.errors // This will show validation errors if any
+      ...(error.errors && { details: error.errors })
     });
   }
 });
