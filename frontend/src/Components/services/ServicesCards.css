@@ -3,6 +3,7 @@
   height: 300px;
   width: 220px;
   scale: 0;
+  /* transform: translate(-50% ,  -50%); */
 }
 .service-card:hover .service-hover-img {
   pointer-events: none;
