@@ -24,31 +24,52 @@ export default function WhydoNeed({onChange,initialData}) {
                 id: newId,
                 value: "",
                 description: "",
-                heading: "",
+                // heading: "",
                 cardheading: ""
             }
         ]);
     };
-
     useEffect(() => {
-        if (initialData ) {
-          setSelectFields(initialData.map((item, index) => ({
-            id: index + 1,
-            // heading: item.heading || "",
-            cardheading: item.cardheading || item.cardheding || "", // handle both spellings
-            description: item.description || ""
-          })));
+        if (initialData && initialData.length > 0) {
+            setSelectFields(initialData.map((item, index) => ({
+                id: index + 1,
+                cardheading: item.cardheading || "",
+                description: item.description || ""
+            })));
         }
-      }, [initialData]);
-      useEffect(() => {
+    }, [initialData]);
+
+    // Send data to parent
+    useEffect(() => {
         if (onChange) {
-          onChange(selectFields.map(field => ({
-            // heading: field.heading,
-            cardheading: field.cardheading,
-            description: field.description
-          })));
+            onChange(selectFields.map(field => ({
+                cardheading: field.cardheading,
+                description: field.description
+            })).filter(item => 
+                item.cardheading.trim() !== "" || 
+                item.description.trim() !== ""
+            ))
         }
-      }, [selectFields]);
+    }, [selectFields]);
+    // useEffect(() => {
+    //     if (initialData ) {
+    //       setSelectFields(initialData.map((item, index) => ({
+    //         id: index + 1,
+    //         // heading: item.heading || "",
+    //         cardheading: item.cardheading || item.cardheding || "", // handle both spellings
+    //         description: item.description || ""
+    //       })));
+    //     }
+    //   }, [initialData]);
+    //   useEffect(() => {
+    //     if (onChange) {
+    //       onChange(selectFields.map(field => ({
+    //         // heading: field.heading,
+    //         cardheading: field.cardheading,
+    //         description: field.description
+    //       })));
+    //     }
+    //   }, [selectFields]);
       
     const removeSelectField = (id) => {
         if (selectFields.length > 1) {

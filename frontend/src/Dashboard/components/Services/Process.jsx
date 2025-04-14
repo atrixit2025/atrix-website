@@ -4,7 +4,7 @@ import Input from "../../components/form/input/InputField";
 import TextArea from "../../components/form/input/TextArea";
 
 export default function Process({onChange,initialData}) {
-    const [selectFields, setSelectFields] = useState(() => {
+   const [selectFields, setSelectFields] = useState(() => {
         return [
             {
                 id: 1,
@@ -16,26 +16,6 @@ export default function Process({onChange,initialData}) {
         ];
     });
 
-    
-        useEffect(() => {
-            if (initialData && Array.isArray(initialData)) {
-              setSelectFields(initialData.map((item, index) => ({
-                id: index + 1,
-                // heading: item.heading || "",
-                cardheading: item.cardheading || item.cardheding || "", // handle both spellings
-                description: item.description || ""
-              })));
-            }
-          }, [initialData]);
-          useEffect(() => {
-            if (onChange) {
-              onChange(selectFields.map(field => ({
-                // heading: field.heading,
-                cardheading: field.cardheading,
-                description: field.description
-              })));
-            }
-          }, [selectFields]);
     const addSelectField = () => {
         const newId = selectFields.length > 0 ? Math.max(...selectFields.map(f => f.id)) + 1 : 1;
         setSelectFields([
@@ -49,6 +29,29 @@ export default function Process({onChange,initialData}) {
             }
         ]);
     };
+    useEffect(() => {
+        if (initialData && initialData.length > 0) {
+            setSelectFields(initialData.map((item, index) => ({
+                id: index + 1,
+                cardheading: item.cardheading || "",
+                description: item.description || ""
+            })));
+        }
+    }, [initialData]);
+
+    // Send data to parent
+    useEffect(() => {
+        if (onChange) {
+            onChange(selectFields.map(field => ({
+                cardheading: field.cardheading,
+                description: field.description
+            })).filter(item => 
+                item.cardheading.trim() !== "" || 
+                item.description.trim() !== ""
+            ))
+        }
+    }, [selectFields]);
+
 
     const removeSelectField = (id) => {
         if (selectFields.length > 1) {

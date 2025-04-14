@@ -78,7 +78,7 @@ export default function AddNewServices() {
     tags: [],
     iconImageId: null,
     imageId: null,
-    Banner: [],
+    Bannerdata: [],
     WhydoNeed: [],
     WhyAtrix: [],
     Process: [],
@@ -129,7 +129,7 @@ export default function AddNewServices() {
         tags: Services.tags || [],
         iconImageId: Services.iconImageId || null,
         imageId: Services.FeaturedImage || null,
-        Banner: Services.Banner || [],
+        Bannerdata: Services.Bannerdata || [],
         WhydoNeed: Services.WhydoNeed || [],
         WhyAtrix: Services.WhyAtrix || [],
         Process: Services.Process || [],
@@ -191,7 +191,7 @@ export default function AddNewServices() {
       tags,
       iconImageId,
       imageId,
-      Banner,
+      Bannerdata,
       WhydoNeed,
       WhyAtrix,
       Process,
@@ -231,14 +231,43 @@ export default function AddNewServices() {
       }
     });
 
-    const Bannerdata = (formData.Banner || [])
-    .filter(item => item.type && item.imageId) // Only include complete items
-    .map(item => ({
-        type: item.type,
-        imageId: item.imageId
-    }));
+  //   const bannerData = formData.Banner.map(item => {
+  //     if (item.type === "slider") {
+  //         return {
+  //             type: item.type,
+  //             sliderImages: item.sliderImages.filter(img => img) // Remove empty slots
+  //         };
+  //     }
+  //     return item;
+  // }).filter(item => {
+  //     // Filter out incomplete entries
+  //     if (item.type === "slider") {
+  //         return item.sliderImages.length > 0;
+  //     }
+  //     return item.imageId;
+  // });
+  const bannerData = formData.Banner.map(item => {
+    if (item.type === "slider") {
+      return {
+        type: "slider",
+        sliderImages: item.sliderImages
+          .filter(img => img) // Remove empty slots
+          .slice(0, 4) // Ensure max 4 images
+      };
+    }
+    return {
+      type: item.type,
+      imageId: item.imageId
+    };
+  }).filter(item => {
+    // Filter out incomplete entries
+    if (item.type === "slider") {
+      return item.sliderImages.length > 0; // At least 1 image required
+    }
+    return item.imageId;
+  });
 
-console.log("Processed Banner Data:", Bannerdata);
+// console.log("Processed Banner Data:", bannerData);
     
    // Add these logs to verify data:
 console.log("Raw Banner data from form:", formData.Banner);
@@ -251,7 +280,7 @@ console.log("Raw Banner data from form:", formData.Banner);
       tags: tags.filter(tag => tag.trim() !== ""),
       iconImageId,
       FeaturedImageId: imageId,
-      Bannerdata,
+      Bannerdata:bannerData,
       WhydoNeed,
       WhyAtrix,
       Process,
@@ -264,6 +293,7 @@ console.log("Raw Banner data from form:", formData.Banner);
       })),
       contentSections
     };
+    // console.log("Received Bannerdata:", Bannerdata);
 
     try {
       if (Services) {
