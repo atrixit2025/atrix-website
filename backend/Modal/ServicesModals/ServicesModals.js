@@ -33,12 +33,13 @@ const WhyAtrixSectionSchema = new mongoose.Schema({
 
 const BannerfieldSectionSchema = new mongoose.Schema({
     type: {
-        type: String, enum: ['Banner', 'video', 'sider-image'], //only one slected 
-        required: true
+      type: String, 
+      enum: ['banner', 'video', 'slider'],
+      required: true
     },
-    imageId: { type: String }
-});
-
+    imageId: { type: String }, // For single images (banner/video)
+    sliderImages: [{ type: String }] // Array for slider images
+  }, { _id: true }); // Ensure each gets its own _id
 const ServicesSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -59,9 +60,7 @@ const ServicesSchema = new mongoose.Schema({
         type: [String],
         default: []
     },
-    Bannerdata: [// Changed to match input data
-        BannerfieldSectionSchema
-    ],
+    Bannerdata: [BannerfieldSectionSchema],
     WhydoNeed: [WhydoNeedSectionSchema],
     Process: [ProcessSectionSchema],
     WhyAtrix: [WhyAtrixSectionSchema], // Changed to array

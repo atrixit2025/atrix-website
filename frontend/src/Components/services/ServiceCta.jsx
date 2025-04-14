@@ -1,5 +1,4 @@
 import React from 'react'
-import bg_img from '../../../public/bgimage.jpg'
 import cta_bg from './../../assets/bgcta.svg'
 
 const ServiceCta = () => {

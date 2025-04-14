@@ -135,43 +135,52 @@ function validateServicesContentSection(section) {
     };
   }
 }
-
 function validateBannerdata(bannerDataArr) {
-  if (!Array.isArray(bannerDataArr)) throw new Error("Bannerdata must be an array");
-
-  // Check types
-  const allowedTypes = ['sider-image', 'video', 'Banner'];
-  const types = bannerDataArr.map(b => b.type);
-
-  const invalidTypes = types.filter(t => !allowedTypes.includes(t));
-  if (invalidTypes.length > 0) {
-    throw new Error(`Invalid Bannerdata types: ${invalidTypes.join(", ")}`);
+  if (!Array.isArray(bannerDataArr)) {
+    throw new Error("Bannerdata must be an array");
   }
 
-  // Count types
-  const typeCounts = types.reduce((acc, t) => {
-    acc[t] = (acc[t] || 0) + 1;
-    return acc;
-  }, {});
+  const allowedTypes = ['banner', 'video', 'slider'];
+  const maxSliderImages = 4; // Maximum allowed slider images
 
-  if ((typeCounts['video'] || 0) > 1) {
-    throw new Error("Only one 'video' Bannerdata allowed");
-  }
+  return bannerDataArr.map(item => {
+    // Validate type
+    if (!allowedTypes.includes(item.type)) {
+      throw new Error(`Invalid Bannerdata type: ${item.type}`);
+    }
 
-  if ((typeCounts['Banner'] || 0) > 1) {
-    throw new Error("Only one 'Banner' Bannerdata allowed");
-  }
+    // Slider-specific validation
+    if (item.type === 'slider') {
+      if (!item.sliderImages || !Array.isArray(item.sliderImages)) {
+        throw new Error("Slider type must have sliderImages array");
+      }
+      
+      // Filter out empty images and limit to maximum
+      const validImages = item.sliderImages
+        .filter(img => img && typeof img === 'string')
+        .slice(0, maxSliderImages);
 
-  // Validate imageId
-  bannerDataArr.forEach((item, index) => {
-    if (!item.imageId) {
-      throw new Error(`Bannerdata[${index}] missing imageId`);
+      if (validImages.length === 0) {
+        throw new Error("Slider must have at least one valid image");
+      }
+
+      return {
+        type: item.type,
+        sliderImages: validImages
+      };
+    } 
+    // Banner/Video validation
+    else {
+      if (!item.imageId || typeof item.imageId !== 'string') {
+        throw new Error(`${item.type} type must have a valid imageId`);
+      }
+      return {
+        type: item.type,
+        imageId: item.imageId
+      };
     }
   });
-
-  return bannerDataArr;
 }
-
 
 
     const savedServices = await newServices.save();
