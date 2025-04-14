@@ -1,0 +1,9 @@
+.modal-video-inner {
+  padding: 0px 0px !important;
+}
+.modal-video-body {
+  max-width: 1260px !important;
+}
+.modal-video {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}

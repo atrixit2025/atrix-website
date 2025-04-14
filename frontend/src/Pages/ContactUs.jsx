@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import ContactHero from '../Components/Contact_us/ContactHero'
 import MapAddress from '../Components/Contact_us/MapAddress'
 import ContactForm from '../Components/Contact_us/ContactForm'
@@ -15,11 +15,6 @@ const herodata = [
 
 
 const ContactUs = () => {
-
-    useEffect(() => {
-        window.scroll(0, 0)
-    })
-
     return (
         <div>
             <HeroCommon heroData={herodata[0]} />

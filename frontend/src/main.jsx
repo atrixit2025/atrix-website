@@ -3,8 +3,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import './index.css';
-// import AppDash from './Dashboard/AppDashboard.js';
-import { ThemeProvider } from './Dashboard/context/ThemeContext.js';
+
 import { AppWrapper } from './Dashboard/components/common/PageMeta.js';
 import { CategoryProvider } from './Dashboard/ContextApi/CategoryContextApi.jsx';
 import { BlogCategoryProvider } from './Dashboard/ContextApi/BlogCategoryContextApi.jsx';
@@ -16,7 +15,7 @@ import { PortfolioCategoryProvider } from './Dashboard/ContextApi/PortfolioCateg
 createRoot(document.getElementById('root')).render(
   <StrictMode>
 
-    <ThemeProvider>
+  
       <AppWrapper>
         <CategoryProvider>
           <BlogCategoryProvider >
@@ -26,6 +25,6 @@ createRoot(document.getElementById('root')).render(
           </BlogCategoryProvider>
         </CategoryProvider>
       </AppWrapper>
-    </ThemeProvider>
+
   </StrictMode>,
 )

@@ -20,6 +20,7 @@ import favIcons from "/favicon_ais-logo-2.png";
 import { FaBloggerB } from "react-icons/fa6";
 import { FaImagePortrait } from "react-icons/fa6";
 import { TbMarquee } from "react-icons/tb";
+import { FaHandshakeSimple } from "react-icons/fa6";
 type NavItem = {
   name: string;
   icon: React.ReactNode;
@@ -39,9 +40,9 @@ const navItems: NavItem[] = [
     name: "Technology",
     icon: <GrTechnology />, 
     subItems: [
-      { name: "All Technology", path: "/Technology", pro: false },
-      { name: "Add New Technology ", path: "/AddNewTechnology", pro: false },
-      { name: "Category", path: "/CategoryTechnology", pro: false },
+      { name: "All Technology", path: "/Dashboard/Technology", pro: false },
+      { name: "Add New Technology ", path: "/Dashboard/AddNewTechnology", pro: false },
+      { name: "Category", path: "/Dashboard/CategoryTechnology", pro: false },
 
 
     ],
@@ -50,9 +51,9 @@ const navItems: NavItem[] = [
     name: "Blog",
     icon: <FaBloggerB />, 
     subItems: [
-      { name: "All Blog", path: "/Blog", pro: false },
-      { name: "Add New Blog ", path: "/AddNewBlog", pro: false },
-      { name: "Category Blog", path: "/CategoryBlog", pro: false },
+      { name: "All Blog", path: "/Dashboard/Blog", pro: false },
+      { name: "Add New Blog ", path: "/Dashboard/AddNewBlog", pro: false },
+      { name: "Category Blog", path: "/Dashboard/CategoryBlog", pro: false },
 
 
     ],
@@ -61,9 +62,9 @@ const navItems: NavItem[] = [
     name: "Portfolio",
     icon: <FaImagePortrait />, 
     subItems: [
-      { name: "All Portfolio", path: "/Portfolio", pro: false },
-      { name: "Add New Portfolio ", path: "/AddNewPortfolio", pro: false },
-      { name: "Category Portfolio", path: "/CategoryPortfolio", pro: false },
+      { name: "All Portfolio", path: "/Dashboard/Portfolio", pro: false },
+      { name: "Add New Portfolio ", path: "/Dashboard/AddNewPortfolio", pro: false },
+      { name: "Category Portfolio", path: "/Dashboard/CategoryPortfolio", pro: false },
 
 
     ],
@@ -72,12 +73,25 @@ const navItems: NavItem[] = [
     name: "Brand",
     icon: <TbMarquee />, 
     subItems: [
-      { name: "All Brand", path: "/Brand", pro: false },
-      { name: "Add New Brand ", path: "/AddNewBrand", pro: false },
+      { name: "All Brand", path: "/Dashboard/Brand", pro: false },
+      { name: "Add New Brand ", path: "/Dashboard/AddNewBrand", pro: false },
 
 
     ],
   },
+  {
+    name: "Services ",
+    icon: <FaHandshakeSimple />, 
+    subItems: [
+      { name: "All Services", path: "/Dashboard/Services", pro: false },
+      { name: "Add New Services ", path: "/Dashboard/AddNewServices", pro: false },
+      { name: "Category Services", path: "/Dashboard/CategoryServices", pro: false },
+
+
+    ],
+  },
+
+  
   // {
   //   icon: <FaUser />, // User profile icon
   //   name: "User Profile",
@@ -102,6 +116,8 @@ const navItems: NavItem[] = [
   //     { name: "404 Error", path: "/error-404", pro: false },
   //   ],
   // },
+
+
 ];
 
 const othersItems: NavItem[] = [

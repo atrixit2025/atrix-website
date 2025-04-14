@@ -5,11 +5,11 @@ import Label from "../../components/form/Label";
 import Input from "../../components/form/input/InputField";
 import TextArea from "../../components/form/input/TextArea";
 import Button from "../../components/ui/button/Button";
-import { CategoryContext } from "../../ContextApi/CategoryContextApi";
 import CategoryTable from "./CategoryTable";
+import { TechnologyCategoryContext } from "../../ContextApi/CategoryContextApi";
 
 export default function CategoryTechnology() {
-  const { addCategory, editCategory } = useContext(CategoryContext);
+  const { addCategory, editCategory } = useContext(TechnologyCategoryContext);
   const [formData, setFormData] = useState({
     name: "",
     description: "",

@@ -14,11 +14,11 @@ const ContactForm = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     {/* Contact Heading Section */}
                     <div className="contact-heading md:pr-40 pt-8">
-                        <h2 className="text-5xl font-bold ">Let's Grow Together</h2>
-                        <p className="mt-5 mb-6 max-w-[350px]">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi, perferendis. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        <h2 className="text-5xl font-bold ">Stay Ahead in the Digital World with Us!</h2>
+                        <p className="mt-5 mb-6 max-w-[450px]">
+                            Attain a top brand position with smart and effective IT services. Partner with us to boost brand awareness, improve your online presence, and stay ahead in the fast-changing digital world.
                         </p>
-                        <Link to="#" className="text-[var(--blue)] font-medium flex gap-1">
+                        <Link to="/faqs" className="text-[var(--blue)] font-medium flex gap-1">
                             Read Our FAQ <div className="icon pt-0.5 text-xl"> <IoIosArrowForward /> </div>
                         </Link>
                         <div className='mt-6'>
@@ -28,7 +28,7 @@ const ContactForm = () => {
                     </div>
 
                     {/* Contact Form Section */}
-                    <div className="contact-form bg-[#444343] rounded-3xl p-12 shadow-lg">
+                    <div className="contact-form  rounded-3xl p-12 shadow-lg bg-(--black)">
                         <form>
 
 

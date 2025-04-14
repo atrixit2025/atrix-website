@@ -61,7 +61,7 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onImageUpload, imag
             setSelectedImageUrl(imageData.image);
             // console.log("Fetching image data for imageId:", imageId);
             const response = await axios.get(`http://localhost:5300/Image/get/${imageId}`);
-            console.log("Response from backend:", response.data);
+            // console.log("Response from backend:", response.data);
           } else {
             console.error("No imageData found for imageId:", imageId);
           }

@@ -11,9 +11,10 @@ const RiseWithUs = () => {
                 <div className="container mx-auto  w-[90%] py-24">
                     <div className=' grid grid-cols-1 lg:grid-cols-2 gap-y-7'>
                         <div className='md:pr-36  pt-8' >
-                            <h2 className=' text-4xl  md:text-5xl font-bold '>Rise With Us</h2>
-                            <p className='mt-4 mb-10'> Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum cum reiciendis quibusdam dolores. Itaque aut dolore at. Voluptatem, suscipit perferendis? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Debitis ipsum, corrupti fugiat itaque iste officia doloribus soluta accusantium impedit officiis. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, excepturi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, dolor. </p>
-                            <SimpleButton buttonName={"Open Roles"} ></SimpleButton>
+                            <h2 className=' text-4xl  md:text-5xl font-bold '>Be a part of Atrix IT Solutions </h2>
+                            <p className='mt-4 mb-10'> Atrix It Solutions is more than just a workplace it’s a place where creative and hardworking people come together to achieve great things. We believe in teamwork, innovation, and helping each other grow.
+                            </p>
+                            <SimpleButton buttonName={"Open Vacancies"} ></SimpleButton>
                         </div>
                         <div className=' md:pl-36 '>
                             <div className="img-wraper rounded-2xl overflow-hidden ">

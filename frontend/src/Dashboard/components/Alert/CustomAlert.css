@@ -1,0 +1,44 @@
+.custom-alert {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 4px;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-width: 300px;
+    animation: slideIn 0.3s ease-out;
+  }
+  
+  .custom-alert.success {
+    background-color: var(--green);
+  }
+  
+  .custom-alert.error {
+    background-color: #F44336;
+  }
+  
+  .custom-alert.warning {
+    background-color: #FF9800;
+  }
+  
+  .alert-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .alert-close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 15px;
+  }
+  
+  @keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }

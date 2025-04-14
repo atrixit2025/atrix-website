@@ -113,7 +113,7 @@ export default function SignInForm() {
                   </div>
 
                   <div className="mt-10">
-                    <Button type="submit" className="w-full gradient-button" size="sm">
+                    <Button type="submit" className="w-full gradient-button cursor-pointer" size="sm">
                       Sign in
                     </Button>
                   </div>

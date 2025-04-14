@@ -39,6 +39,7 @@ BlogCategoryRouter.post("/blog/category/add", async (req, res) => {
       });
   
       await newBlogCategory.save();
+      
       res.status(201).json({ message: "BlogCategory created successfully", BlogCategory: newBlogCategory });
     } catch (error) {
       console.log(error);

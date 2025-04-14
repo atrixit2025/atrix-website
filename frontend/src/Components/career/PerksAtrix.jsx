@@ -36,7 +36,8 @@ const PerksAtrix = () => {
                 <div className="contact-cards-wrapper grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4  ">
                     {PerksCardContent.map((item, index) => (
                         <div className="contact-card  py-10 px-8  " >
-                            <div className=' max-w-16 h-auto mb-6 mx-auto '> <img src={item.icon} alt="" className=' w-full h-full' /> </div>
+                            <div className=' w-16 h-16 mb-6 mx-auto '>
+                                 <img src={item.icon} alt="" className=' w-full h-full object-cantain' /> </div>
                             <h3 className='text-2xl font-semibold  text-center ' >{item.title}</h3>
                             <p className='mt-4 '>{item.desc}</p>
                         </div>

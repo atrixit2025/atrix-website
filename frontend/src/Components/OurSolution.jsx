@@ -54,14 +54,14 @@ const OurSolution = () => {
 
 
     return (
-        <div className="Our-Solution-Process-section bg-(--darkblack) text-(--whitelight)   relative mb-[00px] ">
-            <div className='container mx-auto '>
+        <div className=" Our-Solution-Process-section bg-(--darkblack) text-(--whitelight)   relative mb-[00px] ">
+            <div className='container mx-auto   '>
 
                 <div className='row  py-14 md:py-28'>
                     <div className=" grid md:grid-cols-3 grid-cols-1  gap-10  ">
                         <h2 className="text-6xl font-bold  tracking-wider">Our Step by step process</h2>
 
-                        <div className='w-full max-w- flex items-end'>
+                        <div className='w-full  flex items-end'>
                             <svg className='' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477 65">
                                 <path fill="#2f2f2f" d="M0.333333 3C0.333333 4.47276 1.52724 5.66667 3 5.66667C4.47276 5.66667 5.66667 4.47276 5.66667 3C5.66667 1.52724 4.47276 0.333333 3 0.333333C1.52724 0.333333 0.333333 1.52724 0.333333 3ZM475 3L475.255 3.42984L476.82 2.5H475V3ZM438.668 65L441.872 60.197L436.111 59.8239L438.668 65ZM3 3.5H475V2.5H3V3.5ZM474.745 2.57016C459.928 11.3742 441.341 27.8789 438.461 60.47L439.457 60.5581C442.3 28.3895 460.613 12.1303 475.255 3.42984L474.745 2.57016Z"></path>
                             </svg>

@@ -53,7 +53,7 @@
 //     try {
 //       const technology = await Technology.find({})
 //       if (!technology.length) {
-//         return res.status(404).json({ message: "No blogs found" });
+//         return res.status(404).json({ message: "No Technologys found" });
 //     }
 //     return res.json({ Technology: technology });
 
@@ -196,6 +196,37 @@ TechnologyRouter.delete("/delete", async (req, res) => {
     res.status(500).json({ message: "Error deleting Technology", error: error.message });
   }
 });
+
+TechnologyRouter.get("/count/category", async (req, res) => {
+  try {
+    const technologies = await Technology.find({});
+    
+    // Create a map to count categories
+    const categoryCounts = {};
+    
+    technologies.forEach(tech => {
+      const categories = tech.category.split(", ");
+      categories.forEach(cat => {
+        categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+      });
+    });
+
+    // Convert to array format
+    const result = Object.keys(categoryCounts).map(category => ({
+      category,
+      count: categoryCounts[category]
+    }));
+
+    res.status(200).json({ categoryCounts: result });
+  } catch (error) {
+    console.error("Error counting technologies by category:", error);
+    res.status(500).json({ 
+      message: "Error counting technologies by category", 
+      error: error.message 
+    });
+  }
+});
+
 
 export default TechnologyRouter;
 

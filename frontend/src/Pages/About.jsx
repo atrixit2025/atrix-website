@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 
 import OurSolution from "../Components/OurSolution";
 import OurPortfolio from "../Components/OurPortfolio";
@@ -20,9 +20,12 @@ import icon10 from "../assets/AboutUs/keys-sec/Agile-Solutions.svg";
 import About_video from "../assets/Final Website cmpress Apatrix video.mp4";
 
 import About_sec_scroll from "../Components/About_sec_scroll";
-import ValueCards from "../Components/career/ValueCards";
+
 
 import { RxArrowTopRight } from "react-icons/rx";
+import ValueCards from "../Components/career/ValueCards";
+import TestimonialsCards from "../Components/TestimonialsCards";
+
 
 const cards = [
   { id: 1, title: "Card 1", color: "bg-red-500" },
@@ -47,57 +50,54 @@ const About = () => {
       setIndex(index - 1);
     }
   };
-  
-  useEffect(()=>{
- window.scroll(0,0)
-  })
 
+ 
 
-  const ValueCardheading =[
-    { 
-        secHeading:"Our Keys",
-        secSubHeading:"What sets us apart"
+  const ValueCardheading = [
+    {
+      secHeading: "Our Keys",
+      secSubHeading: "What sets us apart"
     }
-]
+  ]
 
-const ValueCardContent = [
-  {
-    icon: icon5,
-    title: "Values",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
-  },
-  {
-    icon: icon6,
-    title: "Innovation ",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
-  },
-  {
-    icon: icon7,
-    title: "Integrity",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
-  },
-  {
-    icon: icon8,
-    title: "Agile Solutions",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
-  },
-  {
-    icon: icon9,
-    title: "Culture",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
-  },
-  {
-    icon: icon10,
-    title: "Kindness",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
-  },
-];
+  const ValueCardContent = [
+    {
+      icon: icon5,
+      title: "Values",
+      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
+    },
+    {
+      icon: icon6,
+      title: "Innovation ",
+      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
+    },
+    {
+      icon: icon7,
+      title: "Integrity",
+      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
+    },
+    {
+      icon: icon8,
+      title: "Agile Solutions",
+      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
+    },
+    {
+      icon: icon9,
+      title: "Culture",
+      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
+    },
+    {
+      icon: icon10,
+      title: "Kindness",
+      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui quidem praesentium?",
+    },
+  ];
 
 
   return (
     <>
       {/* video-section */}
-      
+
       <div className="video-sec mx-6 pt-38">
         <div className="pointer-events-none  ">
           <video
@@ -114,79 +114,78 @@ const ValueCardContent = [
 
 
       {/* About-heading and img-tex section */}
-      <div className="Page-heading text-center mt-8 px-4">
+      <div className="Page-heading text-center mt-22 px-4">
         <h1 className="font-bold text-4xl md:text-6xl lg:text-9xl">About Us</h1>
         <p className="mx-auto max-w-3xl text-sm md:text-base lg:text-lg text-white/55 mt-4">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Id nihil
-          suscipit autem accusamus provident magnam, 
+          We develop creative solutions that generate actual results. With tailored technology solutions, our team of experts is committed to helping your company grow and achieve long-term success.
         </p>
       </div>
 
       <About_sec_scroll />
 
       {/* text-marquee-section */}
-      <div className="relative marquee-sec text-6xl font-bold mt-22 ">   <div>
-          <Marquee speed={30} className="overflow-hidden">
-            VISIONARY . INNOVATIVE . EFFICIENT . GL PROFESSIONAL . ACCESSIBLE .
-            USER-CENTR EMPOWERING . TRUSTWORTHY . SCALABLE
-          </Marquee>
-        </div>
+      <div className="relative marquee-sec text-6xl font-bold mt-22  ">   <div>
+        <Marquee speed={30} className="overflow-hidden text-[#565656]">
+         VISIONARY . INNOVATIVE . EFFICIENT . GLOBAL . PROFESSIONAL . ACCESSIBLE . USER-CENTRIC . EMPOWERING . TRUSTWORTHY . SCALABLE. 
+        </Marquee>
+      </div>
 
         <div>
           <Marquee
             speed={30}
             direction="right"
-            className="overflow-hidden mt-1"
-          >
-            VISIONARY . INNOVATIVE . EFFICIENT . GL ROFESSIONAL . ACCESSIBLE .
-            USER-CENTR EMPOWERING . TRUSTWORTHY . SCALABLE
+
+            className="overflow-hidden mt-1 text-[#565656]"
+          > &nbsp; VISIONARY . INNOVATIVE . EFFICIENT . GLOBAL . PROFESSIONAL . ACCESSIBLE . USER-CENTRIC . EMPOWERING . TRUSTWORTHY . SCALABLE .  
+
           </Marquee>
         </div>
 
         <div>
-          <Marquee speed={30} className="overflow-hidden mt-1">
-            ACCESSIBLE . USER-CENTR EMPOWERING . TRUSTWORTHY . SCALABLE .
-            VISIONARY . INNOVATIVE . EFFICIENT . GL ROFESSIONAL .
+
+          <Marquee speed={30} className="overflow-hidden mt-1 text-[#565656]">
+           USER-CENTRIC . EMPOWERING . TRUSTWORTHY . SCALABLE . VISIONARY . INNOVATIVE . EFFICIENT . GLOBAL . PROFESSIONAL . ACCESSIBLE . 
+
           </Marquee>
         </div>
       </div>
 
       {/* Our Keys section */}
 
-    
-        {/* Heading */}          
-          <ValueCards ValueCardContent={ValueCardContent } ValueCardheadings={ValueCardheading} />
+
+      {/* Heading */}
+      <ValueCards />
 
       {/* CTA-section */}
       <div className="container mx-auto mt-28 ">
-  <div className="row grid grid-cols-1 md:grid-cols-12 mt-10 bg-(--blue) rounded-sm p-6 md:p-10">
-    
-    {/* Text Section */}
-    <div className="md:col-span-10 col-span-12 text-center md:text-left">
-      <h3 className="text-white text-3xl md:text-4xl font-bold">
-        We are always on the lookout for new talent!
-      </h3>
-    </div>
-    
-    {/* Button Section */}
-    <div className="md:col-span-2 col-span-12 flex justify-center md:justify-end mt-4 md:mt-0 ">
-    <button className="bg-(--white)  font-extrabold text-(--blue) px-4 py-2  duration-300  rounded-lg  cursor-pointer  flex items-center gap-2">Learn More  <span className="">
-                <RxArrowTopRight className="" />
-              </span></button>
-    </div>
+        <div className="row grid grid-cols-1 md:grid-cols-12 mt-10 bg-(--blue) rounded-sm p-6 md:p-10">
 
-  </div>
-</div>
+          {/* Text Section */}
+          <div className="md:col-span-10 col-span-12 text-center md:text-left">
+            <h3 className="text-white text-3xl md:text-4xl font-bold">
+              Say Goodbye to IT Hassles – Get Expert Solutions Now!
+            </h3>
+          </div>
+
+          {/* Button Section */}
+          <div className="md:col-span-2 col-span-12 flex justify-center md:justify-end mt-4 md:mt-0 ">
+            <Link to='/contact-us' className="bg-(--white)  font-extrabold text-(--blue) px-4 py-2  duration-300  rounded-lg  cursor-pointer  flex items-center gap-2">Contact us!<span className="">
+              <RxArrowTopRight className="" />
+            </span></Link>
+          </div>
+
+        </div>
+      </div>
 
 
       {/* Environment-section */}
       <div className="Environment-sec">
-        <div className="container mx-auto mt-28 ">
+        <div className="container mx-auto  mt-28 ">
           <div className="row text-center pb-10 ">
             <div className="col">
-              <p className="text-xl pb-4">Atrix Environment</p>
+              <p className="text-xl pb-4"> Atrix Environment</p>
               <h2 className="font-bold text-5xl">
-                What let us thrive together
+                Thriving Together for a Better Future!
               </h2>
             </div>
           </div>
@@ -208,7 +207,7 @@ const ValueCardContent = [
               <div className="image w-20 brightness-[2.5] mb-2 ">
                 <img src={icon3} alt="" />
               </div>
-              <p className="mt-2">Growth & support</p>
+              <p className="mt-2">Growth & support  </p>
             </div>
             <div className="col-span-3 flex items-center flex-col  ">
               <div className="image w-20 brightness-[2.5] mb-2 ">
@@ -217,28 +216,27 @@ const ValueCardContent = [
               <p className="mt-2">Transparency</p>
             </div>
           </div>
-        </div>
-      </div>
+        </div >
+      </div >
 
       {/* OurSolution-section */}
-      <div className=" mt-28 ">
+      < div className=" mt-28 " >
         <div className="row  flex-col grid grid-cols-12 space-x-96  ">
           <div className=" Our Solution Process col-span-12 ">
             <OurSolution />
           </div>
         </div>
-      </div>
+      </div >
 
       {/* OurPortfolio-section */}
-      <div className="Our Solution Process  ">
+      < div className="Our Solution Process  " >
         <OurPortfolio />
-      </div>
+      </div >
 
-      {/* card-carousel-section */}
-     {/* <CardCarousel/> */}
+      {/* Testimonial-Section */}
+      <TestimonialsCards/>
+    
 
-     {/* <Ccarousel/> */}
-     
 
     </>
   );

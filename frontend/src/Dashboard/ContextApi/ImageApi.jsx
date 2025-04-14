@@ -9,7 +9,7 @@ export const ImageProvider = ({ children }) => {
   const [allImages, setAllImages] = useState([]);
   const [selectedImageUrl, setSelectedImageUrl] = useState(null);
 
-  // Fetch all images from the backend
+ 
   const fetchAllImages = async () => {
     try {
       const response = await axios.get("http://localhost:5300/Image/get");

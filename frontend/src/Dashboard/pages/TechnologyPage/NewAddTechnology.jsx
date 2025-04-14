@@ -58,9 +58,9 @@ export default function NewAddTechnology() {
 
   // Handle form submission
   const handleSubmit = async () => {
-    console.log("Title:", title);
-    console.log("Selected Categories:", selectedCategories);
-    console.log("Image ID:", imageId);
+    // console.log("Title:", title);
+    // console.log("Selected Categories:", selectedCategories);
+    // console.log("Image ID:", imageId);
 
     if (!title || selectedCategories.length === 0 || !imageId) {
       alert("Title, category, and image are required!");
@@ -76,10 +76,10 @@ export default function NewAddTechnology() {
     try {
       if (technology) {
         // Log the payload for debugging
-        console.log("Update Payload:", {
-          id: technology.id,
-          ...technologyData,
-        });
+        // console.log("Update Payload:", {
+        //   id: technology.id,
+        //   ...technologyData,
+        // });
 
         // Update existing technology
         const response = await axios.put(`http://localhost:5300/technology/edit`, {
@@ -87,20 +87,20 @@ export default function NewAddTechnology() {
           ...technologyData,
         });
 
-        console.log("Update Response:", response.data);
+        // console.log("Update Response:", response.data);
         // alert("Technology updated successfully!");
       } else {
         // Log the payload for debugging
-        console.log("Create Payload:", technologyData);
+        // console.log("Create Payload:", technologyData);
 
         // Create new technology
         const response = await axios.post("http://localhost:5300/technology/add", technologyData);
 
-        console.log("Create Response:", response.data);
+        // console.log("Create Response:", response.data);
         // alert("Technology created successfully!");
       }
 
-      navigate("/Technology"); 
+      navigate("/Dashboard/Technology"); 
     } catch (error) {
       console.error("Error saving technology:", error);
       if (error.response) {
@@ -168,3 +168,32 @@ export default function NewAddTechnology() {
     </div>
   );
 }
+
+
+// import React, { useContext } from "react";
+// import { useLocation } from "react-router-dom";
+// import GenericForm from "../../components/form/form-Add-New/GenericForm";
+// import { TechnologyCategoryContext } from "../../ContextApi/CategoryContextApi";
+
+// export default function NewAddTechnology() {
+//   const location = useLocation();
+//   const { technology } = location.state || {};
+//   const { fetchCategoryCounts } = useContext(TechnologyCategoryContext);
+
+
+
+//   return (
+//     <GenericForm
+//       title="Add New Technology"
+//       editTitle="Edit Technology"
+//       apiEndpoint="http://localhost:5300/technology"
+//       categoryEndpoint="http://localhost:5300/category/get"
+//       redirectPath="/Dashboard/Technology"
+//       categoryLink="/Dashboard/CategoryTechnology"
+//       contentType="technology"
+//       initialData={technology}
+//       hasContentSections={true}
+//       hasRichText={false} 
+//     />
+//   );
+// }

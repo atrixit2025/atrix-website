@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import RiseWithUs from "../Components/career/RiseWithUs";
 import CounterSec from "../Components/career/CounterSec";
 import ValueCards from "../Components/career/ValueCards";
@@ -6,24 +6,24 @@ import PerksAtrix from "../Components/career/PerksAtrix";
 import Roles from "../Components/career/Roles";
 import CareerFormSec from "../Components/career/FormSec";
 import HeroCommon from "../Components/HeroCommon";
+import "./career.css"
 
 import icon from "../assets/career/date.svg";
 
-const herodata = [
 
+
+const herodata = [
   {
-    title: "Careers",
+    title: "Career",
     desc: "",
   },
 ];
 
-const ValueCardheading =[
-    { 
-        secHeading:"Our Values",
-        secSubHeading:""
-
-  
-    }
+const ValueCardheading = [
+  {
+    secHeading: "Our Values",
+    secSubHeading: ""
+  }
 ]
 
 const ValueCardContent = [
@@ -60,12 +60,17 @@ const ValueCardContent = [
 ];
 
 const Careers = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div>
+    <div className="career-page" >
       <HeroCommon heroData={herodata[0]} />
       <RiseWithUs />
       <CounterSec />
-      <ValueCards ValueCardContent={ValueCardContent } ValueCardheadings={ValueCardheading} />
+      <ValueCards />
       <PerksAtrix />
       <Roles />
       <CareerFormSec />
@@ -73,4 +78,4 @@ const Careers = () => {
   );
 };
 
-export default Careers;
+export default Careers; 
