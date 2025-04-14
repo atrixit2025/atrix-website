@@ -12,14 +12,14 @@ import { FaQuoteRight } from "react-icons/fa";
 import ProcessCards from '../Components/ProcessCards'
 import ServiceFrom from '../Components/services/ServiceFrom'
 import WebDevelopment from '../Components/services/WebDevelopment'
-import Testing from '../Components/services/Testing'
+
 
 
 const Service = () => {
     return (
         <div className="pt-[150px] ">
             <ServiceHeroBanner></ServiceHeroBanner>
-            {/* <Testing></Testing> */}
+         
             <WebDevelopment></WebDevelopment>
             <ServicesCards></ServicesCards>
             <WhyNeedBranding></WhyNeedBranding>

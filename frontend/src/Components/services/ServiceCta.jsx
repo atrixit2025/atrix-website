@@ -6,7 +6,7 @@ const ServiceCta = () => {
     return (
         <div className="service-cta-wrapper mt-36 mb-20">
             <div className="container mx-auto">
-                <div className="service-cta  grid grid-cols-2 p-28 rounded-[60px] " style={{background: `url(${cta_bg})` , backgroundSize: "cover", backgroundRepeat: "no-repeat" }} >
+                <div className="service-cta  grid grid-cols-2 p-28 rounded-3xl  bg-[#262626]/60 " >
                     <div className="content">
                        <h2 className=' text-4xl font-bold mb-5 ' >Lorem ipsum dolor sit.</h2>
                        <p className="desc">
