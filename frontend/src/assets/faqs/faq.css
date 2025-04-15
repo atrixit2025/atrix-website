@@ -3,6 +3,7 @@
   margin-bottom: 8px;
   border-radius: 6px;
 }
+
 .accordian .accordian-title {
   padding: 16px 20px;
   display: flex;
@@ -16,18 +17,22 @@
   line-height: normal;
   cursor: pointer;
 }
+
 .bodyContent {
   padding: 20px 20px;
 }
+
 .accordian-title.active {
   background-color: #292929;
-  /* background-color: #614040; */
+  
 }
+
 .faqCatHeading {
   display: flex;
   gap: 12px;
   align-items: center;
 }
+
 .faqCatHeading::before,
 .faqCatHeading::after {
   content: "";
@@ -36,4 +41,19 @@
   width: 100%;
   background-color: #fff;
   opacity: 0.1;
+}
+
+/* 👇 New Smooth Animation Styles */
+.accordion-content-wrapper {
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+
+}
+
+.accordian-title.active {
+  background-color: var(--blue); 
+  color: #fff; 
+}
+.accordian.active {
+  border-color: var(--blue);  
 }

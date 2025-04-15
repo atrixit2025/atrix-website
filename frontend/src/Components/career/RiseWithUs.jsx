@@ -1,6 +1,7 @@
 import React from 'react'
 import SimpleButton from '../SimpleButton'
 import rise_img from '../../assets/career/comp.jpg'
+import Button from '../Button'
 
 
 
@@ -14,7 +15,7 @@ const RiseWithUs = () => {
                             <h2 className=' text-4xl  md:text-5xl font-bold '>Be a part of Atrix IT Solutions </h2>
                             <p className='mt-4 mb-10'> Atrix It Solutions is more than just a workplace it’s a place where creative and hardworking people come together to achieve great things. We believe in teamwork, innovation, and helping each other grow.
                             </p>
-                            <SimpleButton buttonName={"Open Vacancies"} ></SimpleButton>
+                            <Button mybtn={"Open Vacancies"} />
                         </div>
                         <div className=' md:pl-36 '>
                             <div className="img-wraper rounded-2xl overflow-hidden ">

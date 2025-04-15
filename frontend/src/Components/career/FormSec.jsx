@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { IoIosArrowForward } from "react-icons/io";
 import { RiAttachment2 } from "react-icons/ri";
 import hire_img from '../../assets/career/hire.svg'
+import Button from '../Button';
 
 
 const CareerFormSec = () => {
@@ -73,7 +74,11 @@ const CareerFormSec = () => {
 
                             <p className="mt-3 text-gray-300 text-sm italic">( Upload file  PDF format, max size: 10MB )</p>
 
-                            <button type="submit" className=" bg-gradient-to-r from-blue-400 to-green-400 text-white py-1     px-9 rounded-full text-lg cursor-pointer mt-20 ">Submit</button>
+                            <div className="mybtn mt-20">
+                            <Button mybtn={'Submit'} />
+                            </div>
+                          
+                            
                         </form>
                     </div>
                 </div>

@@ -29,15 +29,15 @@ const OurServices = () => {
 
       {/* HOW WE DO IT */}
 
-      <div className="container mx-auto mt-25 ">
-        <h2 className="text-9xl text-center font-extrabold py-15 "> HOW WE DO IT</h2>
+      <div className="container mx-auto mt-25 leading-0 ">
+        <h3 className="text-8xl text-center font-extrabold py-15 "> HOW WE DO IT</h3>
         <div className="row-span-12 flex gap-9 ">
           <div className="col-span-4 border-t-1 border-white/20 w-[33.3%] ">
             <h2 className="text-5xl font-extrabold  pt-10">
               START WITH <br />
               UNDERSTANDING
             </h2>
-            <p className="text-lg tracking-[0.1rem] pt-3 ">
+            <p className="text-lg  pt-3 ">
               Every partnership begins with an ask. But our magic is in the
               understanding, finding the root of what needs to be solved—your
               Pivotal Problem. Pivotal Problems are the inflection point—the
@@ -52,7 +52,7 @@ const OurServices = () => {
               CRAFT <br />
               FOR IMPACT
             </h2>
-            <p className="text-lg tracking-[0.1rem] pt-3 ">
+            <p className="text-lg  pt-3 ">
               With our focus clear, we build a strategic framework for brand
               positioning and messaging at the core. From there, we craft
               impactful, audience-aligned solutions designed to resonate and
@@ -65,7 +65,7 @@ const OurServices = () => {
               ACCELERATE FOR <br />
               GROWTHG
             </h2>
-            <p className="text-lg  tracking-[0.1rem] pt-3 ">
+            <p className="text-lg   pt-3 ">
               We never set it and forget it. We constantly monitor our
               ecosystem, analyze performance, optimize, and refine strategies
               for continuous improvement and scalability.

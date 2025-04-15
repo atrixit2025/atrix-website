@@ -29,7 +29,7 @@ const TechnologySecPart = () => {
     const data = activeSection === 'frontend' ? frontend : backend;
 
     return (
-        <div className=' py-20'>
+        <div className=' '>
             <style>
                 {`
                 .icon-ul li:nth-child(1) > div, .icon-ul li:nth-child(6) > div {

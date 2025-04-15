@@ -80,9 +80,9 @@ const OurPortfolio = () => {
         ]
     };
     return (
-        <div className="Protfolio-section  bg-(--darkblack) text-(--whitelight)  relative overflow-hidden">
+        <div className="Protfolio-section   text-(--whitelight)  relative overflow-hidden">
              <div className='container  mx-auto  '>
-                <div className=' py-14 md:py-28'>
+                <div className=' py-25 mb-6'>
                 <div className="md:flex justify-between  gap-10 ">
                     <div className=' font-extrabold '>
                         <p className='text-gray '>OUR PORTFOLIO</p>
