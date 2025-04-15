@@ -21,11 +21,11 @@ export default function WhyAtrix({onChange,initialData}) {
       const editor = useRef(null);
 
     useEffect(() => {
-        if (initialData && Array.isArray(initialData)) {
+        if (initialData && initialData.length > 0) {
           setSelectFields(initialData.map((item, index) => ({
             id: index + 1,
             // heading: item.heading || "",
-            cardheading: item.cardheading || item.cardheding || "", // handle both spellings
+            cardheading: item.cardheading ||  "", // handle both spellings
             description: item.description || ""
           })));
         }
@@ -33,13 +33,20 @@ export default function WhyAtrix({onChange,initialData}) {
 
       useEffect(() => {
         if (onChange) {
-          onChange(selectFields.map(field => ({
-            // heading: field.heading,
-            cardheading: field.cardheading,
-            description: field.description
-          })));
+          onChange(
+            selectFields
+              .map(field => ({
+                cardheading: field.cardheading,
+                description: field.description
+              }))
+              .filter(item =>
+                (item.cardheading || "").trim() !== "" ||
+                (item.description || "").trim() !== ""
+              )
+          );
         }
       }, [selectFields]);
+      
  
 
     const handleTextChange = (id, textValue) => {

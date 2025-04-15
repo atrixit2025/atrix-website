@@ -109,32 +109,47 @@ ServicesRouter.post("/add", async (req, res) => {
       }
     }
 
-// 🔹 For servicescontent
-function validateServicesContentSection(section) {
-  if (!section || !section.type) return null;
-
-  const validTypes = ['content', 'gallery'];
-  if (!validTypes.includes(section.type)) {
-    throw new Error(`Invalid type for servicescontent: ${section.type}`);
-  }
-
-  if (section.type === 'content') {
-    return {
-      type: section.type,
-      // heading: section.heading || "",
-      cardheading: section.cardheading || "",
-      description: section.description || ""
-    };
-  } else {
-    if (!section.imageId) {
-      throw new Error(`'gallery' type must include imageId`);
+    function validateServicesContentSection(section) {
+      if (!section || typeof section !== 'object') {
+        throw new Error("Invalid servicescontent format");
+      }
+    
+      const validatedSection = {};
+    
+      // Accept content array
+      if (section.content && Array.isArray(section.content)) {
+        validatedSection.content = section.content.map(item => ({
+          cardheading: item.cardheading || "",
+          description: item.description || ""
+        }));
+      }
+    
+      // Accept gallery array
+      if (section.gallery && Array.isArray(section.gallery)) {
+        validatedSection.gallery = section.gallery.map(item => {
+          if (!item.imageId) throw new Error("Gallery item must have imageId");
+          return { imageId: item.imageId };
+        });
+      }
+    
+      // 💡 Try to guess fallback: a flat content item
+      if (!validatedSection.content && !validatedSection.gallery) {
+        if (section.cardheading || section.description) {
+          validatedSection.content = [
+            {
+              cardheading: section.cardheading || "",
+              description: section.description || ""
+            }
+          ];
+        } else {
+          throw new Error("Each servicescontent item must have either content or gallery");
+        }
+      }
+    
+      return validatedSection;
     }
-    return {
-      type: section.type,
-      imageId: section.imageId
-    };
-  }
-}
+    
+    
 function validateBannerdata(bannerDataArr) {
   if (!Array.isArray(bannerDataArr)) {
     throw new Error("Bannerdata must be an array");
@@ -202,9 +217,9 @@ function validateBannerdata(bannerDataArr) {
 ServicesRouter.get("/get", async (req, res) => {
   try {
     const Servicess = await Services.find({}).populate('FeaturedImage', 'url'); // Assuming you have a reference
-    if (!Servicess.length) {
-      return res.status(404).json({ message: "No Servicess found" });
-    }
+    // if (!Servicess.length) {
+    //   return res.status(404).json({ message: "No Services found" });
+    // }
     
     // Map Servicess to include image URLs
     const ServicessWithUrls = Servicess.map(Services => ({

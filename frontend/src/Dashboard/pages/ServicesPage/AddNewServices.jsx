@@ -1,35 +1,3 @@
-
-// import React,{useContext} from "react";
-// import { useLocation } from "react-router-dom";
-// import GenericForm from "../../components/form/form-Add-New/GenericForm";
-// import { ServicesCategoryContext } from "../../ContextApi/ServicesCategoryContextApi";
-// // import { ServicesCategoryContext } from "../../ContextApi/ServicesCategoryContextApi";
-
-// export default function AddNewServices() {
-//   const location = useLocation();
-//   const { services } = location.state || {};
-//   const { fetchCategoryCounts } = useContext(ServicesCategoryContext );
-// console.log("Services",services)
-//   return (
-//     <GenericForm
-//       title="Add New Services"
-//       editTitle="Edit Services"
-//       apiEndpoint="http://localhost:5300/Services"
-//       categoryEndpoint="http://localhost:5300/ServicesCategory/Services/category/get"
-//       redirectPath="/Dashboard/Services"
-//       contentType="Services"
-//       item={services}
-//       hasContentSections={true}
-//       hasRichText={true}
-//       initialData={services}
-//       onSuccess={fetchCategoryCounts}
-//     />
-//   );
-// }
-
-
-
-
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FileInputExample from "../../components/form/form-elements/FileInputExample";
@@ -198,20 +166,6 @@ export default function AddNewServices() {
       servicescontent
     } = formData;
 
-    // console.log("Submitting with data:", {
-    //   title: formData.title,
-    //   selectedCategories: formData.selectedCategories,
-    //   selectedPortfolioCategories: formData.selectedPortfolioCategories,
-    //   tags: formData.tags,
-    //   iconImageId: formData.iconImageId,
-    //   imageId: formData.imageId,
-    //   contentSections: selectFields.map(field => ({
-    //     type: field.value?.value,
-    //     content: field.textContent,
-    //     imageId: field.imageFile?.id
-    //   }))
-    // });
-    // Validate required fields
     if (!title || !description || selectedCategories.length === 0 || !imageId) {
       alert("Title, description, at least one category, and featured image are required!");
       return;
@@ -231,21 +185,31 @@ export default function AddNewServices() {
       }
     });
 
-  //   const bannerData = formData.Banner.map(item => {
-  //     if (item.type === "slider") {
-  //         return {
-  //             type: item.type,
-  //             sliderImages: item.sliderImages.filter(img => img) // Remove empty slots
-  //         };
-  //     }
-  //     return item;
-  // }).filter(item => {
-  //     // Filter out incomplete entries
-  //     if (item.type === "slider") {
-  //         return item.sliderImages.length > 0;
-  //     }
-  //     return item.imageId;
-  // });
+    const processedServicesContent = (servicescontent || []).map(section => {
+      if (section.contents) {
+        return {
+          content: section.contents.map(content => ({
+            cardheading: content.cardheading || "",
+            description: content.description || ""
+          }))
+        };
+      }
+    
+      if (section.galleryImages) {
+        return {
+          gallery: section.galleryImages
+            .filter(img => img.imageFile)
+            .map(img => ({
+              imageId: img.imageFile.id || img.imageFile
+            }))
+        };
+      }
+    
+      return {}; // Fallback in case of an empty section
+    });
+    
+
+  
   const bannerData = formData.Banner.map(item => {
     if (item.type === "slider") {
       return {
@@ -270,7 +234,7 @@ export default function AddNewServices() {
 // console.log("Processed Banner Data:", bannerData);
     
    // Add these logs to verify data:
-console.log("Raw Banner data from form:", formData.Banner);
+// console.log("Raw Banner data from form:", formData.Banner);
     const ServicesData = {
       title,
       description,
@@ -284,16 +248,11 @@ console.log("Raw Banner data from form:", formData.Banner);
       WhydoNeed,
       WhyAtrix,
       Process,
-      servicescontent: formData.servicescontent.map(item => ({
-        type: item.type || 'content', 
-        heading: item.heading || "",
-        cardheading: item.cardheading || "",
-        description: item.description || "",
-        ...(item.imageId && { imageId: item.imageId })
-      })),
+      servicescontent: processedServicesContent,
       contentSections
     };
     // console.log("Received Bannerdata:", Bannerdata);
+    // console.log("Raw servicescontent data from form:", servicescontent);
 
     try {
       if (Services) {

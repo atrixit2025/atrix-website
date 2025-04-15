@@ -71,9 +71,9 @@ PortfolioRouter.post("/add", async (req, res) => {
 PortfolioRouter.get("/get", async (req, res) => {
   try {
     const portfolios = await Portfolio.find({}).populate('FeaturedImage', 'url'); // Assuming you have a reference
-    if (!portfolios.length) {
-      return res.status(404).json({ message: "No portfolios found" });
-    }
+    // if (!portfolios.length) {
+    //   return res.status(404).json({ message: "No portfolios found" });
+    // }
     
     // Map portfolios to include image URLs
     const portfoliosWithUrls = portfolios.map(portfolio => ({
