@@ -71,9 +71,9 @@ BlogRouter.post("/add", async (req, res) => {
 BlogRouter.get("/get", async (req, res) => {
   try {
     const blogs = await Blog.find({}).populate('FeaturedImage', 'url'); // Assuming you have a reference
-    if (!blogs.length) {
-      return res.status(404).json({ message: "No Blogs found" });
-    }
+    // if (!blogs.length) {
+    //   return res.status(404).json({ message: "No Blogs found" });
+    // }
     
     // Map blogs to include image URLs
     const blogsWithUrls = blogs.map(blog => ({

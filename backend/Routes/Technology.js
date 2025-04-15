@@ -110,9 +110,9 @@ TechnologyRouter.post("/add", async (req, res) => {
 TechnologyRouter.get("/get", async (req, res) => {
   try {
     const technology = await Technology.find({}).populate('image'); 
-    if (!technology.length) {
-      return res.status(404).json({ message: "No technologies found" });
-    }
+    // if (!technology.length) {
+    //   return res.status(404).json({ message: "No technologies found" });
+    // }
     return res.json({ Technology: technology });
   } catch (error) {
     console.error("Error fetching Technology:", error);

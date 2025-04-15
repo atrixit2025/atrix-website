@@ -7,10 +7,14 @@ const contentSectionSchema = new mongoose.Schema({
 });
 
 const servicescontentSectionSchema = new mongoose.Schema({
-    type: { type: String, enum: ['content', 'gallery'], required: true },
-    cardheading: { type: String },
-    description: { type: String },
-    imageId: { type: String }
+    content:
+    [{
+        cardheading: { type: String },
+        description: { type: String },
+    }],
+    gallery: [{
+        imageId: { type: String }
+    }]
 });
 
 const WhydoNeedSectionSchema = new mongoose.Schema({
@@ -26,20 +30,20 @@ const ProcessSectionSchema = new mongoose.Schema({
 });
 
 const WhyAtrixSectionSchema = new mongoose.Schema({
-    type: { type: String, required: false }, 
+    type: { type: String, required: false },
     title: { type: String },
     description: { type: String },
 });
 
 const BannerfieldSectionSchema = new mongoose.Schema({
     type: {
-      type: String, 
-      enum: ['banner', 'video', 'slider'],
-      required: true
+        type: String,
+        enum: ['banner', 'video', 'slider'],
+        required: true
     },
     imageId: { type: String }, // For single images (banner/video)
     sliderImages: [{ type: String }] // Array for slider images
-  }, { _id: true }); // Ensure each gets its own _id
+}, { _id: true }); // Ensure each gets its own _id
 const ServicesSchema = new mongoose.Schema({
     title: {
         type: String,

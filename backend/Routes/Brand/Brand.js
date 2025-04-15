@@ -37,9 +37,9 @@ BrandRouter.post("/add", async (req, res) => {
 BrandRouter.get("/get", async (req, res) => {
   try {
     const brand = await Brand.find({}).populate('image'); // Get the brand details with the image
-    if (!brand.length) {
-      return res.status(404).json({ message: "No brands found" });
-    }
+    // if (!brand.length) {
+    //   return res.status(404).json({ message: "No brands found" });
+    // }
     return res.json({ Brand: brand });
   } catch (error) {
     console.error("Error fetching Brand:", error);
