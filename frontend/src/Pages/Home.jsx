@@ -325,16 +325,6 @@ const Home = () => {
         )}
       </div>
 
-      <div ref={technologyRef}>
-        {visibleComponents.technology ? (
-          <Suspense fallback={<div className="text-(--white) text-center py-20"></div>}>
-            <Technology />
-          </Suspense>
-        ) : (
-          <div className="text-(--white) text-center py-20"></div>
-        )}
-      </div>
-
       <div ref={letterMarqueeRef}>
         {visibleComponents.letterMarquee ? (
           <Suspense fallback={<div className="text-(--white) text-center py-20"></div>}>
@@ -344,6 +334,19 @@ const Home = () => {
           <div className="text-(--white) text-center py-20"></div>
         )}
       </div>
+
+
+      <div ref={technologyRef}>
+        {visibleComponents.technology ? (
+          <Suspense fallback={<div className="text-(--white) text-center "></div>}>
+            <Technology />
+          </Suspense>
+        ) : (
+          <div className="text-(--white) text-center "></div>
+        )}
+      </div>
+
+   
     </div>
   );
 };

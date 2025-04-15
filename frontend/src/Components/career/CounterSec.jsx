@@ -18,7 +18,7 @@ const CounterSec = () => {
                         <div className="counter-heading">
                             <h3 className="text-2xl  md:text-3xl font-bold  ">{item.title}</h3>
                         </div>
-                        <hr className="max-w-[200px] border border-blue-500" />
+                        <hr className="max-w-[200px] border border-(--white)" />
                         <div className="counter">
                             <CountUp
                                 end={item.count}

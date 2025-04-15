@@ -40,9 +40,9 @@ const cardsContent = [
 const Footer = () => {
   return (
     <footer className="bg-cs_theme_black">
-      <div className=" container  mx-auto py-14 md:py-8 ">
+      <div className=" container  mx-auto  mt-18 pb-9  ">
         {/* Main Footer Content */}
-        <div className="flex flex-col md:flex-row justify-between border-t border-gray-700 pt-10 ">
+        <div className="flex flex-col md:flex-row justify-between border-t border-gray-700 py-18 ">
           {/* Logo Column */}
           <div className=" w-[200px] flex flex-col gap-5">
             <div className="img-sec">
@@ -56,10 +56,10 @@ const Footer = () => {
 
           {/* Contact Info Column */}
           <div className="md:w-[280px] flex flex-col gap-1">
-            <h4 className="text-blue-400 font-bold text-lg">Email</h4>
+            <h4 className="text-(--blue) font-bold text-lg">Email</h4>
             <p className="break-words">info@atrixitsolutions.com</p>
 
-            <h4 className="text-blue-400 font-bold text-lg mt-4">Address</h4>
+            <h4 className="text-(--blue) font-bold text-lg mt-4">Address</h4>
             <p className="uppercase">
               D-179 Phase, 8B, Phase 8B, Industrial Area, Sector 74, S.A.S
               Nagar, Punjab 140501
@@ -72,7 +72,7 @@ const Footer = () => {
               {ourServices.map((item, index) => (
                 <li
                   key={index}
-                  className="hover:text-blue-400 transition-colors hover:font-extrabold  "
+                  className="hover:text-(--blue) transition-colors hover:font-extrabold  "
                 >
                   <Link to={item.url}>{item.service_name}</Link>
                 </li>
@@ -91,15 +91,15 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="row max-w-[70%] mx-auto mt-16">
+        <div className="row max-w-[70%] mx-auto ">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-1 pb-10">
             {cardsContent.map((item, index) => (
               <div className="link-div flex">
                 <Link key={index} to={item.link} className=" ">
-                  <div className="titel cursor-pointer hover:text-blue-500  group font-bold flex items-center justify-center   self-start ">
+                  <div className="titel cursor-pointer hover:text-(--blue)  group font-bold flex items-center justify-center   self-start ">
                     {item.btn_name}
 
-                    <span className="border border-gray-400 ml-2 flex justify-center items-center h-6 w-6 rounded-full -rotate-45 group-hover:rotate-1 group-hover:bg-blue-500 group-hover:text-white group-hover:border-blue-500 duration-300">
+                    <span className="border border-gray-400 ml-2 flex justify-center items-center h-6 w-6 rounded-full -rotate-45 group-hover:rotate-1 group-hover:bg-(--blue) group-hover:text-white group-hover:border-(--blue) duration-300">
                       <FaArrowRight size={12} />
                     </span>
                   </div>

@@ -126,7 +126,7 @@ const OurServiceCard = () => {
           </div>
         ))}
 
-        <div className="mt-8">
+        {/* <div className="mt-8">
           <div className="bg-[#262626] p-8 rounded-2xl text-center shadow-lg ">
             <h1 className="text-3xl font-bold ">
               READY TO ELEVATE YOUR BRAND?
@@ -139,7 +139,7 @@ const OurServiceCard = () => {
               <Button mybtn={"LET'S TALK"} />
             </div>
           </div>
-        </div>
+        </div> */}
 
         
       </div>

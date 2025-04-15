@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Socialcons from './Socialcons';
 import { IoIosArrowForward } from "react-icons/io";
+import Button from '../Button';
 
 
 import "../../CSS/One.css";
@@ -60,7 +61,9 @@ const ContactForm = () => {
 
                             <textarea placeholder="Message" rows="3" className=" text-lg  w-full bg-tra py-2 nsparent border-b border-gray-600 text-gray-400 outline-none mb-6"></textarea>
 
-                            <button type="submit" className=" bg-gradient-to-r from-blue-400 to-green-400 text-white py-1     px-9 rounded-full text-lg cursor-pointer ">Let's Us Begin</button>
+                       <div className="formbtn">
+                        <Button mybtn={"Get A Quote"} />
+                       </div>
                         </form>
                     </div>
                 </div>

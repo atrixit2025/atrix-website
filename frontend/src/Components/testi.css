@@ -32,11 +32,11 @@
   font-weight: 600;
   font-size: 20px;
 }
-.testimonial-slider .slick-next:before {
-  content: "\f060";
+.testimonial-slider .slick-prev:before {
+  content: "\f060"; 
 }
 .testimonial-slider .slick-next:before {
-  content: "\f061";
+  content: "\f061"; 
 }
 
 /* dfsdf */
