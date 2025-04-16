@@ -4,7 +4,7 @@ import TechnologySecPart from './TechnologySecPart';
 const Technology = () => {
 
     return (
-        <div className="Technology-section bg-(--darkblack) text-(--whitelight)  relative overflow-hidden">
+        <div className="Technology-section  text-(--whitelight)  relative overflow-hidden">
             <div className='container mx-auto '>
                 <div className='py-30'>
                     <div className="md:flex   ">
