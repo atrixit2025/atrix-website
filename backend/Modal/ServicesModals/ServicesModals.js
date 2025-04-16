@@ -31,7 +31,7 @@ const ProcessSectionSchema = new mongoose.Schema({
 
 const WhyAtrixSectionSchema = new mongoose.Schema({
     type: { type: String, required: false },
-    title: { type: String },
+    heading: { type: String },
     description: { type: String },
 });
 
@@ -70,6 +70,10 @@ const ServicesSchema = new mongoose.Schema({
     WhyAtrix: [WhyAtrixSectionSchema], // Changed to array
     servicescontent: [servicescontentSectionSchema],
     portfolioCategories: {
+        type: [String], // Changed to array of strings
+        default: []
+    },
+    faqCategories: {
         type: [String], // Changed to array of strings
         default: []
     },

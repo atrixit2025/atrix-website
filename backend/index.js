@@ -17,6 +17,8 @@ import DemoRouter from './Routes/Demo/Demo.js';
 import ServicesCategoryRouter from './Routes/Services/ServicesCategory.js';
 import ServicesRouter from './Routes/Services/Services.js';
 import BehanceRouter from './BehanceApi/Behance.js';
+import FAQCategoryRouter from './Routes/FAQ/FAQCategory.js';
+import FAQRouter from './Routes/FAQ/FAQ.js';
 
 const __filename = fileURLToPath(import.meta.url); 
 const __dirname = path.dirname(__filename);
@@ -59,6 +61,10 @@ app.use("/ServicesCategory", ServicesCategoryRouter);
 app.use("/Services", ServicesRouter);
 
 app.use("/Behance", BehanceRouter);
+
+app.use("/FAQ", FAQRouter);
+app.use("/FAQCategory", FAQCategoryRouter);
+
 
 app.use("/demo",DemoRouter)
 app.listen(PORT, () => {

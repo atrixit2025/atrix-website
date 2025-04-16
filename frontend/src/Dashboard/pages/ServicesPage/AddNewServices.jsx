@@ -24,8 +24,13 @@ import MoreContent from "../../components/Services/MoreContent";
 export default function AddNewServices() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [categories, setCategories] = useState([]);
-  const [portfolioCategory, setPortfolioCategory] = useState([]);
+  // const [categories, setCategories] = useState([]);
+  // const [portfolioCategory, setPortfolioCategory] = useState([]);
+  const [categories, setCategories] = useState({
+    services: [],
+    portfolio: [],
+    faq: []
+  });
 
   const { fetchCategoryCounts } = useContext(ServicesCategoryContext);
   const editor = useRef(null);
@@ -43,6 +48,7 @@ export default function AddNewServices() {
     text: "",
     selectedCategories: [],
     selectedPortfolioCategories: [],
+    selectedfaqCategories:[],
     tags: [],
     iconImageId: null,
     imageId: null,
@@ -57,29 +63,42 @@ export default function AddNewServices() {
   const { Services } = location.state || {};
 
   // Fetch categories from the API
+  // Fetch services categories
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get("http://localhost:5300/ServicesCategory/Services/category/get");
-        setCategories(response.data.categories);
+        setCategories(prev => ({ ...prev, services: response.data.categories }));
       } catch (error) {
-        console.error("Error fetching categories:", error);
+        console.error("Error fetching services categories:", error);
       }
     };
-
     fetchCategories();
   }, []);
 
+  // Fetch portfolio categories
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get("http://localhost:5300/PortfolioCategory/Portfolio/category/get");
-        setPortfolioCategory(response.data.categories);
+        setCategories(prev => ({ ...prev, portfolio: response.data.categories }));
       } catch (error) {
-        console.error("Error fetching categories:", error);
+        console.error("Error fetching portfolio categories:", error);
       }
     };
+    fetchCategories();
+  }, []);
 
+  // Fetch FAQ categories
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get("http://localhost:5300/FAQCategory/FAQ/category/get");
+        setCategories(prev => ({ ...prev, faq: response.data.categories }));
+      } catch (error) {
+        console.error("Error fetching FAQ categories:", error);
+      }
+    };
     fetchCategories();
   }, []);
 
@@ -91,9 +110,12 @@ export default function AddNewServices() {
         description: Services.description || "",
         Servicesquote: Services.Servicesquote || "",
         selectedCategories: Services.category ? Services.category.split(", ") : [],
-        selectedPortfolioCategories: Services.portfolioCategories 
-        ? Services.portfolioCategories.split(", ") 
-        : [],
+        selectedPortfolioCategories: Services.portfolioCategories
+          ? Services.portfolioCategories.split(", ")
+          : [],
+          selectedfaqCategories: Services.faqCategories
+          ? Services.faqCategories.split(", ")
+          : [],
         tags: Services.tags || [],
         iconImageId: Services.iconImageId || null,
         imageId: Services.FeaturedImage || null,
@@ -194,7 +216,7 @@ export default function AddNewServices() {
           }))
         };
       }
-    
+
       if (section.galleryImages) {
         return {
           gallery: section.galleryImages
@@ -204,47 +226,48 @@ export default function AddNewServices() {
             }))
         };
       }
-    
+
       return {}; // Fallback in case of an empty section
     });
-    
 
-  
-  const bannerData = formData.Banner.map(item => {
-    if (item.type === "slider") {
+
+
+    const bannerData = formData.Banner.map(item => {
+      if (item.type === "slider") {
+        return {
+          type: "slider",
+          sliderImages: item.sliderImages
+            .filter(img => img) // Remove empty slots
+            .slice(0, 4) // Ensure max 4 images
+        };
+      }
       return {
-        type: "slider",
-        sliderImages: item.sliderImages
-          .filter(img => img) // Remove empty slots
-          .slice(0, 4) // Ensure max 4 images
+        type: item.type,
+        imageId: item.imageId
       };
-    }
-    return {
-      type: item.type,
-      imageId: item.imageId
-    };
-  }).filter(item => {
-    // Filter out incomplete entries
-    if (item.type === "slider") {
-      return item.sliderImages.length > 0; // At least 1 image required
-    }
-    return item.imageId;
-  });
+    }).filter(item => {
+      // Filter out incomplete entries
+      if (item.type === "slider") {
+        return item.sliderImages.length > 0; // At least 1 image required
+      }
+      return item.imageId;
+    });
 
-// console.log("Processed Banner Data:", bannerData);
-    
-   // Add these logs to verify data:
-// console.log("Raw Banner data from form:", formData.Banner);
+    // console.log("Processed Banner Data:", bannerData);
+
+    // Add these logs to verify data:
+    // console.log("Raw Banner data from form:", formData.Banner);
     const ServicesData = {
       title,
       description,
       Servicesquote: formData.Servicesquote || "",
       category: selectedCategories.join(", "),
       portfolioCategories: formData.selectedPortfolioCategories,
+      faqCategories: formData.selectedfaqCategories,
       tags: tags.filter(tag => tag.trim() !== ""),
       iconImageId,
       FeaturedImageId: imageId,
-      Bannerdata:bannerData,
+      Bannerdata: bannerData,
       WhydoNeed,
       WhyAtrix,
       Process,
@@ -325,6 +348,14 @@ export default function AddNewServices() {
       selectedPortfolioCategories: prev.selectedPortfolioCategories.includes(category)
         ? prev.selectedPortfolioCategories.filter(cat => cat !== category)
         : [...prev.selectedPortfolioCategories, category]
+    }));
+  };
+  const handlefaqCategoryChange = (category) => {
+    setFormData(prev => ({
+      ...prev,
+      selectedfaqCategories: prev.selectedfaqCategories.includes(category)
+        ? prev.selectedfaqCategories.filter(cat => cat !== category)
+        : [...prev.selectedfaqCategories, category]
     }));
   };
   const handleSelectChange = (id, value) => {
@@ -559,9 +590,9 @@ export default function AddNewServices() {
         </div>
         <div className="space-y-6">
           <div>
-            <ComponentCategory title="Category" link="/CategoryServices">
+            <ComponentCategory title="Category" link="/Dashboard/CategoryServices">
               <div className="items-center gap-4 space-y-5">
-                {categories.map((category) => (
+                {categories.services.map((category) => (
                   <div key={category._id} className="flex items-center gap-3">
                     <Checkbox
                       id={`category-${category._id}`}
@@ -594,18 +625,37 @@ export default function AddNewServices() {
           </ImageProvider>
 
           <div>
-            <ComponentCategory title="Portfolio Category" link="/CategoryPortfolio">
+            <ComponentCategory title="Portfolio Category" link="/Dashboard/CategoryPortfolio">
               <div className="items-center gap-4 space-y-5">
-              {portfolioCategory.map((category) => (
-  <div key={category._id} className="flex items-center gap-3">
-    <Checkbox
-      id={`portfolio-category-${category._id}`}
-      checked={formData.selectedPortfolioCategories.includes(category.Name)}
-      onChange={() => handlePortfolioCategoryChange(category.Name)}
-      label={category.Name}
-    />
-  </div>
-))}
+                {categories.portfolio.map((category) => (
+                  <div key={category._id} className="flex items-center gap-3">
+                    <Checkbox
+                      id={`portfolio-category-${category._id}`}
+                      checked={formData.selectedPortfolioCategories.includes(category.Name)}
+                      onChange={() => handlePortfolioCategoryChange(category.Name)}
+                      label={category.Name}
+                    />
+                  </div>
+                ))}
+              </div>
+            </ComponentCategory>
+          </div>
+
+
+
+          <div>
+            <ComponentCategory title="FAQ Category" link="/Dashboard/CategoryFAQ">
+              <div className="items-center gap-4 space-y-5">
+                {categories.faq.map((category) => (
+                  <div key={category._id} className="flex items-center gap-3">
+                    <Checkbox
+                      id={`faq-category-${category._id}`}
+                      checked={formData.selectedfaqCategories.includes(category.Name)}
+                      onChange={() => handlefaqCategoryChange(category.Name)}
+                      label={category.Name}
+                    />
+                  </div>
+                ))}
               </div>
             </ComponentCategory>
           </div>

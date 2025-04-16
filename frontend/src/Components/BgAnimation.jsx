@@ -2,7 +2,7 @@ import React from 'react';
 
 const BgAnimation = () => {
   return (
-    <div class="fixed pointer-events-none z-[-1] opacity-[.4] bg-anim-wrapper h-full overflow-hidden w-full">
+    <div className="fixed pointer-events-none z-[-1] opacity-[.4] bg-anim-wrapper h-full overflow-hidden w-full">
         <div id="bg-anim" className="bg-animation w-full h-full" >
 
         <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" className="w-full h-full">

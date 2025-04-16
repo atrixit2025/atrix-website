@@ -14,7 +14,8 @@ ServicesRouter.post("/add", async (req, res) => {
     Servicesquote, // Added
     category, 
     tags, 
-    portfolioCategories, 
+    portfolioCategories,
+    faqCategories,
     iconImageId, 
     FeaturedImageId,
     Bannerdata, // Added
@@ -44,6 +45,7 @@ ServicesRouter.post("/add", async (req, res) => {
     // Sanitize all array inputs
     const sanitized = {
       portfolioCategories: validateArray(portfolioCategories, 'portfolioCategories'),
+      faqCategories: validateArray(faqCategories, 'faqCategories'),
       tags: validateArray(tags, 'tags'),
       Bannerdata: validateArray(Bannerdata, 'Bannerdata'),
       WhydoNeed: validateArray(WhydoNeed, 'WhydoNeed'),
@@ -67,6 +69,7 @@ ServicesRouter.post("/add", async (req, res) => {
       Process: sanitized.Process,
       WhyAtrix: sanitized.WhyAtrix,
       portfolioCategories: sanitized.portfolioCategories,
+      faqCategories: sanitized.faqCategories,
       iconImageId: iconImageId || null,
       FeaturedImage: FeaturedImageId,
       servicescontent: sanitized.servicescontent.map(validateServicesContentSection),
