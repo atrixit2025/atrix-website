@@ -49,7 +49,7 @@ const Footer = () => {
               <img
                 src={logo}
                 alt="Atrix IT Solutions Logo"
-                className="h-full"
+                className=""
               />
             </div>
           </div>
