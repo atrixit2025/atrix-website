@@ -21,6 +21,8 @@ import { FaBloggerB } from "react-icons/fa6";
 import { FaImagePortrait } from "react-icons/fa6";
 import { TbMarquee } from "react-icons/tb";
 import { FaHandshakeSimple } from "react-icons/fa6";
+import { FaQuestion } from "react-icons/fa";
+
 type NavItem = {
   name: string;
   icon: React.ReactNode;
@@ -90,7 +92,17 @@ const navItems: NavItem[] = [
 
     ],
   },
+  {
+    name: "FAQ ",
+    icon: <FaQuestion />, 
+    subItems: [
+      { name: "All FAQ", path: "/Dashboard/FAQ", pro: false },
+      { name: "Add New FAQ ", path: "/Dashboard/AddNewFAQ", pro: false },
+      { name: "Category FAQ", path: "/Dashboard/CategoryFAQ", pro: false },
 
+
+    ],
+  },
   
   // {
   //   icon: <FaUser />, // User profile icon

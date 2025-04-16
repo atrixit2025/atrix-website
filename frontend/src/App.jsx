@@ -44,6 +44,10 @@ import OurServices from './Pages/OurServices';
 import WhyAtrix from './Dashboard/components/Services/WhyAtrix';
 import MoreContent from './Dashboard/components/Services/MoreContent';
 import Behance from './Components/Behanceshowpost/Behance';
+import SelectField from './Dashboard/components/SelectFieldComp/SelectField';
+import FAQCategory from './Dashboard/pages/FAQPages/CategoryFAQ';
+import FAQ from './Dashboard/pages/FAQPages/FAQ';
+import AddNewFAQ from './Dashboard/pages/FAQPages/AddNewFAQ';
 
 export default function App() {
   return (
@@ -76,8 +80,17 @@ export default function App() {
 
 
         </Route >
-      </Routes >
-      <Routes>
+    
+
+
+
+
+
+
+
+
+
+    
         {/* Dashboard Layout */}
         <Route element={<ProtectedRoute />}>
           <Route element={<AppLayout />}>
@@ -103,7 +116,12 @@ export default function App() {
             <Route path="/Dashboard/AddNewServices" element={<AddNewServices />} />
             <Route path="/Dashboard/CategoryServices" element={<CategoryServices />} />
 
-            <Route path="/Dashboard/Demo" element={<MoreContent />} />
+            <Route path="/Dashboard/FAQ" element={<FAQ />} />
+            <Route path="/Dashboard/AddNewFAQ" element={<AddNewFAQ />} />
+            <Route path="/Dashboard/CategoryFAQ" element={<FAQCategory />} />
+
+
+            <Route path="/Dashboard/Demo" element={<SelectField />} />
 
             {/* <Route path="/Dashboard/Ckeditor" element={<Ckeditor />} /> */}
 

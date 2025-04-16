@@ -1,9 +1,8 @@
-
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Label from "../../components/form/Label";
 import Input from "../../components/form/input/InputField";
 import TextArea from "../../components/form/input/TextArea";
-import JoditEditor from "jodit-react";
+import JoditEditorComp from "../JoditEditorComp/JoditEditorComp";
 
 export default function WhyAtrix({onChange,initialData}) {
     const [selectFields, setSelectFields] = useState(() => {
@@ -12,20 +11,19 @@ export default function WhyAtrix({onChange,initialData}) {
                 id: 1,
                 value: "",
                 textValue: "",
-                // heading: "",
-                cardheading: ""
+                heading: "",
+                // cardheading: ""
             }
         ];
     });
 
-      const editor = useRef(null);
 
     useEffect(() => {
         if (initialData && initialData.length > 0) {
           setSelectFields(initialData.map((item, index) => ({
             id: index + 1,
-            // heading: item.heading || "",
-            cardheading: item.cardheading ||  "", // handle both spellings
+            heading: item.heading || "",
+            // cardheading: item.cardheading ||  "", // handle both spellings
             description: item.description || ""
           })));
         }
@@ -36,11 +34,11 @@ export default function WhyAtrix({onChange,initialData}) {
           onChange(
             selectFields
               .map(field => ({
-                cardheading: field.cardheading,
+                heading: field.heading,
                 description: field.description
               }))
               .filter(item =>
-                (item.cardheading || "").trim() !== "" ||
+                (item.heading || "").trim() !== "" ||
                 (item.description || "").trim() !== ""
               )
           );
@@ -49,11 +47,11 @@ export default function WhyAtrix({onChange,initialData}) {
       
  
 
-    const handleTextChange = (id, textValue) => {
+      const handleTextChange = (id, newContent) => {
         setSelectFields(selectFields.map(field =>
-            field.id === id ? { ...field, textValue } : field
+          field.id === id ? { ...field, description: newContent } : field
         ));
-    };
+      };
 
     const handleHeadingChange = (id, value) => {
         setSelectFields(selectFields.map(field =>
@@ -63,7 +61,7 @@ export default function WhyAtrix({onChange,initialData}) {
 
     const handlecardheadingChange = (id, value) => {
         setSelectFields(selectFields.map(field =>
-            field.id === id ? { ...field, cardheading: value } : field
+            field.id === id ? { ...field, heading: value } : field
         ));
     };
 
@@ -89,21 +87,20 @@ export default function WhyAtrix({onChange,initialData}) {
                                 </div> */}
 
                                 <div>
-                                    <Label htmlFor={`Title-${field.id}`}>Title</Label>
+                                    <Label htmlFor={`Heading-${field.id}`}>Heading</Label>
                                     <Input
                                         type="text"
-                                        id={`Title-${field.id}`}
-                                        placeholder="Title"
-                                        value={field.cardheading}
-                                        onChange={(e) => handlecardheadingChange(field.id, e.target.value)}
+                                        id={`Heading-${field.id}`}
+                                        placeholder="Heading"
+                                        value={field.heading}
+                                        onChange={(e) => handleHeadingChange(field.id, e.target.value)}
                                     />
                                 </div>
 
-                                <div className="md:col-span-2">
+                                <div className="md:col-span-2 text-black    ">
                                     <Label htmlFor={`Description-${field.id}`}>Description</Label>
-                                    <JoditEditor
-                                        ref={editor}
-                                        value={field.textContent || ""}
+                                    <JoditEditorComp
+                                        value={field.description || ""}
                                         onChange={(newContent) => handleTextChange(field.id, newContent)}
 
                                     />

@@ -5,6 +5,7 @@ import AppHeader from "./AppHeader";
 import Backdrop from "./Backdrop";
 import AppSidebar from "./AppSidebar";
 import { ServicesCategoryProvider } from "../ContextApi/ServicesCategoryContextApi";
+import { FAQCategoryProvider } from "../ContextApi/FAQCaategoryContextApi";
 
 const LayoutContent: React.FC = () => {
   const { isExpanded, isHovered, isMobileOpen } = useSidebar();
@@ -12,8 +13,9 @@ const LayoutContent: React.FC = () => {
   return (
     <>
       <ServicesCategoryProvider>
+        <FAQCategoryProvider>
 
-        <div className="container max-auto min-h-screen max-w-full">
+        <div className="container max-auto min-h-screen max-w-full bg-(--darkblack)">
           <div>
             <AppSidebar />
             <Backdrop />
@@ -28,6 +30,7 @@ const LayoutContent: React.FC = () => {
             </div>
           </div>
         </div>
+        </FAQCategoryProvider>
       </ServicesCategoryProvider>
 
     </>
