@@ -453,18 +453,14 @@ export default function AddNewServices() {
               }
             />
           </div>
+    
           <div>
-            <Label htmlFor={`description-${formData.id}`}>Description</Label>
-            <TextArea
-              type="text"
-              id={`description-${formData.id}`}
-              placeholder="Description"
-              value={formData.description}
-              onChange={(value) =>
-                setFormData((prev) => ({ ...prev, description: value }))
-              }
-            />
+            <Label htmlFor="input">Header</Label>
+
+
+            <Banner onChange={handleBannerChange} initialData={Services?.Banner} />
           </div>
+
 
 
           <div>
@@ -479,19 +475,7 @@ export default function AddNewServices() {
               }
             />
           </div>
-          <div>
-            <TagsInput
-              initialTags={formData.tags}
-              onChange={handleTagsChange}
-            />
-          </div>
-
-          <div>
-            <Label htmlFor="input"> Select Field</Label>
-
-
-            <Banner onChange={handleBannerChange} initialData={Services?.Banner} />
-          </div>
+       
 
           <div>
             <Label>Why do you need</Label>
@@ -589,6 +573,24 @@ export default function AddNewServices() {
 
         </div>
         <div className="space-y-6">
+        <div>
+            <Label htmlFor={`description-${formData.id}`}>Excerpt</Label>
+            <TextArea
+              type="text"
+              id={`description-${formData.id}`}
+              placeholder="Excerpt"
+              value={formData.description}
+              onChange={(value) =>
+                setFormData((prev) => ({ ...prev, description: value }))
+              }
+            />
+          </div>
+          <div>
+            <TagsInput
+              initialTags={formData.tags}
+              onChange={handleTagsChange}
+            />
+          </div>
           <div>
             <ComponentCategory title="Category" link="/Dashboard/CategoryServices">
               <div className="items-center gap-4 space-y-5">

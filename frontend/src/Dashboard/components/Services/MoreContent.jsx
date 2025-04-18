@@ -3,7 +3,7 @@ import Label from "../../components/form/Label";
 import Input from "../../components/form/input/InputField";
 import TextArea from "../../components/form/input/TextArea";
 import SelectBulk from "../../components/form/SelectBulk";
-import SelectFileInput from "../form/form-elements/SelectFileInput";
+import GalleryComp from "../Gallery/GalleryComp";
 
 export default function MoreContent({ onChange, initialData }) {
   const [selectFields, setSelectFields] = useState([
@@ -17,26 +17,20 @@ export default function MoreContent({ onChange, initialData }) {
       ],
       description: "",
       cardheading: "",
-      imageFile: null
+      galleryImages: [] // Changed from imageFile to galleryImages array
     }
   ]);
 
   const [contentselectFields, setContentSelectFields] = useState(() => {
     return [
-        {
-            id: 1,
-            value: "",
-            description: "",
-            cardheading: ""
-        }
+      {
+        id: 1,
+        value: "",
+        description: "",
+        cardheading: ""
+      }
     ];
-});
-const [galleryselectFields, setGallerySelectFields] = useState(() => {
-  return Array.from({ length: 4 }, (_, index) => ({
-    id: index + 1,
-    imageFile: null
-  }));
-});
+  });
 
   useEffect(() => {
     if (initialData && initialData.length > 0) {
@@ -50,7 +44,7 @@ const [galleryselectFields, setGallerySelectFields] = useState(() => {
         ],
         description: item.description || "",
         cardheading: item.cardheading || "",
-        imageFile: item.imageFile || null
+        galleryImages: item.galleryImages || [] // Initialize with empty array
       }));
       setSelectFields(mappedFields);
     }
@@ -70,9 +64,7 @@ const [galleryselectFields, setGallerySelectFields] = useState(() => {
         } else if (field.type === "gallery") {
           return {
             type: "gallery",
-            galleryImages: galleryselectFields.map(f => ({
-              imageFile: f.imageFile
-            })).filter(img => img.imageFile) // filter out empty ones
+            galleryImages: field.galleryImages.filter(img => img) // Filter out any null values
           };
         }
         return null;
@@ -80,8 +72,8 @@ const [galleryselectFields, setGallerySelectFields] = useState(() => {
   
       onChange(mapped);
     }
-  }, [selectFields, contentselectFields, galleryselectFields]);
-  
+  }, [selectFields, contentselectFields]);
+
   const getFilteredOptions = (currentType) => {
     const baseOptions = [
       { value: "", label: "Select Option" },
@@ -89,10 +81,8 @@ const [galleryselectFields, setGallerySelectFields] = useState(() => {
       { value: "gallery", label: "Gallery" },
     ];
     
-    // If no type selected yet, show all options
     if (!currentType) return baseOptions;
     
-    // If content selected, show only gallery
     if (currentType === "content") {
       return [
         { value: "", label: "Select Option" },
@@ -100,13 +90,11 @@ const [galleryselectFields, setGallerySelectFields] = useState(() => {
       ];
     }
     
-    // If gallery selected, show only content
     return [
       { value: "", label: "Select Option" },
       { value: "content", label: "Content" },
     ];
   };
-
 
   const addSelectField = () => {
     const newId = selectFields.length > 0 ? Math.max(...selectFields.map(f => f.id)) + 1 : 1;
@@ -115,81 +103,83 @@ const [galleryselectFields, setGallerySelectFields] = useState(() => {
       {
         id: newId,
         type: "",
-        options: getFilteredOptions(""), // Initial options for new field
+        options: getFilteredOptions(""), 
         description: "",
         cardheading: "",
-        imageFile: null
+        galleryImages: []
       }
     ]);
   };
 
-
- 
-  const galleryaddSelectField = () => {
-    const newIdStart = galleryselectFields.length > 0 ? Math.max(...galleryselectFields.map(f => f.id)) + 1 : 1;
-    const newFields = Array.from({ length: 4 }, (_, i) => ({
-      id: newIdStart + i,
-      imageFile: null
-    }));
-    setGallerySelectFields(prev => [...prev, ...newFields]);
-  };
-  const galleryremoveSelectField = () => {
-    if (galleryselectFields.length > 4) {
-      setGallerySelectFields(prev => prev.slice(0, -4));
-    }
-  };
-
-
-const contentaddSelectField = () => {
-  const newId = contentselectFields.length > 0 ? Math.max(...contentselectFields.map(f => f.id)) + 1 : 1;
-  setContentSelectFields([
+  const contentaddSelectField = () => {
+    const newId = contentselectFields.length > 0 ? Math.max(...contentselectFields.map(f => f.id)) + 1 : 1;
+    setContentSelectFields([
       ...contentselectFields,
       {
-          id: newId,
-          value: "",
-          description: "",
-          cardheading: ""
+        id: newId,
+        value: "",
+        description: "",
+        cardheading: ""
       }
-  ]);
-};
+    ]);
+  };
 
-const contentremoveSelectField = (id) => {
-  if (contentselectFields.length > 1) {
+  const contentremoveSelectField = (id) => {
+    if (contentselectFields.length > 1) {
       setContentSelectFields(contentselectFields.filter(field => field.id !== id));
-  }
-};
-
-const handleSelectChange = (id, value) => {
-  setSelectFields(selectFields.map(field => {
-    if (field.id === id) {
-      return { 
-        ...field, 
-        type: value.value,
-        // Update options for all fields to reflect current selections
-        options: getFilteredOptions(value.value)
-      };
     }
-    return field;
-  }));
-};
+  };
+
+  const handleSelectChange = (id, value) => {
+    setSelectFields(selectFields.map(field => {
+      if (field.id === id) {
+        return { 
+          ...field, 
+          type: value.value,
+          options: getFilteredOptions(value.value),
+          galleryImages: value.value === "gallery" ? [] : field.galleryImages
+        };
+      }
+      return field;
+    }));
+  };
 
   const handleContentDescriptionChange = (id, value) => {
     setContentSelectFields(contentselectFields.map(field =>
-        field.id === id ? { ...field, description: value } : field
+      field.id === id ? { ...field, description: value } : field
     ));
-};
+  };
 
- 
   const handlecardheadingChange = (id, value) => {
     setContentSelectFields(contentselectFields.map(field =>
-        field.id === id ? { ...field, cardheading: value } : field
+      field.id === id ? { ...field, cardheading: value } : field
     ));
-};
+  };
 
-  const handleImageChange = (id, imageFile) => {
-    setGallerySelectFields(galleryselectFields.map(field =>
-      field.id === id ? { ...field, imageFile } : field
-    ));
+  // Handle adding images to gallery
+  const handleAddImage = (id, file) => {
+    setSelectFields(selectFields.map(field => {
+      if (field.id === id && field.type === "gallery") {
+        return {
+          ...field,
+          galleryImages: [...field.galleryImages, file]
+        };
+      }
+      return field;
+    }));
+  };
+
+  // Handle removing images from gallery
+  const handleRemoveImage = (id, imageIndex) => {
+    setSelectFields(selectFields.map(field => {
+      if (field.id === id && field.type === "gallery") {
+        return {
+          ...field,
+          galleryImages: field.galleryImages.filter((_, index) => index !== imageIndex)
+        };
+      }
+      return field;
+    }));
   };
 
   const removeSelectField = (id) => {
@@ -234,101 +224,104 @@ const handleSelectChange = (id, value) => {
                 </div>
 
                 {field.type === "content" && (
-                    contentselectFields.map((contentField, index) => (
-                      <div key={contentField.id} className="mb-3">
-                          <div className="flex justify-between items-center mb-4">
-                              <h4 className="text-lg font-medium">
-                                  Field {index + 1}
-                              </h4>
-                              <div className="flex gap-2">
-                                  {index > 0 && (
-                                      <button
-                                          onClick={() => contentremoveSelectField(contentField.id)}
-                                          className="text-red-500 text-2xl cursor-pointer"
-                                      >
-                                          -
-                                      </button>
-                                  )}
-                                  {index === contentselectFields.length - 1 && (
-                                      <button
-                                          onClick={contentaddSelectField}
-                                          className="text-blue-500 text-2xl cursor-pointer"
-                                      >
-                                          +
-                                      </button>
-                                  )}
-                              </div>
-                          </div>
-
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                       
-
-                              <div>
-                                  <Label htmlFor={`card-heading-${contentField.id}`}>Card Heading</Label>
-                                  <Input
-                                      type="text"
-                                      id={`card-heading-${contentField.id}`}
-                                      placeholder="Card Heading"
-                                      value={contentField.cardheading}
-                                      onChange={(e) => handlecardheadingChange(contentField.id, e.target.value)}
-                                  />
-                              </div>
-
-                              <div className="md:col-span-2">
-                                  <Label htmlFor={`description-${contentField.id}`}>Description</Label>
-                                  <TextArea
-                                      id={`description-${contentField.id}`}
-                                      value={contentField.description}
-                                      onChange={(value) => handleContentDescriptionChange(contentField.id,value)}
-                                      placeholder="Enter your text content"
-                                  />
-                              </div>
-                          </div>
+                  contentselectFields.map((contentField, index) => (
+                    <div key={contentField.id} className="mb-3">
+                      <div className="flex justify-between items-center mb-4">
+                        <h4 className="text-lg font-medium">
+                          Field {index + 1}
+                        </h4>
+                        <div className="flex gap-2">
+                          {index > 0 && (
+                            <button
+                              onClick={() => contentremoveSelectField(contentField.id)}
+                              className="text-red-500 text-2xl cursor-pointer"
+                            >
+                              -
+                            </button>
+                          )}
+                          {index === contentselectFields.length - 1 && (
+                            <button
+                              onClick={contentaddSelectField}
+                              className="text-blue-500 text-2xl cursor-pointer"
+                            >
+                              +
+                            </button>
+                          )}
+                        </div>
                       </div>
+
+                      <div className="space-6">
+                        <div>
+                          <Label htmlFor={`card-heading-${contentField.id}`}>Heading</Label>
+                          <Input
+                            type="text"
+                            id={`card-heading-${contentField.id}`}
+                            placeholder="Card Heading"
+                            value={contentField.cardheading}
+                            onChange={(e) => handlecardheadingChange(contentField.id, e.target.value)}
+                          />
+                        </div>
+
+                        <div className="md:col-span-2">
+                          <Label htmlFor={`description-${contentField.id}`}>Description</Label>
+                          <TextArea
+                            id={`description-${contentField.id}`}
+                            value={contentField.description}
+                            onChange={(value) => handleContentDescriptionChange(contentField.id, value)}
+                            placeholder="Enter your text content"
+                          />
+                        </div>
+                      </div>
+                    </div>
                   ))
-              )}
+                )}
 
                 {field.type === "gallery" && (
                   <div className="mb-4">
-                           <div className="flex justify-end items-center gap-2 mb-4">
-                      <div className="mt-4 flex justify-center">
-                        <button
-                          onClick={galleryremoveSelectField}
-                          className="text-red-500 text-2xl cursor-pointer px-4 py-2 border border-red-500 rounded-lg hover:bg-red-100"
-                        >
-                          - 
-                        </button>
-                      </div>
-                      <div className="mt-4 flex justify-center">
-                        <button
-                          onClick={galleryaddSelectField}
-                          className="text-blue-500 text-2xl cursor-pointer px-4 py-2 border border-blue-500 rounded-lg hover:bg-blue-100"
-                        >
-                          + 
-                        </button>
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                      {galleryselectFields.map((galleryField) => (
-                        <div key={galleryField.id}>
-                          <div className="relative border px-2 border-gray-700 h-52 w-full flex justify-center items-center text-center rounded-md">
-                            <SelectFileInput
-                              NameOffield="+"
-                              onImageUpload={(file) => handleImageChange(galleryField.id, file)}
-                              existingImage={galleryField.imageFile}
-                            />
-                          </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-4">
 
+                    <div className="relative  w-full  rounded-md">
+                        <GalleryComp
+                        selected="Set the image"
+                          NameOffield="+ Add Image"
+                          onImageUpload={(file) => handleAddImage(field.id, file)}
+                          existingImage={null}
+                        />
+                      </div>
+                      {/* Existing images */}
+                      {field.galleryImages.map((image, imgIndex) => (
+                        <div key={imgIndex} className="relative w-full rounded-md">
 
+                          
+                          <GalleryComp
+                            NameOffield="More ADD"
+                            onImageUpload={(file) => {
+                              // Replace the existing image
+                              setSelectFields(selectFields.map(f => {
+                                if (f.id === field.id) {
+                                  const newImages = [...f.galleryImages];
+                                  newImages[imgIndex] = file;
+                                  return { ...f, galleryImages: newImages };
+                                }
+                                return f;
+                              }));
+                            }}
+                            existingImage={image}
+                          />
+                          {/* <button
+                            onClick={() => handleRemoveImage(field.id, imgIndex)}
+                            className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center"
+                          >
+                            ×
+                          </button> */}
                         </div>
                       ))}
+                      
+                      {/* Add new image button */}
+                      
                     </div>
-
-             
                   </div>
                 )}
-
-
               </div>
             </div>
           ))}

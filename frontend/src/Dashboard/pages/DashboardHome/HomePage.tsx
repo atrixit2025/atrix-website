@@ -1,4 +1,5 @@
 import React from "react";
+import CountSectionMetrics from "../../components/HomeComp/CountSection";
 // import EcommerceMetrics from "../../components/ecommerce/EcommerceMetrics";
 // import MonthlySalesChart from "../../components/ecommerce/MonthlySalesChart";
 // import StatisticsChart from "../../components/ecommerce/StatisticsChart";
@@ -11,7 +12,8 @@ export default function DashboardHome() {
   return (
     <>
     <div className="text-(--white)">
-      <h1>DashboardHome</h1>
+      <CountSectionMetrics />
+      {/* <h1>DashboardHome</h1> */}
       {/* <PageMeta 
         title="React.js Ecommerce Dashboard | TailAdmin - React.js Admin Dashboard Template"
         description="This is React.js Ecommerce Dashboard page for TailAdmin - React.js Tailwind CSS Admin Dashboard Template"

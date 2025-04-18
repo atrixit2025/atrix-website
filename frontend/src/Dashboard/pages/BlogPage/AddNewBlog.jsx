@@ -8,7 +8,7 @@ export default function AddNewBlog() {
   const location = useLocation();
   const { blog } = location.state || {};
   const { fetchCategoryCounts } = useContext(BlogCategoryContext );
-console.log("blog",blog)
+// console.log("blog",blog)
   return (
     <GenericForm
       title="Add New Blog"

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Label from "../../components/form/Label";
 import Input from "../../components/form/input/InputField";
-import TextArea from "../../components/form/input/TextArea";
 import JoditEditorComp from "../JoditEditorComp/JoditEditorComp";
 
 export default function WhyAtrix({onChange,initialData}) {
@@ -67,14 +66,14 @@ export default function WhyAtrix({onChange,initialData}) {
 
     return (
         <div className="">
-            <div className="space-y-6 ">
+            <div className="">
                 <div
                     className="border-2 border-gray-700 rounded-xl p-4">
                     {selectFields.map((field, index) => (
                         <div key={field.id} className="">
 
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="space-y-6 ">
                                 {/* <div>
                                     <Label htmlFor={`heading-${field.id}`}>Heading</Label>
                                     <Input
@@ -97,11 +96,12 @@ export default function WhyAtrix({onChange,initialData}) {
                                     />
                                 </div>
 
-                                <div className="md:col-span-2 text-black    ">
+                                <div className="md:col-span-2    ">
                                     <Label htmlFor={`Description-${field.id}`}>Description</Label>
                                     <JoditEditorComp
                                         value={field.description || ""}
                                         onChange={(newContent) => handleTextChange(field.id, newContent)}
+                                       
 
                                     />
                                 </div>

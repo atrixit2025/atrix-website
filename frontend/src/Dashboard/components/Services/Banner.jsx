@@ -6,13 +6,12 @@ export default function Banner({ onChange, initialData }) {
     const [selectFields, setSelectFields] = useState(() => [
         {
             id: 1,
-            type: "", // "banner", "video", or "slider"
-            imageId: null, // For banner/video
-            sliderImages: [] // For slider type
+            type: "",
+            imageId: null,
+            sliderImages: []
         }
     ]);
 
-    // Initialize with data
     useEffect(() => {
         if (initialData && initialData.length > 0) {
             setSelectFields(initialData.map((item, index) => ({
@@ -24,57 +23,56 @@ export default function Banner({ onChange, initialData }) {
         }
     }, [initialData]);
 
-    // Send formatted data to parent
+
     useEffect(() => {
         if (onChange) {
-           // In Banner component's useEffect
-const formattedData = selectFields
-.filter(field => {
-  if (field.type === "slider") {
-    return field.sliderImages.some(img => img); // At least one image
-  }
-  return field.type && field.imageId;
-})
-.map(field => ({
-  type: field.type,
-  ...(field.type === "slider" ? { 
-    sliderImages: field.sliderImages 
-  } : { 
-    imageId: field.imageId 
-  })
-}));
-            
+            const formattedData = selectFields
+                .filter(field => {
+                    if (field.type === "slider") {
+                        return field.sliderImages.some(img => img);
+                    }
+                    return field.type && field.imageId;
+                })
+                .map(field => ({
+                    type: field.type,
+                    ...(field.type === "slider" ? {
+                        sliderImages: field.sliderImages
+                    } : {
+                        imageId: field.imageId
+                    })
+                }));
+
             onChange(formattedData);
         }
     }, [selectFields]);
 
     const handleTypeChange = (id, selectedOption) => {
-        setSelectFields(prev => 
-            prev.map(field => 
-                field.id === id 
-                    ? { 
-                        ...field, 
+        setSelectFields(prev =>
+            prev.map(field =>
+                field.id === id
+                    ? {
+                        ...field,
                         type: selectedOption.value,
                         imageId: null,
-                        sliderImages: [] 
-                    } 
+                        sliderImages: []
+                    }
                     : field
             )
         );
     };
 
     const handleImageUpload = (id, imageId) => {
-        setSelectFields(prev => 
-            prev.map(field => 
-                field.id === id 
-                    ? { ...field, imageId } 
+        setSelectFields(prev =>
+            prev.map(field =>
+                field.id === id
+                    ? { ...field, imageId }
                     : field
             )
         );
     };
 
     const handleSliderImageUpload = (id, imageId, index) => {
-        setSelectFields(prev => 
+        setSelectFields(prev =>
             prev.map(field => {
                 if (field.id === id) {
                     const newSliderImages = [...field.sliderImages];
@@ -97,7 +95,7 @@ const formattedData = selectFields
         <div className="space-y-4">
             {selectFields.map((field) => (
                 <div key={field.id} className="border-2 border-gray-700 rounded-xl p-4">
-                    <div className="mb-4">
+                    <div className="">
                         <SelectBulk
                             options={options}
                             value={options.find(opt => opt.value === field.type) || ""}
@@ -105,36 +103,51 @@ const formattedData = selectFields
                         />
                     </div>
 
-                    {field.type === "banner" && (
-                        <SelectFileInput
-                            NameOffield="Add Banner Image"
-                            onImageUpload={(imageId) => handleImageUpload(field.id, imageId)}
-                            imageId={field.imageId}
-                        />
-                    )}
+                    <div className="">
+                        {field.type === "banner" && (
+                            <div className="mt-4">
 
-                    {field.type === "video" && (
-                        <SelectFileInput
-                            NameOffield="Add Video"
-                            accept="video/*"
-                            onImageUpload={(imageId) => handleImageUpload(field.id, imageId)}
-                            imageId={field.imageId}
-                        />
-                    )}
+                                <SelectFileInput
+                                    NameOffield="Add Banner Image"
+                                    onImageUpload={(imageId) => handleImageUpload(field.id, imageId)}
+                                    imageId={field.imageId}
+                                />
+                            </div>
 
-                    {field.type === "slider" && (
-                        <div className="grid grid-cols-2 gap-4">
-                            {[0, 1, 2, 3].map((index) => (
-                                <div key={index} className="border border-gray-700 h-52 flex justify-center items-center">
-                                    <SelectFileInput
-                                        NameOffield={field.sliderImages[index] ? "Change" : "+"}
-                                        onImageUpload={(imageId) => handleSliderImageUpload(field.id, imageId, index)}
-                                        imageId={field.sliderImages[index]}
-                                    />
-                                </div>
-                            ))}
-                        </div>
-                    )}
+                        )}
+
+                        {field.type === "video" && (
+                            <div className="mt-4">
+
+                                <SelectFileInput
+                                    NameOffield="Add Video"
+                                    accept="video/*"
+                                    onImageUpload={(imageId) => handleImageUpload(field.id, imageId)}
+                                    imageId={field.imageId}
+                                />
+                            </div>
+                        )}
+
+                        {field.type === "slider" && (
+
+
+                            <div className="grid grid-cols-2 gap-4 mt-4">
+                                {[0, 1, 2, 3].map((index) => (
+                                    <div key={index} className="border border-gray-700 h-52 flex justify-center items-center">
+                                        <SelectFileInput
+                                            NameOffield={field.sliderImages[index] ? "Change" : "+"}
+                                            onImageUpload={(imageId) => handleSliderImageUpload(field.id, imageId, index)}
+                                            imageId={field.sliderImages[index]}
+                                        />
+                                    </div>
+
+                                ))}
+
+                            </div>
+
+                        )}
+                    </div>
+
                 </div>
             ))}
         </div>
