@@ -16,7 +16,6 @@ const Portfolio = () => {
         <div className='pt-40'>
             <PortfolioHero></PortfolioHero>
             <PortfolioCard></PortfolioCard>
-           
         </div>
     )
 }
