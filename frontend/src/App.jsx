@@ -48,6 +48,7 @@ import SelectField from './Dashboard/components/SelectFieldComp/SelectField';
 import FAQCategory from './Dashboard/pages/FAQPages/CategoryFAQ';
 import FAQ from './Dashboard/pages/FAQPages/FAQ';
 import AddNewFAQ from './Dashboard/pages/FAQPages/AddNewFAQ';
+import Roles from './Components/career/Roles';
 
 export default function App() {
   return (
@@ -75,6 +76,7 @@ export default function App() {
           <Route path="/OurServices" element={<OurServices/>} />
           <Route path="/Behance" element={<Behance/>} />
           <Route path="/Service" element={<Service/>} />
+         
           
           <Route path="/Service/:project_cat/:project_id" element={<Service/>} />
 

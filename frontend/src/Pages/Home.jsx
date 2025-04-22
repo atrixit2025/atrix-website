@@ -142,7 +142,7 @@ const Home = () => {
             <ParticleEffect />
           </div>
           <div className='container mx-auto   '>
-            <div className="flex justify-center items-center md:min-h-screen md:py-46 py-40 ">
+            <div className="flex justify-center items-center md:min-h-screen md:py-46 py-40 mt-10 ">
               <div className="text-center relative">
                 <h1 className="text-(--whitelight) mt-5 text-6xl md:text-8xl lg:text-9xl">
                   <div className="relative inline-block">
@@ -263,16 +263,16 @@ const Home = () => {
 
 
             <div className="text-(--white) lg:-ml-16  relative w-full lg:max-w-[40%] px-5 ">
-              <p className="text-xl sm:text-md font-semibold text-(--gray) mb-2">Who We Are</p>
+              <p className="text-xl sm:text-md font-semibold text-(--white) mb-2">Who We Are</p>
               <h5 className="lg:text-5xl text-2xl font-bold mb-5">Trusted Experts in Taking Your Business Higher</h5>
 
-              <p className="text-md text-(--gray) pb-4">Struggling to keep up in today’s fast-changing digital world? Don’t worry!, Atrix IT Solutions is here to help your business succeed!
+              <p className="text-md text-(--white) pb-4">Struggling to keep up in today’s fast-changing digital world? Don’t worry!, Atrix IT Solutions is here to help your business succeed!
               </p>
-              <p className="text-md text-(--gray) pb-4">We do more than just offer IT services - we create smart solutions that drive real success. With a passion for innovation, we’ve built a team of experts dedicated to helping businesses grow and stay ahead in the digital world.
+              <p className="text-md text-(--white) pb-4">We do more than just offer IT services - we create smart solutions that drive real success. With a passion for innovation, we’ve built a team of experts dedicated to helping businesses grow and stay ahead in the digital world.
               </p>
-              <p className="text-md text-(--gray) pb-4">From custom software development to strong IT infrastructure and reliable support, we provide solutions tailored to your needs, ensuring smooth growth and long-term success.
+              <p className="text-md text-(--white) pb-4">From custom software development to strong IT infrastructure and reliable support, we provide solutions tailored to your needs, ensuring smooth growth and long-term success.
               </p>
-              <p className="text-md text-(--gray) pb-10 ">Look no further! Let’s turn your vision into reality together.
+              <p className="text-md text-(--white) pb-10 ">Look no further! Let’s turn your vision into reality together.
 
               </p>
 

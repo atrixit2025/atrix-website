@@ -1,8 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { RxArrowTopRight } from "react-icons/rx";
-import { Link } from "react-router-dom";
 
-const Button = ({ mybtn, btnLink }) => {
+const Button = ({ mybtn, targetRef }) => {
   const btnRef = useRef(null);
 
   useEffect(() => {
@@ -29,19 +28,25 @@ const Button = ({ mybtn, btnLink }) => {
     };
   }, []);
 
+  const handleClick = () => {
+    if (typeof targetRef?.current?.scrollIntoView === "function") {
+      targetRef.current.scrollIntoView(); // calling your custom function
+    }
+  };
+  
+
   return (
     <div>
-      <Link to={btnLink}>
-        <button
-          ref={btnRef}
-          className="bg-(--navbarUlbgcolor) font-bold text-(--white) px-4 py-2 duration-300 rounded-lg hover:bg-(--green) cursor-pointer flex items-center gap-2 hover:scale-104 group"
-        >
-          {mybtn}{" "}
-          <span>
-            <RxArrowTopRight className="group-hover:rotate-45 group-hover:scale-140 duration-250 text-white" />
-          </span>
-        </button>
-      </Link>
+      <button
+        onClick={handleClick}
+        ref={btnRef}
+        className="bg-(--navbarUlbgcolor) font-bold text-(--white) px-4 py-2 duration-300 rounded-lg hover:bg-(--green) cursor-pointer flex items-center gap-2 hover:scale-104 group"
+      >
+        {mybtn}
+        <span>
+          <RxArrowTopRight className="group-hover:rotate-45 group-hover:scale-140 duration-250 text-white" />
+        </span>
+      </button>
     </div>
   );
 };

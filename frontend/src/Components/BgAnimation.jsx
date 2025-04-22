@@ -2,19 +2,19 @@ import React from 'react';
 
 const BgAnimation = () => {
   return (
-    <div className="fixed pointer-events-none z-[-1] opacity-[.4] bg-anim-wrapper h-full overflow-hidden w-full">
+    <div className="fixed pointer-events-none z-[-1] opacity-[.3] bg-anim-wrapper h-full overflow-hidden w-full">
         <div id="bg-anim" className="bg-animation w-full h-full" >
 
         <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" className="w-full h-full">
             <defs>
             <radialGradient id="Gradient1" cx="50%" cy="50%" fx="1.841602%" fy="50%" r=".5">
-                <animate attributeName="fx" dur="44s" values="0%;3%;0%" repeatCount="indefinite" />
+                <animate attributeName="fx" dur="38s" values="0%;45%;0%" repeatCount="indefinite" />
                 <stop offset="0%" stopColor="rgb(0 166 87 / 100%)" />
                 <stop offset="100%" stopColor="rgb(0 166 87 / 0%)" />
             </radialGradient>
 
             <radialGradient id="Gradient2" cx="50%" cy="50%" fx="2.68147%" fy="50%" r=".5">
-                <animate attributeName="fx" dur="33.5s" values="0%;3%;0%" repeatCount="indefinite" />
+                <animate attributeName="fx" dur="35.5s" values="0%;3%;0%" repeatCount="indefinite" />
                 <stop offset="0%" stopColor="rgb(0 162 220 / 100%)" />
                 <stop offset="100%" stopColor="rgb(0 162 220 / 0%)" />
             </radialGradient>
