@@ -62,9 +62,9 @@ CategoryRouter.get("/get", async (req, res) => {
       const { name } = req.params;
       const category = await Category.findOne({ Name: name });
   
-      if (!category) {
-        return res.status(404).json({ message: "Category not found" });
-      }
+      // if (!category) {
+      //   return res.status(404).json({ message: "Category not found" });
+      // }
   
       res.status(200).json({ message: "Category fetched successfully", category });
     } catch (error) {

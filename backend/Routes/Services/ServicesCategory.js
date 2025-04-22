@@ -91,9 +91,9 @@ ServicesCategoryRouter.get("/Services/category/get", async (req, res) => {
       const { name } = req.params;
       const Servicescategory = await ServicesCategory.findOne({ Name: name });
   
-      if (!Servicescategory) {
-        return res.status(404).json({ message: "ServicesCategory not found" });
-      }
+      // if (!Servicescategory) {
+      //   return res.status(404).json({ message: "ServicesCategory not found" });
+      // }
   
       res.status(200).json({ message: "ServicesCategory fetched successfully", Servicescategory });
     } catch (error) {
@@ -210,9 +210,9 @@ ServicesCategoryRouter.get("/Services/category/get", async (req, res) => {
   
       const category = await ServicesCategory.findById(id);
       
-      if (!category) {
-        return res.status(404).json({ message: "Category not found" });
-      }
+      // if (!category) {
+      //   return res.status(404).json({ message: "Category not found" });
+      // }
   
       // Get subcategory count
       const subcategoryCount = await ServicesCategory.countDocuments({

@@ -89,7 +89,7 @@ const GalleryComp = ({ onImageUpload, imageId, imageType, existingImages = [], N
             } : null;
         }).filter(Boolean);
         
-        console.log("Sending to parent:", selectedImageData);
+        // console.log("Sending to parent:", selectedImageData);
         onImageUpload(selectedImageData);
         closeModal();
     };
