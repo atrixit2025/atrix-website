@@ -4,11 +4,11 @@ import React from 'react'
 const WhyAtrix = () => {
   return (
     <div className='why-atrix my-36' >
-      <div className='container mx-auto' >
+      <div className='container max-w-[1150px] mx-auto' >
         <div>  <h2 className='text-6xl font-bold mb-8 text-center' >Why Atrix</h2> </div>
         <div className="why-atrix-content-content grid grid-cols-2 ">
-            <div className="left flex items-center justify-center  text-4xl font-bold">
-              <h3 className=' max-w-[350px] ' >Let us tell you what it's like to work with us.</h3>
+            <div className="left flex items-center  text-4xl font-bold">
+              <h3 className=' max-w-[380px] ' >Let us tell you what it's like to work with us.</h3>
             </div>
             <div className="right">
               <p className='mb-3'> Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat recusandae nisi placeat maxime. Quam, pariatur. Magni sint aperiam tempora ipsa iusto repellendus et asperiores, cupiditate, vel, maxime incidunt suscipit! Ad a odio sit quasi? Labore animi voluptatibus consectetur natus dolorum. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio, nesciunt. </p>
