@@ -2,13 +2,21 @@ import React from 'react'
 import img_1 from '../../assets/DTS_Influencer.webp'
 import img_2 from '../../assets/infulancer.png'
 
+import ServicesData from '../../data/ServicesData';
+import { useParams } from "react-router-dom";
+
+
+
+// const { Service_id } = useParams();
+//     const filteredProject = ServicesData.find(item => item.Service_id === Service_id)
+
 const WebDevelopment = () => {
     return (
         <div className='web-development-sec my-36'>
             <div className="container mx-auto ">
                 <div className="web-dev-wrapper grid grid-cols-12 gap-10 ">
                     <div className=' col-span-6' >
-                        <h2 className='text-4xl font-bold leading-11 '  >Web Development Creates a Digital Home That Sets the Foundation to Transform Your Brand Experience.</h2>
+                        <h2 className='text-4xl font-bold leading-11 ' >loem mnasbdgusadbma  bjmnbmg</h2>
                     </div>
                     <div className="col-span-6 flex">
                         <div className="img-wrapper ml-auto ">
