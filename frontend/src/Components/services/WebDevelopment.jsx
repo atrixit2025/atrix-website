@@ -10,13 +10,22 @@ import { useParams } from "react-router-dom";
 // const { Service_id } = useParams();
 //     const filteredProject = ServicesData.find(item => item.Service_id === Service_id)
 
-const WebDevelopment = () => {
+const WebDevelopment = ({secData}) => {
+
+    secData.map((item , index)=>(
+        console.log( "filtered service" , item.heading_1)
+    ))
+    
     return (
-        <div className='web-development-sec my-36'>
+
+        secData.map((item , index)=>(
+            // console.log( "filtered service" , item.heading_1)
+
+            <div className='web-development-sec my-36'>
             <div className="container mx-auto ">
                 <div className="web-dev-wrapper grid grid-cols-12 gap-10 ">
                     <div className=' col-span-6' >
-                        <h2 className='text-4xl font-bold leading-11 ' >loem mnasbdgusadbma  bjmnbmg</h2>
+                        <h2 className='text-4xl font-bold leading-11 ' >{ item.heading_1}</h2>
                     </div>
                     <div className="col-span-6 flex">
                         <div className="img-wrapper ml-auto ">
@@ -36,6 +45,8 @@ const WebDevelopment = () => {
                 </div>
             </div>
         </div>
+        ))
+       
     )
 }
 

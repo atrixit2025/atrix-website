@@ -3,7 +3,7 @@ import { FaArrowRight } from 'react-icons/fa6';
 import { Link } from "react-router-dom"
 import projectsData from '../../data/projectsData';
 
-
+ 
 
 const PortFolioCards = () => {
     const [activeCategory, setActiveCategory] = useState('All')

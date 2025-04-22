@@ -76,7 +76,7 @@ export default function App() {
           <Route path="/Behance" element={<Behance/>} />
           <Route path="/Service" element={<Service/>} />
           
-          <Route path="/Service/:project_cat/:project_id" element={<Service/>} />
+          <Route path="/service/:service_id" element={<Service/>} />
 
 
         </Route >

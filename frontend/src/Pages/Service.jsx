@@ -19,23 +19,39 @@ import { useParams } from "react-router-dom";
 
 
 const Service = () => {
-const { projectCat , setProjectCat   } =  useState()
 
-const {  project_cat , project_id } = useParams();
-const filteredService = ServicesData.find(item => item.Category === project_cat )
-// console.log (filteredProject.title)
+
+    const {service_id } = useParams();
+    // console.log("service cat" , service_id)
+    const filteredService = ServicesData.find(item => item.service_id === service_id )
+    // console.log( "filtered service" , filteredService)
+
+
+
+    // console.log("All services:", ServicesData);
+    // const { projectCat , setProjectCat   } =  useState()
+    // const filteredService = ServicesData.find(item => item.cat_id  === service_cat )
+    // console.log("service cat" , service_cat)
+    // console.log( "filtered service" , filteredService)
+    // ServicesData.map((item, index) => (
+    //     console.log( item.cat_title.toLowerCase().replace(/[^a-z0-9]/g, '') )
+    // ) )
+    // console.log (filteredProject.title)
+    // console.log("Type of service_cat:", typeof service_cat);
+    // console.log("Type of cat_id:", typeof ServicesData[0]?.cat_id);
 
 
 
     return (
         <div className="pt-[150px] ">
             <ServiceHeroBanner></ServiceHeroBanner>
-         
-            <WebDevelopment></WebDevelopment>
+            <div className="container mx-auto mt-40">
+                <h1 className='text-9xl font-bold text-center' >{filteredService.service_title }</h1>
+            </div>
+            <WebDevelopment secData = {filteredService.service_description}  ></WebDevelopment>
             <ServicesCards></ServicesCards>
             <WhyNeedBranding></WhyNeedBranding>
             <WhyAtrix></WhyAtrix>
-            
             <ServiceFrom></ServiceFrom>
             <ProcessCards></ProcessCards>
             {/* <ProcessSteps></ProcessSteps> */}
