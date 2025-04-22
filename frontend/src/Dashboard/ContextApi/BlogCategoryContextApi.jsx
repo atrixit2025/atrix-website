@@ -8,6 +8,7 @@ export const BlogCategoryContext = createContext();
 export const BlogCategoryProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
   const [categoryCounts, setCategoryCounts] = useState({});
+  const [totalBlogCount, setTotalBlogCount] = useState(0);
 
 
   const fetchCategories = async () => {
@@ -15,6 +16,7 @@ export const BlogCategoryProvider = ({ children }) => {
       const response = await axios.get("http://localhost:5300/BlogCategory/blog/category/get");
       setCategories(response.data.categories);
       await fetchCategoryCounts();
+      await fetchCounts()
 
 
     } catch (error) {
@@ -22,20 +24,21 @@ export const BlogCategoryProvider = ({ children }) => {
     }
   };
 
-  // Add a new Blogcategory
+
   const addCategory = async (BlogcategoryData) => {
     try {
       const response = await axios.post("http://localhost:5300/BlogCategory/blog/category/add", BlogcategoryData);
       setCategories((prevCategories) => [...prevCategories, response.data.BlogCategory]);
       await fetchCategoryCounts();
+      await fetchCounts()
 
     } catch (error) {
       console.error("Error adding Blogcategory:", error);
-      throw error; // Re-throw the error to handle it in the component
+      throw error;
     }
   };
 
-  // Edit a Blogcategory
+
   const editCategory = async (name, updatedData) => {
     try {
       const response = await axios.put(
@@ -50,8 +53,9 @@ export const BlogCategoryProvider = ({ children }) => {
       );
 
       await fetchCategoryCounts();
+      await fetchCounts()
 
-      // console.log("edit", response);
+
       return response.data;
     } catch (error) {
       console.error("Error editing Portfolio category:", error);
@@ -60,7 +64,7 @@ export const BlogCategoryProvider = ({ children }) => {
 
   };
 
-  // Delete a Blogcategory
+
   const deleteCategory = async (name) => {
     try {
       await axios.delete(`http://localhost:5300/BlogCategory/blog/category/name/${name}`);
@@ -68,6 +72,7 @@ export const BlogCategoryProvider = ({ children }) => {
         prevCategories.filter((Blogcategory) => Blogcategory.Name !== name)
       );
       await fetchCategoryCounts();
+      await fetchCounts()
 
     } catch (error) {
       console.error("Error deleting Blogcategory:", error);
@@ -84,12 +89,11 @@ export const BlogCategoryProvider = ({ children }) => {
       console.error("Error fetching categories:", error);
     }
   };
-  // Fetch categories when the provider mounts
 
   const fetchCategoryCounts = async () => {
     try {
       const response = await axios.get('http://localhost:5300/Blog/count/category');
-      // Convert array to object for easier lookup
+
       const countsObj = response.data.categoryCounts.reduce((acc, curr) => {
         acc[curr.category] = curr.count;
         return acc;
@@ -99,12 +103,36 @@ export const BlogCategoryProvider = ({ children }) => {
       console.error('Error fetching category counts:', error);
     }
   };
+
+
+  const fetchCounts = async () => {
+    try {
+      const response = await axios.get('http://localhost:5300/Blog/count');
+      setTotalBlogCount(response.data.count || 0); // Update to match your backend response
+    } catch (error) {
+      console.error('Error fetching total blog count:', error);
+    }
+  };
+
+
+
   useEffect(() => {
     fetchCategories();
   }, []);
 
   return (
-    <BlogCategoryContext.Provider value={{ categories, fetchCategories, addCategory, editCategory, deleteCategory, fetchParentCategories, fetchCategoryCounts, categoryCounts }}>
+    <BlogCategoryContext.Provider value={{
+      categories,
+      fetchCategories,
+      addCategory,
+      editCategory,
+      deleteCategory,
+      fetchParentCategories,
+      fetchCategoryCounts,
+      categoryCounts,
+      fetchCounts,
+      totalBlogCount 
+    }}>
       {children}
     </BlogCategoryContext.Provider>
   );

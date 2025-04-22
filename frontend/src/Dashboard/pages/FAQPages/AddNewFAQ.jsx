@@ -14,8 +14,7 @@ export default function AddNewFAQ() {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const { fetchCategoryCounts } = useContext(FAQCategoryContext);
-  const editor = useRef(null);
-  // Single state object for form data
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -24,7 +23,6 @@ export default function AddNewFAQ() {
 
   const { FAQ } = location.state || {};
 
-  // Fetch categories from the API
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -38,7 +36,6 @@ export default function AddNewFAQ() {
     fetchCategories();
   }, []);
 
-  // Pre-fill the form if in edit mode
   useEffect(() => {
     if (FAQ) {
       setFormData({
@@ -54,16 +51,16 @@ export default function AddNewFAQ() {
     setFormData((prev) => ({
       ...prev,
       selectedCategories: prev.selectedCategories.includes(category)
-        ? prev.selectedCategories.filter((cat) => cat !== category) // Deselect
-        : [...prev.selectedCategories, category], // Select
+        ? prev.selectedCategories.filter((cat) => cat !== category) 
+        : [...prev.selectedCategories, category],
     }));
   };
 
-  // Handle form submission
+  
   const handleSubmit = async () => {
     const { title, selectedCategories, description } = formData;
 
-    // Validate required fields
+  
     if (!title) {
       alert("Title is required!");
       return;
@@ -84,7 +81,7 @@ export default function AddNewFAQ() {
       description: description,
     };
 
-    // console.log("FAQData",FAQData)
+  
     try {
       if (FAQ) {
         await axios.put(`http://localhost:5300/FAQ/edit`, {
@@ -150,14 +147,7 @@ export default function AddNewFAQ() {
               }
             />
           </div>
-          {/* <div>
-            <Label htmlFor="text">Add text</Label>
-            <TextArea
-              id="text"
-            
-            />
-          </div> */}
-
+         
         </div>
         <div className="space-y-6">
           <div>

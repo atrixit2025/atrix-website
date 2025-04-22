@@ -285,6 +285,20 @@ BlogRouter.delete("/delete", async (req, res) => {
     }
   });
 
+
+  BlogRouter.get("/count", async (req, res) => {
+    try {
+      const totalBlogs = await Blog.countDocuments({});
+      res.status(200).json({ count: totalBlogs });
+    } catch (error) {
+      console.error("Error counting blogs:", error);
+      res.status(500).json({ 
+        message: "Error counting blogs", 
+        error: error.message 
+      });
+    }
+  });
+
 export default BlogRouter;
 
 

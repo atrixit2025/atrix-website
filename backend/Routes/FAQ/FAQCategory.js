@@ -140,25 +140,22 @@ FAQCategoryRouter.get("/FAQ/category/get", async (req, res) => {
     }
   });
   
-  // Delete a FAQcategory by Name
+  
   FAQCategoryRouter.delete("/FAQ/category/name/:name", async (req, res) => {
     const { name } = req.params;
   
     try {
-      // Find the category to be deleted
       const categoryToDelete = await FAQCategory.findOne({ Name: name });
   
       if (!categoryToDelete) {
         return res.status(404).json({ message: "FAQCategory not found" });
       }
   
-      // Remove the reference to this category from other categories' ParentCategory fields
       await FAQCategory.updateMany(
-        { ParentCategory: categoryToDelete._id }, // Find all categories where ParentCategory is the one being deleted
-        { $set: { ParentCategory: null } } // Set their ParentCategory to null
+        { ParentCategory: categoryToDelete._id },
+        { $set: { ParentCategory: null } } 
       );
   
-      // Delete the category
       await FAQCategory.findOneAndDelete({ Name: name });
   
       res.status(200).json({ message: "FAQCategory deleted successfully", categoryToDelete });

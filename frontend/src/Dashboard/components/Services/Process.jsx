@@ -39,7 +39,7 @@ export default function Process({onChange,initialData}) {
         }
     }, [initialData]);
 
-    // Send data to parent
+    
     useEffect(() => {
         if (onChange) {
             onChange(selectFields.map(field => ({
@@ -83,47 +83,47 @@ export default function Process({onChange,initialData}) {
                             <Label>Process</Label>
                 
                 <div 
-                className="border-2 border-gray-700 rounded-xl p-4">
+                className="border-2 border-gray-700 rounded-xl px-4">
                 {selectFields.map((field, index) => (
                     <div key={field.id} className="">
-                        <div className="flex justify-between items-center mb-4">
-                            <h4 className="text-lg font-medium">
-                                 Field {index + 1}
-                            </h4>
-                            <div className="flex gap-2 ">
-                                {index > 0 && (
-                                    <button
-                                        onClick={() => removeSelectField(field.id)}
-                                        className="text-red-500 text-2xl cursor-pointer"
-                                    >
-                                        -
-                                    </button>
-                                )}
-                                {index === selectFields.length - 1 && (
-                                    <button
-                                        onClick={addSelectField}
-                                        className="text-blue-500 text-2xl cursor-pointer"
-                                    >
-                                        +
-                                    </button>
-                                )}
-                            </div>
-                        </div>
+                      
                         
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {/* <div>
-                                <Label htmlFor={`heading-${field.id}`}>Heading</Label>
-                                <Input
-                                    type="text"
-                                    id={`heading-${field.id}`}
-                                    placeholder="Why do you need"
-                                    value={field.heading}
-                                    onChange={(e) => handleHeadingChange(field.id, e.target.value)}
-                                />
-                            </div> */}
+                        <div className=" space-y-6 bg-zinc-800 rounded-xl p-4 my-4">
+                                {/* <div>
+                                    <Label htmlFor={`heading-${field.id}`}>Heading</Label>
+                                    <Input
+                                        type="text"
+                                        id={`heading-${field.id}`}
+                                        placeholder="Why do you need"
+                                        value={field.heading}
+                                        onChange={(e) => handleHeadingChange(field.id, e.target.value)}
+                                    />
+                                </div> */}
 
-                            <div>
-                                <Label htmlFor={`card-heading-${field.id}`}>Card Heading</Label>
+                                <div className="">
+                                    <div className="flex justify-between items-center">
+                                        <Label htmlFor={`card-heading-${field.id}`}>Card Heading</Label>
+                                        <div className="flex  items-center mb-4">
+                                            <div className="flex gap-2 ">
+                                                {index > 0 && (
+                                                    <button
+                                                        onClick={() => removeSelectField(field.id)}
+                                                        className="text-red-500 bg-(--white)  font-bold w-8 rounded-lg  text-2xl cursor-pointer"
+                                                    >
+                                                        -
+                                                    </button>
+                                                )}
+                                                {index === selectFields.length - 1 && (
+                                                    <button
+                                                        onClick={addSelectField}
+                                                        className="bg-(--white) text-(--black) font-bold w-8 rounded-lg  text-2xl cursor-pointer"
+                                                    > 
+                                                        +
+                                                    </button>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
                                 <Input
                                     type="text"
                                     id={`card-heading-${field.id}`}
