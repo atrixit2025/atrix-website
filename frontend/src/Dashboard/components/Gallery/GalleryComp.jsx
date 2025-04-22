@@ -1,232 +1,168 @@
 import React, { useState, useEffect } from "react";
-// import { Modal } from "../../ui/modal";
-// import Button from "../../ui/button/Button";
 import { FaTrash, FaUpload } from "react-icons/fa";
 import axios from "axios";
 import { ImCheckboxChecked } from "react-icons/im";
 import { GrFormSubtract } from "react-icons/gr";
 import { Modal } from "../ui/modal";
 import Button from "../ui/button/Button";
+import Label from "../form/Label";
 
-
-
-
-const GalleryComp = ({ onImageUpload, imageId, imageType, existingImage,NameOffield,selected }) => {
-    const [previewUrl, setPreviewUrl] = useState(existingImage?.url || null);
+const GalleryComp = ({ onImageUpload, imageId, imageType, existingImages = [], NameOffield, selected }) => {
+    const [previewUrl, setPreviewUrl] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [showUploadSection, setShowUploadSection] = useState(true);
     const [showAllImagesSection, setShowAllImagesSection] = useState(false);
-    const [selectedImage, setSelectedImage] = useState(
-        existingImage?.url || (imageId ? `http://localhost:5300/Image/get/${imageId}` : null)
-    );
     const [allImages, setAllImages] = useState([]);
-    const [selectedImageUrl, setSelectedImageUrl] = useState(null);
+    const [selectedImageUrls, setSelectedImageUrls] = useState([]);
     const [hoveredImage, setHoveredImage] = useState(null);
     const [hoverIcons, setHoverIcons] = useState(null);
+
+    // Initialize with existing images
+    useEffect(() => {
+        if (existingImages && existingImages.length > 0) {
+            setPreviewUrl(existingImages[0]?.url || null);
+        }
+    }, [existingImages]);
 
     // Fetch all images from the server
     const fetchAllImages = async () => {
         try {
             const response = await axios.get("http://localhost:5300/Image/get");
             if (response.status === 200) {
-                const images = response.data.Image.map((item) => ({
-                    imageId: item._id, // MongoDB ObjectId
-                    imageUrl: item.image, // Image URL
-                }));
-                setAllImages(images);
-            } else {
-                console.error("Error fetching images:", response.data.message);
+                setAllImages(response.data.Image.map(item => ({
+                    imageId: item._id,
+                    imageUrl: item.image,
+                })));
             }
         } catch (error) {
             console.error("Error fetching images:", error);
         }
     };
-    
-    useEffect(() => {
-        const fetchImage = async () => {
-            if (imageId && !existingImage?.url) {
-                try {
-                    const response = await axios.get(`http://localhost:5300/Image/get/${imageId}`);
-                    if (response.data.Image) {
-                        setSelectedImage(response.data.Image.image);
-                    }
-                } catch (error) {
-                    console.error("Error fetching image:", error);
-                }
-            }
-        };
 
-        fetchImage();
-    }, [imageId, existingImage]);
-
-    // Handle image upload
+    // Handle multiple image upload
     const handleUpload = async (event) => {
-        const file = event.target.files?.[0];
-        if (file) {
-            const formData = new FormData();
-            formData.append("file", file);
+        const files = Array.from(event.target.files || []);
+        if (files.length === 0) return;
 
-            try {
-                const response = await axios.post("http://localhost:5300/Image/add", formData, {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                    },
-                });
+        try {
+            const uploadPromises = files.map(file => {
+                const formData = new FormData();
+                formData.append("file", file);
+                return axios.post("http://localhost:5300/Image/add", formData);
+            });
 
-                const uploadedImage = response.data.Image;
-                const imageId = uploadedImage._id; // MongoDB ObjectId
-                const imageUrl = uploadedImage.image; // Image URL
-
-                // console.log("imageId:", imageId); // Log the imageId
-                // console.log("imageUrl:", imageUrl); // Log the imageUrl
-
-                setShowUploadSection(false);
-                setShowAllImagesSection(true);
-                fetchAllImages(); // Fetch all images again to update the list
-                setSelectedImageUrl(imageUrl);
-            } catch (error) {
-                console.error("Error uploading image:", error);
-                alert("Error uploading image. Please try again.");
-            }
+            const responses = await Promise.all(uploadPromises);
+            const newImages = responses.map(res => res.data.Image.image);
+            
+            setSelectedImageUrls(prev => [...prev, ...newImages]);
+            setShowUploadSection(false);
+            setShowAllImagesSection(true);
+            fetchAllImages();
+        } catch (error) {
+            console.error("Error uploading images:", error);
         }
     };
 
-    // Handle image deletion
+    // Handle image deletion from server
     const handleDeleteImage = async (imageUrl) => {
         try {
-            const response = await axios.delete("http://localhost:5300/Image/delete", {
+            await axios.delete("http://localhost:5300/Image/delete", {
                 data: { ImageUrl: imageUrl },
             });
-
-            if (response.status === 200) {
-                setAllImages((prev) => prev.filter((img) => img.imageUrl !== imageUrl)); // Remove from state
-                if (selectedImageUrl === imageUrl) {
-                    setSelectedImageUrl(null); // Clear selected image if deleted
-                }
-                // console.log("Image deleted successfully");
-            }
+            setAllImages(prev => prev.filter(img => img.imageUrl !== imageUrl));
+            setSelectedImageUrls(prev => prev.filter(url => url !== imageUrl));
         } catch (error) {
             console.error("Error deleting image:", error);
         }
     };
 
-    // Handle setting a featured image
-    const handleSetFeaturedImage = (imageUrl) => {
-        if (!imageUrl) return;
+    // Handle confirming image selection
+    const handleSetFeaturedImages = () => {
+        if (selectedImageUrls.length === 0) return;
         
-        // If we're using an existing image from the content sections
-        if (existingImage) {
-            onImageUpload(existingImage.id, existingImage.type);
-            setSelectedImage(imageUrl);
-            closeModal();
-            return;
-        }
+        const selectedImageData = selectedImageUrls.map(url => {
+            const found = allImages.find(image => image.imageUrl === url);
+            return found ? { 
+                imageId: found.imageId, 
+                url: found.imageUrl 
+            } : null;
+        }).filter(Boolean);
         
-        // For newly selected images from the modal
-        const imageData = allImages.find((image) => image.imageUrl === imageUrl);
-        if (imageData) {
-            setSelectedImage(imageUrl);
-            onImageUpload(imageData.imageId, 'image'); // Default type if not specified
-            closeModal();
-        }
+        console.log("Sending to parent:", selectedImageData);
+        onImageUpload(selectedImageData);
+        closeModal();
     };
 
-    // Handle removing the featured image
-    const handleRemoveImage = () => {
-        setSelectedImage(null);
-        onImageUpload(null); // Notify the parent component that no image is selected
+    // Handle removing an image from selection
+    const handleRemoveImage = (index) => {
+        const updatedImages = [...existingImages];
+        updatedImages.splice(index, 1);
+        onImageUpload(updatedImages);
     };
 
-    // Open the modal
+    // Toggle image selection
+    const toggleImageSelection = (imageUrl) => {
+        setSelectedImageUrls(prev => 
+            prev.includes(imageUrl)
+                ? prev.filter(url => url !== imageUrl)
+                : [...prev, imageUrl]
+        );
+    };
+
     const openModal = () => {
         setIsOpen(true);
-        setIsFullscreen(false);
-        setShowUploadSection(true);
-        setShowAllImagesSection(false);
-        setSelectedImageUrl(null);
-        fetchAllImages(); // Fetch images when the modal opens
+        setSelectedImageUrls(existingImages.map(img => img.url) || []);
+        fetchAllImages();
     };
 
-    // Close the modal
     const closeModal = () => {
         setIsOpen(false);
-        setIsFullscreen(false);
     };
 
-    // Handle image selection in the modal
-    const handleImageClick = (imageUrl) => {
-        if (selectedImageUrl === imageUrl) {
-            setSelectedImageUrl(null);
-        } else {
-            setSelectedImageUrl(imageUrl);
-        }
-    };
-
-    
     return (
-
-        <div>
-            {selectedImage ? (
-                <div className="flex flex-col  relative">
-                    <div className="relative">
+        <>
+        <Label>Gallery</Label>
+        <div className="border-2 px-4 py-2 rounded-xl border-gray-700">
+            {/* Selected Images Preview */}
+            <div className="  flex flex-wrap gap-4">
+                {existingImages.map((image, index) => (
+                    <div key={index} className="relative group">
                         <img
-                            src={`http://localhost:5300${selectedImage}`}
-                            alt="Featured"
-                            className="w-52 h-52 object-contain border-gray-700 border p-1 relative"
+                            src={`http://localhost:5300${image.url}`}
+                            alt={`Selected ${index + 1}`}
+                            className="w-32 h-32 object-contain rounded-md border border-gray-300 mb-4"
                         />
                         <button
-                            onClick={handleRemoveImage}
-
-                            className="absolute  cursor-pointer top-1  left -1 p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600"
+                            onClick={() => handleRemoveImage(index)}
+                            className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
                         >
-                            <FaTrash size={14} />
+                            ×
                         </button>
                     </div>
-                   
-                </div>
-            ) : (
-                <p
-                    className=" cursor-pointer"
+                ))}
+            </div>
 
-                >
-                    {selected} <button onClick={openModal} className=" border-(--blue) border px-4 py-2 text-(--blue) rounded-lg ml-2"> {NameOffield}</button>
-                </p>
+            {/* Add Images Button */}
+            {(existingImages.length > 0 || selectedImageUrls.length > 0) ? "" : selected} <button 
+                onClick={openModal}
+                className="border border-(--blue) px-4 py-2 text-(--blue) rounded-lg transition-colors"
+            >
+               
+               {(existingImages.length > 0 || selectedImageUrls.length > 0) ? "Add More Images" : NameOffield}
 
-            )}
+            </button>
 
-
-            {previewUrl && (
-                <div className="mt-4">
-                    <p className="text-sm text-gray-500 mb-2">
-                        {imageType === 'full-image' ? 'Full Width Image' :
-                            imageType === 'big-image' ? 'Large Image' : 'Regular Image'}
-                    </p>
-                    <div className={`overflow-hidden rounded-lg border ${imageType === 'full-image' ? 'w-full' :
-                            imageType === 'big-image' ? 'w-3/4' : 'w-1/2'
-                        }`}>
-                        <img
-                            src={previewUrl.startsWith('data:') ? previewUrl : `http://localhost:5300${previewUrl}`}
-                            alt="Preview"
-                            className="w-full h-auto"
-                        />
-                    </div>
-                </div>
-            )}
-
-
-            {/* Modal for Uploading and Selecting Images */}
+            {/* Modal for Image Selection */}
             <Modal
                 isOpen={isOpen}
                 onClose={closeModal}
-                className={isFullscreen ? "w-[80%] h-full" : "container mx-auto max-w-[1850px]  w-[80%] p-6 bg-black"}
+                className={isFullscreen ? "w-[80%] h-full" : "container mx-auto max-w-[1850px] w-[80%] p-6 bg-black"}
                 isFullscreen={isFullscreen}
             >
                 <div className="row flex flex-col flex-wrap">
                     <div className="col-3 grow-0 shrink-0">
-                        <h1 className="text-2xl font-bold mb-10">Select Image</h1>
-
-                        {/* Toggle between Upload and All Images sections */}
+                        <h1 className="text-2xl font-bold mb-10">Select Images</h1>
                         <div className="border-b border-darkblack mb-5">
                             <div className="flex justify-between">
                                 <div className="flex items-center gap-10 mb-3">
@@ -236,9 +172,9 @@ const GalleryComp = ({ onImageUpload, imageId, imageType, existingImage,NameOffi
                                             setShowAllImagesSection(false);
                                         }}
                                         className={`text-lg cursor-pointer font-bold ${showUploadSection
-                                            ? "text-(--white) border-2 bg-(--blue) rounded-sm border-(--blue) px-2 py-2"
-                                            : "text-gray-500 "
-                                            }`}
+                                            ? "text-white border-2 bg-(--blue) rounded-sm border-(--blue) px-2 py-2"
+                                            : "text-gray-500"
+                                        }`}
                                     >
                                         Upload Image
                                     </button>
@@ -248,9 +184,9 @@ const GalleryComp = ({ onImageUpload, imageId, imageType, existingImage,NameOffi
                                             setShowAllImagesSection(true);
                                         }}
                                         className={`text-lg cursor-pointer font-bold ${showAllImagesSection
-                                            ? "text-(--white) border-2 bg-(--blue) rounded-sm border-(--blue) px-2 py-2"
+                                            ? "text-white border-2 bg-(--blue) rounded-sm border-(--blue) px-2 py-2"
                                             : "text-gray-500"
-                                            }`}
+                                        }`}
                                     >
                                         All Images
                                     </button>
@@ -259,43 +195,41 @@ const GalleryComp = ({ onImageUpload, imageId, imageType, existingImage,NameOffi
                         </div>
                     </div>
 
-                    <div className="col-3   ">
-                        {/* Upload Section */}
+                    <div className="col-3">
                         {showUploadSection && (
-                            <div className="cursor-pointer text-center  h-[60vh] flex justify-center items-center  ">
-                                <div className="border-2 border-dashed border-(--blue) p-6 rounded-lg  hover:bg-(--blue) transition ">
+                            <div className="cursor-pointer text-center h-[60vh] flex justify-center items-center">
+                                <div className="border-2 border-dashed border-(--blue) p-6 rounded-lg hover:bg-(--blue) transition">
                                     <label className="cursor-pointer">
                                         <input
                                             type="file"
                                             onChange={handleUpload}
                                             accept="image/*"
+                                            multiple
                                             className="hidden"
                                         />
                                         <div className="flex flex-col items-center">
-                                            <FaUpload className="text-(--lightwhite) text-3xl" />
-                                            <p className="text-(--lightwhite) font-bold">Click to upload or drag & drop</p>
+                                            <FaUpload className="text-white text-3xl" />
+                                            <p className="text-white font-bold">Click to upload or drag & drop</p>
                                         </div>
                                     </label>
                                 </div>
                             </div>
                         )}
 
-
-                        {/* All Images Section */}
                         {showAllImagesSection && (
-                            <div className="flex-1 flex-col px-2  h-[60vh]  custom-scrollbar">
-
+                            <div className="flex-1 flex-col px-2 h-[60vh] custom-scrollbar">
                                 <div className="">
                                     <h5 className="mb-4 text-xl lg:text-2xl">All Images</h5>
-                                    <div className="flex flex-wrap  gap-5">
+                                    <div className="flex flex-wrap gap-5">
                                         {allImages.map((image, index) => (
                                             <div
                                                 key={index}
-                                                className={`relative cursor-pointer p-0.5 w-32 ${selectedImageUrl === image.imageUrl
-                                                    ? "border-(--blue) outline-4 outline-(--blue)"
-                                                    : "border-gray-700 border"
-                                                    }`}
-                                                onClick={() => handleImageClick(image.imageUrl)}
+                                                className={`relative cursor-pointer p-0.5 w-32 ${
+                                                    selectedImageUrls.includes(image.imageUrl)
+                                                        ? "border-(--blue) outline-4 outline-(--blue)"
+                                                        : "border-gray-700 border"
+                                                }`}
+                                                onClick={() => toggleImageSelection(image.imageUrl)}
                                                 onMouseEnter={() => setHoveredImage(image.imageUrl)}
                                                 onMouseLeave={() => setHoveredImage(null)}
                                             >
@@ -305,37 +239,31 @@ const GalleryComp = ({ onImageUpload, imageId, imageType, existingImage,NameOffi
                                                     className="w-32 h-32 object-contain"
                                                 />
 
-                                                {selectedImageUrl === image.imageUrl && hoverIcons !== image.imageUrl && (
-                                                    <div
-                                                        onMouseEnter={() => setHoverIcons(image.imageUrl)}
-                                                        onMouseLeave={() => setHoverIcons(null)}
-                                                    >
-                                                        <ImCheckboxChecked
-                                                            size={24}
-                                                            className="absolute -top-2.5 cursor-pointer -right-3 bg-(--white) rounded-sm text-(--blue)"
-                                                        />
+                                                {selectedImageUrls.includes(image.imageUrl) && (
+                                                    <div className="absolute -top-2.5 -right-3 bg-white rounded-sm text-(--blue)">
+                                                        <ImCheckboxChecked size={24} />
                                                     </div>
                                                 )}
 
-                                                {hoverIcons === image.imageUrl && (
+                                                   {hoverIcons === image.imageUrl && (
                                                     <div
                                                         onMouseEnter={() => setHoverIcons(image.imageUrl)}
                                                         onMouseLeave={() => setHoverIcons(null)}
+                                                        className="absolute -top-2.5 cursor-pointer -right-3 bg-(--blue) rounded-sm text-(--white)"
                                                     >
                                                         <GrFormSubtract
                                                             size={24}
-                                                            className="absolute -top-2.5 cursor-pointer -right-3 bg-(--blue) rounded-sm text-(--white)"
+                                                            
                                                         />
                                                     </div>
                                                 )}
-
                                                 {hoveredImage === image.imageUrl && (
                                                     <button
                                                         onClick={(e) => {
                                                             e.stopPropagation();
                                                             handleDeleteImage(image.imageUrl);
                                                         }}
-                                                        className="absolute bottom-2 cursor-pointer right-2 p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600"
+                                                        className="absolute bottom-2 right-2 p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600"
                                                     >
                                                         <FaTrash size={14} />
                                                     </button>
@@ -345,27 +273,26 @@ const GalleryComp = ({ onImageUpload, imageId, imageType, existingImage,NameOffi
                                     </div>
                                 </div>
                             </div>
-
                         )}
                     </div>
 
                     <div className="col-3 mt-auto">
-                        <div className="flex items-end text-end gap-3 mt-6 justify-end">
+                        <div className="flex items-end gap-3 mt-6 justify-end">
                             <Button
                                 size="sm"
                                 variant="outline"
-                                onClick={() => handleSetFeaturedImage(selectedImageUrl)}
-                                disabled={!selectedImageUrl}
-                                className="btn btn-success cursor-pointer flex w-full justify-center rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-600 sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
+                                onClick={handleSetFeaturedImages}
+                                disabled={selectedImageUrls.length === 0}
+                                className="btn btn-success cursor-pointer flex justify-center rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-600 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                Set Select Gallery
+                                Add {selectedImageUrls.length} Images
                             </Button>
                         </div>
                     </div>
                 </div>
             </Modal>
         </div>
-
+        </>
     );
 };
 

@@ -6,6 +6,8 @@ import SelectBulk from "../../components/form/SelectBulk";
 import GalleryComp from "../Gallery/GalleryComp";
 
 export default function MoreContent({ onChange, initialData }) {
+  const [galleryImages, setGalleryImages] = useState([]);
+
   const [selectFields, setSelectFields] = useState([
     {
       id: 1,
@@ -187,7 +189,9 @@ export default function MoreContent({ onChange, initialData }) {
       setSelectFields(selectFields.filter(field => field.id !== id));
     }
   };
-
+  const handleImageUpload = (images) => {
+    setGalleryImages(images);
+};
   return (
     <div>
       <div className="flex justify-between items-center mb-10"></div>
@@ -278,15 +282,15 @@ export default function MoreContent({ onChange, initialData }) {
 
                 {field.type === "gallery" && (
                   <div className="mb-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-4">
+                    <div className="">
 
                     <div className="relative  w-full  rounded-md">
-                        <GalleryComp
-                        selected="Set the image"
-                          NameOffield="+ Add Image"
-                          onImageUpload={(file) => handleAddImage(field.id, file)}
-                          existingImage={null}
-                        />
+                    <GalleryComp 
+                    selected="Set Images"
+    onImageUpload={handleImageUpload}
+    existingImages={galleryImages}
+    NameOffield="Gallery "
+/>
                       </div>
                       {/* Existing images */}
                       {field.galleryImages.map((image, imgIndex) => (
