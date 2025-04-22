@@ -154,7 +154,7 @@ const SelectFileInput = ({ onImageUpload, imageId, imageType, existingImage,Name
             onImageUpload(imageData.imageId, 'image'); // Default type if not specified
             closeModal();
         }
-         console.log("Selected image data:", imageData)
+        //  console.log("Selected image data:", imageData)
     };
 
     // Handle removing the featured image

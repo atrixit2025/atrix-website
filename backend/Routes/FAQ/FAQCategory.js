@@ -91,9 +91,9 @@ FAQCategoryRouter.get("/FAQ/category/get", async (req, res) => {
       const { name } = req.params;
       const FAQcategory = await FAQCategory.findOne({ Name: name });
   
-      if (!FAQcategory) {
-        return res.status(404).json({ message: "FAQCategory not found" });
-      }
+      // if (!FAQcategory) {
+      //   return res.status(404).json({ message: "FAQCategory not found" });
+      // }
   
       res.status(200).json({ message: "FAQCategory fetched successfully", FAQcategory });
     } catch (error) {
@@ -207,9 +207,9 @@ FAQCategoryRouter.get("/FAQ/category/get", async (req, res) => {
   
       const category = await FAQCategory.findById(id);
       
-      if (!category) {
-        return res.status(404).json({ message: "Category not found" });
-      }
+      // if (!category) {
+      //   return res.status(404).json({ message: "Category not found" });
+      // }
   
       // Get subcategory count
       const subcategoryCount = await FAQCategory.countDocuments({

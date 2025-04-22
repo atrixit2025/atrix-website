@@ -16,48 +16,17 @@ export default function HeaderContent({ onChange, initialData }) {
                 id: index + 1,
                 heading: item.heading || "",
                 description: item.description || "",
-                imageFile: item.imageFile || null
+                imageId: item.imageId || null
             }))
             : [{
                 id: 1,
                 heading: "",
                 description: "",
-                imageFile: null
+                imageId: null
             }]
     );
 
 
-
-
-    // Notify parent of changes
-    // useEffect(() => {
-    //     if (onChange) {
-    //         onChange({
-    //             centerContent,
-    //             selectFields: selectFields.filter(item =>
-    //                 item.heading.trim() !== "" || item.description.trim() !== "" || item.imageFile
-    //             )
-    //         });
-    //     }
-    // }, [centerContent, selectFields]);
-    useEffect(() => {
-        if (onChange) {
-            onChange([{
-                centerHeading: centerContent.centerHeading,
-                centerDescription: centerContent.centerDescription,
-                headingAnddescription: selectFields.filter(item =>
-                    item.heading.trim() !== "" || item.description.trim() !== "" || item.imageFile
-                ).map(item => ({
-                    heading: item.heading,
-                    description: item.description,
-                    imageId: item.imageFile?.imageId || null // This is important
-                }))
-            }]);
-        }
-    }, [centerContent, selectFields]);
-    
-
-    // Center content handlers
     const handleCenterHeadingChange = (e) => {
         setCenterContent(prev => ({
             ...prev,
@@ -81,7 +50,7 @@ export default function HeaderContent({ onChange, initialData }) {
                 id: newId,
                 heading: "",
                 description: "",
-                imageFile: null
+                imageId: null
             }
         ]);
     };
@@ -104,25 +73,102 @@ export default function HeaderContent({ onChange, initialData }) {
         ));
     };
     const handleImageChange = (id, selectedImages) => {
-        if (!Array.isArray(selectedImages) || selectedImages.length === 0) {
-            // User may have removed the image, so reset the field
+        // console.log("selectedImages", selectedImages);
+        // console.log("id", id);
+    
+        // Handle case where we get just an imageId string
+        if (typeof selectedImages === 'string') {
             setSelectFields(prevFields =>
                 prevFields.map(field =>
-                    field.id === id ? { ...field, imageFile: null } : field
+                    field.id === id ? {
+                        ...field,
+                        imageId: selectedImages // Use the string directly as imageId
+                    } : field
                 )
             );
             return;
         }
     
+        // Handle case where selectedImages is not an array
+        if (!Array.isArray(selectedImages)) {
+            console.error("selectedImages is not an array:", selectedImages);
+            return;
+        }
+    
+        if (selectedImages.length === 0) {
+            setSelectFields(prevFields =>
+                prevFields.map(field =>
+                    field.id === id ? {
+                        ...field,
+                        imageId: null
+                    } : field
+                )
+            );
+            return;
+        }
+    
+        // Get first image and validate it
         const image = selectedImages[0];
+        if (typeof image !== 'object' || image === null) {
+            console.error("Invalid image data structure:", image);
+            return;
+        }
+    
+        // Handle both object format and direct ID
+        const imageId = image.imageId || image;
+        if (!imageId) {
+            console.error("No imageId found in:", image);
+            return;
+        }
+    
         setSelectFields(prevFields =>
             prevFields.map(field =>
-                field.id === id ? { ...field, imageFile: image } : field
+                field.id === id ? {
+                    ...field,
+                    imageId
+                } : field
             )
         );
     };
+
+
+    useEffect(() => {
+        if (onChange) {
+            onChange([{
+                centerHeading: centerContent.centerHeading,
+                centerDescription: centerContent.centerDescription,
+                headingAnddescription: selectFields
+                    .filter(item => item.heading.trim() !== "" ||
+                        item.description.trim() !== "" ||
+                        item.imageId
+                    )
+                    .map(item => ({
+                        heading: item.heading,
+                        description: item.description,
+                        imageId: item.imageFile?.imageId || item.imageId || null
+                    }))
+                    
+            }]);
+        }
+    }, [centerContent, selectFields]);
+
+
+
+    // console.log("Updated SelectFields:", selectFields);
+    // useEffect(() => {
+    //     console.log("Updated fields after image select:", selectFields);
+    // }, [selectFields]);
     
-    
+
+    // console.log("Sending to parent:", {
+    //     centerHeading: centerContent.centerHeading,
+    //     centerDescription: centerContent.centerDescription,
+    //     headingAnddescription: selectFields.map(item => ({
+    //         heading: item.heading,
+    //         description: item.description,
+    //         imageId: item.imageId
+    //     }))
+    // });
 
 
 
@@ -208,12 +254,13 @@ export default function HeaderContent({ onChange, initialData }) {
                                     <SelectFileInput
                                         selected="Set the"
                                         NameOffield="Image"
-                                        onImageUpload={(selectedImages) =>
-                                            handleImageChange(field.id, selectedImages)
-                                        }
-                                        imageId={field.imageFile?.id}
+                                        onImageUpload={(selectedImages) => handleImageChange(field.id, selectedImages)}
+                                        imageId={field.imageId} // Pass imageId directly
                                         existingImages={field.imageFile ? [field.imageFile] : []}
+
+
                                     />
+
 
                                 </div>
                             </div>

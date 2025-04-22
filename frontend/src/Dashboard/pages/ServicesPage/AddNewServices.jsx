@@ -21,8 +21,9 @@ import WhyAtrix from "../../components/Services/WhyAtrix";
 import Process from "../../components/Services/Process";
 import MoreContent from "../../components/Services/MoreContent";
 import GalleryComp from "../../components/Gallery/GalleryComp";
-import Headercontent from "../../components/Services/Headercontent";
+// import Headercontent from "../../components/Services/Headercontent";
 import TextToImageAndImageToText from "../../components/Services/TextToImageAndImageToText";
+import HeaderContent from "../../components/Services/HeaderContent";
 
 export default function AddNewServices() {
   const location = useLocation();
@@ -211,21 +212,21 @@ export default function AddNewServices() {
       WhydoNeed,
       WhyAtrix,
       Process,
-      Headercontent: formData.Headercontent ? [{
-        centerHeading: formData.Headercontent[0]?.centerHeading,
-        centerDescription: formData.Headercontent[0]?.centerDescription,
-        headingAnddescription: formData.Headercontent[0]?.headingAnddescription?.map(item => ({
+      Headercontent: formData.Headercontent.length > 0 ? [{
+        centerHeading: formData.Headercontent[0].centerHeading,
+        centerDescription: formData.Headercontent[0].centerDescription,
+        headingAnddescription: formData.Headercontent[0].headingAnddescription.map(item => ({
             heading: item.heading,
             description: item.description,
-            imageId: item.imageFile?.imageId // Here we use the imageId
-        })) || []
+            imageId: item.imageId // Directly use imageId
+        }))
     }] : [],
 
       gallery: formData.gallery.map(img => ({ imageId: img.imageId })),
 
       texttoimageandimagetotext: textToImageData
     };
-    console.log("Headercontent", Headercontent)
+    // console.log("Headercontent", Headercontent)
 
 
     try {
@@ -291,11 +292,13 @@ export default function AddNewServices() {
     setGalleryImages(images);
   };
   const handleHeadercontentChange = (content) => {
+    // console.log("content received:", content);
+
     setFormData(prev => ({ ...prev, Headercontent: content }));
   };
 
   const handleGalleryChange = (images) => {
-    console.log("Gallery images received:", images);
+    // console.log("Gallery images received:", images);
     setFormData(prev => ({ ...prev, gallery: images }));
   };
 
@@ -387,7 +390,7 @@ export default function AddNewServices() {
 
           {formData.showHeadercontent && (
             <div>
-              <Headercontent
+              <HeaderContent
                 onChange={handleHeadercontentChange}
                 initialData={formData.Headercontent}
               />
