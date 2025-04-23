@@ -30,7 +30,7 @@ const Button = ({ mybtn, targetRef }) => {
 
   const handleClick = () => {
     if (typeof targetRef?.current?.scrollIntoView === "function") {
-      targetRef.current.scrollIntoView(); // calling your custom function
+      targetRef.current.scrollIntoView(); 
     }
   };
   

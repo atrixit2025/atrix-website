@@ -3,3 +3,7 @@
  font-size: 52px;
  line-height: 1.1;
 }
+.social-icons{
+  border: solid  1px;
+  border-color:  #14d39a3a !important;
+} 

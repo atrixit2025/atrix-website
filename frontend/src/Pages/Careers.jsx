@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import RiseWithUs from "../Components/career/RiseWithUs";
 import CounterSec from "../Components/career/CounterSec";
 import ValueCards from "../Components/career/ValueCards";
@@ -8,13 +8,13 @@ import CareerFormSec from "../Components/career/FormSec";
 import HeroCommon from "../Components/HeroCommon";
 import "./career.css";
 
-import icon from "../assets/career/date.svg";
-
 const herodata = [
   { title: "Career", desc: "" },
 ];
 
 const Careers = () => {
+  const [selectedJob, setSelectedJob] = useState(null);
+
   const rolesSectionRef = useRef(null);
   const formSectionRef = useRef(null);
 
@@ -26,7 +26,8 @@ const Careers = () => {
     rolesSectionRef.current?.scrollToSection();
   };
 
-  const scrollToFormSection = () => {
+  const handleApplyClick = (jobTitle) => {
+    setSelectedJob(jobTitle); // Store the selected job
     formSectionRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -40,11 +41,12 @@ const Careers = () => {
       <ValueCards />
       <PerksAtrix />
 
-      <Roles ref={rolesSectionRef} onApplyClick={scrollToFormSection} />
+      {/* Roles section with ref and click handler */}
+      <Roles ref={rolesSectionRef} onApplyClick={handleApplyClick} />
 
-      {/* Attach ref to CareerFormSec */}
+      {/* Form section that scrolls into view and receives the selected job */}
       <div ref={formSectionRef}>
-        <CareerFormSec />
+        <CareerFormSec selectedJob={selectedJob} />
       </div>
     </div>
   );
