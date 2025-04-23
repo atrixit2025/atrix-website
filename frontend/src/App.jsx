@@ -76,10 +76,7 @@ export default function App() {
           <Route path="/OurServices" element={<OurServices/>} />
           <Route path="/Behance" element={<Behance/>} />
           <Route path="/Service" element={<Service/>} />
-         
-          
-          <Route path="/service/:service_id" element={<Service/>} />
-
+          <Route path="/OurServices/:service_id" element={<Service/>} />
 
         </Route >
     

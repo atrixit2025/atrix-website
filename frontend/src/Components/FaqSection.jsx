@@ -99,7 +99,7 @@ const faqsData = [
     },
 ];
 
-const FaqSection = () => {
+const FaqSection = ({secData}) => {
     const [openIndex, setOpenIndex] = useState(null);
 
     const handleToggle = (idx) => {
@@ -107,14 +107,14 @@ const FaqSection = () => {
     };
 
     return (
-        <section className="faqsec my-36">
+        <section className="faqsec ">
             <div className="container mx-auto">
                 <div className="grid grid-cols-1 gap-y-15 gap-x-15 max-w-[900px] mx-auto">
-                    {faqsData.map((item, index) => (
+                    {secData.faqs.map((item, index) => (
                         <div className="leading-relaxed mt-12" key={index}>
                             <div className="space-y-3 text-center">
                                 <h2 className="text-4xl faqCatHeading font-semibold mb-10">
-                                    {item.category}
+                                Frequently Asked Questions
                                 </h2>
                             </div>
                             <div className="mt-16">
