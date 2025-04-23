@@ -18,8 +18,8 @@ const ServicesData = [
     category: "Branding/Graphic Design",
     heading_1: "Crafting Memorable Brand Identities",
     description_1: "We transform businesses into distinctive brands through strategic design solutions that communicate your unique value and resonate with your target audience across all touchpoints.",
-    img_1 : image_1,
-    img_2 : image_2,
+    img_1: image_1,
+    img_2: image_2,
     sub_service: [
       {
         services_heading: "Comprehensive Branding Services",
@@ -72,7 +72,7 @@ const ServicesData = [
     cards_sec_data: [
       {
         cardTitle: "Competitive Differentiation",
-        desc: "In saturated markets, distinctive branding helps you stand out from competitors and be immediately recognizable to customers."
+        desc: "In saturated markets, distinctive branding helps you stand out from competitors and be immediately recognizable to customers. In saturated markets, distinctive branding helps you stand out from competitors and be immediately recognizable to customers."
       },
       {
         cardTitle: "Customer Connection",
@@ -148,6 +148,8 @@ const ServicesData = [
     category: "Digital Marketing",
     heading_1: "Data-Driven Digital Growth Strategies",
     description_1: "We develop performance-focused digital marketing campaigns that drive qualified traffic, generate leads, and deliver measurable ROI through precisely targeted channels and continuous optimization.",
+    img_1: image_1,
+    img_2: image_2,
     sub_service: [
       {
         services_heading: "Digital Marketing Services",
@@ -266,6 +268,8 @@ const ServicesData = [
     category: "Media Production",
     heading_1: "Professional Visual Storytelling",
     description_1: "We produce high-quality photography and videography that showcases your products, services and brand story with cinematic quality and strategic messaging tailored to your marketing objectives.",
+    img_1: image_1,
+    img_2: image_2,
     sub_service: [
       {
         services_heading: "Production Services",
@@ -291,7 +295,7 @@ const ServicesData = [
             service_desc: "Capturing stunning aerial perspectives for unique establishing shots and b-roll",
             hover_image: hover_img
           },
-          
+
         ]
       }
     ],
@@ -375,6 +379,8 @@ const ServicesData = [
     category: "Web Development",
     heading_1: "Custom Digital Experiences That Drive Results",
     description_1: "We design and build high-performance websites and web applications that combine stunning aesthetics with seamless functionality, optimized for user experience, conversions and business growth.",
+    img_1: image_1,
+    img_2: image_2,
     sub_service: [
       {
         services_heading: "Web Development Services",
@@ -508,6 +514,8 @@ const ServicesData = [
     category: "Visual Effects",
     heading_1: "Cutting-Edge Visual Effects",
     description_1: "We create stunning visual effects that bring imagination to life, from subtle enhancements to full CGI environments, helping brands tell compelling stories through cinematic visuals.",
+    img_1: image_1,
+    img_2: image_2,
     sub_service: [
       {
         services_heading: "VFX Services",
@@ -533,7 +541,7 @@ const ServicesData = [
             service_desc: "Enhancing and standardizing color across all footage for professional results",
             hover_image: hover_img
           },
-          
+
         ]
       }
     ],
@@ -617,6 +625,8 @@ const ServicesData = [
     category: "Staffing Solutions",
     heading_1: "Strategic Talent Acquisition",
     description_1: "We connect businesses with top-tier talent through customized staffing solutions that address immediate hiring needs while building long-term workforce strategies for sustainable growth.",
+    img_1: image_1,
+    img_2: image_2,
     sub_service: [
       {
         services_heading: "Staffing Services",
@@ -740,6 +750,8 @@ const ServicesData = [
     category: "Logistics Solutions",
     heading_1: "Optimized Supply Chain Solutions",
     description_1: "We design and implement logistics strategies that streamline operations, reduce costs and improve service levels through intelligent network design, transportation optimization and technology integration.",
+    img_1: image_1,
+    img_2: image_2,
     sub_service: [
       {
         services_heading: "Logistics Services",
@@ -760,7 +772,7 @@ const ServicesData = [
             service_desc: "Optimizing routing, carrier selection and freight consolidation",
             hover_image: hover_img
           },
-          
+
         ]
       }
     ],

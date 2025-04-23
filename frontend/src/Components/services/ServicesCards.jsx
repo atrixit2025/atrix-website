@@ -71,7 +71,7 @@ const ServicesCards = ({ secData }) => {
                     <div className="container mx-auto">
                         <div className='text-center' >
                             <h2 className=' text-6xl font-bold mb-6' >{item.services_heading}  </h2>
-                            <p className=' max-w-[900px] mx-auto mb-14 '>{item.services_desc} </p>
+                            <p className=' max-w-[900px] mx-auto mb-14 leading-[1.65rem] '>{item.services_desc} </p>
                         </div>
                     </div>
                     <div>
@@ -91,7 +91,7 @@ const ServicesCards = ({ secData }) => {
                                             <span className="absolute -top-2 -left-12 font-bold text-xl">{serindex < 9 ? "0" : ""}{serindex+ 1}</span>
                                         </div>
                                         <div className="service-desc">
-                                            <p>{seritem.service_desc}</p>
+                                        <p className='leading-[1.65rem]'>{seritem.service_desc}</p>
                                         </div>
                                         <div
                                             className="service-hover-img absolute z-40 rounded overflow-hidden"

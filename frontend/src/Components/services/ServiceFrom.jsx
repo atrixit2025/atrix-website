@@ -3,7 +3,7 @@ import ColoredButton from '../ColoredButton'
 
 const ServiceFrom = () => {
     return (
-        <section className="service-from-sec my-28">
+        <section className="service-from-sec mt-36 mb-12">
             <div className="container mx-auto">
                 <form className="form-wrapper  grid grid-cols-12 space-x-36 ">
                     <div className="form-sec col-span-8 space-y-10 ">

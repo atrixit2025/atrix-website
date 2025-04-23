@@ -117,7 +117,7 @@ const FaqSection = ({secData}) => {
                                 Frequently Asked Questions
                                 </h2>
                             </div>
-                            <div className="mt-16">
+                            <div className="mt-16 ">
                                 {item.content.map((faq, idx) => (
                                     <FaqsCard 
                                         key={idx}
@@ -125,6 +125,7 @@ const FaqSection = ({secData}) => {
                                         faqsList={faq} 
                                         isOpen={openIndex === idx}
                                         onClick={handleToggle}
+                                        
                                     />
                                 ))}
                             </div>

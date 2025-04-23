@@ -22,7 +22,7 @@ const WebDevelopment = ({ secData }) => {
                             </div>
                         </div>
                         <div className="col-span-5 flex items-end justify-end">
-                            <h3 className='text-xl font-bold  max-w-[570px] ' >{secData.description_1} </h3>
+                            <p className='text-xl  max-w-[570px] ' >{secData.description_1} </p>
                         </div>
                     </div>
                 </div>

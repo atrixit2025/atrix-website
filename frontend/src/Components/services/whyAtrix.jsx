@@ -7,7 +7,7 @@ const WhyAtrix = ({ secData }) => {
       <div className='container max-w-[1150px] mx-auto' >
         <div>  <h2 className='text-6xl font-bold mb-8 text-center' >{secData.why_atrix_heading}</h2> </div>
         <div className="why-atrix-content-content grid grid-cols-2 ">
-          <div className="left flex items-center  text-4xl font-bold">
+          <div className="left flex   text-4xl font-bold">
             <h3 className=' max-w-[380px] ' >{secData.why_atrix_subheading}</h3>
           </div>
           <div className="right">
