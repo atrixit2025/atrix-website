@@ -128,7 +128,7 @@ ServicesRouter.post("/add", async (req, res) => {
         }
       });
     }
-    console.log("Received Headercontent:", req.body.Headercontent);
+    
 
     function validateHeadercontent(headerContentArr) {
       if (headerContentArr.length > 1) {
@@ -262,71 +262,209 @@ ServicesRouter.put("/edit", async (req, res) => {
   const {
     id,
     title,
+    description,
+    Servicesquote,
     category,
-    tags = [], // Default empty array
-    portfolioCategories = [], // Default empty array
+    tags,
+    portfolioCategories,
+    faqCategories,
     iconImageId,
     FeaturedImageId,
-    contentSections
+    Bannerdata,
+    WhydoNeed,
+    Process,
+    WhyAtrix,
+    Headercontent,
+    gallery,
+    texttoimageandimagetotext
   } = req.body;
 
-  // Basic validation
-  if (!id) return res.status(400).json({ message: "Services ID is required" });
-  if (!title || !category || !FeaturedImageId) {
-    return res.status(400).json({
-      message: "Title, category, and featured image are required"
-    });
+  // Basic validation - only ID is absolutely required
+  if (!id) {
+    return res.status(400).json({ message: "Service ID is required" });
   }
 
-  // Ensure arrays
-  const sanitizedTags = Array.isArray(tags) ? tags : [];
-  const sanitizedPortfolioCategories = Array.isArray(portfolioCategories)
-    ? portfolioCategories
-    : [];
-
   try {
+    // Get the existing service
+    const existingService = await Services.findById(id);
+    if (!existingService) {
+      return res.status(404).json({ message: "Service not found" });
+    }
+
+    // Reuse your validation functions from the add route
+    const validateArray = (arr, fieldName) => {
+      if (arr && !Array.isArray(arr)) {
+        throw new Error(`${fieldName} must be an array if provided`);
+      }
+      return Array.isArray(arr) ? arr : undefined; // Return undefined if not provided
+    };
+
+    // Prepare update data - only update what's provided
     const updateData = {
-      title,
-      category,
-      tags: sanitizedTags,
-      portfolioCategories: sanitizedPortfolioCategories,
-      iconImageId: iconImageId || null,
-      FeaturedImage: FeaturedImageId,
+      title: title !== undefined ? title : existingService.title,
+      description: description !== undefined ? description : existingService.description,
+      Servicesquote: Servicesquote !== undefined ? Servicesquote : existingService.Servicesquote,
+      category: category !== undefined ? category : existingService.category,
+      tags: tags !== undefined ? validateArray(tags, 'tags') : existingService.tags,
+      portfolioCategories: portfolioCategories !== undefined 
+        ? validateArray(portfolioCategories, 'portfolioCategories') 
+        : existingService.portfolioCategories,
+      faqCategories: faqCategories !== undefined 
+        ? validateArray(faqCategories, 'faqCategories') 
+        : existingService.faqCategories,
+      iconImageId: iconImageId !== undefined ? iconImageId : existingService.iconImageId,
+      FeaturedImage: FeaturedImageId !== undefined ? FeaturedImageId : existingService.FeaturedImage,
       updatedAt: new Date()
     };
 
-    // Handle content sections if provided
-    if (contentSections) {
-      if (!Array.isArray(contentSections)) {
-        return res.status(400).json({ message: "contentSections must be an array" });
+    // Handle complex fields if provided
+    if (Bannerdata !== undefined) {
+      updateData.Bannerdata = validateBannerdata(validateArray(Bannerdata, 'Bannerdata'));
+    }
+    if (WhydoNeed !== undefined) {
+      updateData.WhydoNeed = validateArray(WhydoNeed, 'WhydoNeed');
+    }
+    if (Process !== undefined) {
+      updateData.Process = validateArray(Process, 'Process');
+    }
+    if (WhyAtrix !== undefined) {
+      updateData.WhyAtrix = validateArray(WhyAtrix, 'WhyAtrix');
+    }
+    if (Headercontent !== undefined) {
+      updateData.Headercontent = validateHeadercontent(validateArray(Headercontent, 'Headercontent'));
+    }
+    if (gallery !== undefined) {
+      updateData.gallery = validateGallery(validateArray(gallery, 'gallery'));
+    }
+    if (texttoimageandimagetotext !== undefined) {
+      updateData.texttoimageandimagetotext = validateTextToImage(texttoimageandimagetotext);
+    }
+
+   
+    function validateBannerdata(bannerDataArr) {
+      if (!Array.isArray(bannerDataArr)) {
+        throw new Error("Bannerdata must be an array");
       }
 
-      updateData.contentSections = contentSections.map(section => {
-        if (!section.type) throw new Error("Each section must have a type");
+      const allowedTypes = ['banner', 'video', 'slider'];
+      const maxSliderImages = 4;
 
-        if (section.type === 'text') {
-          return { type: 'text', content: section.content || "" };
-        } else {
-          if (!section.imageId) throw new Error(`Image section must have an imageId`);
-          return { type: section.type, imageId: section.imageId };
+      return bannerDataArr.map(item => {
+        if (!allowedTypes.includes(item.type)) {
+          throw new Error(`Invalid Bannerdata type: ${item.type}`);
+        }
+
+
+        if (item.type === 'slider') {
+          if (!item.sliderImages || !Array.isArray(item.sliderImages)) {
+            throw new Error("Slider type must have sliderImages array");
+          }
+
+
+          const validImages = item.sliderImages
+            .filter(img => img && typeof img === 'string')
+            .slice(0, maxSliderImages);
+
+          if (validImages.length === 0) {
+            throw new Error("Slider must have at least one valid image");
+          }
+
+          return {
+            type: item.type,
+            sliderImages: validImages
+          };
+        }
+
+        else {
+          if (!item.imageId || typeof item.imageId !== 'string') {
+            throw new Error(`${item.type} type must have a valid imageId`);
+          }
+          return {
+            type: item.type,
+            imageId: item.imageId
+          };
         }
       });
     }
+    
 
-    const updatedServices = await Services.findByIdAndUpdate(
+    function validateHeadercontent(headerContentArr) {
+      if (headerContentArr.length > 1) {
+        throw new Error("Only one Headercontent section allowed");
+      }
+
+      if (headerContentArr.length === 0) {
+        return [];
+      }
+
+      const content = headerContentArr[0];
+
+      return [{
+        centerHeading: content.centerHeading || "",
+        centerDescription: content.centerDescription || "",
+        headingAnddescription: validateHeadingDescription(content.headingAnddescription || [])
+      }];
+    }
+
+    function validateHeadingDescription(items) {
+      if (!Array.isArray(items)) {
+        throw new Error("headingAnddescription must be an array");
+      }
+
+      return items.map(item => ({
+        heading: item.heading || "",
+        description: item.description || "",
+        imageId: item.imageId || null
+      }));
+    }
+
+
+
+    function validateGallery(galleryArr) {
+     
+      if (!Array.isArray(galleryArr)) {
+        throw new Error("Gallery must be an array");
+      }
+    
+      return galleryArr.map(img => ({
+        imageId: img.imageId || ""
+      }));
+    }
+    
+
+    function validateTextToImage(data) {
+      if (!data) {
+        return {
+          lefttext: "",
+          rightimageId: "",
+          righttext: "",
+          leftimageId: ""
+        };
+      }
+
+      return {
+        lefttext: data.lefttext || "",
+        rightimageId: data.rightimageId || "",
+        righttext: data.righttext || "",
+        leftimageId: data.leftimageId || ""
+      };
+    }
+    // Perform the update
+    const updatedService = await Services.findByIdAndUpdate(
       id,
       updateData,
-      { new: true }
+      { new: true, runValidators: true }
     );
 
     res.status(200).json({
-      message: "Services updated successfully",
-      Services: updatedServices
+      message: "Service updated successfully",
+      service: updatedService
     });
+
   } catch (error) {
-    console.error("Error updating Services:", error);
+    console.error("Error updating service:", error);
     res.status(500).json({
-      message: "Error updating Services",
+      message: "Error updating service",
       error: error.message,
       ...(error.errors && { details: error.errors })
     });
