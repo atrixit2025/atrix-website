@@ -12,7 +12,7 @@ const OurServices = () => {
           <h1 className="text-9xl font-[900]  ">
             WEBSITE <br />
             DESIGN AND <br />
-            DEVELOPMENT
+            DEVELOPMENT 
           </h1>
         </div>
       </div>

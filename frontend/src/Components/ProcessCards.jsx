@@ -26,7 +26,7 @@ const processCardsData = [
 
 
 
-const ProcessCards = () => {
+const ProcessCards = ({secData}) => {
 
     const [activeCard , setActiveCard] = useState(1)
 
@@ -36,7 +36,7 @@ const ProcessCards = () => {
             <div className="container mx-auto">
                 <h1 className='text-6xl font-bold text-center my-10'>Process</h1>
                 <div className="process-cards-wrapper flex gap-5"  >
-                    {processCardsData.map((item, index) => (
+                    {secData.process_cards.map((item, index) => (
                         <div key={index}  onClick={ ()=> setActiveCard(index)} className={`process-card p-10 rounded-2xl bg-(--black) flex-[0] max-w-[500px] transition-all duration-500  ${activeCard === index ? 'flex-[2]' : 'flex-[1]'}`}>                            
                             <span>{index + 1}</span>
                             <h3 className={` mb-5 mt-2 font-bold ${activeCard === index ? ' text-3xl ' : 'text-xl'}`} >{item.title}</h3>

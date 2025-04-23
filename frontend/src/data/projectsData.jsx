@@ -21,7 +21,7 @@ const projectsData = [
                 description_3: "The visual storytelling approach incorporated custom 3D illustrations created in Blender, which helped explain complex technical concepts through metaphor. We developed a comprehensive design system with 58 reusable components, ensuring consistency across all pages while allowing for creative variation. The hero section features a dynamic WebGL animation that responds to scroll behavior, creating an immersive experience without compromising performance (maintaining 60fps on mid-range devices). Custom SVG animations were implemented for process diagrams, making them interactive and more engaging than static images. Post-launch analytics showed that pages with these enhanced visuals had 72% longer dwell times compared to text-heavy sections, validating our investment in high-quality visual content."
             }
         ]
-    },
+    }, 
     {
         project_id: "project2",
         project_title: "Corporate SaaS Platform",
