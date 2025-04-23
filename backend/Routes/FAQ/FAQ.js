@@ -34,7 +34,7 @@ FAQRouter.post("/add", async (req, res) => {
     res.status(500).json({ 
       message: 'Error creating FAQ', 
       error: error.message,
-      details: error.errors // This will show validation errors if any
+      details: error.errors 
     });
   }
 });

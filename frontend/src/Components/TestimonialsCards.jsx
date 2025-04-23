@@ -94,9 +94,9 @@ const TestimonialsCards = () => {
               {testimonials.map((item, index) => (
                 <div
                   key={index}
-                  className="testimonial-card md:px-4 px-1 mt-46"
+                  className="testimonial-card md:px-2 px-1 mt-46"
                 >
-                  <div className="rounded-2xl p-6  bg-(--black)">
+                  <div className="rounded-2xl p-10  bg-(--black)">
                     <div className="flex items-center gap-3">
                       <div>
                         <img

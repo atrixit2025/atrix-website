@@ -91,9 +91,9 @@ PortfolioCategoryRouter.get("/Portfolio/category/get", async (req, res) => {
       const { name } = req.params;
       const Portfoliocategory = await PortfolioCategory.findOne({ Name: name });
   
-      if (!Portfoliocategory) {
-        return res.status(404).json({ message: "PortfolioCategory not found" });
-      }
+      // if (!Portfoliocategory) {
+      //   return res.status(404).json({ message: "PortfolioCategory not found" });
+      // }
   
       res.status(200).json({ message: "PortfolioCategory fetched successfully", Portfoliocategory });
     } catch (error) {
@@ -210,9 +210,9 @@ PortfolioCategoryRouter.get("/Portfolio/category/get", async (req, res) => {
   
       const category = await PortfolioCategory.findById(id);
       
-      if (!category) {
-        return res.status(404).json({ message: "Category not found" });
-      }
+      // if (!category) {
+      //   return res.status(404).json({ message: "Category not found" });
+      // }
   
       // Get subcategory count
       const subcategoryCount = await PortfolioCategory.countDocuments({

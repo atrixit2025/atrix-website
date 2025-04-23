@@ -65,9 +65,9 @@ BlogCategoryRouter.get("/blog/category/get", async (req, res) => {
       const { name } = req.params;
       const Blogcategory = await BlogCategory.findOne({ Name: name });
   
-      if (!Blogcategory) {
-        return res.status(404).json({ message: "BlogCategory not found" });
-      }
+      // if (!Blogcategory) {
+      //   return res.status(404).json({ message: "BlogCategory not found" });
+      // }
   
       res.status(200).json({ message: "BlogCategory fetched successfully", Blogcategory });
     } catch (error) {

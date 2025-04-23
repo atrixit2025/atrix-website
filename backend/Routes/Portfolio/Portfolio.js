@@ -256,6 +256,20 @@ PortfolioRouter.delete("/delete", async (req, res) => {
       }
     });
 
+
+    PortfolioRouter.get("/count", async (req, res) => {
+        try {
+          const totalPortfolios = await Portfolio.countDocuments({});
+          res.status(200).json({ count: totalPortfolios });
+        } catch (error) {
+          console.error("Error counting Portfolios:", error);
+          res.status(500).json({ 
+            message: "Error counting Portfolios", 
+            error: error.message 
+          });
+        }
+      });
+
 export default PortfolioRouter;
 
 

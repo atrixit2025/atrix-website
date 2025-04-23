@@ -432,7 +432,7 @@
 //   );
 // }
 
-import React from "react";
+import React, { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import GenericForm from "../../components/form/form-Add-New/GenericForm";
 import { PortfolioCategoryContext } from "../../ContextApi/PortfolioCategoryContextApi";
@@ -440,20 +440,24 @@ import { PortfolioCategoryContext } from "../../ContextApi/PortfolioCategoryCont
 export default function AddNewPortfolio() {
   const location = useLocation();
   const { portfolio } = location.state || {};
+    const { fetchCategoryCounts } = useContext(PortfolioCategoryContext );
+  
   // console.log("portfolio", portfolio);
   return (
     <GenericForm
       title="Add New Portfolio"
       editTitle="Edit Portfolio"
       apiEndpoint="http://localhost:5300/Portfolio"
-      categoryEndpoint="http://localhost:5300/PortfolioCategory/portfolio/category/get"
+      categoryEndpoint="http://localhost:5300/PortfolioCategory/Portfolio/category/get"
       redirectPath="/Dashboard/Portfolio"
       contentType="portfolio"
       item={portfolio}
 
       hasContentSections={true}
-      hasRichText={false} // Example: Portfolios might not need rich text
+      hasRichText={true} // Example: Portfolios might not need rich text
       initialData={portfolio}
+      onSuccess={fetchCategoryCounts}
+
     />
   );
 }

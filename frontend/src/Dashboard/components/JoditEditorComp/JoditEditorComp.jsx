@@ -18,7 +18,7 @@ const JoditEditorComp = ({ value, onChange }) => {
     };
   
     return (
-        <div>
+        <div className='text-black'>
             <JoditEditor
                 ref={editor}
                 value={content}

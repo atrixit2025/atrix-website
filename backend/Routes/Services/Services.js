@@ -8,27 +8,29 @@ app.use(express.json());
 const ServicesRouter = express.Router();
 
 ServicesRouter.post("/add", async (req, res) => {
-  const { 
+  const {
     title,
-    description, // Added
-    Servicesquote, // Added
-    category, 
-    tags, 
+    description,
+    Servicesquote,
+    category,
+    tags,
     portfolioCategories,
     faqCategories,
-    iconImageId, 
+    iconImageId,
     FeaturedImageId,
-    Bannerdata, // Added
-    WhydoNeed, // Added
+    Bannerdata,
+    WhydoNeed,
     Process,
-    WhyAtrix, // Added
-    servicescontent, // Added
-    contentSections 
+    WhyAtrix,
+    Headercontent, // Add this
+    gallery,       // Add this
+    texttoimageandimagetotext
   } = req.body;
+
 
   // Enhanced validation
   if (!title || !description || !category || !FeaturedImageId) {
-    return res.status(400).json({ 
+    return res.status(400).json({
       message: "Title, description, category, and featured image are required"
     });
   }
@@ -51,12 +53,12 @@ ServicesRouter.post("/add", async (req, res) => {
       WhydoNeed: validateArray(WhydoNeed, 'WhydoNeed'),
       Process: validateArray(Process, 'Process'),
 
-      
-      WhyAtrix: validateArray(WhyAtrix, 'WhyAtrix'),
-      servicescontent: validateArray(servicescontent, 'servicescontent'),
-      contentSections: validateArray(contentSections, 'contentSections')
-    };
 
+      WhyAtrix: validateArray(WhyAtrix, 'WhyAtrix'),
+      Headercontent: validateHeadercontent(validateArray(Headercontent, 'Headercontent')),
+      gallery: validateGallery(validateArray(gallery, 'gallery'))
+    };
+    const validatedTextImage = validateTextToImage(texttoimageandimagetotext);
     // Create new service document
     const newServices = new Services({
       title,
@@ -72,145 +74,134 @@ ServicesRouter.post("/add", async (req, res) => {
       faqCategories: sanitized.faqCategories,
       iconImageId: iconImageId || null,
       FeaturedImage: FeaturedImageId,
-      servicescontent: sanitized.servicescontent.map(validateServicesContentSection),
-      contentSections: sanitized.contentSections.map(validateContentSection),
+      Headercontent: sanitized.Headercontent, // ✅ Add this
+      gallery: sanitized.gallery,             // ✅ And this
+      texttoimageandimagetotext: validatedTextImage,
       updatedAt: new Date()
     });
 
-    // Helper function to validate content sections
-    // 🔹 For contentSections
-    function validateContentSection(section) {
-      // Skip validation if section is empty
-      if (!section) return null;
-      
-      // If section exists but has no type, provide a default
-      if (!section.type) {
-        return {
-          type: 'text', // Default type
-          content: section.content || ""
-        };
+
+
+
+    function validateBannerdata(bannerDataArr) {
+      if (!Array.isArray(bannerDataArr)) {
+        throw new Error("Bannerdata must be an array");
       }
-    
-      const validTypes = ['text', 'image', 'full-image', 'big-image'];
-      if (!validTypes.includes(section.type)) {
-        throw new Error(`Invalid type for contentSection: ${section.type}`);
-      }
-    
-      if (section.type === 'text') {
-        return {
-          type: section.type,
-          content: section.content || ""
-        };
-      } else {
-        if (!section.imageId) {
-          throw new Error(`${section.type} section must have an imageId`);
+
+      const allowedTypes = ['banner', 'video', 'slider'];
+      const maxSliderImages = 4;
+
+      return bannerDataArr.map(item => {
+        if (!allowedTypes.includes(item.type)) {
+          throw new Error(`Invalid Bannerdata type: ${item.type}`);
         }
-        return {
-          type: section.type,
-          imageId: section.imageId
-        };
-      }
-    }
 
-    function validateServicesContentSection(section) {
-      if (!section || typeof section !== 'object') {
-        throw new Error("Invalid servicescontent format");
-      }
-    
-      const validatedSection = {};
-    
-      // Accept content array
-      if (section.content && Array.isArray(section.content)) {
-        validatedSection.content = section.content.map(item => ({
-          cardheading: item.cardheading || "",
-          description: item.description || ""
-        }));
-      }
-    
-      // Accept gallery array
-      if (section.gallery && Array.isArray(section.gallery)) {
-        validatedSection.gallery = section.gallery.map(item => {
-          if (!item.imageId) throw new Error("Gallery item must have imageId");
-          return { imageId: item.imageId };
-        });
-      }
-    
-      // 💡 Try to guess fallback: a flat content item
-      if (!validatedSection.content && !validatedSection.gallery) {
-        if (section.cardheading || section.description) {
-          validatedSection.content = [
-            {
-              cardheading: section.cardheading || "",
-              description: section.description || ""
-            }
-          ];
-        } else {
-          throw new Error("Each servicescontent item must have either content or gallery");
+
+        if (item.type === 'slider') {
+          if (!item.sliderImages || !Array.isArray(item.sliderImages)) {
+            throw new Error("Slider type must have sliderImages array");
+          }
+
+
+          const validImages = item.sliderImages
+            .filter(img => img && typeof img === 'string')
+            .slice(0, maxSliderImages);
+
+          if (validImages.length === 0) {
+            throw new Error("Slider must have at least one valid image");
+          }
+
+          return {
+            type: item.type,
+            sliderImages: validImages
+          };
         }
+
+        else {
+          if (!item.imageId || typeof item.imageId !== 'string') {
+            throw new Error(`${item.type} type must have a valid imageId`);
+          }
+          return {
+            type: item.type,
+            imageId: item.imageId
+          };
+        }
+      });
+    }
+    console.log("Received Headercontent:", req.body.Headercontent);
+
+    function validateHeadercontent(headerContentArr) {
+      if (headerContentArr.length > 1) {
+        throw new Error("Only one Headercontent section allowed");
+      }
+
+      if (headerContentArr.length === 0) {
+        return [];
+      }
+
+      const content = headerContentArr[0];
+
+      return [{
+        centerHeading: content.centerHeading || "",
+        centerDescription: content.centerDescription || "",
+        headingAnddescription: validateHeadingDescription(content.headingAnddescription || [])
+      }];
+    }
+
+    function validateHeadingDescription(items) {
+      if (!Array.isArray(items)) {
+        throw new Error("headingAnddescription must be an array");
+      }
+
+      return items.map(item => ({
+        heading: item.heading || "",
+        description: item.description || "",
+        imageId: item.imageId || null
+      }));
+    }
+
+
+
+    function validateGallery(galleryArr) {
+     
+      if (!Array.isArray(galleryArr)) {
+        throw new Error("Gallery must be an array");
       }
     
-      return validatedSection;
+      return galleryArr.map(img => ({
+        imageId: img.imageId || ""
+      }));
     }
     
-    
-function validateBannerdata(bannerDataArr) {
-  if (!Array.isArray(bannerDataArr)) {
-    throw new Error("Bannerdata must be an array");
-  }
 
-  const allowedTypes = ['banner', 'video', 'slider'];
-  const maxSliderImages = 4; // Maximum allowed slider images
-
-  return bannerDataArr.map(item => {
-    // Validate type
-    if (!allowedTypes.includes(item.type)) {
-      throw new Error(`Invalid Bannerdata type: ${item.type}`);
-    }
-
-    // Slider-specific validation
-    if (item.type === 'slider') {
-      if (!item.sliderImages || !Array.isArray(item.sliderImages)) {
-        throw new Error("Slider type must have sliderImages array");
-      }
-      
-      // Filter out empty images and limit to maximum
-      const validImages = item.sliderImages
-        .filter(img => img && typeof img === 'string')
-        .slice(0, maxSliderImages);
-
-      if (validImages.length === 0) {
-        throw new Error("Slider must have at least one valid image");
+    function validateTextToImage(data) {
+      if (!data) {
+        return {
+          lefttext: "",
+          rightimageId: "",
+          righttext: "",
+          leftimageId: ""
+        };
       }
 
       return {
-        type: item.type,
-        sliderImages: validImages
-      };
-    } 
-    // Banner/Video validation
-    else {
-      if (!item.imageId || typeof item.imageId !== 'string') {
-        throw new Error(`${item.type} type must have a valid imageId`);
-      }
-      return {
-        type: item.type,
-        imageId: item.imageId
+        lefttext: data.lefttext || "",
+        rightimageId: data.rightimageId || "",
+        righttext: data.righttext || "",
+        leftimageId: data.leftimageId || ""
       };
     }
-  });
-}
-
 
     const savedServices = await newServices.save();
-    res.status(201).json({ 
-      message: 'Service created successfully', 
-      service: savedServices 
+    res.status(201).json({
+      message: 'Service created successfully',
+      service: savedServices
     });
 
   } catch (error) {
     console.error("Save error:", error);
-    res.status(500).json({ 
-      message: 'Error creating service', 
+    res.status(500).json({
+      message: 'Error creating service',
       error: error.message,
       ...(error.errors && { details: error.errors })
     });
@@ -223,13 +214,13 @@ ServicesRouter.get("/get", async (req, res) => {
     // if (!Servicess.length) {
     //   return res.status(404).json({ message: "No Services found" });
     // }
-    
+
     // Map Servicess to include image URLs
     const ServicessWithUrls = Servicess.map(Services => ({
       ...Services.toObject(),
       FeaturedImageUrl: Services.FeaturedImage?.url || null
     }));
-    
+
     return res.json({ Services: ServicessWithUrls });
   } catch (error) {
     console.error("Error fetching Services:", error);
@@ -268,29 +259,29 @@ ServicesRouter.get("/get", async (req, res) => {
 // });
 
 ServicesRouter.put("/edit", async (req, res) => {
-  const { 
+  const {
     id,
-    title, 
+    title,
     category,
     tags = [], // Default empty array
     portfolioCategories = [], // Default empty array
     iconImageId,
-    FeaturedImageId, 
-    contentSections 
+    FeaturedImageId,
+    contentSections
   } = req.body;
 
   // Basic validation
   if (!id) return res.status(400).json({ message: "Services ID is required" });
   if (!title || !category || !FeaturedImageId) {
-    return res.status(400).json({ 
+    return res.status(400).json({
       message: "Title, category, and featured image are required"
     });
   }
 
   // Ensure arrays
   const sanitizedTags = Array.isArray(tags) ? tags : [];
-  const sanitizedPortfolioCategories = Array.isArray(portfolioCategories) 
-    ? portfolioCategories 
+  const sanitizedPortfolioCategories = Array.isArray(portfolioCategories)
+    ? portfolioCategories
     : [];
 
   try {
@@ -309,10 +300,10 @@ ServicesRouter.put("/edit", async (req, res) => {
       if (!Array.isArray(contentSections)) {
         return res.status(400).json({ message: "contentSections must be an array" });
       }
-      
+
       updateData.contentSections = contentSections.map(section => {
         if (!section.type) throw new Error("Each section must have a type");
-        
+
         if (section.type === 'text') {
           return { type: 'text', content: section.content || "" };
         } else {
@@ -323,19 +314,19 @@ ServicesRouter.put("/edit", async (req, res) => {
     }
 
     const updatedServices = await Services.findByIdAndUpdate(
-      id, 
-      updateData, 
+      id,
+      updateData,
       { new: true }
     );
 
-    res.status(200).json({ 
-      message: "Services updated successfully", 
-      Services: updatedServices 
+    res.status(200).json({
+      message: "Services updated successfully",
+      Services: updatedServices
     });
   } catch (error) {
     console.error("Error updating Services:", error);
-    res.status(500).json({ 
-      message: "Error updating Services", 
+    res.status(500).json({
+      message: "Error updating Services",
       error: error.message,
       ...(error.errors && { details: error.errors })
     });
@@ -344,83 +335,83 @@ ServicesRouter.put("/edit", async (req, res) => {
 
 
 ServicesRouter.delete("/delete", async (req, res) => {
-    const { titles, categories } = req.body;
-  
-    // Handle bulk delete
-    if (Array.isArray(titles) && Array.isArray(categories)) {
-      if (titles.length === 0 || categories.length === 0) {
-        return res.status(400).json({ message: "Titles and categories arrays cannot be empty" });
-      }
-      if (titles.length !== categories.length) {
-        return res.status(400).json({ message: "Titles and categories arrays must be the same length" });
-      }
-  
-      try {
-        const deleteOperations = titles.map((title, index) => ({
-          deleteOne: {
-            filter: { title, category: categories[index] }
-          }
-        }));
-  
-        const result = await Services.bulkWrite(deleteOperations);
-        
-        return res.status(200).json({ 
-          message: `${result.deletedCount} Servicess deleted successfully`,
-          result
-        });
-      } catch (error) {
-        console.error("Error bulk deleting Servicess:", error);
-        return res.status(500).json({ message: "Error bulk deleting Servicess", error: error.message });
-      }
-    }
-  
-    // Handle single delete (original functionality)
-    const { title, category } = req.body;
-    if (!title || !category) {
-      return res.status(400).json({ message: "Title and category are required" });
-    }
-  
-    try {
-      const deletedServices = await Services.findOneAndDelete({ title, category });
-      if (!deletedServices) {
-        return res.status(404).json({ message: "Services not found" });
-      }
-      res.status(200).json({ message: "Services deleted successfully", Services: deletedServices });
-    } catch (error) {
-      console.error("Error deleting Services:", error);
-      res.status(500).json({ message: "Error deleting Services", error: error.message });
-    }
-  });
+  const { titles, categories } = req.body;
 
-  ServicesRouter.get("/count/category", async (req, res) => {
-    try {
-      const Servicess = await Services.find({});
-      
-      // Create a map to count categories
-      const categoryCounts = {};
-      
-      Servicess.forEach(tech => {
-        const categories = tech.category.split(", ");
-        categories.forEach(cat => {
-          categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
-        });
-      });
-  
-      // Convert to array format
-      const result = Object.keys(categoryCounts).map(category => ({
-        category,
-        count: categoryCounts[category]
-      }));
-  
-      res.status(200).json({ categoryCounts: result });
-    } catch (error) {
-      console.error("Error counting Servicess by category:", error);
-      res.status(500).json({ 
-        message: "Error counting Servicess by category", 
-        error: error.message 
-      });
+  // Handle bulk delete
+  if (Array.isArray(titles) && Array.isArray(categories)) {
+    if (titles.length === 0 || categories.length === 0) {
+      return res.status(400).json({ message: "Titles and categories arrays cannot be empty" });
     }
-  });
+    if (titles.length !== categories.length) {
+      return res.status(400).json({ message: "Titles and categories arrays must be the same length" });
+    }
+
+    try {
+      const deleteOperations = titles.map((title, index) => ({
+        deleteOne: {
+          filter: { title, category: categories[index] }
+        }
+      }));
+
+      const result = await Services.bulkWrite(deleteOperations);
+
+      return res.status(200).json({
+        message: `${result.deletedCount} Servicess deleted successfully`,
+        result
+      });
+    } catch (error) {
+      console.error("Error bulk deleting Servicess:", error);
+      return res.status(500).json({ message: "Error bulk deleting Servicess", error: error.message });
+    }
+  }
+
+  // Handle single delete (original functionality)
+  const { title, category } = req.body;
+  if (!title || !category) {
+    return res.status(400).json({ message: "Title and category are required" });
+  }
+
+  try {
+    const deletedServices = await Services.findOneAndDelete({ title, category });
+    if (!deletedServices) {
+      return res.status(404).json({ message: "Services not found" });
+    }
+    res.status(200).json({ message: "Services deleted successfully", Services: deletedServices });
+  } catch (error) {
+    console.error("Error deleting Services:", error);
+    res.status(500).json({ message: "Error deleting Services", error: error.message });
+  }
+});
+
+ServicesRouter.get("/count/category", async (req, res) => {
+  try {
+    const Servicess = await Services.find({});
+
+    // Create a map to count categories
+    const categoryCounts = {};
+
+    Servicess.forEach(tech => {
+      const categories = tech.category.split(", ");
+      categories.forEach(cat => {
+        categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+      });
+    });
+
+    // Convert to array format
+    const result = Object.keys(categoryCounts).map(category => ({
+      category,
+      count: categoryCounts[category]
+    }));
+
+    res.status(200).json({ categoryCounts: result });
+  } catch (error) {
+    console.error("Error counting Servicess by category:", error);
+    res.status(500).json({
+      message: "Error counting Servicess by category",
+      error: error.message
+    });
+  }
+});
 
 export default ServicesRouter;
 

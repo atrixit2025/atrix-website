@@ -3,108 +3,216 @@ import axios from "axios";
 
 export const PortfolioCategoryContext = createContext();
 
-
 export const PortfolioCategoryProvider = ({ children }) => {
-  const [categories, setCategories] = useState([]);
-  const [categoryCounts, setCategoryCounts] = useState({});
-
+  // Single state object that contains all related data
+  const [portfolioState, setPortfolioState] = useState({
+    categories: [],
+    categoryCounts: {},
+    totalPortfolioCount: 0,
+    loading: false,
+    error: null
+  });
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("http://localhost:5300/PortfolioCategory/Portfolio/category/get");
-      // First set the categories
-      setCategories(response.data.categories);
-      await fetchCategoryCounts();
+      setPortfolioState(prev => ({ ...prev, loading: true }));
       
+      const response = await axios.get(
+        "http://localhost:5300/PortfolioCategory/Portfolio/category/get"
+      );
+      
+      setPortfolioState(prev => ({
+        ...prev,
+        categories: response.data.categories,
+        loading: false
+      }));
+      
+      await fetchCategoryCounts();
+      await fetchCounts();
       
     } catch (error) {
+      setPortfolioState(prev => ({
+        ...prev,
+        error: error.message,
+        loading: false
+      }));
       console.error("Error fetching categories:", error);
     }
   };
-  
 
-
-  // Add a new Portfoliocategory
-  const addPortfolioCategory = async (PortfoliocategoryData) => {
+  const addCategory = async (PortfoliocategoryData) => {
     try {
+      setPortfolioState(prev => ({ ...prev, loading: true }));
+      
       const response = await axios.post(
         "http://localhost:5300/PortfolioCategory/Portfolio/category/add", 
         PortfoliocategoryData
       );
-      setCategories(prevCategories => [...prevCategories, response.data.PortfolioCategory]);
+      
+      setPortfolioState(prev => ({
+        ...prev,
+        categories: [...prev.categories, response.data.PortfolioCategory],
+        loading: false
+      }));
+      
       await fetchCategoryCounts();
-
+      await fetchCounts();
+      
     } catch (error) {
-      console.error("Error adding Portfoliocategory:", error);
+      setPortfolioState(prev => ({
+        ...prev,
+        error: error.message,
+        loading: false
+      }));
       throw error;
     }
   };
 
-  // Edit a Portfoliocategory
-  const editPortfolioCategory = async (name, updatedData) => {
+  const editCategory = async (name, updatedData) => {
     try {
+      setPortfolioState(prev => ({ ...prev, loading: true }));
+      
       const response = await axios.put(
         `http://localhost:5300/PortfolioCategory/Portfolio/category/name/${name}`,
         updatedData
       );
       
-      setCategories((prevCategories) =>
-        prevCategories.map((category) =>
+      setPortfolioState(prev => ({
+        ...prev,
+        categories: prev.categories.map(category =>
           category.name === name ? response.data.updatedCategory : category
-        )
-      );
+        ),
+        loading: false
+      }));
       
       await fetchCategoryCounts();
-
+      await fetchCounts();
+      
       return response.data;
     } catch (error) {
-      console.error("Error editing Portfolio category:", error);
+      setPortfolioState(prev => ({
+        ...prev,
+        error: error.message,
+        loading: false
+      }));
       throw error;
     }
   };
 
   const fetchParentCategories = async () => {
     try {
-      const response = await axios.get("http://localhost:5300/PortfolioCategory/Portfolio/category/get");
-      setCategories(response.data.categories);
+      setPortfolioState(prev => ({ ...prev, loading: true }));
+      
+      const response = await axios.get(
+        "http://localhost:5300/PortfolioCategory/Portfolio/category/get"
+      );
+      
+      setPortfolioState(prev => ({
+        ...prev,
+        categories: response.data.categories,
+        loading: false
+      }));
+      
     } catch (error) {
-      console.error("Error fetching categories:", error);
+      setPortfolioState(prev => ({
+        ...prev,
+        error: error.message,
+        loading: false
+      }));
     }
   };
-  // Delete a Portfoliocategory
+
   const deleteCategory = async (name) => {
     try {
-      await axios.delete(`http://localhost:5300/PortfolioCategory/Portfolio/category/name/${name}`);
+      setPortfolioState(prev => ({ ...prev, loading: true }));
+      
+      await axios.delete(
+        `http://localhost:5300/PortfolioCategory/Portfolio/category/name/${name}`
+      );
+      
+      setPortfolioState(prev => ({
+        ...prev,
+        categories: prev.categories.filter(category => category.name !== name),
+        loading: false
+      }));
+      
       await fetchCategoryCounts();
-
+      await fetchCounts();
+      
     } catch (error) {
-      console.error("Error deleting Portfoliocategory:", error);
+      setPortfolioState(prev => ({
+        ...prev,
+        error: error.message,
+        loading: false
+      }));
       throw error;
     }
   };
 
   const fetchCategoryCounts = async () => {
     try {
-      const response = await axios.get('http://localhost:5300/Portfolio/count/category');
-      // Convert array to object for easier lookup
+      setPortfolioState(prev => ({ ...prev, loading: true }));
+      
+      const response = await axios.get(
+        'http://localhost:5300/Portfolio/count/category'
+      );
+      
       const countsObj = response.data.categoryCounts.reduce((acc, curr) => {
         acc[curr.category] = curr.count;
         return acc;
       }, {});
-      setCategoryCounts(countsObj);
+      
+      setPortfolioState(prev => ({
+        ...prev,
+        categoryCounts: countsObj,
+        loading: false
+      }));
+      
     } catch (error) {
-      console.error('Error fetching category counts:', error);
+      setPortfolioState(prev => ({
+        ...prev,
+        error: error.message,
+        loading: false
+      }));
     }
   };
   
-
+  const fetchCounts = async () => {
+    try {
+      setPortfolioState(prev => ({ ...prev, loading: true }));
+      
+      const response = await axios.get('http://localhost:5300/Portfolio/count');
+      
+      setPortfolioState(prev => ({
+        ...prev,
+        totalPortfolioCount: response.data.count || 0,
+        loading: false
+      }));
+      
+    } catch (error) {
+      setPortfolioState(prev => ({
+        ...prev,
+        error: error.message,
+        loading: false
+      }));
+    }
+  };
 
   useEffect(() => {
     fetchCategories();
   }, []);
 
   return (
-    <PortfolioCategoryContext.Provider value={{ categories,categoryCounts, fetchCategories, addPortfolioCategory,fetchCategoryCounts,fetchParentCategories, editPortfolioCategory, deleteCategory }}>
+    <PortfolioCategoryContext.Provider value={{ 
+      ...portfolioState,
+      fetchCategories,
+      addCategory,
+      editCategory,
+      deleteCategory,
+      fetchParentCategories,
+      fetchCategoryCounts,
+      fetchCounts
+    }}>
       {children}
     </PortfolioCategoryContext.Provider>
   );

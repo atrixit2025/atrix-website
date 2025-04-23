@@ -1,9 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
-
 export const FAQCategoryContext = createContext();
-
 
 export const FAQCategoryProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
@@ -22,8 +20,7 @@ export const FAQCategoryProvider = ({ children }) => {
     }
   };
 
-  // Add a new FAQcategory
-  const addCategory = async (FAQcategoryData) => {
+  const addCategory =  async (FAQcategoryData) => {
     try {
       const response = await axios.post("http://localhost:5300/FAQCategory/FAQ/category/add", FAQcategoryData);
       setCategories((prevCategories) => [...prevCategories, response.data.FAQCategory]);
@@ -31,11 +28,11 @@ export const FAQCategoryProvider = ({ children }) => {
 
     } catch (error) {
       console.error("Error adding FAQcategory:", error);
-      throw error; // Re-throw the error to handle it in the component
+      throw error; 
     }
   };
 
-  // Edit a FAQcategory
+
   const editCategory = async (name, updatedData) => {
     try {
       const response = await axios.put(
@@ -51,7 +48,7 @@ export const FAQCategoryProvider = ({ children }) => {
 
       await fetchCategoryCounts();
 
-      // console.log("edit", response);
+
       return response.data;
     } catch (error) {
       console.error("Error editing Portfolio category:", error);
@@ -60,7 +57,7 @@ export const FAQCategoryProvider = ({ children }) => {
 
   };
 
-  // Delete a FAQcategory
+
   const deleteCategory = async (name) => {
     try {
       await axios.delete(`http://localhost:5300/FAQCategory/FAQ/category/name/${name}`);
@@ -84,12 +81,10 @@ export const FAQCategoryProvider = ({ children }) => {
       console.error("Error fetching categories:", error);
     }
   };
-  // Fetch categories when the provider mounts
 
   const fetchCategoryCounts = async () => {
     try {
       const response = await axios.get('http://localhost:5300/FAQ/count/category');
-      // Convert array to object for easier lookup
       const countsObj = response.data.categoryCounts.reduce((acc, curr) => {
         acc[curr.category] = curr.count;
         return acc;

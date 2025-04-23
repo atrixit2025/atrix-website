@@ -126,7 +126,7 @@ const About = () => {
 
       {/* text-marquee-section */}
       <div className="relative marquee-sec text-6xl font-bold mt-22  ">   <div>
-        <Marquee speed={30} className="overflow-hidden text-[#565656]">
+        <Marquee speed={30} className="overflow-hidden text-[#8d8d8d]">
          VISIONARY . INNOVATIVE . EFFICIENT . GLOBAL . PROFESSIONAL . ACCESSIBLE . USER-CENTRIC . EMPOWERING . TRUSTWORTHY . SCALABLE. 
         </Marquee>
       </div>
@@ -135,13 +135,13 @@ const About = () => {
           <Marquee
             speed={30}
             direction="right"
-            className="overflow-hidden mt-1 text-[#565656]"
+            className="overflow-hidden mt-1 text-[#8d8d8d]"
           > &nbsp; VISIONARY . INNOVATIVE . EFFICIENT . GLOBAL . PROFESSIONAL . ACCESSIBLE . USER-CENTRIC . EMPOWERING . TRUSTWORTHY . SCALABLE .  
           </Marquee>
         </div>
 
         <div>
-          <Marquee speed={30} className="overflow-hidden mt-1 text-[#565656]">
+          <Marquee speed={30} className="overflow-hidden mt-1 text-[#8d8d8d]">
            USER-CENTRIC . EMPOWERING . TRUSTWORTHY . SCALABLE . VISIONARY . INNOVATIVE . EFFICIENT . GLOBAL . PROFESSIONAL . ACCESSIBLE . 
           </Marquee>
         </div>

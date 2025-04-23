@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useState, useEffect, useContext, useRef, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FileInputExample from "../../components/form/form-elements/FileInputExample";
 import Button from "../../components/ui/button/Button";
@@ -20,12 +20,14 @@ import WhydoNeed from "../../components/Services/WhydoNeed";
 import WhyAtrix from "../../components/Services/WhyAtrix";
 import Process from "../../components/Services/Process";
 import MoreContent from "../../components/Services/MoreContent";
+import GalleryComp from "../../components/Gallery/GalleryComp";
+// import Headercontent from "../../components/Services/Headercontent";
+import TextToImageAndImageToText from "../../components/Services/TextToImageAndImageToText";
+import HeaderContent from "../../components/Services/HeaderContent";
 
 export default function AddNewServices() {
   const location = useLocation();
   const navigate = useNavigate();
-  // const [categories, setCategories] = useState([]);
-  // const [portfolioCategory, setPortfolioCategory] = useState([]);
   const [categories, setCategories] = useState({
     services: [],
     portfolio: [],
@@ -33,14 +35,7 @@ export default function AddNewServices() {
   });
 
   const { fetchCategoryCounts } = useContext(ServicesCategoryContext);
-  const editor = useRef(null);
-  const [content, setContent] = useState('');
-  const [imageFields, setImageFields] = useState({
-    image: null,
-    fullImage: null,
-    bigImage: null
-  });
-  // Single state object for form data
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -48,7 +43,7 @@ export default function AddNewServices() {
     text: "",
     selectedCategories: [],
     selectedPortfolioCategories: [],
-    selectedfaqCategories:[],
+    selectedfaqCategories: [],
     tags: [],
     iconImageId: null,
     imageId: null,
@@ -56,14 +51,21 @@ export default function AddNewServices() {
     WhydoNeed: [],
     WhyAtrix: [],
     Process: [],
-    servicescontent: [],
-    contentSections: []
+    Headercontent: [],
+    gallery: [],
+    textToImage: {
+      leftText: "",
+      rightImage: null, // Will hold image ID
+      rightText: "",
+      leftImage: null   // Will hold image ID
+    },
+    showHeadercontent: false,
+    showGallery: false,
+    showTextToImage: false,
   });
 
   const { Services } = location.state || {};
 
-  // Fetch categories from the API
-  // Fetch services categories
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -76,7 +78,6 @@ export default function AddNewServices() {
     fetchCategories();
   }, []);
 
-  // Fetch portfolio categories
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -89,7 +90,6 @@ export default function AddNewServices() {
     fetchCategories();
   }, []);
 
-  // Fetch FAQ categories
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -102,7 +102,6 @@ export default function AddNewServices() {
     fetchCategories();
   }, []);
 
-  // Pre-fill the form if in edit mode
   useEffect(() => {
     if (Services) {
       setFormData({
@@ -113,7 +112,7 @@ export default function AddNewServices() {
         selectedPortfolioCategories: Services.portfolioCategories
           ? Services.portfolioCategories.split(", ")
           : [],
-          selectedfaqCategories: Services.faqCategories
+        selectedfaqCategories: Services.faqCategories
           ? Services.faqCategories.split(", ")
           : [],
         tags: Services.tags || [],
@@ -123,42 +122,22 @@ export default function AddNewServices() {
         WhydoNeed: Services.WhydoNeed || [],
         WhyAtrix: Services.WhyAtrix || [],
         Process: Services.Process || [],
-        servicescontent: Services.servicescontent || []
-      });
-
-      // Transform contentSections to selectFields
-      const transformedFields = Services.contentSections.map((section, index) => ({
-        id: index + 1,
-        value: {
-          value: section.type, label: section.type === 'text' ? 'Text' :
-            section.type === 'image' ? 'Image' :
-              section.type === 'full-image' ? 'Full Image' : 'Big Image'
-        },
-        options: [
-          { value: "", label: "Select Option" },
-          { value: "text", label: "Text" },
-          { value: "image", label: "Image" },
-          { value: "full-image", label: "Full Image" },
-          { value: "big-image", label: "Big Image" }
-        ],
-        textContent: section.type === 'text' ? section.content : "",
-        imageFile: section.type !== 'text' ? {
-          id: section.imageId,
-          name: "Existing image",
-          type: section.type
-        } : null
-      }));
-
-      setSelectFields(transformedFields);
-
-      // Set image fields
-      const imageFields = {};
-      Services.contentSections.forEach(section => {
-        if (section.type !== 'text') {
-          imageFields[section.type.replace('-', '')] = section.imageId;
+        Headercontent: Services.Headercontent || [],
+        gallery: Services.gallery || [],
+        textToImage: Services.texttoimageandimagetotext ? {
+          leftText: Services.texttoimageandimagetotext.lefttext || "",
+          rightImage: Services.texttoimageandimagetotext.rightimageId || null,
+          rightText: Services.texttoimageandimagetotext.righttext || "",
+          leftImage: Services.texttoimageandimagetotext.leftimageId || null
+        } : {
+          leftText: "",
+          rightImage: null,
+          rightText: "",
+          leftImage: null
         }
       });
-      setImageFields(imageFields);
+
+
     }
   }, [Services]);
 
@@ -166,26 +145,25 @@ export default function AddNewServices() {
     setFormData((prev) => ({
       ...prev,
       selectedCategories: prev.selectedCategories.includes(category)
-        ? prev.selectedCategories.filter((cat) => cat !== category) // Deselect
-        : [...prev.selectedCategories, category], // Select
+        ? prev.selectedCategories.filter((cat) => cat !== category)
+        : [...prev.selectedCategories, category],
     }));
   };
 
-  // Handle form submission
   const handleSubmit = async () => {
     const {
       title,
       description,
       selectedCategories,
-      portfolioCategories,
       tags,
       iconImageId,
       imageId,
-      Bannerdata,
       WhydoNeed,
       WhyAtrix,
       Process,
-      servicescontent
+      Headercontent,
+      gallery,
+      textToImage
     } = formData;
 
     if (!title || !description || selectedCategories.length === 0 || !imageId) {
@@ -193,52 +171,13 @@ export default function AddNewServices() {
       return;
     }
 
-    const contentSections = selectFields.map(field => {
-      if (field.value.value === 'text') {
-        return {
-          type: 'text',
-          content: field.textContent
-        };
-      } else {
-        return {
-          type: field.value.value,
-          imageId: field.imageFile?.id || null
-        };
-      }
-    });
-
-    const processedServicesContent = (servicescontent || []).map(section => {
-      if (section.contents) {
-        return {
-          content: section.contents.map(content => ({
-            cardheading: content.cardheading || "",
-            description: content.description || ""
-          }))
-        };
-      }
-
-      if (section.galleryImages) {
-        return {
-          gallery: section.galleryImages
-            .filter(img => img.imageFile)
-            .map(img => ({
-              imageId: img.imageFile.id || img.imageFile
-            }))
-        };
-      }
-
-      return {}; // Fallback in case of an empty section
-    });
-
-
-
     const bannerData = formData.Banner.map(item => {
       if (item.type === "slider") {
         return {
           type: "slider",
           sliderImages: item.sliderImages
-            .filter(img => img) // Remove empty slots
-            .slice(0, 4) // Ensure max 4 images
+            .filter(img => img)
+            .slice(0, 4)
         };
       }
       return {
@@ -246,17 +185,19 @@ export default function AddNewServices() {
         imageId: item.imageId
       };
     }).filter(item => {
-      // Filter out incomplete entries
       if (item.type === "slider") {
-        return item.sliderImages.length > 0; // At least 1 image required
+        return item.sliderImages.length > 0;
       }
       return item.imageId;
     });
 
-    // console.log("Processed Banner Data:", bannerData);
+    const textToImageData = {
+      lefttext: formData.textToImage.leftText,
+      rightimageId: formData.textToImage.rightImage, // Image ID
+      righttext: formData.textToImage.rightText,
+      leftimageId: formData.textToImage.leftImage    // Image ID
+    };
 
-    // Add these logs to verify data:
-    // console.log("Raw Banner data from form:", formData.Banner);
     const ServicesData = {
       title,
       description,
@@ -271,11 +212,22 @@ export default function AddNewServices() {
       WhydoNeed,
       WhyAtrix,
       Process,
-      servicescontent: processedServicesContent,
-      contentSections
+      Headercontent: formData.Headercontent.length > 0 ? [{
+        centerHeading: formData.Headercontent[0].centerHeading,
+        centerDescription: formData.Headercontent[0].centerDescription,
+        headingAnddescription: formData.Headercontent[0].headingAnddescription.map(item => ({
+            heading: item.heading,
+            description: item.description,
+            imageId: item.imageId // Directly use imageId
+        }))
+    }] : [],
+
+      gallery: formData.gallery.map(img => ({ imageId: img.imageId })),
+
+      texttoimageandimagetotext: textToImageData
     };
-    // console.log("Received Bannerdata:", Bannerdata);
-    // console.log("Raw servicescontent data from form:", servicescontent);
+    // console.log("Headercontent", Headercontent)
+
 
     try {
       if (Services) {
@@ -293,49 +245,6 @@ export default function AddNewServices() {
       console.error("Error saving Services:", error);
       alert(error.response?.data?.message || "Error saving Services. Please try again.");
     }
-  };
-
-
-
-  const [selectFields, setSelectFields] = useState(() => {
-    return [
-      {
-        id: 1,
-        value: "",
-        options: [
-          { value: "", label: "Select Option" },
-          { value: "text", label: "Text" },
-          { value: "image", label: "Image" },
-          { value: "full-image", label: "Full Image" },
-          { value: "big-image", label: "Big Image" }
-        ],
-        textValue: "",
-        imageFile: null
-      }
-    ];
-  });
-
-
-
-
-  const addSelectField = () => {
-    const newId = selectFields.length > 0 ? Math.max(...selectFields.map(f => f.id)) + 1 : 1;
-    setSelectFields([
-      ...selectFields,
-      {
-        id: newId,
-        value: "",
-        options: [
-          { value: "", label: "Select Option" },
-          { value: "text", label: "Text" },
-          { value: "image", label: "Image" },
-          { value: "full-image", label: "Full Image" },
-          { value: "big-image", label: "Big Image" }
-        ],
-        textValue: "",
-        imageFile: null
-      }
-    ]);
   };
 
   const handleTagsChange = (newTags) => {
@@ -358,68 +267,56 @@ export default function AddNewServices() {
         : [...prev.selectedfaqCategories, category]
     }));
   };
-  const handleSelectChange = (id, value) => {
-    // console.log(`Field ${id} changed to:`, value);
-    setSelectFields(selectFields.map(field =>
-      field.id === id ? { ...field, value } : field
-    ));
-  };
 
 
-  const removeSelectField = (id) => {
-    if (selectFields.length > 1) {
-      setSelectFields(selectFields.filter(field => field.id !== id));
-    }
-  };
 
-  const handleTextChange = (id, newContent) => {
-    setSelectFields(selectFields.map(field =>
-      field.id === id ? { ...field, textContent: newContent } : field
-    ));
-  };
-
-
-  const handleImageChange = (id, imageId, fieldType) => {
-    setSelectFields(selectFields.map(field => {
-      if (field.id === id) {
-        return {
-          ...field,
-          imageFile: {
-            id: imageId,
-            url: imageId ? `http://localhost:5300/Image/get/${imageId}` : null,
-            type: fieldType,
-            name: "Uploaded image"
-          }
-        };
-      }
-      return field;
-    }));
-  };
-
-  // Banner handler
   const handleBannerChange = (bannerData) => {
     setFormData(prev => ({ ...prev, Banner: bannerData }));
   };
 
-  // WhyDoNeed handler
   const handleWhyDoNeedChange = (whyData) => {
     setFormData(prev => ({ ...prev, WhydoNeed: whyData }));
   };
 
-  // WhyAtrix handler
   const handleWhyAtrixChange = (atrixData) => {
     setFormData(prev => ({ ...prev, WhyAtrix: atrixData }));
   };
 
-  // Process handler
   const handleProcessChange = (processData) => {
     setFormData(prev => ({ ...prev, Process: processData }));
   };
 
-  // MoreContent handler
-  const handleMoreContentChange = (contentData) => {
-    setFormData(prev => ({ ...prev, servicescontent: contentData }));
+  const [galleryImages, setGalleryImages] = useState([]);
+
+  const handleImageUpload = (images) => {
+    setGalleryImages(images);
   };
+  const handleHeadercontentChange = (content) => {
+    // console.log("content received:", content);
+
+    setFormData(prev => ({ ...prev, Headercontent: content }));
+  };
+
+  const handleGalleryChange = (images) => {
+    // console.log("Gallery images received:", images);
+    setFormData(prev => ({ ...prev, gallery: images }));
+  };
+
+  const handleTextToImageChange = useCallback((data) => {
+    setFormData(prev => ({
+      ...prev,
+      textToImage: {
+        leftText: data.lefttext || "",
+        rightImage: data.rightimageId || null,
+        rightText: data.righttext || "",
+        leftImage: data.leftimageId || null
+      }
+    }));
+
+  }, []);
+
+
+
 
 
   return (
@@ -453,18 +350,14 @@ export default function AddNewServices() {
               }
             />
           </div>
+
           <div>
-            <Label htmlFor={`description-${formData.id}`}>Description</Label>
-            <TextArea
-              type="text"
-              id={`description-${formData.id}`}
-              placeholder="Description"
-              value={formData.description}
-              onChange={(value) =>
-                setFormData((prev) => ({ ...prev, description: value }))
-              }
-            />
+            <Label htmlFor="input">Header</Label>
+
+
+            <Banner onChange={handleBannerChange} initialData={Services?.Banner} />
           </div>
+
 
 
           <div>
@@ -479,19 +372,7 @@ export default function AddNewServices() {
               }
             />
           </div>
-          <div>
-            <TagsInput
-              initialTags={formData.tags}
-              onChange={handleTagsChange}
-            />
-          </div>
 
-          <div>
-            <Label htmlFor="input"> Select Field</Label>
-
-
-            <Banner onChange={handleBannerChange} initialData={Services?.Banner} />
-          </div>
 
           <div>
             <Label>Why do you need</Label>
@@ -507,88 +388,96 @@ export default function AddNewServices() {
             <Process onChange={handleProcessChange} initialData={Services?.Process} />
           </div>
 
-          <div>
-            <MoreContent onChange={handleMoreContentChange} initialData={Services?.servicescontent} />
-          </div>
-
-
-          {selectFields.map((field, index) => (
-            <div key={field.id} className="card mb-3 border-2 px-4 py-2 rounded-xl border-gray-700">
-              <div className="card-header ">
-                <h4 className="card-title flex justify-between items-center mb-2">
-                  Select Field
-                  {/* {index + 1} */}
-                  <div className="flex items-center gap-5">
-                    {/* Show minus button only if not the first field */}
-                    {index > 0 && (
-                      <button
-                        onClick={() => removeSelectField(field.id)}
-                        className="text-red-500 text-3xl mt-3"
-                      >
-                        -
-                      </button>
-                    )}
-                    {/* Show plus button only on the last field */}
-                    {index === selectFields.length - 1 && (
-                      <button
-                        onClick={addSelectField}
-                        className="flex items-center gap-2 text-blue-500 mt-4"
-                      >
-                        <span className="text-3xl">+</span>
-                      </button>
-                    )}
-                  </div>
-                </h4>
-              </div>
-              <div className="card-body">
-                <div className="form-group mb-3">
-                  <SelectBulk
-                    options={field.options}
-                    value={field.value}
-                    onChange={(value) => handleSelectChange(field.id, value)}
-                    className="form-control"
-                  />
-                </div>
-
-                {field.value?.value === "text" && (
-                  <div className="form-group text-black ">
-
-                    <JoditEditor
-                      ref={editor}
-                      value={field.textContent || ""}
-                      onChange={(newContent) => handleTextChange(field.id, newContent)}
-
-                    />
-                  </div>
-                )}
-
-                {(field.value?.value === "image" ||
-                  field.value?.value === "full-image" ||
-                  field.value?.value === "big-image") && (
-                    <div className="form-group">
-                      <SelectFileInput
-                        NameOffield="Image"
-                        onImageUpload={(imageId, imageType) =>
-                          handleImageChange(field.id, imageId, imageType || field.value?.value)
-                        }
-                        imageId={field.imageFile?.id}
-                        existingImage={field.imageFile}
-                      />
-
-                      {/* Optional: Show image type indicator */}
-                      {field.imageFile?.type && (
-                        <div className="mt-2 text-sm text-gray-500">
-                          Image Type: {field.imageFile.type}
-                        </div>
-                      )}
-                    </div>
-                  )}
-              </div>
+          {formData.showHeadercontent && (
+            <div>
+              <HeaderContent
+                onChange={handleHeadercontentChange}
+                initialData={formData.Headercontent}
+              />
             </div>
-          ))}
+          )}
+
+          {formData.showGallery && (
+            <div>
+              <GalleryComp
+                selected="Set Images"
+                onImageUpload={handleGalleryChange}
+                existingImages={formData.gallery}
+                NameOffield="Gallery"
+              />
+            </div>
+          )}
+
+          {formData.showTextToImage && (
+            <div>
+              <TextToImageAndImageToText
+                onChange={handleTextToImageChange}
+                initialData={formData.textToImage}
+              />
+            </div>
+          )}
+
+
 
         </div>
+
         <div className="space-y-6">
+          <div className="space-y-4">
+            <Checkbox
+              id="toggle-header-content"
+              label="Show Header Content"
+              checked={formData.showHeadercontent}
+              onChange={() =>
+                setFormData(prev => ({
+                  ...prev,
+                  showHeadercontent: !prev.showHeadercontent
+                }))
+              }
+            />
+
+            <Checkbox
+              id="toggle-gallery"
+              label="Show Gallery"
+              checked={formData.showGallery}
+              onChange={() =>
+                setFormData(prev => ({
+                  ...prev,
+                  showGallery: !prev.showGallery
+                }))
+              }
+            />
+
+            <Checkbox
+              id="toggle-text-to-image"
+              label="Show Text-to-Image & Image-to-Text"
+              checked={formData.showTextToImage}
+              onChange={() =>
+                setFormData(prev => ({
+                  ...prev,
+                  showTextToImage: !prev.showTextToImage
+                }))
+              }
+            />
+          </div>
+
+          <div>
+            <Label htmlFor={`description-${formData.id}`}>Excerpt</Label>
+            <TextArea
+              type="text"
+              id={`description-${formData.id}`}
+              placeholder="Excerpt"
+              value={formData.description}
+              onChange={(value) =>
+                setFormData((prev) => ({ ...prev, description: value }))
+              }
+            />
+          </div>
+          <div>
+            <TagsInput
+              initialTags={formData.tags}
+              onChange={handleTagsChange}
+            />
+          </div>
           <div>
             <ComponentCategory title="Category" link="/Dashboard/CategoryServices">
               <div className="items-center gap-4 space-y-5">
