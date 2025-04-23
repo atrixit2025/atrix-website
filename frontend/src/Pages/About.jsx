@@ -17,7 +17,7 @@ import icon7 from "../assets/AboutUs/keys-sec/Integrity.svg";
 import icon8 from "../assets/AboutUs/keys-sec/Kindness.svg";
 import icon9 from "../assets/AboutUs/keys-sec/value.svg";
 import icon10 from "../assets/AboutUs/keys-sec/Agile-Solutions.svg";
-import About_video from "../assets/Final Website cmpress Apatrix video.mp4";
+import About_video from "../assets/AtrixHomevideo.mp4";
 
 import About_sec_scroll from "../Components/About_sec_scroll";
 
@@ -104,6 +104,7 @@ const About = () => {
           <video
             className="  rounded-xl "
             src={About_video}
+             poster='https://media.gettyimages.com/id/1302436712/video/loading-circle-icon-animation-on-black-background-4k-video-loopable-preloader.jpg?s=640x640&k=20&c=WJGwZEsiTQgk-HfSVV1GS-_y-uU7Fqu679eb25wAiKY='
             autoPlay
             muted
             loop
@@ -141,7 +142,7 @@ const About = () => {
         </div>
 
         <div>
-          <Marquee speed={30} className="overflow-hidden mt-1 text-[#8d8d8d]">
+          <Marquee speed={30} className="overflow-hidden mt-1 text-[#8d8d8d]  ">
            USER-CENTRIC . EMPOWERING . TRUSTWORTHY . SCALABLE . VISIONARY . INNOVATIVE . EFFICIENT . GLOBAL . PROFESSIONAL . ACCESSIBLE . 
           </Marquee>
         </div>

@@ -15,7 +15,7 @@ const RiseWithUs = ({ scrollToRolesSection }) => {
               Atrix IT Solutions is more than just a workplace — it’s a place where creative and hardworking people come together to achieve great things. We believe in teamwork, innovation, and helping each other grow.
             </p>
 
-            {/* 👇 Button receives scroll function from parent */}
+            {/* Button receives scroll function from parent */}
             <Button
               mybtn="Open Vacancies"
               targetRef={{
