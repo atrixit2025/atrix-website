@@ -49,6 +49,8 @@ import FAQCategory from './Dashboard/pages/FAQPages/CategoryFAQ';
 import FAQ from './Dashboard/pages/FAQPages/FAQ';
 import AddNewFAQ from './Dashboard/pages/FAQPages/AddNewFAQ';
 import Roles from './Components/career/Roles';
+import ServiceBackend from './Components/FetchBackendServices/ServiceBackend';
+import SinglePageBackend from './Components/FetchBackendServices/SinglePageBackend';
 
 export default function App() {
   return (
@@ -76,7 +78,16 @@ export default function App() {
           <Route path="/OurServices" element={<OurServices/>} />
           <Route path="/Behance" element={<Behance/>} />
           <Route path="/Service" element={<Service/>} />
+
           <Route path="/OurServices/:service_id" element={<Service/>} />
+
+          <Route path="/ServiceBackend" element={<ServiceBackend/>} />
+         
+          <Route path="/:title" element={<SinglePageBackend/>} />
+          
+          <Route path="/Service/:project_cat/:project_id" element={<Service/>} />
+
+
 
         </Route >
     
