@@ -24,6 +24,7 @@ import GalleryComp from "../../components/Gallery/GalleryComp";
 // import Headercontent from "../../components/Services/Headercontent";
 import TextToImageAndImageToText from "../../components/Services/TextToImageAndImageToText";
 import HeaderContent from "../../components/Services/HeaderContent";
+import CtaDashboard from "../../components/Services/CtaDashboard";
 
 export default function AddNewServices() {
   const location = useLocation();
@@ -31,19 +32,24 @@ export default function AddNewServices() {
   const [categories, setCategories] = useState({
     services: [],
     portfolio: [],
-    faq: []
+    faq: [],
+    technology: []
   });
 
   const { fetchCategoryCounts } = useContext(ServicesCategoryContext);
 
   const [formData, setFormData] = useState({
     title: "",
+    customSlug: "",
+    autoSlug: "",
+    isEditingSlug: false,
     description: "",
     Servicesquote: "",
     text: "",
     selectedCategories: [],
     selectedPortfolioCategories: [],
     selectedfaqCategories: [],
+    selectedtechnology: [],
     tags: [],
     iconImageId: null,
     imageId: null,
@@ -55,13 +61,13 @@ export default function AddNewServices() {
     gallery: [],
     textToImage: {
       leftText: "",
-      rightImage: null, // Will hold image ID
+      rightImage: null,
       rightText: "",
-      leftImage: null   // Will hold image ID
+      leftImage: null
     },
     showHeadercontent: false,
     showGallery: false,
-    showTextToImage: false,
+    showTextToImage: true,
   });
 
   const { Services } = location.state || {};
@@ -106,6 +112,9 @@ export default function AddNewServices() {
     if (Services) {
       setFormData({
         title: Services.title,
+        // customSlug: Services.slug || Services.title.toLowerCase().replace(/\s+/g, '-'),
+        customSlug: Services.slug || Services.Slug || generatedFromTitle,
+        autoSlug: Services.title.toLowerCase().replace(/\s+/g, '-'),
         description: Services.description || "",
         Servicesquote: Services.Servicesquote || "",
         selectedCategories: Services.category ? Services.category.split(", ") : [],
@@ -115,6 +124,10 @@ export default function AddNewServices() {
         selectedfaqCategories: Services.faqCategories
           ? Services.faqCategories.split(", ")
           : [],
+        selectedtechnology: Services.Technology
+          ? Services.Technology.map((tech) => tech.title)  
+          : [],
+
         tags: Services.tags || [],
         iconImageId: Services.iconImageId || null,
         imageId: Services.FeaturedImage || null,
@@ -124,22 +137,37 @@ export default function AddNewServices() {
         Process: Services.Process || [],
         Headercontent: Services.Headercontent || [],
         gallery: Services.gallery || [],
-        textToImage: Services.texttoimageandimagetotext ? {
-          leftText: Services.texttoimageandimagetotext.lefttext || "",
-          rightImage: Services.texttoimageandimagetotext.rightimageId || null,
-          rightText: Services.texttoimageandimagetotext.righttext || "",
-          leftImage: Services.texttoimageandimagetotext.leftimageId || null
-        } : {
-          leftText: "",
-          rightImage: null,
-          rightText: "",
-          leftImage: null
-        }
+        Cta: Services.Cta || { title: "", description: "" },
       });
 
 
     }
   }, [Services]);
+
+  useEffect(() => {
+    if (formData.title) {
+      const generatedSlug = formData.title
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w\-]+/g, '-')
+        .replace(/\-\-+/g, '-')
+        .replace(/^-+/, '-')
+        .replace(/-+$/, '-');
+
+      setFormData((prev) => ({
+        ...prev,
+        autoSlug: generatedSlug,
+        customSlug: prev.isEditingSlug ? prev.customSlug : generatedSlug
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        autoSlug: '',
+        customSlug: '',
+      }));
+    }
+  }, [formData.title]);
+
 
   const handleCategoryChange = (category) => {
     setFormData((prev) => ({
@@ -161,6 +189,7 @@ export default function AddNewServices() {
       WhydoNeed,
       WhyAtrix,
       Process,
+      customSlug,
       Headercontent,
       gallery,
       textToImage
@@ -191,20 +220,18 @@ export default function AddNewServices() {
       return item.imageId;
     });
 
-    const textToImageData = {
-      lefttext: formData.textToImage.leftText,
-      rightimageId: formData.textToImage.rightImage, // Image ID
-      righttext: formData.textToImage.rightText,
-      leftimageId: formData.textToImage.leftImage    // Image ID
-    };
+
 
     const ServicesData = {
       title,
+      Slug: customSlug,
       description,
       Servicesquote: formData.Servicesquote || "",
       category: selectedCategories.join(", "),
       portfolioCategories: formData.selectedPortfolioCategories,
       faqCategories: formData.selectedfaqCategories,
+      Technology:formData.selectedtechnology,
+
       tags: tags.filter(tag => tag.trim() !== ""),
       iconImageId,
       FeaturedImageId: imageId,
@@ -216,17 +243,18 @@ export default function AddNewServices() {
         centerHeading: formData.Headercontent[0].centerHeading,
         centerDescription: formData.Headercontent[0].centerDescription,
         headingAnddescription: formData.Headercontent[0].headingAnddescription.map(item => ({
-            heading: item.heading,
-            description: item.description,
-            imageId: item.imageId // Directly use imageId
+          heading: item.heading,
+          description: item.description,
+          imageId: item.imageId
         }))
-    }] : [],
+      }] : [],
+   
 
       gallery: formData.gallery.map(img => ({ imageId: img.imageId })),
+      Cta:formData.Cta
 
-      texttoimageandimagetotext: textToImageData
     };
-    // console.log("Headercontent", Headercontent)
+
 
 
     try {
@@ -286,11 +314,9 @@ export default function AddNewServices() {
     setFormData(prev => ({ ...prev, Process: processData }));
   };
 
-  const [galleryImages, setGalleryImages] = useState([]);
+    const handleTextToImageChange =()=>{
 
-  const handleImageUpload = (images) => {
-    setGalleryImages(images);
-  };
+    }
   const handleHeadercontentChange = (content) => {
     // console.log("content received:", content);
 
@@ -302,21 +328,45 @@ export default function AddNewServices() {
     setFormData(prev => ({ ...prev, gallery: images }));
   };
 
-  const handleTextToImageChange = useCallback((data) => {
-    setFormData(prev => ({
-      ...prev,
-      textToImage: {
-        leftText: data.lefttext || "",
-        rightImage: data.rightimageId || null,
-        rightText: data.righttext || "",
-        leftImage: data.leftimageId || null
-      }
-    }));
 
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5300/Technology/get");
+        const Technologys = response.data.Technology.map((tech) => {
+          const imageUrl = tech.image?.image
+            ? tech.image.image
+            : "/images/user/user-22.jpg";
+          return {
+            _id: tech._id,
+            Name: tech.title,
+            team: {
+              images: [imageUrl],
+            },
+            imageId: tech.image?._id,
+          };
+        });
+        setCategories(prev => ({
+          ...prev,
+          technology: Technologys
+        }));
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
   }, []);
 
-
-
+  const handletechnologysChange = (technology) => {
+    setFormData(prev => ({
+      ...prev,
+      selectedtechnology: prev.selectedtechnology.includes(technology)
+        ? prev.selectedtechnology.filter((tech) => tech !== technology)
+        : [...prev.selectedtechnology, technology]
+    }));
+  };
 
 
   return (
@@ -349,6 +399,54 @@ export default function AddNewServices() {
                 setFormData((prev) => ({ ...prev, title: e.target.value }))
               }
             />
+           
+
+            <div className="mt-2">
+
+              <div className="mt-2">
+                {formData.isEditingSlug ? (
+                  <div className="items-center gap-2 space-y-1">
+                    <Input
+                      type="text"
+                      value={formData.customSlug}
+                      onChange={(e) =>
+                        setFormData((prev) => ({ ...prev, customSlug: e.target.value }))
+                      }
+                      className="w-full"
+                    />
+                    <button
+                      onClick={() =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          isEditingSlug: false,
+                          autoSlug: prev.customSlug.trim()
+                        }))
+                      }
+                      className="w-16 bg-(--blue) text-white p-1 rounded-lg"
+                    >
+                      OK
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <p className="text-sm text-(--gray)">
+                      Slug: {formData.customSlug}
+                    </p>
+                    {formData.title && (
+                      <button
+                        onClick={() =>
+                          setFormData((prev) => ({ ...prev, isEditingSlug: true }))
+                        }
+                        className="w-16 bg-(--blue) text-white p-1 rounded-lg"
+                      >
+                        Edit
+                      </button>
+                    )}
+                  </div>
+                )}
+              </div>
+
+            </div>
           </div>
 
           <div>
@@ -358,20 +456,24 @@ export default function AddNewServices() {
             <Banner onChange={handleBannerChange} initialData={Services?.Banner} />
           </div>
 
+          {formData.showTextToImage && (
+            <div>
+              <TextToImageAndImageToText
+                onChange={handleTextToImageChange}
+                initialData={formData.textToImage}
+              />
+            </div>
+          )}
 
+          {formData.showHeadercontent && (
+            <div>
+              <HeaderContent
+                onChange={handleHeadercontentChange}
+                initialData={formData.Headercontent}
+              />
+            </div>
+          )}
 
-          <div>
-            <Label htmlFor={`Servicesquote-${formData.id}`}>Services quote</Label>
-            <TextArea
-              type="text"
-              id={`Servicesquote-${formData.id}`}
-              placeholder="Services quote"
-              value={formData.Servicesquote}
-              onChange={(value) =>
-                setFormData((prev) => ({ ...prev, Servicesquote: value }))
-              }
-            />
-          </div>
 
 
           <div>
@@ -388,15 +490,26 @@ export default function AddNewServices() {
             <Process onChange={handleProcessChange} initialData={Services?.Process} />
           </div>
 
-          {formData.showHeadercontent && (
-            <div>
-              <HeaderContent
-                onChange={handleHeadercontentChange}
-                initialData={formData.Headercontent}
-              />
-            </div>
-          )}
+          <div>
+            <Label htmlFor={`Servicesquote-${formData.id}`}>Services quote</Label>
+            <TextArea
+              type="text"
+              id={`Servicesquote-${formData.id}`}
+              placeholder="Services quote"
+              value={formData.Servicesquote}
+              onChange={(value) =>
+                setFormData((prev) => ({ ...prev, Servicesquote: value }))
+              }
+            />
+          </div>
 
+          <div>
+            <CtaDashboard
+              initialData={formData.Cta}
+              onChange={(data) => setFormData(prev => ({ ...prev, Cta: data }))}
+            />
+
+          </div>
           {formData.showGallery && (
             <div>
               <GalleryComp
@@ -408,14 +521,7 @@ export default function AddNewServices() {
             </div>
           )}
 
-          {formData.showTextToImage && (
-            <div>
-              <TextToImageAndImageToText
-                onChange={handleTextToImageChange}
-                initialData={formData.textToImage}
-              />
-            </div>
-          )}
+
 
 
 
@@ -514,7 +620,7 @@ export default function AddNewServices() {
           </ImageProvider>
 
           <div>
-            <ComponentCategory title="Portfolio Category" link="/Dashboard/CategoryPortfolio">
+            <ComponentCategory title="Portfolio Category" >
               <div className="items-center gap-4 space-y-5">
                 {categories.portfolio.map((category) => (
                   <div key={category._id} className="flex items-center gap-3">
@@ -533,7 +639,7 @@ export default function AddNewServices() {
 
 
           <div>
-            <ComponentCategory title="FAQ Category" link="/Dashboard/CategoryFAQ">
+            <ComponentCategory title="FAQ Category">
               <div className="items-center gap-4 space-y-5">
                 {categories.faq.map((category) => (
                   <div key={category._id} className="flex items-center gap-3">
@@ -545,6 +651,39 @@ export default function AddNewServices() {
                     />
                   </div>
                 ))}
+              </div>
+            </ComponentCategory>
+          </div>
+
+
+          <div>
+            <ComponentCategory title="Technology">
+              <div className="items-center gap-4 space-y-5">
+                {categories.technology.map((technologys) => (
+                  <div key={technologys._id} className="flex items-center justify-between">
+
+
+                    <Checkbox
+                      id={`faq-technologys-${technologys._id}`}
+                      checked={formData.selectedtechnology.includes(technologys.Name)}
+                      onChange={() => handletechnologysChange(technologys.Name)}
+                      label={technologys.Name}
+
+                    />
+
+
+
+                    <img
+                      src={`http://localhost:5300${technologys.team.images[0]}`}
+                      alt={technologys.Name}
+                      className="w-12  object-contain rounded-xs"
+                    />
+
+
+                  </div>
+                ))}
+
+
               </div>
             </ComponentCategory>
           </div>

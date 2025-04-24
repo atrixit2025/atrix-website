@@ -7,24 +7,35 @@ app.use(express.json());
 
 const ServicesRouter = express.Router();
 
+const generateSlug = (name) => {
+  return name
+    .toLowerCase()
+    .replace(/\s+/g, "-")       // spaces to dashes
+    .replace(/[^\w\-]+/g, "");  // remove non-word characters
+};
+
+
 ServicesRouter.post("/add", async (req, res) => {
   const {
     title,
+    Slug: customSlug,
     description,
     Servicesquote,
     category,
     tags,
     portfolioCategories,
     faqCategories,
+    Technology ,
     iconImageId,
     FeaturedImageId,
     Bannerdata,
     WhydoNeed,
     Process,
     WhyAtrix,
-    Headercontent, // Add this
-    gallery,       // Add this
-    texttoimageandimagetotext
+    Headercontent, 
+    texttoimageandimagetotext,
+    Cta ,
+    gallery,       
   } = req.body;
 
 
@@ -44,7 +55,14 @@ ServicesRouter.post("/add", async (req, res) => {
   };
 
   try {
-    // Sanitize all array inputs
+    let slug = customSlug || generateSlug(title);
+    let slugExists = await Services.findOne({ Slug: slug });
+    
+    if (slugExists) {
+      slug = `${slug}-${Date.now()}`;
+    }
+    
+    
     const sanitized = {
       portfolioCategories: validateArray(portfolioCategories, 'portfolioCategories'),
       faqCategories: validateArray(faqCategories, 'faqCategories'),
@@ -58,10 +76,35 @@ ServicesRouter.post("/add", async (req, res) => {
       Headercontent: validateHeadercontent(validateArray(Headercontent, 'Headercontent')),
       gallery: validateGallery(validateArray(gallery, 'gallery'))
     };
-    const validatedTextImage = validateTextToImage(texttoimageandimagetotext);
+    const validateCta = (cta) => {
+      return {
+        title: cta?.title || '',
+        description: cta?.description || ''
+      };
+    };
+  
+    const validateTechnology = (data) => {
+      if (!Array.isArray(data)) return [];
+    
+      return data.map(item => ({
+        title: item.title || '',
+        imageId: item.imageId || null
+      }));
+    };
+  
+    const validateTextToImage = (data) => {
+      if (!Array.isArray(data)) return [];
+      
+      return data.map(item => ({
+        type: ['texttoimage', 'imagetotext'].includes(item.type) ? item.type : 'texttoimage',
+        text: item.text || '',
+        imageId: item.imageId || null
+      })).filter(item => item.text || item.imageId);
+    };
     // Create new service document
     const newServices = new Services({
       title,
+      Slug: slug, 
       description,
       Servicesquote: Servicesquote || "",
       category,
@@ -74,14 +117,16 @@ ServicesRouter.post("/add", async (req, res) => {
       faqCategories: sanitized.faqCategories,
       iconImageId: iconImageId || null,
       FeaturedImage: FeaturedImageId,
-      Headercontent: sanitized.Headercontent, // ✅ Add this
-      gallery: sanitized.gallery,             // ✅ And this
-      texttoimageandimagetotext: validatedTextImage,
+      Headercontent: sanitized.Headercontent, 
+      texttoimageandimagetotext: validateTextToImage(texttoimageandimagetotext),
+      Technology: validateTechnology(Technology),
+      Cta: validateCta(Cta),
+
+      gallery: sanitized.gallery,           
       updatedAt: new Date()
     });
-
-
-
+    
+    
 
     function validateBannerdata(bannerDataArr) {
       if (!Array.isArray(bannerDataArr)) {
@@ -174,23 +219,6 @@ ServicesRouter.post("/add", async (req, res) => {
     }
     
 
-    function validateTextToImage(data) {
-      if (!data) {
-        return {
-          lefttext: "",
-          rightimageId: "",
-          righttext: "",
-          leftimageId: ""
-        };
-      }
-
-      return {
-        lefttext: data.lefttext || "",
-        rightimageId: data.rightimageId || "",
-        righttext: data.righttext || "",
-        leftimageId: data.leftimageId || ""
-      };
-    }
 
     const savedServices = await newServices.save();
     res.status(201).json({
