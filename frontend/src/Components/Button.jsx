@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { RxArrowTopRight } from "react-icons/rx";
 
-const Button = ({ mybtn, targetRef }) => {
+const Button = ({ mybtn, targetRef  }) => {
   const btnRef = useRef(null);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const Button = ({ mybtn, targetRef }) => {
       >
         {mybtn}
         <span>
-          <RxArrowTopRight className="group-hover:rotate-45 group-hover:scale-140 duration-250 text-white" />
+          <RxArrowTopRight id="btnArrow" className="  group-hover:rotate-45 group-hover:scale-140 duration-250 " />
         </span>
       </button>
     </div>

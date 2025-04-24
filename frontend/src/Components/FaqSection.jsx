@@ -20,7 +20,7 @@ const FaqsCard = (props) => {
     }, [isOpen]);
 
     return (
-        <div className="accordian overflow-hidden" key={idx}>
+        <div className={`accordian overflow-hidden  ${isOpen ? "active" : ""}`} key={idx}>
             <h4 
                 className={`accordian-title ${isOpen ? "active" : ""}`}
                 onClick={handleOpenAnswer}
