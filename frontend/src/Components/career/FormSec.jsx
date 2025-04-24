@@ -44,7 +44,7 @@ const CareerFormSec = ({ selectedJob }) => {
   };
 
   return (
-    <div className="pt-40 pb-20">
+    <div  className="pt-40 pb-20">
       <div className="container mx-auto w-[90%]">
         <div className="mb-12">
           <p className="max-w-[800px] mx-auto text-center text-3xl">
