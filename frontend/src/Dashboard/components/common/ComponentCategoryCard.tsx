@@ -1,17 +1,18 @@
 import React from "react";
 import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
+
 interface ComponentCardProps {
   title: string;
-  link: string;
+  link?: string; // Make link optional
   children: React.ReactNode;
-  className?: string; // Additional custom classes for styling
-  desc?: string; // Description text
+  className?: string;
+  desc?: string;
 }
 
 const ComponentCategory: React.FC<ComponentCardProps> = ({
   title,
-  link,
+  link, // Now optional
   children,
   className = "",
   desc = "",
@@ -26,9 +27,14 @@ const ComponentCategory: React.FC<ComponentCardProps> = ({
           {title}
         </h3>
 
-        <div>
-          <Link to={link}><FiPlus className="cursor-pointer" /></Link>
-        </div>
+        {/* Conditionally render the + icon only if link is provided */}
+        {link && (
+          <div>
+            <Link to={link}>
+              <FiPlus className="cursor-pointer" />
+            </Link>
+          </div>
+        )}
       </div>
 
       {/* Card Body */}

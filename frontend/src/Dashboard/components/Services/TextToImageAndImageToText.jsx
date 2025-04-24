@@ -1,242 +1,176 @@
-// import React, { useEffect, useState } from "react";
-// import Label from "../../components/form/Label";
-// import Input from "../../components/form/input/InputField";
-// import TextArea from "../../components/form/input/TextArea";
-// import SelectFileInput from "../form/form-elements/SelectFileInput";
+import React, { useState } from 'react'
+import SelectBulk from '../form/SelectBulk';
+import JoditEditorComp from '../JoditEditorComp/JoditEditorComp';
+import SelectFileInput from '../form/form-elements/SelectFileInput';
+import Label from '../form/Label';
 
-// export default function TextToImageAndImageToText({ onChange, initialData }) {
-//     const [content, setContent] = useState({
-//         leftText: "",
-//         rightImage: null,
-//         rightText: "",
-//         leftImage: null
-//     });
+const TextToImageAndImageToText = () => {
+    const [selectFields, setSelectFields] = useState(() => {
+        return [
+            {
+                id: 1,
+                value: "",
+                options: [
+                    { value: "", label: "Select Option" },
+                    { value: "texttoimage", label: "TexttoImage" },
+                    { value: "imagetotext", label: "ImagetoText" },
 
-//     // Initialize with initialData
-//     useEffect(() => {
-//         if (initialData && initialData.length > 0) {
-//             setContent({
-//                 leftText: initialData.leftText || "",
-//                 rightImage: initialData.rightImage || null,
-//                 rightText: initialData.rightText || "",
-//                 leftImage: initialData.leftImage || null
-//             });
-//         }
-//     }, [initialData]);
-
-//     // Notify parent of changes
-//     useEffect(() => {
-//         if (onChange) {
-//             onChange(content);
-//         }
-//     }, [content,onChange]);
-
-//     // Handler for text changes
-//     const handleTextChange = (field, value) => {
-//         setContent(prev => ({
-//             ...prev,
-//             [field]: value
-//         }));
-//     };
-
-//     // Handler for image changes
-//     const handleImageChange = (field, imageFile) => {
-//         setContent(prev => ({
-//             ...prev,
-//             [field]: imageFile
-//         }));
-//     };
-
-//     return (
-//         <div className="">
-//             <div className="space-y-6 relative">
-//                 <Label>Text to Image & Image to Text</Label>
-
-//                 <div className="border-2 border-gray-700 rounded-xl px-4">
-//                     <div className="space-y-6">
-//                         <div className="mt-6">
-//                             <Label htmlFor="left-text">Left Text</Label>
-//                             <TextArea
-//                                 id="left-text"
-//                                 value={content.leftText}
-//                                 onChange={(value) => handleTextChange("leftText", value)}
-//                                 placeholder="Left Text"
-//                             />
-//                         </div>
+                ],
+                textValue: "",
+                imageFile: null
+            }
+        ];
+    });
 
 
-//                         <div>
-//                             <Label>Right Image</Label>
-//                             <SelectFileInput
-//                                 selected="Set the"
-//                                 NameOffield="Image"
-//                                 onImageUpload={(image) => handleImageChange("rightImage", image)}
-//                                 existingImage={content.rightImage ? [content.rightImage] : []}
-//                             />
-//                         </div>
-
-//                         <div>
-//                             <Label>Left Image</Label>
-//                             <SelectFileInput
-//                                 selected="Set the"
-//                                 NameOffield="Image"
-//                                 onImageUpload={(image) => handleImageChange("leftImage", image)}
-//                                 existingImage={content.leftImage ? [content.leftImage] : []}
-//                             />
-//                         </div>
 
 
-//                         <div className="md:col-span-2">
-//                             <Label htmlFor="right-text">Right Text</Label>
-//                             <TextArea
-//                                 id="right-text"
-//                                 value={content.rightText}
-//                                 onChange={(value) => handleTextChange("rightText", value)}
-//                                 placeholder="Right Text"
-//                             />
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// }
-import React, { useState, useEffect, useCallback } from "react";
-import Label from "../../components/form/Label";
-import TextArea from "../../components/form/input/TextArea";
-import SelectFileInput from "../form/form-elements/SelectFileInput";
-
-export default function TextToImageAndImageToText({ onChange, initialData }) {
-    const normalizedInitialData = initialData ? {
-        leftText: initialData.lefttext || "",
-        rightImage: initialData.rightimageId || null,
-        rightText: initialData.righttext || "",
-        leftImage: initialData.leftimageId || null
-    } : {
-        leftText: "",
-        rightImage: null,
-        rightText: "",
-        leftImage: null
+    const addSelectField = () => {
+        const newId = selectFields.length > 0 ? Math.max(...selectFields.map(f => f.id)) + 1 : 1;
+        setSelectFields([
+            ...selectFields,
+            {
+                id: newId,
+                value: "",
+                options: [
+                    { value: "", label: "Select Option" },
+                    { value: "texttoimage", label: "TexttoImage" },
+                    { value: "imagetotext", label: "ImagetoText" },
+                ],
+                textValue: "",
+                imageFile: null
+            }
+        ]);
+    };
+    const handleSelectChange = (id, value) => {
+        // console.log(`Field ${id} changed to:`, value);
+        setSelectFields(selectFields.map(field =>
+            field.id === id ? { ...field, value } : field
+        ));
     };
 
-    const [content, setContent] = useState(normalizedInitialData);
 
-    const handleTextChange = useCallback((field, value) => {
-        setContent(prev => ({
-            ...prev,
-            [field]: value
-        }));
-    }, []);
-
-    const handleImageChange = useCallback((field, images) => {
-        // console.log("Received images in handleImageChange:", images); // Debug log
-
-        // Handle both array and single image cases
-        let imageId = null;
-        if (Array.isArray(images)) {
-            imageId = images.length > 0 ? images[0]?.imageId || images[0] : null;
-        } else if (typeof images === 'string') {
-            imageId = images;
-        } else if (images && images.imageId) {
-            imageId = images.imageId;
+    const removeSelectField = (id) => {
+        if (selectFields.length > 1) {
+            setSelectFields(selectFields.filter(field => field.id !== id));
         }
+    };
 
-        // console.log("Extracted imageId:", imageId); // Debug log
+    const handleTextChange = (id, newContent) => {
+        setSelectFields(selectFields.map(field =>
+            field.id === id ? { ...field, textContent: newContent } : field
+        ));
+    };
 
-        setContent(prev => ({
-            ...prev,
-            [field]: imageId
+
+    const handleImageChange = (id, imageId, fieldType) => {
+        setSelectFields(selectFields.map(field => {
+            if (field.id === id) {
+                return {
+                    ...field,
+                    imageFile: {
+                        id: imageId,
+                        url: imageId ? `http://localhost:5300/Image/get/${imageId}` : null,
+                        type: fieldType,
+                        name: "Uploaded image"
+                    }
+                };
+            }
+            return field;
         }));
-    }, []);
-    // const handleImageChange = useCallback((field, images) => {
-    //     if (!images || images.length === 0) {
-    //         console.error("No images received");
-    //         return;
-    //     }
-    //     const imageId = images[0].id;
-    //     if (!imageId) {
-    //         console.error("Invalid image ID received:", images);
-    //         return;
-    //     }
-    //     setContent(prev => ({
-    //         ...prev,
-    //         [field]: imageId
-    //     }));
-    // }, []);
-    // Notify parent of changes with the correct property names
-    useEffect(() => {
-        // console.log("Current content state:", content); // Log current state
-
-        if (onChange) {
-            const dataToSend = {
-                lefttext: content.leftText,
-                rightimageId: content.rightImage,
-                righttext: content.rightText,
-                leftimageId: content.leftImage
-            };
-            // console.log("Sending to parent:", dataToSend);/ // Log before sending
-            onChange(dataToSend);
-        }
-    }, [content, onChange]);
-    // console.log("Image changed:", field, images);
-    // console.log("Sending to parent:", {
-    //   lefttext: content.leftText,
-    //   rightimageId: content.rightImage,
-    //   righttext: content.rightText,
-    //   leftimageId: content.leftImage
-    // });
-
+    };
     return (
-        <div className="space-y-6 relative">
-            <Label>Text to Image & Image to Text</Label>
-            <div className="border-2 border-gray-700 rounded-xl px-4 space-y-6">
-                {/* Left Text */}
-                <div className="mt-6">
-                    <Label htmlFor="left-text">Left Text</Label>
-                    <TextArea
-                        id="left-text"
-                        value={content.leftText}
-                        onChange={(value) => handleTextChange("leftText", value)}
-                        placeholder="Left Text"
-                    />
-                </div>
+        <>
+            <Label>Select Field</Label>
+            <div className='border-2 px-4 py-2 rounded-xl border-gray-700 '>
 
-                {/* Right Image */}
-                <div>
-                    <Label>Right Image</Label>
-                    <SelectFileInput
-                        selected="Set the"
-                        NameOffield="Image"
-                        onImageUpload={(imageId) => {
-                            handleImageChange('rightImage', { imageId });
-                            ;
-                        }}
-                        existingImages={content.rightImage ? [{ id: content.rightImage }] : []}
-                    />
-                </div>
+                {selectFields.map((field, index) => (
+                    <div key={field.id} className="card  ">
 
-                {/* Left Image */}
-                <div>
-                    <Label>Left Image</Label>
-                    <SelectFileInput
-                        selected="Set the"
-                        NameOffield="Image"
-                        onImageUpload={(images) => handleImageChange("leftImage", images)}
-                        existingImages={content.leftImage ? [{ id: content.leftImage }] : []}
-                    />
-                </div>
 
-                {/* Right Text */}
-                <div className="md:col-span-2">
-                    <Label htmlFor="right-text">Right Text</Label>
-                    <TextArea
-                        id="right-text"
-                        value={content.rightText}
-                        onChange={(value) => handleTextChange("rightText", value)}
-                        placeholder="Right Text"
-                    />
-                </div>
+                        <div className="card-body  bg-zinc-800 rounded-xl p-4">
+                            <div className="form-group   flex justify-between items-center gap-5 mb-2">
+                                <div className='rounded-lg border border-gray-300 w-full '>
+                                    <SelectBulk
+                                        options={field.options}
+                                        value={field.value}
+                                        onChange={(value) => handleSelectChange(field.id, value)}
+                                        className="form-control "
+                                    />
+                                </div>
+                                <div className="flex items-center gap-5">
+                                    {index > 0 && (
+                                        <button
+                                            onClick={() => removeSelectField(field.id)}
+                                            className="text-red-500 bg-(--white)  font-bold w-8 rounded-lg  text-2xl cursor-pointer"
+                                        >
+                                            -
+                                        </button>
+                                    )}
+                                    {index === selectFields.length - 1 && (
+                                        <button
+                                            onClick={addSelectField}
+                                            className="bg-(--white) text-(--black) font-bold w-8 rounded-lg  text-2xl cursor-pointer"
+                                        >
+                                            +
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+
+
+                            {field.value?.value === "texttoimage" && (
+                                <div className="form-group  space-y-6">
+
+                                    <Label >Text</Label>
+                                    <JoditEditorComp
+                                        value={field.textContent || ""}
+                                        onChange={(newContent) => handleTextChange(field.id, newContent)}
+
+                                    />
+                                    <Label>Image</Label>
+                                    <SelectFileInput
+                                        selected="Set the "
+                                        NameOffield="Image"
+                                        onImageUpload={(imageId, imageType) =>
+                                            handleImageChange(field.id, imageId, imageType || field.value?.value)
+                                        }
+                                        imageId={field.imageFile?.id}
+                                        existingImage={field.imageFile}
+                                    />
+                                </div>
+                            )}
+
+                            {field.value?.value === "imagetotext" && (
+                                <div className="form-group space-y-6 ">
+
+                                    <Label>Image</Label>
+                                    <SelectFileInput
+                                        selected="Set the "
+                                        NameOffield="Image"
+                                        onImageUpload={(imageId, imageType) =>
+                                            handleImageChange(field.id, imageId, imageType || field.value?.value)
+                                        }
+                                        imageId={field.imageFile?.id}
+                                        existingImage={field.imageFile}
+                                    />
+                                    <Label >Text</Label>
+                                    <JoditEditorComp
+                                        value={field.textContent || ""}
+                                        onChange={(newContent) => handleTextChange(field.id, newContent)}
+
+                                    />
+
+                                </div>
+                            )}
+
+
+                        </div>
+                    </div>
+                ))}
             </div>
-        </div>
-    );
+        </>
+    )
 }
+
+export default TextToImageAndImageToText
