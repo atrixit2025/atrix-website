@@ -1,5 +1,6 @@
 import React from 'react'
 import ColoredButton from '../ColoredButton'
+import Button from '../Button'
 
 const ServiceFrom = () => {
     return (
@@ -30,7 +31,8 @@ const ServiceFrom = () => {
                         </div>
 
                         <div className=' flex justify-end mt-10'>
-                            <button type="submit" className=" bg-gradient-to-r from-blue-400 to-green-400 text-white py-1  ms-auto   px-9 rounded-full text-lg cursor-pointer ">Let's Us Begin</button>
+                            {/* <button type="submit" className=" bg-gradient-to-r from-blue-400 to-green-400 text-white py-1  ms-auto   px-9 rounded-full text-lg cursor-pointer ">Let's Us Begin</button> */}
+                            <Button mybtn="Let's Us Begin" btnLink="#" />
 
                         </div>
 

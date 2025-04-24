@@ -27,42 +27,42 @@ const ServicesData = [
         all_services: [
           {
             service_name: "Logo Design",
-            service_desc: "Creating distinctive marks that capture your brand essence and values",
+            service_desc: "Creating distinctive, memorable logos that perfectly capture your brand's essence and values, designed to be timeless and effective across all platforms and applications.",
             hover_image: hover_img
           },
           {
             service_name: "Brand Identity",
-            service_desc: "Developing core brand elements including positioning, voice, and visual direction",
+            service_desc: "Developing comprehensive visual systems including logos, color palettes, typography and graphic elements for cohesive brand recognition across all touchpoints.",
             hover_image: hover_img
           },
           {
             service_name: "Business Cards",
-            service_desc: "Designing professional business cards that make strong first impressions",
+            service_desc: "Designing premium business cards with careful attention to typography, materials and finishes that reflect your brand's professionalism and quality.",
             hover_image: hover_img
           },
           {
             service_name: "Packaging Design",
-            service_desc: "Designing product packaging that stands out on shelves and communicates quality",
+            service_desc: "Creating innovative packaging solutions that stand out on shelves while effectively communicating product quality and brand values through design.",
             hover_image: hover_img
           },
           {
             service_name: "Brochures",
-            service_desc: "Creating informative and visually appealing marketing brochures",
+            service_desc: "Developing visually stunning marketing brochures with strategic information hierarchy and compelling layouts that guide readers through your brand story.",
             hover_image: hover_img
           },
           {
             service_name: "Social Media Graphics",
-            service_desc: "Designing engaging visuals for all your social media platforms",
+            service_desc: "Designing platform-optimized social media visuals that capture attention and maintain consistent brand recognition across all digital channels.",
             hover_image: hover_img
           },
           {
             service_name: "Print Advertising",
-            service_desc: "Creating eye-catching print ads for magazines, newspapers and billboards",
+            service_desc: "Creating eye-catching print ads for magazines, newspapers and outdoor media that communicate quickly and leave lasting impressions.",
             hover_image: hover_img
           },
           {
             service_name: "Brand Guidelines",
-            service_desc: "Documenting standards for consistent brand application across all mediums",
+            service_desc: "Documenting comprehensive standards for logo usage, colors, typography and imagery to ensure consistent brand application across all mediums.",
             hover_image: hover_img
           }
         ]
@@ -72,15 +72,15 @@ const ServicesData = [
     cards_sec_data: [
       {
         cardTitle: "Competitive Differentiation",
-        desc: "In saturated markets, distinctive branding helps you stand out from competitors and be immediately recognizable to customers. In saturated markets, distinctive branding helps you stand out from competitors and be immediately recognizable to customers."
+        desc: "Distinctive branding helps you stand out in crowded markets and become instantly recognizable to your target audience."
       },
       {
         cardTitle: "Customer Connection",
-        desc: "Strategic branding creates emotional resonance with your audience, fostering loyalty and advocacy through consistent visual storytelling."
+        desc: "Strategic branding creates emotional resonance that fosters loyalty and advocacy through consistent visual storytelling."
       },
       {
         cardTitle: "Business Value",
-        desc: "Professional branding increases perceived value by up to 40%, allowing premium pricing and contributing to long-term business equity."
+        desc: "Professional branding increases perceived value by up to 40%, supporting premium pricing and long-term equity."
       }
     ],
     why_atrix_heading: "Our Branding Process",
@@ -93,23 +93,23 @@ const ServicesData = [
     process_cards: [
       {
         title: "Discovery & Research",
-        desc: "Conducting market analysis, competitor audits and stakeholder interviews to establish strategic foundation"
+        desc: "Conducting market analysis and competitor audits to establish strategic foundation."
       },
       {
         title: "Strategy Development",
-        desc: "Defining brand architecture, personality traits, messaging framework and visual direction"
+        desc: "Defining brand personality, messaging framework and visual direction."
       },
       {
         title: "Identity Design",
-        desc: "Creating logo systems, color palettes, typography and supporting graphic elements"
+        desc: "Creating logo systems, color palettes and supporting graphic elements."
       },
       {
         title: "Application Design",
-        desc: "Extending the identity across digital, print and environmental touchpoints"
+        desc: "Extending the identity across digital, print and environmental touchpoints."
       },
       {
         title: "Guidelines & Handoff",
-        desc: "Documenting usage standards and providing organized asset packages"
+        desc: "Documenting usage standards and providing organized asset packages."
       }
     ],
     quote: "A brand is the sum total of how someone perceives a particular organization. Branding is about shaping that perception.",
@@ -157,34 +157,34 @@ const ServicesData = [
         all_services: [
           {
             service_name: "SEO Services",
-            service_desc: "Improving organic visibility through technical, on-page and off-page SEO strategies",
+            service_desc: "Improving organic search visibility through technical optimization, keyword research and content strategies to drive sustainable, long-term traffic and conversions.",
             hover_image: hover_img
           },
           {
             service_name: "Social Media Marketing",
-            service_desc: "Developing platform-specific strategies to build engaged communities",
+            service_desc: "Developing platform-specific strategies to build engaged communities through compelling content and targeted advertising across major social networks.",
             hover_image: hover_img
           },
           {
             service_name: "PPC Advertising",
-            service_desc: "Managing high-converting campaigns across Google, Bing and social platforms",
+            service_desc: "Managing high-converting paid campaigns on Google, Bing and social platforms with continuous optimization for maximum ROI.",
             hover_image: hover_img
           },
           {
             service_name: "Content Marketing",
-            service_desc: "Creating valuable, relevant content that attracts and nurtures ideal customers",
+            service_desc: "Creating valuable, SEO-optimized content that attracts and nurtures ideal customers through every stage of the buyer's journey.",
             hover_image: hover_img
           },
           {
             service_name: "Email Marketing",
-            service_desc: "Designing automated email sequences that convert subscribers to customers",
+            service_desc: "Designing automated email sequences and newsletters that convert subscribers into loyal customers with personalized messaging.",
             hover_image: hover_img
           },
           {
             service_name: "Influencer Marketing",
-            service_desc: "Leveraging influencer partnerships to expand brand reach and credibility",
+            service_desc: "Leveraging authentic influencer partnerships to expand brand reach and credibility through trusted voices in your industry.",
             hover_image: hover_img
-          },
+          }
         ]
       }
     ],
@@ -192,11 +192,11 @@ const ServicesData = [
     cards_sec_data: [
       {
         cardTitle: "Precision Targeting",
-        desc: "Reach your ideal customers based on demographics, interests, behaviors and intent signals with pixel-perfect accuracy."
+        desc: "Reach your ideal customers based on demographics, interests and behaviors with pixel-perfect accuracy."
       },
       {
         cardTitle: "Performance Transparency",
-        desc: "Real-time analytics provide clear visibility into what's working and ROI across all channels and campaigns."
+        desc: "Real-time analytics provide clear visibility into campaign performance and ROI across all channels."
       },
       {
         cardTitle: "Scalable Growth",
@@ -213,23 +213,23 @@ const ServicesData = [
     process_cards: [
       {
         title: "Audience Research",
-        desc: "Identifying buyer personas, pain points, customer journeys and digital behaviors"
+        desc: "Identifying buyer personas, pain points and digital behaviors."
       },
       {
         title: "Channel Strategy",
-        desc: "Selecting optimal marketing mix based on goals, audience and competitive landscape"
+        desc: "Selecting optimal marketing mix based on goals and audience."
       },
       {
         title: "Campaign Development",
-        desc: "Creating targeted messaging, offers and conversion paths for each channel"
+        desc: "Creating targeted messaging and conversion paths."
       },
       {
         title: "Execution & Monitoring",
-        desc: "Launching campaigns with real-time performance tracking and adjustment"
+        desc: "Launching campaigns with real-time performance tracking."
       },
       {
         title: "Optimization",
-        desc: "Continuous testing and refinement to improve results over time"
+        desc: "Continuous testing and refinement for better results."
       }
     ],
     quote: "Digital marketing is about having the right conversation with the right person at the right time.",
@@ -273,29 +273,28 @@ const ServicesData = [
     sub_service: [
       {
         services_heading: "Production Services",
-        services_desc: "Full-service production capabilities from concept development through final delivery across all media formats.",
+        services_desc: "End-to-end production solutions tailored to your brand's needs—from concept development to final delivery across photography, videography and multimedia formats.",
         all_services: [
           {
             service_name: "Product Photography",
-            service_desc: "Professional product shots that highlight features and quality",
+            service_desc: "Creating high-resolution product images that highlight features and quality, with studio lighting and professional styling for e-commerce and marketing materials.",
             hover_image: hover_img
           },
           {
             service_name: "Corporate Videos",
-            service_desc: "Creating compelling brand videos, testimonials, training and company profiles",
+            service_desc: "Producing professional corporate videos including testimonials, training content and company profiles with polished scripting, filming and editing.",
             hover_image: hover_img
           },
           {
             service_name: "Commercial Photography",
-            service_desc: "High-quality images for advertising campaigns and marketing materials",
+            service_desc: "Capturing striking images for advertising campaigns with tailored lighting, composition and art direction for maximum visual impact.",
             hover_image: hover_img
           },
           {
             service_name: "Drone Videography",
-            service_desc: "Capturing stunning aerial perspectives for unique establishing shots and b-roll",
+            service_desc: "Providing stunning aerial footage for real estate, events and promotional content captured by licensed drone operators.",
             hover_image: hover_img
-          },
-
+          }
         ]
       }
     ],
@@ -303,15 +302,15 @@ const ServicesData = [
     cards_sec_data: [
       {
         cardTitle: "Brand Perception",
-        desc: "High-quality production values immediately elevate how customers perceive your brand quality and professionalism."
+        desc: "High-quality visuals immediately elevate how customers perceive your brand quality and professionalism."
       },
       {
         cardTitle: "Engagement Impact",
-        desc: "Video content generates 1200% more shares than text and images combined across social platforms."
+        desc: "Video content generates significantly more shares and engagement than text or images alone."
       },
       {
         cardTitle: "Content Versatility",
-        desc: "Professional assets can be repurposed across websites, social media, ads, presentations and print materials."
+        desc: "Professional assets can be repurposed across websites, social media, ads and print materials."
       }
     ],
     why_atrix_heading: "Our Production Approach",
@@ -324,23 +323,23 @@ const ServicesData = [
     process_cards: [
       {
         title: "Creative Briefing",
-        desc: "Defining project objectives, target audience, key messages and distribution channels"
+        desc: "Defining project objectives, audience and key messages."
       },
       {
         title: "Pre-Production",
-        desc: "Scripting, storyboarding, location scouting, talent casting and scheduling"
+        desc: "Scripting, storyboarding and planning all shoot details."
       },
       {
         title: "Production",
-        desc: "Professional filming with proper lighting, cinema cameras, audio recording and direction"
+        desc: "Professional filming with proper lighting and equipment."
       },
       {
         title: "Post-Production",
-        desc: "Editing, color correction, sound design, graphics and final mastering"
+        desc: "Editing, color correction and final mastering."
       },
       {
         title: "Delivery",
-        desc: "Providing optimized files for all required platforms and formats"
+        desc: "Providing optimized files for all platforms."
       }
     ],
     quote: "Great visual content doesn't just capture attention - it captures hearts, minds and market share.",
@@ -388,47 +387,27 @@ const ServicesData = [
         all_services: [
           {
             service_name: "Website Development",
-            service_desc: "Building responsive, performant websites with modern frameworks like React and Vue",
-            hover_image: hover_img
-          },
-          {
-            service_name: "Drone Videography",
-            service_desc: "Capturing stunning aerial perspectives for unique establishing shots and b-roll",
+            service_desc: "Building responsive, performant websites with modern frameworks like React and Vue, optimized for speed, SEO and user experience across all devices.",
             hover_image: hover_img
           },
           {
             service_name: "E-commerce Solutions",
-            service_desc: "Developing online stores with Shopify, WooCommerce or custom platforms",
+            service_desc: "Developing feature-rich online stores with Shopify, WooCommerce or custom platforms, including payment integration and inventory management.",
             hover_image: hover_img
           },
           {
             service_name: "Web Applications",
-            service_desc: "Creating custom business tools, dashboards and SaaS platforms",
+            service_desc: "Creating custom business tools, dashboards and SaaS platforms with robust backend functionality and intuitive interfaces.",
             hover_image: hover_img
           },
           {
             service_name: "CMS Development",
-            service_desc: "Implementing WordPress, Drupal or other content management systems",
+            service_desc: "Implementing WordPress, Drupal or other content management systems for easy content updates and publishing workflows.",
             hover_image: hover_img
           },
           {
             service_name: "API Integration",
-            service_desc: "Connecting your website with third-party services and databases",
-            hover_image: hover_img
-          },
-          {
-            service_name: "Frontend Development",
-            service_desc: "Creating intuitive user interfaces with modern JavaScript frameworks",
-            hover_image: hover_img
-          },
-          {
-            service_name: "Backend Development",
-            service_desc: "Building robust server-side applications and databases",
-            hover_image: hover_img
-          },
-          {
-            service_name: "Database Management",
-            service_desc: "Designing and optimizing database structures for performance and scalability",
+            service_desc: "Connecting your website with third-party services, payment gateways and databases for seamless functionality.",
             hover_image: hover_img
           }
         ]
@@ -438,15 +417,15 @@ const ServicesData = [
     cards_sec_data: [
       {
         cardTitle: "Mobile-First Approach",
-        desc: "We prioritize mobile experience in all our builds, with responsive designs that adapt perfectly to all devices."
+        desc: "Responsive designs that adapt perfectly to all devices, prioritizing mobile user experience."
       },
       {
         cardTitle: "Performance Optimized",
-        desc: "Fast-loading sites (under 2s) improve user experience and search rankings while reducing bounce rates."
+        desc: "Fast-loading sites improve user experience and search rankings while reducing bounce rates."
       },
       {
         cardTitle: "Future-Proof Architecture",
-        desc: "Clean, modular codebase allows for easy updates, maintenance and scalability as your business grows."
+        desc: "Clean, modular codebase allows for easy updates and scalability as your business grows."
       }
     ],
     why_atrix_heading: "Our Development Philosophy",
@@ -459,23 +438,23 @@ const ServicesData = [
     process_cards: [
       {
         title: "Discovery & Planning",
-        desc: "Defining project requirements, user flows, technical specifications and success metrics"
+        desc: "Defining requirements, user flows and technical specifications."
       },
       {
         title: "Design & Prototyping",
-        desc: "Creating wireframes, UI designs and interactive prototypes for feedback"
+        desc: "Creating wireframes and UI designs for feedback."
       },
       {
         title: "Development",
-        desc: "Building features with clean, documented code following best practices"
+        desc: "Building features with clean, documented code."
       },
       {
         title: "Testing & QA",
-        desc: "Rigorous testing across devices, browsers and user scenarios"
+        desc: "Rigorous testing across devices and scenarios."
       },
       {
         title: "Launch & Optimization",
-        desc: "Deploying with monitoring and continuous improvement based on analytics"
+        desc: "Deploying with monitoring for improvements."
       }
     ],
     quote: "A great website is the digital storefront of your business - we build experiences that welcome visitors and convert them into customers.",
@@ -523,25 +502,24 @@ const ServicesData = [
         all_services: [
           {
             service_name: "3D Animation",
-            service_desc: "Creating lifelike character animations, product visualizations and environments",
+            service_desc: "Creating lifelike character animations, product visualizations and environments with realistic physics and movement for immersive experiences.",
             hover_image: hover_img
           },
           {
             service_name: "Motion Graphics",
-            service_desc: "Designing dynamic animated graphics for explainers, titles and presentations",
+            service_desc: "Designing dynamic animated graphics for explainer videos, titles and presentations that communicate complex ideas simply and effectively.",
             hover_image: hover_img
           },
           {
             service_name: "Video Editing",
-            service_desc: "Professional editing and assembly of video footage for maximum impact",
+            service_desc: "Professional editing and assembly of video footage with seamless transitions, pacing and storytelling for maximum impact.",
             hover_image: hover_img
           },
           {
             service_name: "Color Correction",
-            service_desc: "Enhancing and standardizing color across all footage for professional results",
+            service_desc: "Enhancing and standardizing color across all footage for professional, consistent results that match brand aesthetics.",
             hover_image: hover_img
-          },
-
+          }
         ]
       }
     ],
@@ -549,15 +527,15 @@ const ServicesData = [
     cards_sec_data: [
       {
         cardTitle: "Enhanced Storytelling",
-        desc: "Visual effects allow you to tell stories and explain concepts that would be impossible to capture with live action alone."
+        desc: "Visual effects allow you to tell stories and explain concepts that would be impossible with live action alone."
       },
       {
         cardTitle: "Cost Efficiency",
-        desc: "VFX can often achieve results more affordably than practical effects, especially for complex or dangerous scenarios."
+        desc: "VFX can often achieve results more affordably than practical effects, especially for complex scenarios."
       },
       {
         cardTitle: "Creative Freedom",
-        desc: "Break free from physical limitations and create anything imaginable through CGI and compositing techniques."
+        desc: "Break free from physical limitations and create anything imaginable through CGI and compositing."
       }
     ],
     why_atrix_heading: "Our VFX Approach",
@@ -570,23 +548,23 @@ const ServicesData = [
     process_cards: [
       {
         title: "Concept Development",
-        desc: "Planning the visual approach through storyboards, animatics and style frames"
+        desc: "Planning visual approach through storyboards and style frames."
       },
       {
         title: "Asset Creation",
-        desc: "Modeling, texturing and rigging 3D assets or preparing motion graphics elements"
+        desc: "Modeling, texturing and rigging 3D assets."
       },
       {
         title: "Animation & Simulation",
-        desc: "Bringing assets to life through movement and physics-based behaviors"
+        desc: "Bringing assets to life through movement."
       },
       {
         title: "Lighting & Rendering",
-        desc: "Setting up proper lighting conditions and generating final frames"
+        desc: "Setting up proper lighting conditions."
       },
       {
         title: "Compositing",
-        desc: "Integrating all elements with live action footage for seamless results"
+        desc: "Integrating elements with live footage."
       }
     ],
     quote: "The best visual effects are invisible - they enhance reality without calling attention to themselves.",
@@ -634,37 +612,22 @@ const ServicesData = [
         all_services: [
           {
             service_name: "Permanent Staffing",
-            service_desc: "Finding the right long-term candidates through targeted search and vetting",
+            service_desc: "Finding the right long-term candidates through targeted search and comprehensive vetting processes to ensure perfect cultural and skills fit.",
             hover_image: hover_img
           },
           {
             service_name: "Temporary Staffing",
-            service_desc: "Providing qualified temporary professionals for project-based needs",
+            service_desc: "Providing qualified temporary professionals for project-based needs, seasonal demands and special initiatives with flexible terms.",
             hover_image: hover_img
           },
           {
             service_name: "Executive Search",
-            service_desc: "Identifying and recruiting C-level and senior leadership talent",
+            service_desc: "Identifying and recruiting C-level and senior leadership talent through discreet, targeted searches and thorough assessment processes.",
             hover_image: hover_img
           },
           {
             service_name: "Technical Recruitment",
-            service_desc: "Specialized sourcing for IT, engineering and STEM positions",
-            hover_image: hover_img
-          },
-          {
-            service_name: "Payroll Management",
-            service_desc: "Handling payroll processing and compliance for temporary staff",
-            hover_image: hover_img
-          },
-          {
-            service_name: "HR Consulting",
-            service_desc: "Developing workforce strategies, compensation plans and hiring processes",
-            hover_image: hover_img
-          },
-          {
-            service_name: "Talent Management",
-            service_desc: "Implementing strategies to attract, develop and retain top talent",
+            service_desc: "Specialized sourcing for IT, engineering and STEM positions with deep understanding of technical skills and industry requirements.",
             hover_image: hover_img
           }
         ]
@@ -674,15 +637,15 @@ const ServicesData = [
     cards_sec_data: [
       {
         cardTitle: "Reduced Hiring Time",
-        desc: "Our extensive networks and streamlined processes fill positions 40% faster than traditional hiring methods."
+        desc: "Our extensive networks and processes fill positions 40% faster than traditional hiring methods."
       },
       {
         cardTitle: "Quality Candidates",
-        desc: "Rigorous screening ensures only the most qualified, culture-fit candidates are presented for consideration."
+        desc: "Rigorous screening ensures only the most qualified, culture-fit candidates are presented."
       },
       {
         cardTitle: "Cost Efficiency",
-        desc: "Reduce bad hires and turnover costs while optimizing recruitment spend through strategic partnerships."
+        desc: "Reduce bad hires and turnover costs while optimizing recruitment spend."
       }
     ],
     why_atrix_heading: "Our Staffing Methodology",
@@ -695,23 +658,23 @@ const ServicesData = [
     process_cards: [
       {
         title: "Needs Assessment",
-        desc: "Understanding role requirements, team dynamics and organizational culture"
+        desc: "Understanding role requirements and team dynamics."
       },
       {
         title: "Talent Sourcing",
-        desc: "Identifying potential candidates through networks, databases and targeted outreach"
+        desc: "Identifying potential candidates through networks."
       },
       {
         title: "Screening & Evaluation",
-        desc: "Conducting interviews, skills assessments and reference checks"
+        desc: "Conducting interviews and skills assessments."
       },
       {
         title: "Candidate Presentation",
-        desc: "Submitting qualified candidates with detailed profiles and recommendations"
+        desc: "Submitting qualified candidates with profiles."
       },
       {
         title: "Onboarding Support",
-        desc: "Facilitating smooth transitions and ensuring successful placements"
+        desc: "Facilitating smooth transitions for new hires."
       }
     ],
     quote: "The right talent transforms organizations - we don't just fill positions, we build high-performing teams.",
@@ -759,20 +722,19 @@ const ServicesData = [
         all_services: [
           {
             service_name: "Supply Chain Management",
-            service_desc: "Comprehensive oversight and optimization of your entire supply network",
+            service_desc: "Comprehensive oversight and optimization of your entire supply network from procurement to distribution for maximum efficiency.",
             hover_image: hover_img
           },
           {
             service_name: "Warehousing",
-            service_desc: "Improving storage efficiency, picking processes and inventory accuracy",
+            service_desc: "Improving storage efficiency, inventory accuracy and picking processes through optimized warehouse layout and management systems.",
             hover_image: hover_img
           },
           {
             service_name: "Transportation",
-            service_desc: "Optimizing routing, carrier selection and freight consolidation",
+            service_desc: "Optimizing routing, carrier selection and freight consolidation to reduce costs while improving delivery reliability.",
             hover_image: hover_img
-          },
-
+          }
         ]
       }
     ],
@@ -780,15 +742,15 @@ const ServicesData = [
     cards_sec_data: [
       {
         cardTitle: "Cost Reduction",
-        desc: "Our solutions typically reduce logistics costs by 15-30% through network optimization and process improvements."
+        desc: "Our solutions typically reduce logistics costs by 15-30% through network optimization."
       },
       {
         cardTitle: "Service Improvement",
-        desc: "Enhance customer satisfaction through faster, more reliable deliveries and inventory availability."
+        desc: "Enhance customer satisfaction through faster, more reliable deliveries."
       },
       {
         cardTitle: "Scalability",
-        desc: "Flexible solutions grow with your business, accommodating seasonal peaks and geographic expansion."
+        desc: "Flexible solutions grow with your business needs and expansion."
       }
     ],
     why_atrix_heading: "Our Logistics Approach",
@@ -801,23 +763,23 @@ const ServicesData = [
     process_cards: [
       {
         title: "Current State Analysis",
-        desc: "Mapping existing processes, costs and performance metrics"
+        desc: "Mapping existing processes and performance."
       },
       {
         title: "Opportunity Assessment",
-        desc: "Identifying improvement areas through data analysis and benchmarking"
+        desc: "Identifying improvement areas through data."
       },
       {
         title: "Solution Design",
-        desc: "Developing optimized network, transportation and inventory strategies"
+        desc: "Developing optimized network strategies."
       },
       {
         title: "Implementation",
-        desc: "Executing changes with minimal disruption to ongoing operations"
+        desc: "Executing changes with minimal disruption."
       },
       {
         title: "Continuous Improvement",
-        desc: "Monitoring performance and refining strategies over time"
+        desc: "Monitoring and refining strategies."
       }
     ],
     quote: "Efficient logistics operations are the invisible backbone of successful businesses - when they work well, no one notices, but when they fail, everyone feels the impact.",
@@ -850,5 +812,7 @@ const ServicesData = [
     ]
   }
 ];
+
+
 
 export default ServicesData;
