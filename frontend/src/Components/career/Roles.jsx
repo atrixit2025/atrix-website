@@ -6,11 +6,12 @@ import { BsPersonWorkspace } from "react-icons/bs";
 
 
 const rolesData = [
-  { title: "Graphic Designer", desc: "Lorem ipsum...", btnLink: "#" , date:"12/12/2025",Education:"12th", experince:"min-1year"  },
-  { title: "Web Development", desc: "Lorem ipsum...", btnLink: "#" , date:"12/12/2025",Education:"12th", experince:"min-1year" },
-  { title: "SEO", desc: "Lorem ipsum...", btnLink: "#" , date:"12/12/2025",Education:"12th", experince:"min-1year" },
-  { title: "Broker", desc: "Lorem ipsum...", btnLink: "#" , date:"12/12/2025",Education:"12th", experince:"min-1year" },
-  { title: "content writer", desc: "Lorem ipsum...", btnLink: "#" , date:"12/12/2025",Education:"12th", experince:"min-1year" },
+
+  { title: "Graphic Designer", desc: "  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet commodi debitis molestiae impedit praesentium quisquam vitae nostrum, esse a assumenda ex autem cupiditate vero aspernatur, quos voluptatum tenetur quae facilis?Dicta modi voluptas numquam labore, tempora quisquam officia, dolorum animi vero aut corporis ut nobis ipsa voluptate? Quaerat", btnLink: "#" , date:"12/12/2025",Education:"12th", experince:"min-1year"  },
+  { title: "Web Development", desc: "  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet commodi debitis molestiae impedit praesentium quisquam vitae nostrum, esse a assumenda ex autem cupiditate veraerat eum nostrum iusto, quasi rerum harum aperiam eligendi at voluptatum modi deserunt.", btnLink: "#" , date:"12/12/2025",Education:"12th", experince:"min-1year" },
+  { title: "SEO", desc: "  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet commodi debitis molestiae impedit praesentium quisquam vitae nostrum, esse a assumenda ex autem cupiditate vero aspernatur, quos voluptatum tenetur quae facilis?Dicta modi voluptas numquam labore, tempora quisquam officia, dolorum animi vero aut corporis ut nobis ipsa voluptate? Quaerat eum nostrum iusto, quasi rerum harum aperiam eligendi at voluptatum modi deserunt.", btnLink: "#" , date:"12/12/2025",Education:"12th", experince:"min-1year" },
+  { title: "Broker", desc: "  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet commodi debitis molestiae impedit praesentium quisquam vitae nostrum, esse a assumenda ex autem cupiditate vero aspernatur, quos voluptatum tenetur quae facilis?Dicta modi voluptas numquam labore, tempora quisquam officia, dolorum animi vero aut corporis ut nobis ipsa voluptate? Quaerat eum nostrum iusto, quasi rerum harum aperiam eligendi at voluptatum modi deserunt.", btnLink: "#" , date:"12/12/2025",Education:"12th", experince:"min-1year" },
+  { title: "content writer", desc: "  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet commodi debitis molestiae impedit praesentium quisquam vitae nostrum, esse a assumenda ex autem cupiditate vero aspernatur, quos voluptatum tenetur quae facilis?Dicta modi voluptas numquam labore, tempora quisquam officia, dolorum animi vero aut corporis ut nobis ipsa voluptate? Quaerat eum nostrum iusto, quasi rerum harum aperiam eligendi at voluptatum modi deserunt.", btnLink: "#" , date:"12/12/2025",Education:"12th", experince:"min-1year" },
 ];
 
 const Roles = forwardRef(({ onApplyClick }, ref) => {
@@ -42,11 +43,11 @@ const Roles = forwardRef(({ onApplyClick }, ref) => {
               <div className="role-card">
                 <h3 className="text-3xl font-semibold">{item.title}</h3>
                 <p className=' flex  gap-16  pt-3' >
-                  <p className='flex gap-2 items-center' > <BsCalendar2Date />
+                  <p className='flex gap-2 items-center' >Published:-<BsCalendar2Date />
                   {item.date}</p>
-                  <p className='flex gap-2 items-center' >  <FaGraduationCap />
+                  <p className='flex gap-2 items-center' >Education:-<FaGraduationCap />
                   {item.Education}</p>
-                  <p className='flex gap-2 items-center' ><BsPersonWorkspace />
+                  <p className='flex gap-2 items-center' >Experience:-<BsPersonWorkspace />
                   {item.experince}</p>
                   
                 </p>
