@@ -3,17 +3,33 @@ import img_1 from "../../src/assets/DTS_Influencer.webp";
 // import img_2 from '../../assets/infulancer.png'
 import Asset1 from "../assets/ServicesIcons/Asset 1.svg";
 import Asset2 from "../assets/ServicesIcons/Asset 2.svg";
+import Asset3 from "../assets/ServicesIcons/Asset 3.svg";
+import Asset4 from "../assets/ServicesIcons/Asset 4.svg";
+import Asset5 from "../assets/ServicesIcons/Asset 5.svg";
+import Asset6 from "../assets/ServicesIcons/Asset 6.svg";
+import Asset7 from "../assets/ServicesIcons/Asset 7.svg";
+import graphic from "../assets/ServicesImage/graphic.svg";
 import hover_img from '../assets/service-hover.jpg';
 import image_1 from '../assets/DTS_Influencer.webp'
 import image_2 from '../assets/infulancer.png'
+// import graphic from "../assets/ServicesImage/graphic.svg";
+import dev from "../assets/ServicesImage/dev.svg";
+import log from "../assets/ServicesImage/log.svg";
+import marketing from "../assets/ServicesImage/marketing.svg";
+import staffing from "../assets/ServicesImage/staffing.svg";
+import visual from "../assets/ServicesImage/visual.svg";
+import video from "../assets/ServicesImage/video.svg";
 
 
 
 
 const ServicesData = [
   {
-    service_id: "Branding-Graphic-Design",
+    service_id: "branding-raphic-design",
     service_title: "Branding/Graphic Design",
+    main_desc: "Did you know? 94% of first impressions are design-related! That’s why strong visuals are key to brand success. Graphic design isn’t just about looks - it’s about delivering your message effectively. At Atrix IT Solutions, we bring your vision to life with top-notch designs tailored to your needs. Whether it’s branding, websites, infographics, or eBooks, our expert team creates visually captivating content that engages and inspires. Let’s design something impactful!",
+    tags: ["Branding", "Logo Design", "Packaging", "Product Design", "Print Media", "Advertisement", "Ui/UX", "Social Media Design"],
+    main_image: graphic,
     icon: Asset1,
     category: "Branding/Graphic Design",
     heading_1: "Crafting Memorable Brand Identities",
@@ -142,9 +158,130 @@ const ServicesData = [
     ]
   },
   {
+    service_id: "web-development",
+    service_title: "Web Development",
+    main_desc: "Create stunning, user-friendly websites that captivate, engage, and drive real results with our experts! Whether you need a new website, a redesign, or custom development, we ensure a seamless experience with modern, responsive designs tailored to your brand. Our expert team focuses on creating visually appealing and high-performing websites that boost visibility, attract customers, and grow your business effortlessly. So, take your online presence to the next level!",
+    tags: ["AI", "Metaverse", "Salesforce", "CRM", "CMS", "PHP", "Laravel", "React Js", "Node Js "],
+    main_image: dev,
+    icon: Asset2,
+    category: "Web Development",
+    heading_1: "Custom Digital Experiences That Drive Results",
+    description_1: "We design and build high-performance websites and web applications that combine stunning aesthetics with seamless functionality, optimized for user experience, conversions and business growth.",
+    img_1: image_1,
+    img_2: image_2,
+    sub_service: [
+      {
+        services_heading: "Web Development Services",
+        services_desc: "Complete website solutions from simple brochure sites to complex web applications and ecommerce platforms.",
+        all_services: [
+          {
+            service_name: "Website Development",
+            service_desc: "Building responsive, performant websites with modern frameworks like React and Vue, optimized for speed, SEO and user experience across all devices.",
+            hover_image: hover_img
+          },
+          {
+            service_name: "E-commerce Solutions",
+            service_desc: "Developing feature-rich online stores with Shopify, WooCommerce or custom platforms, including payment integration and inventory management.",
+            hover_image: hover_img
+          },
+          {
+            service_name: "Web Applications",
+            service_desc: "Creating custom business tools, dashboards and SaaS platforms with robust backend functionality and intuitive interfaces.",
+            hover_image: hover_img
+          },
+          {
+            service_name: "CMS Development",
+            service_desc: "Implementing WordPress, Drupal or other content management systems for easy content updates and publishing workflows.",
+            hover_image: hover_img
+          },
+          {
+            service_name: "API Integration",
+            service_desc: "Connecting your website with third-party services, payment gateways and databases for seamless functionality.",
+            hover_image: hover_img
+          }
+        ]
+      }
+    ],
+    cards_sec_heading: "Web Development Benefits",
+    cards_sec_data: [
+      {
+        cardTitle: "Mobile-First Approach",
+        desc: "Responsive designs that adapt perfectly to all devices, prioritizing mobile user experience."
+      },
+      {
+        cardTitle: "Performance Optimized",
+        desc: "Fast-loading sites improve user experience and search rankings while reducing bounce rates."
+      },
+      {
+        cardTitle: "Future-Proof Architecture",
+        desc: "Clean, modular codebase allows for easy updates and scalability as your business grows."
+      }
+    ],
+    why_atrix_heading: "Our Development Philosophy",
+    why_atrix_subheading: "Engineering excellence meets business objectives",
+    why_atrix_desc: [
+      "We approach development as problem-solving - creating technical solutions that address specific business challenges and opportunities.",
+      "Our process emphasizes planning, quality assurance and long-term maintainability over quick fixes and technical debt.",
+      "The team stays current with evolving web standards, security practices and emerging technologies to deliver future-ready solutions."
+    ],
+    process_cards: [
+      {
+        title: "Discovery & Planning",
+        desc: "Defining requirements, user flows and technical specifications."
+      },
+      {
+        title: "Design & Prototyping",
+        desc: "Creating wireframes and UI designs for feedback."
+      },
+      {
+        title: "Development",
+        desc: "Building features with clean, documented code."
+      },
+      {
+        title: "Testing & QA",
+        desc: "Rigorous testing across devices and scenarios."
+      },
+      {
+        title: "Launch & Optimization",
+        desc: "Deploying with monitoring for improvements."
+      }
+    ],
+    quote: "A great website is the digital storefront of your business - we build experiences that welcome visitors and convert them into customers.",
+    faqs: [
+      {
+        category: "Web Development FAQs",
+        content: [
+          {
+            q: "What technologies do you typically use?",
+            a: "Our stack includes React, Vue, Node.js, Laravel, WordPress, Shopify and various databases depending on project needs."
+          },
+          {
+            q: "Can you redesign our existing website?",
+            a: "Yes, we frequently modernize legacy sites with improved design, functionality and technical architecture."
+          },
+          {
+            q: "How do you ensure website security?",
+            a: "We implement security best practices including regular updates, secure coding standards, HTTPS, and protection against common vulnerabilities."
+          },
+          {
+            q: "What about website maintenance?",
+            a: "We offer ongoing maintenance plans covering updates, backups, security monitoring and content changes as needed."
+          },
+          {
+            q: "How long does website development take?",
+            a: "Timelines vary by complexity - simple sites take 4-6 weeks, while complex web apps may require 3-6 months of development."
+          }
+        ]
+      }
+    ]
+  },
+  {
     service_id: "Digital-Marketing",
     service_title: "Digital Marketing",
-    icon: Asset1,
+    icon: Asset3,
+    main_desc: "At Atrix IT Solutions, get your own digital marketing strategy built from scratch. Our expert team crafts tailored campaigns to drive traffic, engage customers, and convert leads into loyal clients. Whether it’s SEO, social media marketing, or content creation, we focus on delivering real, measurable results that help your brand stand out. Ready to take your business to the next level? Partner with us today and watch your online presence grow!",
+    tags: ["Marketing", "Strategy", "SEO", "SMO", "Digital Ads", "Content Creation"],
+    main_image: marketing,
     category: "Digital Marketing",
     heading_1: "Data-Driven Digital Growth Strategies",
     description_1: "We develop performance-focused digital marketing campaigns that drive qualified traffic, generate leads, and deliver measurable ROI through precisely targeted channels and continuous optimization.",
@@ -262,234 +399,12 @@ const ServicesData = [
     ]
   },
   {
-    service_id: "Photo-Video-Production",
-    service_title: "Photo/Video Production",
-    icon: Asset1,
-    category: "Media Production",
-    heading_1: "Professional Visual Storytelling",
-    description_1: "We produce high-quality photography and videography that showcases your products, services and brand story with cinematic quality and strategic messaging tailored to your marketing objectives.",
-    img_1: image_1,
-    img_2: image_2,
-    sub_service: [
-      {
-        services_heading: "Production Services",
-        services_desc: "End-to-end production solutions tailored to your brand's needs—from concept development to final delivery across photography, videography and multimedia formats.",
-        all_services: [
-          {
-            service_name: "Product Photography",
-            service_desc: "Creating high-resolution product images that highlight features and quality, with studio lighting and professional styling for e-commerce and marketing materials.",
-            hover_image: hover_img
-          },
-          {
-            service_name: "Corporate Videos",
-            service_desc: "Producing professional corporate videos including testimonials, training content and company profiles with polished scripting, filming and editing.",
-            hover_image: hover_img
-          },
-          {
-            service_name: "Commercial Photography",
-            service_desc: "Capturing striking images for advertising campaigns with tailored lighting, composition and art direction for maximum visual impact.",
-            hover_image: hover_img
-          },
-          {
-            service_name: "Drone Videography",
-            service_desc: "Providing stunning aerial footage for real estate, events and promotional content captured by licensed drone operators.",
-            hover_image: hover_img
-          }
-        ]
-      }
-    ],
-    cards_sec_heading: "Why Professional Production Matters",
-    cards_sec_data: [
-      {
-        cardTitle: "Brand Perception",
-        desc: "High-quality visuals immediately elevate how customers perceive your brand quality and professionalism."
-      },
-      {
-        cardTitle: "Engagement Impact",
-        desc: "Video content generates significantly more shares and engagement than text or images alone."
-      },
-      {
-        cardTitle: "Content Versatility",
-        desc: "Professional assets can be repurposed across websites, social media, ads and print materials."
-      }
-    ],
-    why_atrix_heading: "Our Production Approach",
-    why_atrix_subheading: "Cinematic quality meets commercial objectives",
-    why_atrix_desc: [
-      "We combine artistic vision with technical expertise to create visuals that capture attention while clearly communicating your key messages.",
-      "Our productions are strategically planned with your marketing goals and distribution channels in mind from the outset.",
-      "The team includes award-winning directors, cinematographers and editors using professional cinema equipment for broadcast-quality results."
-    ],
-    process_cards: [
-      {
-        title: "Creative Briefing",
-        desc: "Defining project objectives, audience and key messages."
-      },
-      {
-        title: "Pre-Production",
-        desc: "Scripting, storyboarding and planning all shoot details."
-      },
-      {
-        title: "Production",
-        desc: "Professional filming with proper lighting and equipment."
-      },
-      {
-        title: "Post-Production",
-        desc: "Editing, color correction and final mastering."
-      },
-      {
-        title: "Delivery",
-        desc: "Providing optimized files for all platforms."
-      }
-    ],
-    quote: "Great visual content doesn't just capture attention - it captures hearts, minds and market share.",
-    faqs: [
-      {
-        category: "Production FAQs",
-        content: [
-          {
-            q: "What equipment do you use for video production?",
-            a: "We shoot with professional cinema cameras (RED, ARRI, Blackmagic), prime lenses, and professional lighting/audio gear for broadcast-quality results."
-          },
-          {
-            q: "Can you help develop concepts and scripts?",
-            a: "Absolutely - our creative team develops strategic concepts and complete scripts tailored to your marketing objectives and brand voice."
-          },
-          {
-            q: "How long does a typical video project take?",
-            a: "Most corporate video projects take 4-6 weeks from concept to final delivery, depending on complexity, locations and revisions."
-          },
-          {
-            q: "Do you provide actors/models or locations?",
-            a: "Yes, we have access to professional talent pools and location resources to meet all production needs."
-          },
-          {
-            q: "What file formats do you deliver?",
-            a: "We provide web-optimized files (MP4, MOV) along with high-resolution masters suitable for broadcast or print use."
-          }
-        ]
-      }
-    ]
-  },
-  {
-    service_id: "Web-Development",
-    service_title: "Web Development",
-    icon: Asset1,
-    category: "Web Development",
-    heading_1: "Custom Digital Experiences That Drive Results",
-    description_1: "We design and build high-performance websites and web applications that combine stunning aesthetics with seamless functionality, optimized for user experience, conversions and business growth.",
-    img_1: image_1,
-    img_2: image_2,
-    sub_service: [
-      {
-        services_heading: "Web Development Services",
-        services_desc: "Complete website solutions from simple brochure sites to complex web applications and ecommerce platforms.",
-        all_services: [
-          {
-            service_name: "Website Development",
-            service_desc: "Building responsive, performant websites with modern frameworks like React and Vue, optimized for speed, SEO and user experience across all devices.",
-            hover_image: hover_img
-          },
-          {
-            service_name: "E-commerce Solutions",
-            service_desc: "Developing feature-rich online stores with Shopify, WooCommerce or custom platforms, including payment integration and inventory management.",
-            hover_image: hover_img
-          },
-          {
-            service_name: "Web Applications",
-            service_desc: "Creating custom business tools, dashboards and SaaS platforms with robust backend functionality and intuitive interfaces.",
-            hover_image: hover_img
-          },
-          {
-            service_name: "CMS Development",
-            service_desc: "Implementing WordPress, Drupal or other content management systems for easy content updates and publishing workflows.",
-            hover_image: hover_img
-          },
-          {
-            service_name: "API Integration",
-            service_desc: "Connecting your website with third-party services, payment gateways and databases for seamless functionality.",
-            hover_image: hover_img
-          }
-        ]
-      }
-    ],
-    cards_sec_heading: "Web Development Benefits",
-    cards_sec_data: [
-      {
-        cardTitle: "Mobile-First Approach",
-        desc: "Responsive designs that adapt perfectly to all devices, prioritizing mobile user experience."
-      },
-      {
-        cardTitle: "Performance Optimized",
-        desc: "Fast-loading sites improve user experience and search rankings while reducing bounce rates."
-      },
-      {
-        cardTitle: "Future-Proof Architecture",
-        desc: "Clean, modular codebase allows for easy updates and scalability as your business grows."
-      }
-    ],
-    why_atrix_heading: "Our Development Philosophy",
-    why_atrix_subheading: "Engineering excellence meets business objectives",
-    why_atrix_desc: [
-      "We approach development as problem-solving - creating technical solutions that address specific business challenges and opportunities.",
-      "Our process emphasizes planning, quality assurance and long-term maintainability over quick fixes and technical debt.",
-      "The team stays current with evolving web standards, security practices and emerging technologies to deliver future-ready solutions."
-    ],
-    process_cards: [
-      {
-        title: "Discovery & Planning",
-        desc: "Defining requirements, user flows and technical specifications."
-      },
-      {
-        title: "Design & Prototyping",
-        desc: "Creating wireframes and UI designs for feedback."
-      },
-      {
-        title: "Development",
-        desc: "Building features with clean, documented code."
-      },
-      {
-        title: "Testing & QA",
-        desc: "Rigorous testing across devices and scenarios."
-      },
-      {
-        title: "Launch & Optimization",
-        desc: "Deploying with monitoring for improvements."
-      }
-    ],
-    quote: "A great website is the digital storefront of your business - we build experiences that welcome visitors and convert them into customers.",
-    faqs: [
-      {
-        category: "Web Development FAQs",
-        content: [
-          {
-            q: "What technologies do you typically use?",
-            a: "Our stack includes React, Vue, Node.js, Laravel, WordPress, Shopify and various databases depending on project needs."
-          },
-          {
-            q: "Can you redesign our existing website?",
-            a: "Yes, we frequently modernize legacy sites with improved design, functionality and technical architecture."
-          },
-          {
-            q: "How do you ensure website security?",
-            a: "We implement security best practices including regular updates, secure coding standards, HTTPS, and protection against common vulnerabilities."
-          },
-          {
-            q: "What about website maintenance?",
-            a: "We offer ongoing maintenance plans covering updates, backups, security monitoring and content changes as needed."
-          },
-          {
-            q: "How long does website development take?",
-            a: "Timelines vary by complexity - simple sites take 4-6 weeks, while complex web apps may require 3-6 months of development."
-          }
-        ]
-      }
-    ]
-  },
-  {
     service_id: "Visual-Effects",
     service_title: "Visual Effects",
-    icon: Asset1,
+    icon: Asset4,
+    main_desc: "Looking to bring your ideas to life with stunning visual effects? At Atrix IT Solutions, we specialize in creating eye-catching VFX that captivate and engage your audience. Whether it's for film, advertisements, or digital media, our expert team delivers cutting-edge effects that enhance your project and leave a lasting impact. Transform your vision into reality with Atrix IT Solutions today and make your visuals unforgettable!  ",
+    tags: ["VFX", "SFX", "3D", "Editing", "Composition", "Grading", "Motion Graphics",],
+    main_image: visual,
     category: "Visual Effects",
     heading_1: "Cutting-Edge Visual Effects",
     description_1: "We create stunning visual effects that bring imagination to life, from subtle enhancements to full CGI environments, helping brands tell compelling stories through cinematic visuals.",
@@ -597,9 +512,126 @@ const ServicesData = [
     ]
   },
   {
+    service_id: "Photo-Video-Production",
+    service_title: "Photo/Video Production",
+    icon: Asset5,
+    main_desc: "Your moments deserve the spotlight! At Atrix IT Solutions, we specialize in photo and videography that showcases your vision in the most stunning way. From events and branding to creative projects, our team ensures every shot is perfect. With high-quality photography and dynamic videography, we make your ideas come to life. Ready to capture the perfect shot? Partner with Atrix IT Solutions and let’s create something amazing together! ",
+    tags: ["Corporate Shoot", "Product Shoot", "Food Photography", "Commercial Shoot "],
+    main_image:  video,
+    category: "Media Production",
+    heading_1: "Professional Visual Storytelling",
+    description_1: "We produce high-quality photography and videography that showcases your products, services and brand story with cinematic quality and strategic messaging tailored to your marketing objectives.",
+    img_1: image_1,
+    img_2: image_2,
+    sub_service: [
+      {
+        services_heading: "Production Services",
+        services_desc: "End-to-end production solutions tailored to your brand's needs—from concept development to final delivery across photography, videography and multimedia formats.",
+        all_services: [
+          {
+            service_name: "Product Photography",
+            service_desc: "Creating high-resolution product images that highlight features and quality, with studio lighting and professional styling for e-commerce and marketing materials.",
+            hover_image: hover_img
+          },
+          {
+            service_name: "Corporate Videos",
+            service_desc: "Producing professional corporate videos including testimonials, training content and company profiles with polished scripting, filming and editing.",
+            hover_image: hover_img
+          },
+          {
+            service_name: "Commercial Photography",
+            service_desc: "Capturing striking images for advertising campaigns with tailored lighting, composition and art direction for maximum visual impact.",
+            hover_image: hover_img
+          },
+          {
+            service_name: "Drone Videography",
+            service_desc: "Providing stunning aerial footage for real estate, events and promotional content captured by licensed drone operators.",
+            hover_image: hover_img
+          }
+        ]
+      }
+    ],
+    cards_sec_heading: "Why Professional Production Matters",
+    cards_sec_data: [
+      {
+        cardTitle: "Brand Perception",
+        desc: "High-quality visuals immediately elevate how customers perceive your brand quality and professionalism."
+      },
+      {
+        cardTitle: "Engagement Impact",
+        desc: "Video content generates significantly more shares and engagement than text or images alone."
+      },
+      {
+        cardTitle: "Content Versatility",
+        desc: "Professional assets can be repurposed across websites, social media, ads and print materials."
+      }
+    ],
+    why_atrix_heading: "Our Production Approach",
+    why_atrix_subheading: "Cinematic quality meets commercial objectives",
+    why_atrix_desc: [
+      "We combine artistic vision with technical expertise to create visuals that capture attention while clearly communicating your key messages.",
+      "Our productions are strategically planned with your marketing goals and distribution channels in mind from the outset.",
+      "The team includes award-winning directors, cinematographers and editors using professional cinema equipment for broadcast-quality results."
+    ],
+    process_cards: [
+      {
+        title: "Creative Briefing",
+        desc: "Defining project objectives, audience and key messages."
+      },
+      {
+        title: "Pre-Production",
+        desc: "Scripting, storyboarding and planning all shoot details."
+      },
+      {
+        title: "Production",
+        desc: "Professional filming with proper lighting and equipment."
+      },
+      {
+        title: "Post-Production",
+        desc: "Editing, color correction and final mastering."
+      },
+      {
+        title: "Delivery",
+        desc: "Providing optimized files for all platforms."
+      }
+    ],
+    quote: "Great visual content doesn't just capture attention - it captures hearts, minds and market share.",
+    faqs: [
+      {
+        category: "Production FAQs",
+        content: [
+          {
+            q: "What equipment do you use for video production?",
+            a: "We shoot with professional cinema cameras (RED, ARRI, Blackmagic), prime lenses, and professional lighting/audio gear for broadcast-quality results."
+          },
+          {
+            q: "Can you help develop concepts and scripts?",
+            a: "Absolutely - our creative team develops strategic concepts and complete scripts tailored to your marketing objectives and brand voice."
+          },
+          {
+            q: "How long does a typical video project take?",
+            a: "Most corporate video projects take 4-6 weeks from concept to final delivery, depending on complexity, locations and revisions."
+          },
+          {
+            q: "Do you provide actors/models or locations?",
+            a: "Yes, we have access to professional talent pools and location resources to meet all production needs."
+          },
+          {
+            q: "What file formats do you deliver?",
+            a: "We provide web-optimized files (MP4, MOV) along with high-resolution masters suitable for broadcast or print use."
+          }
+        ]
+      }
+    ]
+  },
+  {
     service_id: "Staffing",
     service_title: "Staffing",
-    icon: Asset1,
+    icon: Asset6,
+    main_desc:
+      "Ready to boost your business with a flexible workforce? Our solution helps you create a staffing plan that adapts to your needs, saving you money and ensuring compliance. With our platform, you can improve efficiency, reduce costs, and stay ahead in today’s fast-paced market. Empower your business with a staffing strategy designed to grow and succeed!",
+    tags: ["Us Staffing", "Us Recruiter", "Payroll", "Talent Acquisition ", "Us Hiring"],
+    main_image: staffing,
     category: "Staffing Solutions",
     heading_1: "Strategic Talent Acquisition",
     description_1: "We connect businesses with top-tier talent through customized staffing solutions that address immediate hiring needs while building long-term workforce strategies for sustainable growth.",
@@ -709,7 +741,10 @@ const ServicesData = [
   {
     service_id: "Logistics",
     service_title: "Logistics",
-    icon: Asset1,
+    icon: Asset7,
+    main_desc: "Atrix is a modern logistics firm dedicated to providing our clients throughout the world with outstanding service and cutting-edge solutions. Having worked in the transportation and logistics industry for five years, we have made a name for ourselves as a reliable partner. Road freight is in our extensive service offering, which enables us to satisfy the varied demands of companies in a number of sectors.",
+    tags: ["OTR", "Drayage", "Jctrans"],
+    main_image: log,
     category: "Logistics Solutions",
     heading_1: "Optimized Supply Chain Solutions",
     description_1: "We design and implement logistics strategies that streamline operations, reduce costs and improve service levels through intelligent network design, transportation optimization and technology integration.",

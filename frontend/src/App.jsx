@@ -75,17 +75,18 @@ export default function App() {
           <Route path='/portfolio-single' element={< PortfolioSingle />} /> */}
           <Route path="/portfolio" element={< Portfolio_page />} />
           <Route path="/portfolio/:project_id" element={< PortfolioSingle />} />
-          <Route path="/OurServices" element={<OurServices/>} />
+          <Route path="/our-services" element={<OurServices/>} />
           <Route path="/Behance" element={<Behance/>} />
           <Route path="/Service" element={<Service/>} />
 
-          <Route path="/OurServices/:service_id" element={<Service/>} />
+          <Route path="/our-services/:service_id" element={<Service/>} />
+         
 
           <Route path="/ServiceBackend" element={<ServiceBackend/>} />
          
           <Route path="/:title" element={<SinglePageBackend/>} />
           
-          <Route path="/Service/:project_cat/:project_id" element={<Service/>} />
+          {/* <Route path="/Service/:project_cat/:project_id" element={<Service/>} /> */}
 
 
 

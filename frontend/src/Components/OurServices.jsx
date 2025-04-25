@@ -15,78 +15,80 @@ import visual from "../assets/ServicesImage/visual.svg";
 import video from "../assets/ServicesImage/video.svg";
 import "../CSS/one.css";
 import Button from "./Button";
+import ServicesData from "../data/ServicesData";
+import { Link } from "react-router-dom";
 
 
 
-const services = [
-  {
-    id: 1,
-    image: graphic,
-    icon: Asset1,
-    title: "Branding/Graphic Design",
-    description:
-      "Did you know? 94% of first impressions are design-related! That’s why strong visuals are key to brand success. Graphic design isn’t just about looks - it’s about delivering your message effectively. At Atrix IT Solutions, we bring your vision to life with top-notch designs tailored to your needs. Whether it’s branding, websites, infographics, or eBooks, our expert team creates visually captivating content that engages and inspires. Let’s design something impactful!",
-    button: ["Branding", "Logo Design", "Packaging", "Product Design", "Print Media", "Advertisement", "Ui/UX", "Social Media Design"],
-  },
-  {
-    id: 2,
-    image: dev,
-    icon: Asset2,
-    title: "Web Development",
-    description:
-      "Create stunning, user-friendly websites that captivate, engage, and drive real results with our experts! Whether you need a new website, a redesign, or custom development, we ensure a seamless experience with modern, responsive designs tailored to your brand. Our expert team focuses on creating visually appealing and high-performing websites that boost visibility, attract customers, and grow your business effortlessly. So, take your online presence to the next level!",
-    button: ["AI", "Metaverse", "Salesforce", "CRM", "CMS", "PHP", "Laravel", "React Js", "Node Js "],
+// const services = [
+//   {
+//     id: 1,
+//     image: graphic,
+//     icon: Asset1,
+//     title: "Branding/Graphic Design",
+//     description:
+//       "Did you know? 94% of first impressions are design-related! That’s why strong visuals are key to brand success. Graphic design isn’t just about looks - it’s about delivering your message effectively. At Atrix IT Solutions, we bring your vision to life with top-notch designs tailored to your needs. Whether it’s branding, websites, infographics, or eBooks, our expert team creates visually captivating content that engages and inspires. Let’s design something impactful!",
+//     button: ["Branding", "Logo Design", "Packaging", "Product Design", "Print Media", "Advertisement", "Ui/UX", "Social Media Design"],
+//   },
+//   {
+//     id: 2,
+//     image: dev,
+//     icon: Asset2,
+//     title: "Web Development",
+//     description:
+//       "Create stunning, user-friendly websites that captivate, engage, and drive real results with our experts! Whether you need a new website, a redesign, or custom development, we ensure a seamless experience with modern, responsive designs tailored to your brand. Our expert team focuses on creating visually appealing and high-performing websites that boost visibility, attract customers, and grow your business effortlessly. So, take your online presence to the next level!",
+//     button: ["AI", "Metaverse", "Salesforce", "CRM", "CMS", "PHP", "Laravel", "React Js", "Node Js "],
 
-  },
-  {
-    id: 3,
-    image: marketing,
-    icon: Asset3,   
-    title: "Digital Marketing",
-    description:
-      "At Atrix IT Solutions, get your own digital marketing strategy built from scratch. Our expert team crafts tailored campaigns to drive traffic, engage customers, and convert leads into loyal clients. Whether it’s SEO, social media marketing, or content creation, we focus on delivering real, measurable results that help your brand stand out. Ready to take your business to the next level? Partner with us today and watch your online presence grow!",
-    button: ["Marketing", "Strategy", "SEO", "SMO", "Digital Ads", "Content Creation"],
-  },
-  {
-    id: 4,
-    image: visual,
-    icon: Asset5,
-    title: "Visual Effects",
-    description:
-      "Looking to bring your ideas to life with stunning visual effects? At Atrix IT Solutions, we specialize in creating eye-catching VFX that captivate and engage your audience. Whether it's for film, advertisements, or digital media, our expert team delivers cutting-edge effects that enhance your project and leave a lasting impact. Transform your vision into reality with Atrix IT Solutions today and make your visuals unforgettable!  ",
-    button: ["VFX", "SFX", "3D", "Editing", "Composition", "Grading", "Motion Graphics",],
+//   },
+//   {
+//     id: 3,
+//     image: marketing,
+//     icon: Asset3,   
+//     title: "Digital Marketing",
+//     description:
+//       "At Atrix IT Solutions, get your own digital marketing strategy built from scratch. Our expert team crafts tailored campaigns to drive traffic, engage customers, and convert leads into loyal clients. Whether it’s SEO, social media marketing, or content creation, we focus on delivering real, measurable results that help your brand stand out. Ready to take your business to the next level? Partner with us today and watch your online presence grow!",
+//     button: ["Marketing", "Strategy", "SEO", "SMO", "Digital Ads", "Content Creation"],
+//   },
+//   {
+//     id: 4,
+//     image: visual,
+//     icon: Asset5,
+//     title: "Visual Effects",
+//     description:
+//       "Looking to bring your ideas to life with stunning visual effects? At Atrix IT Solutions, we specialize in creating eye-catching VFX that captivate and engage your audience. Whether it's for film, advertisements, or digital media, our expert team delivers cutting-edge effects that enhance your project and leave a lasting impact. Transform your vision into reality with Atrix IT Solutions today and make your visuals unforgettable!  ",
+//     button: ["VFX", "SFX", "3D", "Editing", "Composition", "Grading", "Motion Graphics",],
 
-  },
-  {
-    id: 5,
-    image: video,
-    icon: Asset4,
-    title: "Photo/Video Production ",
-    description:
-      "Your moments deserve the spotlight! At Atrix IT Solutions, we specialize in photo and videography that showcases your vision in the most stunning way. From events and branding to creative projects, our team ensures every shot is perfect. With high-quality photography and dynamic videography, we make your ideas come to life. Ready to capture the perfect shot? Partner with Atrix IT Solutions and let’s create something amazing together!",
-    button: ["Corporate Shoot", "Product Shoot", "Food Photography", "Commercial Shoot "],
-  },
-  {
-    id: 6,
-    image: staffing,
-    icon: Asset6,
-    title: "Staffing",
-    description:
-      "Ready to boost your business with a flexible workforce? Our solution helps you create a staffing plan that adapts to your needs, saving you money and ensuring compliance. With our platform, you can improve efficiency, reduce costs, and stay ahead in today’s fast-paced market. Empower your business with a staffing strategy designed to grow and succeed!",
-    button: ["Us Staffing", "Us Recruiter", "Payroll", "Talent Acquisition ", "Us Hiring"]
+//   },
+//   {
+//     id: 5,
+//     image: video,
+//     icon: Asset4,
+//     title: "Photo/Video Production ",
+//     description:
+//       "Your moments deserve the spotlight! At Atrix IT Solutions, we specialize in photo and videography that showcases your vision in the most stunning way. From events and branding to creative projects, our team ensures every shot is perfect. With high-quality photography and dynamic videography, we make your ideas come to life. Ready to capture the perfect shot? Partner with Atrix IT Solutions and let’s create something amazing together!",
+//     button: ["Corporate Shoot", "Product Shoot", "Food Photography", "Commercial Shoot "],
+//   },
+//   {
+//     id: 6,
+//     image: staffing,
+//     icon: Asset6,
+//     title: "Staffing",
+//     description:
+//       "Ready to boost your business with a flexible workforce? Our solution helps you create a staffing plan that adapts to your needs, saving you money and ensuring compliance. With our platform, you can improve efficiency, reduce costs, and stay ahead in today’s fast-paced market. Empower your business with a staffing strategy designed to grow and succeed!",
+//     button: ["Us Staffing", "Us Recruiter", "Payroll", "Talent Acquisition ", "Us Hiring"]
 
-  },
-  {
-    id: 7,
-    image: log,
-    icon: Asset7,
-    title: "Logistics ",
-    description:
-      "Atrix is a modern logistics firm dedicated to providing our clients throughout the world with outstanding service and cutting-edge solutions. Having worked in the transportation and logistics industry for five years, we have made a name for ourselves as a reliable partner. Road freight is in our extensive service offering, which enables us to satisfy the varied demands of companies in a number of sectors.",
-    button: ["OTR", "Drayage", "Jctrans"],
+//   },
+//   {
+//     id: 7,
+//     image: log,
+//     icon: Asset7,
+//     title: "Logistics ",
+//     description:
+//       "Atrix is a modern logistics firm dedicated to providing our clients throughout the world with outstanding service and cutting-edge solutions. Having worked in the transportation and logistics industry for five years, we have made a name for ourselves as a reliable partner. Road freight is in our extensive service offering, which enables us to satisfy the varied demands of companies in a number of sectors.",
+//     button: ["OTR", "Drayage", "Jctrans"],
 
-  },
-];
+//   },
+// ];
 
 const OurServices = () => {
   useEffect(() => {
@@ -149,37 +151,38 @@ const OurServices = () => {
           <div className="flex flex-col md:flex-row   gap-2  mt-10  md:mt-20 ">
 
             <div className="w-full md:w-1/2  ">
-              {services.map((service) => (
+              {ServicesData.map((item , index) => (
                 <div
-                  key={service.id}
+                  key={index}
                   className="service-card opacity-30 transition-opacity duration-300 mt-20 md:mt-40 first:mt-0 "
                 >
                   <div className="flex justify-center items-center pb-5">
-                    <img key={service.id}
-                      src={service.image}
-                      alt={service.title}
+                    <img key={index}
+                      src={item.main_image}
+                      alt={item.service_title}
                       className="md:hidden flex h-80 w-auto"
                     />
                   </div>
-                  <div className="flex  items-center gap-3 ">
+                  <Link to={`our-services/${item.service_id}`} className="flex  items-center gap-3 ">
                     <div className="min-w-12 h-12 relative flex justify-center items-center bg-gradient-to-r from-(--blue) to-(--green) rounded-full translate-y-2 mr-1">
-                      <img src={service.icon} className="w-6 h-6 filter grayscale-100 brightness-800" />
+                      <img src={item.icon} className="w-6 h-6 filter grayscale-100 brightness-800" />
                       {/* <div className="inline-block ml-2 mt-2 text-2xl">{service.icon}</div> */}
                     </div>
-                    <h3 className="text-xl md:text-4xl font-bold mt-4 ">{service.title}</h3>
-                  </div>
+                    <h3 className="text-xl md:text-4xl font-bold mt-4 ">{item.service_title} </h3>
+                  </Link>
                   <p className="text-sm md:text-lg mt-6 md:mt-9 text-(--white) leading-7 md:leading-8">
-                    {service.description}
+                  {item.main_desc}
                   </p>
-                  {service.button && (
+
+                  
+                  {item.tags && (
                     <div className="flex flex-wrap mt-6 md:mt-10">
-                      {service.button.map((btn, i) => (
+                      {item.tags.map((tag, i) => (
                         <div
                           key={i}
                           className="custom-gradient duration-300 rounded-full px-4 py-1 md:px-6 md:py-2 mt-2 mr-2"
-
                         >
-                          {btn}
+                          {tag}
                         </div>
                       ))}
                     </div>
@@ -191,11 +194,11 @@ const OurServices = () => {
 
             <div className="w-1/2  relative md:block   hidden  ">
               <div className="sticky top-[25vh]  w-[75%] min-h-[400px] ">
-                {services.map((serviceimg, index) => (
+                {ServicesData.map((serviceimg, index) => (
                   <img
-                    key={serviceimg.id}
-                    src={serviceimg.image}
-                    alt={serviceimg.title}
+                    key={index}
+                    src={serviceimg.main_image}
+                    alt={serviceimg.service_title}
                     className="serviceImg absolute z-10 left-1/4  h-full w-full opacity-0 transition-all duration-200"
                   />
                 ))}
