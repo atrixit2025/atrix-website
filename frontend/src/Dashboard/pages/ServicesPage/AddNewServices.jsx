@@ -58,13 +58,9 @@ export default function AddNewServices() {
     WhyAtrix: [],
     Process: [],
     Headercontent: [],
+    Cta: "",
     gallery: [],
-    textToImage: {
-      leftText: "",
-      rightImage: null,
-      rightText: "",
-      leftImage: null
-    },
+    texttoimageandimagetotext: [],
     showHeadercontent: false,
     showGallery: false,
     showTextToImage: true,
@@ -72,6 +68,7 @@ export default function AddNewServices() {
 
   const { Services } = location.state || {};
 
+  // console.log("texttoimageandimagetotext", formData.texttoimageandimagetotext)
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -118,20 +115,37 @@ export default function AddNewServices() {
         description: Services.description || "",
         Servicesquote: Services.Servicesquote || "",
         selectedCategories: Services.category ? Services.category.split(", ") : [],
-        selectedPortfolioCategories: Services.portfolioCategories
-          ? Services.portfolioCategories.split(", ")
-          : [],
-        selectedfaqCategories: Services.faqCategories
-          ? Services.faqCategories.split(", ")
-          : [],
-        selectedtechnology: Services.Technology
-          ? Services.Technology.map((tech) => tech.title)  
-          : [],
+        selectedPortfolioCategories: Array.isArray(Services.portfolioCategories)
+        ? Services.portfolioCategories // If it's an array, use it directly
+        : Services.portfolioCategories
+        ? Services.portfolioCategories.split(", ") // If it's a string, split it
+        : [],
+        selectedfaqCategories: Array.isArray(Services.faqCategories)
+        ? Services.faqCategories // If it's an array, use it directly
+        : Services.faqCategories
+        ? Services.faqCategories.split(", ") // If it's a string, split it
+        : [],  
+      
+        // selectedfaqCategories: Services.faqCategories? Services.faqCategories.split(", ")
+        //   : [],
+        // selectedtechnology: Services.Technology
+        //   ? Services.Technology.map((tech) => tech.title)
+        //   : [],
+      selectedtechnology: Services.Technology
+        ? Services.Technology.map(tech => ({
+            _id: tech._id,
+            title: tech.title,
+            imageId: tech.imageId,
+            // Add the full technology object for comparison
+            ...tech
+          }))
+        : [],
 
         tags: Services.tags || [],
         iconImageId: Services.iconImageId || null,
         imageId: Services.FeaturedImage || null,
         Bannerdata: Services.Bannerdata || [],
+        texttoimageandimagetotext: Services.texttoimageandimagetotext || [],
         WhydoNeed: Services.WhydoNeed || [],
         WhyAtrix: Services.WhyAtrix || [],
         Process: Services.Process || [],
@@ -190,9 +204,11 @@ export default function AddNewServices() {
       WhyAtrix,
       Process,
       customSlug,
+      Cta,
       Headercontent,
       gallery,
-      textToImage
+      texttoimageandimagetotext,
+      selectedtechnology
     } = formData;
 
     if (!title || !description || selectedCategories.length === 0 || !imageId) {
@@ -200,6 +216,13 @@ export default function AddNewServices() {
       return;
     }
 
+    const transformTextToImageData = (fields) => {
+      return fields.map(field => ({
+        type: field?.value?.value || "",
+        text: field?.textContent || "",
+        imageId: field?.imageFile?.id || null
+      }));
+    };
     const bannerData = formData.Banner.map(item => {
       if (item.type === "slider") {
         return {
@@ -230,7 +253,11 @@ export default function AddNewServices() {
       category: selectedCategories.join(", "),
       portfolioCategories: formData.selectedPortfolioCategories,
       faqCategories: formData.selectedfaqCategories,
-      Technology:formData.selectedtechnology,
+      Technology: formData.selectedtechnology.map(tech => ({
+        title: tech.Name || tech.title,
+        imageId: tech.imageId,
+        _id: tech._id
+      })),
 
       tags: tags.filter(tag => tag.trim() !== ""),
       iconImageId,
@@ -248,14 +275,15 @@ export default function AddNewServices() {
           imageId: item.imageId
         }))
       }] : [],
-   
+      texttoimageandimagetotext: transformTextToImageData(formData.texttoimageandimagetotext),
 
       gallery: formData.gallery.map(img => ({ imageId: img.imageId })),
-      Cta:formData.Cta
+      Cta
 
     };
 
 
+// console.log("texttoimageandimagetotext",texttoimageandimagetotext)
 
     try {
       if (Services) {
@@ -314,14 +342,20 @@ export default function AddNewServices() {
     setFormData(prev => ({ ...prev, Process: processData }));
   };
 
-    const handleTextToImageChange =()=>{
-
-    }
+  const handleTextToImageChange = useCallback((data) => {
+    setFormData(prev => ({
+      ...prev,
+      texttoimageandimagetotext: data
+    }));
+  },[]);
   const handleHeadercontentChange = (content) => {
     // console.log("content received:", content);
 
     setFormData(prev => ({ ...prev, Headercontent: content }));
   };
+  const handleCtaChange = useCallback((data) => {
+    setFormData(prev => ({ ...prev, Cta: data }));
+  }, []);
 
   const handleGalleryChange = (images) => {
     // console.log("Gallery images received:", images);
@@ -359,16 +393,19 @@ export default function AddNewServices() {
     fetchData();
   }, []);
 
+
+
   const handletechnologysChange = (technology) => {
-    setFormData(prev => ({
-      ...prev,
-      selectedtechnology: prev.selectedtechnology.includes(technology)
-        ? prev.selectedtechnology.filter((tech) => tech !== technology)
-        : [...prev.selectedtechnology, technology]
-    }));
+    setFormData(prev => {
+      const isSelected = prev.selectedtechnology.some(t => t._id === technology._id);
+      return {
+        ...prev,
+        selectedtechnology: isSelected
+          ? prev.selectedtechnology.filter(t => t._id !== technology._id)
+          : [...prev.selectedtechnology, technology]
+      };
+    });
   };
-
-
   return (
     <div>
       <div className="flex justify-between items-center mb-10">
@@ -399,7 +436,7 @@ export default function AddNewServices() {
                 setFormData((prev) => ({ ...prev, title: e.target.value }))
               }
             />
-           
+
 
             <div className="mt-2">
 
@@ -460,7 +497,7 @@ export default function AddNewServices() {
             <div>
               <TextToImageAndImageToText
                 onChange={handleTextToImageChange}
-                initialData={formData.textToImage}
+                initialData={formData.texttoimageandimagetotext}
               />
             </div>
           )}
@@ -505,8 +542,8 @@ export default function AddNewServices() {
 
           <div>
             <CtaDashboard
-              initialData={formData.Cta}
-              onChange={(data) => setFormData(prev => ({ ...prev, Cta: data }))}
+
+              onChange={handleCtaChange} initialData={Services?.Cta}
             />
 
           </div>
@@ -659,27 +696,19 @@ export default function AddNewServices() {
           <div>
             <ComponentCategory title="Technology">
               <div className="items-center gap-4 space-y-5">
-                {categories.technology.map((technologys) => (
-                  <div key={technologys._id} className="flex items-center justify-between">
-
-
+                {categories.technology.map((tech) => (
+                  <div key={tech._id} className="flex items-center justify-between">
                     <Checkbox
-                      id={`faq-technologys-${technologys._id}`}
-                      checked={formData.selectedtechnology.includes(technologys.Name)}
-                      onChange={() => handletechnologysChange(technologys.Name)}
-                      label={technologys.Name}
-
+                      id={`tech-${tech._id}`}
+                      checked={formData.selectedtechnology.some(t => t._id === tech._id )}
+                      onChange={() => handletechnologysChange(tech)}
+                      label={tech.Name || tech.title}
                     />
-
-
-
                     <img
-                      src={`http://localhost:5300${technologys.team.images[0]}`}
-                      alt={technologys.Name}
-                      className="w-12  object-contain rounded-xs"
+                      src={`http://localhost:5300${tech.team?.images?.[0]}`}
+                      alt={tech.Name || tech.title}
+                      className="w-12 object-contain rounded-xs"
                     />
-
-
                   </div>
                 ))}
 
@@ -687,7 +716,7 @@ export default function AddNewServices() {
               </div>
             </ComponentCategory>
           </div>
-
+          
 
         </div>
 
@@ -696,3 +725,32 @@ export default function AddNewServices() {
     </div>
   );
 }
+
+
+
+{/* <ComponentCategory title="Technology">
+  <div className="items-center gap-4 space-y-5">
+    {categories.technology.map((tech) => {
+      const isSelected = formData.selectedtechnology.some(
+  selectedTech => selectedTech.title === tech.Name
+);
+
+      
+      return (
+        <div key={tech._id} className="flex items-center justify-between">
+          <Checkbox
+            id={`tech-${tech._id}`}
+            checked={isSelected}
+            onChange={() => handletechnologysChange(tech)}
+            label={tech.Name || tech.title}
+          />
+          <img
+            src={`http://localhost:5300${tech.team?.images?.[0]}`}
+            alt={tech.Name || tech.title}
+            className="w-12 object-contain rounded-xs"
+          />
+        </div>
+      );
+    })}
+  </div>
+</ComponentCategory> */}

@@ -1,64 +1,56 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Label from '../form/Label';
 import Input from '../form/input/InputField';
 import TextArea from '../form/input/TextArea';
 
 const CtaDashboard = ({ onChange, initialData }) => {
-  const [selectFields, setSelectFields] = useState([
-    { id: 1, title: '', description: '' }
-  ]);
+  const [ctaData, setCtaData] = useState({
+    title: '',
+    description: ''
+  });
 
-  const prevInitialDataRef = useRef(null);
+// // In CtaDashboard.jsx
+// useEffect(() => {
+//   if (onChange) {
+//     // Only call onChange if data has actually changed
+//     const hasChanged = 
+//       initialData?.title !== ctaData.title || 
+//       initialData?.description !== ctaData.description;
+    
+//     if (hasChanged) {
+//       onChange(ctaData);
+//     }
+//   }
+// }, [ctaData, onChange, initialData]);
 
-  useEffect(() => {
-    // Only update if initialData has changed
-    const initialDataString = JSON.stringify(initialData);
-    const prevDataString = prevInitialDataRef.current;
+useEffect(() => {
+  if (initialData && typeof initialData === 'object') {
+    setCtaData({
+      title: initialData.title || '',
+      description: initialData.description || ''
+    });
+  }
+}, [initialData]);
 
-    if (
-      initialData &&
-      initialData.length > 0 &&
-      initialDataString !== prevDataString
-    ) {
-      prevInitialDataRef.current = initialDataString;
+useEffect(() => {
+  if (onChange) {
+    onChange(ctaData);
+  }
+}, [ctaData, onChange]);
 
-      const mapped = initialData.map((item, index) => ({
-        id: index + 1,
-        title: item.title || '',
-        description: item.description || '',
-      }));
 
-      setSelectFields(mapped);
-    }
-  }, [initialData]);
-
-  useEffect(() => {
-    if (onChange) {
-      const cleaned = selectFields
-        .map((field) => ({
-          title: field.title,
-          description: field.description,
-        }))
-        .filter(
-          (item) =>
-            (item.title || '').trim() !== '' ||
-            (item.description || '').trim() !== ''
-        );
-
-      onChange(cleaned);
-    }
-  }, [selectFields]);
-
-  const handleTitleChange = (index, newValue) => {
-    const updated = [...selectFields];
-    updated[index].title = newValue;
-    setSelectFields(updated);
+  const handleTitleChange = (e) => {
+    setCtaData(prev => ({
+      ...prev,
+      title: e.target.value
+    }));
   };
 
-  const handleDescriptionChange = (index, newValue) => {
-    const updated = [...selectFields];
-    updated[index].description = newValue;
-    setSelectFields(updated);
+  const handleDescriptionChange = (newContent) => {
+    setCtaData(prev => ({
+      ...prev,
+      description: newContent
+    }));
   };
 
   return (
@@ -66,20 +58,23 @@ const CtaDashboard = ({ onChange, initialData }) => {
       <div className="space-y-6 relative">
         <Label>Cta</Label>
         <div className="border-2 border-gray-700 rounded-xl p-4 space-y-6">
-          <Label htmlFor="left-text">Title</Label>
-          <Input
-            type="text"
-            id="input"
-            placeholder="Title"
-            value={selectFields[0]?.title || ''}
-            onChange={(e) => handleTitleChange(0, e.target.value)}
-          />
+          <div>
+            <Label htmlFor="cta-title">Title</Label>
+            <Input
+              type="text"
+              id="cta-title"
+              placeholder="Title"
+              value={ctaData.title}
+              onChange={handleTitleChange}
+            />
+          </div>
+
           <div className="md:col-span-2">
-            <Label htmlFor="right-text">Description</Label>
+            <Label htmlFor="cta-description">Description</Label>
             <TextArea
-              id="right-text"
-              value={selectFields[0]?.description || ''}
-              onChange={(value) => handleDescriptionChange(0, value)}
+              id="cta-description"
+              value={ctaData.description}
+              onChange={handleDescriptionChange}
               placeholder="Description"
             />
           </div>

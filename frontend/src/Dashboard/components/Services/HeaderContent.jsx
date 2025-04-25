@@ -5,26 +5,51 @@ import TextArea from "../../components/form/input/TextArea";
 import SelectFileInput from "../form/form-elements/SelectFileInput";
 
 export default function HeaderContent({ onChange, initialData }) {
-    const [centerContent, setCenterContent] = useState({
-        centerHeading: initialData?.centerContent?.centerHeading || "",
-        centerDescription: initialData?.centerContent?.centerDescription || ""
-    });
-
-    const [selectFields, setSelectFields] = useState(
-        initialData?.selectFields?.length
-            ? initialData.selectFields.map((item, index) => ({
+    // const [centerContent, setCenterContent] = useState({
+    //     centerHeading: initialData?.centerContent?.centerHeading || "",
+    //     centerDescription: initialData?.centerContent?.centerDescription || ""
+    // });
+    const [centerContent, setCenterContent] = useState(() => ({
+        centerHeading: initialData?.[0]?.centerHeading || "",
+        centerDescription: initialData?.[0]?.centerDescription || ""
+    }));
+    
+    // const [selectFields, setSelectFields] = useState(
+    //     initialData?.selectFields?.length
+    //         ? initialData.selectFields.map((item, index) => ({
+    //             id: index + 1,
+    //             heading: item.heading || "",
+    //             description: item.description || "",
+    //             imageId: item.imageId || null
+    //         }))
+    //         : [{
+    //             id: 1,
+    //             heading: "",
+    //             description: "",
+    //             imageId: null
+    //         }]
+    // );
+    const [selectFields, setSelectFields] = useState(() => {
+        if (initialData?.[0]?.headingAnddescription?.length > 0) {
+            return initialData[0].headingAnddescription.map((item, index) => ({
                 id: index + 1,
                 heading: item.heading || "",
                 description: item.description || "",
-                imageId: item.imageId || null
-            }))
-            : [{
-                id: 1,
-                heading: "",
-                description: "",
-                imageId: null
-            }]
-    );
+                imageId: item.imageId || null,
+                existingImage: item.imageId ? {
+                    id: item.imageId,
+                    url: `http://localhost:5300/Image/get/${item.imageId}`
+                } : null
+            }));
+        }
+        return [{
+            id: 1,
+            heading: "",
+            description: "",
+            imageId: null,
+            existingImage: null
+        }];
+    });
 
 
     const handleCenterHeadingChange = (e) => {

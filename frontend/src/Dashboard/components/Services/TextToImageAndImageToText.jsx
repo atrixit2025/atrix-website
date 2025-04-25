@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SelectBulk from '../form/SelectBulk';
 import JoditEditorComp from '../JoditEditorComp/JoditEditorComp';
 import SelectFileInput from '../form/form-elements/SelectFileInput';
 import Label from '../form/Label';
 
-const TextToImageAndImageToText = () => {
+const TextToImageAndImageToText = ({ onChange, initialData }) => {
     const [selectFields, setSelectFields] = useState(() => {
         return [
             {
@@ -23,7 +23,18 @@ const TextToImageAndImageToText = () => {
     });
 
 
-
+    useEffect(() => {
+        if (initialData && initialData.length > 0) {
+          setSelectFields(initialData);
+        }
+      }, [initialData]);
+    
+      // 👇 Send updated data to parent
+      useEffect(() => {
+        if (onChange) {
+          onChange(selectFields);
+        }
+      }, [selectFields]);
 
     const addSelectField = () => {
         const newId = selectFields.length > 0 ? Math.max(...selectFields.map(f => f.id)) + 1 : 1;
