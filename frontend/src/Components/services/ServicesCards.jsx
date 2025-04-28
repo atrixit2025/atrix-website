@@ -39,12 +39,7 @@ const serviceCardsData = [
 
 const ServicesCards = ({ secData }) => {
 
-
-
-
     const [imgPosition, setImgPosition] = useState({ x: 0, y: 0 });
-    // const [cardTopPosition, setCardTopPosition] = useState(0);
-
     const handleMouseMove = (event) => {
         const cardRect = event.currentTarget.getBoundingClientRect();
         setImgPosition({
@@ -53,17 +48,6 @@ const ServicesCards = ({ secData }) => {
         });
     };
 
-    // const handleMouseEnter = (event) => {
-    //     const cardRect = event.target.getBoundingClientRect();
-    //     // setCardTopPosition(cardRect.top);
-    // };
-
-    // const mouseResetValue = () => {
-    //     setImgPosition({
-    //         x: 0,
-    //         y: 0,
-    //     });
-    // };
 
     return (
         <div className="services-sec mt-36">
