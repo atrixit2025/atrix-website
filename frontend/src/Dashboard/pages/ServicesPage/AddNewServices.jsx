@@ -10,18 +10,13 @@ import { ImageProvider } from "../../ContextApi/ImageApi";
 import axios from "axios";
 import TextArea from "../../components/form/input/TextArea";
 import { ServicesCategoryContext } from "../../ContextApi/ServicesCategoryContextApi";
-import SelectBulk from "../../components/form/SelectBulk";
-import JoditEditor from 'jodit-react';
-import SelectFileInput from "../../components/form/form-elements/SelectFileInput";
 import TagsInput from "../../components/form/TagsInput";
 import IconsInputExample from "../../components/form/form-elements/IconsInputExample";
 import Banner from "../../components/Services/Banner";
 import WhydoNeed from "../../components/Services/WhydoNeed";
 import WhyAtrix from "../../components/Services/WhyAtrix";
 import Process from "../../components/Services/Process";
-import MoreContent from "../../components/Services/MoreContent";
 import GalleryComp from "../../components/Gallery/GalleryComp";
-// import Headercontent from "../../components/Services/Headercontent";
 import TextToImageAndImageToText from "../../components/Services/TextToImageAndImageToText";
 import HeaderContent from "../../components/Services/HeaderContent";
 import CtaDashboard from "../../components/Services/CtaDashboard";
@@ -58,7 +53,7 @@ export default function AddNewServices() {
     WhyAtrix: [],
     Process: [],
     Headercontent: [],
-    Cta: "",
+    Cta: { title: "", description: "" },
     gallery: [],
     texttoimageandimagetotext: [],
     showHeadercontent: false,
@@ -68,7 +63,6 @@ export default function AddNewServices() {
 
   const { Services } = location.state || {};
 
-  // console.log("texttoimageandimagetotext", formData.texttoimageandimagetotext)
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -116,36 +110,42 @@ export default function AddNewServices() {
         Servicesquote: Services.Servicesquote || "",
         selectedCategories: Services.category ? Services.category.split(", ") : [],
         selectedPortfolioCategories: Array.isArray(Services.portfolioCategories)
-        ? Services.portfolioCategories // If it's an array, use it directly
-        : Services.portfolioCategories
-        ? Services.portfolioCategories.split(", ") // If it's a string, split it
-        : [],
+          ? Services.portfolioCategories // If it's an array, use it directly
+          : Services.portfolioCategories
+            ? Services.portfolioCategories.split(", ") // If it's a string, split it
+            : [],
         selectedfaqCategories: Array.isArray(Services.faqCategories)
-        ? Services.faqCategories // If it's an array, use it directly
-        : Services.faqCategories
-        ? Services.faqCategories.split(", ") // If it's a string, split it
-        : [],  
-      
+          ? Services.faqCategories // If it's an array, use it directly
+          : Services.faqCategories
+            ? Services.faqCategories.split(", ") // If it's a string, split it
+            : [],
+
         // selectedfaqCategories: Services.faqCategories? Services.faqCategories.split(", ")
         //   : [],
         // selectedtechnology: Services.Technology
         //   ? Services.Technology.map((tech) => tech.title)
         //   : [],
-      selectedtechnology: Services.Technology
-        ? Services.Technology.map(tech => ({
+        selectedtechnology: Services.Technology
+          ? Services.Technology.map(tech => ({
             _id: tech._id,
             title: tech.title,
             imageId: tech.imageId,
-            // Add the full technology object for comparison
-            ...tech
+            // Make sure these match the structure of categories.technology
+            Name: tech.title, // Add this if it's missing
+            team: {
+              images: [tech.image?.image || "/images/user/user-22.jpg"]
+            }
           }))
-        : [],
+          : [],
 
         tags: Services.tags || [],
         iconImageId: Services.iconImageId || null,
         imageId: Services.FeaturedImage || null,
-        Bannerdata: Services.Bannerdata || [],
-        texttoimageandimagetotext: Services.texttoimageandimagetotext || [],
+
+        Banner: Services?.Banner || [], // Proper initialization
+        Bannerdata: Services?.Bannerdata || [], // Consistent naming
+        // Bannerdata: Services.Bannerdata || [],
+        // texttoimageandimagetotext: Services.texttoimageandimagetotext || [],
         WhydoNeed: Services.WhydoNeed || [],
         WhyAtrix: Services.WhyAtrix || [],
         Process: Services.Process || [],
@@ -157,6 +157,68 @@ export default function AddNewServices() {
 
     }
   }, [Services]);
+  useEffect(() => {
+    if (Services) {
+      const mappedFields = (Services.texttoimageandimagetotext || []).map((item, index) => ({
+        id: index + 1,
+        value: {
+          value: item.type,
+          label: item.type === "texttoimage" ? "TexttoImage" : "ImagetoText"
+        },
+        textContent: item.text,
+        imageFile: item.imageId ? {
+          id: item.imageId,
+          url: `/Image/${item.imageId}`,
+          type: item.type,
+          name: "Uploaded image"
+        } : null,
+        options: [
+          { value: "", label: "Select Option" },
+          { value: "texttoimage", label: "TexttoImage" },
+          { value: "imagetotext", label: "ImagetoText" },
+        ]
+      }));
+
+      setFormData(prev => ({
+        ...prev,
+        texttoimageandimagetotext: mappedFields
+      }));
+    }
+  }, [Services]);
+
+
+  useEffect(() => {
+    if (Services) {
+      setFormData(prev => {
+        // Find matching tech in categories.technology by name
+        const mapTech = (tech) => {
+          const found = categories.technology.find(
+            catTech => catTech.Name === tech.title || catTech._id === tech._id
+          );
+          return found || {
+            _id: tech._id,
+            title: tech.title,
+            imageId: tech.imageId,
+            Name: tech.title,
+            team: {
+              images: [tech.image?.image || "/images/user/user-22.jpg"]
+            }
+          };
+        };
+  
+        return {
+          ...prev,
+          title: Services.title,
+          customSlug: Services.slug || Services.Slug || generatedFromTitle,
+          // ... other fields
+          selectedtechnology: Services.Technology
+            ? Services.Technology.map(mapTech)
+            : [],
+          // ... rest of your form data
+        };
+      });
+    }
+  }, [Services, categories.technology]);
 
   useEffect(() => {
     if (formData.title) {
@@ -205,10 +267,7 @@ export default function AddNewServices() {
       Process,
       customSlug,
       Cta,
-      Headercontent,
-      gallery,
-      texttoimageandimagetotext,
-      selectedtechnology
+    
     } = formData;
 
     if (!title || !description || selectedCategories.length === 0 || !imageId) {
@@ -217,11 +276,13 @@ export default function AddNewServices() {
     }
 
     const transformTextToImageData = (fields) => {
-      return fields.map(field => ({
-        type: field?.value?.value || "",
-        text: field?.textContent || "",
-        imageId: field?.imageFile?.id || null
-      }));
+      return fields
+        .filter(field => field?.value?.value) // Only include fields with a type
+        .map(field => ({
+          type: field.value.value, // Ensure type is always set
+          text: field.textContent || "",
+          imageId: field.imageFile?.id || null
+        }));
     };
     const bannerData = formData.Banner.map(item => {
       if (item.type === "slider") {
@@ -254,9 +315,9 @@ export default function AddNewServices() {
       portfolioCategories: formData.selectedPortfolioCategories,
       faqCategories: formData.selectedfaqCategories,
       Technology: formData.selectedtechnology.map(tech => ({
-        title: tech.Name || tech.title,
-        imageId: tech.imageId,
-        _id: tech._id
+        _id: tech._id, // Ensure this matches your backend expectation
+        title: tech.Name || tech.title || "",
+        imageId: tech.imageId || null
       })),
 
       tags: tags.filter(tag => tag.trim() !== ""),
@@ -278,12 +339,10 @@ export default function AddNewServices() {
       texttoimageandimagetotext: transformTextToImageData(formData.texttoimageandimagetotext),
 
       gallery: formData.gallery.map(img => ({ imageId: img.imageId })),
-      Cta
+      Cta, // Ensure it's always an object
 
     };
 
-
-// console.log("texttoimageandimagetotext",texttoimageandimagetotext)
 
     try {
       if (Services) {
@@ -298,9 +357,18 @@ export default function AddNewServices() {
       await fetchCategoryCounts();
       navigate("/Dashboard/Services");
     } catch (error) {
-      console.error("Error saving Services:", error);
-      alert(error.response?.data?.message || "Error saving Services. Please try again.");
-    }
+  console.error("Full error object:", error);
+  if (error.response) {
+    console.error("Response data:", error.response.data);
+    console.error("Response status:", error.response.status);
+    console.error("Response headers:", error.response.headers);
+  } else if (error.request) {
+    console.error("Request:", error.request);
+  } else {
+    console.error("Error message:", error.message);
+  }
+  alert(error.response?.data?.message || "Error saving Services. Please check console for details.");
+}
   };
 
   const handleTagsChange = (newTags) => {
@@ -327,7 +395,7 @@ export default function AddNewServices() {
 
 
   const handleBannerChange = (bannerData) => {
-    setFormData(prev => ({ ...prev, Banner: bannerData }));
+    setFormData(prev => ({ ...prev, Banner: bannerData || [] }));
   };
 
   const handleWhyDoNeedChange = (whyData) => {
@@ -347,7 +415,7 @@ export default function AddNewServices() {
       ...prev,
       texttoimageandimagetotext: data
     }));
-  },[]);
+  }, []);
   const handleHeadercontentChange = (content) => {
     // console.log("content received:", content);
 
@@ -361,8 +429,6 @@ export default function AddNewServices() {
     // console.log("Gallery images received:", images);
     setFormData(prev => ({ ...prev, gallery: images }));
   };
-
-
 
 
   useEffect(() => {
@@ -397,12 +463,19 @@ export default function AddNewServices() {
 
   const handletechnologysChange = (technology) => {
     setFormData(prev => {
-      const isSelected = prev.selectedtechnology.some(t => t._id === technology._id);
+      const isSelected = prev.selectedtechnology.some(
+        selectedTech => selectedTech._id === technology._id
+      );
+      
       return {
         ...prev,
         selectedtechnology: isSelected
           ? prev.selectedtechnology.filter(t => t._id !== technology._id)
-          : [...prev.selectedtechnology, technology]
+          : [...prev.selectedtechnology, {
+              _id: technology._id,
+              title: technology.Name || technology.title,
+              imageId: technology.imageId
+            }]
       };
     });
   };
@@ -431,7 +504,7 @@ export default function AddNewServices() {
               type="text"
               id="input"
               placeholder="Add Title"
-              value={formData.title}
+              value={formData.title || ""}
               onChange={(e) =>
                 setFormData((prev) => ({ ...prev, title: e.target.value }))
               }
@@ -490,17 +563,18 @@ export default function AddNewServices() {
             <Label htmlFor="input">Header</Label>
 
 
-            <Banner onChange={handleBannerChange} initialData={Services?.Banner} />
+            <Banner onChange={handleBannerChange} initialData={formData.Bannerdata} />
+
           </div>
 
-          {formData.showTextToImage && (
-            <div>
-              <TextToImageAndImageToText
-                onChange={handleTextToImageChange}
-                initialData={formData.texttoimageandimagetotext}
-              />
-            </div>
-          )}
+          {/* {formData.showTextToImage && ( */}
+          <div>
+            <TextToImageAndImageToText
+              onChange={handleTextToImageChange}
+              initialData={formData.texttoimageandimagetotext}
+            />
+          </div>
+          {/* )} */}
 
           {formData.showHeadercontent && (
             <div>
@@ -533,7 +607,7 @@ export default function AddNewServices() {
               type="text"
               id={`Servicesquote-${formData.id}`}
               placeholder="Services quote"
-              value={formData.Servicesquote}
+              value={formData.Servicesquote || ""}
               onChange={(value) =>
                 setFormData((prev) => ({ ...prev, Servicesquote: value }))
               }
@@ -590,7 +664,7 @@ export default function AddNewServices() {
               }
             />
 
-            <Checkbox
+            {/* <Checkbox
               id="toggle-text-to-image"
               label="Show Text-to-Image & Image-to-Text"
               checked={formData.showTextToImage}
@@ -600,7 +674,7 @@ export default function AddNewServices() {
                   showTextToImage: !prev.showTextToImage
                 }))
               }
-            />
+            /> */}
           </div>
 
           <div>
@@ -694,29 +768,32 @@ export default function AddNewServices() {
 
 
           <div>
-            <ComponentCategory title="Technology">
-              <div className="items-center gap-4 space-y-5">
-                {categories.technology.map((tech) => (
-                  <div key={tech._id} className="flex items-center justify-between">
-                    <Checkbox
-                      id={`tech-${tech._id}`}
-                      checked={formData.selectedtechnology.some(t => t._id === tech._id )}
-                      onChange={() => handletechnologysChange(tech)}
-                      label={tech.Name || tech.title}
-                    />
-                    <img
-                      src={`http://localhost:5300${tech.team?.images?.[0]}`}
-                      alt={tech.Name || tech.title}
-                      className="w-12 object-contain rounded-xs"
-                    />
-                  </div>
-                ))}
+  <ComponentCategory title="Technology">
+    <div className="items-center gap-4 space-y-5">
+      {categories.technology.map((tech) => {
+        const isSelected = formData.selectedtechnology.some(
+          selectedTech => selectedTech._id === tech._id
+        );
 
-
-              </div>
-            </ComponentCategory>
+        return (
+          <div key={tech._id} className="flex items-center justify-between">
+            <Checkbox
+              id={`tech-${tech._id}`}
+              checked={isSelected}
+              onChange={() => handletechnologysChange(tech)}
+              label={tech.Name}
+            />
+            <img
+              src={`http://localhost:5300${tech.team?.images?.[0]}`}
+              alt={tech.Name}
+              className="w-12 object-contain rounded-xs"
+            />
           </div>
-          
+        );
+      })}
+    </div>
+  </ComponentCategory>
+</div>
 
         </div>
 

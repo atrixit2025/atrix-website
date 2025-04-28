@@ -39,7 +39,7 @@ const cardsContent = [
 
 const Footer = () => {
   return (
-    <footer className="bg-cs_theme_black">
+    <footer className="bg-cs_theme_black px-5">
       <div className=" container  mx-auto  mt-18 pb-9  ">
         {/* Main Footer Content */}
         <div className="flex flex-col md:flex-row justify-between border-t border-gray-700 py-18 ">
@@ -114,7 +114,7 @@ const Footer = () => {
         </div>
 
         {/* Footer Bottom */}
-        <div className="border-t border-gray-700  pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t border-gray-700  pt-8 flex flex-col-reverse  md:flex-row justify-between items-center gap-4 ">
           <p className="text-sm">
             © Copyright 2025 Atrix IT Solutions | All Right Reserved.
           </p>

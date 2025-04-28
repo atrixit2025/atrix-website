@@ -1,94 +1,11 @@
 import React, { useEffect } from "react";
-import Asset1 from "../assets/ServicesIcons/Asset 1.svg";
-import Asset2 from "../assets/ServicesIcons/Asset 2.svg";
-import Asset3 from "../assets/ServicesIcons/Asset 3.svg";
-import Asset4 from "../assets/ServicesIcons/Asset 4.svg";
-import Asset5 from "../assets/ServicesIcons/Asset 5.svg";
-import Asset6 from "../assets/ServicesIcons/Asset 6.svg";
-import Asset7 from "../assets/ServicesIcons/Asset 7.svg";
-import graphic from "../assets/ServicesImage/graphic.svg";
-import dev from "../assets/ServicesImage/dev.svg";
-import log from "../assets/ServicesImage/log.svg";
-import marketing from "../assets/ServicesImage/marketing.svg";
-import staffing from "../assets/ServicesImage/staffing.svg";
-import visual from "../assets/ServicesImage/visual.svg";
-import video from "../assets/ServicesImage/video.svg";
+
 import "../CSS/one.css";
 import Button from "./Button";
 import ServicesData from "../data/ServicesData";
 import { Link } from "react-router-dom";
 
 
-
-// const services = [
-//   {
-//     id: 1,
-//     image: graphic,
-//     icon: Asset1,
-//     title: "Branding/Graphic Design",
-//     description:
-//       "Did you know? 94% of first impressions are design-related! That’s why strong visuals are key to brand success. Graphic design isn’t just about looks - it’s about delivering your message effectively. At Atrix IT Solutions, we bring your vision to life with top-notch designs tailored to your needs. Whether it’s branding, websites, infographics, or eBooks, our expert team creates visually captivating content that engages and inspires. Let’s design something impactful!",
-//     button: ["Branding", "Logo Design", "Packaging", "Product Design", "Print Media", "Advertisement", "Ui/UX", "Social Media Design"],
-//   },
-//   {
-//     id: 2,
-//     image: dev,
-//     icon: Asset2,
-//     title: "Web Development",
-//     description:
-//       "Create stunning, user-friendly websites that captivate, engage, and drive real results with our experts! Whether you need a new website, a redesign, or custom development, we ensure a seamless experience with modern, responsive designs tailored to your brand. Our expert team focuses on creating visually appealing and high-performing websites that boost visibility, attract customers, and grow your business effortlessly. So, take your online presence to the next level!",
-//     button: ["AI", "Metaverse", "Salesforce", "CRM", "CMS", "PHP", "Laravel", "React Js", "Node Js "],
-
-//   },
-//   {
-//     id: 3,
-//     image: marketing,
-//     icon: Asset3,   
-//     title: "Digital Marketing",
-//     description:
-//       "At Atrix IT Solutions, get your own digital marketing strategy built from scratch. Our expert team crafts tailored campaigns to drive traffic, engage customers, and convert leads into loyal clients. Whether it’s SEO, social media marketing, or content creation, we focus on delivering real, measurable results that help your brand stand out. Ready to take your business to the next level? Partner with us today and watch your online presence grow!",
-//     button: ["Marketing", "Strategy", "SEO", "SMO", "Digital Ads", "Content Creation"],
-//   },
-//   {
-//     id: 4,
-//     image: visual,
-//     icon: Asset5,
-//     title: "Visual Effects",
-//     description:
-//       "Looking to bring your ideas to life with stunning visual effects? At Atrix IT Solutions, we specialize in creating eye-catching VFX that captivate and engage your audience. Whether it's for film, advertisements, or digital media, our expert team delivers cutting-edge effects that enhance your project and leave a lasting impact. Transform your vision into reality with Atrix IT Solutions today and make your visuals unforgettable!  ",
-//     button: ["VFX", "SFX", "3D", "Editing", "Composition", "Grading", "Motion Graphics",],
-
-//   },
-//   {
-//     id: 5,
-//     image: video,
-//     icon: Asset4,
-//     title: "Photo/Video Production ",
-//     description:
-//       "Your moments deserve the spotlight! At Atrix IT Solutions, we specialize in photo and videography that showcases your vision in the most stunning way. From events and branding to creative projects, our team ensures every shot is perfect. With high-quality photography and dynamic videography, we make your ideas come to life. Ready to capture the perfect shot? Partner with Atrix IT Solutions and let’s create something amazing together!",
-//     button: ["Corporate Shoot", "Product Shoot", "Food Photography", "Commercial Shoot "],
-//   },
-//   {
-//     id: 6,
-//     image: staffing,
-//     icon: Asset6,
-//     title: "Staffing",
-//     description:
-//       "Ready to boost your business with a flexible workforce? Our solution helps you create a staffing plan that adapts to your needs, saving you money and ensuring compliance. With our platform, you can improve efficiency, reduce costs, and stay ahead in today’s fast-paced market. Empower your business with a staffing strategy designed to grow and succeed!",
-//     button: ["Us Staffing", "Us Recruiter", "Payroll", "Talent Acquisition ", "Us Hiring"]
-
-//   },
-//   {
-//     id: 7,
-//     image: log,
-//     icon: Asset7,
-//     title: "Logistics ",
-//     description:
-//       "Atrix is a modern logistics firm dedicated to providing our clients throughout the world with outstanding service and cutting-edge solutions. Having worked in the transportation and logistics industry for five years, we have made a name for ourselves as a reliable partner. Road freight is in our extensive service offering, which enables us to satisfy the varied demands of companies in a number of sectors.",
-//     button: ["OTR", "Drayage", "Jctrans"],
-
-//   },
-// ];
 
 const OurServices = () => {
   useEffect(() => {
@@ -123,7 +40,7 @@ const OurServices = () => {
   }, []);
 
   return (
-    <div className="Services-section container mx-auto   text-(--whitelight) ">
+    <div className="Services-section container mx-auto   text-(--whitelight) px-5 ">
 
       <div className="container mx-auto ">
         <div className=" py-14 md:py-32 ">

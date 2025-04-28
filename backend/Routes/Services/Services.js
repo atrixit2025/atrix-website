@@ -290,12 +290,14 @@ ServicesRouter.put("/edit", async (req, res) => {
   const {
     id,
     title,
+    Slug: customSlug,
     description,
     Servicesquote,
     category,
     tags,
     portfolioCategories,
     faqCategories,
+    Technology,
     iconImageId,
     FeaturedImageId,
     Bannerdata,
@@ -304,6 +306,7 @@ ServicesRouter.put("/edit", async (req, res) => {
     WhyAtrix,
     Headercontent,
     gallery,
+    Cta,
     texttoimageandimagetotext
   } = req.body;
 
@@ -330,6 +333,7 @@ ServicesRouter.put("/edit", async (req, res) => {
     // Prepare update data - only update what's provided
     const updateData = {
       title: title !== undefined ? title : existingService.title,
+      Slug: customSlug !== undefined ? customSlug : existingService.Slug,
       description: description !== undefined ? description : existingService.description,
       Servicesquote: Servicesquote !== undefined ? Servicesquote : existingService.Servicesquote,
       category: category !== undefined ? category : existingService.category,
@@ -342,6 +346,7 @@ ServicesRouter.put("/edit", async (req, res) => {
         : existingService.faqCategories,
       iconImageId: iconImageId !== undefined ? iconImageId : existingService.iconImageId,
       FeaturedImage: FeaturedImageId !== undefined ? FeaturedImageId : existingService.FeaturedImage,
+      Cta: Cta !== undefined ? Cta : existingService.Cta,
       updatedAt: new Date()
     };
 
@@ -367,7 +372,24 @@ ServicesRouter.put("/edit", async (req, res) => {
     if (texttoimageandimagetotext !== undefined) {
       updateData.texttoimageandimagetotext = validateTextToImage(texttoimageandimagetotext);
     }
+    if (Technology !== undefined) {
+      updateData.Technology = validateTechnology(Technology);
+    }
 
+
+    function validateTechnology(data) {
+      if (!data) return undefined;
+      
+      if (!Array.isArray(data)) {
+        throw new Error("Technology must be an array");
+      }
+    
+      return data.map(item => ({
+        _id: item._id ,
+        title: item.title || "",
+        imageId: item.imageId || null
+      }));
+    }
    
     function validateBannerdata(bannerDataArr) {
       if (!Array.isArray(bannerDataArr)) {
@@ -461,21 +483,22 @@ ServicesRouter.put("/edit", async (req, res) => {
     
 
     function validateTextToImage(data) {
-      if (!data) {
-        return {
-          lefttext: "",
-          rightimageId: "",
-          righttext: "",
-          leftimageId: ""
-        };
+      if (!data) return [];
+      if (!Array.isArray(data)) {
+        throw new Error("texttoimageandimagetotext must be an array");
       }
-
-      return {
-        lefttext: data.lefttext || "",
-        rightimageId: data.rightimageId || "",
-        righttext: data.righttext || "",
-        leftimageId: data.leftimageId || ""
-      };
+    
+      return data.map(item => {
+        if (!item.type && !(item.value && item.value.value)) {
+          throw new Error("Each item must have a type");
+        }
+    
+        return {
+          type: item.type || item.value.value,
+          text: item.text || item.textContent || "",
+          imageId: item.imageId || (item.imageFile ? item.imageFile.id : null)
+        };
+      }).filter(item => item.type); // Remove items without type
     }
     // Perform the update
     const updatedService = await Services.findByIdAndUpdate(
