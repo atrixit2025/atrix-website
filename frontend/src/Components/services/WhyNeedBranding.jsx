@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '../Button'
 
 const brandingCardData = [
     {
@@ -16,7 +17,8 @@ const brandingCardData = [
 
 ]
 
-const WhyNeedBranding = ({secData}) => {
+const WhyNeedBranding = ({ secData, targetRef }) => {
+
     return (
         <div className='why-need-branding my-36' >
             <div className="container mx-auto ">
@@ -29,8 +31,11 @@ const WhyNeedBranding = ({secData}) => {
                         </div>
                     ))}
 
-
                 </div>
+                <div className='mt-14 flex justify-center' >
+                <Button mybtn="Get Your Quote Now" targetRef={targetRef} />
+
+                    </div>
             </div>
 
 

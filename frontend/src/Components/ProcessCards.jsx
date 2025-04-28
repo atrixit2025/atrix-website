@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Button from './Button'
 
 const processCardsData = [
     {
@@ -26,7 +27,7 @@ const processCardsData = [
 
 
 
-const ProcessCards = ({secData}) => {
+const ProcessCards = ({ secData, targetRef }) => {
 
     const [activeCard , setActiveCard] = useState(1)
 
@@ -45,6 +46,10 @@ const ProcessCards = ({secData}) => {
                     ))}
 
                 </div>
+                <div className='mt-14 flex justify-center' >
+                <Button mybtn="Get Your Quote Now" targetRef={targetRef} />
+
+                    </div>
             </div>
 
         </section>

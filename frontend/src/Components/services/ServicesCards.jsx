@@ -42,27 +42,28 @@ const ServicesCards = ({ secData }) => {
 
 
 
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-    const [cardTopPosition, setCardTopPosition] = useState(0);
+    const [imgPosition, setImgPosition] = useState({ x: 0, y: 0 });
+    // const [cardTopPosition, setCardTopPosition] = useState(0);
 
     const handleMouseMove = (event) => {
-        setMousePosition({
-            x: event.clientX,
-            y: event.clientY,
+        const cardRect = event.currentTarget.getBoundingClientRect();
+        setImgPosition({
+            x: event.clientX - cardRect.left,    
+            y: event.clientY - cardRect.top,
         });
     };
 
-    const handleMouseEnter = (event) => {
-        const cardRect = event.target.getBoundingClientRect();
-        setCardTopPosition(cardRect.top);
-    };
+    // const handleMouseEnter = (event) => {
+    //     const cardRect = event.target.getBoundingClientRect();
+    //     // setCardTopPosition(cardRect.top);
+    // };
 
-    const mouseResetValue = () => {
-        setMousePosition({
-            x: 0,
-            y: 0,
-        });
-    };
+    // const mouseResetValue = () => {
+    //     setImgPosition({
+    //         x: 0,
+    //         y: 0,
+    //     });
+    // };
 
     return (
         <div className="services-sec mt-36">
@@ -81,9 +82,7 @@ const ServicesCards = ({ secData }) => {
                                     <div
                                         key={serindex}
                                         className="service-card grid lg:grid-cols-2 gap-10 pb-12 pt-15 relative container mx-auto"
-                                        onMouseEnter={handleMouseEnter}
                                         onMouseMove={handleMouseMove}
-                                        onMouseLeave={mouseResetValue}
                                     >
 
                                         <div className="service-title flex  items-center relative ml-12 ">
@@ -96,15 +95,15 @@ const ServicesCards = ({ secData }) => {
                                         <div
                                             className="service-hover-img absolute z-40 rounded overflow-hidden"
                                             style={{
-                                                top: `${mousePosition.y - cardTopPosition - 100}px`,
-                                                left: `${mousePosition.x - 270}px`,
+                                                top: `${imgPosition.y}px`,
+                                                left: `${imgPosition.x}px`,
 
                                             }}
                                         >
                                             <img
                                                 src={seritem.hover_image}
                                                 alt="hover"
-                                                className="w-full h-fit object-cover"
+                                                className="w-full h-full object-cover"
                                             />
                                         </div>
                                     </div>

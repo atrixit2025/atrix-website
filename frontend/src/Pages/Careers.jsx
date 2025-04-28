@@ -42,7 +42,7 @@ const Careers = () => {
       <PerksAtrix />
 
       {/* Roles section with ref and click handler */}
-      <Roles ref={rolesSectionRef} onApplyClick={handleApplyClick} />
+      <Roles ref={`rolesSectionRef`} onApplyClick={handleApplyClick} />
 
       {/* Form section that scrolls into view and receives the selected job */}
       <div ref={formSectionRef}>

@@ -1,106 +1,95 @@
-import React, { useState } from 'react'
-import ServiceHeroBanner from '../Components/services/ServiceHeroBanner'
-import ProcessSteps from '../Components/services/ProcessSteps'
-import ServicesCards from '../Components/services/ServicesCards'
-import OurPortfolio from '../Components/OurPortfolio'
-import WhyNeedBranding from '../Components/services/WhyNeedBranding'
-import WhyAtrix from '../Components/services/whyAtrix'
-import ServiceCta from '../Components/services/ServiceCta'
-import FaqSection from '../Components/FaqSection'
-import { FaQuoteLeft } from "react-icons/fa";
-import { FaQuoteRight } from "react-icons/fa";
-import ProcessCards from '../Components/ProcessCards'
-import ServiceFrom from '../Components/services/ServiceFrom'
-import WebDevelopment from '../Components/services/WebDevelopment'
-import ServicesData from '../data/ServicesData'
-import { Link, useParams } from "react-router-dom";
-import { RxArrowTopRight } from "react-icons/rx";
-// import { Button } from '@headlessui/react'
+import React, { useRef } from "react";
+import { useParams } from "react-router-dom";
+import {
+  FaQuoteLeft,
+  FaQuoteRight
+} from "react-icons/fa";
+
+import ServiceHeroBanner from "../Components/services/ServiceHeroBanner";
+import WebDevelopment from "../Components/services/WebDevelopment";
+import ServicesCards from "../Components/services/ServicesCards";
+import WhyNeedBranding from "../Components/services/WhyNeedBranding";
+import WhyAtrix from "../Components/services/whyAtrix";
+import ProcessCards from "../Components/ProcessCards";
+import ServiceFrom from "../Components/services/ServiceFrom";
+import OurPortfolio from "../Components/OurPortfolio";
+import FaqSection from "../Components/FaqSection";
 import Button from "../Components/Button";
 
-import "./Service.css"
-import ServiceTesting from '../Components/serviceTesting'
-
+import ServicesData from "../data/ServicesData";
+import "./Service.css";
 
 const Service = () => {
+  const { service_id } = useParams();
+  const filteredService = ServicesData.find((item) => item.service_id === service_id);
+  const formRef = useRef(null);
 
-    const { service_id } = useParams();
-    const filteredService = ServicesData.find(item => item.service_id === service_id);
-    console.log("filtered service", filteredService);
+  return (
+    <>
+      <style>
+        {`
+          #mybtn2 button:hover {
+            background-color: white;
+            color: var(--blue);
+          }
+          #btnArrow:hover {
+            color: var(--blue) !important;
+          }
+        `}
+      </style>
 
+      <div className="pt-[150px]">
+        <ServiceHeroBanner />
 
+        <div className="container mx-auto mt-40">
+          <h1 className="text-7xl font-bold text-center">{filteredService?.service_title}</h1>
+        </div>
 
+        <WebDevelopment secData={filteredService} targetRef={formRef} />
+        <ServicesCards secData={filteredService} />
+        <WhyNeedBranding secData={filteredService} targetRef={formRef} />
 
-    return (
-        <>
-            {/* CSS in the same file */}
-            <style>
-                {`
-        #mybtn2 button:hover{
+        <WhyAtrix secData={filteredService} />
+        <ProcessCards secData={filteredService} targetRef={formRef} />
 
-          background-color: white;
-          color: var(--blue);
+        <div className="container mx-auto my-16">
+          <h2 className="max-w-[800px] mx-auto text-5xl font-bold relative">
+            <FaQuoteLeft className="absolute -top-0.5 -translate-y-full text-(--blue) text-2xl mb-8" />
+            {filteredService?.quote}
+            <FaQuoteRight className="absolute right-0 text-(--blue) text-2xl mt-2" />
+          </h2>
+        </div>
 
-        }
-         #btnArrow:hover{
-         color: var(--blue) !important;
-         }
-      `}
-            </style>
+        {/* Scroll target form */}
+        <div ref={formRef}>
+          <ServiceFrom />
+        </div>
 
-            <div className="pt-[150px] ">
+        <OurPortfolio />
+        <FaqSection secData={filteredService} />
 
-                <ServiceHeroBanner></ServiceHeroBanner>
-
-                {/* <ServiceTesting secData={filteredService}></ServiceTesting> */}
-
-                <div className="container mx-auto mt-40">
-                    <h1 className='text-7xl font-bold text-center' >{filteredService.service_title}</h1>
-                </div>
-                <WebDevelopment secData={filteredService}  ></WebDevelopment>
-                <ServicesCards secData={filteredService}  ></ServicesCards>
-                <WhyNeedBranding secData={filteredService}  ></WhyNeedBranding>
-                <WhyAtrix secData={filteredService}  ></WhyAtrix>
-
-                <ProcessCards secData={filteredService}  ></ProcessCards>
-                {/* <ProcessSteps></ProcessSteps> */}
-                <div className="container mx-auto my-16 ">
-                    <h2 className='max-w-[800px] mx-auto text-5xl font-bold' > <span className='relative'> <FaQuoteLeft className=' absolute -top-0.5  -translate-y-full  text-(--blue) text-2xl mb-8  ' /> {filteredService.quote} <FaQuoteRight className=' absolute right-0  text-(--blue) text-2xl mt-2 ' /></span> </h2>
-                </div>
-                <ServiceFrom></ServiceFrom>
-                <OurPortfolio></OurPortfolio>
-                <FaqSection secData={filteredService}  ></FaqSection>
-                {/* <ServiceCta></ServiceCta> */}
-                {/* CTA-section */}
-                <div className="container mx-auto mt-28 service-cta ">
-                    <div className="row grid grid-cols-1 md:grid-cols-12 mt-10 bg-(--blue) rounded-xl p-6 md:p-10">
-
-                        {/* Text Section */}
-                        <div className="md:col-span-10 col-span-12 text-center md:text-left">
-                            <h3 className="text-white text-3xl md:text-4xl font-bold">
-                                Lorem ipsum dolor sit.
-                            </h3>
-                            <p className=" mt-5 max-w-[800px]"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, officiis. Suscipit officia veniam voluptatum sapiente, quas modi repudiandae possimus consequuntur ipsum corrupti iusto, recusandae debitis sit ut, tempore tempora nihil!</p>
-                        </div>
-
-                        {/* Button Section */}
-                        <div id="mybtn2" className="  md:col-span-2 col-span-12 flex justify-center items-center md:justify-end mt-4 md:mt-0 ">
-                            {/* <Link to='/contact-us' className="bg-(--white)  font-extrabold text-(--blue) px-4 py-2  duration-300  rounded-lg  cursor-pointer  flex items-center gap-2 group hover:scale-104  ">Contact us!<span className="  ">
-                            <RxArrowTopRight className=" group-hover:rotate-45 group-hover:scale-140 duration-250 " />
-                        </span></Link> */}
-                            <Button mybtn="Contact Us" btnLink="#" btnColor={""} />
-
-                        </div>
-
-                    </div>
-                </div>
+        {/* CTA Section */}
+        <div className="container mx-auto mt-28 service-cta">
+          <div className="row grid grid-cols-1 md:grid-cols-12 mt-10 bg-(--blue) rounded-xl p-6 md:p-10">
+            <div className="md:col-span-10 col-span-12 text-center md:text-left">
+              <h3 className="text-white text-3xl md:text-4xl font-bold">Lorem ipsum dolor sit.</h3>
+              <p className="mt-5 max-w-[800px]">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, officiis. Suscipit officia veniam
+                voluptatum sapiente, quas modi repudiandae possimus consequuntur ipsum corrupti iusto, recusandae
+                debitis sit ut, tempore tempora nihil!
+              </p>
             </div>
+            <div
+              id="mybtn2"
+              className="md:col-span-2 col-span-12 flex justify-center items-center md:justify-end mt-4 md:mt-0"
+            >
+              <Button mybtn="Contact Us" targetRef={formRef} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
 
-        </>
-
-
-
-    )
-}
-
-export default Service
+export default Service;

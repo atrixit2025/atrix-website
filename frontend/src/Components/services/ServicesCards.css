@@ -1,12 +1,16 @@
 .service-hover-img {
-  transform: rotate(-15deg);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 0px;
+  width: 0px;
+  transform: translate(-50%, -50%)  rotate(-15deg);
+  pointer-events: none;
+  transition: height 0.5s ease, width 0.5s ease;
+  z-index: 10;
+}
+
+.service-card:hover .service-hover-img {
   height: 300px;
   width: 220px;
-  scale: 0;
-  /* transform: translate(-50% ,  -50%); */
-}
-.service-card:hover .service-hover-img {
-  pointer-events: none;
-  scale: 1;
-  transition: scale 0.3s;
 }

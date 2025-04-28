@@ -10,6 +10,11 @@ import Asset6 from "../assets/ServicesIcons/Asset 6.svg";
 import Asset7 from "../assets/ServicesIcons/Asset 7.svg";
 import graphic from "../assets/ServicesImage/graphic.svg";
 import hover_img from '../assets/service-hover.jpg';
+import hover_img2 from '../assets/service1.jpg';
+import hover_img3 from '../assets/service2.jpg';
+import hover_img4 from '../assets/service3.jpg';
+import hover_img5 from '../assets/service4.jpg';
+
 import image_1 from '../assets/DTS_Influencer.webp'
 import image_2 from '../assets/infulancer.png'
 // import graphic from "../assets/ServicesImage/graphic.svg";
@@ -49,17 +54,17 @@ const ServicesData = [
           {
             service_name: "Brand Identity",
             service_desc: "Developing comprehensive visual systems including logos, color palettes, typography and graphic elements for cohesive brand recognition across all touchpoints.",
-            hover_image: hover_img
+            hover_image: hover_img2
           },
           {
             service_name: "Business Cards",
             service_desc: "Designing premium business cards with careful attention to typography, materials and finishes that reflect your brand's professionalism and quality.",
-            hover_image: hover_img
+            hover_image: hover_img3
           },
           {
             service_name: "Packaging Design",
             service_desc: "Creating innovative packaging solutions that stand out on shelves while effectively communicating product quality and brand values through design.",
-            hover_image: hover_img
+            hover_image: hover_img4
           },
           {
             service_name: "Brochures",
@@ -69,17 +74,17 @@ const ServicesData = [
           {
             service_name: "Social Media Graphics",
             service_desc: "Designing platform-optimized social media visuals that capture attention and maintain consistent brand recognition across all digital channels.",
-            hover_image: hover_img
+            hover_image: hover_img2
           },
           {
             service_name: "Print Advertising",
             service_desc: "Creating eye-catching print ads for magazines, newspapers and outdoor media that communicate quickly and leave lasting impressions.",
-            hover_image: hover_img
+            hover_image: hover_img3
           },
           {
             service_name: "Brand Guidelines",
             service_desc: "Documenting comprehensive standards for logo usage, colors, typography and imagery to ensure consistent brand application across all mediums.",
-            hover_image: hover_img
+            hover_image: hover_img4
           }
         ]
       }
@@ -182,22 +187,22 @@ const ServicesData = [
           {
             service_name: "E-commerce Solutions",
             service_desc: "Developing feature-rich online stores with Shopify, WooCommerce or custom platforms, including payment integration and inventory management.",
-            hover_image: hover_img
+            hover_image: hover_img2
           },
           {
             service_name: "Web Applications",
             service_desc: "Creating custom business tools, dashboards and SaaS platforms with robust backend functionality and intuitive interfaces.",
-            hover_image: hover_img
+            hover_image: hover_img3
           },
           {
             service_name: "CMS Development",
             service_desc: "Implementing WordPress, Drupal or other content management systems for easy content updates and publishing workflows.",
-            hover_image: hover_img
+            hover_image: hover_img4
           },
           {
             service_name: "API Integration",
             service_desc: "Connecting your website with third-party services, payment gateways and databases for seamless functionality.",
-            hover_image: hover_img
+            hover_image: hover_img5
           }
         ]
       }
@@ -300,22 +305,22 @@ const ServicesData = [
           {
             service_name: "Social Media Marketing",
             service_desc: "Developing platform-specific strategies to build engaged communities through compelling content and targeted advertising across major social networks.",
-            hover_image: hover_img
+            hover_image: hover_img2
           },
           {
             service_name: "PPC Advertising",
             service_desc: "Managing high-converting paid campaigns on Google, Bing and social platforms with continuous optimization for maximum ROI.",
-            hover_image: hover_img
+            hover_image: hover_img3
           },
           {
             service_name: "Content Marketing",
             service_desc: "Creating valuable, SEO-optimized content that attracts and nurtures ideal customers through every stage of the buyer's journey.",
-            hover_image: hover_img
+            hover_image: hover_img4
           },
           {
             service_name: "Email Marketing",
             service_desc: "Designing automated email sequences and newsletters that convert subscribers into loyal customers with personalized messaging.",
-            hover_image: hover_img
+            hover_image: hover_img5
           },
           {
             service_name: "Influencer Marketing",
@@ -423,17 +428,17 @@ const ServicesData = [
           {
             service_name: "Motion Graphics",
             service_desc: "Designing dynamic animated graphics for explainer videos, titles and presentations that communicate complex ideas simply and effectively.",
-            hover_image: hover_img
+            hover_image: hover_img2
           },
           {
             service_name: "Video Editing",
             service_desc: "Professional editing and assembly of video footage with seamless transitions, pacing and storytelling for maximum impact.",
-            hover_image: hover_img
+            hover_image: hover_img3
           },
           {
             service_name: "Color Correction",
             service_desc: "Enhancing and standardizing color across all footage for professional, consistent results that match brand aesthetics.",
-            hover_image: hover_img
+            hover_image: hover_img4
           }
         ]
       }
@@ -536,17 +541,17 @@ const ServicesData = [
           {
             service_name: "Corporate Videos",
             service_desc: "Producing professional corporate videos including testimonials, training content and company profiles with polished scripting, filming and editing.",
-            hover_image: hover_img
+            hover_image: hover_img2
           },
           {
             service_name: "Commercial Photography",
             service_desc: "Capturing striking images for advertising campaigns with tailored lighting, composition and art direction for maximum visual impact.",
-            hover_image: hover_img
+            hover_image: hover_img3
           },
           {
             service_name: "Drone Videography",
             service_desc: "Providing stunning aerial footage for real estate, events and promotional content captured by licensed drone operators.",
-            hover_image: hover_img
+            hover_image: hover_img4
           }
         ]
       }
@@ -655,12 +660,12 @@ const ServicesData = [
           {
             service_name: "Executive Search",
             service_desc: "Identifying and recruiting C-level and senior leadership talent through discreet, targeted searches and thorough assessment processes.",
-            hover_image: hover_img
+            hover_image: hover_img2
           },
           {
             service_name: "Technical Recruitment",
             service_desc: "Specialized sourcing for IT, engineering and STEM positions with deep understanding of technical skills and industry requirements.",
-            hover_image: hover_img
+            hover_image: hover_img3
           }
         ]
       }
@@ -763,12 +768,12 @@ const ServicesData = [
           {
             service_name: "Warehousing",
             service_desc: "Improving storage efficiency, inventory accuracy and picking processes through optimized warehouse layout and management systems.",
-            hover_image: hover_img
+            hover_image: hover_img2
           },
           {
             service_name: "Transportation",
             service_desc: "Optimizing routing, carrier selection and freight consolidation to reduce costs while improving delivery reliability.",
-            hover_image: hover_img
+            hover_image: hover_img3
           }
         ]
       }

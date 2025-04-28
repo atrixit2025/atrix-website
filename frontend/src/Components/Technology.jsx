@@ -22,10 +22,8 @@ const Technology = () => {
                             We use the latest tools and innovations to deliver smart, efficient, and reliable solutions that help your business grow and stay competitive in the digital world.
                             </p>
                         </div>
-
                     </div>
                     <TechnologySecPart />
-
                 </div>
             </div>
         </div>
