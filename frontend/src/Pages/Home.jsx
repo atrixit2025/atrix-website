@@ -21,7 +21,7 @@ import { CiPlay1 } from "react-icons/ci";
 import ModalVideo from 'react-modal-video';
 import 'react-modal-video/css/modal-video.css';
 import about_video from '../assets/About_video.mp4'
-import './modal-video-custom.css'; // Replace the default import
+import './modal-video-custom.css'; 
 
 const Home = () => {
   const ourServicesRef = useRef(null);
@@ -133,15 +133,15 @@ const Home = () => {
 
 
   return (
-    <div >
+    <div className=' ' >
 
       <div className=" overflow-hidden">
-        <div className="relative w-full text-(--whitelight) hero_section">
+        <div className="relative w-full text-(--whitelight) hero_section px-5 ">
           <div className="pointer-events-none absolute inset-0 h-full">
             <ParticleEffect />
           </div>
           <div className='container mx-auto   '>
-            <div className="flex justify-center items-center md:min-h-screen md:py-46 py-40 mt-10 ">
+            <div className="flex justify-center items-center md:min-h-screen md:py-46 pt-26 pb-14 mt-10">
               <div className="text-center relative">
                 <h1 className="text-(--whitelight) mt-5 text-6xl md:text-8xl lg:text-9xl">
                   <div className="relative inline-block">
@@ -181,13 +181,13 @@ const Home = () => {
                       <img src={Assetarrow} className='w-auto lg:h-22 h-12 md:ml-5 ml-2 mt-1 moveWithMouse' />
                     </div>
 
-                    <div className="absolute -bottom-[25%] md:bottom-[10%] md:-left-[25%] text-center z-0 animateFromTop tracking-normal">
+                    <div className="absolute -bottom-[25%]  md:bottom-[10%] md:-left-[25%] text-center z-0 animateFromTop tracking-normal">
                       <p className="bg-(--blue) text-(--black) border   font-body border-transparent rounded-4xl md:px-8  px-2 py-1 text-sm md:text-2xl rotate-12 font-bold moveWithMouse">
                         Brand Identity
                       </p>
                     </div>
 
-                    <div className="absolute -bottom-[25%] md:-bottom-[5%] md:left-[68%] text-center z-0 animateFromTop tracking-normal">
+                    <div className="absolute -bottom-[25%] left-[68%] md:-bottom-[5%] md:left-[68%] text-center z-0 animateFromTop tracking-normal">
                       <p className="bg-(--green) text-(--black) border   font-body border-transparent rounded-4xl md:px-8  px-2 py-1 text-sm md:text-2xl rotate-12 font-bold moveWithMouse">
                         Visual
                       </p>
@@ -209,9 +209,9 @@ const Home = () => {
 
 
       <LogoSlider className="max-w-full" />
-      <div className=" py-10  container mx-auto  ">
+      <div className=" md:py-10   container mx-auto  ">
 
-        <div className=" ">
+        <div className="-mt-10 md:mt-0  ">
           <h1 className="font-bold flex justify-center lg:right-60 top-14 relative text-8xl md:text-9xl text-transparent z-10" style={{ WebkitTextStroke: "1px white" }}>About us</h1>
           <div className="lg:flex items-center ">
             <div className='inline-block relative max-w-[100%] '>
