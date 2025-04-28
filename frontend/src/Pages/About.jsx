@@ -155,7 +155,7 @@ const About = () => {
       <ValueCards />
 
       {/* CTA-section */}
-      <div className="container mx-auto mt-28 ">
+      <div className="container mx-auto mt-28  w-[90%] ">
         <div className="row grid grid-cols-1 md:grid-cols-12 mt-10 bg-(--blue) rounded-xl p-6 md:p-10">
 
           {/* Text Section */}
@@ -178,7 +178,7 @@ const About = () => {
 
       {/* Environment-section */}
       <div className="Environment-sec">
-        <div className="container mx-auto  mt-28 ">
+        <div className="container mx-auto  mt-28  w-[90%]">
           <div className="row text-center pb-10 ">
             <div className="col">
               <p className="text-xl pb-4"> Atrix Environment</p>

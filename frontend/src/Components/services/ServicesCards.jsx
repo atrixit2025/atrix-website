@@ -37,6 +37,7 @@ const serviceCardsData = [
 
 ];
 
+
 const ServicesCards = ({ secData }) => {
 
     const [imgPosition, setImgPosition] = useState({ x: 0, y: 0 });
@@ -47,10 +48,13 @@ const ServicesCards = ({ secData }) => {
             y: event.clientY - cardRect.top,
         });
     };
+ 
+    
 
 
     return (
-        <div className="services-sec mt-36">
+        
+       <div className="services-sec mt-36">
             {secData.sub_service.map((item, index) => (
                 <>
                     <div className="container mx-auto">
@@ -98,6 +102,7 @@ const ServicesCards = ({ secData }) => {
                 </>
             ))}
         </div>
+
     );
 };
 
