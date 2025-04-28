@@ -175,14 +175,14 @@ export default function Banner({ onChange, initialData }) {
                 // Handle existing image data
                 const existingImage = item.imageId ? {
                     id: item.imageId,
-                    url: `http://localhost:5300/Image/get/${item.imageId}`
+                    url: `/Image/${item.imageId}`
                 } : null;
 
                 // Handle slider images if they exist
                 const sliderImages = item.sliderImages || [];
                 const existingSliderImages = sliderImages.map(imgId => ({
                     id: imgId,
-                    url: `http://localhost:5300/Image/get/${imgId}`
+                    url: `http://localhost:5300/Image/${imgId}`
                 }));
 
                 return {

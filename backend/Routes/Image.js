@@ -66,6 +66,34 @@ const storage = multer.diskStorage({
     }
   })
 
+
+  ImageRouter.get("/:imageId", async (req, res) => {
+    try {
+      const { imageId } = req.params;
+  
+      const imageDoc = await Image.findById(imageId);
+      if (!imageDoc) {
+        return res.status(404).json({ message: "Image not found in database" });
+      }
+  
+      const imagePath = path.join(__dirname, "..", "uploads", "Image", imageDoc.image.replace(/^\/Image\//, ''));
+  
+      // Check if file exists
+      try {
+        await fs.access(imagePath);
+      } catch (err) {
+        return res.status(404).json({ message: "Image file not found on server" });
+      }
+  
+      // Send the file
+      res.sendFile(imagePath);
+    } catch (error) {
+      console.error("Error serving image:", error);
+      res.status(500).json({ message: "Server error", error: error.message });
+    }
+  });
+  
+
   
   ImageRouter.get("/get/:imageId", async (req, res) => {
     try {

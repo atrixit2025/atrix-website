@@ -202,7 +202,7 @@ const SelectFileInput = ({ onImageUpload, imageId, imageType, existingImage,Name
                         <button
                             onClick={handleRemoveImage}
 
-                            className="absolute  cursor-pointer top-1  left -1 p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600"
+                            className="absolute  cursor-pointer top-1.5  left-1.5 p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600"
                         >
                             <FaTrash size={14} />
                         </button>
@@ -227,7 +227,7 @@ const SelectFileInput = ({ onImageUpload, imageId, imageType, existingImage,Name
             )}
 
 
-            {previewUrl && (
+            {/* {previewUrl && (
                 <div className="mt-4">
                     <p className="text-sm text-gray-500 mb-2">
                         {imageType === 'full-image' ? 'Full Width Image' :
@@ -243,7 +243,7 @@ const SelectFileInput = ({ onImageUpload, imageId, imageType, existingImage,Name
                         />
                     </div>
                 </div>
-            )}
+            )} */}
 
 
             {/* Modal for Uploading and Selecting Images */}
