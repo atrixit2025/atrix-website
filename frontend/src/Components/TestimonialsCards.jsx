@@ -84,7 +84,7 @@ const TestimonialsCards = () => {
         <div className="py-10 md:py-22">
           <div className="testimonial-heading text-center">
             <p className="text-xl">Our Testimonials</p>
-            <h1 className="text-6xl font-bold pt-2">What Our Clients Say</h1>
+            <h2 className="text-6xl font-bold pt-2">What Our Clients Say</h2>
           </div>
 
           <div className="testimonial-slider pt-5">
@@ -106,7 +106,7 @@ const TestimonialsCards = () => {
                       </div>
 
                       <div className="flex flex-col justify-center">
-                        <h2 className="text-xl font-bold tracking-tighter leading-2 mt-2 ">{item.UserName}</h2>
+                        <h4 className="text-xl font-bold tracking-tighter leading-2 mt-2 ">{item.UserName}</h4>
                         <p className="text-white/70 mt-1">{item.Subheading}</p>
                         <span className="absolute right-20 text-5xl text-white/15" ><i class="fa-solid fa-quote-right"></i></span>
                       </div>

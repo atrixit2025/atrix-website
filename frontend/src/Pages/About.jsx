@@ -26,6 +26,7 @@ import { RxArrowTopRight } from "react-icons/rx";
 import ValueCards from "../Components/career/ValueCards";
 import TestimonialsCards from "../Components/TestimonialsCards";
 import Behance from "../Components/Behanceshowpost/Behance";
+import thumbnail1 from "../assets/thumbnail-1.jpg";
 
 
 const cards = [
@@ -104,7 +105,7 @@ const About = () => {
           <video
             className="  rounded-xl "
             src={About_video}
-             poster='https://media.gettyimages.com/id/1302436712/video/loading-circle-icon-animation-on-black-background-4k-video-loopable-preloader.jpg?s=640x640&k=20&c=WJGwZEsiTQgk-HfSVV1GS-_y-uU7Fqu679eb25wAiKY='
+             poster={thumbnail1}
             autoPlay
             muted
             loop

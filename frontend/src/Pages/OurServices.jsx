@@ -18,11 +18,11 @@ const OurServices = () => {
       </div>
 
       <div className="Brand-Experience container flex  justify-between  mx-auto mt-22">
-        <h2 className=" text-2xl  ">
+        <h4 className=" text-2xl  ">
           Crafted by our team of experts and powered by cutting-edge AI
           technology, our services deliver measurable, impactful results that
           drive growth and elevate your business.
-        </h2>
+        </h4>
       </div>
 
       <OurServiceCard />
@@ -30,13 +30,13 @@ const OurServices = () => {
       {/* HOW WE DO IT */}
 
       <div className="container mx-auto mt-25 leading-0 ">
-        <h3 className="text-8xl text-center font-extrabold py-15 "> HOW WE DO IT</h3>
+        <h2 className="text-8xl text-center font-extrabold py-15 "> HOW WE DO IT</h2>
         <div className="row-span-12 flex gap-9 ">
           <div className="col-span-4 border-t-1 border-white/20 w-[33.3%] ">
-            <h2 className="text-5xl font-extrabold  pt-10">
+            <h3 className="text-5xl font-extrabold  pt-10">
               START WITH <br />
               UNDERSTANDING
-            </h2>
+            </h3>
             <p className="text-lg  pt-3 ">
               Every partnership begins with an ask. But our magic is in the
               understanding, finding the root of what needs to be solved—your
@@ -48,10 +48,10 @@ const OurServices = () => {
           </div>
 
           <div className="col-span-4 border-t-1 border-white/20 w-[33.3%] ">
-            <h2 className="text-5xl font-extrabold  pt-10">
+            <h3 className="text-5xl font-extrabold  pt-10">
               CRAFT <br />
               FOR IMPACT
-            </h2>
+            </h3>
             <p className="text-lg  pt-3 ">
               With our focus clear, we build a strategic framework for brand
               positioning and messaging at the core. From there, we craft
@@ -61,10 +61,10 @@ const OurServices = () => {
           </div>
 
           <div className="col-span-4 border-t-1 border-white/20 w-[33.3%] ">
-            <h2 className="text-5xl font-extrabold  pt-10">
+            <h3 className="text-5xl font-extrabold  pt-10">
               ACCELERATE FOR <br />
               GROWTHG
-            </h2>
+            </h3>
             <p className="text-lg   pt-3 ">
               We never set it and forget it. We constantly monitor our
               ecosystem, analyze performance, optimize, and refine strategies
