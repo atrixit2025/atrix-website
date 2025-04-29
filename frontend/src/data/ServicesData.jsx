@@ -43,7 +43,7 @@ const ServicesData = [
     img_2: image_2,
     sub_service: [
       {
-        services_heading: "Comprehensive Branding Services",
+        services_heading: "Contant",
         services_desc: "From initial concept to final execution, we deliver complete branding solutions that make lasting impressions in competitive markets.",
         all_services: [
           {
@@ -89,7 +89,7 @@ const ServicesData = [
         ]
       }
     ],
-    cards_sec_heading: "Why Strong Branding Matters",
+    cards_sec_heading: "Why do you need branding",
     cards_sec_data: [
       {
         cardTitle: "Competitive Differentiation",
@@ -104,7 +104,7 @@ const ServicesData = [
         desc: "Professional branding increases perceived value by up to 40%, supporting premium pricing and long-term equity."
       }
     ],
-    why_atrix_heading: "Our Branding Process",
+    why_atrix_heading: "Why Atrix",
     why_atrix_subheading: "Research-driven approach to visual identity development",
     why_atrix_desc: [
       "We begin with in-depth discovery sessions to understand your business objectives, market position and target audience demographics.",
@@ -176,7 +176,7 @@ const ServicesData = [
     img_2: image_2,
     sub_service: [
       {
-        services_heading: "Web Development Services",
+        services_heading: "Contant",
         services_desc: "Complete website solutions from simple brochure sites to complex web applications and ecommerce platforms.",
         all_services: [
           {
@@ -207,7 +207,7 @@ const ServicesData = [
         ]
       }
     ],
-    cards_sec_heading: "Web Development Benefits",
+    cards_sec_heading: "Why do you need branding",
     cards_sec_data: [
       {
         cardTitle: "Mobile-First Approach",
@@ -222,7 +222,7 @@ const ServicesData = [
         desc: "Clean, modular codebase allows for easy updates and scalability as your business grows."
       }
     ],
-    why_atrix_heading: "Our Development Philosophy",
+    why_atrix_heading: "Why Atrix",
     why_atrix_subheading: "Engineering excellence meets business objectives",
     why_atrix_desc: [
       "We approach development as problem-solving - creating technical solutions that address specific business challenges and opportunities.",
@@ -294,7 +294,7 @@ const ServicesData = [
     img_2: image_2,
     sub_service: [
       {
-        services_heading: "Digital Marketing Services",
+        services_heading: "Contant",
         services_desc: "Comprehensive solutions covering the entire customer journey from initial awareness to final conversion and retention.",
         all_services: [
           {
@@ -330,7 +330,7 @@ const ServicesData = [
         ]
       }
     ],
-    cards_sec_heading: "Digital Marketing Advantages",
+    cards_sec_heading: "Why do you need branding",
     cards_sec_data: [
       {
         cardTitle: "Precision Targeting",
@@ -345,7 +345,7 @@ const ServicesData = [
         desc: "Digital campaigns can be precisely calibrated and scaled to match business objectives and budgets."
       }
     ],
-    why_atrix_heading: "Our Marketing Methodology",
+    why_atrix_heading: "Why Atrix",
     why_atrix_subheading: "Scientific approach to digital growth",
     why_atrix_desc: [
       "We combine data analysis with creative execution to develop campaigns that deliver actual business results, not just vanity metrics.",
@@ -417,7 +417,7 @@ const ServicesData = [
     img_2: image_2,
     sub_service: [
       {
-        services_heading: "VFX Services",
+        services_heading: "Contant",
         services_desc: "Comprehensive visual effects solutions for commercials, films, presentations and digital content.",
         all_services: [
           {
@@ -443,7 +443,7 @@ const ServicesData = [
         ]
       }
     ],
-    cards_sec_heading: "VFX Advantages",
+    cards_sec_heading: "Why do you need branding",
     cards_sec_data: [
       {
         cardTitle: "Enhanced Storytelling",
@@ -458,7 +458,7 @@ const ServicesData = [
         desc: "Break free from physical limitations and create anything imaginable through CGI and compositing."
       }
     ],
-    why_atrix_heading: "Our VFX Approach",
+    why_atrix_heading: "Why Atrix",
     why_atrix_subheading: "Seamless integration of effects and reality",
     why_atrix_desc: [
       "We blend technical expertise with artistic vision to create effects that serve the story rather than distract from it.",
@@ -530,7 +530,7 @@ const ServicesData = [
     img_2: image_2,
     sub_service: [
       {
-        services_heading: "Production Services",
+        services_heading: "Contant",
         services_desc: "End-to-end production solutions tailored to your brand's needs—from concept development to final delivery across photography, videography and multimedia formats.",
         all_services: [
           {
@@ -556,7 +556,7 @@ const ServicesData = [
         ]
       }
     ],
-    cards_sec_heading: "Why Professional Production Matters",
+    cards_sec_heading: "Why do you need branding",
     cards_sec_data: [
       {
         cardTitle: "Brand Perception",
@@ -571,7 +571,7 @@ const ServicesData = [
         desc: "Professional assets can be repurposed across websites, social media, ads and print materials."
       }
     ],
-    why_atrix_heading: "Our Production Approach",
+    why_atrix_heading: "Why Atrix",
     why_atrix_subheading: "Cinematic quality meets commercial objectives",
     why_atrix_desc: [
       "We combine artistic vision with technical expertise to create visuals that capture attention while clearly communicating your key messages.",
@@ -644,7 +644,7 @@ const ServicesData = [
     img_2: image_2,
     sub_service: [
       {
-        services_heading: "Staffing Services",
+        services_heading: "Contant",
         services_desc: "Comprehensive workforce solutions tailored to your industry, company culture and specific role requirements.",
         all_services: [
           {
@@ -670,7 +670,7 @@ const ServicesData = [
         ]
       }
     ],
-    cards_sec_heading: "Staffing Benefits",
+    cards_sec_heading: "Why do you need branding",
     cards_sec_data: [
       {
         cardTitle: "Reduced Hiring Time",
@@ -685,7 +685,7 @@ const ServicesData = [
         desc: "Reduce bad hires and turnover costs while optimizing recruitment spend."
       }
     ],
-    why_atrix_heading: "Our Staffing Methodology",
+    why_atrix_heading: "Why Atrix",
     why_atrix_subheading: "Quality-focused talent acquisition",
     why_atrix_desc: [
       "We go beyond resumes to understand both candidate capabilities and cultural fit with your organization.",
@@ -757,7 +757,7 @@ const ServicesData = [
     img_2: image_2,
     sub_service: [
       {
-        services_heading: "Logistics Services",
+        services_heading: "Contant",
         services_desc: "End-to-end supply chain solutions tailored to your product characteristics, customer requirements and business objectives.",
         all_services: [
           {
@@ -778,7 +778,7 @@ const ServicesData = [
         ]
       }
     ],
-    cards_sec_heading: "Logistics Advantages",
+    cards_sec_heading: "Why do you need branding",
     cards_sec_data: [
       {
         cardTitle: "Cost Reduction",
@@ -793,7 +793,7 @@ const ServicesData = [
         desc: "Flexible solutions grow with your business needs and expansion."
       }
     ],
-    why_atrix_heading: "Our Logistics Approach",
+    why_atrix_heading: "Why Atrix",
     why_atrix_subheading: "Data-driven supply chain optimization",
     why_atrix_desc: [
       "We analyze your current operations to identify inefficiencies and opportunities for improvement across the entire supply chain.",

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import img1 from "../assets/AboutUs/project-sec/about_img1-jpg.webp";
-import img2 from "../assets/AboutUs/project-sec/about_img2-jpg.webp";
-import img3 from "../assets/AboutUs/project-sec/about_img3-jpg.webp";
-import img4 from "../assets/AboutUs/project-sec/about_img4-jpg.webp";
+import img1 from "../assets/About_sec_scroll_imgs/img1.png";
+import img2 from "../assets/About_sec_scroll_imgs/img2.png";
+import img3 from "../assets/About_sec_scroll_imgs/img3.png";
+import img4 from "../assets/About_sec_scroll_imgs/img4.png";
 
 const About_sec_scroll = () => {
   return (
@@ -16,13 +16,13 @@ const About_sec_scroll = () => {
                 <img src={img1} alt="" className="w-full h-full object-cover rounded-2xl" />
               </div>
               <div className="aspect-[4/5] rounded-3xl overflow-hidden p-2">
-                <img src={img2} alt="" className="w-full h-full object-cover rounded-2xl" />
+                <img src={img3} alt="" className="w-full h-full object-cover rounded-2xl" />
               </div>
             </div>
 
             <div className="pt-14">
               <div className="aspect-[4/5] rounded-3xl overflow-hidden p-2">
-                <img src={img3} alt="" className="w-full h-full object-cover rounded-2xl" />
+                <img src={img2} alt="" className="w-full h-full object-cover rounded-2xl" />
               </div>
               <div className="aspect-[4/5] rounded-3xl overflow-hidden p-2">
                 <img src={img4} alt="" className="w-full h-full object-cover rounded-2xl" />
@@ -38,7 +38,7 @@ const About_sec_scroll = () => {
             {blurbContent.map((item, index) => (
               <div key={index} className="md:p-6 ">
                 <p className="text-lg font-medium text-white pt-5 ">{item.title}</p>
-                <h1 className="mb-5 text-2xl md:text-5xl font-bold ">{item.description}</h1>
+                <h2 className="mb-5 text-2xl md:text-5xl font-bold ">{item.description}</h2>
                 <p className="text-white/55 text-sm/6">{item.pText}</p><br />
                 <p className="text-white/55 text-sm/6">{item.pText1}</p>
 

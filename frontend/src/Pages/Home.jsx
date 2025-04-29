@@ -7,7 +7,6 @@ import LogoSlider from '../Components/marqueelogo/LogoSlider';
 import Button from '../Components/Button';
 import useIntersectionObserver from '../Components/useIntersectionObserver';
 import AboutImage from "../assets/AboutImage.jpg";
-// import About_Video from "../assets/Atrix Website 4 compress Full szie video .mp4"
 import Assetarrow from "../assets/Asset 1arrow.svg"
 const OurServices = React.lazy(() => import('../Components/OurServices'));
 const VideoSection = React.lazy(() => import('../Components/VideoSection'));
@@ -16,12 +15,9 @@ const OurPortfolio = React.lazy(() => import('../Components/OurPortfolio'));
 const Technology = React.lazy(() => import('../Components/Technology'));
 const LetterMarquee = React.lazy(() => import('../Components/marqueelogo/letterMarquee'));
 import video_circle from '../assets/video_circle.svg'
-import { MdOutlineSlowMotionVideo } from "react-icons/md";
 import { CiPlay1 } from "react-icons/ci";
-import ModalVideo from 'react-modal-video';
-import 'react-modal-video/css/modal-video.css';
 import about_video from '../assets/About_video.mp4'
-import './modal-video-custom.css'; 
+import thumbnail2 from "../assets/thumbnail-2.jpg"
 
 const Home = () => {
   const ourServicesRef = useRef(null);
@@ -30,6 +26,8 @@ const Home = () => {
   const ourPortfolioRef = useRef(null);
   const technologyRef = useRef(null);
   const letterMarqueeRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
 
   const [visibleComponents, setVisibleComponents] = useState({
     ourServices: false,
@@ -113,34 +111,34 @@ const Home = () => {
     ' Visionary, Trustworthy'
   ];
 
-
-  // const [isOpen, setIsOpen] = useState(false);
-
-  // popup video js 
-  const [isOpen, setIsOpen] = useState(false);
-
+  // Video modal effect
   useEffect(() => {
+    let timer;
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      // Show video after 3 seconds
+      timer = setTimeout(() => {
+        setShowVideo(true);
+      }, 800);
     } else {
       document.body.style.overflow = 'auto';
+      setShowVideo(false);
     }
 
     return () => {
+      clearTimeout(timer);
       document.body.style.overflow = 'auto';
     };
   }, [isOpen]);
 
-
   return (
-    <div className=' ' >
-
+    <div className=' '>
       <div className=" overflow-hidden">
         <div className="relative w-full text-(--whitelight) hero_section px-5 ">
           <div className="pointer-events-none absolute inset-0 h-full">
             <ParticleEffect />
           </div>
-          <div className='container mx-auto   '>
+          <div className='container mx-auto'>
             <div className="flex justify-center items-center md:min-h-screen md:py-46 pt-26 pb-14 mt-10">
               <div className="text-center relative">
                 <h1 className="text-(--whitelight) mt-5 text-6xl md:text-8xl lg:text-9xl">
@@ -169,7 +167,6 @@ const Home = () => {
                           speed={170}
                           deleteSpeed={100}
                           delay={1500}
-
                         />
                       </div>
                     </div>
@@ -192,7 +189,6 @@ const Home = () => {
                         Visual
                       </p>
                     </div>
-
                   </div>
                 </h1>
 
@@ -207,11 +203,9 @@ const Home = () => {
         </div>
       </div>
 
-
       <LogoSlider className="max-w-full" />
-      <div className=" md:py-10   container mx-auto  ">
-
-        <div className="-mt-10 md:mt-0  ">
+      <div className=" md:py-10   container mx-auto">
+        <div className="-mt-10 md:mt-0">
           <h1 className="font-bold flex justify-center lg:right-60 top-14 relative text-8xl md:text-9xl text-transparent z-10" style={{ WebkitTextStroke: "1px white" }}>About us</h1>
           <div className="lg:flex items-center ">
             <div className='inline-block relative max-w-[100%] '>
@@ -221,66 +215,111 @@ const Home = () => {
                 <div className="video-circle">
                   <img src={video_circle} alt="" className='w-full h-full object-cover' />
                 </div>
-
-                <button className="js-modal-btn hover:text-(--blue)    transition-all  video-icon text-6xl text-white ml-[5px] cursor-pointer" onClick={() => setIsOpen(true)}>
+                <button className="js-modal-btn hover:text-(--blue) transition-all video-icon text-6xl text-white ml-[5px] cursor-pointer" onClick={() => setIsOpen(true)}>
                   <CiPlay1 />
                 </button>
-                <ModalVideo
-                  channel="custom"
-                  isOpen={isOpen}
-                  url={about_video}
-                  onClose={() => setIsOpen(false)}
-                  allowFullScreen={true}
-                  animationSpeed={300}
-                  modalStyle={{
-                    content: {
-                      width: '90%',
-                      maxWidth: '1200px',
-                      margin: '0 auto',
-                      padding: 0,
-                      border: 'none',
-                      background: 'transparent'
-                    },
-                    overlay: {
-                      backgroundColor: 'rgba(0, 0, 0, 0.8)!important',
-                      zIndex: 1000
-                    }
-                  }}
-                />
               </div>
-
-              {/* <video
-                      src={About_Video}
-                      autoPlay 
-                      muted 
-                      loop 
-                      controls={false} 
-                      style={{ width: "100%", height: "auto" }} 
-                     className=" w-auto  object-cover relative max-w-[100%]"
-                    /> */}
             </div>
-
 
             <div className="text-(--white) lg:-ml-16  relative w-full lg:max-w-[40%] px-5 ">
               <p className="text-xl sm:text-md font-semibold text-(--white) mb-2">Who We Are</p>
               <h5 className="lg:text-5xl text-2xl font-bold mb-5">Trusted Experts in Taking Your Business Higher</h5>
 
-              <p className="text-md text-(--white) pb-4">Struggling to keep up in today’s fast-changing digital world? Don’t worry!, Atrix IT Solutions is here to help your business succeed!
+              <p className="text-md text-(--white) pb-4">Struggling to keep up in today's fast-changing digital world? Don't worry!, Atrix IT Solutions is here to help your business succeed!
               </p>
-              <p className="text-md text-(--white) pb-4">We do more than just offer IT services - we create smart solutions that drive real success. With a passion for innovation, we’ve built a team of experts dedicated to helping businesses grow and stay ahead in the digital world.
+              <p className="text-md text-(--white) pb-4">We do more than just offer IT services - we create smart solutions that drive real success. With a passion for innovation, we've built a team of experts dedicated to helping businesses grow and stay ahead in the digital world.
               </p>
               <p className="text-md text-(--white) pb-4">From custom software development to strong IT infrastructure and reliable support, we provide solutions tailored to your needs, ensuring smooth growth and long-term success.
               </p>
-              <p className="text-md text-(--white) pb-10 ">Look no further! Let’s turn your vision into reality together.
-
+              <p className="text-md text-(--white) pb-10 ">Look no further! Let's turn your vision into reality together.
               </p>
 
               <Button btnLink={"/about"} mybtn={"Learn More"} />
-
             </div>
           </div>
         </div>
       </div>
+
+      {/* Custom Video Modal */}
+      {isOpen && (
+        <div className="modal-video-custom-overlay" style={{
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          zIndex: 1000,
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}>
+          <div className="modal-video-custom-content" style={{
+            width: '90%',
+            maxWidth: '1200px',
+            margin: '0 auto',
+            padding: 0,
+            border: 'none',
+            background: 'transparent',
+            position: 'relative'
+          }}>
+            {/* Thumbnail Image - shows for first 3 seconds */}
+            {!showVideo && (
+              <div style={{ position: 'relative' }}>
+                <img 
+                  src={thumbnail2} 
+                  alt="Video thumbnail"
+                  style={{ width: '100%', height: 'auto' }}
+                />
+                <div style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer'
+                }}>
+                  <CiPlay1 className="text-6xl text-white" />
+                </div>
+              </div>
+            )}
+            
+            {/* Video Player - shows after 3 seconds and auto-plays */}
+            {showVideo && (
+              <video 
+                controls 
+                autoPlay 
+                muted
+                style={{ width: '100%' }}
+              >
+                <source src={about_video} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            )}
+            
+            {/* Close Button */}
+            <button 
+              onClick={() => {
+                setIsOpen(false);
+                setShowVideo(false);
+              }}
+              style={{
+                position: 'absolute',
+                top: '-80px',
+                right: '0',
+                background: 'transparent',
+                border: 'none',
+                color: 'white',
+                fontSize: '70px',
+                cursor: 'pointer'
+              }}
+            >
+              ×
+            </button>
+          </div>
+        </div>
+      )}
 
       <div className=' ' ref={ourServicesRef}>
         {visibleComponents.ourServices ? (
@@ -289,7 +328,6 @@ const Home = () => {
           </Suspense>
         ) : (
           <div className="text-(--white) text-center py-20">
-
           </div>
         )}
       </div>
@@ -334,7 +372,6 @@ const Home = () => {
         )}
       </div>
 
-
       <div ref={technologyRef}>
         {visibleComponents.technology ? (
           <Suspense fallback={<div className="text-(--white) text-center "></div>}>
@@ -344,8 +381,6 @@ const Home = () => {
           <div className="text-(--white) text-center "></div>
         )}
       </div>
-
-   
     </div>
   );
 };

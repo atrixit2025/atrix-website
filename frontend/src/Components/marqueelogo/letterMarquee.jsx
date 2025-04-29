@@ -67,7 +67,7 @@ const LetterMarquee = () => {
                     {letterMarquee.map((item, index) => (
                         <div key={index} className="flex items-center gap-5 filter invert brightness-0 contrast-100 z-10">
                             {item.icons}
-                            <h2 className="text-center mt-2 font-bold text-2xl">{item.title}</h2>
+                            <h4 className="text-center mt-2 font-bold text-2xl">{item.title}</h4>
                         </div>
                     ))}
                 </div>

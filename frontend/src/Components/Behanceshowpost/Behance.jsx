@@ -57,12 +57,12 @@ export default function Behance() {
         {/* LEFT SIDE: HEADING */}
         <div className="flex-shrink-0 w-[300px]">
           <Link to={"https://www.behance.net/atrixit"} target='_blank' >
-            <h1 className="text-5xl font-bold mb-6 group duration-300 hover:text-(--blue)">
+            <h2 className="min-w-[340px] text-5xl font-bold mb-6 group duration-300 hover:text-(--blue)">
               Explore Our <br /> Behance
               <span className="inline-block border border-text-white/50 ml-2 h-8 w-8 rounded-full -rotate-45 group-hover:rotate-1 group-hover:bg-(--blue) group-hover:text-white group-hover:border-(--blue) duration-300 ">
                 <FaArrowRight size={16} className="mx-auto mt-1.5" />
               </span>
-            </h1>
+            </h2>
           </Link>
 
           {error && (
