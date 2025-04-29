@@ -60,13 +60,6 @@ const Service = () => {
           </h2>
         </div>
 
-        {/* Scroll target form */}
-        <div ref={formRef}>
-          <ServiceFrom />
-        </div>
-
-        <OurPortfolio />
-        <FaqSection secData={filteredService} />
 
         {/* CTA Section */}
         <div className="container mx-auto mt-28 service-cta">
@@ -87,6 +80,15 @@ const Service = () => {
             </div>
           </div>
         </div>
+        {/* Scroll target form */}
+        <div ref={formRef}>
+          <ServiceFrom />
+        </div>
+
+        <OurPortfolio />
+        <FaqSection secData={filteredService} />
+
+
       </div>
     </>
   );
