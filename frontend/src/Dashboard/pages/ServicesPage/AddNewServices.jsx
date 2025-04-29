@@ -152,11 +152,19 @@ export default function AddNewServices() {
         Headercontent: Services.Headercontent || [],
         gallery: Services.gallery || [],
         Cta: Services.Cta || { title: "", description: "" },
+        showHeadercontent: Services?.Headercontent?.length > 0,
+      showGallery: Services?.gallery?.length > 0,
+      showTextToImage: Services?.texttoimageandimagetotext?.length > 0,
       });
 
 
     }
   }, [Services]);
+  const headerContentRef = useRef(null);
+const galleryRef = useRef(null);
+const textToImageRef = useRef(null);
+
+
   useEffect(() => {
     if (Services) {
       const mappedFields = (Services.texttoimageandimagetotext || []).map((item, index) => ({
@@ -563,24 +571,24 @@ export default function AddNewServices() {
             <Label htmlFor="input">Header</Label>
 
 
-            <Banner onChange={handleBannerChange} initialData={formData.Bannerdata} />
+            <Banner onChange={handleBannerChange} initialData={formData.Bannerdata || ""} />
 
           </div>
 
-          {/* {formData.showTextToImage && ( */}
-          <div>
+          {formData.showTextToImage && (
+          <div ref={textToImageRef}>
             <TextToImageAndImageToText
               onChange={handleTextToImageChange}
-              initialData={formData.texttoimageandimagetotext}
+              initialData={formData.texttoimageandimagetotext || ""}
             />
           </div>
-          {/* )} */}
+           )} 
 
           {formData.showHeadercontent && (
-            <div>
+             <div ref={headerContentRef}>
               <HeaderContent
                 onChange={handleHeadercontentChange}
-                initialData={formData.Headercontent}
+                initialData={formData.Headercontent || ""}
               />
             </div>
           )}
@@ -589,16 +597,16 @@ export default function AddNewServices() {
 
           <div>
             <Label>Why do you need</Label>
-            <WhydoNeed onChange={handleWhyDoNeedChange} initialData={Services?.WhydoNeed} />
+            <WhydoNeed onChange={handleWhyDoNeedChange} initialData={Services?.WhydoNeed || ""} />
           </div>
 
           <div>
             <Label>Why Atrix</Label>
-            <WhyAtrix onChange={handleWhyAtrixChange} initialData={Services?.WhyAtrix} />
+            <WhyAtrix onChange={handleWhyAtrixChange} initialData={Services?.WhyAtrix || ""} />
           </div>
 
           <div>
-            <Process onChange={handleProcessChange} initialData={Services?.Process} />
+            <Process onChange={handleProcessChange} initialData={Services?.Process || ""} />
           </div>
 
           <div>
@@ -617,16 +625,16 @@ export default function AddNewServices() {
           <div>
             <CtaDashboard
 
-              onChange={handleCtaChange} initialData={Services?.Cta}
+              onChange={handleCtaChange} initialData={Services?.Cta || ""}
             />
 
           </div>
           {formData.showGallery && (
-            <div>
+              <div ref={galleryRef}>
               <GalleryComp
                 selected="Set Images"
                 onImageUpload={handleGalleryChange}
-                existingImages={formData.gallery}
+                existingImages={formData.gallery || ""}
                 NameOffield="Gallery"
               />
             </div>
@@ -640,42 +648,61 @@ export default function AddNewServices() {
 
         <div className="space-y-6">
           <div className="space-y-4">
-            <Checkbox
-              id="toggle-header-content"
-              label="Show Header Content"
-              checked={formData.showHeadercontent}
-              onChange={() =>
-                setFormData(prev => ({
-                  ...prev,
-                  showHeadercontent: !prev.showHeadercontent
-                }))
-              }
-            />
+          <Checkbox
+  id="toggle-header-content"
+  label="Show Header Content"
+  checked={formData.showHeadercontent}
+  onChange={() => {
+    setFormData(prev => {
+      const newValue = !prev.showHeadercontent;
+      setTimeout(() => {
+        if (newValue && headerContentRef.current) {
+          headerContentRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100); // Delay to ensure UI update
+
+      return { ...prev, showHeadercontent: newValue };
+    });
+  }}
+/>
+
+<Checkbox
+  id="toggle-gallery"
+  label="Show Gallery"
+  checked={formData.showGallery}
+  onChange={() => {
+    setFormData(prev => {
+      const newValue = !prev.showGallery;
+      setTimeout(() => {
+        if (newValue && galleryRef.current) {
+          galleryRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+      return { ...prev, showGallery: newValue };
+    });
+  }}
+/>
+
 
             <Checkbox
-              id="toggle-gallery"
-              label="Show Gallery"
-              checked={formData.showGallery}
-              onChange={() =>
-                setFormData(prev => ({
-                  ...prev,
-                  showGallery: !prev.showGallery
-                }))
-              }
-            />
-
-            {/* <Checkbox
               id="toggle-text-to-image"
               label="Show Text-to-Image & Image-to-Text"
               checked={formData.showTextToImage}
-              onChange={() =>
-                setFormData(prev => ({
-                  ...prev,
-                  showTextToImage: !prev.showTextToImage
-                }))
-              }
-            /> */}
+              onChange={() => {
+                setFormData(prev => {
+                  const newValue = !prev.showTextToImage;
+                  setTimeout(() => {
+                    if (newValue && textToImageRef.current) {
+                      textToImageRef.current.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }, 100);
+                  return { ...prev, showTextToImage: newValue };
+                });
+              }}
+            />
           </div>
+
+
 
           <div>
             <Label htmlFor={`description-${formData.id}`}>Excerpt</Label>
