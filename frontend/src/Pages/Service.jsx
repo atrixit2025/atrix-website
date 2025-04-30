@@ -65,18 +65,16 @@ const Service = () => {
         <div className="container mx-auto mt-28 service-cta">
           <div className="row grid grid-cols-1 md:grid-cols-12 mt-10 bg-(--blue) rounded-xl p-6 md:p-10">
             <div className="md:col-span-10 col-span-12 text-center md:text-left">
-              <h3 className="text-white text-3xl md:text-4xl font-bold">Lorem ipsum dolor sit.</h3>
+              <h3 className="text-white text-3xl md:text-4xl font-bold">Ready to take your brand to the next level? </h3>
               <p className="mt-5 max-w-[800px]">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, officiis. Suscipit officia veniam
-                voluptatum sapiente, quas modi repudiandae possimus consequuntur ipsum corrupti iusto, recusandae
-                debitis sit ut, tempore tempora nihil!
+              We’re here to help you create an identity that’s powerful and memorable. Let’s work together to make your brand stand out. Get in touch today, and let’s bring your vision to life!
               </p>
             </div>
             <div
               id="mybtn2"
               className="md:col-span-2 col-span-12 flex justify-center items-center md:justify-end mt-4 md:mt-0"
             >
-              <Button mybtn="Contact Us" targetRef={formRef} />
+              <Button mybtn="Contact us!" targetRef={formRef} />
             </div>
           </div>
         </div>
