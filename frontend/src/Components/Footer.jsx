@@ -42,7 +42,7 @@ const Footer = () => {
     <footer className="bg-cs_theme_black px-5">
       <div className=" container  mx-auto  mt-18 pb-9  ">
         {/* Main Footer Content */}
-        <div className="flex flex-col md:flex-row justify-between border-t border-gray-700 py-18 ">
+        <div className="flex flex-col md:flex-row justify-between border-t border-gray-700  py-8 md:py-18 ">
           {/* Logo Column */}
           <div className=" w-[200px] flex flex-col gap-5">
             <div className="img-sec">
@@ -67,7 +67,7 @@ const Footer = () => {
           </div>
 
           {/* Navigation Links Column */}
-          <div className="md:w-[250px]">
+          <div className="md:w-[250px] my-8 md:my-0 ">
             <ul className="grid grid-cols-2 gap-4 ">
               {ourServices.map((item, index) => (
                 <li
@@ -91,8 +91,8 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="row max-w-[70%] mx-auto ">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-1 pb-10">
+        <div className="">
+          <div className="flex flex-wrap md:justify-center justify-start gap-4 md:gap-16 pb-10">
             {cardsContent.map((item, index) => (
               <div className="link-div flex">
                 <Link key={index} to={item.link} className=" ">

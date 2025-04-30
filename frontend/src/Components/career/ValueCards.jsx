@@ -50,7 +50,7 @@ const ValueCards = () => {
         <div>
             <div className="container mx-auto  mt-14 md:pt-32 w-[90%]">
                 <div>
-                    <h2 className=' text-6xl text-center font-bold mb-4 ' >Our Values</h2>
+                    <h2 className='sec-heading  text-center  mb-4 ' >Our Values</h2>
                     <p className='mb-12 text-center ' >Our values shape how we work, delivering results you can trust.</p>
                 </div>
                 <div className="contact-cards-wrapper grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  ">
@@ -60,7 +60,7 @@ const ValueCards = () => {
                                 <img src={item.icon} alt="" className=' w-full h-full' style={{ filter: 'grayscale(1) brightness(20.255)' }} />
                                 {/* <img src={item.icon} alt="" className="w-full h-full invert" /> */}
                             </div>
-                            <h3 className='text-3xl font-bold ' >{item.title}</h3>
+                            <h3 className='sub-sec-heading text-3xl font-bold ' >{item.title}</h3>
                             <p className='mt-4 '>{item.desc}</p>
                         </div>
                     ))}

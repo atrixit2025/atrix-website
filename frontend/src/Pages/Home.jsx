@@ -141,9 +141,9 @@ const Home = () => {
           <div className='container mx-auto'>
             <div className="flex justify-center items-center md:min-h-screen md:py-46 pt-26 pb-14 mt-10">
               <div className="text-center relative">
-                <h1 className="text-(--whitelight) mt-5 text-6xl md:text-8xl lg:text-9xl">
+                <h1 className="text-(--whitelight) mt-5 large-heading ">
                   <div className="relative inline-block">
-                    <div className="font-bold tracking-wider">We deliver</div>
+                    <div className="font-bold tracking-wider ">We deliver</div>
                     <div className="absolute md:bottom-[4%] bottom-[80%]  md:-right-[20%]  right-0 text-center z-0 animateFromTop tracking-normal">
                       <p className="bg-(--white) text-(--black) border font-body border-transparent rounded-4xl md:px-8  px-2 py-1 text-sm md:text-2xl -rotate-7 font-bold moveWithMouse">
                         Marketing
@@ -206,7 +206,7 @@ const Home = () => {
       <LogoSlider className="max-w-full" />
       <div className=" md:py-10   container mx-auto">
         <div className="-mt-10 md:mt-0">
-          <h1 className="font-bold flex justify-center lg:right-60 top-14 relative text-8xl md:text-9xl text-transparent z-10" style={{ WebkitTextStroke: "1px white" }}>About us</h1>
+          <h2 className="font-bold flex justify-center lg:right-60 top-8 md:top-14 relative text-7xl md:text-9xl  text-transparent z-10" style={{ WebkitTextStroke: "1px white" }}>About us</h2>
           <div className="lg:flex items-center ">
             <div className='inline-block relative max-w-[100%] '>
               <img src={AboutImage} className="h-full  w-auto min-h-[600px] object-cover relative max-w-[100%]" alt="About Us" />
@@ -221,9 +221,9 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="text-(--white) lg:-ml-16  relative w-full lg:max-w-[40%] px-5 ">
+            <div className="text-(--white) lg:-ml-16  relative w-full lg:max-w-[40%] px-5 mt-10 md:mt-0 ">
               <p className="text-xl sm:text-md font-semibold text-(--white) mb-2">Who We Are</p>
-              <h5 className="lg:text-5xl text-2xl font-bold mb-5">Trusted Experts in Taking Your Business Higher</h5>
+              <h3 className="sub-sec-heading  font-bold mb-5">Trusted Experts in Taking Your Business Higher</h3>
 
               <p className="text-md text-(--white) pb-4">Struggling to keep up in today's fast-changing digital world? Don't worry!, Atrix IT Solutions is here to help your business succeed!
               </p>

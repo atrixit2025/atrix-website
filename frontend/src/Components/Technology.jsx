@@ -9,7 +9,7 @@ const Technology = () => {
                 <div className='py-15 md:py-30'>
                     <div className="md:flex   ">
                         <div className='font-extrabold'>
-                            <h2 className="text-5xl  font-bold w-[300px] ">We Used Advance TECHNOLOGY</h2>
+                            <h2 className="sec-heading w-[300px] ">We Used Advance  Technology</h2>
                         </div>
 
                         <div className='w-full  mt-14'>

@@ -38,7 +38,7 @@ const About_sec_scroll = () => {
             {blurbContent.map((item, index) => (
               <div key={index} className="md:p-6 ">
                 <p className="text-lg font-medium text-white pt-5 ">{item.title}</p>
-                <h2 className="mb-5 text-2xl md:text-5xl font-bold ">{item.description}</h2>
+                <h3 className="mb-5 sub-sec-heading">{item.description}</h3>
                 <p className="text-white/55 text-sm/6">{item.pText}</p><br />
                 <p className="text-white/55 text-sm/6">{item.pText1}</p>
 

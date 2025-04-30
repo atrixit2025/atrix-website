@@ -118,7 +118,7 @@ const About = () => {
 
       {/* About-heading and img-tex section */}
       <div className="Page-heading text-center mt-10 md:mt-22 px-4">
-        <h1 className="font-bold text-4xl md:text-6xl lg:text-9xl">About Us</h1>
+        <h1 className="medium-heading">About Us</h1>
         <p className="mx-auto max-w-3xl text-sm md:text-base lg:text-lg text-white/55 mt-4">
           We develop creative solutions that generate actual results. With tailored technology solutions, our team of experts is committed to helping your company grow and achieve long-term success.
         </p>
@@ -161,7 +161,7 @@ const About = () => {
 
           {/* Text Section */}
           <div className="md:col-span-10 col-span-12 text-center md:text-left">
-            <h3 className="text-white text-3xl md:text-4xl font-bold">
+            <h3 className="text-white sub-sec-heading">
               Say Goodbye to IT Hassles – Get Expert Solutions Now!
             </h3>
           </div>
@@ -183,7 +183,7 @@ const About = () => {
           <div className="row text-center pb-10 ">
             <div className="col">
               <p className="text-xl pb-4"> Atrix Environment</p>
-              <h2 className="font-bold text-5xl leading-[1.5em]">
+              <h2 className="sec-heading">
                 Thriving Together for a Better Future!
               </h2>
             </div>
