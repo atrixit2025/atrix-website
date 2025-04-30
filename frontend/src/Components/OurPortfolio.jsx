@@ -88,7 +88,7 @@ const OurPortfolio = () => {
                 <div className="md:flex justify-between  gap-10 ">
                     <div className=' font-extrabold '>
                         <p className='text-gray '>OUR PORTFOLIO</p>
-                        <h2 className="text-6xl font-bold w-[380px] "> Our Work Your Success</h2>
+                        <h2 className="sec-heading w-[380px] "> Our Work Your Success</h2>
                     </div>
 
                     <div className='flex-1  mt-14'>

@@ -1,327 +1,413 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
 
 @import "tailwindcss";
 
-
 @font-face {
-  font-family: 'Neue Leiden';
-  src: url('/fontsss/Otf/NeueLeiden-Bold.eot');
-  src: url('/fontsss/Otf/NeueLeiden-Bold.eot?#iefix') format('embedded-opentype'),
-      url('/fontsss/Otf/NeueLeiden-Bold.woff2') format('woff2'),
-      url('/fontsss/Otf/NeueLeiden-Bold.woff') format('woff'),
-      url('/fontsss/Otf/NeueLeiden-Bold.ttf') format('truetype'),
-      url('/fontsss/Otf/NeueLeiden-Bold.svg#NeueLeiden-Bold') format('svg');
+  font-family: "Neue Leiden";
+  src: url("/fontsss/Otf/NeueLeiden-Bold.eot");
+  src: url("/fontsss/Otf/NeueLeiden-Bold.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fontsss/Otf/NeueLeiden-Bold.woff2") format("woff2"),
+    url("/fontsss/Otf/NeueLeiden-Bold.woff") format("woff"),
+    url("/fontsss/Otf/NeueLeiden-Bold.ttf") format("truetype"),
+    url("/fontsss/Otf/NeueLeiden-Bold.svg#NeueLeiden-Bold") format("svg");
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Neue Leiden';
-  src: url('/fontsss/Otf/NeueLeiden-ExtraLight.eot');
-  src: url('/fontsss/Otf/NeueLeiden-ExtraLight.eot?#iefix') format('embedded-opentype'),
-      url('/fontsss/Otf/NeueLeiden-ExtraLight.woff2') format('woff2'),
-      url('/fontsss/Otf/NeueLeiden-ExtraLight.woff') format('woff'),
-      url('/fontsss/Otf/NeueLeiden-ExtraLight.ttf') format('truetype'),
-      url('/fontsss/Otf/NeueLeiden-ExtraLight.svg#NeueLeiden-ExtraLight') format('svg');
+  font-family: "Neue Leiden";
+  src: url("/fontsss/Otf/NeueLeiden-ExtraLight.eot");
+  src: url("/fontsss/Otf/NeueLeiden-ExtraLight.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fontsss/Otf/NeueLeiden-ExtraLight.woff2") format("woff2"),
+    url("/fontsss/Otf/NeueLeiden-ExtraLight.woff") format("woff"),
+    url("/fontsss/Otf/NeueLeiden-ExtraLight.ttf") format("truetype"),
+    url("/fontsss/Otf/NeueLeiden-ExtraLight.svg#NeueLeiden-ExtraLight")
+      format("svg");
   font-weight: 200;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Neue Leiden';
-  src: url('/fontsss/Otf/NeueLeiden-SemiBold.eot');
-  src: url('/fontsss/Otf/NeueLeiden-SemiBold.eot?#iefix') format('embedded-opentype'),
-      url('/fontsss/Otf/NeueLeiden-SemiBold.woff2') format('woff2'),
-      url('/fontsss/Otf/NeueLeiden-SemiBold.woff') format('woff'),
-      url('/fontsss/Otf/NeueLeiden-SemiBold.ttf') format('truetype'),
-      url('/fontsss/Otf/NeueLeiden-SemiBold.svg#NeueLeiden-SemiBold') format('svg');
+  font-family: "Neue Leiden";
+  src: url("/fontsss/Otf/NeueLeiden-SemiBold.eot");
+  src: url("/fontsss/Otf/NeueLeiden-SemiBold.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fontsss/Otf/NeueLeiden-SemiBold.woff2") format("woff2"),
+    url("/fontsss/Otf/NeueLeiden-SemiBold.woff") format("woff"),
+    url("/fontsss/Otf/NeueLeiden-SemiBold.ttf") format("truetype"),
+    url("/fontsss/Otf/NeueLeiden-SemiBold.svg#NeueLeiden-SemiBold")
+      format("svg");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Neue Leiden';
-  src: url('/fontsss/Otf/NeueLeiden-Thin.eot');
-  src: url('/fontsss/Otf/NeueLeiden-Thin.eot?#iefix') format('embedded-opentype'),
-      url('/fontsss/Otf/NeueLeiden-Thin.woff2') format('woff2'),
-      url('/fontsss/Otf/NeueLeiden-Thin.woff') format('woff'),
-      url('/fontsss/Otf/NeueLeiden-Thin.ttf') format('truetype'),
-      url('/fontsss/Otf/NeueLeiden-Thin.svg#NeueLeiden-Thin') format('svg');
+  font-family: "Neue Leiden";
+  src: url("/fontsss/Otf/NeueLeiden-Thin.eot");
+  src: url("/fontsss/Otf/NeueLeiden-Thin.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fontsss/Otf/NeueLeiden-Thin.woff2") format("woff2"),
+    url("/fontsss/Otf/NeueLeiden-Thin.woff") format("woff"),
+    url("/fontsss/Otf/NeueLeiden-Thin.ttf") format("truetype"),
+    url("/fontsss/Otf/NeueLeiden-Thin.svg#NeueLeiden-Thin") format("svg");
   font-weight: 100;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Neue Leiden';
-  src: url('/fontsss/Otf/NeueLeiden-Light.eot');
-  src: url('/fontsss/Otf/NeueLeiden-Light.eot?#iefix') format('embedded-opentype'),
-      url('/fontsss/Otf/NeueLeiden-Light.woff2') format('woff2'),
-      url('/fontsss/Otf/NeueLeiden-Light.woff') format('woff'),
-      url('/fontsss/Otf/NeueLeiden-Light.ttf') format('truetype'),
-      url('/fontsss/Otf/NeueLeiden-Light.svg#NeueLeiden-Light') format('svg');
+  font-family: "Neue Leiden";
+  src: url("/fontsss/Otf/NeueLeiden-Light.eot");
+  src: url("/fontsss/Otf/NeueLeiden-Light.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fontsss/Otf/NeueLeiden-Light.woff2") format("woff2"),
+    url("/fontsss/Otf/NeueLeiden-Light.woff") format("woff"),
+    url("/fontsss/Otf/NeueLeiden-Light.ttf") format("truetype"),
+    url("/fontsss/Otf/NeueLeiden-Light.svg#NeueLeiden-Light") format("svg");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Neue Leiden';
-  src: url('/fontsss/Otf/NeueLeiden-Regular.eot');
-  src: url('/fontsss/Otf/NeueLeiden-Regular.eot?#iefix') format('embedded-opentype'),
-      url('/fontsss/Otf/NeueLeiden-Regular.woff2') format('woff2'),
-      url('/fontsss/Otf/NeueLeiden-Regular.woff') format('woff'),
-      url('/fontsss/Otf/NeueLeiden-Regular.ttf') format('truetype'),
-      url('/fontsss/Otf/NeueLeiden-Regular.svg#NeueLeiden-Regular') format('svg');
+  font-family: "Neue Leiden";
+  src: url("/fontsss/Otf/NeueLeiden-Regular.eot");
+  src: url("/fontsss/Otf/NeueLeiden-Regular.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fontsss/Otf/NeueLeiden-Regular.woff2") format("woff2"),
+    url("/fontsss/Otf/NeueLeiden-Regular.woff") format("woff"),
+    url("/fontsss/Otf/NeueLeiden-Regular.ttf") format("truetype"),
+    url("/fontsss/Otf/NeueLeiden-Regular.svg#NeueLeiden-Regular") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Neue Leiden';
-  src: url('/fontsss/Otf/NeueLeiden-Medium.eot');
-  src: url('/fontsss/Otf/NeueLeiden-Medium.eot?#iefix') format('embedded-opentype'),
-      url('/fontsss/Otf/NeueLeiden-Medium.woff2') format('woff2'),
-      url('/fontsss/Otf/NeueLeiden-Medium.woff') format('woff'),
-      url('/fontsss/Otf/NeueLeiden-Medium.ttf') format('truetype'),
-      url('/fontsss/Otf/NeueLeiden-Medium.svg#NeueLeiden-Medium') format('svg');
+  font-family: "Neue Leiden";
+  src: url("/fontsss/Otf/NeueLeiden-Medium.eot");
+  src: url("/fontsss/Otf/NeueLeiden-Medium.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fontsss/Otf/NeueLeiden-Medium.woff2") format("woff2"),
+    url("/fontsss/Otf/NeueLeiden-Medium.woff") format("woff"),
+    url("/fontsss/Otf/NeueLeiden-Medium.ttf") format("truetype"),
+    url("/fontsss/Otf/NeueLeiden-Medium.svg#NeueLeiden-Medium") format("svg");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Neue Leiden';
-  src: url('/fontsss/Otf/NeueLeiden-Bold_1.eot');
-  src: url('/fontsss/Otf/NeueLeiden-Bold_1.eot?#iefix') format('embedded-opentype'),
-      url('/fontsss/Otf/NeueLeiden-Bold_1.woff2') format('woff2'),
-      url('/fontsss/Otf/NeueLeiden-Bold_1.woff') format('woff'),
-      url('/fontsss/Otf/NeueLeiden-Bold_1.ttf') format('truetype'),
-      url('/fontsss/Otf/NeueLeiden-Bold_1.svg#NeueLeiden-Bold') format('svg');
+  font-family: "Neue Leiden";
+  src: url("/fontsss/Otf/NeueLeiden-Bold_1.eot");
+  src: url("/fontsss/Otf/NeueLeiden-Bold_1.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fontsss/Otf/NeueLeiden-Bold_1.woff2") format("woff2"),
+    url("/fontsss/Otf/NeueLeiden-Bold_1.woff") format("woff"),
+    url("/fontsss/Otf/NeueLeiden-Bold_1.ttf") format("truetype"),
+    url("/fontsss/Otf/NeueLeiden-Bold_1.svg#NeueLeiden-Bold") format("svg");
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-    font-family: 'Remark';
-    src: url('/fontsss/Remark/Remark-Bold.eot');
-    src: url('/fontsss/Remark/Remark-Bold.eot?#iefix') format('embedded-opentype'),
-        url('/fontsss/Remark/Remark-Bold.woff2') format('woff2'),
-        url('/fontsss/Remark/Remark-Bold.woff') format('woff'),
-        url('/fontsss/Remark/Remark-Bold.ttf') format('truetype'),
-        url('/fontsss/Remark/Remark-Bold.svg#Remark-Bold') format('svg');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Remark";
+  src: url("/fontsss/Remark/Remark-Bold.eot");
+  src: url("/fontsss/Remark/Remark-Bold.eot?#iefix") format("embedded-opentype"),
+    url("/fontsss/Remark/Remark-Bold.woff2") format("woff2"),
+    url("/fontsss/Remark/Remark-Bold.woff") format("woff"),
+    url("/fontsss/Remark/Remark-Bold.ttf") format("truetype"),
+    url("/fontsss/Remark/Remark-Bold.svg#Remark-Bold") format("svg");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Remark';
-    src: url('/fontsss/Remark/Remark-Bold_Italic.eot');
-    src: url('/fontsss/Remark/Remark-Bold_Italic.eot?#iefix') format('embedded-opentype'),
-        url('/fontsss/Remark/Remark-Bold_Italic.woff2') format('woff2'),
-        url('/fontsss/Remark/Remark-Bold_Italic.woff') format('woff'),
-        url('/fontsss/Remark/Remark-Bold_Italic.ttf') format('truetype'),
-        url('/fontsss/Remark/Remark-Bold_Italic.svg#Remark-Bold_Italic') format('svg');
-    font-weight: bold;
-    font-style: italic;
-    font-display: swap;
+  font-family: "Remark";
+  src: url("/fontsss/Remark/Remark-Bold_Italic.eot");
+  src: url("/fontsss/Remark/Remark-Bold_Italic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fontsss/Remark/Remark-Bold_Italic.woff2") format("woff2"),
+    url("/fontsss/Remark/Remark-Bold_Italic.woff") format("woff"),
+    url("/fontsss/Remark/Remark-Bold_Italic.ttf") format("truetype"),
+    url("/fontsss/Remark/Remark-Bold_Italic.svg#Remark-Bold_Italic")
+      format("svg");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Remark';
-    src: url('/fontsss/Remark/Remark-ExtraBold.eot');
-    src: url('/fontsss/Remark/Remark-ExtraBold.eot?#iefix') format('embedded-opentype'),
-        url('/fontsss/Remark/Remark-ExtraBold.woff2') format('woff2'),
-        url('/fontsss/Remark/Remark-ExtraBold.woff') format('woff'),
-        url('/fontsss/Remark/Remark-ExtraBold.ttf') format('truetype'),
-        url('/fontsss/Remark/Remark-ExtraBold.svg#Remark-ExtraBold') format('svg');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Remark";
+  src: url("/fontsss/Remark/Remark-ExtraBold.eot");
+  src: url("/fontsss/Remark/Remark-ExtraBold.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fontsss/Remark/Remark-ExtraBold.woff2") format("woff2"),
+    url("/fontsss/Remark/Remark-ExtraBold.woff") format("woff"),
+    url("/fontsss/Remark/Remark-ExtraBold.ttf") format("truetype"),
+    url("/fontsss/Remark/Remark-ExtraBold.svg#Remark-ExtraBold") format("svg");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Remark';
-    src: url('/fontsss/Remark/Remark-ExtraBold_Italic.eot');
-    src: url('/fontsss/Remark/Remark-ExtraBold_Italic.eot?#iefix') format('embedded-opentype'),
-        url('/fontsss/Remark/Remark-ExtraBold_Italic.woff2') format('woff2'),
-        url('/fontsss/Remark/Remark-ExtraBold_Italic.woff') format('woff'),
-        url('/fontsss/Remark/Remark-ExtraBold_Italic.ttf') format('truetype'),
-        url('/fontsss/Remark/Remark-ExtraBold_Italic.svg#Remark-ExtraBold_Italic') format('svg');
-    font-weight: bold;
-    font-style: italic;
-    font-display: swap;
+  font-family: "Remark";
+  src: url("/fontsss/Remark/Remark-ExtraBold_Italic.eot");
+  src: url("/fontsss/Remark/Remark-ExtraBold_Italic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fontsss/Remark/Remark-ExtraBold_Italic.woff2") format("woff2"),
+    url("/fontsss/Remark/Remark-ExtraBold_Italic.woff") format("woff"),
+    url("/fontsss/Remark/Remark-ExtraBold_Italic.ttf") format("truetype"),
+    url("/fontsss/Remark/Remark-ExtraBold_Italic.svg#Remark-ExtraBold_Italic")
+      format("svg");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Remark';
-    src: url('/fontsss/Remark/Remark-Heavy.eot');
-    src: url('/fontsss/Remark/Remark-Heavy.eot?#iefix') format('embedded-opentype'),
-        url('/fontsss/Remark/Remark-Heavy.woff2') format('woff2'),
-        url('/fontsss/Remark/Remark-Heavy.woff') format('woff'),
-        url('/fontsss/Remark/Remark-Heavy.ttf') format('truetype'),
-        url('/fontsss/Remark/Remark-Heavy.svg#Remark-Heavy') format('svg');
-    font-weight: 900;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Remark";
+  src: url("/fontsss/Remark/Remark-Heavy.eot");
+  src: url("/fontsss/Remark/Remark-Heavy.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fontsss/Remark/Remark-Heavy.woff2") format("woff2"),
+    url("/fontsss/Remark/Remark-Heavy.woff") format("woff"),
+    url("/fontsss/Remark/Remark-Heavy.ttf") format("truetype"),
+    url("/fontsss/Remark/Remark-Heavy.svg#Remark-Heavy") format("svg");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Remark Heavy';
-    src: url('/fontsss/Remark/Remark-Heavy_Italic.eot');
-    src: url('/fontsss/Remark/Remark-Heavy_Italic.eot?#iefix') format('embedded-opentype'),
-        url('/fontsss/Remark/Remark-Heavy_Italic.woff2') format('woff2'),
-        url('/fontsss/Remark/Remark-Heavy_Italic.woff') format('woff'),
-        url('/fontsss/Remark/Remark-Heavy_Italic.ttf') format('truetype'),
-        url('/fontsss/Remark/Remark-Heavy_Italic.svg#Remark-Heavy_Italic') format('svg');
-    font-weight: 900;
-    font-style: italic;
-    font-display: swap;
+  font-family: "Remark Heavy";
+  src: url("/fontsss/Remark/Remark-Heavy_Italic.eot");
+  src: url("/fontsss/Remark/Remark-Heavy_Italic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fontsss/Remark/Remark-Heavy_Italic.woff2") format("woff2"),
+    url("/fontsss/Remark/Remark-Heavy_Italic.woff") format("woff"),
+    url("/fontsss/Remark/Remark-Heavy_Italic.ttf") format("truetype"),
+    url("/fontsss/Remark/Remark-Heavy_Italic.svg#Remark-Heavy_Italic")
+      format("svg");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Remark';
-    src: url('/fontsss/Remark/Remark-Light.eot');
-    src: url('/fontsss/Remark/Remark-Light.eot?#iefix') format('embedded-opentype'),
-        url('/fontsss/Remark/Remark-Light.woff2') format('woff2'),
-        url('/fontsss/Remark/Remark-Light.woff') format('woff'),
-        url('/fontsss/Remark/Remark-Light.ttf') format('truetype'),
-        url('/fontsss/Remark/Remark-Light.svg#Remark-Light') format('svg');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Remark";
+  src: url("/fontsss/Remark/Remark-Light.eot");
+  src: url("/fontsss/Remark/Remark-Light.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fontsss/Remark/Remark-Light.woff2") format("woff2"),
+    url("/fontsss/Remark/Remark-Light.woff") format("woff"),
+    url("/fontsss/Remark/Remark-Light.ttf") format("truetype"),
+    url("/fontsss/Remark/Remark-Light.svg#Remark-Light") format("svg");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Remark';
-    src: url('/fontsss/Remark/Remark-Light_Italic.eot');
-    src: url('/fontsss/Remark/Remark-Light_Italic.eot?#iefix') format('embedded-opentype'),
-        url('/fontsss/Remark/Remark-Light_Italic.woff2') format('woff2'),
-        url('/fontsss/Remark/Remark-Light_Italic.woff') format('woff'),
-        url('/fontsss/Remark/Remark-Light_Italic.ttf') format('truetype'),
-        url('/fontsss/Remark/Remark-Light_Italic.svg#Remark-Light_Italic') format('svg');
-    font-weight: 300;
-    font-style: italic;
-    font-display: swap;
+  font-family: "Remark";
+  src: url("/fontsss/Remark/Remark-Light_Italic.eot");
+  src: url("/fontsss/Remark/Remark-Light_Italic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fontsss/Remark/Remark-Light_Italic.woff2") format("woff2"),
+    url("/fontsss/Remark/Remark-Light_Italic.woff") format("woff"),
+    url("/fontsss/Remark/Remark-Light_Italic.ttf") format("truetype"),
+    url("/fontsss/Remark/Remark-Light_Italic.svg#Remark-Light_Italic")
+      format("svg");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Remark';
-    src: url('/fontsss/Remark/Remark-Medium.eot');
-    src: url('/fontsss/Remark/Remark-Medium.eot?#iefix') format('embedded-opentype'),
-        url('/fontsss/Remark/Remark-Medium.woff2') format('woff2'),
-        url('/fontsss/Remark/Remark-Medium.woff') format('woff'),
-        url('/fontsss/Remark/Remark-Medium.ttf') format('truetype'),
-        url('/fontsss/Remark/Remark-Medium.svg#Remark-Medium') format('svg');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Remark";
+  src: url("/fontsss/Remark/Remark-Medium.eot");
+  src: url("/fontsss/Remark/Remark-Medium.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fontsss/Remark/Remark-Medium.woff2") format("woff2"),
+    url("/fontsss/Remark/Remark-Medium.woff") format("woff"),
+    url("/fontsss/Remark/Remark-Medium.ttf") format("truetype"),
+    url("/fontsss/Remark/Remark-Medium.svg#Remark-Medium") format("svg");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Remark';
-    src: url('/fontsss/Remark/Remark-Medium_Italic.eot');
-    src: url('/fontsss/Remark/Remark-Medium_Italic.eot?#iefix') format('embedded-opentype'),
-        url('/fontsss/Remark/Remark-Medium_Italic.woff2') format('woff2'),
-        url('/fontsss/Remark/Remark-Medium_Italic.woff') format('woff'),
-        url('/fontsss/Remark/Remark-Medium_Italic.ttf') format('truetype'),
-        url('/fontsss/Remark/Remark-Medium_Italic.svg#Remark-Medium_Italic') format('svg');
-    font-weight: 500;
-    font-style: italic;
-    font-display: swap;
+  font-family: "Remark";
+  src: url("/fontsss/Remark/Remark-Medium_Italic.eot");
+  src: url("/fontsss/Remark/Remark-Medium_Italic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fontsss/Remark/Remark-Medium_Italic.woff2") format("woff2"),
+    url("/fontsss/Remark/Remark-Medium_Italic.woff") format("woff"),
+    url("/fontsss/Remark/Remark-Medium_Italic.ttf") format("truetype"),
+    url("/fontsss/Remark/Remark-Medium_Italic.svg#Remark-Medium_Italic")
+      format("svg");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Remark';
-    src: url('/fontsss/Remark/Remark-Regular.eot');
-    src: url('/fontsss/Remark/Remark-Regular.eot?#iefix') format('embedded-opentype'),
-        url('/fontsss/Remark/Remark-Regular.woff2') format('woff2'),
-        url('/fontsss/Remark/Remark-Regular.woff') format('woff'),
-        url('/fontsss/Remark/Remark-Regular.ttf') format('truetype'),
-        url('/fontsss/Remark/Remark-Regular.svg#Remark-Regular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Remark";
+  src: url("/fontsss/Remark/Remark-Regular.eot");
+  src: url("/fontsss/Remark/Remark-Regular.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fontsss/Remark/Remark-Regular.woff2") format("woff2"),
+    url("/fontsss/Remark/Remark-Regular.woff") format("woff"),
+    url("/fontsss/Remark/Remark-Regular.ttf") format("truetype"),
+    url("/fontsss/Remark/Remark-Regular.svg#Remark-Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Remark';
-    src: url('/fontsss/Remark/Remark-Regular_Italic.eot');
-    src: url('/fontsss/Remark/Remark-Regular_Italic.eot?#iefix') format('embedded-opentype'),
-        url('/fontsss/Remark/Remark-Regular_Italic.woff2') format('woff2'),
-        url('/fontsss/Remark/Remark-Regular_Italic.woff') format('woff'),
-        url('/fontsss/Remark/Remark-Regular_Italic.ttf') format('truetype'),
-        url('/fontsss/Remark/Remark-Regular_Italic.svg#Remark-Regular_Italic') format('svg');
-    font-weight: normal;
-    font-style: italic;
-    font-display: swap;
+  font-family: "Remark";
+  src: url("/fontsss/Remark/Remark-Regular_Italic.eot");
+  src: url("/fontsss/Remark/Remark-Regular_Italic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fontsss/Remark/Remark-Regular_Italic.woff2") format("woff2"),
+    url("/fontsss/Remark/Remark-Regular_Italic.woff") format("woff"),
+    url("/fontsss/Remark/Remark-Regular_Italic.ttf") format("truetype"),
+    url("/fontsss/Remark/Remark-Regular_Italic.svg#Remark-Regular_Italic")
+      format("svg");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Remark';
-    src: url('/fontsss/Remark/Remark-SemiBold.eot');
-    src: url('/fontsss/Remark/Remark-SemiBold.eot?#iefix') format('embedded-opentype'),
-        url('/fontsss/Remark/Remark-SemiBold.woff2') format('woff2'),
-        url('/fontsss/Remark/Remark-SemiBold.woff') format('woff'),
-        url('/fontsss/Remark/Remark-SemiBold.ttf') format('truetype'),
-        url('/fontsss/Remark/Remark-SemiBold.svg#Remark-SemiBold') format('svg');
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Remark";
+  src: url("/fontsss/Remark/Remark-SemiBold.eot");
+  src: url("/fontsss/Remark/Remark-SemiBold.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fontsss/Remark/Remark-SemiBold.woff2") format("woff2"),
+    url("/fontsss/Remark/Remark-SemiBold.woff") format("woff"),
+    url("/fontsss/Remark/Remark-SemiBold.ttf") format("truetype"),
+    url("/fontsss/Remark/Remark-SemiBold.svg#Remark-SemiBold") format("svg");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
 }
 
-:root{
-  --whitelight:white;
-  --white:#D8D8D8;
-  --gray: #888888!important;
-  --blue:#00A2DC;
-  --green: #00A657;
+:root {
+  --whitelight: white;
+  --white: #d8d8d8;
+  --gray: #888888 !important;
+  --blue: #00a2dc;
+  --green: #00a657;
   --black: #262626;
-  --darkblack:#181818;
+  --darkblack: #181818;
   --navbarUlbgcolor: #444343;
-  --headingfont: 'Neue Leiden', sans-serif;
-  --bodyfont: 'Remark', sans-serif;
- --manropefont:"Manrope", serif;
+  --headingfont: "Neue Leiden", sans-serif;
+  --bodyfont: "Remark", sans-serif;
+  --manropefont: "Manrope", serif;
 }
 
-.keys-sec img{
- filter: grayscale(1) brightness(200);
+.keys-sec img {
+  filter: grayscale(1) brightness(200);
+}
+
+
+
+/* heading  */
+h1.large-heading {
+  font-size: 128px;
+  font-weight: bold;
+  line-height: 1em;
+}
+
+h1.medium-heading {
+  font-size: 76px;
+  font-weight: bold;
+}
+
+h1.extra-large-heading {
+  font-size: 150px;
+  font-weight: 900;
+}
+
+/* section heading  */
+h2.sec-heading {
+  font-size: 60px;
+  font-weight: bold;
+  line-height: 1em;
+}
+h3.sub-sec-heading {
+  font-size: 48px;
+  line-height: 1em;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 640px) {
+  h1.large-heading {
+    font-size: 60px;
+  }
+  h2.sec-heading {
+    font-size: 48px;
+    font-weight: bold;
+    line-height: 1em;
+  }
+
+  h3.sub-sec-heading {
+    font-size: 30px;
+  }
+  h1.medium-heading {
+    font-size: 44px;
+  }
+  h1.extra-large-heading {
+    font-size: 72px;
+  }
 }
 
 /* body{
   font-size: 16px;
 } */
-body, input, textarea, html{
+body,
+input,
+textarea,
+html {
   /* font-family: var(--bodyfont); */
-  font-family:var(--manropefont);
+  font-family: var(--manropefont);
 }
-body{
+body {
   color: var(--white);
   background-color: var(--darkblack);
 }
-h1,h2,h3,h4,h5{
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-family: var(--headingfont);
   letter-spacing: 2px;
 }
-.bg-gr{
+.bg-gr {
   background-image: linear-gradient(to left, var(--green), var(--blue));
 }
-.font-heading{
+.font-heading {
   font-family: var(--headingfont);
 }
-.font-body{
+.font-body {
   font-family: var(--bodyfont);
 }
-.bg-green{
+.bg-green {
   background-color: var(--green);
 }
-.bg-blue{
+.bg-blue {
   background-color: var(--blue);
 }
 
@@ -346,4 +432,3 @@ body:before {
   pointer-events: none;
   z-index: -1;
 } */
-

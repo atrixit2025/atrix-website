@@ -8,7 +8,7 @@ const PortfolioHero = () => {
                     <div className=' relative' >
                         <img src={hero_img} alt="" className=' w-full h-auto ' />
                         <h1
-                            className='text-6xl md:text-[150px] font-bold text-white text-center absolute w-full top-1/2 -translate-y-1/2'
+                            className='extra-large-heading text-white text-center absolute w-full top-1/2 -translate-y-1/2'
                             style={{
                                 textShadow: '3px 3px 6px rgba(0,0,0,0.5), 0 0 20px rgba(255, 255, 255, 0.3)'
                             }}

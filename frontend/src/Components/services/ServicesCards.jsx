@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import hover_img from '../../assets/service-hover.jpg';
 import './ServicesCards.css';
 
@@ -44,17 +44,18 @@ const ServicesCards = ({ secData }) => {
     const handleMouseMove = (event) => {
         const cardRect = event.currentTarget.getBoundingClientRect();
         setImgPosition({
-            x: event.clientX - cardRect.left,    
+            x: event.clientX - cardRect.left,
             y: event.clientY - cardRect.top,
         });
     };
+
  
-    
+
 
 
     return (
-        
-       <div className="services-sec mt-36">
+
+        <div className="services-sec mt-36">
             {secData.sub_service.map((item, index) => (
                 <>
                     <div className="container mx-auto">
@@ -71,14 +72,15 @@ const ServicesCards = ({ secData }) => {
                                         key={serindex}
                                         className="service-card grid lg:grid-cols-2 gap-10 pb-12 pt-15 relative container mx-auto"
                                         onMouseMove={handleMouseMove}
+                                        onMouseEnter={handleMouseMove}
                                     >
 
                                         <div className="service-title flex  items-center relative ml-12 ">
                                             <h2 className="text-5xl font-bold">{seritem.service_name}</h2>
-                                            <span className="absolute -top-2 -left-12 font-bold text-xl">{serindex < 9 ? "0" : ""}{serindex+ 1}</span>
+                                            <span className="absolute -top-2 -left-12 font-bold text-xl">{serindex < 9 ? "0" : ""}{serindex + 1}</span>
                                         </div>
                                         <div className="service-desc">
-                                        <p className='leading-[1.65rem]'>{seritem.service_desc}</p>
+                                            <p className='leading-[1.65rem]'>{seritem.service_desc}</p>
                                         </div>
                                         <div
                                             className="service-hover-img absolute z-40 rounded overflow-hidden"

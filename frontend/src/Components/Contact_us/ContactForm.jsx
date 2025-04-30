@@ -15,7 +15,7 @@ const ContactForm = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     {/* Contact Heading Section */}
                     <div className="contact-heading md:pr-40 pt-8">
-                        <h2 className="text-5xl font-bold ">Stay Ahead in the Digital World with Us!</h2>
+                        <h2 className="sec-heading ">Stay Ahead in the Digital World with Us!</h2>
                         <p className="mt-5 mb-6 max-w-[450px]">
                             Attain a top brand position with smart and effective IT services. Partner with us to boost brand awareness, improve your online presence, and stay ahead in the fast-changing digital world.
                         </p>

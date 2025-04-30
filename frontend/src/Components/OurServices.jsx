@@ -46,7 +46,7 @@ const OurServices = () => {
         <div className=" py-14 md:py-32 ">
 
           <div className="md:flex flex-wrap justify-between  gap-10 ">
-            <h2 className=" text-4xl md:text-6xl font-bold">Our <br />Services</h2>
+            <h2 className="sec-heading">Our <br />Services</h2>
 
 
             <div className='flex-1 mt-14'>
@@ -85,7 +85,7 @@ const OurServices = () => {
                       <img src={item.icon} className="w-6 h-6 filter grayscale-100 brightness-800" />
                       {/* <div className="inline-block ml-2 mt-2 text-2xl">{service.icon}</div> */}
                     </div>
-                    <h3 className="text-xl md:text-4xl font-bold mt-4 ">{item.service_title} </h3>
+                    <h3 className="sub-sec-heading mt-4 ">{item.service_title} </h3>
                   </Link>
                   <p className="text-sm md:text-lg mt-6 md:mt-9 text-(--white) leading-7 md:leading-8">
                   {item.main_desc}

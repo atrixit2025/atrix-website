@@ -59,7 +59,7 @@ const OurSolution = () => {
 
                 <div className='row  py-14 md:py-28'>
                     <div className=" grid md:grid-cols-3 grid-cols-1  gap-10  ">
-                        <h2 className="text-6xl font-bold  tracking-wider">Our Step by step process</h2>
+                        <h2 className="sec-heading  tracking-wider">Our Step by step process</h2>
 
                         <div className='w-full  flex items-end'>
                             <svg className='' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477 65">
@@ -86,7 +86,7 @@ const OurSolution = () => {
                                 <div key={index} className="blurb-item pb-20 bg-(--darkblack) pl-1 pt-1 sticky top-20">
                                     <img src={item.image} alt={item.title} className="filter invert brightness-0 contrast-100 mb-5" />
                                     <p className='md:hidden inline-block mb-5 bg-(--black) px-5  py-2 rounded-lg font-bold text-sm' >STEP   {item.id}</p>
-                                    <h3 className="text-4xl font-bold mb-8">{item.title}</h3>
+                                    <h3 className="sub-sec-heading mb-8">{item.title}</h3>
                                     <p className="mb-5 text-(--gray)">{item.description}</p>
                                     <ul>
                                         {item.additionalText.map((text, idx) => (

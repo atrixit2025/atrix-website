@@ -96,8 +96,8 @@ import Asset1 from "../../assets/ServicesIcons/Asset 2.svg";
 const OurServiceCard = () => {
   return (
     <>
-      <div className="container mx-auto">
-        <div className="columns-3 gap-20 mt-12">
+      <div className="container mx-auto w-[90%]">
+        <div className="columns-1 md:columns-3 gap-20 mt-12">
           {ServicesData.map((item, index) => (
             <div key={index} className="  pt-18 inline-block w-full">
               <Link to={`${item.service_id}`} className=" cursor-pointer"  >

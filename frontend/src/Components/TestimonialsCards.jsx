@@ -84,17 +84,14 @@ const TestimonialsCards = () => {
         <div className="py-10 md:py-22">
           <div className="testimonial-heading text-center">
             <p className="text-xl">Our Testimonials</p>
-            <h2 className="text-6xl font-bold pt-2">What Our Clients Say</h2>
+            <h2 className="sec-heading pt-2">What Our Clients Say</h2>
           </div>
-
           <div className="testimonial-slider pt-5">
-
-
             <Slider {...settings}>
               {testimonials.map((item, index) => (
                 <div
                   key={index}
-                  className="testimonial-card md:px-2 px-1 mt-46"
+                  className="testimonial-card md:px-2 px-1 mt-16 md:mt-46"
                 >
                   <div className="rounded-2xl p-10  bg-(--black)">
                     <div className="flex items-center gap-3">
