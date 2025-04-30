@@ -153,16 +153,16 @@ export default function AddNewServices() {
         gallery: Services.gallery || [],
         Cta: Services.Cta || { title: "", description: "" },
         showHeadercontent: Services?.Headercontent?.length > 0,
-      showGallery: Services?.gallery?.length > 0,
-      showTextToImage: Services?.texttoimageandimagetotext?.length > 0,
+        showGallery: Services?.gallery?.length > 0,
+        showTextToImage: Services?.texttoimageandimagetotext?.length > 0,
       });
 
 
     }
   }, [Services]);
   const headerContentRef = useRef(null);
-const galleryRef = useRef(null);
-const textToImageRef = useRef(null);
+  const galleryRef = useRef(null);
+  const textToImageRef = useRef(null);
 
 
   useEffect(() => {
@@ -213,7 +213,7 @@ const textToImageRef = useRef(null);
             }
           };
         };
-  
+
         return {
           ...prev,
           title: Services.title,
@@ -275,7 +275,7 @@ const textToImageRef = useRef(null);
       Process,
       customSlug,
       Cta,
-    
+
     } = formData;
 
     if (!title || !description || selectedCategories.length === 0 || !imageId) {
@@ -287,29 +287,29 @@ const textToImageRef = useRef(null);
       return fields
         .filter(field => field?.value?.value) // Only include fields with a type
         .map(field => ({
-          type: field.value.value, // Ensure type is always set
+          type: field.value.value,
           text: field.textContent || "",
           imageId: field.imageFile?.id || null
         }));
     };
-    const bannerData = formData.Banner.map(item => {
-      if (item.type === "slider") {
+    const bannerData = formData.Banner
+    .filter(item => {
+        if (item.type === "slider") {
+            return item.sliderImages && item.sliderImages.length > 0;
+        }
+        return item.type && item.imageId;
+    })
+    .map(item => {
+        if (item.type === "slider") {
+            return {
+                type: item.type,
+                sliderImages: item.sliderImages.filter(img => img) // Only non-null images
+            };
+        }
         return {
-          type: "slider",
-          sliderImages: item.sliderImages
-            .filter(img => img)
-            .slice(0, 4)
+            type: item.type,
+            imageId: item.imageId
         };
-      }
-      return {
-        type: item.type,
-        imageId: item.imageId
-      };
-    }).filter(item => {
-      if (item.type === "slider") {
-        return item.sliderImages.length > 0;
-      }
-      return item.imageId;
     });
 
 
@@ -323,7 +323,7 @@ const textToImageRef = useRef(null);
       portfolioCategories: formData.selectedPortfolioCategories,
       faqCategories: formData.selectedfaqCategories,
       Technology: formData.selectedtechnology.map(tech => ({
-        _id: tech._id, // Ensure this matches your backend expectation
+        _id: tech._id,
         title: tech.Name || tech.title || "",
         imageId: tech.imageId || null
       })),
@@ -349,7 +349,13 @@ const textToImageRef = useRef(null);
       gallery: formData.gallery.map(img => ({ imageId: img.imageId })),
       Cta, // Ensure it's always an object
 
+
+
     };
+
+    console.log("Current Bannerdata state:", formData.Bannerdata);
+    console.log("Current Banner state:", formData.Banner);
+console.log("Processed bannerData:", bannerData);
 
 
     try {
@@ -358,6 +364,7 @@ const textToImageRef = useRef(null);
           id: Services.id,
           ...ServicesData
         });
+        console.log("Services updated successfully!", ServicesData.Bannerdata);
       } else {
         await axios.post("http://localhost:5300/Services/add", ServicesData);
       }
@@ -365,18 +372,18 @@ const textToImageRef = useRef(null);
       await fetchCategoryCounts();
       navigate("/Dashboard/Services");
     } catch (error) {
-  console.error("Full error object:", error);
-  if (error.response) {
-    console.error("Response data:", error.response.data);
-    console.error("Response status:", error.response.status);
-    console.error("Response headers:", error.response.headers);
-  } else if (error.request) {
-    console.error("Request:", error.request);
-  } else {
-    console.error("Error message:", error.message);
-  }
-  alert(error.response?.data?.message || "Error saving Services. Please check console for details.");
-}
+      console.error("Full error object:", error);
+      if (error.response) {
+        console.error("Response data:", error.response.data);
+        console.error("Response status:", error.response.status);
+        console.error("Response headers:", error.response.headers);
+      } else if (error.request) {
+        console.error("Request:", error.request);
+      } else {
+        console.error("Error message:", error.message);
+      }
+      alert(error.response?.data?.message || "Error saving Services. Please check console for details.");
+    }
   };
 
   const handleTagsChange = (newTags) => {
@@ -474,16 +481,16 @@ const textToImageRef = useRef(null);
       const isSelected = prev.selectedtechnology.some(
         selectedTech => selectedTech._id === technology._id
       );
-      
+
       return {
         ...prev,
         selectedtechnology: isSelected
           ? prev.selectedtechnology.filter(t => t._id !== technology._id)
           : [...prev.selectedtechnology, {
-              _id: technology._id,
-              title: technology.Name || technology.title,
-              imageId: technology.imageId
-            }]
+            _id: technology._id,
+            title: technology.Name || technology.title,
+            imageId: technology.imageId
+          }]
       };
     });
   };
@@ -576,16 +583,16 @@ const textToImageRef = useRef(null);
           </div>
 
           {formData.showTextToImage && (
-          <div ref={textToImageRef}>
-            <TextToImageAndImageToText
-              onChange={handleTextToImageChange}
-              initialData={formData.texttoimageandimagetotext || ""}
-            />
-          </div>
-           )} 
+            <div ref={textToImageRef}>
+              <TextToImageAndImageToText
+                onChange={handleTextToImageChange}
+                initialData={formData.texttoimageandimagetotext || ""}
+              />
+            </div>
+          )}
 
           {formData.showHeadercontent && (
-             <div ref={headerContentRef}>
+            <div ref={headerContentRef}>
               <HeaderContent
                 onChange={handleHeadercontentChange}
                 initialData={formData.Headercontent || ""}
@@ -630,7 +637,7 @@ const textToImageRef = useRef(null);
 
           </div>
           {formData.showGallery && (
-              <div ref={galleryRef}>
+            <div ref={galleryRef}>
               <GalleryComp
                 selected="Set Images"
                 onImageUpload={handleGalleryChange}
@@ -648,40 +655,40 @@ const textToImageRef = useRef(null);
 
         <div className="space-y-6">
           <div className="space-y-4">
-          <Checkbox
-  id="toggle-header-content"
-  label="Show Header Content"
-  checked={formData.showHeadercontent}
-  onChange={() => {
-    setFormData(prev => {
-      const newValue = !prev.showHeadercontent;
-      setTimeout(() => {
-        if (newValue && headerContentRef.current) {
-          headerContentRef.current.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100); // Delay to ensure UI update
+            <Checkbox
+              id="toggle-header-content"
+              label="Show Header Content"
+              checked={formData.showHeadercontent}
+              onChange={() => {
+                setFormData(prev => {
+                  const newValue = !prev.showHeadercontent;
+                  setTimeout(() => {
+                    if (newValue && headerContentRef.current) {
+                      headerContentRef.current.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }, 100); // Delay to ensure UI update
 
-      return { ...prev, showHeadercontent: newValue };
-    });
-  }}
-/>
+                  return { ...prev, showHeadercontent: newValue };
+                });
+              }}
+            />
 
-<Checkbox
-  id="toggle-gallery"
-  label="Show Gallery"
-  checked={formData.showGallery}
-  onChange={() => {
-    setFormData(prev => {
-      const newValue = !prev.showGallery;
-      setTimeout(() => {
-        if (newValue && galleryRef.current) {
-          galleryRef.current.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
-      return { ...prev, showGallery: newValue };
-    });
-  }}
-/>
+            <Checkbox
+              id="toggle-gallery"
+              label="Show Gallery"
+              checked={formData.showGallery}
+              onChange={() => {
+                setFormData(prev => {
+                  const newValue = !prev.showGallery;
+                  setTimeout(() => {
+                    if (newValue && galleryRef.current) {
+                      galleryRef.current.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }, 100);
+                  return { ...prev, showGallery: newValue };
+                });
+              }}
+            />
 
 
             <Checkbox
@@ -795,32 +802,32 @@ const textToImageRef = useRef(null);
 
 
           <div>
-  <ComponentCategory title="Technology">
-    <div className="items-center gap-4 space-y-5">
-      {categories.technology.map((tech) => {
-        const isSelected = formData.selectedtechnology.some(
-          selectedTech => selectedTech._id === tech._id
-        );
+            <ComponentCategory title="Technology">
+              <div className="items-center gap-4 space-y-5">
+                {categories.technology.map((tech) => {
+                  const isSelected = formData.selectedtechnology.some(
+                    selectedTech => selectedTech._id === tech._id
+                  );
 
-        return (
-          <div key={tech._id} className="flex items-center justify-between">
-            <Checkbox
-              id={`tech-${tech._id}`}
-              checked={isSelected}
-              onChange={() => handletechnologysChange(tech)}
-              label={tech.Name}
-            />
-            <img
-              src={`http://localhost:5300${tech.team?.images?.[0]}`}
-              alt={tech.Name}
-              className="w-12 object-contain rounded-xs"
-            />
+                  return (
+                    <div key={tech._id} className="flex items-center justify-between">
+                      <Checkbox
+                        id={`tech-${tech._id}`}
+                        checked={isSelected}
+                        onChange={() => handletechnologysChange(tech)}
+                        label={tech.Name}
+                      />
+                      <img
+                        src={`http://localhost:5300${tech.team?.images?.[0]}`}
+                        alt={tech.Name}
+                        className="w-12 object-contain rounded-xs"
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            </ComponentCategory>
           </div>
-        );
-      })}
-    </div>
-  </ComponentCategory>
-</div>
 
         </div>
 
