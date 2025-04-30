@@ -166,11 +166,12 @@ const BlogUS = () => {
   const currentBlogs = blogData.slice(indexOfFirstBlog, indexOfLastBlog);
   const totalPages = Math.ceil(blogData.length / blogsPerPage);
 
+
   return (
     <>
       <HeroCommon heroData={herodata[0]} />
-      <div className="container mx-auto w-[90%] pt-10 px-10">
-        <div className="grid grid-cols-3 top  gap-10 -mx-10">
+      <div className="container mx-auto w-[90%] pt-10 md:px-10">
+        <div className="grid md:grid-cols-3 top  gap-10 md:-mx-10">
           {currentBlogs.map((blog) => (
             <div key={blog.id} className="w-full flex flex-col">
               <Card.Img
@@ -184,6 +185,7 @@ const BlogUS = () => {
                 variant="top"
                 src={blog.img}
               />
+
 
               <Card.Body className="border border-white/15 p-6 flex-1 flex flex-col">
                 <Card.Title className="flex items-center gap-2">

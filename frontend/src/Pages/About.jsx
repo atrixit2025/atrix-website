@@ -117,7 +117,7 @@ const About = () => {
 
 
       {/* About-heading and img-tex section */}
-      <div className="Page-heading text-center mt-22 px-4">
+      <div className="Page-heading text-center mt-10 md:mt-22 px-4">
         <h1 className="font-bold text-4xl md:text-6xl lg:text-9xl">About Us</h1>
         <p className="mx-auto max-w-3xl text-sm md:text-base lg:text-lg text-white/55 mt-4">
           We develop creative solutions that generate actual results. With tailored technology solutions, our team of experts is committed to helping your company grow and achieve long-term success.
@@ -127,7 +127,7 @@ const About = () => {
       <About_sec_scroll />
 
       {/* text-marquee-section */}
-      <div className="relative marquee-sec text-6xl font-bold mt-22  ">   <div>
+      <div className="relative marquee-sec text-2xl md:text-6xl font-bold mt-8 md:mt-22   ">   <div>
         <Marquee speed={30} className="overflow-hidden text-[#8d8d8d]">
          VISIONARY . INNOVATIVE . EFFICIENT . GLOBAL . PROFESSIONAL . ACCESSIBLE . USER-CENTRIC . EMPOWERING . TRUSTWORTHY . SCALABLE. 
         </Marquee>
@@ -156,7 +156,7 @@ const About = () => {
       <ValueCards />
 
       {/* CTA-section */}
-      <div className="container mx-auto mt-28  w-[90%] ">
+      <div className="container mx-auto mt-14 md:mt-28  w-[90%] ">
         <div className="row grid grid-cols-1 md:grid-cols-12 mt-10 bg-(--blue) rounded-xl p-6 md:p-10">
 
           {/* Text Section */}
@@ -179,36 +179,36 @@ const About = () => {
 
       {/* Environment-section */}
       <div className="Environment-sec">
-        <div className="container mx-auto  mt-28  w-[90%]">
+        <div className="container mx-auto  mt-14 md:mt-28  w-[90%]">
           <div className="row text-center pb-10 ">
             <div className="col">
               <p className="text-xl pb-4"> Atrix Environment</p>
-              <h2 className="font-bold text-5xl">
+              <h2 className="font-bold text-5xl leading-[1.5em]">
                 Thriving Together for a Better Future!
               </h2>
             </div>
           </div>
 
-          <div className="row flex-col grid grid-cols-12 mt-10 ">
-            <div className="col-span-3 flex items-center flex-col ">
+          <div className="row flex-col grid grid-cols-12 mt-10 space-y-10 ">
+            <div className=" col-span-6 md:col-span-3 flex items-center flex-col ">
               <div className="image w-20 brightness-[2.5] mb-2">
                 <img src={icon1} alt="" />
               </div>
               <p className="mt-2">Good Culture</p>
             </div>
-            <div className="col-span-3 flex items-center flex-col  ">
+            <div className=" col-span-6 md:col-span-3 flex items-center flex-col  ">
               <div className="image w-20 brightness-[2.5] mb-2 ">
                 <img src={icon2} alt="" />
               </div>
               <p className="mt-2">5 Day Working</p>
             </div>
-            <div className="col-span-3 flex items-center flex-col  ">
+            <div className=" col-span-6 md:col-span-3 flex items-center flex-col  ">
               <div className="image w-20 brightness-[2.5] mb-2 ">
                 <img src={icon3} alt="" />
               </div>
               <p className="mt-2">Growth & support  </p>
             </div>
-            <div className="col-span-3 flex items-center flex-col  ">
+            <div className=" col-span-6 md:col-span-3 flex items-center flex-col  ">
               <div className="image w-20 brightness-[2.5] mb-2 ">
                 <img src={icon4} alt="" />
               </div>
@@ -219,7 +219,7 @@ const About = () => {
       </div >
 
       {/* OurSolution-section */}
-      < div className=" mt-28 " >
+      < div className=" mt-14 md:mt-28 " >
         <div className="row  flex-col grid grid-cols-12 space-x-96  ">
           <div className=" Our Solution Process col-span-12 ">
             <OurSolution />

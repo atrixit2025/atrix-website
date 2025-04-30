@@ -48,7 +48,7 @@ const ValueCardContent = [
 const ValueCards = () => {
     return (
         <div>
-            <div className="container mx-auto  pt-32">
+            <div className="container mx-auto  mt-14 md:pt-32 w-[90%]">
                 <div>
                     <h2 className=' text-6xl text-center font-bold mb-4 ' >Our Values</h2>
                     <p className='mb-12 text-center ' >Our values shape how we work, delivering results you can trust.</p>

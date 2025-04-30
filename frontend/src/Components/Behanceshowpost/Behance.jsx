@@ -51,7 +51,7 @@ export default function Behance() {
   };
 
   return (
-    <div className="container mx-auto py-8 pb-14 ">
+    <div className="container mx-auto py-8 pb-14 w-[90%] ">
       <div className="flex flex-col lg:flex-row gap-16 ">
         
         {/* LEFT SIDE: HEADING */}

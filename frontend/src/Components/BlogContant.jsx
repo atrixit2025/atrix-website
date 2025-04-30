@@ -36,7 +36,7 @@ const BolgContant = () => {
   return (
     <div className="">
       <div className="Blog-header">
-        <div className="container mx-auto w-[90%]">
+        <div className="container mx-auto ">
           <HeroCommon
             heroData={{ title: blog?.title || "Blog Not Found", desc: "" }}
           />
@@ -44,26 +44,26 @@ const BolgContant = () => {
       </div>
 
       <div className="container mx-auto w-[90%]">
-        <div className="row flex justify-between pt-5">
+        <div className="grid grid-cols-12 pt-5">
           <div
             onClick={() => navigate("/blog")}
-           className="font-bold pt-2 flex items-center  cursor-pointer hover:text-(--blue) gap-2   group ">
-              
-            <div className="flex items-center gap-2">
+            className="font-bold  flex items-center justify-center md:justify-start  cursor-pointer hover:text-(--blue) gap-2   group col-span-12  md:col-span-3 ">
+
+            <div className="flex items-center gap-2 ">
               <span className='border border-white/45 ml-2 flex justify-center items-center h-6 w-6 rounded-full  rotate-45 text-[var(--blue)] group-hover:rotate-1 group-hover:bg-(--blue) group-hover:text-(--white) group-hover:border-(--blue)   duration-300' > <FaArrowLeft /> </span>
-               Back to main blog
-              
+              Back to main blog
+
             </div>
-         
+
           </div>
 
-          <div className="category-sec flex gap-5 items-center ">
+          <div className="category-sec mt-1  flex flex-col md:flex-row justify-center flex-wrap gap-5 items-center   col-span-12  md:col-span-6  ">
             <div className="col-4  flex text-[14px]">
               {blog.Published}
               {blog.date}
             </div>
 
-            <hr className="border w-16 border-white/35  " />
+            <hr className="border w-16 border-white/35 block   " />
 
             <div className="cat-center-sec flex gap-2 items-center ">
               Category:{" "}
@@ -76,9 +76,9 @@ const BolgContant = () => {
             </div>
           </div>
 
-          <div className="social-media-icons col-4 text-[16px] flex items-center">
+          <div className="social-media-icons text-[16px] flex justify-center   items-center  col-span-12  md:col-span-3">
             <div className="py-2.5">
-              <ul className="flex gap-2 mt-3  md:justify-start">
+              <ul className="flex gap-2  md:justify-start">
                 {[
                   { icon: <FaFacebookF />, id: "fb", link: "" },
                   {
@@ -122,7 +122,7 @@ const BolgContant = () => {
         </div>
       </div>
 
-      <div className="container mx-auto pt-10">
+      <div className="container mx-auto pt-10 w-[90%]">
         <div className="featured-img w-[100%] h-[700px]  ">
           <img
             className=" rounded-2xl  w-full h-full object-cover"
@@ -132,21 +132,23 @@ const BolgContant = () => {
         </div>
       </div>
 
-      <div className="container mx-auto pt-10">
+
+      <div className="container mx-auto pt-10 w-[90%]">
         <div className="mx-auto max-w-[800px]">
           <p className=" felx items-center">{blog?.text}</p>
         </div>
       </div>
 
-      <div className="container mx-auto pt-20">
+      {/* Relatede Post  */}
+      <div className="container mx-auto pt-20 w-[90%]">
         <div className="related-heading mx-auto">
           <h1 className="text-5xl font-bold"> Related Posts</h1>
         </div>
 
         {[0].map(() => (
-          <div key={0} className="flex gap-10 pt-10">
+          <div key={0} className=" grid grid-cols-12 gap-10  pt-10">
             {relatedBlogs.slice(0, 3).map((relatedBlog) => (
-              <div key={relatedBlog.id} className="w-[33.3%] flex flex-col  ">
+              <div key={relatedBlog.id} className=" col-span-12 md:col-span-6 lg:col-span-4 flex flex-col  ">
                 <Card.Img
                   onClick={() =>
                     navigate(
@@ -197,7 +199,7 @@ const BolgContant = () => {
                     }
                     className="font-bold pt-4 flex items-center  cursor-pointer hover:text-(--blue) self-start  group "
                   > Read More <span className='border border-white/45 ml-2 flex justify-center items-center h-6 w-6 rounded-full  -rotate-45 text-[var(--blue)] group-hover:rotate-1 group-hover:bg-(--blue) group-hover:text-(--white) group-hover:border-(--blue)   duration-300' ><FaArrowRight /></span>
-                    </Button>
+                  </Button>
                 </Card.Body>
               </div>
             ))}
