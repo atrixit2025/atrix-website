@@ -42,7 +42,7 @@ const Roles = forwardRef(({ onApplyClick }, ref) => {
             >
               <div className="role-card">
                 <h3 className="text-3xl font-semibold">{item.title}</h3>
-                <p className=' flex  gap-16  pt-3' >
+                <div className=' flex  gap-16  pt-3' >
                   <p className='flex gap-2 items-center' >Published:-<BsCalendar2Date />
                   {item.date}</p>
                   <p className='flex gap-2 items-center' >Education:-<FaGraduationCap />
@@ -50,7 +50,7 @@ const Roles = forwardRef(({ onApplyClick }, ref) => {
                   <p className='flex gap-2 items-center' >Experience:-<BsPersonWorkspace />
                   {item.experince}</p>
                   
-                </p>
+                </div>
                 <p className="mt-4">{item.desc}</p>
               </div>
               <div>

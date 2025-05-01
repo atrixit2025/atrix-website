@@ -70,16 +70,17 @@ export default function App() {
           <Route path='/Blog' element={< BlogUS />} />
           <Route path='/blog/:id' element={< BlogContant />} />
 
+
           {/* <Route path='/portfolio' element={< Portfolio />} /> */}
           {/* <Route path='/portfolio-page' element={< Portfolio_page />} />
           <Route path='/portfolio-single' element={< PortfolioSingle />} /> */}
           <Route path="/portfolio" element={< Portfolio_page />} />
           <Route path="/portfolio/:project_id" element={< PortfolioSingle />} />
-          <Route path="/our-services" element={<OurServices/>} />
+          <Route path="/services" element={<OurServices/>} />
           <Route path="/Behance" element={<Behance/>} />
           <Route path="/Service" element={<Service/>} />
 
-          <Route path="/our-services/:service_id" element={<Service/>} />
+          <Route path="/service/:service_id" element={<Service/>} />
          
 
           <Route path="/ServiceBackend" element={<ServiceBackend/>} />

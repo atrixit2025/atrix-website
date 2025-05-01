@@ -28,6 +28,7 @@ import TestimonialsCards from "../Components/TestimonialsCards";
 import Behance from "../Components/Behanceshowpost/Behance";
 
 import thumbnail from "../assets/thumbnail/t.png";
+import { RxArrowTopRight } from "react-icons/rx";
 
 
 const cards = [
@@ -168,13 +169,12 @@ const About = () => {
           </div>
 
           {/* Button Section */}
-          <div className="md:col-span-2 col-span-12 flex justify-center md:justify-end mt-4 md:mt-0 ">
-          <div
-              id="mybtn2"
-              className="md:col-span-2 col-span-12 flex justify-center items-center md:justify-end mt-4 md:mt-0 hover:text-red-500" 
-            >
-              <Button  mybtn="Contact us!" />
-            </div>
+
+          <div className="md:col-span-2 col-span-12 flex justify-center items-center md:justify-end mt-4 md:mt-0 ">
+            <Link to='/contact-us' className="bg-(--white)  font-extrabold text-(--blue) px-4 py-2  duration-300  rounded-lg  cursor-pointer  flex items-center gap-2 group hover:scale-104  ">Contact us!<span className="  ">
+              <RxArrowTopRight className=" group-hover:rotate-45 group-hover:scale-140 duration-250 " />
+            </span></Link>
+
           </div>
 
         </div>

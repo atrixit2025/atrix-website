@@ -9,6 +9,7 @@ import project2 from "../assets/PortfolioImage/imgpsh_fullsize_anim (2).png";
 import project3 from "../assets/PortfolioImage/imgpsh_fullsize_anim (3).png";
 import project4 from "../assets/PortfolioImage/imgpsh_fullsize_anim.png";
 import "./OurPortfolio.css"
+import LinkButton from './LinkButton';
 
 
 const OurPortfolio = () => {
@@ -98,7 +99,8 @@ const OurPortfolio = () => {
                     </div>
                     <div className='mt-1  md:text-end'>
                         <div className=' flex md:justify-end'>
-                            <Button className="" mybtn={"View All Portfolio"} />
+                            {/* <Button className="" mybtn={"View All Portfolio"} /> */}
+                            <LinkButton mybtn={"View All Portfolio"} btnLink={'/portfolio'} ></LinkButton>
                         </div>
                         <p className='md:w-86 text-gray font-bold mt-4'>
                         At Atrix IT Solutions, every project we deliver is a step toward your success. Our expertise turns ideas into powerful solutions, helping businesses grow, innovate, and stand out. 

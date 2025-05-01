@@ -17,7 +17,13 @@ const LetterMarquee = React.lazy(() => import('../Components/marqueelogo/letterM
 import video_circle from '../assets/video_circle.svg'
 import { CiPlay1 } from "react-icons/ci";
 import about_video from '../assets/About_video.mp4'
+
 import thumbnail2 from "../assets/thumbnail/t2.png"
+
+
+import { Link } from 'react-router-dom';
+import LinkButton from '../Components/LinkButton';
+
 
 const Home = () => {
   const ourServicesRef = useRef(null);
@@ -233,8 +239,12 @@ const Home = () => {
               </p>
               <p className="text-md text-(--white) pb-10 ">Look no further! Let's turn your vision into reality together.
               </p>
-
-              <Button btnLink={"/about"} mybtn={"Learn More"} />
+            
+              <div className='flex' >
+              <LinkButton mybtn={'Learn More'}  btnLink={'/about'} ></LinkButton>
+              </div>
+              
+              
             </div>
           </div>
         </div>

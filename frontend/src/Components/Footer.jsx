@@ -7,8 +7,8 @@ import Atrix_img from "../assets/footer/Asset 24.svg";
 
 const ourServices = [
   { service_name: "Home", url: "/" },
-  { service_name: "About US", url: "/about" },
-  { service_name: "Services", url: "/service" },
+  { service_name: "About Us", url: "/about" },
+  { service_name: "Services", url: "/services" },
   { service_name: "Our Portfolio", url: "/portfolio" },
   { service_name: "Career", url: "/careers" },
   { service_name: "Our Blog", url: "/blog" },
@@ -22,17 +22,19 @@ const cardsContent = [
     btn_name: "Facebook",
   },
   {
-    link: "mailto:info@atrixitsolutions.com",
+    link: "https://www.instagram.com/atrixit.solutions/",
     btn_name: "Instagram",
   },
   {
-    link: "#",
+    link: "https://www.behance.net/atrixit",
     btn_name: "Behance",
   },
   {
+    link: "https://x.com/AtrixIT_S",
     btn_name: "Twitter",
   },
   {
+    link: "https://www.linkedin.com/company/atrixitsolutions/",
     btn_name: "Linked In",
   },
 ];
@@ -86,7 +88,8 @@ const Footer = () => {
               Ready to Elevate Your Brand?
             </h2>
             <div className="mt-2  ">
-              <Button mybtn="Lets' Talk" btnLink="/contact-us" />
+              <Link to={'/contact-us'} > <Button mybtn="Lets' Talk" btnLink="/contact-us" /></Link>
+             
             </div>
           </div>
         </div>
@@ -94,8 +97,8 @@ const Footer = () => {
         <div className="">
           <div className="flex flex-wrap md:justify-center justify-start gap-4 md:gap-16 pb-10">
             {cardsContent.map((item, index) => (
-              <div className="link-div flex">
-                <Link key={index} to={item.link} className=" ">
+              <div key={index} className="link-div flex">
+                <Link key={index} to={item.link} className=" " target="_blank" >
                   <div className="titel cursor-pointer hover:text-(--blue)  group font-bold flex items-center justify-center   self-start ">
                     {item.btn_name}
 

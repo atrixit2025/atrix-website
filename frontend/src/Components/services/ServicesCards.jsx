@@ -57,7 +57,7 @@ const ServicesCards = ({ secData }) => {
 
         <div className="services-sec mt-36">
             {secData.sub_service.map((item, index) => (
-                <>
+                <div key={index}>
                     <div className="container mx-auto">
                         <div className='text-center' >
                             <h2 className=' text-6xl font-bold mb-6' >{item.services_heading}  </h2>
@@ -67,9 +67,8 @@ const ServicesCards = ({ secData }) => {
                     <div>
                         <div className="service-cards-wapper grid grid-cols-1  ">
                             {item.all_services.map((seritem, serindex) => (
-                                <div className='border-b ' >
+                                <div key={serindex} className='border-b ' >
                                     <div
-                                        key={serindex}
                                         className="service-card grid lg:grid-cols-2 gap-10 pb-12 pt-15 relative container mx-auto"
                                         onMouseMove={handleMouseMove}
                                         onMouseEnter={handleMouseMove}
@@ -101,7 +100,7 @@ const ServicesCards = ({ secData }) => {
                             ))}
                         </div>
                     </div>
-                </>
+                </div>
             ))}
         </div>
 

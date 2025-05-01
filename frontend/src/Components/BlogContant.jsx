@@ -101,9 +101,9 @@ const BolgContant = () => {
                     id: "insta",
                     link: "https://www.instagram.com/atrixit.solutions/",
                   },
-                ].map((item) => (
+                ].map((item , index) => (
                   <li
-                    key={item.id}
+                    key={index}
                     className="relative w-10 h-10 p-1 rounded-full cursor-pointer flex justify-center items-center   text-white"
                   >
                     <Link
@@ -147,8 +147,8 @@ const BolgContant = () => {
 
         {[0].map(() => (
           <div key={0} className=" grid grid-cols-12 gap-10  pt-10">
-            {relatedBlogs.slice(0, 3).map((relatedBlog) => (
-              <div key={relatedBlog.id} className=" col-span-12 md:col-span-6 lg:col-span-4 flex flex-col  ">
+            {relatedBlogs.slice(0, 3).map((relatedBlog , index) => (
+              <div key={index} className=" col-span-12 md:col-span-6 lg:col-span-4 flex flex-col  ">
                 <Card.Img
                   onClick={() =>
                     navigate(
