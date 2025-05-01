@@ -1,21 +1,22 @@
-
-import React from 'react';
-import video from "../assets/AtrixHomevideo.mp4";
-import thumbnail1 from "../assets/thumbnail-1.jpg";
-
+import React from "react";
+import videoSrc from "../assets/AtrixHomevideo.mp4";
+import thumbnail from "../assets/thumbnail/t.png";
 
 const VideoSection = () => {
   return (
-    <div className='pointer-events-none'>
-      <video
-        src={video}
-        autoPlay 
-        muted 
-        poster={thumbnail1}
-        loop 
-        controls={false} 
-        style={{ width: "100%", height: "auto" }} 
-      />
+    <div className="video-sec mx-6 pt-38">
+      <div className="pointer-events-none">
+        <video
+          className="rounded-xl"
+          src={videoSrc}
+          poster={thumbnail}
+          autoPlay
+          muted
+          loop
+          controls={false}
+          style={{ width: "100%", height: "auto" }}
+        />
+      </div>
     </div>
   );
 };

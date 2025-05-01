@@ -7,7 +7,8 @@ const WebDevelopment = ({ secData, targetRef }) => {
       <div className="container mx-auto">
         <div className="web-dev-wrapper grid grid-cols-12 gap-10">
           <div className="col-span-6">
-            <h2 className="text-4xl font-bold leading-11">{secData.heading_1}</h2>
+            <h2 className="text-4xl font-bold ">{secData.heading_1}</h2>
+            <p className=" mt-[10px] max-w-[590px]">{secData.description_1}</p>
           </div>
           <div className="col-span-6 flex">
             <div className="img-wrapper ml-auto">
@@ -22,12 +23,15 @@ const WebDevelopment = ({ secData, targetRef }) => {
               <img src={secData.img_2} alt="" className="w-full" />
             </div>
           </div>
+
           <div className="col-span-5 flex flex-col justify-end">
-            <p className="text-xl max-w-[570px]">{secData.description_1}</p>
+            <h2 className="text-4xl font-bold ">{secData.heading_2}</h2>
+            <p className=" mt-[10px]  max-w-[570px]">{secData.description_2}</p>
             <div className="mt-5">
-              <Button mybtn="Get Your Quote Now" targetRef={targetRef} />
+              <Button mybtn="Get A Quote" targetRef={targetRef} />
             </div>
           </div>
+
         </div>
       </div>
     </div>

@@ -1,41 +1,19 @@
 import React, { useState } from 'react'
 import Button from './Button'
 
-const processCardsData = [
-    {
-        title: "Research and Brainstorm",
-        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore cum culpa perspiciatis fugit enim provident eveniet. Laborum atque eum architecto, molestias sint delectus. Facere, perferendis eligendi? Eaque maxime pariatur impedit?"
-    },
-    {
-        title: "Research and Brainstorm",
-        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore cum culpa perspiciatis fugit enim provident eveniet. Laborum atque eum architecto, molestias sint delectus. Facere, perferendis eligendi? Eaque maxime pariatur impedit?"
-    },
-    {
-        title: "Research and Brainstorm",
-        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore cum culpa perspiciatis fugit enim provident eveniet. Laborum atque eum architecto, molestias sint delectus. Facere, perferendis eligendi? Eaque maxime pariatur impedit?"
-    },
-    {
-        title: "Research and Brainstorm",
-        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore cum culpa perspiciatis fugit enim provident eveniet. Laborum atque eum architecto, molestias sint delectus. Facere, perferendis eligendi? Eaque maxime pariatur impedit?"
-    },
-    {
-        title: "Research and Brainstorm",
-        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore cum culpa perspiciatis fugit enim provident eveniet. Laborum atque eum architecto, molestias sint delectus. Facere, perferendis eligendi? Eaque maxime pariatur impedit?"
-    },
-   
-]
 
 
 
 const ProcessCards = ({ secData, targetRef }) => {
 
-    const [activeCard , setActiveCard] = useState(1)
+    const [activeCard , setActiveCard] = useState(0)
 
     return (
         <section className='process-cards-section my-36'>
 
             <div className="container mx-auto">
-                <h1 className='text-6xl font-bold text-center my-10'>Process</h1>
+                <h1 className='text-6xl font-bold text-center mt-10'>Process</h1>
+                <p className='text-center  max-w-[800px] mx-auto mb-10'>Curious about how we create impactful brands? Our step-by-step process ensures that your brand stands out and makes a lasting impression! </p>
                 <div className="process-cards-wrapper flex gap-5"  >
                     {secData.process_cards.map((item, index) => (
                         <div key={index}  onClick={ ()=> setActiveCard(index)} className={`process-card p-10 rounded-2xl bg-(--black) flex-[0] max-w-[500px] transition-all duration-500  ${activeCard === index ? 'flex-[2]' : 'flex-[1]'}`}>                            
@@ -47,7 +25,7 @@ const ProcessCards = ({ secData, targetRef }) => {
 
                 </div>
                 <div className='mt-14 flex justify-center' >
-                <Button mybtn="Get Your Quote Now" targetRef={targetRef} />
+                {/* <Button mybtn="Get Your Quote Now" targetRef={targetRef} /> */}
 
                     </div>
             </div>

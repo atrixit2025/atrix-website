@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import Logo from "../assets/ais-logo-3.png";import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react';
+import Logo from "../assets/ais-logo-3.png";
+import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, useLocation } from "react-router-dom";
 import Button from './Button';
 import BgAnimation from './BgAnimation';
+import "./Navbar.css"
 
 const navigation = [
   { name: 'Home', path: '/', current: true },
@@ -58,10 +60,10 @@ export default function Navbar() {
           <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex shrink-0 items-center">
               <Link to="/" onClick={() => setIsMenuOpen(false)}>
-                <img
+                <img 
                   alt="Your Company"
                   src={Logo}
-                  className="w-auto h-16 md:h-32"
+                  className=" nav-img-icon w-auto h-16 md:h-32"
                 />
               </Link>
             </div>

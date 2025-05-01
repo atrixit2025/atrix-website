@@ -1,4 +1,4 @@
 #mybtn2 button:hover{
     background-color: white;
-
+    color: var(--blue);
 }
