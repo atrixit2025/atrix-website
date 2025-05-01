@@ -8,7 +8,7 @@ import Atrix_img from "../assets/footer/Asset 24.svg";
 const ourServices = [
   { service_name: "Home", url: "/" },
   { service_name: "About US", url: "/about" },
-  { service_name: "Services", url: "/service" },
+  { service_name: "Services", url: "/services" },
   { service_name: "Our Portfolio", url: "/portfolio" },
   { service_name: "Career", url: "/careers" },
   { service_name: "Our Blog", url: "/blog" },

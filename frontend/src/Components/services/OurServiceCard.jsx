@@ -100,7 +100,7 @@ const OurServiceCard = () => {
         <div className="columns-1 md:columns-3 gap-20 mt-12">
           {ServicesData.map((item, index) => (
             <div key={index} className="  pt-18 inline-block w-full">
-              <Link to={`${item.service_id}`} className=" cursor-pointer"  >
+              <Link to={`/service/${item.service_id}`} className=" cursor-pointer"  >
                 <h3 className="text-3xl font-bold flex items-center gap-2 ]">
                   <div className=" icon-bg min-w-12 h-12 relative flex justify-center items-center bg-gradient-to-r from-(--blue) to-(--green) rounded-full translate-y-2 mr-1 mb-3">
                     <img
@@ -116,22 +116,21 @@ const OurServiceCard = () => {
                 {
                   item.tags.map((tagItem, tagindex) => (
                     <li
-                    key={tagindex}
-                    className="flex items-center justify-between border-b-2  border-white/15  hover:border-(--green)  pb-4 pt-4 group cursor-pointer hover:scale-102 duration-350 "
-                  >
-                    <Link
-                      to={`${item.service_id}`}
-
-                      className="flex items-center justify-between w-full group-hover:text-(--green) font-bold  "
+                      key={tagindex}
+                      className="flex items-center justify-between border-b-2  border-white/15  hover:border-(--green)  pb-4 pt-4 group cursor-pointer hover:scale-102 duration-350 "
                     >
-                      <span>{tagItem}</span>
-                      <AiOutlineArrowRight className="text-gray-500 text-2xl group-hover:text-(--green) -rotate-45 group-hover:rotate-2 transform duration-300  group " />
-                    </Link>
-                  </li>
-              ))
+                      <Link
+                        to={`/service/${item.service_id}`}
+                        className="flex items-center justify-between w-full group-hover:text-(--green) font-bold"
+                      >
+                        <span>{tagItem}</span>
+                        <AiOutlineArrowRight className="text-gray-500 text-2xl group-hover:text-(--green) -rotate-45 group-hover:rotate-2 transform duration-300  group " />
+                      </Link>
+                    </li>
+                  ))
                 }
               </ul>
-            </div>  
+            </div>
           ))}
         </div>
       </div>
