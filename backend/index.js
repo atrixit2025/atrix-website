@@ -41,8 +41,12 @@ app.use('/Image', express.static(path.join(__dirname, 'uploads', 'Image')), (req
   // console.log(`Request received for: ${req.url}`);
   next();
 });
+app.use('/Videos', express.static(path.join(__dirname, 'uploads', 'Videos')), (req, res, next) => {
+  // console.log(`Request received for: ${req.url}`);
+  next();
+});
 
-app.use("/Image", ImageRouter);
+app.use("/files", ImageRouter);
 app.use("/Category", CategoryRouter);
 
 

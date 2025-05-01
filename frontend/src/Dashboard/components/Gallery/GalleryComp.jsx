@@ -122,7 +122,7 @@ const GalleryComp = ({ onImageUpload, imageId, imageType, existingImages = [], N
 
     return (
         <>
-        <Label>Gallery</Label>
+      
         <div className="border-2 px-4 py-2 rounded-xl border-gray-700">
             {/* Selected Images Preview */}
             <div className="  flex flex-wrap gap-4">
