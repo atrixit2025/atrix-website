@@ -27,7 +27,7 @@ const Careers = () => {
   };
 
   const handleApplyClick = (jobTitle) => {
-    setSelectedJob(jobTitle); // Store the selected job
+    setSelectedJob(jobTitle);
     formSectionRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -41,10 +41,8 @@ const Careers = () => {
       <ValueCards />
       <PerksAtrix />
 
-      {/* Roles section with ref and click handler */}
-      <Roles ref={`rolesSectionRef`} onApplyClick={handleApplyClick} />
+      <Roles ref={rolesSectionRef} onApplyClick={handleApplyClick} />
 
-      {/* Form section that scrolls into view and receives the selected job */}
       <div ref={formSectionRef}>
         <CareerFormSec selectedJob={selectedJob} />
       </div>
