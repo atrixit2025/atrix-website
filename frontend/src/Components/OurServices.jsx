@@ -4,6 +4,7 @@ import "../CSS/one.css";
 import Button from "./Button";
 import ServicesData from "../data/ServicesData";
 import { Link } from "react-router-dom";
+import LinkButton from "./LinkButton";
 
 
 
@@ -57,9 +58,8 @@ const OurServices = () => {
 
             <div className='mt-1  md:text-end'>
               <div className=' flex md:justify-end'>
-                <Link to={'/services'}>
-                <Button className="" mybtn={"View All Services"} />
-                </Link>
+                
+                <LinkButton  mybtn={'View All Services'} btnLink={'/services'} ></LinkButton>
               </div>
               <p className='md:w-86 text-gray font-bold mt-4'>
                 Offer a wide range of services to help businesses establish and enhance their online presence.

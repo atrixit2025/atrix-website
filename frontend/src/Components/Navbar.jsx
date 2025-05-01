@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Logo from "../assets/ais-logo-3.png";import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react';
+import Logo from "../assets/ais-logo-3.png"; import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, useLocation } from "react-router-dom";
 import Button from './Button';
@@ -83,7 +83,10 @@ export default function Navbar() {
           </div>
 
           <div className="absolute inset-y-0 right-0 xl:flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 hidden">
-            <Button className="relative" mybtn={"Let's Talk"} btnLink={"/contact-us"} />
+            <Link to="/contact-us">
+              <Button className="relative" mybtn={"Let's Talk"} btnLink={"/contact-us"} />
+            </Link>
+
           </div>
 
           <div className="left-0 flex items-center justify-end xl:hidden">
@@ -106,7 +109,7 @@ export default function Navbar() {
       <DisclosurePanel className="xl:hidden ">
         <div className="fixed inset-0 z-50 flex flex-col justify-between  text-center bg-black overflow-y-auto">
           <BgAnimation />
-       
+
 
           <div className="w-full flex mb-6 pt-3">
             <div className="flex items-center justify-center pl-10" />
