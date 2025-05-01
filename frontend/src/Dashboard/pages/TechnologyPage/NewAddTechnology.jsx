@@ -159,8 +159,8 @@ export default function NewAddTechnology() {
           </div>
           <ImageProvider>
             <FileInputExample
-              onImageUpload={(imageId) => setImageId(imageId)}
-              imageId={technology?.imageId}
+              onfilesUpload={(imageId) => setImageId(imageId)}
+              filesId={technology?.imageId} 
             />
           </ImageProvider>
         </div>

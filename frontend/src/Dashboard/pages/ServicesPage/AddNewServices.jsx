@@ -293,24 +293,30 @@ export default function AddNewServices() {
         }));
     };
     const bannerData = formData.Banner
-    .filter(item => {
-        if (item.type === "slider") {
-            return item.sliderImages && item.sliderImages.length > 0;
-        }
-        return item.type && item.imageId;
-    })
-    .map(item => {
-        if (item.type === "slider") {
-            return {
-                type: item.type,
-                sliderImages: item.sliderImages.filter(img => img) // Only non-null images
-            };
-        }
-        return {
-            type: item.type,
-            imageId: item.imageId
-        };
-    });
+        .filter(item => item.type) // Only include items with a type
+        .map(item => {
+            if (item.type === "slider") {
+                // Ensure slider has at least one image
+                if (!item.sliderImages || item.sliderImages.length === 0) {
+                    alert("Slider must have at least one image");
+                    throw new Error("Slider must have at least one image");
+                }
+                return {
+                    type: item.type,
+                    sliderImages: item.sliderImages.filter(img => img) // Only non-null images
+                };
+            } else {
+                // Ensure banner/video has an imageId
+                if (!item.imageId) {
+                    alert(`${item.type} must have an image/video`);
+                    throw new Error(`${item.type} must have an image/video`);
+                }
+                return {
+                    type: item.type,
+                    imageId: item.imageId
+                };
+            }
+        });
 
 
 
@@ -353,9 +359,6 @@ export default function AddNewServices() {
 
     };
 
-    console.log("Current Bannerdata state:", formData.Bannerdata);
-    console.log("Current Banner state:", formData.Banner);
-console.log("Processed bannerData:", bannerData);
 
 
     try {
@@ -364,7 +367,6 @@ console.log("Processed bannerData:", bannerData);
           id: Services.id,
           ...ServicesData
         });
-        console.log("Services updated successfully!", ServicesData.Bannerdata);
       } else {
         await axios.post("http://localhost:5300/Services/add", ServicesData);
       }
@@ -409,9 +411,15 @@ console.log("Processed bannerData:", bannerData);
 
 
 
+ 
   const handleBannerChange = (bannerData) => {
-    setFormData(prev => ({ ...prev, Banner: bannerData || [] }));
+    setFormData(prev => ({
+      ...prev,
+      Banner: bannerData,
+      Bannerdata: bannerData
+    }));
   };
+  
 
   const handleWhyDoNeedChange = (whyData) => {
     setFormData(prev => ({ ...prev, WhydoNeed: whyData }));
@@ -637,7 +645,10 @@ console.log("Processed bannerData:", bannerData);
 
           </div>
           {formData.showGallery && (
+            
             <div ref={galleryRef}>
+          <Label>Gallery</Label>
+
               <GalleryComp
                 selected="Set Images"
                 onImageUpload={handleGalleryChange}
@@ -666,10 +677,14 @@ console.log("Processed bannerData:", bannerData);
                     if (newValue && headerContentRef.current) {
                       headerContentRef.current.scrollIntoView({ behavior: 'smooth' });
                     }
-                  }, 100); // Delay to ensure UI update
+                  }, 0); // Delay to ensure UI update
 
-                  return { ...prev, showHeadercontent: newValue };
+                  return { ...prev, 
+                    showHeadercontent: newValue ,
+                    Headercontent: newValue ? prev.Headercontent : []
+                  };
                 });
+                
               }}
             />
 
@@ -679,6 +694,7 @@ console.log("Processed bannerData:", bannerData);
               checked={formData.showGallery}
               onChange={() => {
                 setFormData(prev => {
+                  
                   const newValue = !prev.showGallery;
                   setTimeout(() => {
                     if (newValue && galleryRef.current) {
