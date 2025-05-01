@@ -37,15 +37,15 @@ const serviceCardsData = [
 
 ];
 
-const ServiceTesting = ({ secData }) => {
-    // Create individual hover states for each card
-    const [cards, setCards] = useState(
-        serviceCardsData.map(() => ({
-            show: false,
-            x: 0,
-            y: 0
-        }))
-    );
+// const ServiceTesting = ({ secData }) => {
+//     // Create individual hover states for each card
+//     const [cards, setCards] = useState(
+//         serviceCardsData.map(() => ({
+//             show: false,
+//             x: 0,
+//             y: 0
+//         }))
+//     );
 
 
 
@@ -127,6 +127,6 @@ const ServiceTesting = ({ secData }) => {
 
         </div>
     );
-};
+// };
 
 export default ServiceTesting;

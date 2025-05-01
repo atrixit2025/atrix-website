@@ -94,7 +94,7 @@ const Footer = () => {
         <div className="">
           <div className="flex flex-wrap md:justify-center justify-start gap-4 md:gap-16 pb-10">
             {cardsContent.map((item, index) => (
-              <div className="link-div flex">
+              <div key={index} className="link-div flex">
                 <Link key={index} to={item.link} className=" ">
                   <div className="titel cursor-pointer hover:text-(--blue)  group font-bold flex items-center justify-center   self-start ">
                     {item.btn_name}

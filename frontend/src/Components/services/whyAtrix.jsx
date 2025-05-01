@@ -12,10 +12,9 @@ const WhyAtrix = ({ secData }) => {
           </div>
           <div className="right">
             {secData.why_atrix_desc.map((item, index) => (
-              <> 
-              <p className='mb-3'>{item}</p>
+         
+              <p key={index} className='mb-3'>{item}</p>
               
-              </>
              
             ))}
 

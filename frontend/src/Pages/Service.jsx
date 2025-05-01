@@ -47,7 +47,6 @@ const Service = () => {
         <WebDevelopment secData={filteredService} targetRef={formRef} />
         <ServicesCards secData={filteredService} />
         <WhyNeedBranding secData={filteredService} targetRef={formRef} />
-
         <WhyAtrix secData={filteredService} />
         <ProcessCards secData={filteredService} targetRef={formRef} />
 
@@ -58,7 +57,6 @@ const Service = () => {
             <FaQuoteRight className="absolute right-0 text-(--blue) text-2xl mt-2" />
           </h2>
         </div>
-
 
         {/* CTA Section */}
         <div className="container mx-auto mt-28 service-cta">
@@ -86,7 +84,6 @@ const Service = () => {
 
         <OurPortfolio />
         <FaqSection secData={filteredService} />
-
 
       </div>
     </>

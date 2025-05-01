@@ -38,7 +38,7 @@ const PortFolioCards = () => {
                                 <h3 className='text-4xl font-bold mb-2'>{item.project_title}</h3>
                                 <p>
                                     {item.tags.map((item, index) => (
-                                        <span>{item} /  </span>
+                                        <span key={index} >{item} /  </span>
                                     ))}
                                 </p>
                                 <span className="border border-white/35 items-center h-12 w-12 rounded-full flex justify-center -rotate-45  group-hover:text-white duration-300 group-hover:rotate-1 group-hover:bg-[var(--blue)] bg-black text-2xl absolute right-8 -top-2 ">

@@ -54,8 +54,8 @@ const PortfolioSingle = () => {
                 {/* description section  */}
                 {
                     filteredProject.project_description.map((item, index) => (
-                        <>
-                            <div key={index} className="project-desc max-w-[800px] mx-auto  px-4">
+                        <div key={index} >
+                            <div  className="project-desc max-w-[800px] mx-auto  px-4">
                                 <h2 className="text-2xl font-bold mb-6">{item.heading_1}</h2>
                                 <div>{item.description_1}</div>
                             </div>
@@ -69,14 +69,14 @@ const PortfolioSingle = () => {
                                 />
                             </div>
 
-                            <div key={index} className="project-desc max-w-[800px] mx-auto  px-4">
+                            <div  className="project-desc max-w-[800px] mx-auto  px-4">
                                 <h2 className="text-2xl font-bold mb-6">{item.heading_2}</h2>
                                 <div>{item.description_2}</div>
                             </div>
 
 
 
-                            <div key={index} className='port-full-wrapper' >
+                            <div  className='port-full-wrapper' >
                                 <img
                                     src={item.full_image}
                                     alt="full screen image"
@@ -87,15 +87,15 @@ const PortfolioSingle = () => {
                             </div>
 
 
-                            <div key={index} className="project-desc max-w-[800px] mx-auto  px-4">
+                            <div  className="project-desc max-w-[800px] mx-auto  px-4">
                                 <h2 className="text-2xl font-bold mb-6">{item.heading_3}</h2>
                                 <div>{item.description_3}</div>
                             </div>
 
 
-                            <div key={index} className="grid grid-cols-1 md:grid-cols-2 max-w-[1100px] mx-auto my-24 gap-6 px-4">
+                            <div  className="grid grid-cols-1 md:grid-cols-2 max-w-[1100px] mx-auto my-24 gap-6 px-4">
 
-                                <div key={index} className="image-wrapper aspect-[4/3] overflow-hidden rounded-lg">
+                                <div  className="image-wrapper aspect-[4/3] overflow-hidden rounded-lg">
                                     <img
                                         src={item.half_img_1}
                                         alt="#"
@@ -103,7 +103,7 @@ const PortfolioSingle = () => {
                                         loading="lazy"
                                     />
                                 </div>
-                                <div key={index} className="image-wrapper aspect-[4/3] overflow-hidden rounded-lg">
+                                <div  className="image-wrapper aspect-[4/3] overflow-hidden rounded-lg">
                                     <img
                                         src={item.half_img_1}
                                         alt="#"
@@ -113,7 +113,7 @@ const PortfolioSingle = () => {
                                 </div>
                             </div>
 
-                        </>
+                        </div>
                     ))
                 }
             </>

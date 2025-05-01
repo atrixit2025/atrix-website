@@ -25,7 +25,7 @@ const WhyNeedBranding = ({ secData, targetRef }) => {
                 <h2 className='text-6xl font-bold text-center mb-14 ' >{secData.cards_sec_heading}</h2>
                 <div className="branding-Cards grid grid-cols-3 gap-5">
                     {secData.cards_sec_data.map((item, index) => (
-                        <div className="branding-card p-12 bg-(--black) rounded-2xl">
+                        <div key={index} className="branding-card p-12 bg-(--black) rounded-2xl">
                             <h3 className='text-3xl mb-2 font-bold' >{item.cardTitle}</h3>
                             <p>{item.desc}</p>
                         </div>
