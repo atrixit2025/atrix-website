@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Logo from "../assets/white_ais-logo-2.png";
-import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react';
+import Logo from "../assets/ais-logo-3.png";import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, useLocation } from "react-router-dom";
 import Button from './Button';
