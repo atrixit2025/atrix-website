@@ -309,6 +309,7 @@ h1,h2,h3,h4,h5{
   font-family: var(--headingfont);
   letter-spacing: 2px;
 }
+
 .bg-gr{
   background-image: linear-gradient(to left, var(--green), var(--blue));
 }
@@ -324,6 +325,61 @@ h1,h2,h3,h4,h5{
 .bg-blue{
   background-color: var(--blue);
 }
+
+h1{
+  font-size: 128px;
+  font-weight: 800;
+}
+h2{
+  font-size: 60px;
+  font-weight: 600;
+}
+h3{
+  font-size: 36px;
+  font-weight: 800;
+}
+h4{
+  font-size: 24px;
+  /* font-weight: 800; */
+}
+h5{
+  font-size: 1rem;
+  font-weight: 800;
+}
+h6{
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+@media (max-width: 1024px) {
+  h1 { font-size: 96px; }
+  h2 { font-size: 48px; }
+  h3 { font-size: 30px; }
+  h4 { font-size: 20px; }
+  h5 { font-size: 0.95rem; }
+  h6 { font-size: 0.75rem; }
+}
+
+/* Tablets (768px and below) */
+@media (max-width: 768px) {
+  h1 { font-size: 72px; }
+  h2 { font-size: 36px; }
+  h3 { font-size: 24px; }
+  h4 { font-size: 18px; }
+  h5 { font-size: 0.9rem; }
+  h6 { font-size: 0.7rem; }
+}
+
+/* Mobile devices (480px and below) */
+@media (max-width: 480px) {
+  h1 { font-size: 48px; }
+  h2 { font-size: 28px; }
+  h3 { font-size: 20px; }
+  h4 { font-size: 16px; }
+  h5 { font-size: 0.85rem; }
+  h6 { font-size: 0.65rem; }
+}
+
 
 /* body {
   background-image: url(/bgImage.jpg);

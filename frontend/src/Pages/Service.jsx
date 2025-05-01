@@ -15,6 +15,7 @@ import ServiceFrom from "../Components/services/ServiceFrom";
 import OurPortfolio from "../Components/OurPortfolio";
 import FaqSection from "../Components/FaqSection";
 import Button from "../Components/Button";
+import img1 from "../assets/ServicesImage/Logistics.png";
 
 import ServicesData from "../data/ServicesData";
 import "./Service.css";
@@ -48,8 +49,13 @@ const Service = () => {
         <WebDevelopment secData={filteredService} targetRef={formRef} />
         <ServicesCards secData={filteredService} />
         <WhyNeedBranding secData={filteredService} targetRef={formRef} />
+  {/* Image-section */}
+  <div className="img-sec  ">
+          <img className="w-[100%]" src={img1} alt="" />
+        </div>
 
         <WhyAtrix secData={filteredService} />
+      
         <ProcessCards secData={filteredService} targetRef={formRef} />
 
         <div className="container mx-auto my-16">
@@ -65,8 +71,8 @@ const Service = () => {
         <div className="container mx-auto mt-28 service-cta">
           <div className="row grid grid-cols-1 md:grid-cols-12 mt-10 bg-(--blue) rounded-xl p-6 md:p-10">
             <div className="md:col-span-10 col-span-12 text-center md:text-left">
-              <h3 className="text-white text-3xl md:text-4xl font-bold">Ready to take your brand to the next level? </h3>
-              <p className="mt-5 max-w-[800px]">
+              <h3 className="text-4xl md:text-5xl font-bold ">Ready to take your brand to the next level? </h3>
+              <p className="mt-1 max-w-[800px]">
               We’re here to help you create an identity that’s powerful and memorable. Let’s work together to make your brand stand out. Get in touch today, and let’s bring your vision to life!
               </p>
             </div>

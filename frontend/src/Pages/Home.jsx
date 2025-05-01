@@ -17,7 +17,7 @@ const LetterMarquee = React.lazy(() => import('../Components/marqueelogo/letterM
 import video_circle from '../assets/video_circle.svg'
 import { CiPlay1 } from "react-icons/ci";
 import about_video from '../assets/About_video.mp4'
-import thumbnail2 from "../assets/thumbnail-2.jpg"
+import thumbnail2 from "../assets/thumbnail/t2.png"
 
 const Home = () => {
   const ourServicesRef = useRef(null);
