@@ -19,11 +19,11 @@ const OurServices = () => {
 
       <div className="Brand-Experience container flex  justify-between  mx-auto mt-22">
         <div className="container mx-auto w-[90%]">
-        <h4 className=" text-2xl  ">
+        {/* <h4 className=" text-2xl  ">
           Crafted by our team of experts and powered by cutting-edge AI
           technology, our services deliver measurable, impactful results that
           drive growth and elevate your business.
-        </h4>
+        </h4> */}
         </div>
         
       </div>
@@ -32,7 +32,7 @@ const OurServices = () => {
 
       {/* HOW WE DO IT */}
 
-      <div className="container mx-auto mt-25 leading-0 w-[90%] ">
+      <div className="container mx-auto mt-16 leading-0 w-[90%] ">
         <h2 className=" text-4xl md:text-8xl font-bold text-center  py-15 "> HOW WE DO IT</h2>
         <div className=" grid  grid-cols-12  gap-9 ">
           <div className="col-span-12 md:col-span-4 border-t-1 border-white/20  ">
