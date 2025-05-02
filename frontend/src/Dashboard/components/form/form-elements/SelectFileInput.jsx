@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import ComponentCard from "../../common/ComponentCard";
 import { Modal } from "../../ui/modal";
 import Button from "../../ui/button/Button";
 import { FaTrash, FaUpload } from "react-icons/fa";
@@ -10,81 +9,59 @@ import { GrFormSubtract } from "react-icons/gr";
 
 
 
-const SelectFileInput = ({ onImageUpload, imageId, imageType, existingImage,NameOffield,selected }) => {
-    const [previewUrl, setPreviewUrl] = useState(existingImage?.url || null);
+const SelectFileInput = ({ onfilesUpload, filesUrl, filesType, existingfiles, NameOffield, selected }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [showUploadSection, setShowUploadSection] = useState(true);
-    const [showAllImagesSection, setShowAllImagesSection] = useState(false);
-    const [selectedImage, setSelectedImage] = useState(
-        existingImage?.url || (imageId ? `http://localhost:5300/Image/get/${imageId}` : null)
+    const [showAllfilessSection, setShowAllfilessSection] = useState(false);
+    const [selectedfiles, setSelectedfiles] = useState(
+        existingfiles?.url || (filesUrl ? `http://localhost:5300/files/get/${filesUrl}` : null)
     );
-    const [allImages, setAllImages] = useState([]);
-    const [selectedImageUrl, setSelectedImageUrl] = useState(null);
-    const [hoveredImage, setHoveredImage] = useState(null);
+    const [allfiless, setAllfiless] = useState([]);
+    const [selectedfilesUrl, setSelectedfilesUrl] = useState(null);
+    const [hoveredfiles, setHoveredfiles] = useState(null);
     const [hoverIcons, setHoverIcons] = useState(null);
 
-    // Fetch all images from the server
-    const fetchAllImages = async () => {
+    // Fetch all filess from the server
+    const fetchAllfiless = async () => {
         try {
-            const response = await axios.get("http://localhost:5300/Image/get");
-            if (response.status === 200) {
-                const images = response.data.Image.map((item) => ({
-                    imageId: item._id, // MongoDB ObjectId
-                    imageUrl: item.image, // Image URL
+            const response = await axios.get("http://localhost:5300/files/get");
+
+            if (response.data?.files) {
+                const files = response.data.files.map((item) => ({
+                    filesId: item._id,
+                    filesUrl: item.file
                 }));
-                setAllImages(images);
+
+                setAllfiless(files);
             } else {
-                console.error("Error fetching images:", response.data.message);
+                console.error("Unexpected response format:", response.data);
+                setAllfiless([]);
             }
         } catch (error) {
-            console.error("Error fetching images:", error);
+            console.error("Error fetching filess:", error);
+            setAllfiless([]);
         }
     };
 
 
-    // useEffect(() => {
-    //     if (imageId) {
-    //         const fetchImageData = async () => {
-    //             try {
-    //                 const response = await axios.get(`http://localhost:5300/Image/get/${imageId}`);
-    //                 const imageData = response.data.Image;
-
-    //                 if (imageData) {
-    //                     setSelectedImage(imageData.image);
-    //                     setSelectedImageUrl(imageData.image);
-    //                     // console.log("Fetching image data for imageId:", imageId);
-    //                     const response = await axios.get(`http://localhost:5300/Image/get/${imageId}`);
-    //                     console.log("Response from backend:", response.data);
-    //                 } else {
-    //                     console.error("No imageData found for imageId:", imageId);
-    //                 }
-    //             } catch (error) {
-    //                 console.error("Error fetching image data:", error);
-    //             }
-    //         };
-
-    //         fetchImageData();
-    //     }
-    // }, [imageId]);
     useEffect(() => {
-        const fetchImage = async () => {
-            if (imageId && !existingImage?.url) {
+        const fetchfiles = async () => {
+            if (filesUrl && !existingfiles?.url) {
                 try {
-                    const response = await axios.get(`http://localhost:5300/Image/get/${imageId}`);
-                    if (response.data.Image) {
-                        setSelectedImage(response.data.Image.image);
+                    const response = await axios.get(`http://localhost:5300/files/get/${filesUrl}`);
+                    if (response.data.files) {
+                        setSelectedfiles(response.data.files.files);
                     }
                 } catch (error) {
-                    console.error("Error fetching image:", error);
+                    console.error("Error fetching files:", error);
                 }
             }
         };
 
-        fetchImage();
-    }, [imageId, existingImage]);
+        fetchfiles();
+    }, [filesUrl, existingfiles]);
 
-    // Handle image upload
     const handleUpload = async (event) => {
         const file = event.target.files?.[0];
         if (file) {
@@ -92,75 +69,76 @@ const SelectFileInput = ({ onImageUpload, imageId, imageType, existingImage,Name
             formData.append("file", file);
 
             try {
-                const response = await axios.post("http://localhost:5300/Image/add", formData, {
+                const response = await axios.post("http://localhost:5300/files/add", formData, {
                     headers: {
                         "Content-Type": "multipart/form-data",
                     },
                 });
 
-                const uploadedImage = response.data.Image;
-                const imageId = uploadedImage._id; // MongoDB ObjectId
-                const imageUrl = uploadedImage.image; // Image URL
-
-                // console.log("imageId:", imageId); // Log the imageId
-                // console.log("imageUrl:", imageUrl); // Log the imageUrl
-
-                setShowUploadSection(false);
-                setShowAllImagesSection(true);
-                fetchAllImages(); // Fetch all images again to update the list
-                setSelectedImageUrl(imageUrl);
+                const uploadedfiles = response.data?.file;
+                if (uploadedfiles) {
+                    setShowUploadSection(false);
+                    setShowAllfilessSection(true);
+                    fetchAllfiless();
+                    setSelectedfilesUrl(uploadedfiles.files);
+                }
             } catch (error) {
-                console.error("Error uploading image:", error);
-                alert("Error uploading image. Please try again.");
+                console.error("Error uploading files:", error);
+                alert("Error uploading files. Please try again.");
             }
         }
     };
 
-    // Handle image deletion
-    const handleDeleteImage = async (imageUrl) => {
+    // Handle files deletion
+
+    const handleDeletefiles = async (filesUrl) => {
         try {
-            const response = await axios.delete("http://localhost:5300/Image/delete", {
-                data: { ImageUrl: imageUrl },
+            const response = await axios.delete("http://localhost:5300/files/delete", {
+                data: { fileUrl: filesUrl }
             });
 
             if (response.status === 200) {
-                setAllImages((prev) => prev.filter((img) => img.imageUrl !== imageUrl)); // Remove from state
-                if (selectedImageUrl === imageUrl) {
-                    setSelectedImageUrl(null); // Clear selected image if deleted
+                setAllfiless(prev => prev.filter(f => f.filesUrl !== filesUrl));
+
+                if (selectedfilesUrl === filesUrl) {
+                    setSelectedfilesUrl(null);
+                    setSelectedfiles(null);
+                    onfilesUpload(null);
                 }
-                // console.log("Image deleted successfully");
+
             }
         } catch (error) {
-            console.error("Error deleting image:", error);
+            console.error("Error deleting file:", error);
+            alert('Failed to delete file. Please try again.');
         }
     };
 
-    // Handle setting a featured image
-    const handleSetFeaturedImage = (imageUrl) => {
-        if (!imageUrl) return;
-        
-        // If we're using an existing image from the content sections
-        if (existingImage) {
-            onImageUpload(existingImage.id, existingImage.type);
-            setSelectedImage(imageUrl);
+    // Handle setting a featured files
+    const handleSetFeaturedfiles = (filesUrl) => {
+        if (!filesUrl) return;
+
+        // If we're using an existing files from the content sections
+        if (existingfiles) {
+            onfilesUpload(existingfiles.id, existingfiles.type);
+            setSelectedfiles(filesUrl);
             closeModal();
             return;
         }
-        
-        // For newly selected images from the modal
-        const imageData = allImages.find((image) => image.imageUrl === imageUrl);
-        if (imageData) {
-            setSelectedImage(imageUrl);
-            onImageUpload(imageData.imageId, 'image'); // Default type if not specified
+
+        // For newly selected filess from the modal
+        const filesData = allfiless.find((files) => files.filesUrl === filesUrl);
+        if (filesData) {
+            setSelectedfiles(filesUrl);
+            onfilesUpload(filesData.filesUrl, 'files'); // Default type if not specified
             closeModal();
         }
-        //  console.log("Selected image data:", imageData)
+        //  console.log("Selected files data:", filesData)
     };
 
-    // Handle removing the featured image
-    const handleRemoveImage = () => {
-        setSelectedImage(null);
-        onImageUpload(null); // Notify the parent component that no image is selected
+    // Handle removing the featured files
+    const handleRemovefiles = () => {
+        setSelectedfiles(null);
+        onfilesUpload(null); // Notify the parent component that no files is selected
     };
 
     // Open the modal
@@ -168,9 +146,9 @@ const SelectFileInput = ({ onImageUpload, imageId, imageType, existingImage,Name
         setIsOpen(true);
         setIsFullscreen(false);
         setShowUploadSection(true);
-        setShowAllImagesSection(false);
-        setSelectedImageUrl(null);
-        fetchAllImages(); // Fetch images when the modal opens
+        setShowAllfilessSection(false);
+        setSelectedfilesUrl(null);
+        fetchAllfiless(); // Fetch filess when the modal opens
     };
 
     // Close the modal
@@ -179,41 +157,53 @@ const SelectFileInput = ({ onImageUpload, imageId, imageType, existingImage,Name
         setIsFullscreen(false);
     };
 
-    // Handle image selection in the modal
-    const handleImageClick = (imageUrl) => {
-        if (selectedImageUrl === imageUrl) {
-            setSelectedImageUrl(null);
+    // Handle files selection in the modal
+    const handlefilesClick = (filesUrl) => {
+        if (selectedfilesUrl === filesUrl) {
+            setSelectedfilesUrl(null);
         } else {
-            setSelectedImageUrl(imageUrl);
+            setSelectedfilesUrl(filesUrl);
         }
     };
 
     return (
 
         <div>
-            {selectedImage ? (
+            {selectedfiles ? (
                 <div className="flex flex-col  relative">
                     <div className="relative">
-                        <img
-                            src={`http://localhost:5300${selectedImage}`}
-                            alt="Featured"
-                            className="w-52 h-52 object-contain border-gray-700 border p-1 relative"
-                        />
+                        {selectedfiles.endsWith('.mp4') ? (
+
+                            <video
+                                controls
+                                className="w-52 h-52 object-contain border-gray-700 border p-1 relative "
+                            >
+                                <source src={`http://localhost:5300${selectedfiles}`} type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+                        ) : (
+                            <img
+                                src={`http://localhost:5300${selectedfiles}`}
+                                alt="Featured"
+                                className="w-52 h-52 object-contain border-gray-700 border p-1 relative "
+                            />
+                            
+                        )}
                         <button
-                            onClick={handleRemoveImage}
+                            onClick={handleRemovefiles}
 
                             className="absolute  cursor-pointer top-1.5  left-1.5 p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600"
                         >
                             <FaTrash size={14} />
                         </button>
                     </div>
-                    {/* <div className="mt-5 ">{imageId}</div> */}
+                    {/* <div className="mt-5 ">{filesUrl}</div> */}
 
                     {/* <button
-                        onClick={handleRemoveImage}
+                        onClick={handleRemovefiles}
                         className="mt-2 text-red-600 hover:text-red-800"
                     >
-                        Remove Image
+                        Remove files
                     </button> */}
                 </div>
             ) : (
@@ -230,11 +220,11 @@ const SelectFileInput = ({ onImageUpload, imageId, imageType, existingImage,Name
             {/* {previewUrl && (
                 <div className="mt-4">
                     <p className="text-sm text-gray-500 mb-2">
-                        {imageType === 'full-image' ? 'Full Width Image' :
-                            imageType === 'big-image' ? 'Large Image' : 'Regular Image'}
+                        {filesType === 'full-files' ? 'Full Width files' :
+                            filesType === 'big-files' ? 'Large files' : 'Regular files'}
                     </p>
-                    <div className={`overflow-hidden rounded-lg border ${imageType === 'full-image' ? 'w-full' :
-                            imageType === 'big-image' ? 'w-3/4' : 'w-1/2'
+                    <div className={`overflow-hidden rounded-lg border ${filesType === 'full-files' ? 'w-full' :
+                            filesType === 'big-files' ? 'w-3/4' : 'w-1/2'
                         }`}>
                         <img
                             src={previewUrl.startsWith('data:') ? previewUrl : `http://localhost:5300${previewUrl}`}
@@ -246,7 +236,7 @@ const SelectFileInput = ({ onImageUpload, imageId, imageType, existingImage,Name
             )} */}
 
 
-            {/* Modal for Uploading and Selecting Images */}
+            {/* Modal for Uploading and Selecting filess */}
             <Modal
                 isOpen={isOpen}
                 onClose={closeModal}
@@ -255,35 +245,35 @@ const SelectFileInput = ({ onImageUpload, imageId, imageType, existingImage,Name
             >
                 <div className="row flex flex-col flex-wrap">
                     <div className="col-3 grow-0 shrink-0">
-                        <h1 className="text-2xl font-bold mb-10">Select Image</h1>
+                        <h1 className="text-2xl font-bold mb-10">Select files</h1>
 
-                        {/* Toggle between Upload and All Images sections */}
+                        {/* Toggle between Upload and All filess sections */}
                         <div className="border-b border-darkblack mb-5">
                             <div className="flex justify-between">
                                 <div className="flex items-center gap-10 mb-3">
                                     <button
                                         onClick={() => {
                                             setShowUploadSection(true);
-                                            setShowAllImagesSection(false);
+                                            setShowAllfilessSection(false);
                                         }}
                                         className={`text-lg cursor-pointer font-bold ${showUploadSection
                                             ? "text-(--white) border-2 bg-(--blue) rounded-sm border-(--blue) px-2 py-2"
                                             : "text-gray-500 "
                                             }`}
                                     >
-                                        Upload Image
+                                        Upload files
                                     </button>
                                     <button
                                         onClick={() => {
                                             setShowUploadSection(false);
-                                            setShowAllImagesSection(true);
+                                            setShowAllfilessSection(true);
                                         }}
-                                        className={`text-lg cursor-pointer font-bold ${showAllImagesSection
+                                        className={`text-lg cursor-pointer font-bold ${showAllfilessSection
                                             ? "text-(--white) border-2 bg-(--blue) rounded-sm border-(--blue) px-2 py-2"
                                             : "text-gray-500"
                                             }`}
                                     >
-                                        All Images
+                                        All filess
                                     </button>
                                 </div>
                             </div>
@@ -299,7 +289,7 @@ const SelectFileInput = ({ onImageUpload, imageId, imageType, existingImage,Name
                                         <input
                                             type="file"
                                             onChange={handleUpload}
-                                            accept="image/*"
+                                            accept="files/*"
                                             className="hidden"
                                         />
                                         <div className="flex flex-col items-center">
@@ -312,33 +302,42 @@ const SelectFileInput = ({ onImageUpload, imageId, imageType, existingImage,Name
                         )}
 
 
-                        {/* All Images Section */}
-                        {showAllImagesSection && (
+                        {/* All filess Section */}
+                        {showAllfilessSection && (
                             <div className="flex-1 flex-col px-2  h-[60vh]  custom-scrollbar">
 
                                 <div className="">
-                                    <h5 className="mb-4 text-xl lg:text-2xl">All Images</h5>
+                                    <h5 className="mb-4 text-xl lg:text-2xl">All filess</h5>
                                     <div className="flex flex-wrap  gap-5">
-                                        {allImages.map((image, index) => (
+                                        {allfiless.map((files, index) => (
                                             <div
                                                 key={index}
-                                                className={`relative cursor-pointer p-0.5 w-32 ${selectedImageUrl === image.imageUrl
+                                                className={`relative cursor-pointer p-0.5 w-32 ${selectedfilesUrl === files.filesUrl
                                                     ? "border-(--blue) outline-4 outline-(--blue)"
                                                     : "border-gray-700 border"
                                                     }`}
-                                                onClick={() => handleImageClick(image.imageUrl)}
-                                                onMouseEnter={() => setHoveredImage(image.imageUrl)}
-                                                onMouseLeave={() => setHoveredImage(null)}
+                                                onClick={() => handlefilesClick(files.filesUrl)}
+                                                onMouseEnter={() => setHoveredfiles(files.filesUrl)}
+                                                onMouseLeave={() => setHoveredfiles(null)}
                                             >
-                                                <img
-                                                    src={`http://localhost:5300${image.imageUrl}`}
-                                                    alt={`Image ${index + 1}`}
-                                                    className="w-32 h-32 object-contain"
-                                                />
+                                                {files.filesUrl.endsWith('.mp4') ? (
+                                                    <video className="w-32 h-32 object-cover">
+                                                        <source src={`http://localhost:5300${files.filesUrl}`} type="video/mp4" />
+                                                    </video>
+                                                ) : (
+                                                    <img
+                                                        src={`http://localhost:5300${files.filesUrl}`}
+                                                        alt={`File ${index + 1}`}
+                                                        className="w-32 h-32 object-cover"
+                                                        onError={(e) => {
+                                                            (e.target).src = '/path/to/fallback/image.jpg';
+                                                        }}
+                                                    />
+                                                )}
 
-                                                {selectedImageUrl === image.imageUrl && hoverIcons !== image.imageUrl && (
+                                                {selectedfilesUrl === files.filesUrl && hoverIcons !== files.filesUrl && (
                                                     <div
-                                                        onMouseEnter={() => setHoverIcons(image.imageUrl)}
+                                                        onMouseEnter={() => setHoverIcons(files.filesUrl)}
                                                         onMouseLeave={() => setHoverIcons(null)}
                                                     >
                                                         <ImCheckboxChecked
@@ -348,9 +347,9 @@ const SelectFileInput = ({ onImageUpload, imageId, imageType, existingImage,Name
                                                     </div>
                                                 )}
 
-                                                {hoverIcons === image.imageUrl && (
+                                                {hoverIcons === files.filesUrl && (
                                                     <div
-                                                        onMouseEnter={() => setHoverIcons(image.imageUrl)}
+                                                        onMouseEnter={() => setHoverIcons(files.filesUrl)}
                                                         onMouseLeave={() => setHoverIcons(null)}
                                                     >
                                                         <GrFormSubtract
@@ -360,11 +359,11 @@ const SelectFileInput = ({ onImageUpload, imageId, imageType, existingImage,Name
                                                     </div>
                                                 )}
 
-                                                {hoveredImage === image.imageUrl && (
+                                                {hoveredfiles === files.filesUrl && (
                                                     <button
                                                         onClick={(e) => {
                                                             e.stopPropagation();
-                                                            handleDeleteImage(image.imageUrl);
+                                                            handleDeletefiles(files.filesUrl);
                                                         }}
                                                         className="absolute bottom-2 cursor-pointer right-2 p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600"
                                                     >
@@ -385,11 +384,11 @@ const SelectFileInput = ({ onImageUpload, imageId, imageType, existingImage,Name
                             <Button
                                 size="sm"
                                 variant="outline"
-                                onClick={() => handleSetFeaturedImage(selectedImageUrl)}
-                                disabled={!selectedImageUrl}
+                                onClick={() => handleSetFeaturedfiles(selectedfilesUrl)}
+                                disabled={!selectedfilesUrl}
                                 className="btn btn-success cursor-pointer flex w-full justify-center rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-600 sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                Set Select Image
+                                Set Select files
                             </Button>
                         </div>
                     </div>

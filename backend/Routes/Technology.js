@@ -87,18 +87,17 @@ app.use(express.json());
 const TechnologyRouter = express.Router();
 
 TechnologyRouter.post("/add", async (req, res) => {
-  const { title, category, imageId } = req.body; 
-  if (!title || !category || !imageId) {
-    return res.status(400).json({ message: "Title, category, and imageId are required" });
+  const { title, category, featuredImage } = req.body; 
+  if (!title || !category || !featuredImage) {
+    return res.status(400).json({ message: "Title, category, and featuredImage are required" });
   }
 
   try {
     const newTechnology = new Technology({
       title,
       category,
-      image: imageId, 
-    });
-
+      FeaturedImage: featuredImage, 
+    })
     await newTechnology.save();
     res.status(201).json({ message: 'Technology created successfully', technology: newTechnology });
   } catch (error) {
@@ -109,7 +108,7 @@ TechnologyRouter.post("/add", async (req, res) => {
 
 TechnologyRouter.get("/get", async (req, res) => {
   try {
-    const technology = await Technology.find({}).populate('image'); 
+    const technology = await Technology.find({}); 
     // if (!technology.length) {
     //   return res.status(404).json({ message: "No technologies found" });
     // }
@@ -122,10 +121,10 @@ TechnologyRouter.get("/get", async (req, res) => {
 
 
 TechnologyRouter.put("/edit", async (req, res) => {
-  const { id, title, category, imageId } = req.body; 
+  const { id, title, category, featuredImage } = req.body; 
 
-  if (!id || !title || !category || !imageId) {
-    return res.status(400).json({ message: "ID, title, category, and imageId are required" });
+  if (!id || !title || !category || !featuredImage) {
+    return res.status(400).json({ message: "ID, title, category, and featuredImage are required" });
   }
 
   try {
@@ -137,7 +136,7 @@ TechnologyRouter.put("/edit", async (req, res) => {
 
     existingTechnology.title = title;
     existingTechnology.category = category;
-    existingTechnology.image = imageId;
+    existingTechnology.FeaturedImage = featuredImage;
 
     const updatedTechnology = await existingTechnology.save();
 

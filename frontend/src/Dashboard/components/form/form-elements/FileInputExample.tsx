@@ -367,13 +367,16 @@ type files = {
 
 // Define the props for the FileInputExample component
 interface FileInputExampleProps {
-  onfilesUpload: (filesId: string | null) => void; // Callback to pass the filesId to the parent
+  onfilesUpload: (filesUrl: string | null) => void; // Callback to pass the filesId to the parent
   filesId: string | null; // The selected filesId (MongoDB ObjectId)
   filesUrl?: string | null; 
-
+  setName: string; // The name of the set files
+  Componenttitle: string; // The title of the component
+  h1: string; // The title of the modal
+  SetButtonName: string; // The name of the button in the modal
 }
 
-const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, filesId,filesUrl}) => {
+const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, filesId,filesUrl ,setName ,Componenttitle,h1,SetButtonName}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const [showUploadSection, setShowUploadSection] = useState<boolean>(true);
@@ -411,30 +414,30 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, file
 
 
   useEffect(() => {
-    if (filesId) {
+    if (filesUrl) {
+      // If filesUrl is provided directly (for existing images)
+      setSelectedfiles(filesUrl);
+      setSelectedfilesUrl(filesUrl);
+    } else if (filesId) {
+      // If only filesId is provided (fetch the URL)
       const fetchfilesData = async () => {
         try {
           const response = await axios.get(`http://localhost:5300/files/get/${filesId}`);
-          console.log("File data response:", response.data);
-
           const filesData = response.data?.Image;
           if (filesData) {
             setSelectedfiles(filesData._id);
             setSelectedfilesUrl(filesData.image);
-          } else {
-            console.error("No filesData found for filesId:", filesId);
           }
         } catch (error) {
           console.error("Error fetching files data:", error);
         }
       };
-
       fetchfilesData();
     } else {
       setSelectedfiles(null);
       setSelectedfilesUrl(null);
     }
-  }, [filesId]);
+  }, [filesId, filesUrl]);
 
   // Handle files upload
   const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -464,7 +467,7 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, file
     }
   };
 
-  console.log("Selected files URL:", selectedfilesUrl);
+  // console.log("Selected files URL:", selectedfilesUrl);
 
   const handleDeletefiles = async (filesUrl: string) => {
     try {
@@ -481,7 +484,6 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, file
           onfilesUpload(null);
         }
 
-        alert('File deleted successfully');
       }
     } catch (error) {
       console.error("Error deleting file:", error);
@@ -493,7 +495,7 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, file
     const filesData = allfiless.find((files) => files.filesUrl === filesUrl);
     if (filesData) {
       setSelectedfiles(filesUrl);
-      onfilesUpload(filesData.filesId);
+      onfilesUpload(filesData.filesUrl);
       closeModal();
     }
   };
@@ -530,7 +532,7 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, file
 
 
   return (
-    <ComponentCard title="Featured files">
+    <ComponentCard title={Componenttitle}>
       <div>
         {selectedfiles ? (
           <div className="flex flex-col items-center">
@@ -540,12 +542,12 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, file
                 controls 
                 className="w-32 h-32 object-contain"
               >
-                <source src={`${selectedfiles}`} type="video/mp4" />
+                <source src={`http://localhost:5300${selectedfiles}`} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             ) : (
               <img
-                src={`${selectedfiles}`}
+                src={`http://localhost:5300${selectedfiles}`}
                 alt="Featured"
                 className="w-32 h-32 object-contain"
               />
@@ -554,7 +556,7 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, file
               onClick={handleRemovefiles}
               className="mt-2 text-red-600 hover:text-red-800"
             >
-              Remove files
+              Remove 
             </button>
           </div>
         ) : (
@@ -562,7 +564,7 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, file
             className="text-(--blue) cursor-pointer underline"
             onClick={openModal}
           >
-            Set Featured files
+              {setName}
           </p>
         )}
 
@@ -575,7 +577,7 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, file
         >
           <div className="row flex flex-col flex-wrap">
             <div className="col-3 grow-0 shrink-0">
-              <h1 className="text-2xl font-bold mb-10">Featured files</h1>
+              <h1 className="text-2xl font-bold mb-10">{h1}</h1>
 
               {/* Toggle between Upload and All filess sections */}
               <div className="border-b border-darkblack mb-5">
@@ -603,7 +605,7 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, file
                         : "text-gray-500"
                         }`}
                     >
-                      All filess
+                      All files
                     </button>
                   </div>
                 </div>
@@ -652,11 +654,11 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, file
                         >
                           {files.filesUrl.endsWith('.mp4') ? (
                             <video className="w-32 h-32 object-cover">
-                              <source src={`${files.filesUrl}`} type="video/mp4" />
+                              <source src={`http://localhost:5300${files.filesUrl}`} type="video/mp4" />
                             </video>
                           ) : (
                             <img
-                              src={`${files.filesUrl}`}
+                              src={`http://localhost:5300${files.filesUrl}`}
                               alt={`File ${index + 1}`}
                               className="w-32 h-32 object-cover"
                               onError={(e) => {
@@ -718,7 +720,8 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, file
                   disabled={!selectedfilesUrl}
                   className="btn btn-success cursor-pointer flex w-full justify-center rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-600 sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Set Featured files
+                  {SetButtonName}
+                 
                 </Button>
               </div>
             </div>

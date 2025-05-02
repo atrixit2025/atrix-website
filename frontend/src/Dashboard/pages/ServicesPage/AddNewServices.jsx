@@ -762,21 +762,26 @@ export default function AddNewServices() {
             </ComponentCategory>
           </div>
           <ImageProvider>
-            <IconsInputExample
-              onImageUpload={(imageId) =>
+            <FileInputExample
+            Componenttitle="Featured Icons"
+            h1="Featured Icons"
+            SetButtonName=" Set Featured Icons"
+              setName=" Set Icons "
+              onfilesUpload={(imageId) =>
                 setFormData(prev => ({ ...prev, iconImageId: imageId }))
               }
-              imageId={formData.iconImageId}
+              filesUrl={formData.iconImageId}
             />
-          </ImageProvider>
-
-
-          <ImageProvider>
+         
             <FileInputExample
-              onImageUpload={(imageId) =>
+            Componenttitle="Featured Image"
+            h1="Featured Image"
+            SetButtonName=" Set Featured Image"
+            setName=" Set Featured Image "
+              onfilesUpload={(imageId) =>
                 setFormData(prev => ({ ...prev, imageId }))
               }
-              imageId={Services?.imageId || Services?.FeaturedImage}
+              filesUrl={Services?.imageId || Services?.FeaturedImage}
             />
           </ImageProvider>
 
@@ -833,11 +838,11 @@ export default function AddNewServices() {
                         onChange={() => handletechnologysChange(tech)}
                         label={tech.Name}
                       />
-                      <img
+                      {/* <img
                         src={`http://localhost:5300${tech.team?.images?.[0]}`}
                         alt={tech.Name}
                         className="w-12 object-contain rounded-xs"
-                      />
+                      /> */}
                     </div>
                   );
                 })}

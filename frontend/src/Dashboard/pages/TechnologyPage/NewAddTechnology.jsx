@@ -14,7 +14,7 @@ export default function NewAddTechnology() {
   const navigate = useNavigate();
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [title, setTitle] = useState("");
-  const [imageId, setImageId] = useState(null);
+  const [featuredImage, setFeaturedImage] = useState(null);
   const [categories, setCategories] = useState([]); // State to store fetched categories
 
   // Get the technology object from the state
@@ -39,7 +39,7 @@ export default function NewAddTechnology() {
     if (technology) {
       setTitle(technology.name);
       setSelectedCategories(technology.Category.split(", "));
-      setImageId(technology.imageId); // Use imageId instead of imageUrl
+      setFeaturedImage(technology.featuredImage); // Use featuredImage instead of imageUrl
     }
   }, [technology]);
 
@@ -60,9 +60,9 @@ export default function NewAddTechnology() {
   const handleSubmit = async () => {
     // console.log("Title:", title);
     // console.log("Selected Categories:", selectedCategories);
-    // console.log("Image ID:", imageId);
+    // console.log("Image ID:", featuredImage);
 
-    if (!title || selectedCategories.length === 0 || !imageId) {
+    if (!title || selectedCategories.length === 0 || !featuredImage) {
       alert("Title, category, and image are required!");
       return;
     }
@@ -70,7 +70,7 @@ export default function NewAddTechnology() {
     const technologyData = {
       title,
       category: selectedCategories.join(", "),
-      imageId, // Ensure this is correctly formatted
+      featuredImage, // Ensure this is correctly formatted
     };
 
     try {
@@ -159,8 +159,12 @@ export default function NewAddTechnology() {
           </div>
           <ImageProvider>
             <FileInputExample
-              onfilesUpload={(imageId) => setImageId(imageId)}
-              filesId={technology?.imageId} 
+            Componenttitle="Featured Image"
+            h1="Featured Image"
+            SetButtonName=" Set Featured Image"
+            setName=" Set Featured Image "
+              onfilesUpload={(featuredImage) => setFeaturedImage(featuredImage)}
+              filesUrl={technology?.featuredImage} 
             />
           </ImageProvider>
         </div>

@@ -17,18 +17,9 @@ export default function Portfolio() {
         
         const PortfoliosWithImages = await Promise.all(
           response.data.Portfolio.map(async (portfolio) => {
-            let featuredImageUrl = "/images/user/user-22.jpg";
-            
-            if (portfolio.FeaturedImage) {
-              try {
-                const imgResponse = await axios.get(
-                  `http://localhost:5300/Image/get/${portfolio.FeaturedImage}`
-                );
-                featuredImageUrl = imgResponse.data.Image?.image || featuredImageUrl;
-              } catch (error) {
-                console.error("Error fetching featured image:", error);
-              }
-            }
+            const featuredImageUrl = `http://localhost:5300/Image${portfolio.FeaturedImage}` 
+            ? portfolio.FeaturedImage // Use directly if it's a complete URL
+            : `/images/user/user-22.jpg`; // Fallback image
             
             return {
               id: portfolio._id,

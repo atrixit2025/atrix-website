@@ -27,7 +27,7 @@ ServicesRouter.post("/add", async (req, res) => {
     faqCategories,
     Technology ,
     iconImageId,
-    FeaturedImageId,
+    featuredImage,
     Bannerdata,
     WhydoNeed,
     Process,
@@ -40,7 +40,7 @@ ServicesRouter.post("/add", async (req, res) => {
 
 
   // Enhanced validation
-  if (!title || !description || !category || !FeaturedImageId) {
+  if (!title || !description || !category || !featuredImage) {
     return res.status(400).json({
       message: "Title, description, category, and featured image are required"
     });
@@ -116,7 +116,7 @@ ServicesRouter.post("/add", async (req, res) => {
       portfolioCategories: sanitized.portfolioCategories,
       faqCategories: sanitized.faqCategories,
       iconImageId: iconImageId || null,
-      FeaturedImage: FeaturedImageId,
+      FeaturedImage: featuredImage,
       Headercontent: sanitized.Headercontent, 
       texttoimageandimagetotext: validateTextToImage(texttoimageandimagetotext),
       Technology: validateTechnology(Technology),
@@ -299,7 +299,7 @@ ServicesRouter.put("/edit", async (req, res) => {
     faqCategories,
     Technology,
     iconImageId,
-    FeaturedImageId,
+    featuredImage,
     Bannerdata,
     WhydoNeed,
     Process,
@@ -345,7 +345,7 @@ ServicesRouter.put("/edit", async (req, res) => {
         ? validateArray(faqCategories, 'faqCategories') 
         : existingService.faqCategories,
       iconImageId: iconImageId !== undefined ? iconImageId : existingService.iconImageId,
-      FeaturedImage: FeaturedImageId !== undefined ? FeaturedImageId : existingService.FeaturedImage,
+      FeaturedImage: featuredImage !== undefined ? featuredImage : existingService.FeaturedImage,
       Cta: Cta !== undefined ? Cta : existingService.Cta,
       updatedAt: new Date()
     };

@@ -162,7 +162,7 @@ export default function Banner({ onChange, initialData }) {
                             <div className="mt-4">
                                 <SelectFileInput
                                     NameOffield="Add Banner Image"
-                                    onImageUpload={(imageId) => handleImageUpload(field.id, imageId)}
+                                    onfilesUpload={(imageId) => handleImageUpload(field.id, imageId)}
                                     imageId={field.imageId}
                                     existingImage={field.existingImage}
                                 />
