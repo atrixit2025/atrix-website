@@ -14,6 +14,7 @@ import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { LiaTwitter } from "react-icons/lia";
 import { LiaPinterestP } from "react-icons/lia";
+import { FaBehance } from "react-icons/fa";
 
 const BolgContant = () => {
   const location = useLocation();
@@ -97,9 +98,9 @@ const BolgContant = () => {
                     link: "https://www.instagram.com/atrixit.solutions/",
                   },
                   {
-                    icon: <LiaPinterestP />,
-                    id: "insta",
-                    link: "https://www.instagram.com/atrixit.solutions/",
+                    icon: <FaBehance />,
+                    id: "behance",
+                    link: "https://www.behance.net/atrixit",
                   },
                 ].map((item , index) => (
                   <li
@@ -108,6 +109,7 @@ const BolgContant = () => {
                   >
                     <Link
                       to={item.link}
+                      target="_blank"
                       className="absolute inset-0 rounded-full  p-[1px]"
                     >
                       <div className=" social-icons w-full h-full flex justify-center items-center  hover:bg-gradient-to-r from-blue-400 to-green-400 rounded-full">

@@ -3,6 +3,7 @@ import OurServiceCard from "../Components/services/OurServiceCard";
 import Button from "../Components/Button";
 import img5 from "../assets/ServicesImage/chess_1.png";
 import "./ourServices.css";
+import LinkButton from "../Components/LinkButton";
 
 const OurServices = () => {
   return (
@@ -17,20 +18,21 @@ const OurServices = () => {
         </div>
       </div>
 
-      <div className="Brand-Experience container flex  justify-between  mx-auto mt-22">
+      {/* <div className="Brand-Experience container flex  justify-between  mx-auto mt-22">
         <div className="container mx-auto w-[90%]">
-        {/* <h4 className=" text-2xl  ">
+        <h4 className=" text-2xl  ">
           Crafted by our team of experts and powered by cutting-edge AI
           technology, our services deliver measurable, impactful results that
           drive growth and elevate your business.
-        </h4> */}
+        </h4>
         </div>
         
-      </div>
+      </div> */}
 
       <OurServiceCard />
 
       {/* HOW WE DO IT */}
+
 
       <div className="container mx-auto mt-16 leading-0 w-[90%] ">
         <h2 className=" text-4xl md:text-8xl font-bold text-center  py-15 "> HOW WE DO IT</h2>
@@ -89,8 +91,9 @@ const OurServices = () => {
                 Let’s connect so we can understand your business objectives and
                 craft a plan to exceed them.
               </p>
-              <div className="btn   mt-10">
-                <Button mybtn={"LET'S TALK"} />
+              <div className="btn   mt-10 flex ">
+                {/* <Button mybtn={"LET'S TALK"} /> */}
+                <LinkButton mybtn={"LET'S TALK"} btnLink="/contact-us"></LinkButton>
               </div>
             </div>
           </div>

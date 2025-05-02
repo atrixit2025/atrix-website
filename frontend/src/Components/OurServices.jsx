@@ -82,7 +82,7 @@ const OurServices = () => {
                       className="md:hidden flex h-80 w-auto"
                     />
                   </div>
-                  <Link to={`service/${item.service_id}`} className="flex  items-center gap-3 ">
+                  <Link to={`service/${item.slug}`} className="flex  items-center gap-3 ">
                     <div className="min-w-12 h-12 relative flex justify-center items-center bg-gradient-to-r from-(--blue) to-(--green) rounded-full translate-y-2 mr-1">
                       <img src={item.icon} className="w-6 h-6 filter grayscale-100 brightness-800" />
                       {/* <div className="inline-block ml-2 mt-2 text-2xl">{service.icon}</div> */}
