@@ -321,7 +321,7 @@ export default function Blog() {
             if (blog.FeaturedImage) {
               try {
                 const imgResponse = await axios.get(
-                  `http://localhost:5300/Image/get/${blog.FeaturedImage}`
+                  `http://localhost:5300/Image/${blog.FeaturedImage}`
                 );
                 featuredImageUrl = imgResponse.data.Image?.image || featuredImageUrl;
               } catch (error) {

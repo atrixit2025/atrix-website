@@ -363,11 +363,14 @@ const GenericForm = ({
 
           <ImageProvider>
             <FileInputExample
-              onImageUpload={(imageId) =>
+              onfilesUpload={(imageId) =>
                 setFormData(prev => ({ ...prev, imageId }))
               }
-              imageId={item?.imageId || item?.FeaturedImage}
+              filesId={item?.imageId || item?.FeaturedImage}
+              filesUrl={item?.imageUrl || item?.FeaturedImageUrl}
+
             />
+            
           </ImageProvider>
         </div>
       </div>

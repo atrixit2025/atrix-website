@@ -362,16 +362,18 @@ import { GrFormSubtract } from "react-icons/gr";
 // Define the type for the files object
 type files = {
   filesId: string; // MongoDB ObjectId
-  filesUrl: string; // files URL
+  filesUrl: string; 
 };
 
 // Define the props for the FileInputExample component
 interface FileInputExampleProps {
   onfilesUpload: (filesId: string | null) => void; // Callback to pass the filesId to the parent
   filesId: string | null; // The selected filesId (MongoDB ObjectId)
+  filesUrl?: string | null; 
+
 }
 
-const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, filesId }) => {
+const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, filesId,filesUrl}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const [showUploadSection, setShowUploadSection] = useState<boolean>(true);
@@ -381,19 +383,21 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, file
   const [selectedfilesUrl, setSelectedfilesUrl] = useState<string | null>(null);
   const [hoveredfiles, setHoveredfiles] = useState<string | null>(null);
   const [hoverIcons, setHoverIcons] = useState<string | null>(null);
+  // const [selectedFile, setSelectedFile] = useState<{id: string | null, url: string | null}>({
+  //   id: filesId || null,
+  //   url: filesUrl || null
+  // });
 
-  // Fetch all filess from the server
   const fetchAllfiless = async () => {
     try {
       const response = await axios.get("http://localhost:5300/files/get");
 
-      // Add proper type checking
       if (response.data?.files) {
         const files = response.data.files.map((item: any) => ({
           filesId: item._id,
-          filesUrl: item.file  // This now matches the backend response
+          filesUrl: item.file
         }));
-    
+
         setAllfiless(files);
       } else {
         console.error("Unexpected response format:", response.data);
@@ -412,7 +416,7 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, file
         try {
           const response = await axios.get(`http://localhost:5300/files/get/${filesId}`);
           console.log("File data response:", response.data);
-          
+
           const filesData = response.data?.Image;
           if (filesData) {
             setSelectedfiles(filesData._id);
@@ -446,12 +450,12 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, file
           },
         });
 
-        const uploadedfiles = response.data?.file; // Updated to match backend response
+        const uploadedfiles = response.data?.file;
         if (uploadedfiles) {
           setShowUploadSection(false);
           setShowAllfilessSection(true);
           fetchAllfiless();
-          setSelectedfilesUrl(uploadedfiles.files); // Or whatever field contains the URL
+          setSelectedfilesUrl(uploadedfiles.files);
         }
       } catch (error) {
         console.error("Error uploading files:", error);
@@ -460,16 +464,15 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, file
     }
   };
 
-  // Handle files deletion
-  // Update the delete handler
+  console.log("Selected files URL:", selectedfilesUrl);
+
   const handleDeletefiles = async (filesUrl: string) => {
     try {
       const response = await axios.delete("http://localhost:5300/files/delete", {
-        data: { fileUrl: filesUrl } // Changed to match backend expectation
+        data: { fileUrl: filesUrl }
       });
 
       if (response.status === 200) {
-        // Update state properly
         setAllfiless(prev => prev.filter(f => f.filesUrl !== filesUrl));
 
         if (selectedfilesUrl === filesUrl) {
@@ -478,7 +481,6 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, file
           onfilesUpload(null);
         }
 
-        // Optional: Show success message
         alert('File deleted successfully');
       }
     } catch (error) {
@@ -487,39 +489,36 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, file
     }
   };
 
-  // Handle setting a featured files
   const handleSetFeaturedfiles = (filesUrl: string) => {
-    const filesData = allfiless.find((files) => files.filesUrl === filesUrl); // Find the files data
+    const filesData = allfiless.find((files) => files.filesUrl === filesUrl);
     if (filesData) {
-      setSelectedfiles(filesUrl); // Set the selected files URL for display
-      onfilesUpload(filesData.filesId); // Pass the MongoDB ObjectId to the parent component
-      closeModal(); // Close the modal
+      setSelectedfiles(filesUrl);
+      onfilesUpload(filesData.filesId);
+      closeModal();
     }
   };
 
-  // Handle removing the featured files
   const handleRemovefiles = () => {
     setSelectedfiles(null);
-    onfilesUpload(null); // Notify the parent component that no files is selected
+    onfilesUpload(null);
   };
 
-  // Open the modal
+
   const openModal = () => {
     setIsOpen(true);
     setIsFullscreen(false);
     setShowUploadSection(true);
     setShowAllfilessSection(false);
     setSelectedfilesUrl(null);
-    fetchAllfiless(); // Fetch filess when the modal opens
+    fetchAllfiless();
   };
 
-  // Close the modal
   const closeModal = () => {
     setIsOpen(false);
     setIsFullscreen(false);
   };
 
-  // Handle files selection in the modal
+
   const handlefilesClick = (filesUrl: string) => {
     if (selectedfilesUrl === filesUrl) {
       setSelectedfilesUrl(null);
@@ -528,26 +527,29 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, file
     }
   };
 
+
+
   return (
     <ComponentCard title="Featured files">
       <div>
         {selectedfiles ? (
           <div className="flex flex-col items-center">
             {selectedfiles.endsWith('.mp4') ? (
-      <video 
-        controls 
-        className="w-32 h-32 object-contain"
-      >
-        <source src={`${selectedfiles}`} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-    ) : (
-      <img
-        src={`${selectedfiles}`}
-        alt="Featured"
-        className="w-32 h-32 object-contain"
-      />
-    )}
+
+              <video 
+                controls 
+                className="w-32 h-32 object-contain"
+              >
+                <source src={`${selectedfiles}`} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            ) : (
+              <img
+                src={`${selectedfiles}`}
+                alt="Featured"
+                className="w-32 h-32 object-contain"
+              />
+            )}
             <button
               onClick={handleRemovefiles}
               className="mt-2 text-red-600 hover:text-red-800"
@@ -568,7 +570,7 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, file
         <Modal
           isOpen={isOpen}
           onClose={closeModal}
-          className={isFullscreen ? "w-[80%] h-full" : "container mx-auto max-w-[1850px]  w-[80%] p-6 bg-black"}
+          className={isFullscreen ? "w-[80%] h-full" : "container mx-auto max-w-[1850px] p-6 bg-black"}
           isFullscreen={isFullscreen}
         >
           <div className="row flex flex-col flex-wrap">
