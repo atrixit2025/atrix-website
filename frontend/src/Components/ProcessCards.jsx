@@ -12,8 +12,8 @@ const ProcessCards = ({ secData, targetRef }) => {
         <section className='process-cards-section my-36'>
 
             <div className="container mx-auto">
-                <h1 className='text-6xl font-bold text-center mt-10'>Process</h1>
-                <p className='text-center  max-w-[800px] mx-auto mb-10'>Curious about how we create impactful brands? Our step-by-step process ensures that your brand stands out and makes a lasting impression! </p>
+                <h1 className='text-6xl font-bold text-center my-10'>Our {secData.service_title}  Process</h1>
+                {/* <p className='text-center  max-w-[800px] mx-auto mb-10'>Curious about how we create impactful brands? Our step-by-step process ensures that your brand stands out and makes a lasting impression! </p> */}
                 <div className="process-cards-wrapper flex gap-5"  >
                     {secData.process_cards.map((item, index) => (
                         <div key={index}  onClick={ ()=> setActiveCard(index)} className={`process-card p-10 rounded-2xl bg-(--black) flex-[0] max-w-[500px] transition-all duration-500  ${activeCard === index ? 'flex-[2]' : 'flex-[1]'}`}>                            

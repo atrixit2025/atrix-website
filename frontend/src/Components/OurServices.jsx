@@ -5,7 +5,7 @@ import Button from "./Button";
 import ServicesData from "../data/ServicesData";
 import { Link } from "react-router-dom";
 import LinkButton from "./LinkButton";
-
+import "./OurServices.css";
 
 
 const OurServices = () => {

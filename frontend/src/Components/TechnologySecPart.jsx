@@ -17,6 +17,7 @@ import ExpressJS from "../assets/TechnologyImage/express-js.svg"
 import ASPNet from "../assets/TechnologyImage/asp.svg"
 import Laravel from "../assets/TechnologyImage/laravel.svg"
 import Firebase from "../assets/TechnologyImage/firebase.svg"
+import "./TechnologySecPart.css"
 
 
 const TechnologySecPart = () => {
@@ -67,12 +68,14 @@ const TechnologySecPart = () => {
                 <ul className='flex flex-wrap items-end justify-center icon-ul'>
                     {data.map((item, index) => (
                         <li key={index} className='flex items-end w-[16.66%] p-[10px]'>
-                            <div className='bg-(--black) rounded-lg w-full flex items-center justify-center flex-col min-h-[180px]'>
+
+                            <div className='card-bg bg-(--black) rounded-lg w-full flex items-center justify-center flex-col min-h-[180px]'>
                                 <div className='flex justify-center'>
                                     <img className='h-8 md:h-14' src={item.icons} alt={item.TechnologyName} />
                                 </div>
                                 <h6 className='text-sm md:text-lg font-bold  mt-3'>{item.TechnologyName}</h6>
                             </div>
+                            
                         </li>
                     ))}
                 </ul>
