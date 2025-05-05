@@ -15,6 +15,7 @@ import Button from "../Components/Button";
 
 import ServicesData from "../data/ServicesData";
 import "./Service.css";
+import img1 from "../assets/ServicesImage/Logistics.png";
 
 const Service = () => {
   const { service_id } = useParams();
