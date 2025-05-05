@@ -5,293 +5,379 @@ import { ImCheckboxChecked } from "react-icons/im";
 import { GrFormSubtract } from "react-icons/gr";
 import { Modal } from "../ui/modal";
 import Button from "../ui/button/Button";
-import Label from "../form/Label";
 
-const GalleryComp = ({ onImageUpload, imageId, imageType, existingImages = [], NameOffield, selected }) => {
-    const [previewUrl, setPreviewUrl] = useState(null);
+const GalleryComp = ({ onfilesUpload, filesUrl, existingfiles = [], NameOffield, selected }) => {
+
     const [isOpen, setIsOpen] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [showUploadSection, setShowUploadSection] = useState(true);
-    const [showAllImagesSection, setShowAllImagesSection] = useState(false);
-    const [allImages, setAllImages] = useState([]);
-    const [selectedImageUrls, setSelectedImageUrls] = useState([]);
-    const [hoveredImage, setHoveredImage] = useState(null);
+    const [showAllfilessSection, setShowAllfilessSection] = useState(false);
+    const [allfiless, setAllfiless] = useState([]);
+    const [selectedfilesUrl, setSelectedfilesUrl] = useState([]);
+    const [hoveredfiles, setHoveredfiles] = useState(null);
     const [hoverIcons, setHoverIcons] = useState(null);
 
-    // Initialize with existing images
-    useEffect(() => {
-        if (existingImages && existingImages.length > 0) {
-            setPreviewUrl(existingImages[0]?.url || null);
-        }
-    }, [existingImages]);
+    const getImageUrl = (file) => {
+        return file?.imageUrl || file?.url || null;
+    };
 
-    // Fetch all images from the server
-    const fetchAllImages = async () => {
+    useEffect(() => {
+        if (Array.isArray(existingfiles)) {
+            // Map through existing files and ensure they have imageUrl
+            const validFiles = existingfiles.map(file => ({
+                ...file,
+                imageUrl: getImageUrl(file)
+            })).filter(file => file.imageUrl);
+
+            // Update parent if any files were invalid
+            if (validFiles.length !== existingfiles.length) {
+                onfilesUpload(validFiles);
+            }
+
+            // Set selected files URLs
+            setSelectedfilesUrl(validFiles.map(file => file.imageUrl));
+        }
+    }, [existingfiles]);
+
+    const fetchAllfiless = async () => {
         try {
-            const response = await axios.get("http://localhost:5300/Image/get");
-            if (response.status === 200) {
-                setAllImages(response.data.Image.map(item => ({
-                    imageId: item._id,
-                    imageUrl: item.image,
-                })));
+            const response = await axios.get("http://localhost:5300/files/get");
+
+            if (response.data?.files) {
+                // Filter to only include files where type is 'image'
+                const files = response.data.files
+                    .filter(item => item.type === 'image') // This line filters only images
+                    .map((item) => ({
+                        filesId: item._id,
+                        filesUrl: item.file,
+                        type: item.type // Include the type in the object
+                    }));
+
+                setAllfiless(files);
+            } else {
+                console.error("Unexpected response format:", response.data);
+                setAllfiless([]);
             }
         } catch (error) {
-            console.error("Error fetching images:", error);
+            console.error("Error fetching filess:", error);
+            setAllfiless([]);
         }
     };
 
-    // Handle multiple image upload
+
+    useEffect(() => {
+        const fetchfiles = async () => {
+            if (filesUrl && !existingfiles?.url) {
+                try {
+                    const response = await axios.get(`http://localhost:5300${filesUrl}`);
+                    if (response.data.files) {
+                        setSelectedfilesUrl(response.data.files.files);
+                    }
+                } catch (error) {
+                    console.error("Error fetching files:", error);
+                }
+            }
+        };
+
+        fetchfiles();
+    }, [filesUrl, existingfiles]);
+
     const handleUpload = async (event) => {
-        const files = Array.from(event.target.files || []);
-        if (files.length === 0) return;
+        const file = event.target.files?.[0];
+        if (file) {
+            const formData = new FormData();
+            formData.append("file", file);
 
-        try {
-            const uploadPromises = files.map(file => {
-                const formData = new FormData();
-                formData.append("file", file);
-                return axios.post("http://localhost:5300/Image/add", formData);
-            });
+            try {
+                const response = await axios.post("http://localhost:5300/files/add", formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                });
 
-            const responses = await Promise.all(uploadPromises);
-            const newImages = responses.map(res => res.data.Image.image);
-            
-            setSelectedImageUrls(prev => [...prev, ...newImages]);
-            setShowUploadSection(false);
-            setShowAllImagesSection(true);
-            fetchAllImages();
-        } catch (error) {
-            console.error("Error uploading images:", error);
+                const uploadedfiles = response.data?.file;
+                if (uploadedfiles) {
+                    setShowUploadSection(false);
+                    setShowAllfilessSection(true);
+                    fetchAllfiless();
+                    setSelectedfilesUrl(uploadedfiles.files);
+                }
+            } catch (error) {
+                console.error("Error uploading files:", error);
+                alert("Error uploading files. Please try again.");
+            }
         }
     };
 
-    // Handle image deletion from server
-    const handleDeleteImage = async (imageUrl) => {
+    // Handle files deletion
+
+    const handleDeletefiles = async (filesUrl) => {
         try {
-            await axios.delete("http://localhost:5300/Image/delete", {
-                data: { ImageUrl: imageUrl },
+            const response = await axios.delete("http://localhost:5300/files/delete", {
+                data: { fileUrl: filesUrl }
             });
-            setAllImages(prev => prev.filter(img => img.imageUrl !== imageUrl));
-            setSelectedImageUrls(prev => prev.filter(url => url !== imageUrl));
+
+            if (response.status === 200) {
+                // Update all states
+                setAllfiless(prev => prev.filter(f => f.filesUrl !== filesUrl));
+                setSelectedfilesUrl(prev => prev.filter(url => url !== filesUrl));
+
+                // Update existing files
+                const updated = existingfiles
+                    .filter(file => getImageUrl(file) !== filesUrl)
+                    .map(file => ({ imageUrl: getImageUrl(file) }));
+
+                onfilesUpload(updated);
+            }
         } catch (error) {
-            console.error("Error deleting image:", error);
+            console.error("Error deleting file:", error);
+            alert('Failed to delete file. Please try again.');
         }
     };
 
-    // Handle confirming image selection
-    const handleSetFeaturedImages = () => {
-        if (selectedImageUrls.length === 0) return;
-        
-        const selectedImageData = selectedImageUrls.map(url => {
-            const found = allImages.find(image => image.imageUrl === url);
-            return found ? { 
-                imageId: found.imageId, 
-                url: found.imageUrl 
+
+    // Handle confirming files selection
+    const handleSetFeaturedfiless = () => {
+        if (selectedfilesUrl.length === 0) return;
+
+        const selectedfilesData = selectedfilesUrl.map(url => {
+            const found = allfiless.find(files => files.filesUrl === url);
+            return found ? {
+                // filesId: found.filesId,
+                url: found.filesUrl
             } : null;
+
         }).filter(Boolean);
-        
-        // console.log("Sending to parent:", selectedImageData);
-        onImageUpload(selectedImageData);
+
+        onfilesUpload(selectedfilesData);
         closeModal();
     };
 
-    // Handle removing an image from selection
-    const handleRemoveImage = (index) => {
-        const updatedImages = [...existingImages];
-        updatedImages.splice(index, 1);
-        onImageUpload(updatedImages);
+
+
+    // Handle removing an files from selection
+    const handleRemovefiles = (index) => {
+        const updatedfiless = [...existingfiles];
+        updatedfiless.splice(index, 1);
+        onfilesUpload(updatedfiless);
     };
 
-    // Toggle image selection
-    const toggleImageSelection = (imageUrl) => {
-        setSelectedImageUrls(prev => 
-            prev.includes(imageUrl)
-                ? prev.filter(url => url !== imageUrl)
-                : [...prev, imageUrl]
+    // Toggle files selection
+    const togglefilesSelection = (filesUrl) => {
+        setSelectedfilesUrl(prev =>
+            prev.includes(filesUrl)
+                ? prev.filter(url => url !== filesUrl)
+                : [...prev, filesUrl]
         );
     };
 
     const openModal = () => {
         setIsOpen(true);
-        setSelectedImageUrls(existingImages.map(img => img.url) || []);
-        fetchAllImages();
+        setSelectedfilesUrl(existingfiles.map(img => img.imageUrl).filter(Boolean) || []);
+
+
+        fetchAllfiless();
     };
 
     const closeModal = () => {
         setIsOpen(false);
     };
+    // useEffect(() => {
+    //     console.log("Existing files updated:", existingfiles);
+    // }, [existingfiles]);
+
 
     return (
         <>
-      
-        <div className="border-2 px-4 py-2 rounded-xl border-gray-700">
-            {/* Selected Images Preview */}
-            <div className="  flex flex-wrap gap-4">
-                {existingImages.map((image, index) => (
-                    <div key={index} className="relative group">
-                        <img
-                            src={`http://localhost:5300${image.url}`}
-                            alt={`Selected ${index + 1}`}
-                            className="w-32 h-32 object-contain rounded-md border border-gray-300 mb-4"
-                        />
-                        <button
-                            onClick={() => handleRemoveImage(index)}
-                            className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
-                        >
-                            ×
-                        </button>
-                    </div>
-                ))}
-            </div>
 
-            {/* Add Images Button */}
-            {(existingImages.length > 0 || selectedImageUrls.length > 0) ? "" : selected} <button 
-                onClick={openModal}
-                className="border border-(--blue) px-4 py-2 text-(--blue) rounded-lg transition-colors"
-            >
-               
-               {(existingImages.length > 0 || selectedImageUrls.length > 0) ? "Add More Images" : NameOffield}
-
-            </button>
-
-            {/* Modal for Image Selection */}
-            <Modal
-                isOpen={isOpen}
-                onClose={closeModal}
-                className={isFullscreen ? "w-[80%] h-full" : "container mx-auto max-w-[1850px] w-[80%] p-6 bg-black"}
-                isFullscreen={isFullscreen}
-            >
-                <div className="row flex flex-col flex-wrap">
-                    <div className="col-3 grow-0 shrink-0">
-                        <h1 className="text-2xl font-bold mb-10">Select Images</h1>
-                        <div className="border-b border-darkblack mb-5">
-                            <div className="flex justify-between">
-                                <div className="flex items-center gap-10 mb-3">
-                                    <button
-                                        onClick={() => {
-                                            setShowUploadSection(true);
-                                            setShowAllImagesSection(false);
-                                        }}
-                                        className={`text-lg cursor-pointer font-bold ${showUploadSection
-                                            ? "text-white border-2 bg-(--blue) rounded-sm border-(--blue) px-2 py-2"
-                                            : "text-gray-500"
-                                        }`}
-                                    >
-                                        Upload Image
-                                    </button>
-                                    <button
-                                        onClick={() => {
-                                            setShowUploadSection(false);
-                                            setShowAllImagesSection(true);
-                                        }}
-                                        className={`text-lg cursor-pointer font-bold ${showAllImagesSection
-                                            ? "text-white border-2 bg-(--blue) rounded-sm border-(--blue) px-2 py-2"
-                                            : "text-gray-500"
-                                        }`}
-                                    >
-                                        All Images
-                                    </button>
+            <div className="border-2 px-4 py-4 rounded-xl border-gray-700">
+                {/* Selected filess Preview */}
+                <div className="  flex flex-wrap gap-4">
+                    {existingfiles.map((files, index) => (
+                        <div key={index} className="relative group mb-4">
+                            {files?.imageUrl ? (
+                                <img
+                                    src={`http://localhost:5300${files.imageUrl}`}
+                                    alt="Selected"
+                                    className="w-32 h-32 object-contain border-gray-700 border p-1 relative"
+                                    onError={(e) => {
+                                        e.target.onerror = null;
+                                        e.target.src = "/fallback.jpg";
+                                    }}
+                                />
+                            ) : (
+                                <div className="w-32 h-32 flex items-center justify-center border border-red-500 text-red-500">
+                                    Invalid file
                                 </div>
-                            </div>
+                            )}
+                            {/* <button
+                                onClick={() => handleRemovefiles(index)}
+                                className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                            >
+                                ×
+                            </button> */}
                         </div>
-                    </div>
+                    ))}
 
-                    <div className="col-3">
-                        {showUploadSection && (
-                            <div className="cursor-pointer text-center h-[60vh] flex justify-center items-center">
-                                <div className="border-2 border-dashed border-(--blue) p-6 rounded-lg hover:bg-(--blue) transition">
-                                    <label className="cursor-pointer">
-                                        <input
-                                            type="file"
-                                            onChange={handleUpload}
-                                            accept="image/*"
-                                            multiple
-                                            className="hidden"
-                                        />
-                                        <div className="flex flex-col items-center">
-                                            <FaUpload className="text-white text-3xl" />
-                                            <p className="text-white font-bold">Click to upload or drag & drop</p>
-                                        </div>
-                                    </label>
-                                </div>
-                            </div>
-                        )}
+                </div>
 
-                        {showAllImagesSection && (
-                            <div className="flex-1 flex-col px-2 h-[60vh] custom-scrollbar">
-                                <div className="">
-                                    <h5 className="mb-4 text-xl lg:text-2xl">All Images</h5>
-                                    <div className="flex flex-wrap gap-5">
-                                        {allImages.map((image, index) => (
-                                            <div
-                                                key={index}
-                                                className={`relative cursor-pointer p-0.5 w-32 ${
-                                                    selectedImageUrls.includes(image.imageUrl)
-                                                        ? "border-(--blue) outline-4 outline-(--blue)"
-                                                        : "border-gray-700 border"
+                {/* Add filess Button */}
+                {(existingfiles.length > 0 || selectedfilesUrl.length > 0) ? "" : selected} <button
+                    onClick={openModal}
+                    className="border border-(--blue) px-4 py-2 text-(--blue) rounded-lg transition-colors "
+                >
+
+                    {(existingfiles.length > 0 || selectedfilesUrl.length > 0) ? "Add More files" : NameOffield}
+
+                </button>
+
+                {/* Modal for files Selection */}
+                <Modal
+                    isOpen={isOpen}
+                    onClose={closeModal}
+                    className={isFullscreen ? "w-[80%] h-full" : "container mx-auto max-w-[1850px] w-[80%] p-6 bg-black"}
+                    isFullscreen={isFullscreen}
+                >
+                    <div className="row flex flex-col flex-wrap">
+                        <div className="col-3 grow-0 shrink-0">
+                            <h1 className="text-2xl font-bold mb-10">Select files</h1>
+                            <div className="border-b border-darkblack mb-5">
+                                <div className="flex justify-between">
+                                    <div className="flex items-center gap-10 mb-3">
+                                        <button
+                                            onClick={() => {
+                                                setShowUploadSection(true);
+                                                setShowAllfilessSection(false);
+                                            }}
+                                            className={`text-lg cursor-pointer font-bold ${showUploadSection
+                                                ? "text-white border-2 bg-(--blue) rounded-sm border-(--blue) px-2 py-2"
+                                                : "text-gray-500"
                                                 }`}
-                                                onClick={() => toggleImageSelection(image.imageUrl)}
-                                                onMouseEnter={() => setHoveredImage(image.imageUrl)}
-                                                onMouseLeave={() => setHoveredImage(null)}
-                                            >
-                                                <img
-                                                    src={`http://localhost:5300${image.imageUrl}`}
-                                                    alt={`Image ${index + 1}`}
-                                                    className="w-32 h-32 object-contain"
-                                                />
-
-                                                {selectedImageUrls.includes(image.imageUrl) && (
-                                                    <div className="absolute -top-2.5 -right-3 bg-white rounded-sm text-(--blue)">
-                                                        <ImCheckboxChecked size={24} />
-                                                    </div>
-                                                )}
-
-                                                   {hoverIcons === image.imageUrl && (
-                                                    <div
-                                                        onMouseEnter={() => setHoverIcons(image.imageUrl)}
-                                                        onMouseLeave={() => setHoverIcons(null)}
-                                                        className="absolute -top-2.5 cursor-pointer -right-3 bg-(--blue) rounded-sm text-(--white)"
-                                                    >
-                                                        <GrFormSubtract
-                                                            size={24}
-                                                            
-                                                        />
-                                                    </div>
-                                                )}
-                                                {hoveredImage === image.imageUrl && (
-                                                    <button
-                                                        onClick={(e) => {
-                                                            e.stopPropagation();
-                                                            handleDeleteImage(image.imageUrl);
-                                                        }}
-                                                        className="absolute bottom-2 right-2 p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600"
-                                                    >
-                                                        <FaTrash size={14} />
-                                                    </button>
-                                                )}
-                                            </div>
-                                        ))}
+                                        >
+                                            Upload files
+                                        </button>
+                                        <button
+                                            onClick={() => {
+                                                setShowUploadSection(false);
+                                                setShowAllfilessSection(true);
+                                            }}
+                                            className={`text-lg cursor-pointer font-bold ${showAllfilessSection
+                                                ? "text-white border-2 bg-(--blue) rounded-sm border-(--blue) px-2 py-2"
+                                                : "text-gray-500"
+                                                }`}
+                                        >
+                                            All files
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        )}
-                    </div>
+                        </div>
 
-                    <div className="col-3 mt-auto">
-                        <div className="flex items-end gap-3 mt-6 justify-end">
-                            <Button
-                                size="sm"
-                                variant="outline"
-                                onClick={handleSetFeaturedImages}
-                                disabled={selectedImageUrls.length === 0}
-                                className="btn btn-success cursor-pointer flex justify-center rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-600 disabled:opacity-50 disabled:cursor-not-allowed"
-                            >
-                                Add {selectedImageUrls.length} Images
-                            </Button>
+                        <div className="col-3">
+                            {showUploadSection && (
+                                <div className="cursor-pointer text-center h-[60vh] flex justify-center items-center">
+                                    <div className="border-2 border-dashed border-(--blue) p-6 rounded-lg hover:bg-(--blue) transition">
+                                        <label className="cursor-pointer">
+                                            <input
+                                                type="file"
+                                                onChange={handleUpload}
+                                                accept="files/*"
+                                                multiple
+                                                className="hidden"
+                                            />
+                                            <div className="flex flex-col items-center">
+                                                <FaUpload className="text-white text-3xl" />
+                                                <p className="text-white font-bold">Click to upload or drag & drop</p>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            )}
+
+                            {showAllfilessSection && (
+                                <div className="flex-1 flex-col px-2 h-[60vh] custom-scrollbar">
+                                    <div className="">
+                                        <h5 className="mb-4 text-xl lg:text-2xl">All files</h5>
+                                        <div className="flex flex-wrap gap-5">
+                                            {allfiless.map((files, index) => (
+                                                <div
+                                                    key={index}
+                                                    className={`relative cursor-pointer p-0.5 w-32 ${selectedfilesUrl.includes(files.filesUrl)
+                                                        ? "border-(--blue) outline-4 outline-(--blue)"
+                                                        : "border-gray-700 border"
+                                                        }`}
+                                                    onClick={() => togglefilesSelection(files.filesUrl)}
+                                                    onMouseEnter={() => setHoveredfiles(files.filesUrl)}
+                                                    onMouseLeave={() => setHoveredfiles(null)}
+                                                >
+                                                    {files.filesUrl.endsWith('.mp4') ? (
+                                                        <video className="w-32 h-32 object-cover">
+                                                            <source src={`http://localhost:5300${files.filesUrl}`} type="video/mp4" />
+                                                        </video>
+                                                    ) : (
+                                                        <img
+                                                            src={`http://localhost:5300${files.filesUrl}`}
+                                                            alt={`File ${index + 1}`}
+                                                            className="w-32 h-32 object-cover"
+                                                            onError={(e) => {
+                                                                (e.target).src = '/path/to/fallback/image.jpg';
+                                                            }}
+                                                        />
+                                                    )}
+
+                                                    {selectedfilesUrl.includes(files.filesUrl) && (
+                                                        <div className="absolute -top-2.5 -right-3 bg-white rounded-sm text-(--blue)">
+                                                            <ImCheckboxChecked size={24} />
+                                                        </div>
+                                                    )}
+
+                                                    {hoverIcons === files.filesUrl && (
+                                                        <div
+                                                            onMouseEnter={() => setHoverIcons(files.filesUrl)}
+                                                            onMouseLeave={() => setHoverIcons(null)}
+                                                            className="absolute -top-2.5 cursor-pointer -right-3 bg-(--blue) rounded-sm text-(--white)"
+                                                        >
+                                                            <GrFormSubtract
+                                                                size={24}
+
+                                                            />
+                                                        </div>
+                                                    )}
+                                                    {hoveredfiles === files.filesUrl && (
+                                                        <button
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                handleDeletefiles(files.filesUrl);
+                                                            }}
+                                                            className="absolute bottom-2 right-2 p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600"
+                                                        >
+                                                            <FaTrash size={14} />
+                                                        </button>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="col-3 mt-auto">
+                            <div className="flex items-end gap-3 mt-6 justify-end">
+                                <Button
+                                    size="sm"
+                                    variant="outline"
+                                    onClick={handleSetFeaturedfiless}
+                                    disabled={selectedfilesUrl.length === 0}
+                                    className="btn btn-success cursor-pointer flex justify-center rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
+                                    Add {selectedfilesUrl.length} files
+                                </Button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </Modal>
-        </div>
+                </Modal>
+            </div>
         </>
     );
 };

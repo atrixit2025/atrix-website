@@ -239,11 +239,11 @@ const upload = multer({
       }
   
       // Build full URLs
-      const host = req.protocol + "://" + req.get("host");
+      // const host = req.protocol + "://" + req.get("host");
       const updatedFiles = files.map(file => ({
         _id: file._id,
         type: file.type,
-        file: host + file.file,
+        file:  file.file,
         createdAt: file.createdAt
       }));
   

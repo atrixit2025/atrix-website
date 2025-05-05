@@ -26,8 +26,8 @@ ServicesRouter.post("/add", async (req, res) => {
     portfolioCategories,
     faqCategories,
     Technology ,
-    iconImageId,
-    FeaturedImageId,
+    iconImageUrl,
+    FeaturedImage,
     Bannerdata,
     WhydoNeed,
     Process,
@@ -37,14 +37,36 @@ ServicesRouter.post("/add", async (req, res) => {
     Cta ,
     gallery,       
   } = req.body;
+  if (!req.body.FeaturedImage) {
+    return res.status(400).json({
+      message: "The FeaturedImage field is required and must contain a valid image URL"
+    });
+  }
 
 
   // Enhanced validation
-  if (!title || !description || !category || !FeaturedImageId) {
+  if (!title ) {
     return res.status(400).json({
-      message: "Title, description, category, and featured image are required"
+      message: "Title, are required"
     });
   }
+  if ( !description ) {
+    return res.status(400).json({
+      message: " description are required"
+    });
+  }
+  if ( !category ) {
+    return res.status(400).json({
+      message: " category are required"
+    });
+  }
+  if ( !FeaturedImage) {
+    return res.status(400).json({
+      message: " featured image are required"
+    });
+  }
+
+  
 
   // Validate content arrays
   const validateArray = (arr, fieldName) => {
@@ -88,7 +110,7 @@ ServicesRouter.post("/add", async (req, res) => {
     
       return data.map(item => ({
         title: item.title || '',
-        imageId: item.imageId || null
+        imageUrl: item.imageUrl || null
       }));
     };
   
@@ -98,8 +120,8 @@ ServicesRouter.post("/add", async (req, res) => {
       return data.map(item => ({
         type: ['texttoimage', 'imagetotext'].includes(item.type) ? item.type : 'texttoimage',
         text: item.text || '',
-        imageId: item.imageId || null
-      })).filter(item => item.text || item.imageId);
+        imageUrl: item.imageUrl || null
+      })).filter(item => item.text || item.imageUrl);
     };
     // Create new service document
     const newServices = new Services({
@@ -115,8 +137,8 @@ ServicesRouter.post("/add", async (req, res) => {
       WhyAtrix: sanitized.WhyAtrix,
       portfolioCategories: sanitized.portfolioCategories,
       faqCategories: sanitized.faqCategories,
-      iconImageId: iconImageId || null,
-      FeaturedImage: FeaturedImageId,
+      iconImageUrl: iconImageUrl || null,
+      FeaturedImage: FeaturedImage,
       Headercontent: sanitized.Headercontent, 
       texttoimageandimagetotext: validateTextToImage(texttoimageandimagetotext),
       Technology: validateTechnology(Technology),
@@ -163,12 +185,12 @@ ServicesRouter.post("/add", async (req, res) => {
         }
 
         else {
-          if (!item.imageId || typeof item.imageId !== 'string') {
-            throw new Error(`${item.type} type must have a valid imageId`);
+          if (!item.imageUrl || typeof item.imageUrl !== 'string') {
+            throw new Error(`${item.type} type must have a valid imageUrl`);
           }
           return {
             type: item.type,
-            imageId: item.imageId
+            imageUrl: item.imageUrl
           };
         }
       });
@@ -201,7 +223,7 @@ ServicesRouter.post("/add", async (req, res) => {
       return items.map(item => ({
         heading: item.heading || "",
         description: item.description || "",
-        imageId: item.imageId || null
+        imageUrl: item.imageUrl || null
       }));
     }
 
@@ -214,7 +236,7 @@ ServicesRouter.post("/add", async (req, res) => {
       }
     
       return galleryArr.map(img => ({
-        imageId: img.imageId || ""
+        imageUrl: img.imageUrl || ""
       }));
     }
     
@@ -258,10 +280,10 @@ ServicesRouter.get("/get", async (req, res) => {
 
 
 // ServicesRouter.put("/edit", async (req, res) => {
-//   const { id, title, category,text, imageId } = req.body; 
+//   const { id, title, category,text, imageUrl } = req.body; 
 
-//   if (!id || !title || !category ||! text|| !imageId) {
-//     return res.status(400).json({ message: "ID, title, category,text, and imageId are required" });
+//   if (!id || !title || !category ||! text|| !imageUrl) {
+//     return res.status(400).json({ message: "ID, title, category,text, and imageUrl are required" });
 //   }
 
 //   try {
@@ -275,7 +297,7 @@ ServicesRouter.get("/get", async (req, res) => {
 //     existingServices.category = category;
 //     existingServices.text = text;
 
-//     existingServices.image = imageId;
+//     existingServices.image = imageUrl;
 
 //     const updatedServices = await existingServices.save();
 
@@ -298,8 +320,8 @@ ServicesRouter.put("/edit", async (req, res) => {
     portfolioCategories,
     faqCategories,
     Technology,
-    iconImageId,
-    FeaturedImageId,
+    iconImageUrl,
+    FeaturedImage,
     Bannerdata,
     WhydoNeed,
     Process,
@@ -344,8 +366,8 @@ ServicesRouter.put("/edit", async (req, res) => {
       faqCategories: faqCategories !== undefined 
         ? validateArray(faqCategories, 'faqCategories') 
         : existingService.faqCategories,
-      iconImageId: iconImageId !== undefined ? iconImageId : existingService.iconImageId,
-      FeaturedImage: FeaturedImageId !== undefined ? FeaturedImageId : existingService.FeaturedImage,
+      iconImageUrl: iconImageUrl !== undefined ? iconImageUrl : existingService.iconImageUrl,
+      FeaturedImage: FeaturedImage !== undefined ? FeaturedImage : existingService.FeaturedImage,
       Cta: Cta !== undefined ? Cta : existingService.Cta,
       updatedAt: new Date()
     };
@@ -387,7 +409,7 @@ ServicesRouter.put("/edit", async (req, res) => {
       return data.map(item => ({
         _id: item._id ,
         title: item.title || "",
-        imageId: item.imageId || null
+        imageUrl: item.imageUrl || null
       }));
     }
    
@@ -426,12 +448,12 @@ ServicesRouter.put("/edit", async (req, res) => {
         }
 
         else {
-          if (!item.imageId || typeof item.imageId !== 'string') {
-            throw new Error(`${item.type} type must have a valid imageId`);
+          if (!item.imageUrl || typeof item.imageUrl !== 'string') {
+            throw new Error(`${item.type} type must have a valid imageUrl`);
           }
           return {
             type: item.type,
-            imageId: item.imageId
+            imageUrl: item.imageUrl
           };
         }
       });
@@ -464,7 +486,7 @@ ServicesRouter.put("/edit", async (req, res) => {
       return items.map(item => ({
         heading: item.heading || "",
         description: item.description || "",
-        imageId: item.imageId || null
+        imageUrl: item.imageUrl || null
       }));
     }
 
@@ -477,7 +499,7 @@ ServicesRouter.put("/edit", async (req, res) => {
       }
     
       return galleryArr.map(img => ({
-        imageId: img.imageId || ""
+        imageUrl: img.imageUrl || ""
       }));
     }
     
@@ -496,7 +518,7 @@ ServicesRouter.put("/edit", async (req, res) => {
         return {
           type: item.type || item.value.value,
           text: item.text || item.textContent || "",
-          imageId: item.imageId || (item.imageFile ? item.imageFile.id : null)
+          imageUrl: item.imageUrl || (item.imageFile ? item.imageFile.id : null)
         };
       }).filter(item => item.type); // Remove items without type
     }
