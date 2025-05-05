@@ -3,6 +3,7 @@ import OurServiceCard from "../Components/services/OurServiceCard";
 import Button from "../Components/Button";
 import img5 from "../assets/ServicesImage/chess_1.png";
 import "./ourServices.css";
+import LinkButton from "../Components/LinkButton";
 
 const OurServices = () => {
   return (
@@ -25,14 +26,15 @@ const OurServices = () => {
           drive growth and elevate your business.
         </h4>
         </div>
-              
+
       </div> */}
 
       <OurServiceCard />
 
       {/* HOW WE DO IT */}
 
-      <div className="container mx-auto mt-25 leading-0 w-[90%] ">
+
+      <div className="container mx-auto mt-16 leading-0 w-[90%] ">
         <h2 className=" text-4xl md:text-8xl font-bold text-center  py-15 "> HOW WE DO IT</h2>
         <div className=" grid  grid-cols-12  gap-9 ">
           <div className="col-span-12 md:col-span-4 border-t-1 border-white/20  ">
@@ -89,8 +91,9 @@ const OurServices = () => {
                 Let’s connect so we can understand your business objectives and
                 craft a plan to exceed them.
               </p>
-              <div className="btn   mt-10">
-                <Button mybtn={"LET'S TALK"} />
+              <div className="btn   mt-10 flex ">
+                {/* <Button mybtn={"LET'S TALK"} /> */}
+                <LinkButton mybtn={"LET'S TALK"} btnLink="/contact-us"></LinkButton>
               </div>
             </div>
           </div>

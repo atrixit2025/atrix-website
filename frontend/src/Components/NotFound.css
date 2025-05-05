@@ -1,0 +1,74 @@
+@import url('https://img.freepik.com/free-vector/page-found-concept-illustration_114360-1869.jpg');
+
+.not-found-container {
+  min-height: 100vh;
+  /* background: linear-gradient(145deg, #fefefe, #e2f0ff); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.not-found-content {
+  text-align: center;
+  animation: slideUp 0.8s ease-out;
+}
+
+.not-found-image {
+  max-width: 520px;
+  width: 90%;
+  margin-bottom: 1.5rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+.not-found-title {
+  font-size: 3.5rem;
+
+  margin-bottom: 0.5rem;
+}
+
+.not-found-text {
+  font-size: 1.2rem;
+ 
+  margin-bottom: 2rem;
+}
+
+.home-btn {
+  padding: 12px 26px;
+  background-color: var(--blue);
+  color: white;
+  border: none;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.home-btn:hover {
+  background-color: var(--green);
+  transform: translateY(-2px);
+  scale: 1.05;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

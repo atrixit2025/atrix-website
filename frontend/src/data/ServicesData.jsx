@@ -28,7 +28,7 @@ import video from "../assets/ServicesImage/video.svg";
 const ServicesData = [
   // Branding/Graphic Design-section
   {
-    service_id: "branding-graphic-design",
+    slug: "branding-graphic-design",
     service_title: "Branding/Graphic Design",
     main_desc:
       "Did you know? 94% of first impressions are design-related! That’s why strong visuals are key to brand success. Graphic design isn’t just about looks - it’s about delivering your message effectively. At Atrix IT Solutions, we bring your vision to life with top-notch designs tailored to your needs. Whether it’s branding, websites, infographics, or eBooks, our expert team creates visually captivating content that engages and inspires. Let’s design something impactful!",
@@ -193,7 +193,7 @@ const ServicesData = [
   },
 
   {
-    service_id: "web-development",
+    slug: "web-development",
     service_title: "Web Development",
     main_desc:
       "Create stunning, user-friendly websites that captivate, engage, and drive real results with our experts! Whether you need a new website, a redesign, or custom development, we ensure a seamless experience with modern, responsive designs tailored to your brand. Our expert team focuses on creating visually appealing and high-performing websites that boost visibility, attract customers, and grow your business effortlessly. So, take your online presence to the next level!",
@@ -330,7 +330,7 @@ const ServicesData = [
     ],
   },
   {
-    service_id: "Digital-Marketing",
+    slug: "Digital-Marketing",
     service_title: "Digital Marketing",
     icon: Asset3,
     main_desc:
@@ -473,7 +473,7 @@ const ServicesData = [
     ],
   },
   {
-    service_id: "Visual-Effects",
+    slug: "Visual-Effects",
     service_title: "Visual Effects",
     icon: Asset4,
     main_desc:
@@ -604,7 +604,7 @@ const ServicesData = [
     ],
   },
   {
-    service_id: "Photo-Video-Production",
+    slug: "Photo-Video-Production",
     service_title: "Photo/Video Production",
     icon: Asset5,
     main_desc:
@@ -730,7 +730,7 @@ const ServicesData = [
     ],
   },
   {
-    service_id: "Staffing",
+    slug: "Staffing",
     service_title: "Staffing",
     icon: Asset6,
     main_desc:
@@ -857,7 +857,7 @@ const ServicesData = [
     ],
   },
   {
-    service_id: "Logistics",
+    slug: "Logistics",
     service_title: "Logistics",
     icon: Asset7,
     main_desc:
