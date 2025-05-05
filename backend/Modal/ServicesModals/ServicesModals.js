@@ -8,7 +8,7 @@ const HeadercontentSectionSchema = new mongoose.Schema({
         [{
             heading: { type: String },
             description: { type: String },
-            imageId: { type: String },
+            imageUrl: { type: String },
 
         }],
 
@@ -18,7 +18,7 @@ const textandimageSectionSchema = new mongoose.Schema({
     type: { type: String, enum: ['texttoimage', 'imagetotext'], required: true },
  
         text: { type: String },
-        imageId: { type: String }
+        imageUrl: { type: String }
 
 });
 
@@ -46,7 +46,7 @@ const BannerfieldSectionSchema = new mongoose.Schema({
         enum: ['banner', 'video', 'slider'],
         required: true
     },
-    imageId: { type: String },
+    imageUrl: { type: String },
     sliderImages: [{ type: String }]
 }, { _id: true });
 
@@ -68,8 +68,9 @@ const ServicesSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    Servicesquote: {
+    FeaturedImage: {
         type: String,
+        required: true
     },
     category: {
         type: String,
@@ -80,41 +81,43 @@ const ServicesSchema = new mongoose.Schema({
         default: []
     },
     Bannerdata: [BannerfieldSectionSchema],
-    WhydoNeed: [WhydoNeedSectionSchema],
-    Process: [ProcessSectionSchema],
-    WhyAtrix: [WhyAtrixSectionSchema],
+ 
     Headercontent: [HeadercontentSectionSchema],
-    gallery: [{
-        imageId: { type: String }
-    }],
+   
     texttoimageandimagetotext:
     [
         textandimageSectionSchema
     ],
+    WhydoNeed: [WhydoNeedSectionSchema],
+    Process: [ProcessSectionSchema],
+    WhyAtrix: [WhyAtrixSectionSchema],
     portfolioCategories: {
         type: [String],
         default: []
     },
     Technology: [{
         title: { type: String },
-        imageId: { type: String }
+        imageUrl: { type: String }
     }],
     faqCategories: {
         type: [String],
         default: []
     },
-    iconImageId: {
+    iconImageUrl: {
         type: String,
         required: true
     },
-    FeaturedImage: {
-        type: String,
-        required: true
-    },
+
     Cta:{
         title:{ type: String },
         description: {type: String },
     },
+    Servicesquote: {
+        type: String,
+    },
+    gallery: [{
+        imageUrl: { type: String }
+    }],
     updatedAt: {
         type: Date,
         default: Date.now

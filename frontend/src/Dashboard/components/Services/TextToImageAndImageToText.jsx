@@ -19,9 +19,9 @@ const TextToImageAndImageToText = ({ onChange, initialData }) => {
                            item.type === "imagetotext" ? "ImagetoText" : ""
                 },
                 textContent: item.text || item.textContent || "",
-                imageFile: item.imageId ? {
-                    id: item.imageId,
-                    url: item.imageUrl || (item.imageId ? `http://localhost:5300/Image/get/${item.imageId}` : null),
+                imageFile: item.imageUrl ? {
+                    id: item.imageUrl,
+                    url: item.imageUrl || (item.imageUrl ? `http://localhost:5300/Image/get/${item.imageUrl}` : null),
                     type: item.type || item.value?.value,
                     name: "Uploaded image"
                 } : (item.imageFile || null),
@@ -55,14 +55,14 @@ const TextToImageAndImageToText = ({ onChange, initialData }) => {
         }
     };
 
-    const handleImageChange = (id, imageId, fieldType) => {
+    const handleImageChange = (id, imageUrl, fieldType) => {
         const updatedFields = selectFields.map(field => {
             if (field.id === id) {
                 return {
                     ...field,
-                    imageFile: imageId ? {
-                        id: imageId,
-                        url: `http://localhost:5300/Image/get/${imageId}`,
+                    imageFile: imageUrl ? {
+                        id: imageUrl,
+                        url: `http://localhost:5300/Image/get/${imageUrl}`,
                         type: fieldType,
                         name: "Uploaded image"
                     } : null
@@ -165,10 +165,10 @@ const TextToImageAndImageToText = ({ onChange, initialData }) => {
                                     <SelectFileInput
                                         selected="Set the image"
                                         NameOffield="Image"
-                                        onImageUpload={(imageId, imageType) =>
-                                            handleImageChange(field.id, imageId, imageType || field.value?.value)
+                                        onfilesUpload={(imageUrl, imageType) =>
+                                            handleImageChange(field.id, imageUrl, imageType || field.value?.value)
                                         }
-                                        imageId={field.imageFile?.id}
+                                        filesUrl={field.imageFile?.id}
                                         existingImage={field.imageFile ? {
                                             id: field.imageFile.id,
                                             url: field.imageFile.url,
@@ -185,10 +185,10 @@ const TextToImageAndImageToText = ({ onChange, initialData }) => {
                                     <SelectFileInput
                                         selected="Set the "
                                         NameOffield="Image"
-                                        onImageUpload={(imageId, imageType) =>
-                                            handleImageChange(field.id, imageId, imageType || field.value?.value)
+                                        onfilesUpload={(imageUrl, imageType) =>
+                                            handleImageChange(field.id, imageUrl, imageType || field.value?.value)
                                         }
-                                        imageId={field.imageFile?.id}
+                                        filesUrl={field.imageFile?.id}
                                         existingImage={field.imageFile}
                                     />
                                     <Label >Text</Label>

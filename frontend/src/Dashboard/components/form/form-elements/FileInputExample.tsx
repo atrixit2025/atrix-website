@@ -359,21 +359,20 @@ import axios from "axios";
 import { ImCheckboxChecked } from "react-icons/im";
 import { GrFormSubtract } from "react-icons/gr";
 
-// Define the type for the files object
 type files = {
-  filesId: string; // MongoDB ObjectId
+  filesId: string; 
   filesUrl: string; 
 };
 
-// Define the props for the FileInputExample component
+
 interface FileInputExampleProps {
-  onfilesUpload: (filesUrl: string | null) => void; // Callback to pass the filesId to the parent
-  filesId: string | null; // The selected filesId (MongoDB ObjectId)
+  onfilesUpload: (filesUrl: string | null) => void; 
+  filesId: string | null; 
   filesUrl?: string | null; 
-  setName: string; // The name of the set files
-  Componenttitle: string; // The title of the component
-  h1: string; // The title of the modal
-  SetButtonName: string; // The name of the button in the modal
+  setName: string; 
+  Componenttitle: string; 
+  h1: string; 
+  SetButtonName: string; 
 }
 
 const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, filesId,filesUrl ,setName ,Componenttitle,h1,SetButtonName}) => {
@@ -386,32 +385,52 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, file
   const [selectedfilesUrl, setSelectedfilesUrl] = useState<string | null>(null);
   const [hoveredfiles, setHoveredfiles] = useState<string | null>(null);
   const [hoverIcons, setHoverIcons] = useState<string | null>(null);
-  // const [selectedFile, setSelectedFile] = useState<{id: string | null, url: string | null}>({
-  //   id: filesId || null,
-  //   url: filesUrl || null
-  // });
 
-  const fetchAllfiless = async () => {
-    try {
-      const response = await axios.get("http://localhost:5300/files/get");
 
-      if (response.data?.files) {
-        const files = response.data.files.map((item: any) => ({
-          filesId: item._id,
-          filesUrl: item.file
-        }));
+  // const fetchAllfiless = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:5300/files/get");
 
-        setAllfiless(files);
-      } else {
-        console.error("Unexpected response format:", response.data);
-        setAllfiless([]);
-      }
-    } catch (error) {
-      console.error("Error fetching filess:", error);
-      setAllfiless([]);
-    }
-  };
+  //     if (response.data?.files) {
+  //       const files = response.data.files.map((item: any) => ({
+  //         filesId: item._id,
+  //         filesUrl: item.file
+  //       }));
 
+  //       setAllfiless(files);
+  //     } else {
+  //       console.error("Unexpected response format:", response.data);
+  //       setAllfiless([]);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching filess:", error);
+  //     setAllfiless([]);
+  //   }
+  // };
+    const fetchAllfiless = async () => {
+        try {
+            const response = await axios.get("http://localhost:5300/files/get");
+            
+            if (response.data?.files) {
+                // Filter to only include files where type is 'image'
+                const files = response.data.files
+                    .filter((item: any) => item.type === 'image') // This line filters only images
+                    .map((item: any) => ({
+                        filesId: item._id,
+                        filesUrl: item.file,
+                        type: item.type // Include the type in the object
+                    }));
+                
+                setAllfiless(files);
+            } else {
+                console.error("Unexpected response format:", response.data);
+                setAllfiless([]);
+            }
+        } catch (error) {
+            console.error("Error fetching filess:", error);
+            setAllfiless([]);
+        }
+    };
 
   useEffect(() => {
     if (filesUrl) {
@@ -533,7 +552,7 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, file
 
   return (
     <ComponentCard title={Componenttitle}>
-      <div>
+      <div className="">
         {selectedfiles ? (
           <div className="flex flex-col items-center">
             {selectedfiles.endsWith('.mp4') ? (
@@ -660,7 +679,7 @@ const FileInputExample: React.FC<FileInputExampleProps> = ({ onfilesUpload, file
                             <img
                               src={`http://localhost:5300${files.filesUrl}`}
                               alt={`File ${index + 1}`}
-                              className="w-32 h-32 object-cover"
+                              className="w-32 h-32 object-cover filter"
                               onError={(e) => {
                                 (e.target as HTMLImageElement).src = '/path/to/fallback/image.jpg';
                               }}

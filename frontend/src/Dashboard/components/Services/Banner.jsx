@@ -28,10 +28,10 @@ export default function Banner({ onChange, initialData }) {
                         return {
                             id: index + 1,
                             type: item.type,
-                            imageId: item.imageId || null,
-                            existingImage: item.imageId ? {
-                                id: item.imageId,
-                                url: `/Image/${item.imageId}`
+                            imageUrl: item.imageUrl || null,
+                            existingImage: item.imageUrl ? {
+                                id: item.imageUrl,
+                                url: `/Image/${item.imageUrl}`
                             } : null
                         };
                     }
@@ -41,7 +41,7 @@ export default function Banner({ onChange, initialData }) {
                 setSelectFields([{
                     id: 1,
                     type: "",
-                    imageId: null,
+                    imageUrl: null,
                     sliderImages: [],
                     existingImage: null,
                     existingSliderImages: []
@@ -58,7 +58,7 @@ export default function Banner({ onChange, initialData }) {
               ? {
                   ...field,
                   type: selectedOption.value,
-                  imageId: null,
+                  imageUrl: null,
                   sliderImages: [],
                   existingImage: null,
                   existingSliderImages: []
@@ -83,7 +83,7 @@ export default function Banner({ onChange, initialData }) {
                 }
                 return {
                   type: field.type,
-                  imageId: field.imageId
+                  imageUrl: field.imageUrl
                 };
               });
             onChange(formatted);
@@ -97,16 +97,16 @@ export default function Banner({ onChange, initialData }) {
       
     
 
-    const handleImageUpload = (id, imageId) => {
+    const handleImageUpload = (id, imageUrl) => {
         setSelectFields(prev =>
             prev.map(field =>
                 field.id === id
                     ? { 
                         ...field, 
-                        imageId,
+                        imageUrl,
                         existingImage: {
-                            id: imageId,
-                            url: `http://localhost:5300/Image/get/${imageId}`
+                            id: imageUrl,
+                            url: `http://localhost:5300/${imageUrl}`
                         }
                     }
                     : field
@@ -114,17 +114,17 @@ export default function Banner({ onChange, initialData }) {
         );
     };
 
-    const handleSliderImageUpload = (id, imageId, index) => {
+    const handleSliderImageUpload = (id, imageUrl, index) => {
         setSelectFields(prev =>
             prev.map(field => {
                 if (field.id === id) {
                     const newSliderImages = [...field.sliderImages];
-                    newSliderImages[index] = imageId;
+                    newSliderImages[index] = imageUrl;
                     
                     const newExistingSliderImages = [...(field.existingSliderImages || [])];
                     newExistingSliderImages[index] = {
-                        id: imageId,
-                        url: `http://localhost:5300/Image/get/${imageId}`
+                        id: imageUrl,
+                        url: `http://localhost:5300/${imageUrl}`
                     };
 
                     return { 
@@ -162,8 +162,8 @@ export default function Banner({ onChange, initialData }) {
                             <div className="mt-4">
                                 <SelectFileInput
                                     NameOffield="Add Banner Image"
-                                    onfilesUpload={(imageId) => handleImageUpload(field.id, imageId)}
-                                    imageId={field.imageId}
+                                    onfilesUpload={(imageUrl) => handleImageUpload(field.id, imageUrl)}
+                                    filesUrl={field.imageUrl}
                                     existingImage={field.existingImage}
                                 />
                             </div>
@@ -174,8 +174,8 @@ export default function Banner({ onChange, initialData }) {
                                 <SelectFileInput
                                     NameOffield="Add Video"
                                     accept="video/*"
-                                    onImageUpload={(imageId) => handleImageUpload(field.id, imageId)}
-                                    imageId={field.imageId}
+                                    onfilesUpload={(imageUrl) => handleImageUpload(field.id, imageUrl)}
+                                    filesUrl={field.imageUrl}
                                     existingImage={field.existingImage}
                                 />
                             </div>
@@ -187,8 +187,8 @@ export default function Banner({ onChange, initialData }) {
                                     <div key={index} className="border border-gray-700 h-52 flex justify-center items-center">
                                         <SelectFileInput
                                             NameOffield={field.sliderImages[index] ? "Change" : "+"}
-                                            onImageUpload={(imageId) => handleSliderImageUpload(field.id, imageId, index)}
-                                            imageId={field.sliderImages[index]}
+                                            onfilesUpload={(imageUrl) => handleSliderImageUpload(field.id, imageUrl, index)}
+                                            filesUrl={field.sliderImages[index]}
                                             existingImage={field.existingSliderImages?.[index]}
                                         />
                                     </div>

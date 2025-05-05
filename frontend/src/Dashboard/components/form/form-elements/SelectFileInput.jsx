@@ -15,7 +15,7 @@ const SelectFileInput = ({ onfilesUpload, filesUrl, filesType, existingfiles, Na
     const [showUploadSection, setShowUploadSection] = useState(true);
     const [showAllfilessSection, setShowAllfilessSection] = useState(false);
     const [selectedfiles, setSelectedfiles] = useState(
-        existingfiles?.url || (filesUrl ? `http://localhost:5300/files/get/${filesUrl}` : null)
+        existingfiles?.url || (filesUrl ? `${filesUrl}` : null)
     );
     const [allfiless, setAllfiless] = useState([]);
     const [selectedfilesUrl, setSelectedfilesUrl] = useState(null);
@@ -49,7 +49,7 @@ const SelectFileInput = ({ onfilesUpload, filesUrl, filesType, existingfiles, Na
         const fetchfiles = async () => {
             if (filesUrl && !existingfiles?.url) {
                 try {
-                    const response = await axios.get(`http://localhost:5300/files/get/${filesUrl}`);
+                    const response = await axios.get(`http://localhost:5300${filesUrl}`);
                     if (response.data.files) {
                         setSelectedfiles(response.data.files.files);
                     }
