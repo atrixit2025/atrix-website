@@ -17,7 +17,7 @@ const OurServices = () => {
         </div>
       </div>
 
-      <div className="Brand-Experience container flex  justify-between  mx-auto mt-22">
+      {/* <div className="Brand-Experience container flex  justify-between  mx-auto mt-22">
         <div className="container mx-auto w-[90%]">
         <h4 className=" text-2xl  ">
           Crafted by our team of experts and powered by cutting-edge AI
@@ -25,8 +25,8 @@ const OurServices = () => {
           drive growth and elevate your business.
         </h4>
         </div>
-        
-      </div>
+              
+      </div> */}
 
       <OurServiceCard />
 
