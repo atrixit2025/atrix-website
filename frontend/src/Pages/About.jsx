@@ -119,6 +119,9 @@ const About = () => {
       </div>
 
 
+
+
+
       {/* About-heading and img-tex section */}
       <div className="Page-heading text-center mt-10 md:mt-22 px-4">
         <h1 className="medium-heading">About Us</h1>

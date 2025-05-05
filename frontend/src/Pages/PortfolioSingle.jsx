@@ -90,7 +90,7 @@ const PortfolioSingle = () => {
                             <div  className="project-desc max-w-[800px] mx-auto  px-4">
                                 <h2 className="text-2xl font-bold mb-6">{item.heading_3}</h2>
                                 <div>{item.description_3}</div>
-                            </div>
+                            </div> 
 
 
                             <div  className="grid grid-cols-1 md:grid-cols-2 max-w-[1100px] mx-auto my-24 gap-6 px-4">

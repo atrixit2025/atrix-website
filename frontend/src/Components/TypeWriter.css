@@ -1,0 +1,9 @@
+/* .type-writer-sec{
+    display: inline-block;
+    --whiteSpace:pre-wrap; 
+    overflow: hidden;
+    border-right: 2px solid rgb(216, 216, 216);
+    animation: blink 0.5s step-end infinite normal;
+   
+    margin-top: 9px;
+} */

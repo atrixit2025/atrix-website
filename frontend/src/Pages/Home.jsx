@@ -150,8 +150,8 @@ const Home = () => {
                 <h1 className="text-(--whitelight) mt-5 large-heading ">
                   <div className="relative inline-block">
                     <div className="font-bold tracking-wider ">We deliver</div>
-                    <div className="absolute md:bottom-[4%] bottom-[80%]  md:-right-[20%]  right-0 text-center z-0 animateFromTop tracking-normal">
-                      <p className="bg-(--white) text-(--black) border font-body border-transparent rounded-4xl md:px-8  px-2 py-1 text-sm md:text-2xl -rotate-7 font-bold moveWithMouse">
+                    <div className="absolute md:bottom-[4%] bottom-[80%]  lg:-right-[20%] md:-right-[5%]  right-0 text-center z-0 animateFromTop tracking-normal">
+                      <p className="bg-(--white) text-(--black) border font-body border-transparent rounded-4xl md:px-8  px-2 py-0.5 text-sm md:text-2xl -rotate-7 font-bold moveWithMouse">
                         Marketing
                       </p>
                     </div>
@@ -160,14 +160,14 @@ const Home = () => {
                   <div className="lg:flex  flex-wrap items-center justify-center flexhome  ">
                     <div className="relative inline-block">
                       <div className="font-bold tracking-wider">personal</div>
-                      <div className="absolute lg:-top-[2%] -top-[12%] left-[0%] text-center z-0 animateFromTop tracking-normal">
-                        <p className="bg-(--green) text-(--black) font-body border border-transparent rounded-4xl md:px-8  px-2 py-1 text-sm md:text-2xl rotate-5 font-bold moveWithMouse">
+                      <div className="absolute lg:-top-[2%] md:top-[1%] -top-[12%] left-[0%] text-center z-0 animateFromTop tracking-normal">
+                        <p className="bg-(--green) text-(--black) font-body border border-transparent rounded-4xl md:px-8  px-2 py-0.5 text-sm md:text-2xl rotate-5 font-bold moveWithMouse">
                           Web Development
                         </p>
                       </div>
                     </div>
                     <div className='flex justify-center'>
-                      <div className="relative typewiter-wraper   md:text-5xl text-lg md:w-[45rem] w-[20rem]  font-normal rounded-full md:px-16 px-3 mt- font-body">
+                      <div className="relative typewiter-wraper   md:text-5xl text-lg md:w-[45rem] w-[18rem]  font-normal rounded-full md:px-16 px-1   font-body">
                         <TypewriterEffect
                           lines={lines}
                           speed={170}
@@ -184,14 +184,14 @@ const Home = () => {
                       <img src={Assetarrow} className='w-auto lg:h-22 h-12 md:ml-5 ml-2 mt-1 moveWithMouse' />
                     </div>
 
-                    <div className="absolute -bottom-[25%]  md:bottom-[10%] md:-left-[25%] text-center z-0 animateFromTop tracking-normal">
-                      <p className="bg-(--blue) text-(--black) border   font-body border-transparent rounded-4xl md:px-8  px-2 py-1 text-sm md:text-2xl rotate-12 font-bold moveWithMouse">
+                    <div className="absolute -bottom-[25%] lg:bottom-[10%]  md:-bottom-[8%] lg:-left-[25%] md:-left-[5%] text-center z-0 animateFromTop tracking-normal">
+                      <p className="bg-(--blue) text-(--black) border   font-body border-transparent rounded-4xl md:px-8  px-2 py-0.5 text-sm md:text-2xl rotate-12 font-bold moveWithMouse">
                         Brand Identity
                       </p>
                     </div>
 
                     <div className="absolute -bottom-[25%] left-[68%] md:-bottom-[5%] md:left-[68%] text-center z-0 animateFromTop tracking-normal">
-                      <p className="bg-(--green) text-(--black) border   font-body border-transparent rounded-4xl md:px-8  px-2 py-1 text-sm md:text-2xl rotate-12 font-bold moveWithMouse">
+                      <p className="bg-(--green) text-(--black) border   font-body border-transparent rounded-4xl md:px-8  px-2 py-0.5 text-sm md:text-2xl rotate-12 font-bold moveWithMouse">
                         Visual
                       </p>
                     </div>
@@ -199,7 +199,7 @@ const Home = () => {
                 </h1>
 
                 <div className="text-center z-20 flex justify-center ">
-                  <p className="text-(--white) lg:px-10 lg:py-2 md:text-xl text-sm mt-12 font-semibold  max-w-[950px]">
+                  <p className="text-(--white) lg:px-10 lg:py-2 md:text-xl text-sm mt-12 font-semibold w-[90%] max-w-[950px]">
                     Founded with a passion for innovation, our team of young talents brings a fresh perspective to the world of IT and beyond, offering unique and creative solutions tailored to meet the evolving needs of our clients.
                   </p>
                 </div>
@@ -212,7 +212,7 @@ const Home = () => {
       <LogoSlider className="max-w-full" />
       <div className=" md:py-10   container mx-auto">
         <div className="-mt-10 md:mt-0">
-          <h2 className="font-bold flex justify-center lg:right-60 top-8 md:top-14 relative text-7xl md:text-9xl  text-transparent z-10" style={{ WebkitTextStroke: "1px white" }}>About us</h2>
+          <h2 className="font-bold flex justify-center lg:right-60 top-8 md:top-14 relative  lg:text-9xl md:text-8xl text-4xl text-transparent z-10" style={{ WebkitTextStroke: "1px white" }}>About us</h2>
           <div className="lg:flex items-center ">
             <div className='inline-block relative max-w-[100%] '>
               <img src={AboutImage} className="h-full  w-auto min-h-[600px] object-cover relative max-w-[100%]" alt="About Us" />
@@ -227,7 +227,7 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="text-(--white) lg:-ml-16  relative w-full lg:max-w-[40%] px-5 mt-10 md:mt-0 ">
+            <div className="text-(--white) lg:-ml-16  relative w-full lg:max-w-[40%] px-5 mt-10 lg:mt-0 ">
               <p className="text-xl sm:text-md font-semibold text-(--white) mb-2">Who We Are</p>
               <h3 className="sub-sec-heading  font-bold mb-5">Trusted Experts in Taking Your Business Higher</h3>
 

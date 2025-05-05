@@ -1,74 +1,234 @@
-@import url('https://img.freepik.com/free-vector/page-found-concept-illustration_114360-1869.jpg');
-
-.not-found-container {
+.ocean-container {
   min-height: 100vh;
-  /* background: linear-gradient(145deg, #fefefe, #e2f0ff); */
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  /* background: linear-gradient(to bottom, #0250c5 0%, #d43f8d 100%); */
+  color: #fff;
   padding: 2rem;
-  box-sizing: border-box;
-}
-
-.not-found-content {
   text-align: center;
-  animation: slideUp 0.8s ease-out;
+  position: relative;
+  overflow: hidden;
 }
 
-.not-found-image {
-  max-width: 520px;
-  width: 90%;
-  margin-bottom: 1.5rem;
-  animation: float 3s ease-in-out infinite;
+.ocean-content {
+  max-width: 800px;
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.not-found-title {
-  font-size: 3.5rem;
-
-  margin-bottom: 0.5rem;
+.diver {
+  width: 150px;
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+  animation: diverFloat 4s ease-in-out infinite alternate;
 }
 
-.not-found-text {
+.whale {
+  width: 200px;
+  position: absolute;
+  bottom: -30px;
+  right: -30px;
+  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.4));
+  animation: whaleSwim 8s ease-in-out infinite;
+}
+
+.ocean-title {
+  font-size: 3rem;
+  margin: 1rem 0 1.5rem;
+  background: linear-gradient(90deg, var(--blue) 30%, var(--blue) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 800;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.ocean-message {
   font-size: 1.2rem;
- 
+  line-height: 1.6;
   margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.home-btn {
-  padding: 12px 26px;
-  background-color: var(--blue);
-  color: white;
+.ocean-facts {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border-left: 4px solid #a1c4fd;
+}
+
+.ocean-facts h3 {
+  margin-top: 0;
+  color: #c2e9fb;
+}
+
+.ocean-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+}
+
+.surface-btn, .lifeline-btn {
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
   border: none;
   font-size: 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.home-btn:hover {
-  background-color: var(--green);
-  transform: translateY(-2px);
-  scale: 1.05;
+.surface-btn {
+  background: linear-gradient(90deg, #a1c4fd 0%, #c2e9fb 100%);
+  color: #0250c5;
 }
 
-/* Animations */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+.lifeline-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid white;
 }
 
-@keyframes slideUp {
+.btn-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.surface-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(161, 196, 253, 0.4);
+}
+
+.lifeline-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-3px);
+}
+
+.depth-meter {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.meter-gauge {
+  width: 30px;
+  height: 150px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.meter-fill {
+  width: 100%;
+  background: linear-gradient(to top, #a1c4fd 0%, #c2e9fb 100%);
+  border-radius: 15px;
+  position: absolute;
+  bottom: 0;
+  animation: depthChange 4s ease-in-out infinite alternate;
+}
+
+.depth-meter p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.depth-meter span {
+  color: #c2e9fb;
+  font-weight: bold;
+}
+
+/* Bubbles animation */
+.bubble {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: bubbleRise linear infinite;
+  z-index: 1;
+}
+
+@keyframes bubbleRise {
   0% {
-    transform: translateY(40px);
+    bottom: -100px;
     opacity: 0;
   }
+  20% {
+    opacity: 0.8;
+  }
   100% {
-    transform: translateY(0);
-    opacity: 1;
+    bottom: 100vh;
+    opacity: 0;
+  }
+}
+
+@keyframes diverFloat {
+  0% { transform: translateX(-50%) translateY(0); }
+  100% { transform: translateX(-50%) translateY(-15px); }
+}
+
+@keyframes whaleSwim {
+  0% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(-20px) translateY(-10px); }
+  100% { transform: translateX(0) translateY(0); }
+}
+
+@keyframes depthChange {
+  0% { height: 30%; }
+  100% { height: 100%; }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .ocean-content {
+    padding: 2rem 1.5rem;
+    margin: 1rem;
+  }
+  
+  .ocean-title {
+    font-size: 2.2rem;
+    margin-top: 2rem;
+  }
+  
+  .diver {
+    width: 120px;
+    top: -60px;
+  }
+  
+  .whale {
+    width: 150px;
+    right: -20px;
+  }
+  
+  .ocean-actions {
+    flex-direction: column;
+  }
+  
+  .surface-btn, .lifeline-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .meter-gauge {
+    height: 100px;
   }
 }

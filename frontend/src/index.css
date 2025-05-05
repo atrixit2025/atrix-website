@@ -354,7 +354,7 @@ h3.sub-sec-heading {
 
 @media screen and (max-width: 640px) {
   h1.large-heading {
-    font-size: 60px;
+    font-size: 48px;
   }
   h2.sec-heading {
     font-size: 48px;

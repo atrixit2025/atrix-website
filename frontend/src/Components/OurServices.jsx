@@ -67,9 +67,9 @@ const OurServices = () => {
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row   gap-2  mt-10  md:mt-20 ">
+          <div className="flex flex-col lg:flex-row   gap-2  mt-10  md:mt-20 ">
 
-            <div className="w-full md:w-1/2  ">
+            <div className="w-full lg:w-1/2  ">
               {ServicesData.map((item , index) => (
                 <div
                   key={index}
@@ -79,7 +79,7 @@ const OurServices = () => {
                     <img key={index}
                       src={item.main_image}
                       alt={item.service_title}
-                      className="md:hidden flex h-80 w-auto"
+                      className="lg:hidden flex h-80 w-auto"
                     />
                   </div>
                   <Link to={`service/${item.slug}`} className="flex  items-center gap-3 ">
@@ -111,7 +111,7 @@ const OurServices = () => {
               ))}
             </div>
 
-            <div className="w-1/2  relative md:block   hidden  ">
+            <div className="w-1/2  relative lg:block   hidden  ">
               <div className="sticky top-[25vh]  w-[75%] min-h-[400px] ">
                 {ServicesData.map((serviceimg, index) => (
                   <img

@@ -19,5 +19,5 @@ const Portfolio = () => {
         </div>
     )
 }
-
-export default Portfolio
+ 
+export default Portfolio 
