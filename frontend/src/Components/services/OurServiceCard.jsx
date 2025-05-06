@@ -11,7 +11,7 @@ import Asset1 from "../../assets/ServicesIcons/Asset 2.svg";
 // const content = [
 //   {
 //     icon: Asset1,
-//     title: "Branding/Graphic Design",
+//     title: "Branding / Graphic Design",
 //     items: [
 //       "Branding",
 //       "Logo Design",

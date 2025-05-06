@@ -40,25 +40,25 @@ const TechnologySecPart = () => {
 <div className=''>
             <div className='flex justify-center gap-3'>
                 <h6
-                    className={`bg-(--black) md:px-5 md:py-2 text-lg rounded-full font-bold md:w-32 w-28  pl-3 py-1 cursor-pointer relative ${
+                    className={`bg-(--black)  text-sm md:text-lg rounded-full font-bold cursor-pointer relative flex justify-center items-center px-4 py-1 lg:px-8 lg:py-[6px] ${
                         activeSection === 'frontend' ? 'bg-(--blue)' : ''
                     }`}
                     onClick={() => handleSectionChange('frontend')}
                 >
                     Front-end
                     {activeSection === 'frontend' && (
-                        <span className="absolute left-0 right-0 -bottom-1 mx-auto w-4 h-3 bg-(--blue) rotate-45"></span>
+                        <span className="absolute left-0 right-0 -bottom-1 mx-auto w-4 h-3 bg-(--blue) rotate-45 -z-10"></span>
                     )}
                 </h6>
                 <h6
-                    className={`bg-(--black) md:px-5 md:py-2 text-lg rounded-full font-bold md:w-32 w-28  pl-3 py-1 cursor-pointer relative ${
+                    className={`bg-(--black)  text-sm md:text-lg rounded-full font-bold cursor-pointer relative flex justify-center items-center px-4 py-1 lg:px-8 lg:py-[6px] ${
                         activeSection === 'backend' ? 'bg-(--blue)' : ''
                     }`}
                     onClick={() => handleSectionChange('backend')}
                 >
                     Back-end
                     {activeSection === 'backend' && (
-                        <span className="absolute left-0 right-0 -bottom-1 mx-auto w-4 h-3 bg-(--blue) rotate-45"></span>
+                        <span className="absolute left-0 right-0 -bottom-1 mx-auto w-4 h-3 bg-(--blue) rotate-45 -z-10"></span>
                     )}
                 </h6>
             </div>
@@ -71,22 +71,22 @@ const TechnologySecPart = () => {
                                 <div className='flex justify-center'>
                                     <img className='h-8 md:h-14' src={item.icons} alt={item.TechnologyName} />
                                 </div>
-                                <h6 className='text-sm md:text-lg font-bold  mt-3'>{item.TechnologyName}</h6>
+                                <h6 className='text-sm md:text-lg font-bold  mt-6'>{item.TechnologyName}</h6>   
                             </div>
                         </li>
                     ))}
                 </ul>
             </div>
-
+                    
             <div className='md:hidden block'>
                 <ul className='grid grid-cols-2 items-end justify-center mt-5'>
                     {data.map((item, index) => (
                         <li key={index} className='flex  p-[10px]'>
-                            <div className='bg-(--black) rounded-lg w-full flex items-center justify-center flex-col min-h-[180px]'>
+                            <div className='bg-(--black) rounded-lg w-full flex items-center justify-center flex-col pt-6 pb-4 '>
                                 <div className='flex justify-center'>
-                                    <img className='h-15 md:h-auto' src={item.icons} alt={item.TechnologyName} />
+                                    <img className='h-8 md:h-14' src={item.icons} alt={item.TechnologyName} />
                                 </div>
-                                <p className='text-lg md:text:5xl'>{item.TechnologyName}</p>
+                                <p className='text-lg md:text:5xl mt-3'>{item.TechnologyName}</p>
                             </div>
                         </li>
                     ))}

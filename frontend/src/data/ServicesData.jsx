@@ -26,10 +26,10 @@ import visual from "../assets/ServicesImage/visual.svg";
 import video from "../assets/ServicesImage/video.svg";
 
 const ServicesData = [
-  // Branding/Graphic Design-section
+  // Branding / Graphic Design-section
   {
     slug: "branding-graphic-design",
-    service_title: "Branding/Graphic Design",
+    service_title: "Branding / Graphic Design",
     main_desc:
       "Did you know? 94% of first impressions are design-related! That’s why strong visuals are key to brand success. Graphic design isn’t just about looks - it’s about delivering your message effectively. At Atrix IT Solutions, we bring your vision to life with top-notch designs tailored to your needs. Whether it’s branding, websites, infographics, or eBooks, our expert team creates visually captivating content that engages and inspires. Let’s design something impactful!",
     tags: [
@@ -45,7 +45,7 @@ const ServicesData = [
 
     main_image: graphic,
     icon: Asset1,
-    category: "Branding/Graphic Design",
+    category: "Branding / Graphic Design",
     heading_1: "Crafting Memorable Brand Identities",
     description_1:
       "Did You Know Good Design Can Instantly Build Trust With Customers? Graphic design plays a huge role in the digital world. It's not only about things looking pretty; it's about communicating your message effectively and making a great first impression. A good design can make your business stand out, bring in more customers, and build a brand people remember. No matter if it's a logo, website, or social media post, smart design makes your business thrive. ",
