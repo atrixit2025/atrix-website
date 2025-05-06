@@ -1,0 +1,38 @@
+/* Initial State (before entering the viewport) */
+.image-box, .text-section {
+    opacity: 0;
+    transform: translateY(50px); /* Initially shifted down */
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  
+  /* When the element is in view, apply animation */
+  .in-view {
+    opacity: 1;
+    transform: translateY(0); /* Bring it to original position */
+  }
+  
+  /* Optional: For Images */
+  .image-box img {
+    transition: transform 0.5s ease-out;
+  }
+  
+
+  
+  /* Optional: For text */
+  .text-section.in-view {
+    opacity: 1;
+    transform: translateY(0); /* Move up */
+  }
+  
+
+  .sub-sec-heading {
+    font-size: 1.5rem;
+    color: white;
+  }
+  
+  .text-lg {
+    font-size: 1.2rem;
+    color: white;
+  }
+  
+

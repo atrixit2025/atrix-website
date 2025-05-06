@@ -1,0 +1,19 @@
+/* Initial state */
+.cta-animated-block {
+    opacity: 0;
+    transform: translateY(60px) scale(0.96);
+    filter: blur(4px);
+    transition: 
+      opacity 0.8s ease-out,
+      transform 0.8s ease-out,
+      filter 0.8s ease-out;
+    will-change: opacity, transform, filter;
+  }
+  
+  /* Final animated state */
+  .cta-animate-in {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+  
