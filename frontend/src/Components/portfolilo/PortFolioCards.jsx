@@ -18,7 +18,7 @@ const PortFolioCards = () => {
                     {categories.map((item, index) => (
                         <button
                             key={index}
-                            className={` py-2 px-8 rounded-3xl cursor-pointer font-bold  ${activeCategory === item ? "bg-gradient-to-r from-(--blue) to-(--green) text-black" : ""} bg-black relative before:absolute before:-inset-[1px] before:bg-gradient-to-r before:from-(--blue) before:to-(--green)  before:-z-1 before:rounded-3xl`}
+                            className={` text-sm py-1 px-4 lg:py-2 lg:px-8 rounded-3xl cursor-pointer font-bold  ${activeCategory === item ? "bg-gradient-to-r from-(--blue) to-(--green) text-black" : ""} bg-black relative before:absolute before:-inset-[1px] before:bg-gradient-to-r before:from-(--blue) before:to-(--green)  before:-z-1 before:rounded-3xl`}
                             onClick={() => setActiveCategory(item)}
                         >
                             {item}
@@ -35,7 +35,7 @@ const PortFolioCards = () => {
                                 <img src={item.featured_image} alt='featured_image' className='w-full h-full object-cover' />
                             </div>
                             <div className="portfo-card-content relative py-4 ps-2 pr-16">
-                                <h3 className='text-4xl font-bold mb-2'>{item.project_title}</h3>
+                                <h3 className='text-4xl sec-heading font-bold mb-2 sub-sec-heading'>{item.project_title}</h3>
                                 <p>
                                     {item.tags.map((item, index) => (
                                         <span key={index} >{item} /  </span>

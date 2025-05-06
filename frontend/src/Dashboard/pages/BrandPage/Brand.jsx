@@ -32,30 +32,61 @@ export default function Brand() {
     const [showConfirmDialog, setShowConfirmDialog] = useState(false);
     const [currentDeleteAction, setCurrentDeleteAction] = useState(null);
     // Fetch data
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get("http://localhost:5300/Brand/get");
-                const brands = response.data.Brand;
-                const mappedData = brands.map((tech) => ({
-                    id: tech._id,
-                    title: tech.title,
-                    link: tech.link,
-                    Date: new Date(tech.updatedAt).toLocaleDateString(),
-                    team: {
-                        images: [tech.image?.image || "/images/user/user-22.jpg"],
-                    },
-                    imageId: tech.image?._id,
-                }));
-                setTableData(mappedData);
-            } catch (error) {
-                showAlert('error', "Error fetching data. Please try again.");
-                console.error("Error fetching data:", error);
-            }
-        };
-        fetchData();
-    }, []);
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const response = await axios.get("http://localhost:5300/Brand/get");
+    //             const brands = response.data.Brand;
+    //             const mappedData = brands.map((tech) => ({
+    //                 id: tech._id,
+    //                 title: tech.title,
+    //                 link: tech.link,
+    //                 Date: new Date(tech.updatedAt).toLocaleDateString(),
+    //                 team: {
+    //                     images: [tech.image?.image || "/images/user/user-22.jpg"],
+    //                 },
+    //                 imageId: tech.image?._id,
+    //             }));
+    //             setTableData(mappedData);
+    //         } catch (error) {
+    //             showAlert('error', "Error fetching data. Please try again.");
+    //             console.error("Error fetching data:", error);
+    //         }
+    //     };
+    //     fetchData();
+    // }, []);
 
+    
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5300/Brand/get");
+        
+        const Brands = response.data.Brand.map((tech) => {
+          // Construct proper image URL
+          const featuredImageUrl = tech.FeaturedImage 
+            ? `${tech.FeaturedImage}`
+            : '/images/user/user-22.jpg';
+          
+          return {
+            id: tech._id,
+            title: tech.title,
+            link: tech.link,
+            Date: new Date(tech.updatedAt).toLocaleDateString(),
+            team: {
+              images: [featuredImageUrl],
+            },
+            featuredImage: featuredImageUrl,
+          };
+        });
+
+        setTableData(Brands);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
     // Helper function to show alerts
     const showAlert = (type, message) => {
         setAlert({

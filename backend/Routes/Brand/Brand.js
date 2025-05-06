@@ -10,16 +10,16 @@ const BrandRouter = express.Router();
 
 // Create a new brand
 BrandRouter.post("/add", async (req, res) => {
-  const { title, imageId, link } = req.body;
+  const { title, featuredImage, link } = req.body;
 
-  if (!title || !imageId  ) {
-    return res.status(400).json({ message: "Title, imageId are required" });
+  if (!title || !featuredImage  ) {
+    return res.status(400).json({ message: "Title, featuredImage are required" });
   }
 
   try {
     const newBrand = new Brand({
       title,
-      image: imageId,
+      FeaturedImage: featuredImage,
       link,
      
     });
@@ -36,7 +36,7 @@ BrandRouter.post("/add", async (req, res) => {
 // Get brands
 BrandRouter.get("/get", async (req, res) => {
   try {
-    const brand = await Brand.find({}).populate('image'); // Get the brand details with the image
+    const brand = await Brand.find({}) // Get the brand details with the image
     // if (!brand.length) {
     //   return res.status(404).json({ message: "No brands found" });
     // }
@@ -49,10 +49,10 @@ BrandRouter.get("/get", async (req, res) => {
 
 // Edit brand
 BrandRouter.put("/edit", async (req, res) => {
-  const { id, title, imageId, link } = req.body;
+  const { id, title, featuredImage, link } = req.body;
 
-  if (!id || !title || !imageId  ) {
-    return res.status(400).json({ message: "ID, title, imageId are required" });
+  if (!id || !title || !featuredImage  ) {
+    return res.status(400).json({ message: "ID, title, featuredImage are required" });
   }
 
   try {
@@ -63,7 +63,7 @@ BrandRouter.put("/edit", async (req, res) => {
 
     // Update the brand fields
     existingBrand.title = title;
-    existingBrand.image = imageId;
+    existingBrand.FeaturedImage = featuredImage;
     existingBrand.link = link;
    
 

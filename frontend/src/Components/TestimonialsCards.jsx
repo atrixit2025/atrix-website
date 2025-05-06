@@ -93,7 +93,7 @@ const TestimonialsCards = () => {
                   key={index}
                   className="testimonial-card md:px-2 px-1 mt-16 md:mt-46"
                 >
-                  <div className="rounded-2xl p-10  bg-(--black)">
+                  <div className="rounded-2xl lg:p-10  p-7 bg-(--black)">
                     <div className="flex items-center gap-3">
                       <div>
                         <img
@@ -103,9 +103,9 @@ const TestimonialsCards = () => {
                       </div>
 
                       <div className="flex flex-col justify-center">
-                        <h4 className="text-xl font-bold tracking-tighter leading-2 mt-2 ">{item.UserName}</h4>
+                        <h4 className="text-xl font-bold tracking-tighter  mt-2 ">{item.UserName}</h4>
                         <p className="text-white/70 mt-1">{item.Subheading}</p>
-                        <span className="absolute right-20 text-5xl text-white/15" ><i className="fa-solid fa-quote-right"></i></span>
+                        <span className="absolute right-10  lg:right-20  text-5xl text-white/15" ><i className="fa-solid fa-quote-right"></i></span>
                       </div>
                     </div>
                     <p className="testimonial-text text-white/50 mt-3">

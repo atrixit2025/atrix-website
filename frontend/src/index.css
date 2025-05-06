@@ -347,23 +347,30 @@ h2.sec-heading {
   line-height: 1em;
 }
 h3.sub-sec-heading {
-  font-size: 48px;
+  font-size: 26px;
   line-height: 1em;
   font-weight: bold;
 }
 
 @media screen and (max-width: 640px) {
+  p{
+    font-size: 14px;
+  }
   h1.large-heading {
     font-size: 48px;
   }
+  h1.medium-heading {
+    font-size: 42px;
+    font-weight: bold;
+  }
   h2.sec-heading {
-    font-size: 48px;
+    font-size: 28px;
     font-weight: bold;
     line-height: 1em;
   }
 
   h3.sub-sec-heading {
-    font-size: 30px;
+    font-size: 22px;
   }
   h1.medium-heading {
     font-size: 44px;

@@ -20,13 +20,13 @@ export default function HeaderContent({ onChange, initialData }) {
     //             id: index + 1,
     //             heading: item.heading || "",
     //             description: item.description || "",
-    //             imageId: item.imageId || null
+    //             imageUrl: item.imageUrl || null
     //         }))
     //         : [{
     //             id: 1,
     //             heading: "",
     //             description: "",
-    //             imageId: null
+    //             imageUrl: null
     //         }]
     // );
     const [selectFields, setSelectFields] = useState(() => {
@@ -35,10 +35,10 @@ export default function HeaderContent({ onChange, initialData }) {
                 id: index + 1,
                 heading: item.heading || "",
                 description: item.description || "",
-                imageId: item.imageId || null,
-                existingImage: item.imageId ? {
-                    id: item.imageId,
-                    url: `http://localhost:5300/Image/get/${item.imageId}`
+                imageUrl: item.imageUrl || null,
+                existingImage: item.imageUrl ? {
+                    id: item.imageUrl,
+                    url: `http://localhost:5300/Image/get/${item.imageUrl}`
                 } : null
             }));
         }
@@ -46,7 +46,7 @@ export default function HeaderContent({ onChange, initialData }) {
             id: 1,
             heading: "",
             description: "",
-            imageId: null,
+            imageUrl: null,
             existingImage: null
         }];
     });
@@ -75,7 +75,7 @@ export default function HeaderContent({ onChange, initialData }) {
                 id: newId,
                 heading: "",
                 description: "",
-                imageId: null
+                imageUrl: null
             }
         ]);
     };
@@ -101,13 +101,13 @@ export default function HeaderContent({ onChange, initialData }) {
         // console.log("selectedImages", selectedImages);
         // console.log("id", id);
     
-        // Handle case where we get just an imageId string
+        // Handle case where we get just an imageUrl string
         if (typeof selectedImages === 'string') {
             setSelectFields(prevFields =>
                 prevFields.map(field =>
                     field.id === id ? {
                         ...field,
-                        imageId: selectedImages // Use the string directly as imageId
+                        imageUrl: selectedImages // Use the string directly as imageUrl
                     } : field
                 )
             );
@@ -125,7 +125,7 @@ export default function HeaderContent({ onChange, initialData }) {
                 prevFields.map(field =>
                     field.id === id ? {
                         ...field,
-                        imageId: null
+                        imageUrl: null
                     } : field
                 )
             );
@@ -140,9 +140,9 @@ export default function HeaderContent({ onChange, initialData }) {
         }
     
         // Handle both object format and direct ID
-        const imageId = image.imageId || image;
-        if (!imageId) {
-            console.error("No imageId found in:", image);
+        const imageUrl = image.imageUrl || image;
+        if (!imageUrl) {
+            console.error("No imageUrl found in:", image);
             return;
         }
     
@@ -150,7 +150,7 @@ export default function HeaderContent({ onChange, initialData }) {
             prevFields.map(field =>
                 field.id === id ? {
                     ...field,
-                    imageId
+                    imageUrl
                 } : field
             )
         );
@@ -165,12 +165,12 @@ export default function HeaderContent({ onChange, initialData }) {
                 headingAnddescription: selectFields
                     .filter(item => item.heading.trim() !== "" ||
                         item.description.trim() !== "" ||
-                        item.imageId
+                        item.imageUrl
                     )
                     .map(item => ({
                         heading: item.heading,
                         description: item.description,
-                        imageId: item.imageFile?.imageId || item.imageId || null
+                        imageUrl: item.imageFile?.imageUrl || item.imageUrl || null
                     }))
                     
             }]);
@@ -191,7 +191,7 @@ export default function HeaderContent({ onChange, initialData }) {
     //     headingAnddescription: selectFields.map(item => ({
     //         heading: item.heading,
     //         description: item.description,
-    //         imageId: item.imageId
+    //         imageUrl: item.imageUrl
     //     }))
     // });
 
@@ -279,8 +279,8 @@ export default function HeaderContent({ onChange, initialData }) {
                                     <SelectFileInput
                                         selected="Set the"
                                         NameOffield="Image"
-                                        onImageUpload={(selectedImages) => handleImageChange(field.id, selectedImages)}
-                                        imageId={field.imageId} // Pass imageId directly
+                                        onfilesUpload={(selectedImages) => handleImageChange(field.id, selectedImages)}
+                                        filesUrl={field.imageUrl} // Pass imageUrl directly
                                         existingImages={field.imageFile ? [field.imageFile] : []}
 
 

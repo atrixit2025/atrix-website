@@ -4,7 +4,7 @@ import thumbnail from "../assets/thumbnail/t.png";
 
 const VideoSection = () => {
   return (
-    <div className="video-sec mx-6 pt-38">
+    <div className="video-sec mx-6 mb-24">
       <div className="pointer-events-none">
         <video
           className="rounded-xl"

@@ -9,11 +9,9 @@ const TechnologySchema = new mongoose.Schema({
         type:String,
         require:true
     },
-    image:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'file',
+    FeaturedImage: {
+        type: String,
         required: true
-
     },
     updatedAt: {
         type: Date,

@@ -216,7 +216,7 @@ const GenericDataTable = ({
                           className="cursor-pointer text-gray-500 hover:text-gray-700 text-2xl" 
                           
                           onClick={() => {
-                            console.log("Edit clicked for item:", item); // Debugging
+                            // console.log("Edit clicked for item:", item); // Debugging
                             onEdit(item); // Ensure this is being called
                           }}  
                         />

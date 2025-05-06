@@ -314,38 +314,25 @@ export default function Blog() {
       try {
         const response = await axios.get("http://localhost:5300/Blog/get");
         
-        const BlogsWithImages = await Promise.all(
-          response.data.Blog.map(async (blog) => {
-            let featuredImageUrl = "/images/user/user-22.jpg";
-            
-            if (blog.FeaturedImage) {
-              try {
-                const imgResponse = await axios.get(
-                  `http://localhost:5300/Image/${blog.FeaturedImage}`
-                );
-                featuredImageUrl = imgResponse.data.Image?.image || featuredImageUrl;
-              } catch (error) {
-                console.error("Error fetching featured image:", error);
-              }
-            }
-            
-            return {
-              id: blog._id,
-              name: blog.title,
-              Category: blog.category,
-              description: blog.text,
-              Date: new Date(blog.updatedAt).toLocaleDateString(),
-              featuredImage: featuredImageUrl,
-              FeaturedImageId: blog.FeaturedImage,
-              // Include all the content sections
-              contentSections: blog.contentSections || [],
-              // Include any other fields you need
-              updatedAt: blog.updatedAt,
-              // Add other fields as needed
-              
-            };
-          })
-        );
+        const BlogsWithImages = response.data.Blog.map((blog) => {
+          // If FeaturedImage is already a full URL, use it directly
+          // If it's just an ID, you'll need to construct the URL
+          const featuredImageUrl = `http://localhost:5300/Image${blog.FeaturedImage}` 
+            ? blog.FeaturedImage // Use directly if it's a complete URL
+            : `/images/user/user-22.jpg`; // Fallback image
+          
+          return {
+            id: blog._id,
+            name: blog.title,
+            Category: blog.category,
+            description: blog.text,
+            Date: new Date(blog.updatedAt).toLocaleDateString(),
+            featuredImage: featuredImageUrl, // Use the URL directly
+            FeaturedImageId: blog.FeaturedImage,
+            contentSections: blog.contentSections || [],
+            updatedAt: blog.updatedAt,
+          };
+        });
         
         setTableData(BlogsWithImages);
       } catch (error) {

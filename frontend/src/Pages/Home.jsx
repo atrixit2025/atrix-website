@@ -17,7 +17,6 @@ const LetterMarquee = React.lazy(() => import('../Components/marqueelogo/letterM
 import video_circle from '../assets/video_circle.svg'
 import { CiPlay1 } from "react-icons/ci";
 import about_video from '../assets/About_video.mp4'
-
 import thumbnail2 from "../assets/thumbnail/t2.png"
 
 
@@ -210,13 +209,12 @@ const Home = () => {
       </div>
 
       <LogoSlider className="max-w-full" />
-      <div className=" md:py-10   container mx-auto">
+      <div className=" md:py-10 container mx-auto mt-24">
         <div className="-mt-10 md:mt-0">
-          <h2 className="font-bold flex justify-center lg:right-60 top-8 md:top-14 relative  lg:text-9xl md:text-8xl text-4xl text-transparent z-10" style={{ WebkitTextStroke: "1px white" }}>About us</h2>
-          <div className="lg:flex items-center ">
+          <div className="lg:flex items-center  ">
             <div className='inline-block relative max-w-[100%] '>
+            <h2 className="font-bold absolute z-50 lg:text-9xl md:text-8xl text-4xl text-transparent top-0  -translate-1/2  left-1/2 whitespace-nowrap " style={{ WebkitTextStroke: "1px white" }}>About us</h2>
               <img src={AboutImage} className="h-full  w-auto min-h-[600px] object-cover relative max-w-[100%]" alt="About Us" />
-
               <div className='video-button-sec' >
                 <div className="video-circle">
                   <img src={video_circle} alt="" className='w-full h-full object-cover' />

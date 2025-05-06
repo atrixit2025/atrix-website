@@ -178,72 +178,28 @@ export default function Services() {
         const ServicesWithFullData = await Promise.all(
           response.data.Services.map(async (service) => {
             // Fetch featured image
-            let featuredImageUrl = "/images/user/user-22.jpg";
-            if (service.FeaturedImage) {
-              try {
-                const imgResponse = await axios.get(
-                  `http://localhost:5300/Image/get/${service.FeaturedImage}`
-                );
-                featuredImageUrl = imgResponse.data.Image?.image || featuredImageUrl;
-              } catch (error) {
-                console.error("Error fetching featured image:", error);
-              }
-            }
+
+            const getImageUrl = (imagePath) => {
+              if (!imagePath) return '/images/user/user-22.jpg'; 
+              if (imagePath.startsWith('http')) return imagePath; 
+              return `${imagePath}`; 
+            };
+  
+      
+            const featuredImageUrl = getImageUrl(service.FeaturedImage);
+            const iconImageUrl = getImageUrl(service.iconImageUrl);
             
-            // Fetch icon image
-            let iconImageUrl = "/images/default-icon.png";
-            if (service.iconImageId) {
-              try {
-                const iconResponse = await axios.get(
-                  `http://localhost:5300/Image/get/${service.iconImageId}`
-                );
-                iconImageUrl = iconResponse.data.Image?.image || iconImageUrl;
-              } catch (error) {
-                console.error("Error fetching icon image:", error);
-              }
-            }
+       
+            const galleryWithUrls = service.gallery?.map(galleryItem => ({
+              ...galleryItem,
+              url: getImageUrl(galleryItem.imageUrl) 
+            })) || [];
             
-            // Fetch gallery images
-            const galleryWithUrls = await Promise.all(
-              service.gallery?.map(async (galleryItem) => {
-                try {
-                  const galleryResponse = await axios.get(
-                    `http://localhost:5300/Image/get/${galleryItem.imageId}`
-                  );
-                  return {
-                    ...galleryItem,
-                    url: galleryResponse.data.Image?.image || null
-                  };
-                } catch (error) {
-                  console.error("Error fetching gallery image:", error);
-                  return {
-                    ...galleryItem,
-                    url: null
-                  };
-                }
-              }) || []
-            );
-            
-            // Fetch texttoimageandimagetotext images
-            const textImageSections = await Promise.all(
-              service.texttoimageandimagetotext?.map(async (section) => {
-                let imageUrl = null;
-                if (section.imageId) {
-                  try {
-                    const imgResponse = await axios.get(
-                      `http://localhost:5300/Image/get/${section.imageId}`
-                    );
-                    imageUrl = imgResponse.data.Image?.image || null;
-                  } catch (error) {
-                    console.error("Error fetching section image:", error);
-                  }
-                }
-                return {
-                  ...section,
-                  imageUrl
-                };
-              }) || []
-            );
+         
+            const textImageSections = service.texttoimageandimagetotext?.map(section => ({
+              ...section,
+              imageUrl: getImageUrl(section.imageUrl) 
+            })) || [];
             
             return {
               id: service._id,

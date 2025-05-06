@@ -194,6 +194,7 @@ const ContactForm = () => {
                         </div>
                     </div>
 
+
                     <style jsx>{`
                         .form-element {
                             transition: all 0.5s ease;
@@ -211,6 +212,10 @@ const ContactForm = () => {
                 </motion.div>
             )}
         </AnimatePresence>
+
+               
+         
+
     );
 };
 

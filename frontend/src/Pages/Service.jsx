@@ -13,6 +13,7 @@ import OurPortfolio from "../Components/OurPortfolio";
 import FaqSection from "../Components/FaqSection";
 import Button from "../Components/Button";
 
+import img1 from "../assets/ServicesImage/Logistics.png"
 import ServicesData from "../data/ServicesData";
 import "./Service.css";
 import img1 from "../assets/ServicesImage/Logistics.png";

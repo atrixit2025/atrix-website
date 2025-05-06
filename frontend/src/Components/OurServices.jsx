@@ -99,7 +99,7 @@ const OurServices = () => {
                       {item.tags.map((tag, i) => (
                         <div
                           key={i}
-                          className="custom-gradient duration-300 rounded-full px-4 py-1 md:px-6 md:py-2 mt-2 mr-2"
+                          className="custom-gradient duration-300 rounded-full px-4 py-1 md:px-6 md:py-2 mt-2 mr-2 text-[14px] lg:text-[16px] "
                         >
                           {tag}
                         </div>
