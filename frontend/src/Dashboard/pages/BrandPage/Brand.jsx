@@ -12,11 +12,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Checkbox from "../../components/form/input/Checkbox";
 import PageBreadcrumb from "../../components/common/PageBreadCrumb";
-import Select from "../../components/form/Select";
-import SelectBUlk from "../../components/form/SelectBulk";
 import SelectBulk from "../../components/form/SelectBulk";
 import CustomAlert from "../../components/Alert/Alert";
-// import CustomAlert from "./CustomAlert"; 
 
 export default function Brand() {
     const [selectedRows, setSelectedRows] = useState([]);
@@ -31,31 +28,7 @@ export default function Brand() {
     });
     const [showConfirmDialog, setShowConfirmDialog] = useState(false);
     const [currentDeleteAction, setCurrentDeleteAction] = useState(null);
-    // Fetch data
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const response = await axios.get("http://localhost:5300/Brand/get");
-    //             const brands = response.data.Brand;
-    //             const mappedData = brands.map((tech) => ({
-    //                 id: tech._id,
-    //                 title: tech.title,
-    //                 link: tech.link,
-    //                 Date: new Date(tech.updatedAt).toLocaleDateString(),
-    //                 team: {
-    //                     images: [tech.image?.image || "/images/user/user-22.jpg"],
-    //                 },
-    //                 imageId: tech.image?._id,
-    //             }));
-    //             setTableData(mappedData);
-    //         } catch (error) {
-    //             showAlert('error', "Error fetching data. Please try again.");
-    //             console.error("Error fetching data:", error);
-    //         }
-    //     };
-    //     fetchData();
-    // }, []);
-
+ 
     
   useEffect(() => {
     const fetchData = async () => {
@@ -63,7 +36,6 @@ export default function Brand() {
         const response = await axios.get("http://localhost:5300/Brand/get");
         
         const Brands = response.data.Brand.map((tech) => {
-          // Construct proper image URL
           const featuredImageUrl = tech.FeaturedImage 
             ? `${tech.FeaturedImage}`
             : '/images/user/user-22.jpg';
@@ -87,7 +59,6 @@ export default function Brand() {
     };
     fetchData();
   }, []);
-    // Helper function to show alerts
     const showAlert = (type, message) => {
         setAlert({
             show: true,
@@ -96,12 +67,10 @@ export default function Brand() {
         });
     };
 
-    // Close alert
     const closeAlert = () => {
         setAlert(prev => ({ ...prev, show: false }));
     };
 
-    // Single delete
     const handleDelete = async (id) => {
         try {
             const response = await axios.delete("http://localhost:5300/Brand/delete", {
@@ -124,7 +93,6 @@ export default function Brand() {
             return;
         }
 
-        // Set up the delete action that will be executed after confirmation
         setCurrentDeleteAction(() => async () => {
             try {
                 const response = await axios.delete("http://localhost:5300/Brand/delete", {
@@ -143,7 +111,6 @@ export default function Brand() {
             }
         });
 
-        // Show the confirmation dialog
         setShowConfirmDialog(true);
     };
 

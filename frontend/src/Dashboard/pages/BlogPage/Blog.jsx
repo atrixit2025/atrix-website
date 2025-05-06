@@ -324,6 +324,7 @@ export default function Blog() {
           return {
             id: blog._id,
             name: blog.title,
+            slug: blog.Slug,
             Category: blog.category,
             description: blog.text,
             Date: new Date(blog.updatedAt).toLocaleDateString(),
@@ -398,20 +399,24 @@ const handleEdit = (item) => {
       item: {
         id: item.id,
         title: item.name,
+        Slug: item.slug,
         category: item.Category,
         FeaturedImage: item.FeaturedImageId,
         featuredImageUrl: item.featuredImage,
         contentSections: item.contentSections.map(section => ({
           ...section,
           // Add imageUrl if you have it, or we'll fetch it in the form
-          imageUrl: section.imageId ? `http://localhost:5300/Image/get/${section.imageId}` : null
+          imageUrl: section.imageUrl
         })),
         text: item.description,
       } 
+      
     } 
+    
   });
-};
+// console.log("handleEdit", item)
 
+};
 
 const columns = [
   { key: "name", title: "Title" },
