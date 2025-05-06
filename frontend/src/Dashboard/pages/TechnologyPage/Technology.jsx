@@ -37,11 +37,12 @@ export default function Technology() {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:5300/Technology/get");
-        const Technologys = response.data.Technology.map((tech) => {
-          // Check if image data is populated
-          const imageUrl = tech.image?.image 
-            ? tech.image.image 
-            : "/images/user/user-22.jpg"; // Fallback image
+        
+        const technologies = response.data.Technology.map((tech) => {
+          // Construct proper image URL
+          const featuredImageUrl = tech.FeaturedImage 
+            ? `${tech.FeaturedImage}`
+            : '/images/user/user-22.jpg';
           
           return {
             id: tech._id,
@@ -49,13 +50,13 @@ export default function Technology() {
             Category: tech.category,
             Date: new Date(tech.updatedAt).toLocaleDateString(),
             team: {
-              images: [imageUrl], // Use the proper image URL
+              images: [featuredImageUrl],
             },
-            imageId: tech.image?._id,
+            featuredImage: featuredImageUrl,
           };
         });
-  
-        setTableData(Technologys);
+
+        setTableData(technologies);
         await fetchCategoryCounts();
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -63,7 +64,6 @@ export default function Technology() {
     };
     fetchData();
   }, []);
-
   const handleDelete = async (id, title, category) => {
     try {
       await axios.delete("http://localhost:5300/Technology/delete", {
@@ -109,13 +109,9 @@ export default function Technology() {
       render: (item) => (
         <div className="w-16 h-16 overflow-hidden rounded">
           <img
-            src={`http://localhost:5300${item.team.images[0]}`}
-            alt="Technology"
+            src={`http://localhost:5300${item.featuredImage}`}
+            alt="Featured"
             className="w-full h-full object-cover"
-            onError={(e) => {
-              e.target.onerror = null; 
-              e.target.src = "/images/user/user-22.jpg";
-            }}
           />
         </div>
       )

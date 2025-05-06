@@ -43,9 +43,7 @@ const Service = () => {
             background-color: white;
             color: var(--blue);
           }
-          #btnArrow:hover {
-            color: var(--blue) !important;
-          }
+        
         `}
       </style>
 
@@ -59,6 +57,12 @@ const Service = () => {
         <WebDevelopment secData={filteredService} targetRef={formRef} />
         <ServicesCards secData={filteredService} />
         <WhyNeedBranding secData={filteredService} targetRef={formRef} />
+
+        <div className="img-se">
+          <img className="w-full" src={img1} alt="" />
+        </div>
+
+
         <WhyAtrix secData={filteredService} />
         <ProcessCards secData={filteredService} targetRef={formRef} />
 

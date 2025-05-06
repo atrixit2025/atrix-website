@@ -63,7 +63,7 @@ const GenericForm = ({
   const [formData, setFormData] = useState({
     title: "",
     selectedCategories: [],
-    imageId: null,
+    imageUrl: null, // Changed from imageId to imageUrl
   });
 
   // Fetch categories
@@ -85,10 +85,12 @@ const GenericForm = ({
       setFormData({
         title: item.title || item.name || "",
         selectedCategories: item.category ? item.category.split(", ") : [],
-        imageId: item.FeaturedImage || item.imageId || null,
+        imageUrl: item.FeaturedImage || item.imageUrl || null, // Use URL instead of ID
       });
 
-      // Initialize content sections if needed
+      console.log("Item in edit mode:", item);
+
+      // Update content sections initialization
       if (hasContentSections) {
         const initialFields = item.contentSections?.length > 0
           ? item.contentSections.map((section, index) => ({
@@ -106,24 +108,12 @@ const GenericForm = ({
             ],
             textContent: section.type === 'text' ? section.content : "",
             imageFile: section.type !== 'text' ? {
-              id: section.imageId,
+              url: section.imageUrl, // Use URL instead of ID
               name: "Existing image",
               type: section.type
             } : null
           }))
-          : [{
-            id: 1,
-            value: "",
-            options: [
-              { value: "", label: "Select Option" },
-              { value: "text", label: "Text" },
-              { value: "image", label: "Image" },
-              { value: "full-image", label: "Full Image" },
-              { value: "big-image", label: "Big Image" }
-            ],
-            textContent: "",
-            imageFile: null
-          }];
+          : [/* ... */];
 
         setSelectFields(initialFields);
       }
@@ -141,9 +131,9 @@ const GenericForm = ({
   };
 
   const handleSubmit = async () => {
-    const { title, selectedCategories, imageId } = formData;
+    const { title, selectedCategories, imageUrl } = formData;
 
-    if (!title || selectedCategories.length === 0 || !imageId) {
+    if (!title || selectedCategories.length === 0 || !imageUrl) {
       alert("Title, category, and image are required!");
       return;
     }
@@ -151,16 +141,17 @@ const GenericForm = ({
     const payload = {
       title,
       category: selectedCategories.join(", "),
-      FeaturedImageId: imageId,
+      featuredImage: imageUrl, // Send URL instead of ID
       ...(hasContentSections && {
         contentSections: selectFields.map(field => ({
           type: field.value.value,
           ...(field.value.value === 'text' ? { content: field.textContent } :
-            { imageId: field.imageFile?.id || null })
+            { imageUrl: field.imageFile?.url || null }) // Send URL instead of ID
         }))
       }
       )
     };
+    console.log("Payload to be sent:", JSON.stringify(payload, null, 2));
 
     // Add ID to payload if in edit mode
     if (item?.id) {
@@ -219,15 +210,13 @@ const GenericForm = ({
       field.id === id ? { ...field, textContent: newContent } : field
     ));
   };
-
-  const handleImageChange = (id, imageId, fieldType) => {
+  const handleImageChange = (id, imageUrl, fieldType) => {
     setSelectFields(selectFields.map(field => {
       if (field.id === id) {
         return {
           ...field,
           imageFile: {
-            id: imageId,
-            url: imageId ? `http://localhost:5300/Image/get/${imageId}` : null,
+            url: imageUrl, // Store URL directly
             type: fieldType,
             name: "Uploaded image"
           }
@@ -298,7 +287,7 @@ const GenericForm = ({
               <div className="card-body">
                 <div className="form-group mb-3">
                   <SelectBulk
-                  
+
                     options={field.options}
                     value={field.value}
                     onChange={(value) => handleSelectChange(field.id, value)}
@@ -323,7 +312,7 @@ const GenericForm = ({
                   field.value?.value === "big-image") && (
                     <div className="form-group">
                       <SelectFileInput
-                      NameOffield="Image"
+                        NameOffield="Image"
                         onImageUpload={(imageId, imageType) =>
                           handleImageChange(field.id, imageId, imageType || field.value?.value)
                         }
@@ -363,14 +352,15 @@ const GenericForm = ({
 
           <ImageProvider>
             <FileInputExample
-              onfilesUpload={(imageId) =>
-                setFormData(prev => ({ ...prev, imageId }))
+              Componenttitle="Featured Image"
+              h1="Featured Image"
+              SetButtonName=" Set Featured Image"
+              setName=" Set Featured Image "
+              onfilesUpload={(imageUrl) =>  // Changed to receive URL instead of ID
+                setFormData(prev => ({ ...prev, imageUrl }))
               }
-              filesId={item?.imageId || item?.FeaturedImage}
-              filesUrl={item?.imageUrl || item?.FeaturedImageUrl}
-
+              filesUrl={item?.FeaturedImage || item?.imageUrl || item?.featuredImageUrl}
             />
-            
           </ImageProvider>
         </div>
       </div>

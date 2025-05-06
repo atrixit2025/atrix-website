@@ -1,0 +1,95 @@
+.card-bg {
+  position: relative;
+  background: linear-gradient(135deg, #1f1f1f, #2a2a2a);
+  border-radius: 12px;
+  width: 100%;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* Hover effect */
+.card-bg:hover {
+  transform: scale(1.05) rotate(1deg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  background: linear-gradient(135deg, #2a2a2a, #1f1f1f);
+}
+
+/* Image scaling on hover */
+.card-bg img {
+  height: 2rem;
+  transition: transform 0.3s ease;
+}
+
+.card-bg:hover img {
+  transform: scale(1.1);
+}
+
+/* Heading */
+.card-bg h6 {
+  font-weight: bold;
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: white;
+  transition: opacity 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .card-bg img {
+    height: 3.5rem;
+  }
+
+  .card-bg h6 {
+    font-size: 1.125rem;
+  }
+}
+
+/* === Mirror Shine Effect === */
+.card-bg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.32) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  opacity: 0;
+  z-index: 5;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.card-bg:hover::after {
+  animation: shineEffect 0.9s ease forwards;
+}
+
+/* Animation */
+@keyframes shineEffect {
+  0% {
+    left: -60%;
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.15;
+  }
+  100% {
+    left: 120%;
+    opacity: 0;
+  }
+}

@@ -345,77 +345,80 @@ const ServicesData = [
     ],
     main_image: marketing,
     category: "Digital Marketing",
-    heading_1: "Data-Driven Digital Growth Strategies",
+    heading_1: "Maximize Growth Through Smarter Marketing Moves",
     description_1:
-      "We develop performance-focused digital marketing campaigns that drive qualified traffic, generate leads, and deliver measurable ROI through precisely targeted channels and continuous optimization.",
+      "Want to expand your business online? That's where digital marketing steps in. It refers to using the internet to market your goods or services. This includes things such as websites, social media, online advertisements, emails, and more. Digital marketing assists you in reaching a greater number of people, creating trust, and converting visitors into buyers. Most people in today’s world look online before making any purchase, so if your company is not represented there, then you are missing out. With the correct digital strategy, you can get ahead of your competitors, get noticed by the right people, and build your brand quicker. ",
     img_1: image_1,
+
+    heading_2: "Boost your online presence with Attrix Solution!",
+    description_2:
+      "At Atrix IT Solutions, we are experts in result-driven digital marketing! From enhancing your website's search engine visibility to developing effective social media campaigns, we use effective strategies that bring in more customers. Our experts collaborate with you to learn about your objectives and develop a strategy that best meets your business requirements. Regardless of whether you're looking to grow traffic, grow sales, or establish your web presence, we have the software and expertise to help you succeed. Let's get started now and drive your business to new heights!",
     img_2: image_2,
+
     sub_service: [
       {
-        services_heading: "Contant",
+        services_heading: "What digital marketing includes",
         services_desc:
-          "Comprehensive solutions covering the entire customer journey from initial awareness to final conversion and retention.",
+          "Digital marketing is anything you do on the internet to promote a business. It is planning a strategy, using SEO to appear on Google, posting on social media, doing online ads, and writing content such as blogs or videos. They all assist you in reaching more people and increasing your brand. However, here are a few points listed below:",
         all_services: [
           {
-            service_name: "SEO Services",
+            service_name: "Marketing",
             service_desc:
-              "Improving organic search visibility through technical optimization, keyword research and content strategies to drive sustainable, long-term traffic and conversions.",
+              "Marketing is about getting in touch with the right people by providing the right information. It helps in showcasing your business, products, or services to a larger audience with various tools such as websites, advertisements, emails, and social media. Good marketing builds trust and helps your business grow.",
             hover_image: hover_img,
           },
           {
-            service_name: "Social Media Marketing",
+            service_name: "Strategy",
             service_desc:
-              "Developing platform-specific strategies to build engaged communities through compelling content and targeted advertising across major social networks.",
+              "A digital marketing strategy is a plan that shows how to achieve your business objectives online. It involves steps such as understanding your audience, selecting the appropriate platforms, and producing helpful content. A clear strategy assists you in staying on track and achieving better results from your marketing efforts.",
             hover_image: hover_img2,
           },
           {
-            service_name: "PPC Advertising",
+            service_name: "SEO",
             service_desc:
-              "Managing high-converting paid campaigns on Google, Bing and social platforms with continuous optimization for maximum ROI.",
+              "SEO (Search Engine Optimization) makes your website show up higher in search engine results such as Google. It involves proper keyword usage, page speed optimization, and developing useful content. With proper SEO, more individuals can locate your website when they search for something related.",
             hover_image: hover_img3,
           },
           {
-            service_name: "Content Marketing",
+            service_name: "SMO",
             service_desc:
-              "Creating valuable, SEO-optimized content that attracts and nurtures ideal customers through every stage of the buyer's journey.",
+              "SMO (Social Media Optimization) improves your presence on social sites such as Facebook, Instagram, and LinkedIn. SMO involves publishing informative content, applying appropriate hashtags, and engaging with the audience. SMO assists you in reaching more people and making more intimate relationships with customers.",
             hover_image: hover_img4,
           },
           {
-            service_name: "Email Marketing",
+            service_name: "Digital Ads",
             service_desc:
-              "Designing automated email sequences and newsletters that convert subscribers into loyal customers with personalized messaging.",
+              "Digital ads are internet advertisements shown on websites, search engines, or social media. They help in marketing your business to the right people. You can set your budget, select your audience, and check how effective the ads are to achieve better results.",
             hover_image: hover_img5,
           },
           {
-            service_name: "Influencer Marketing",
+            service_name: "Content Creation",
             service_desc:
-              "Leveraging authentic influencer partnerships to expand brand reach and credibility through trusted voices in your industry.",
+              "Content creation is all about making helpful and engaging materials such as blogs, videos, and photos for your site and social networks. Excellent content solves problems, creates trust, and brings people back. It's an essential component of any digital marketing strategy.",
             hover_image: hover_img,
           },
         ],
       },
     ],
-    cards_sec_heading: "Why do you need branding",
+    cards_sec_heading: "Why Your Business Should Be Using Digital Marketing Services",
     cards_sec_data: [
       {
-        cardTitle: "Precision Targeting",
-        desc: "Reach your ideal customers based on demographics, interests and behaviors with pixel-perfect accuracy.",
+        cardTitle: "Reach More Customers",
+        desc: "Digital marketing enables you to reach individuals anywhere in the world. If they are on Google, Facebook, or YouTube, your message can reach them quickly. This implies that more individuals are aware of your business and what you have to offer.",
       },
       {
-        cardTitle: "Performance Transparency",
-        desc: "Real-time analytics provide clear visibility into campaign performance and ROI across all channels.",
+        cardTitle: "Cost-Effective Promotion",
+        desc: "Unlike print ads, digital marketing allows you to advertise cheaply. You can spend less and still reach many people. It's perfect for small businesses with the right budgets.",
       },
       {
-        cardTitle: "Scalable Growth",
-        desc: "Digital campaigns can be precisely calibrated and scaled to match business objectives and budgets.",
+        cardTitle: "Track Results Easily",
+        desc: "One of the best aspects of digital marketing is that you can monitor what works. You can follow up on how many people viewed your ad, clicked it, or bought something. This allows you to get better over time",
       },
     ],
     why_atrix_heading: "Why Atrix",
-    why_atrix_subheading: "Scientific approach to digital growth",
+    why_atrix_subheading: "Get Real Results with Proven Marketing Tactics",
     why_atrix_desc: [
-      "We combine data analysis with creative execution to develop campaigns that deliver actual business results, not just vanity metrics.",
-      "Every strategy begins with clearly defined KPIs tied to revenue goals and includes ongoing optimization based on performance data.",
-      "Our team includes certified specialists in each digital marketing discipline, ensuring best practices across your entire marketing mix.",
+      "Did you know over 5 billion people use the internet every day? Digital marketing helps your business grow by connecting you with more people online, right where they spend most of their time. At Attrix Solutions, we understand how to use the right tools and strategies to help your brand get noticed. From SEO and social media to content and ads, we cover everything you need to build a strong online presence. Partner with us and let’s grow your business together, the smart and effective way.",
     ],
     process_cards: [
       {
@@ -546,26 +549,28 @@ const ServicesData = [
       "Our pipeline combines industry-standard software with proprietary techniques for efficient, high-quality results.",
       "The team includes veterans from film, television and advertising with deep experience across all VFX disciplines.",
     ],
+
     process_cards: [
+      
       {
-        title: "Concept Development",
-        desc: "Planning visual approach through storyboards and style frames.",
+        title: " Understanding Your Business:",
+        desc: "We start by learning about your business, your goals, and your audience. This helps us make a plan that fits your needs and speaks to the right people.",
       },
       {
-        title: "Asset Creation",
-        desc: "Modeling, texturing and rigging 3D assets.",
+        title: "Planning the Strategy:",
+        desc: "Next, we create a step-by-step marketing plan. This includes which platforms to use, what kind of content to post, and how to reach your ideal customers.",
       },
       {
-        title: "Animation & Simulation",
-        desc: "Bringing assets to life through movement.",
+        title: "Creating Quality Content:",
+        desc: "We design posts, ads, and videos that clearly show what your business offers. Good content grabs attention and keeps your audience interested.",
       },
       {
-        title: "Lighting & Rendering",
-        desc: "Setting up proper lighting conditions.",
+        title: "Running Digital Ads:",
+        desc: "We run targeted ads on Google, Facebook, and other platforms to help you get more visitors, leads, or sales.",
       },
       {
-        title: "Compositing",
-        desc: "Integrating elements with live footage.",
+        title: "Tracking and Improving:",
+        desc: "We check what’s working and what’s not. Then, we adjust the plan to get better results over time.",
       },
     ],
     quote:

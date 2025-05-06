@@ -1,0 +1,28 @@
+/* Define the animation */
+@keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(30px) scale(0.8); /* Start with smaller scale and below */
+    }
+    40% {
+      opacity: 0.6;
+      transform: translateY(0) scale(1.1); /* Slight scale-up effect */
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1); /* End with full scale and no offset */
+    }
+  }
+  
+  /* Apply animation on the image */
+  .serviceImg {
+    opacity: 0;
+    transform: translateY(30px); /* Start off slightly below */
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-out; /* Transition for smooth fade-in */
+  }
+  
+  .serviceImg.active-img {
+    opacity: 1;
+    animation: fadeInUp 1s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; /* Using cubic-bezier for a smoother easing */
+  }
+  

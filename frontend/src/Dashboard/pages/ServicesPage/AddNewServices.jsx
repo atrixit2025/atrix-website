@@ -46,8 +46,8 @@ export default function AddNewServices() {
     selectedfaqCategories: [],
     selectedtechnology: [],
     tags: [],
-    iconImageId: null,
-    imageId: null,
+    iconImageUrl: null,
+    imageUrl: null,
     Bannerdata: [],
     WhydoNeed: [],
     WhyAtrix: [],
@@ -129,7 +129,7 @@ export default function AddNewServices() {
           ? Services.Technology.map(tech => ({
             _id: tech._id,
             title: tech.title,
-            imageId: tech.imageId,
+            imageUrl: tech.imageUrl,
             // Make sure these match the structure of categories.technology
             Name: tech.title, // Add this if it's missing
             team: {
@@ -139,8 +139,8 @@ export default function AddNewServices() {
           : [],
 
         tags: Services.tags || [],
-        iconImageId: Services.iconImageId || null,
-        imageId: Services.FeaturedImage || null,
+        iconImageUrl: Services.iconImageUrl || null,
+        imageUrl: Services.FeaturedImage || null,
 
         Banner: Services?.Banner || [], // Proper initialization
         Bannerdata: Services?.Bannerdata || [], // Consistent naming
@@ -174,9 +174,9 @@ export default function AddNewServices() {
           label: item.type === "texttoimage" ? "TexttoImage" : "ImagetoText"
         },
         textContent: item.text,
-        imageFile: item.imageId ? {
-          id: item.imageId,
-          url: `/Image/${item.imageId}`,
+        imageFile: item.imageUrl ? {
+          id: item.imageUrl,
+          url: `/Image/${item.imageUrl}`,
           type: item.type,
           name: "Uploaded image"
         } : null,
@@ -206,7 +206,7 @@ export default function AddNewServices() {
           return found || {
             _id: tech._id,
             title: tech.title,
-            imageId: tech.imageId,
+            imageUrl: tech.imageUrl,
             Name: tech.title,
             team: {
               images: [tech.image?.image || "/images/user/user-22.jpg"]
@@ -268,8 +268,8 @@ export default function AddNewServices() {
       description,
       selectedCategories,
       tags,
-      iconImageId,
-      imageId,
+      iconImageUrl,
+      imageUrl,
       WhydoNeed,
       WhyAtrix,
       Process,
@@ -277,8 +277,13 @@ export default function AddNewServices() {
       Cta,
 
     } = formData;
+    if (!imageUrl || typeof imageUrl !== "string" || imageUrl.trim() === "") {
+      alert("Please select a valid featured image before submitting.");
+      return;
+    }
 
-    if (!title || !description || selectedCategories.length === 0 || !imageId) {
+
+    if (!title || !description || selectedCategories.length === 0 || !imageUrl) {
       alert("Title, description, at least one category, and featured image are required!");
       return;
     }
@@ -289,34 +294,37 @@ export default function AddNewServices() {
         .map(field => ({
           type: field.value.value,
           text: field.textContent || "",
-          imageId: field.imageFile?.id || null
+          imageUrl: field.imageFile?.id || null
         }));
     };
+
+
+
     const bannerData = formData.Banner
-        .filter(item => item.type) // Only include items with a type
-        .map(item => {
-            if (item.type === "slider") {
-                // Ensure slider has at least one image
-                if (!item.sliderImages || item.sliderImages.length === 0) {
-                    alert("Slider must have at least one image");
-                    throw new Error("Slider must have at least one image");
-                }
-                return {
-                    type: item.type,
-                    sliderImages: item.sliderImages.filter(img => img) // Only non-null images
-                };
-            } else {
-                // Ensure banner/video has an imageId
-                if (!item.imageId) {
-                    alert(`${item.type} must have an image/video`);
-                    throw new Error(`${item.type} must have an image/video`);
-                }
-                return {
-                    type: item.type,
-                    imageId: item.imageId
-                };
-            }
-        });
+      .filter(item => item.type) // Only include items with a type
+      .map(item => {
+        if (item.type === "slider") {
+          // Ensure slider has at least one image
+          if (!item.sliderImages || item.sliderImages.length === 0) {
+            alert("Slider must have at least one image");
+            throw new Error("Slider must have at least one image");
+          }
+          return {
+            type: item.type,
+            sliderImages: item.sliderImages.filter(img => img) // Only non-null images
+          };
+        } else {
+          // Ensure banner/video has an imageUrl
+          if (!item.imageUrl) {
+            alert(`${item.type} must have an image/video`);
+            throw new Error(`${item.type} must have an image/video`);
+          }
+          return {
+            type: item.type,
+            imageUrl: item.imageUrl
+          };
+        }
+      });
 
 
 
@@ -331,12 +339,12 @@ export default function AddNewServices() {
       Technology: formData.selectedtechnology.map(tech => ({
         _id: tech._id,
         title: tech.Name || tech.title || "",
-        imageId: tech.imageId || null
+        imageUrl: tech.imageUrl || null
       })),
 
       tags: tags.filter(tag => tag.trim() !== ""),
-      iconImageId,
-      FeaturedImageId: imageId,
+      iconImageUrl,
+      FeaturedImage: imageUrl,
       Bannerdata: bannerData,
       WhydoNeed,
       WhyAtrix,
@@ -347,12 +355,12 @@ export default function AddNewServices() {
         headingAnddescription: formData.Headercontent[0].headingAnddescription.map(item => ({
           heading: item.heading,
           description: item.description,
-          imageId: item.imageId
+          imageUrl: item.imageUrl
         }))
       }] : [],
       texttoimageandimagetotext: transformTextToImageData(formData.texttoimageandimagetotext),
 
-      gallery: formData.gallery.map(img => ({ imageId: img.imageId })),
+      gallery: formData.gallery.map(img => ({ imageUrl: img.imageUrl })),
       Cta, // Ensure it's always an object
 
 
@@ -411,7 +419,7 @@ export default function AddNewServices() {
 
 
 
- 
+
   const handleBannerChange = (bannerData) => {
     setFormData(prev => ({
       ...prev,
@@ -419,7 +427,7 @@ export default function AddNewServices() {
       Bannerdata: bannerData
     }));
   };
-  
+
 
   const handleWhyDoNeedChange = (whyData) => {
     setFormData(prev => ({ ...prev, WhydoNeed: whyData }));
@@ -468,7 +476,7 @@ export default function AddNewServices() {
             team: {
               images: [imageUrl],
             },
-            imageId: tech.image?._id,
+            imageUrl: tech.FeaturedImage || tech.image?.FeaturedImage || null
           };
         });
         setCategories(prev => ({
@@ -497,7 +505,7 @@ export default function AddNewServices() {
           : [...prev.selectedtechnology, {
             _id: technology._id,
             title: technology.Name || technology.title,
-            imageId: technology.imageId
+            imageUrl: technology.imageUrl
           }]
       };
     });
@@ -645,16 +653,28 @@ export default function AddNewServices() {
 
           </div>
           {formData.showGallery && (
-            
-            <div ref={galleryRef}>
-          <Label>Gallery</Label>
 
+            <div ref={galleryRef}>
+              <Label>Gallery</Label>
               <GalleryComp
                 selected="Set Images"
-                onImageUpload={handleGalleryChange}
-                existingImages={formData.gallery || ""}
+
+                existingfiles={formData.gallery || ""}
+                onfilesUpload={(selected) => {
+                  setFormData((prev) => ({
+                    ...prev,
+                    gallery: selected.map(img => ({ imageUrl: img.url }))
+                  }));
+                }}
                 NameOffield="Gallery"
               />
+
+              {/* <GalleryComp
+                selected="Set Images"
+                onfilesUpload={handleGalleryChange}
+                existingfiles={formData.gallery || ""}
+                NameOffield="Gallery"
+              /> */}
             </div>
           )}
 
@@ -679,12 +699,13 @@ export default function AddNewServices() {
                     }
                   }, 0); // Delay to ensure UI update
 
-                  return { ...prev, 
-                    showHeadercontent: newValue ,
+                  return {
+                    ...prev,
+                    showHeadercontent: newValue,
                     Headercontent: newValue ? prev.Headercontent : []
                   };
                 });
-                
+
               }}
             />
 
@@ -694,14 +715,18 @@ export default function AddNewServices() {
               checked={formData.showGallery}
               onChange={() => {
                 setFormData(prev => {
-                  
+
                   const newValue = !prev.showGallery;
                   setTimeout(() => {
                     if (newValue && galleryRef.current) {
                       galleryRef.current.scrollIntoView({ behavior: 'smooth' });
                     }
                   }, 100);
-                  return { ...prev, showGallery: newValue };
+                  return { ...prev, showGallery: newValue,
+                    gallery: newValue ? prev.gallery : [],
+                    // gallery: !prev.showGallery ? [] : prev.gallery
+
+                   };
                 });
               }}
             />
@@ -719,7 +744,9 @@ export default function AddNewServices() {
                       textToImageRef.current.scrollIntoView({ behavior: 'smooth' });
                     }
                   }, 100);
-                  return { ...prev, showTextToImage: newValue };
+                  return { ...prev, showTextToImage: newValue,
+                    texttoimageandimagetotext: newValue ? prev.texttoimageandimagetotext : []
+                   };
                 });
               }}
             />
@@ -762,21 +789,26 @@ export default function AddNewServices() {
             </ComponentCategory>
           </div>
           <ImageProvider>
-            <IconsInputExample
-              onImageUpload={(imageId) =>
-                setFormData(prev => ({ ...prev, iconImageId: imageId }))
-              }
-              imageId={formData.iconImageId}
-            />
-          </ImageProvider>
-
-
-          <ImageProvider>
             <FileInputExample
-              onImageUpload={(imageId) =>
-                setFormData(prev => ({ ...prev, imageId }))
+              Componenttitle="Featured Icons"
+              h1="Featured Icons"
+              SetButtonName=" Set Featured Icons"
+              setName=" Set Icons "
+              onfilesUpload={(imageUrl) =>
+                setFormData(prev => ({ ...prev, iconImageUrl: imageUrl }))
               }
-              imageId={Services?.imageId || Services?.FeaturedImage}
+              filesUrl={formData.iconImageUrl}
+            />
+
+            <FileInputExample
+              Componenttitle="Featured Image"
+              h1="Featured Image"
+              SetButtonName=" Set Featured Image"
+              setName=" Set Featured Image "
+              onfilesUpload={(imageUrl) =>
+                setFormData(prev => ({ ...prev, imageUrl }))
+              }
+              filesUrl={Services?.imageUrl || Services?.FeaturedImage}
             />
           </ImageProvider>
 
@@ -834,10 +866,11 @@ export default function AddNewServices() {
                         label={tech.Name}
                       />
                       <img
-                        src={`http://localhost:5300${tech.team?.images?.[0]}`}
+                        src={`http://localhost:5300${tech.imageUrl}`}
                         alt={tech.Name}
                         className="w-12 object-contain rounded-xs"
                       />
+
                     </div>
                   );
                 })}
@@ -853,31 +886,3 @@ export default function AddNewServices() {
   );
 }
 
-
-
-{/* <ComponentCategory title="Technology">
-  <div className="items-center gap-4 space-y-5">
-    {categories.technology.map((tech) => {
-      const isSelected = formData.selectedtechnology.some(
-  selectedTech => selectedTech.title === tech.Name
-);
-
-      
-      return (
-        <div key={tech._id} className="flex items-center justify-between">
-          <Checkbox
-            id={`tech-${tech._id}`}
-            checked={isSelected}
-            onChange={() => handletechnologysChange(tech)}
-            label={tech.Name || tech.title}
-          />
-          <img
-            src={`http://localhost:5300${tech.team?.images?.[0]}`}
-            alt={tech.Name || tech.title}
-            className="w-12 object-contain rounded-xs"
-          />
-        </div>
-      );
-    })}
-  </div>
-</ComponentCategory> */}

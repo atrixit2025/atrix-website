@@ -8,9 +8,9 @@ app.use(express.json());
 const PortfolioRouter = express.Router();
 
 PortfolioRouter.post("/add", async (req, res) => {
-  const { title, category, FeaturedImageId, contentSections } = req.body;
+  const { title, category, featuredImage, contentSections } = req.body;
   // console.log("Received body:", req.body);
-  if (!title || !category || !FeaturedImageId) {
+  if (!title || !category || !featuredImage) {
     return res.status(400).json({ 
       message: "Title, category, and featured image are required"
     });
@@ -28,7 +28,7 @@ PortfolioRouter.post("/add", async (req, res) => {
     const newPortfolio = new Portfolio({
       title,
       category,
-      FeaturedImage: FeaturedImageId,
+      FeaturedImage: featuredImage,
       contentSections: contentSections.map(section => {
         // Validate each section has a type
         if (!section.type) {
@@ -94,7 +94,7 @@ PortfolioRouter.put("/edit", async (req, res) => {
     id, // Now coming from request body instead of URL params
     title, 
     category, 
-    FeaturedImageId, 
+    featuredImage, 
     contentSections 
   } = req.body;
 
@@ -103,7 +103,7 @@ PortfolioRouter.put("/edit", async (req, res) => {
     return res.status(400).json({ message: "Portfolio ID is required in the request body" });
   }
 
-  if (!title || !category || !FeaturedImageId) {
+  if (!title || !category || !featuredImage) {
     return res.status(400).json({ 
       message: "Title, category, and featured image are required"
     });
@@ -127,7 +127,7 @@ PortfolioRouter.put("/edit", async (req, res) => {
     const updateData = {
       title,
       category,
-      FeaturedImage: FeaturedImageId,
+      FeaturedImage: featuredImage,
       updatedAt: new Date()
     };
 

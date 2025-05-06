@@ -8,13 +8,11 @@ app.use(express.json());
 const BlogRouter = express.Router();
 
 BlogRouter.post("/add", async (req, res) => {
-  const { title, category, FeaturedImageId, contentSections } = req.body;
-  // console.log("Received body:", req.body);
-  if (!title || !category || !FeaturedImageId) {
-    return res.status(400).json({ 
-      message: "Title, category, and featured image are required"
-    });
-  }
+  const { title, category, featuredImage, contentSections } = req.body;
+  console.log("Received body:", req.body);
+  if (!title) return res.status(400).json({ message: "Title is required" });
+  if (!category) return res.status(400).json({ message: "Category is required" });
+  if (!featuredImage) return res.status(400).json({ message: "Featured image is required" });
 
   // Validate contentSections exists and is an array
   if (!Array.isArray(contentSections)) {
@@ -28,7 +26,7 @@ BlogRouter.post("/add", async (req, res) => {
     const newBlog = new Blog({
       title,
       category,
-      FeaturedImage: FeaturedImageId,
+      FeaturedImage: featuredImage,
       contentSections: contentSections.map(section => {
         // Validate each section has a type
         if (!section.type) {
@@ -123,7 +121,7 @@ BlogRouter.put("/edit", async (req, res) => {
     id, // Now coming from request body instead of URL params
     title, 
     category, 
-    FeaturedImageId, 
+    featuredImage, 
     contentSections 
   } = req.body;
 
@@ -132,7 +130,7 @@ BlogRouter.put("/edit", async (req, res) => {
     return res.status(400).json({ message: "Blog ID is required in the request body" });
   }
 
-  if (!title || !category || !FeaturedImageId) {
+  if (!title || !category || !featuredImage) {
     return res.status(400).json({ 
       message: "Title, category, and featured image are required"
     });
@@ -156,7 +154,7 @@ BlogRouter.put("/edit", async (req, res) => {
     const updateData = {
       title,
       category,
-      FeaturedImage: FeaturedImageId,
+      FeaturedImage: featuredImage,
       updatedAt: new Date()
     };
 

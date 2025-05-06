@@ -13,7 +13,7 @@ export default function AddNewBrand() {
 
   const [formData, setFormData] = useState({
     title: "",
-    imageId: null,
+    featuredImage: null,
     link: "",  
   });
 
@@ -23,7 +23,7 @@ export default function AddNewBrand() {
     if (brand) {
       setFormData({
         title: brand.title || "",
-        imageId: brand.imageId,
+        featuredImage: brand.featuredImage,
         link: brand.link || "",  
       });
     }
@@ -31,16 +31,16 @@ export default function AddNewBrand() {
 
   // Handle form submission
   const handleSubmit = async () => {
-    const { title, imageId, link } = formData;
+    const { title, featuredImage, link } = formData;
 
-    if (!title || !imageId  ) {
+    if (!title || !featuredImage  ) {
       alert("Title, image are required!");
       return;
     }
 
     const brandData = {
       title,
-      imageId,
+      featuredImage,
       link,
     };
 
@@ -57,7 +57,7 @@ export default function AddNewBrand() {
         const response = await axios.post("http://localhost:5300/Brand/add", brandData);
       }
 
-      navigate("/Dashboard/brand");
+      navigate("/Dashboard/Brand");
     } catch (error) {
       console.error("Error saving brand:", error);
       if (error.response) {
@@ -114,10 +114,14 @@ export default function AddNewBrand() {
         <div className="space-y-10 mt-5">
           <ImageProvider>
             <FileInputExample
-              onImageUpload={(imageId) =>
-                setFormData((prev) => ({ ...prev, imageId }))
+            Componenttitle="Featured Image"
+            h1="Featured Image"
+            SetButtonName=" Set Featured Image"
+            setName=" Set Featured Image "
+              onfilesUpload={(featuredImage) =>
+                setFormData((prev) => ({ ...prev, featuredImage }))
               }
-              imageId={brand?.imageId}
+              filesUrl={brand?.featuredImage}
             />
           </ImageProvider>
         </div>

@@ -5,11 +5,10 @@ const BrandSchema = new mongoose.Schema({
     type: String,
     required: true,  // Title is required
   },
-  image: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Image', // Assuming this is the reference to the Image collection
-    required: true, // Image is required
-  },
+  FeaturedImage: {
+    type: String,
+    required: true
+},
   link: {
     type: String,
   },
