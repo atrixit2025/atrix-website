@@ -62,27 +62,27 @@ const ContactDetails = () => {
 
                 {/* Button */}
                 {item.link ? (
-  <Link
-    to={item.link}
-    target={item.btn_name === "Google Map" ? "_blank" : "_self"}
-    className="font-bold pt-4 flex items-center cursor-pointer hover:text-[var(--blue)] self-start group mt-auto"
-  >
-    {item.btn_name}
-    <span className="border border-white/45 ml-2 flex justify-center items-center h-6 w-6 rounded-full -rotate-45 text-[var(--blue)] group-hover:rotate-1 group-hover:bg-[var(--blue)] group-hover:text-white group-hover:border-[var(--blue)] duration-300">
-      <FaArrowRight />
-    </span>
-  </Link>
-) : (
-  <div
-    className="font-bold pt-4 flex items-center cursor-pointer hover:text-[var(--blue)] self-start group mt-auto"
-    onClick={() => console.log(item.btn_name)} // optional: handle click
-  >
-    {item.btn_name}
-    <span className="border border-white/45 ml-2 flex justify-center items-center h-6 w-6 rounded-full -rotate-45 text-[var(--blue)] group-hover:rotate-1 group-hover:bg-[var(--blue)] group-hover:text-white group-hover:border-[var(--blue)] duration-300">
-      <FaArrowRight />
-    </span>
-  </div>
-)}
+                  <Link
+                    to={item.link}
+                    target={item.btn_name === "Google Map" ? "_blank" : "_self"}
+                    className="font-bold pt-4 flex items-center cursor-pointer hover:text-[var(--blue)] self-start group mt-auto"
+                  >
+                    {item.btn_name}
+                    <span className="border border-white/45 ml-2 flex justify-center items-center h-6 w-6 rounded-full -rotate-45 text-[var(--blue)] group-hover:rotate-1 group-hover:bg-[var(--blue)] group-hover:text-white group-hover:border-[var(--blue)] duration-300">
+                      <FaArrowRight />
+                    </span>
+                  </Link>
+                ) : (
+                  <div
+                    className="font-bold pt-4 flex items-center cursor-pointer hover:text-[var(--blue)] self-start group mt-auto"
+                    onClick={() => console.log(item.btn_name)} // optional: handle click
+                  >
+                    {item.btn_name}
+                    <span className="border border-white/45 ml-2 flex justify-center items-center h-6 w-6 rounded-full -rotate-45 text-[var(--blue)] group-hover:rotate-1 group-hover:bg-[var(--blue)] group-hover:text-white group-hover:border-[var(--blue)] duration-300">
+                      <FaArrowRight />
+                    </span>
+                  </div>
+                )}
 
               </div>
             </div>

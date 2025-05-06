@@ -39,9 +39,9 @@ const PortfolioSingle = () => {
                         >
                             View the Project
                         </Link>
-                        <h1 className="main-heading text-3xl md:text-4xl font-bold mt-4">
+                        <h2 className=" fon-subt-bold mt-4 sec-heading">
                             {filteredProject.project_title}
-                        </h1>
+                        </h2>
                         <div className="flex gap-3 justify-center mt-6 flex-wrap">
                             {filteredProject.tags.map((tag, index) => (
                                 <span key={index} className="project-tag px-4 py-2 bg-gray-100 rounded-full">
@@ -56,7 +56,7 @@ const PortfolioSingle = () => {
                     filteredProject.project_description.map((item, index) => (
                         <div key={index} >
                             <div  className="project-desc max-w-[800px] mx-auto  px-4">
-                                <h2 className="text-2xl font-bold mb-6">{item.heading_1}</h2>
+                                <h3 className=" sub-sec-heading lg:text-4xl font-bold mb-6">{item.heading_1}</h3>
                                 <div>{item.description_1}</div>
                             </div>
 
@@ -70,7 +70,7 @@ const PortfolioSingle = () => {
                             </div>
 
                             <div  className="project-desc max-w-[800px] mx-auto  px-4">
-                                <h2 className="text-2xl font-bold mb-6">{item.heading_2}</h2>
+                                <h3 className=" sub-sec-heading lg:text-4xl font-bold mb-6">{item.heading_2}</h3>
                                 <div>{item.description_2}</div>
                             </div>
 
@@ -88,7 +88,7 @@ const PortfolioSingle = () => {
 
 
                             <div  className="project-desc max-w-[800px] mx-auto  px-4">
-                                <h2 className="text-2xl font-bold mb-6">{item.heading_3}</h2>
+                                <h3 className=" sub-sec-heading lg:text-4xl font-bold mb-6">{item.heading_3}</h3>
                                 <div>{item.description_3}</div>
                             </div> 
 
