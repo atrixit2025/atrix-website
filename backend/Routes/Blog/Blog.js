@@ -7,8 +7,15 @@ app.use(express.json());
 
 const BlogRouter = express.Router();
 
+const generateSlug = (name) => {
+  return name
+    .toLowerCase()
+    .replace(/\s+/g, "-")       // spaces to dashes
+    .replace(/[^\w\-]+/g, "");  // remove non-word characters
+};
+
 BlogRouter.post("/add", async (req, res) => {
-  const { title, category, featuredImage, contentSections } = req.body;
+  const { title,   Slug: customSlug, category, featuredImage, contentSections } = req.body;
   console.log("Received body:", req.body);
   if (!title) return res.status(400).json({ message: "Title is required" });
   if (!category) return res.status(400).json({ message: "Category is required" });
@@ -23,8 +30,15 @@ BlogRouter.post("/add", async (req, res) => {
   }
 
   try {
+     let slug = customSlug || generateSlug(title);
+        let slugExists = await Blog.findOne({ Slug: slug });
+        
+        if (slugExists) {
+          slug = `${slug}-${Date.now()}`;
+        }
     const newBlog = new Blog({
       title,
+      Slug: slug, 
       category,
       FeaturedImage: featuredImage,
       contentSections: contentSections.map(section => {
@@ -39,12 +53,12 @@ BlogRouter.post("/add", async (req, res) => {
             content: section.content || "" // Default to empty string
           };
         } else {
-          if (!section.imageId) {
-            throw new Error(`Image section must have an imageId`);
+          if (!section.imageUrl) {
+            throw new Error(`Image section must have an imageUrl`);
           }
           return {
             type: section.type,
-            imageId: section.imageId
+            imageUrl: section.imageUrl
           };
         }
       }),
@@ -88,10 +102,10 @@ BlogRouter.get("/get", async (req, res) => {
 
 
 // BlogRouter.put("/edit", async (req, res) => {
-//   const { id, title, category,text, imageId } = req.body; 
+//   const { id, title, category,text, imageUrl } = req.body; 
 
-//   if (!id || !title || !category ||! text|| !imageId) {
-//     return res.status(400).json({ message: "ID, title, category,text, and imageId are required" });
+//   if (!id || !title || !category ||! text|| !imageUrl) {
+//     return res.status(400).json({ message: "ID, title, category,text, and imageUrl are required" });
 //   }
 
 //   try {
@@ -105,7 +119,7 @@ BlogRouter.get("/get", async (req, res) => {
 //     existingBlog.category = category;
 //     existingBlog.text = text;
 
-//     existingBlog.image = imageId;
+//     existingBlog.image = imageUrl;
 
 //     const updatedBlog = await existingBlog.save();
 
@@ -120,6 +134,7 @@ BlogRouter.put("/edit", async (req, res) => {
   const { 
     id, // Now coming from request body instead of URL params
     title, 
+    Slug: customSlug,
     category, 
     featuredImage, 
     contentSections 
@@ -153,6 +168,7 @@ BlogRouter.put("/edit", async (req, res) => {
     // Prepare update data
     const updateData = {
       title,
+      Slug: customSlug !== undefined ? customSlug : existingBlog.Slug,
       category,
       FeaturedImage: featuredImage,
       updatedAt: new Date()
@@ -171,12 +187,12 @@ BlogRouter.put("/edit", async (req, res) => {
             content: section.content || ""
           };
         } else {
-          if (!section.imageId) {
-            throw new Error(`Image section must have an imageId`);
+          if (!section.imageUrl) {
+            throw new Error(`Image section must have an imageUrl`);
           }
           return {
             type: section.type,
-            imageId: section.imageId
+            imageUrl: section.imageUrl
           };
         }
       });

@@ -3,13 +3,19 @@ import mongoose from "mongoose";
 const contentSectionSchema = new mongoose.Schema({
     type: { type: String, enum: ['text', 'image', 'full-image', 'big-image'], required: true },
     content: { type: String }, 
-    imageId: { type: String }  
+    imageUrl: { type: String }  
   });
 
 const BlogSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true
+    },
+    Slug: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
     },
     category: {
         type: String,
