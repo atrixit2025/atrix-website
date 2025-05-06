@@ -342,7 +342,7 @@ h1.extra-large-heading {
 
 /* section heading  */
 h2.sec-heading {
-  font-size: 60px;
+  font-size: 44px;
   font-weight: bold;
   line-height: 1em;
 }
@@ -360,8 +360,9 @@ h3.sub-sec-heading {
     font-size: 48px;
   }
   h1.medium-heading {
-    font-size: 42px;
+    font-size: 44px;
     font-weight: bold;
+    line-height: 1.2em;
   }
   h2.sec-heading {
     font-size: 28px;
@@ -372,9 +373,7 @@ h3.sub-sec-heading {
   h3.sub-sec-heading {
     font-size: 22px;
   }
-  h1.medium-heading {
-    font-size: 44px;
-  }
+  
   h1.extra-large-heading {
     font-size: 72px;
   }
@@ -385,14 +384,14 @@ h3.sub-sec-heading {
     font-size: 14px;
   }
   h1.large-heading {
-    font-size: 48px;
+    font-size: 36px;
   }
   h1.medium-heading {
     font-size: 42px;
     font-weight: bold;
   }
   h2.sec-heading {
-    font-size: 28px;
+    font-size: 22px;
     font-weight: bold;
     line-height: 1em;
   }

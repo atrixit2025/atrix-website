@@ -10,7 +10,7 @@ const OurServices = () => {
     <>
       <div className="services-hero relative h-full w-full z-0  pt-55 pb-20  ">
         <div className="services-hero-text  container mx-auto w-[90%] ">
-          <h1 className="large-heading break-words  ">
+          <h1 className="medium-heading break-words  ">
             WEBSITE <br />
             DESIGN AND <br />
             DEVELOPMENT 
@@ -36,9 +36,9 @@ const OurServices = () => {
 
       <div className="container mx-auto mt-16 leading-0 w-[90%] ">
         <h2 className=" text-4xl md:text-8xl font-bold text-center  py-15 "> HOW WE DO IT</h2>
-        <div className=" grid  grid-cols-12  gap-9 ">
+        <div className=" grid  grid-cols-12  md:gap-9 space-y-5 ">
           <div className="col-span-12 md:col-span-4 border-t-1 border-white/20  ">
-            <h3 className="text-5xl font-extrabold  pt-10 break-words">
+            <h3 className=" text-2xl  md:text-3xl font-extrabold  pt-10 break-words">
               START WITH <br />
               UNDERSTANDING
             </h3>
@@ -53,7 +53,7 @@ const OurServices = () => {
           </div>
 
           <div className="col-span-12 md:col-span-4 border-t-1 border-white/20  ">
-            <h3 className="text-4xl font-extrabold  pt-10 break-words">
+            <h3 className="text-2xl  md:text-3xl font-extrabold  pt-10 break-words">
               CRAFT <br />
               FOR IMPACT
             </h3>
@@ -66,7 +66,7 @@ const OurServices = () => {
           </div>
 
           <div className="col-span-12 md:col-span-4 border-t-1 border-white/20  ">
-            <h3 className="text-4xl font-extrabold  pt-10 break-words">
+            <h3 className="text-2xl  md:text-3xl font-extrabold  pt-10 break-words">
               ACCELERATE FOR <br />
               GROWTHG
             </h3>

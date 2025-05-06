@@ -51,8 +51,8 @@ const Service = () => {
       <div className="pt-[150px]">
         <ServiceHeroBanner />
 
-        <div className="container mx-auto mt-40">
-          <h1 className="text-7xl font-bold text-center">{filteredService.service_title}</h1>
+        <div className="container mx-auto md:mt-40 mt-10">
+          <h1 className=" medium-heading font-bold text-center">{filteredService.service_title}</h1>
         </div>
 
         <WebDevelopment secData={filteredService} targetRef={formRef} />

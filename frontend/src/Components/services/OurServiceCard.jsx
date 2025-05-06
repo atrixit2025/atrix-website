@@ -101,7 +101,7 @@ const OurServiceCard = () => {
           {ServicesData.map((item, index) => (
             <div key={index} className="  pt-18 inline-block w-full">
               <Link to={`/service/${item.slug}`} className=" cursor-pointer"  >
-                <h3 className="text-3xl font-bold flex items-center gap-2 ]">
+                <h3 className="sub-sec-heading font-bold flex items-center gap-2 ]">
                   <div className=" icon-bg min-w-12 h-12 relative flex justify-center items-center bg-gradient-to-r from-(--blue) to-(--green) rounded-full translate-y-2 mr-1 mb-3">
                     <img
                       className="w-6 h-6 filter grayscale-100 brightness-800"

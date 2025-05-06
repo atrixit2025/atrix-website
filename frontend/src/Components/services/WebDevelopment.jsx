@@ -8,7 +8,7 @@ const WebDevelopment = ({ secData, targetRef }) => {
         {/* First Row - Maintains exact 6-6 column layout on desktop */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10">
           <div className="lg:col-span-6">
-            <h2 className="text-3xl lg:text-4xl font-bold">{secData.heading_1}</h2>
+            <h2 className="sec-heading font-bold  ">{secData.heading_1}</h2>
             <p className="mt-3 lg:mt-[10px] max-w-full lg:max-w-[590px]">
               {secData.description_1}
             </p>
@@ -29,7 +29,7 @@ const WebDevelopment = ({ secData, targetRef }) => {
           </div>
 
           <div className="lg:col-span-5 flex flex-col justify-end">
-            <h2 className="text-3xl lg:text-4xl font-bold">{secData.heading_2}</h2>
+            <h2 className="sec-heading font-bold">{secData.heading_2}</h2>
             <p className="mt-3 lg:mt-[10px] max-w-full lg:max-w-[570px]">
               {secData.description_2}
             </p>
