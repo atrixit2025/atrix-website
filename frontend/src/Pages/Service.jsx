@@ -51,8 +51,8 @@ const Service = () => {
       <div className="pt-[150px]">
         <ServiceHeroBanner />
 
-        <div className="container mx-auto md:mt-40 mt-10">
-          <h1 className=" medium-heading font-bold text-center">{filteredService.service_title}</h1>
+        <div className=" container w-[90%] mx-auto md:mt-40 mt-10  " >
+          <h1 className="medium-heading  font-bold text-center">{filteredService.service_title}</h1>
         </div>
 
         <WebDevelopment secData={filteredService} targetRef={formRef} />
@@ -68,7 +68,7 @@ const Service = () => {
         <ProcessCards secData={filteredService} targetRef={formRef} />
 
         <div className="container mx-auto my-16">
-          <h2 className="max-w-[800px] mx-auto text-5xl font-bold relative">
+          <h2 className="max-w-[800px] mx-auto text-2xl md:text-3xl lg:text-5xl font-bold relative">
             <FaQuoteLeft className="absolute -top-0.5 -translate-y-full text-(--blue) text-2xl mb-8" />
             {filteredService.quote}
             <FaQuoteRight className="absolute right-0 text-(--blue) text-2xl mt-2" />
@@ -76,19 +76,19 @@ const Service = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="container mx-auto mt-28 service-cta">
+        <div className="container max-w-[90%] mx-auto mt-28 service-cta">
           <div className="row grid grid-cols-1 md:grid-cols-12 mt-10 bg-(--blue) rounded-xl p-6 md:p-10">
-            <div className="md:col-span-10 col-span-12 text-center md:text-left">
-              <h3 className="text-4xl md:text-5xl font-bold">
+            <div className="lg:col-span-10 col-span-12 text-center md:text-left">
+              <h2 className="sec-heading font-bold">
                 Ready to take your brand to the next level?
-              </h3>
+              </h2>
               <p className="mt-1 max-w-[800px]">
                 We’re here to help you create an identity that’s powerful and memorable. Let’s work together to make your brand stand out. Get in touch today, and let’s bring your vision to life!
               </p>
             </div>
             <div
               id="mybtn2"
-              className="md:col-span-2 col-span-12 flex justify-center items-center md:justify-end mt-4 md:mt-0"
+              className="lg:col-span-2 col-span-12 flex justify-center items-center lg:justify-end mt-4 lg:mt-0"
             >
               <Button mybtn="Contact us!" targetRef={formRef} />
             </div>

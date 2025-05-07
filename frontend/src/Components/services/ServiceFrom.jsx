@@ -5,9 +5,9 @@ import Button from '../Button'
 const ServiceFrom = () => {
     return (
         <section className="service-from-sec mt-36 mb-12">
-            <div className="container mx-auto">
-                <form className="form-wrapper  grid grid-cols-12 space-x-36 ">
-                    <div className="form-sec col-span-8 space-y-10 ">
+            <div className="container max-w-[90%] mx-auto">
+                <form className="form-wrapper  grid grid-cols-12 xl:gap-x-36  gap-y-5 ">
+                    <div className="form-sec col-span-12 xl:col-span-8 space-y-10 order-2 xl:order-1  ">
 
                         <div className='flex items-end gap-8' >
                             <p className="text-white text-lg text-end py-2 self-end   min-w-1/3">Hi! My name is</p>
@@ -38,7 +38,7 @@ const ServiceFrom = () => {
 
 
                     </div>
-                    <div className="form-check-btns col-span-4  ">
+                    <div className="form-check-btns col-span-12 xl:col-span-4 order-1 xl:order-2 ">
                         <p className="text-white text-lg  mb-6">I'm interested in...</p>
                         <ul className="flex flex-wrap gap-2 mb-2 ">
                             {['Branding', 'Website Design', 'Digital Marketing', 'Website Development', 'Video Production', 'Product Design', 'Social Media Design'].map((tag, index) => (

@@ -225,7 +225,7 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="text-(--white) lg:-ml-16  relative w-full lg:max-w-[40%] px-5 mt-10 lg:mt-0 ">
+            <div className="text-(--white) lg:-ml-16  relative w-full lg:max-w-[40%]  mt-10 lg:mt-0 ">
               <p className="text-xl sm:text-md font-semibold text-(--white) mb-2">Who We Are</p>
               <h3 className="sub-sec-heading  font-bold mb-5">Trusted Experts in Taking Your Business Higher</h3>
 

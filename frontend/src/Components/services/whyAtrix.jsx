@@ -4,11 +4,11 @@ import React from 'react'
 const WhyAtrix = ({ secData }) => {
   return (
     <div className='why-atrix my-36' >
-      <div className='container max-w-[1150px] mx-auto' >
-        <div>  <h2 className='text-6xl font-bold mb-8 text-center' >{secData.why_atrix_heading}</h2> </div>
-        <div className="why-atrix-content-content grid grid-cols-2 ">
+      <div className='container max-w-[90%] mx-auto' >
+        <div>  <h2 className='sec-heading font-bold mb-8 text-center' >{secData.why_atrix_heading}</h2> </div>
+        <div className="why-atrix-content-content grid grid-cols-1 lg:grid-cols-2 space-y-4 ">
           <div className="left flex   text-4xl font-bold">
-            <h3 className=' max-w-[380px] ' >{secData.why_atrix_subheading}</h3>
+            <h3 className='sub-sec-heading max-w-[380px]  ' >{secData.why_atrix_subheading}</h3>
           </div>
           <div className="right">
             {secData.why_atrix_desc.map((item, index) => (

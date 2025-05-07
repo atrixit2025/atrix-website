@@ -58,9 +58,9 @@ const ServicesCards = ({ secData }) => {
         <div className="services-sec mt-36">
             {secData.sub_service.map((item, index) => (
                 <div key={index}>
-                    <div className="container mx-auto">
+                    <div className="container mx-auto max-w-[90%]">
                         <div className='text-center' >
-                            <h2 className=' text-6xl font-bold mb-6' >{item.services_heading}  </h2>
+                            <h2 className=' sec-heading mb-6' >{item.services_heading}  </h2>
                             <p className=' max-w-[900px] mx-auto mb-14 leading-[1.65rem] '>{item.services_desc} </p>
                         </div>
                     </div>
@@ -69,13 +69,13 @@ const ServicesCards = ({ secData }) => {
                             {item.all_services.map((seritem, serindex) => (
                                 <div key={serindex} className='border-b ' >
                                     <div
-                                        className="service-card grid lg:grid-cols-2 gap-10 pb-12 pt-15 relative container mx-auto"
+                                        className="service-card grid lg:grid-cols-2 gap-10 pb-12 pt-15 relative container max-w-[90%] mx-auto"
                                         onMouseMove={handleMouseMove}
                                         onMouseEnter={handleMouseMove}
                                     >
 
                                         <div className="service-title flex  items-center relative ml-12 ">
-                                            <h2 className="text-5xl font-bold">{seritem.service_name}</h2>
+                                            <h3 className="sub-sec-heading">{seritem.service_name}</h3>
                                             <span className="absolute -top-2 -left-12 font-bold text-xl">{serindex < 9 ? "0" : ""}{serindex + 1}</span>
                                         </div>
                                         <div className="service-desc">
