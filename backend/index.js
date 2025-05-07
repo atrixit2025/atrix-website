@@ -27,8 +27,17 @@ const app = express();
 const PORT = 5300;
 
 app.use(express.json());
-app.use(cors());
+
+const frontendBuildPath = path.join(__dirname, '../frontend/dist');
+app.use(express.static(frontendBuildPath));
+
+app.use(cors({
+  origin: "*",
+
+}));
 connectDB();
+
+
 
 app.use('/technology', express.static(path.join(__dirname, 'uploads', 'technology')), (req, res, next) => {
   // console.log(`Request received for: ${req.url}`);
@@ -71,6 +80,20 @@ app.use("/FAQCategory", FAQCategoryRouter);
 
 
 app.use("/demo",DemoRouter)
+
+
+app.get('*', (req, res) => {
+  try {
+    res.sendFile(path.join(frontendBuildPath, 'index.html'));
+  } catch (error) {
+    console.error('Error sending index.html:', error);
+    res.status(500).send('Server configuration error');
+  }
+});
+
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(BuildPath, 'index.html'));
+// });
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
