@@ -9,7 +9,7 @@ const WhyNeedBranding = ({ secData, targetRef }) => {
         <div className='why-need-branding my-36' >
             <div className="container mx-auto ">
                 <h2 className='text-6xl font-bold text-center mb-14 ' >Why do you need  {secData.service_title}</h2>
-                <div className="branding-Cards grid grid-cols-3 gap-5">
+                <div className="branding-Cards grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                     {secData.cards_sec_data.map((item, index) => (
                         <div key={index} className="branding-card p-12 bg-(--black) rounded-2xl">
                             <h3 className='text-3xl mb-2 font-bold' >{item.cardTitle}</h3>
