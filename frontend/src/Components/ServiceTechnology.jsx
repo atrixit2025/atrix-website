@@ -75,7 +75,7 @@ const ServiceTechnology = () => {
             <div className=''>
                 <div className="container mx-auto">
                     <div className='text-center' >
-                        <h2 className=' text-6xl font-bold mb-6' > We Used Advance TECHNOLOGY </h2>
+                        <h2 className=' sec-heading font-bold mb-6' > We Used Advance TECHNOLOGY </h2>
                         <p className=' max-w-[900px] mx-auto mb-14 leading-[1.65rem] '> At Atrix IT Solutions, every project we deliver is a step toward your success. Our expertise turns ideas into powerful solutions, helping businesses grow, innovate, and stand out.</p>
                     </div>
                 </div>
