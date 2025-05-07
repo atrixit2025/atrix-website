@@ -19,6 +19,9 @@ import { ServicesCategoryContext } from "../../../ContextApi/ServicesCategoryCon
 
 const GenericForm = ({
   title,
+  customSlug,
+  autoSlug,
+  isEditingSlug,
   editTitle,
   apiEndpoint,
   categoryEndpoint,
@@ -62,8 +65,11 @@ const GenericForm = ({
   // Form data state
   const [formData, setFormData] = useState({
     title: "",
+    customSlug: "",
+    autoSlug: "",
+    isEditingSlug: false,
     selectedCategories: [],
-    imageUrl: null, // Changed from imageId to imageUrl
+    imageUrl: null, // Changed from imageUrl to imageUrl
   });
 
   // Fetch categories
@@ -84,11 +90,15 @@ const GenericForm = ({
     if (item) {
       setFormData({
         title: item.title || item.name || "",
+        customSlug: item.Slug || item.slug || "", 
+        autoSlug: item.Slug || item.slug || "", 
+        isEditingSlug: false,
+  
         selectedCategories: item.category ? item.category.split(", ") : [],
-        imageUrl: item.FeaturedImage || item.imageUrl || null, // Use URL instead of ID
+        imageUrl: item.FeaturedImage || item.imageUrl || null, 
       });
 
-      console.log("Item in edit mode:", item);
+      // console.log("Item in edit mode:", item);
 
       // Update content sections initialization
       if (hasContentSections) {
@@ -120,6 +130,34 @@ const GenericForm = ({
     }
   }, [item, hasContentSections]);
 
+
+  useEffect(() => {
+    // Skip slug generation if we're editing an existing item
+    if (item) return;
+  
+    if (formData.title) {
+      const generatedSlug = formData.title
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w-]+/g, '-')
+        .replace(/--+/g, '-')
+        .replace(/^-+/, '-')
+        .replace(/-+$/, '-');
+  
+      setFormData((prev) => ({
+        ...prev,
+        autoSlug: generatedSlug,
+        customSlug: prev.isEditingSlug ? prev.customSlug : generatedSlug
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        autoSlug: '',
+        customSlug: '',
+      }));
+    }
+  }, [formData.title, item]); 
+
   // Handlers
   const handleCategoryChange = (category) => {
     setFormData(prev => ({
@@ -140,6 +178,7 @@ const GenericForm = ({
 
     const payload = {
       title,
+      Slug: formData.customSlug,
       category: selectedCategories.join(", "),
       featuredImage: imageUrl, // Send URL instead of ID
       ...(hasContentSections && {
@@ -151,7 +190,7 @@ const GenericForm = ({
       }
       )
     };
-    console.log("Payload to be sent:", JSON.stringify(payload, null, 2));
+    // console.log("Payload to be sent:", JSON.stringify(payload, null, 2));
 
     // Add ID to payload if in edit mode
     if (item?.id) {
@@ -216,7 +255,7 @@ const GenericForm = ({
         return {
           ...field,
           imageFile: {
-            url: imageUrl, // Store URL directly
+            url: imageUrl, 
             type: fieldType,
             name: "Uploaded image"
           }
@@ -245,6 +284,8 @@ const GenericForm = ({
       </div>
 
       <div className="grid grid-cols-[4fr_1fr] gap-6">
+
+
         <div className="space-y-10">
           <div>
             <Label htmlFor="input">Add Title</Label>
@@ -257,6 +298,59 @@ const GenericForm = ({
                 setFormData(prev => ({ ...prev, title: e.target.value }))
               }
             />
+
+
+            <div className="mt-2">
+
+              <div className="mt-2">
+                {formData.isEditingSlug ? (
+                  <div className="items-center gap-2 space-y-1">
+                    <Input
+                      type="text"
+                      value={formData.customSlug}
+                      onChange={(e) =>
+                        setFormData((prev) => ({ ...prev, customSlug: e.target.value }))
+                      }
+                      className="w-full"
+                    />
+                    <button
+                      onClick={() =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          isEditingSlug: false,
+                          autoSlug: prev.customSlug.trim()
+                        }))
+                      }
+                      className="w-16 bg-(--blue) text-white p-1 rounded-lg"
+                    >
+                      OK
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <p className="text-sm text-(--gray)">
+                      Slug: {formData.customSlug}
+                    </p>
+                    {formData.title && (
+                      <button
+                        onClick={() =>{
+                          console.log("Switching to slug edit mode");
+                          setFormData((prev) => ({ ...prev, isEditingSlug: true }))
+                        }
+                        }
+                        className="w-16 bg-(--blue) text-white p-1 rounded-lg"
+                      >
+                        Edit
+                      </button>
+                    )}
+                  </div>
+                )}
+              </div>
+
+            </div>
+          </div>
+          <div>
+
           </div>
 
           {hasContentSections && selectFields.map((field, index) => (
@@ -313,10 +407,10 @@ const GenericForm = ({
                     <div className="form-group">
                       <SelectFileInput
                         NameOffield="Image"
-                        onImageUpload={(imageId, imageType) =>
-                          handleImageChange(field.id, imageId, imageType || field.value?.value)
+                        onfilesUpload={(imageUrl, imageType) =>
+                          handleImageChange(field.id, imageUrl, imageType || field.value?.value)
                         }
-                        imageId={field.imageFile?.id}
+                        filesUrl={field.imageFile?.url}
                         existingImage={field.imageFile}
                       />
 

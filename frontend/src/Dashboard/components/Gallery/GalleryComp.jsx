@@ -23,18 +23,15 @@ const GalleryComp = ({ onfilesUpload, filesUrl, existingfiles = [], NameOffield,
 
     useEffect(() => {
         if (Array.isArray(existingfiles)) {
-            // Map through existing files and ensure they have imageUrl
             const validFiles = existingfiles.map(file => ({
                 ...file,
                 imageUrl: getImageUrl(file)
             })).filter(file => file.imageUrl);
 
-            // Update parent if any files were invalid
             if (validFiles.length !== existingfiles.length) {
                 onfilesUpload(validFiles);
             }
 
-            // Set selected files URLs
             setSelectedfilesUrl(validFiles.map(file => file.imageUrl));
         }
     }, [existingfiles]);

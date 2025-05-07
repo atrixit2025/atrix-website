@@ -350,7 +350,7 @@ const ServicesData = [
       "Want to expand your business online? That's where digital marketing steps in. It refers to using the internet to market your goods or services. This includes things such as websites, social media, online advertisements, emails, and more. Digital marketing assists you in reaching a greater number of people, creating trust, and converting visitors into buyers. Most people in today’s world look online before making any purchase, so if your company is not represented there, then you are missing out. With the correct digital strategy, you can get ahead of your competitors, get noticed by the right people, and build your brand quicker. ",
     img_1: image_1,
 
-    heading_2: "Boost your online presence with Attrix Solution!",
+    heading_2: "Boost your online presence with Atrix It Solutions!",
     description_2:
       "At Atrix IT Solutions, we are experts in result-driven digital marketing! From enhancing your website's search engine visibility to developing effective social media campaigns, we use effective strategies that bring in more customers. Our experts collaborate with you to learn about your objectives and develop a strategy that best meets your business requirements. Regardless of whether you're looking to grow traffic, grow sales, or establish your web presence, we have the software and expertise to help you succeed. Let's get started now and drive your business to new heights!",
     img_2: image_2,
@@ -359,7 +359,7 @@ const ServicesData = [
       {
         services_heading: "What digital marketing includes",
         services_desc:
-          "Digital marketing is anything you do on the internet to promote a business. It is planning a strategy, using SEO to appear on Google, posting on social media, doing online ads, and writing content such as blogs or videos. They all assist you in reaching more people and increasing your brand. However, here are a few points listed below:",
+          "Digital marketing is strategizing and focused promotion of products and services to grow a business. It is planning a strategy, using SEO to appear on Google, posting on social media, doing online ads, and writing content such as blogs or videos. They all assist you in reaching more people and increasing your brand. However, here are a few points listed below:",
         all_services: [
           {
             service_name: "Marketing",
@@ -376,7 +376,7 @@ const ServicesData = [
           {
             service_name: "SEO",
             service_desc:
-              "SEO (Search Engine Optimization) makes your website show up higher in search engine results such as Google. It involves proper keyword usage, page speed optimization, and developing useful content. With proper SEO, more individuals can locate your website when they search for something related.",
+              "SEO (Search Engine Optimization) makes your website rank up higher in search engine results such as Google. It involves proper keyword usage, page speed optimization, and developing useful content. With proper SEO, more individuals can locate your website when they search for something related.",
             hover_image: hover_img3,
           },
           {
@@ -418,7 +418,7 @@ const ServicesData = [
     why_atrix_heading: "Why Atrix",
     why_atrix_subheading: "Get Real Results with Proven Marketing Tactics",
     why_atrix_desc: [
-      "Did you know over 5 billion people use the internet every day? Digital marketing helps your business grow by connecting you with more people online, right where they spend most of their time. At Attrix Solutions, we understand how to use the right tools and strategies to help your brand get noticed. From SEO and social media to content and ads, we cover everything you need to build a strong online presence. Partner with us and let’s grow your business together, the smart and effective way.",
+      "Did you know over 5 billion people use the internet every day? Digital marketing helps your business grow by connecting you with more people online, right where they spend most of their time. At Atrix Solutions, we understand how to use the right tools and strategies to help your brand get noticed. From SEO and social media to content and ads, we cover everything you need to build a strong online presence. Partner with us and let’s grow your business together, the smart and effective way.",
     ],
     process_cards: [
       {
