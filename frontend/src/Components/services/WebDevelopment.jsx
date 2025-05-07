@@ -4,7 +4,7 @@ import Button from "../Button";
 const WebDevelopment = ({ secData, targetRef }) => {
   return (
     <div className="web-development-sec my-20 lg:my-36">
-      <div className="container mx-auto px-4 lg:px-0">
+      <div className="container  mx-auto  lg:px-0">
         {/* First Row - Maintains exact 6-6 column layout on desktop */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10">
           <div className="lg:col-span-6">

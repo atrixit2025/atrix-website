@@ -41,7 +41,7 @@ const cardsContent = [
 
 const Footer = () => {
   return (
-    <footer className="bg-cs_theme_black px-5">
+    <footer className="bg-cs_theme_black">
       <div className=" container  mx-auto  mt-18 pb-9  ">
         {/* Main Footer Content */}
         <div className="flex flex-col md:flex-row justify-between border-t border-gray-700  py-8 md:py-18 ">
