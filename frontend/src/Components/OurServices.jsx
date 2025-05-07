@@ -46,7 +46,7 @@ const OurServices = () => {
       <div className="container mx-auto ">
         <div className=" py-14 md:py-32 ">
 
-          <div className="md:flex flex-wrap justify-between  gap-10 ">
+          <div className="flex flex-wrap justify-between  gap-10 ">
             <h2 className="sec-heading">Our <br />Services</h2>
 
 

@@ -54,7 +54,7 @@ const OurSolution = () => {
 
 
     return (
-        <div className=" Our-Solution-Process-section bg-(--darkblack) text-(--whitelight)   relative mb-[00px] px-5 ">
+        <div className=" Our-Solution-Process-section bg-(--darkblack) text-(--whitelight)   relative mb-[00px] ">
             <div className='container mx-auto   '>
 
                 <div className='row  py-14 lg:py-28'>

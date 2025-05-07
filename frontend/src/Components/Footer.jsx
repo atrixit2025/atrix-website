@@ -84,7 +84,7 @@ const Footer = () => {
 
           {/* CTA Column */}
           <div className="md:w-1/4 flex flex-col  gap-4">
-            <h2 className="text-xl md:text-6xl font-bold">
+            <h2 className="sec-heading">
               Ready to Elevate Your Brand?
             </h2>
             <div className="mt-2  ">
