@@ -5,7 +5,7 @@ import Button from '../Button'
 const ServiceFrom = () => {
     return (
         <section className="service-from-sec mt-36 mb-12">
-            <div className="container max-w-[90%] mx-auto">
+            <div className="container  mx-auto">
                 <form className="form-wrapper  grid grid-cols-12 xl:gap-x-36  gap-y-5 ">
                     <div className="form-sec col-span-12 xl:col-span-8 space-y-10 order-2 xl:order-1  ">
 

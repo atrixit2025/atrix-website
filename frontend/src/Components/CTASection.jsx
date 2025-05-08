@@ -22,7 +22,7 @@ const CTASection = () => {
   }, []);
 
   return (
-    <div className="container w-[90%] mx-auto mt-14 md:mt-28">
+    <div className="container  mx-auto mt-14 md:mt-28">
       <div className="grid grid-cols-1 md:grid-cols-12 mt-10 bg-(--blue) rounded-xl p-6 md:p-10 cta-animated-block">
         {/* Text Section */}
         <div className="md:col-span-10 col-span-12 text-center md:text-left">

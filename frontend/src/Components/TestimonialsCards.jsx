@@ -80,7 +80,7 @@ const TestimonialsCards = () => {
 
   return (
     <div className="testimonial-container bg-darkblack text-whitelight relative overflow-hidden ">
-      <div className="container mx-auto pt-10 w-[90%] ">
+      <div className="container mx-auto pt-10  ">
         <div className="py-10 md:py-22">
           <div className="testimonial-heading text-center">
             <p className="text-xl">Our Testimonials</p>

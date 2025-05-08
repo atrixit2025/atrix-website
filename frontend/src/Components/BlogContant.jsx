@@ -52,7 +52,7 @@ const BolgContant = () => {
       </div>
 
       {/* Top Section - Responsive without visual changes */}
-      <div className="container mx-auto w-[90%]">
+      <div className="container mx-auto">
         <div className="grid grid-cols-12 pt-5 gap-y-4">
           <div
             onClick={() => navigate("/blog")}
@@ -87,7 +87,7 @@ const BolgContant = () => {
       </div>
 
       {/* Blog Image - With responsive height */}
-      <div className="container mx-auto pt-10 w-[90%]">
+      <div className="container mx-auto pt-10 ">
         <div className="featured-img w-full h-[300px] sm:h-[500px] md:h-[600px] lg:h-[700px] rounded-2xl overflow-hidden">
           <img
             className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
@@ -98,14 +98,14 @@ const BolgContant = () => {
       </div>
 
       {/* Blog Text - Unchanged */}
-      <div className="container mx-auto pt-10 w-[90%]">
+      <div className="container mx-auto pt-10 ">
         <div className="mx-auto max-w-[800px]">
           <p className="flex items-center">{blog.text}</p>
         </div>
       </div>
 
       {/* Related Posts - Responsive with original animations */}
-      <div className="container mx-auto pt-20 w-[90%]">
+      <div className="container mx-auto pt-20 ">
         <div className="related-heading mx-auto">
           <h1 className="text-3xl md:text-5xl font-bold">Related Posts</h1>
         </div>

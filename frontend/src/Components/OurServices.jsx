@@ -41,7 +41,7 @@ const OurServices = () => {
   }, []);
 
   return (
-    <div className="Services-section container mx-auto   text-(--whitelight)  ">
+    <div className="Services-section    text-(--whitelight)  ">
 
       <div className="container mx-auto ">
         <div className=" py-14 md:py-32 ">

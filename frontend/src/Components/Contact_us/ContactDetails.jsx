@@ -60,7 +60,7 @@ const ContactDetails = () => {
   }, []);
 
   return (
-    <div id="contact-cards" className="container mx-auto w-[90%]">
+    <div id="contact-cards" className="container mx-auto">
       <div className={`contact-cards-wrapper grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 relative transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
         {cardsContent.map((item, index) => {
           const cardClass = item.title.toLowerCase().replace(/\s+/g, "-");

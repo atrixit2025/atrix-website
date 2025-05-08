@@ -122,7 +122,7 @@ const OurSolution = () => {
   }, []);
 
   return (
-    <div className="Our-Solution-Process-section bg-[var(--darkblack)] text-[var(--whitelight)] relative px-5 mb-0">
+    <div className="Our-Solution-Process-section bg-[var(--darkblack)] text-[var(--whitelight)] relative mb-0">
       <div className="container mx-auto">
         <div className="row py-14 lg:py-28">
           <div className="grid lg:grid-cols-3 grid-cols-1 gap-10">
@@ -162,12 +162,21 @@ const OurSolution = () => {
               <div
                 id="line-progress"
                 className="absolute left-0 top-0 w-[2px] rounded-full"
-                style={{
-                  background: "linear-gradient(to bottom, #00a2dc)",
-                  height: "5%",
-                  transition: "height 0.3s ease-out",
-                  boxShadow: "0 0 10px 3px rgba(0, 166, 87, 0.4)",
-                }}
+                style={
+                  window.innerWidth >= 1024
+                    ? {
+                        background: "linear-gradient(to bottom, #00a2dc)",
+                        height: "5%",
+                        transition: "height 0.3s ease-out",
+                        boxShadow: "0 0 10px 3px rgba(0, 166, 87, 0.4)",
+                      }
+                    : {
+                        
+                        // height: "0",
+                        // transition: "none",
+                        // boxShadow: "none",
+                      }
+                }
               />
 
               <div className="w-full lg:pl-26 z-50">

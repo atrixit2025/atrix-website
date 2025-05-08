@@ -198,7 +198,7 @@ const Home = () => {
                 </h1>
 
                 <div className="text-center z-20 flex justify-center ">
-                  <p className="text-(--white) lg:px-10 lg:py-2 md:text-xl text-sm mt-12 font-semibold w-[90%] max-w-[950px]">
+                  <p className="text-(--white) lg:px-10 lg:py-2 md:text-xl text-sm mt-12 font-semibold  max-w-[950px]">
                     Founded with a passion for innovation, our team of young talents brings a fresh perspective to the world of IT and beyond, offering unique and creative solutions tailored to meet the evolving needs of our clients.
                   </p>
                 </div>
@@ -213,7 +213,7 @@ const Home = () => {
         <div className="-mt-10 md:mt-0">
           <div className="lg:flex items-center  ">
             <div className='inline-block relative max-w-[100%] '>
-            <h2 className="font-bold absolute z-50 lg:text-9xl md:text-8xl text-4xl text-transparent top-0  -translate-1/2  left-1/2 whitespace-nowrap " style={{ WebkitTextStroke: "1px white" }}>About us</h2>
+            <h2 className="font-bold absolute z-50 lg:text-9xl md:text-8xl text-4xl sm:text-6xl text-transparent top-0  -translate-1/2  left-1/2 whitespace-nowrap " style={{ WebkitTextStroke: "1px white" }}>About us</h2>
               <img src={AboutImage} className="h-full  w-auto min-h-[600px] object-cover relative max-w-[100%]" alt="About Us" />
               <div className='video-button-sec' >
                 <div className="video-circle">

@@ -5,7 +5,7 @@ import Button from '../Button';
 const RiseWithUs = ({ scrollToRolesSection }) => {
   return (
     <div>
-      <div className="container mx-auto w-[90%] py-24">
+      <div className="container mx-auto py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-7">
           <div className="md:pr-36 pt-8">
             <h2 className="text-4xl md:text-5xl font-bold">

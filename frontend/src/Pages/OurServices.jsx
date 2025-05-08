@@ -9,7 +9,7 @@ const OurServices = () => {
   return (
     <>
       <div className="services-hero relative h-full w-full z-0  pt-55 pb-20  ">
-        <div className="services-hero-text  container mx-auto w-[90%] ">
+        <div className="services-hero-text  container mx-auto  ">
           <h1 className="medium-heading break-words  ">
             WEBSITE <br />
             DESIGN AND <br />
@@ -19,7 +19,7 @@ const OurServices = () => {
       </div>
 
       {/* <div className="Brand-Experience container flex  justify-between  mx-auto mt-22">
-        <div className="container mx-auto w-[90%]">
+        <div className="container mx-auto">
         <h4 className=" text-2xl  ">
           Crafted by our team of experts and powered by cutting-edge AI
           technology, our services deliver measurable, impactful results that
@@ -34,11 +34,11 @@ const OurServices = () => {
       {/* HOW WE DO IT */}
 
 
-      <div className="container mx-auto mt-16 leading-0 w-[90%] ">
-        <h2 className=" text-4xl md:text-8xl font-bold text-center  py-15 "> HOW WE DO IT</h2>
+      <div className="container mx-auto mt-16 leading-0  ">
+        <h2 className=" sec-heading text-center  py-15 "> HOW WE DO IT</h2>
         <div className=" grid  grid-cols-12  md:gap-9 space-y-5 ">
           <div className="col-span-12 md:col-span-4 border-t-1 border-white/20  ">
-            <h3 className=" text-2xl  md:text-3xl font-extrabold  pt-10 break-words">
+            <h3 className=" sub-sec-heading font-extrabold  pt-10 break-words">
               START WITH <br />
               UNDERSTANDING
             </h3>
@@ -53,7 +53,7 @@ const OurServices = () => {
           </div>
 
           <div className="col-span-12 md:col-span-4 border-t-1 border-white/20  ">
-            <h3 className="text-2xl  md:text-3xl font-extrabold  pt-10 break-words">
+            <h3 className="sub-sec-heading font-extrabold  pt-10 break-words">
               CRAFT <br />
               FOR IMPACT
             </h3>
@@ -66,7 +66,7 @@ const OurServices = () => {
           </div>
 
           <div className="col-span-12 md:col-span-4 border-t-1 border-white/20  ">
-            <h3 className="text-2xl  md:text-3xl font-extrabold  pt-10 break-words">
+            <h3 className="sub-sec-heading font-extrabold  pt-10 break-words">
               ACCELERATE FOR <br />
               GROWTHG
             </h3>
@@ -80,8 +80,8 @@ const OurServices = () => {
       </div>
 
       {/* CTA SECTION */}
-      <div className="container mx-auto mt-35 mb-11 w-[90%] ">
-        <div className="grid grid-cols-12  p-15 bg-[#262626] rounded-2xl  ">
+      <div className="container mx-auto mt-35 mb-11  ">
+        <div className="grid grid-cols-12 p-8 md:p-12 lg:p-15 bg-[#262626] rounded-2xl  ">
           <div className="col-span-12 md:col-span-6 flex justify-start items-center ">
             <div className="brand-text-sec   ">
               <h2 className="sec-heading font-[900]">

@@ -15,7 +15,7 @@ const PrivacyPolicy = () => {
 
     return (
         <div>
-            <div className="container mx-auto w-[90%]">
+            <div className="container mx-auto ">
                 <HeroCommon heroData={herodata[0]} />
                 <div className="md:px-36 py-14 ">
                     <div className="privacy-policy-container">
