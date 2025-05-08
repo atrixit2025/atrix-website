@@ -95,31 +95,50 @@ const OurSolution = () => {
   }, []);
 
   useEffect(() => {
-    const updateProgressLine = () => {
-      const line = document.getElementById("line-progress");
-      const cards = document.getElementById("process-cards");
-      if (!line || !cards) return;
-
-      const rect = cards.getBoundingClientRect();
-      const height = rect.height;
-      const top = rect.top;
-
-      let progress = Math.min(Math.max(-top / height, 0), 1);
-      progress = Math.min(progress * 1.8, 1);
-
-      const minHeight = 5;
-      const dynamicHeight = minHeight + progress * (100 - minHeight);
-      line.style.height = `${dynamicHeight}%`;
+    const line = document.getElementById("line-progress");
+    const cards = document.getElementById("process-cards");
+    const circleWrapper = document.getElementById("circle-wrapper");
+  
+    if (!line || !cards || !circleWrapper) return;
+  
+    let ticking = false;
+  
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const rect = cards.getBoundingClientRect();
+          const height = rect.height;
+          const top = rect.top;
+  
+          // Progress calculation
+          let progress = Math.min(Math.max(-top / height, 0), 1);
+          let circlePercent = Math.floor(progress * 100);
+          let linePercent = Math.min(progress * 1.8, 1);
+  
+          // Update circle (like before)
+          circleWrapper.style.background = `conic-gradient(var(--blue) ${circlePercent + 15}%, #1A1A1A 0%)`;
+  
+          // Update line height smoothly
+          const minHeight = 5;
+          const dynamicHeight = minHeight + linePercent * (100 - minHeight);
+          line.style.height = `${dynamicHeight}%`;
+  
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-
-    window.addEventListener("scroll", updateProgressLine);
-    window.addEventListener("load", updateProgressLine);
-
+  
+    window.addEventListener("scroll", onScroll);
+    window.addEventListener("load", onScroll);
+  
     return () => {
-      window.removeEventListener("scroll", updateProgressLine);
-      window.removeEventListener("load", updateProgressLine);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("load", onScroll);
     };
   }, []);
+  
+  
 
   return (
     <div className="Our-Solution-Process-section bg-[var(--darkblack)] text-[var(--whitelight)] relative px-5 mb-0">

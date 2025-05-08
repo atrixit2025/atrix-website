@@ -11,7 +11,7 @@
     filter: grayscale(1) contrast(0.5) brightness(6);
 }
 
-.services-hero-text::before{
+/* .services-hero-text::before{
     content: "";
     position: absolute;
     background-color: rgba(0, 0, 0, 0.403);
@@ -20,4 +20,4 @@
     top: 0;
     left: 0;
     z-index: -1;
-}
+} */
