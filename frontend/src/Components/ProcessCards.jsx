@@ -11,7 +11,7 @@ const ProcessCards = ({ secData, targetRef }) => {
     return (
         <section className='process-cards-section my-36'>
 
-            <div className="container mx-auto max-w-[90%]">
+            <div className="container mx-auto">
                 <h2 className='sec-heading text-center my-10'>Our {secData.service_title}  Process</h2>
                 {/* <p className='text-center  max-w-[800px] mx-auto mb-10'>Curious about how we create impactful brands? Our step-by-step process ensures that your brand stands out and makes a lasting impression! </p> */}
                 <div className="process-cards-wrapper flex flex-wrap gap-5"  >

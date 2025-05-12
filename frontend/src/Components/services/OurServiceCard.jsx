@@ -17,8 +17,8 @@ const OurServiceCard = () => {
 
   return (
     <>
-      <div className="container mx-auto w-[90%]">
-        <div className="columns-1 md:columns-3 gap-20 mt-12">
+      <div className="container mx-auto ">
+        <div className="columns-1  md:columns-2 xl:columns-3 gap-20 mt-12">
           {ServicesData.map((item, index) => (
             <div 
               key={index} 

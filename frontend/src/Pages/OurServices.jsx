@@ -18,15 +18,18 @@ const OurServices = () => {
 
   return (
     <>
-      <div className="services-hero relative h-full w-full z-0 pt-55 pb-20">
-        <div className="services-hero-text container mx-auto w-[90%]" data-aos="fade-up">
-          <h1 className="medium-heading break-words">
+
+      <div className="services-hero relative h-full w-full z-0  pt-55 pb-20  ">
+        <div className="services-hero-text  container mx-auto  ">
+          <h1 className="medium-heading break-words  ">
+
             WEBSITE <br />
             DESIGN AND <br />
             DEVELOPMENT
           </h1>
         </div>
       </div>
+
 
       <OurServiceCard />
 
@@ -41,6 +44,7 @@ const OurServices = () => {
             data-aos="fade-right"
           >
             <h3 className="text-2xl md:text-3xl font-extrabold pt-10 break-words">
+
               START WITH <br />
               UNDERSTANDING
             </h3>
@@ -51,11 +55,13 @@ const OurServices = () => {
             </p>
           </div>
 
+
           <div
             className="col-span-12 md:col-span-4 border-t-1 border-white/20"
             data-aos="fade-up"
           >
             <h3 className="text-2xl md:text-3xl font-extrabold pt-10 break-words">
+
               CRAFT <br />
               FOR IMPACT
             </h3>
@@ -65,11 +71,13 @@ const OurServices = () => {
             </p>
           </div>
 
+
           <div
             className="col-span-12 md:col-span-4 border-t-1 border-white/20"
             data-aos="fade-left"
           >
             <h3 className="text-2xl md:text-3xl font-extrabold pt-10 break-words">
+
               ACCELERATE FOR <br />
               GROWTH
             </h3>
@@ -82,6 +90,7 @@ const OurServices = () => {
       </div>
 
       {/* CTA SECTION */}
+
       <div
         className="container mx-auto mt-35 mb-11 w-[90%]"
         data-aos="zoom-in-up"
@@ -89,6 +98,7 @@ const OurServices = () => {
         <div className="grid grid-cols-12 p-15 bg-[#262626] rounded-2xl">
           <div className="col-span-12 md:col-span-6 flex justify-start items-center">
             <div className="brand-text-sec">
+
               <h2 className="sec-heading font-[900]">
                 READY TO ELEVATE <br /> YOUR BRAND?
               </h2>

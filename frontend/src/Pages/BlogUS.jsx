@@ -170,7 +170,7 @@ const BlogUS = () => {
   return (
     <>
       <HeroCommon heroData={herodata[0]} />
-      <div className="container mx-auto w-[90%] pt-10 md:px-10">
+      <div className="container mx-auto pt-10 md:px-10">
         <div className="grid md:grid-cols-3 top  gap-10 md:-mx-10">
           {currentBlogs.map((blog) => (
             <div key={blog.id} className="w-full flex flex-col">

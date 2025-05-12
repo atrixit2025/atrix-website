@@ -45,7 +45,7 @@ const ContactForm = () => {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.8 }}
                 >
-                    <div className="container mx-auto w-[90%]">
+                    <div className="container mx-auto ">
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                             {/* Contact Heading Section */}
                             <motion.div 

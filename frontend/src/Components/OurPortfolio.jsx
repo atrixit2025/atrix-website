@@ -88,7 +88,7 @@ const OurPortfolio = () => {
                 <div className=' py-25 mb-6'>
                 <div className="md:flex justify-between  gap-10 ">
                     <div className=' font-extrabold '>
-                        <p className='text-gray '>OUR PORTFOLIO</p>
+                        <p className='text-gray small-sub-heading '>OUR PORTFOLIO</p>
                         <h2 className="sec-heading max-w-[380px] "> Our Work Your Success</h2>
                     </div>
 

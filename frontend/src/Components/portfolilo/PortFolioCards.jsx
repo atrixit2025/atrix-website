@@ -13,7 +13,7 @@ const PortFolioCards = () => {
         : projectsData.filter(item => item.category === activeCategory);
     return (
         <div className='md:py-32 py-6'>
-            <div className="container w-[90%] mx-auto">
+            <div className="container  mx-auto">
                 <div className="category-btns flex flex-wrap justify-start  md:justify-center gap-3 mt-4 ">
                     {categories.map((item, index) => (
                         <button

@@ -171,7 +171,7 @@ const OurSolution = () => {
                         boxShadow: "0 0 10px 3px rgba(0, 166, 87, 0.4)",
                       }
                     : {
-                       
+
                         // height: "0",
                         // transition: "none",
                         // boxShadow: "none",

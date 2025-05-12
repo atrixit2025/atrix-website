@@ -51,7 +51,7 @@ const Service = () => {
       <div className="pt-[150px]">
         <ServiceHeroBanner />
 
-        <div className=" container w-[90%] mx-auto md:mt-40 mt-10  " >
+        <div className=" container  mx-auto md:mt-40 mt-10  " >
           <h1 className="medium-heading  font-bold text-center">{filteredService.service_title}</h1>
         </div>
 
@@ -76,7 +76,7 @@ const Service = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="container max-w-[90%] mx-auto mt-28 service-cta">
+        <div className="container  mx-auto mt-28 service-cta">
           <div className="row grid grid-cols-1 md:grid-cols-12 mt-10 bg-(--blue) rounded-xl p-6 md:p-10">
             <div className="lg:col-span-10 col-span-12 text-center md:text-left">
               <h2 className="sec-heading font-bold">
