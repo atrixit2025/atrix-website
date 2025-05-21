@@ -744,39 +744,47 @@ const ServicesData = [
     ],
     main_image: staffing,
     category: "Staffing Solutions",
-    heading_1: "Strategic Talent Acquisition",
+    heading_1: " Strategic Talent Acquisition",
     description_1:
-      "We connect businesses with top-tier talent through customized staffing solutions that address immediate hiring needs while building long-term workforce strategies for sustainable growth.",
+      "We are experts in hiring people strategically, which goes beyond simply covering open positions. Our approach is designed to satisfy your company's particular hiring requirements, ensuring that you will not only find exceptional talent but also create a long-lasting, sustainable workforce. We collaborate closely with you to get your company's culture, goals, and future vision, ensuring the candidates we offer adjust together with your vital targets. ",
     img_1: image_1,
+description_2: "In order to help you remain competitive in a changing market, our staffing solutions are made for both your immediate needs and your long-term expansion. Our expertise in identifying, screening, and assigning highly qualified workers enables your company to grow effectively, sustain output, and experience continuous success.",
+
     img_2: image_2,
     sub_service: [
       {
-        services_heading: "Contant",
-        services_desc:
-          "Comprehensive workforce solutions tailored to your industry, company culture and specific role requirements.",
+        // services_heading: "U.S Recruitment",
+        // services_desc:
+        //   "Finding and placing elite professionals for clients across the US is our area of expertise. Only the most capable and culturally compatible applicants are chosen as a result of our industry-specific hiring procedure. We handle every step of the process, from initial sourcing to the final placement, quickly, accurately, and in accordance with US service regulations.",
         all_services: [
           {
-            service_name: "Permanent Staffing",
+            service_name: "U.S Recruitment",
+            service_desc:
+              "Finding and placing elite professionals for clients across the US is our area of expertise. Only the most capable and culturally compatible applicants are chosen as a result of our industry-specific hiring procedure. We handle every step of the process, from initial sourcing to the final placement, quickly, accurately, and in accordance with US service regulations.",
+            hover_image: hover_img,
+          },
+          {
+            service_name: "Payroll",
             service_desc:
               "Finding the right long-term candidates through targeted search and comprehensive vetting processes to ensure perfect cultural and skills fit.",
             hover_image: hover_img,
           },
           {
-            service_name: "Temporary Staffing",
+            service_name: "Talent Acquisition",
             service_desc:
-              "Providing qualified temporary professionals for project-based needs, seasonal demands and special initiatives with flexible terms.",
+              "Our talent acquisition process extends past standard recruitment methods. Our talent acquisition process focuses on finding exceptional professionals who match your company objectives and cultural values and share your long-term organizational direction. Our approach of strategic sourcing combined with data assessments and thorough candidate evaluations enables you to build a workforce that drives growth and innovation. Our customized approach helps you acquire suitable talent exactly when you need them regardless of your current growth stage or specific hiring needs.",
             hover_image: hover_img,
           },
           {
-            service_name: "Executive Search",
+            service_name: "U.S. Hiring",
             service_desc:
-              "Identifying and recruiting C-level and senior leadership talent through discreet, targeted searches and thorough assessment processes.",
+              "We deliver complete hiring solutions for businesses operating in the United States which ensures complete compliance with federal and state employment regulations. Our U.S. hiring services include job posting, applicant tracking, screening, background verification, and onboarding. Our expertise in various industries and local labor markets helps you discover suitable candidates quickly while reducing risks and boosting operational efficiency",
             hover_image: hover_img2,
           },
           {
-            service_name: "Technical Recruitment",
+            service_name: "Client Engagement",
             service_desc:
-              "Specialized sourcing for IT, engineering and STEM positions with deep understanding of technical skills and industry requirements.",
+              "Our staffing services depend on building strong relationships with our clients. We invest time to grasp your specific hiring difficulties along with your organizational targets and team relationships. Our partnership delivers continuous communication along with performance feedback and dedicated account management to provide a smooth and responsive experience. Our mission is to function as an additional component of your HR department by delivering flexible and effective staffing solutions that drive your business expansion.",
             hover_image: hover_img3,
           },
         ],
@@ -807,23 +815,23 @@ const ServicesData = [
     process_cards: [
       {
         title: "Needs Assessment",
-        desc: "Understanding role requirements and team dynamics.",
+        desc: "Our team works with clients to determine the exact requirements of the role along with team organization and business objectives to establish the perfect candidate profile.",
       },
       {
         title: "Talent Sourcing",
-        desc: "Identifying potential candidates through networks.",
+        desc: "Our strategic sourcing methods allow us to access high-quality candidates through our professional networks and job portals and talent databases.",
       },
       {
         title: "Screening & Evaluation",
-        desc: "Conducting interviews and skills assessments.",
+        desc: "The evaluation process includes complete interviews and background checks and skill assessments to verify candidates fulfill both technical standards and cultural requirements.",
       },
       {
         title: "Candidate Presentation",
-        desc: "Submitting qualified candidates with profiles.",
+        desc: "Our service provides you with a selection of pre-screened qualified candidates who receive complete profile information to simplify your recruitment process.",
       },
       {
         title: "Onboarding Support",
-        desc: "Facilitating smooth transitions for new hires.",
+        desc: "We provide assistance with documentation and communication and integration services to create a smooth onboarding process for both clients and candidates.",
       },
     ],
     quote:

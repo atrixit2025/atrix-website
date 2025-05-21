@@ -60,7 +60,7 @@ const OurServiceCard = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> 
     </>
   );
 };
