@@ -491,39 +491,58 @@ const ServicesData = [
     category: "Visual Effects",
     heading_1: "Cutting-Edge Visual Effects",
     description_1:
-      "We create stunning visual effects that bring imagination to life, from subtle enhancements to full CGI environments, helping brands tell compelling stories through cinematic visuals.",
+      "Modern storytelling depends on visual effects as its fundamental power, which our studio enhances through its advanced capabilities. Our state-of-the-art visual effects services unite creative vision with modern technological capabilities to enhance your content. Our team of expert VFX artists uses their precision and artistic skills to transform your imaginative concepts into realistic visual creations, whether you need dramatic cinematic sequences, hyper-realistic CGI environments, or subtle emotional depth enhancements. Our team uses leading-edge tools and methods to merge digital components with live-action footage, which produces realistic and emotionally powerful visuals. Every frame we create combines dynamic particle effects with explosive simulations and detailed 3D modeling and compositing techniques to deliver captivating visuals that enhance your brand narrative. Our mission extends beyond visual impact to assist you in creating a narrative that both moves audiences deeply and remains in their minds after the screen goes dark.",
     img_1: image_1,
     img_2: image_2,
     sub_service: [
       {
-        services_heading: "Contant",
-        services_desc:
-          "Comprehensive visual effects solutions for commercials, films, presentations and digital content.",
+        // services_heading: "VFX (Visual Effects)",
+        // services_desc:
+        //   "Our team creates breathtaking digital visual effects which combine imaginative elements with realistic elements to boost narrative impact",
         all_services: [
           {
-            service_name: "3D Animation",
+            service_name: "VFX (Visual Effects)",
             service_desc:
-              "Creating lifelike character animations, product visualizations and environments with realistic physics and movement for immersive experiences.",
+              "Our team creates breathtaking digital visual effects which combine imaginative elements with realistic elements to boost narrative impact",
             hover_image: hover_img,
           },
           {
-            service_name: "Motion Graphics",
+            service_name: "SFX (Special Effects)",
             service_desc:
-              "Designing dynamic animated graphics for explainer videos, titles and presentations that communicate complex ideas simply and effectively.",
+              "Our practical on-set effects, including smoke, fire, and mechanical rigs, create real-time authenticity and dramatic effects in your scenes.",
+            hover_image: hover_img,
+          },
+          {
+            service_name: "3D",
+            service_desc:
+              "Our 3D work delivers realistic motion and depth to visual projects through the creation of lifelike characters and immersive environments.",
             hover_image: hover_img2,
           },
           {
-            service_name: "Video Editing",
+            service_name: "Editing",
             service_desc:
-              "Professional editing and assembly of video footage with seamless transitions, pacing and storytelling for maximum impact.",
+              "We transform unedited footage into compelling visual narratives through strategic editing techniques that maintain audience interest.",
             hover_image: hover_img3,
           },
-          {
-            service_name: "Color Correction",
+             {
+            service_name: "Composition",
             service_desc:
-              "Enhancing and standardizing color across all footage for professional, consistent results that match brand aesthetics.",
+              "We achieve cohesive and polished cinematic effects by combining multiple visual elements through layering and blending techniques.",
             hover_image: hover_img4,
           },
+          {
+            service_name: "Grading",
+            service_desc:
+              "Our expert color correction and grading process establishes visual tone and mood which intensifies the emotional power of each frame.",
+            hover_image: hover_img4,
+          },
+          {
+            service_name: " Motion Graphics",
+            service_desc:
+              "Our team adds clarity and style to visuals through the integration of sleek titles and animated elements and transitions, which bring energy to your content.",
+            hover_image: hover_img4,
+          },
+       
         ],
       },
     ],
@@ -551,26 +570,25 @@ const ServicesData = [
     ],
 
     process_cards: [
-      
       {
-        title: " Understanding Your Business:",
-        desc: "We start by learning about your business, your goals, and your audience. This helps us make a plan that fits your needs and speaks to the right people.",
+        title: "Understanding Your Business:",
+        desc: "Our first step involves learning about your brand identity together with your business targets and objectives to match our visual effects with your original vision.",
       },
       {
         title: "Planning the Strategy:",
-        desc: "Next, we create a step-by-step marketing plan. This includes which platforms to use, what kind of content to post, and how to reach your ideal customers.",
+        desc: "We develop a strategic plan that includes both creative and technical aspects to select the most suitable style, techniques, and platforms that will achieve your goals.",
       },
       {
         title: "Creating Quality Content:",
-        desc: "We design posts, ads, and videos that clearly show what your business offers. Good content grabs attention and keeps your audience interested.",
+        desc: "Our team creates content that effectively demonstrates your business offerings to potential customers. The quality of your content determines how well it will attract viewers while maintaining their interest.",
       },
       {
         title: "Running Digital Ads:",
-        desc: "We run targeted ads on Google, Facebook, and other platforms to help you get more visitors, leads, or sales.",
+        desc: "Through strategic ad placement on different platforms, we help increase content visibility to achieve better engagement and conversion rates.",
       },
       {
         title: "Tracking and Improving:",
-        desc: "We check what’s working and what’s not. Then, we adjust the plan to get better results over time.",
+        desc: "Our team tracks performance data while collecting feedback to make ongoing improvements in VFX and marketing strategies, which produce maximum impact",
       },
     ],
     quote:
