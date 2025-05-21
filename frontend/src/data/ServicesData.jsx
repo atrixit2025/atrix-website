@@ -758,7 +758,7 @@ description_2: "In order to help you remain competitive in a changing market, ou
         //   "Finding and placing elite professionals for clients across the US is our area of expertise. Only the most capable and culturally compatible applicants are chosen as a result of our industry-specific hiring procedure. We handle every step of the process, from initial sourcing to the final placement, quickly, accurately, and in accordance with US service regulations.",
         all_services: [
           {
-            service_name: "U.S Recruitment",
+            service_name: "U.S Recruitment", 
             service_desc:
               "Finding and placing elite professionals for clients across the US is our area of expertise. Only the most capable and culturally compatible applicants are chosen as a result of our industry-specific hiring procedure. We handle every step of the process, from initial sourcing to the final placement, quickly, accurately, and in accordance with US service regulations.",
             hover_image: hover_img,
