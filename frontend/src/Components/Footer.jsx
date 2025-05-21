@@ -46,7 +46,7 @@ const Footer = () => {
         {/* Main Footer Content */}
         <div className="flex flex-col md:flex-row justify-between border-t border-gray-700  py-8 md:py-18 ">
           {/* Logo Column */}
-          <div className=" w-[200px] flex flex-col gap-5">
+          <div className="w-[120px] md:w-[140px]  lg:w-[170px] xl:w-[200px] flex flex-col gap-5">
             <div className="img-sec">
               <img
                 src={logo}
