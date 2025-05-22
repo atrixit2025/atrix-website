@@ -339,6 +339,7 @@ h1.large-heading {
 h1.medium-heading {
   font-size: 76px;
   font-weight: bold;
+  line-height: 1.2em;
 }
 
 h1.extra-large-heading {
@@ -350,7 +351,7 @@ h1.extra-large-heading {
 h2.sec-heading {
   font-size: 44px;
   font-weight: bold;
-  line-height: 1em;
+  line-height: 1.1em;
 }
 h3.sub-sec-heading {
   font-size: 32px;
@@ -366,7 +367,7 @@ h3.sub-sec-heading {
     font-size: 96px;
   }
   h1.medium-heading {
-    font-size: 30px;
+    font-size: 48px;
     font-weight: bold;
     line-height: 1.2em;
   }
@@ -395,7 +396,7 @@ h3.sub-sec-heading {
     font-size: 76px;
   }
   h1.medium-heading {
-    font-size: 36px;
+    font-size: 40px;
   }
  
   h2.sec-heading {
@@ -429,7 +430,7 @@ h3.sub-sec-heading {
     font-size: 78px;
   }
   h1.medium-heading {
-    font-size: 36px;
+    font-size: 42px;
   }
  
   h2.sec-heading {
@@ -447,6 +448,9 @@ h3.sub-sec-heading {
   }
 }
 @media screen and (max-width: 480px) {
+  h1.medium-heading {
+    font-size: 42px;
+  }
 
   h1.large-heading {
     font-size: 48px;
