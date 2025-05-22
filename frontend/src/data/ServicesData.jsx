@@ -213,45 +213,67 @@ const ServicesData = [
     category: "Web Development",
     heading_1: "Custom Digital Experiences That Drive Results",
     description_1:
-      "We design and build high-performance websites and web applications that combine stunning aesthetics with seamless functionality, optimized for user experience, conversions and business growth.",
+      "Beyond aesthetic appeal, we design and develop high-performance websites and web applications that offer flawless operation, remarkable speed, and tangible business impact. Every project we take on is informed by our in-depth knowledge of contemporary user behavior, new developments in digital technology, and our clients’ particular goals. Our team creates secure, scalable, and responsive platforms that draw in visitors and turn them into devoted clients by fusing creativity with cutting-edge technical know-how.",
     img_1: image_1,
+
+      description_2:
+      "We ensure that every digital product, from enterprise-level web solutions to dynamic single-page apps, is precisely and purposefully engineered. We focus heavily on optimizing user journeys—ensuring intuitive navigation, fast load times, mobile responsiveness, and accessible design. Our solutions are designed to satisfy the highest requirements for usability, performance, and cross-browser compatibility while reflecting your brand identity. ",
     img_2: image_2,
     sub_service: [
       {
-        services_heading: "Contant",
-        services_desc:
-          "Complete website solutions from simple brochure sites to complex web applications and ecommerce platforms.",
+        // services_heading: "Contant",
+        // services_desc:
+        //   "Complete website solutions from simple brochure sites to complex web applications and ecommerce platforms.",
         all_services: [
           {
-            service_name: "Website Development",
+            service_name: "Artificial Intelligence",
             service_desc:
-              "Building responsive, performant websites with modern frameworks like React and Vue, optimized for speed, SEO and user experience across all devices.",
+              "Boost your digital solutions with AI-powered intelligent features. AI facilitates task automation, enhances user engagement, and leads to more intelligent business decisions through the use of intelligent chatbots, virtual assistants, predictive analytics, and personalized content delivery. ",
             hover_image: hover_img,
           },
           {
-            service_name: "E-commerce Solutions",
+            service_name: "Metaverse",
             service_desc:
-              "Developing feature-rich online stores with Shopify, WooCommerce or custom platforms, including payment integration and inventory management.",
+              "Take web experiences to the next level by integrating with the metaverse. We create immersive 3D worlds, VR webshops, and interactive digital worlds where users can experience your brand in a revolutionary way-ideal for future-oriented brands that want to differentiate themselves.",
             hover_image: hover_img2,
           },
           {
-            service_name: "Web Applications",
+            service_name: "Salesforce",
             service_desc:
-              "Creating custom business tools, dashboards and SaaS platforms with robust backend functionality and intuitive interfaces.",
+              "Maximize your customer relationship with custom Salesforce integration. Be it with automating your sales pipelines, creating custom dashboards, or syncing web data, we want to make sure your platform aligns with your business objectives.",
             hover_image: hover_img3,
           },
           {
-            service_name: "CMS Development",
+            service_name: "CRM (Customer Relationship Management)",
             service_desc:
-              "Implementing WordPress, Drupal or other content management systems for easy content updates and publishing workflows.",
+              "We create and integrate customer relationship management (CRM) systems that centralize your customer data, automate follow-ups, and streamline lead tracking so you can create more personalized and robust relationships with each client.",
             hover_image: hover_img4,
           },
           {
-            service_name: "API Integration",
+            service_name: "PHP",
             service_desc:
-              "Connecting your website with third-party services, payment gateways and databases for seamless functionality.",
+              "PHP is a strong, well-established scripting language that enables us to build feature-rich, fast, and reliable websites and dynamic web apps. PHP powers everything, from fully functional business systems to customized portals.",
             hover_image: hover_img5,
           },
+          {
+            service_name: "Laravel",
+            service_desc:
+              " We build back-end architectures that are reliable, safe, and beautiful by using the latest PHP framework, Laravel. Perfect for organizations that desire clean code, fast development, and cutting-edge performance without compromising on quality.",
+            hover_image: hover_img5,
+          },
+          {
+            service_name: "React JS",
+            service_desc:
+              "With React JS we can develop fast, interactive front-ends that are a pleasure to use. Dashboards, e-commerce stores, and server-driven interfaces-with React, you get a UI that feels faster, more intuitive, and more responsive than you’re used to. ",
+            hover_image: hover_img5,
+          },
+          {
+            service_name: "Node.js",
+            service_desc:
+              "For real-time, scalable, and event-driven projects, we opt for Node.js as the backend technology. We deploy it to develop robust APIs, chat systems, and responsive applications that can serve millions of users performing multiple tasks without any glitches.",
+            hover_image: hover_img5,
+          },
+         
         ],
       },
     ],
@@ -280,23 +302,23 @@ const ServicesData = [
     process_cards: [
       {
         title: "Discovery & Planning",
-        desc: "Defining requirements, user flows and technical specifications.",
+        desc: "In order to establish precise requirements, user journeys, and technical roadmaps that lay the groundwork for success, we thoroughly examine your objectives.",
       },
       {
         title: "Design & Prototyping",
-        desc: "Creating wireframes and UI designs for feedback.",
+        desc: "To visualize user experiences and get early feedback, our designers create captivating UI mockups and intuitive wireframes.",
       },
       {
         title: "Development",
-        desc: "Building features with clean, documented code.",
+        desc: "Using scalable architecture and clean, well-documented code, we bring your vision to life with performance and security in mind.",
       },
       {
         title: "Testing & QA",
-        desc: "Rigorous testing across devices and scenarios.",
+        desc: "Before going live, we make sure everything is perfect, from cross-device compatibility to functional stress tests.",
       },
       {
         title: "Launch & Optimization",
-        desc: "Deploying with monitoring for improvements.",
+        desc: "We track performance, deploy your product seamlessly, and continuously improve its speed, engagement, and outcomes.",
       },
     ],
     quote:
@@ -637,8 +659,10 @@ const ServicesData = [
     category: "Media Production",
     heading_1: "Professional Visual Storytelling",
     description_1:
-      "We produce high-quality photography and videography that showcases your products, services and brand story with cinematic quality and strategic messaging tailored to your marketing objectives.",
+      "At Atrix, we're experts at creating stunning images and videos that vividly convey your brand. Our team creates content that not only looks amazing but also perfectly fits your marketing objectives by fusing strategic messaging with cinematic techniques.",
     img_1: image_1,
+    description_2:
+      "We make sure every frame conveys value, trust, and professionalism, whether you're showcasing your goods, summarising your services, or sharing the backstory of your company. Our visual content, which ranges from corporate films and promotional videos to product photography and event coverage, is made to captivate viewers, strengthen your brand, and produce outcomes on digital media.",
     img_2: image_2,
     sub_service: [
       {
@@ -647,27 +671,27 @@ const ServicesData = [
           "End-to-end production solutions tailored to your brand's needs—from concept development to final delivery across photography, videography and multimedia formats.",
         all_services: [
           {
-            service_name: "Product Photography",
+            service_name: "Corporate Shoot",
             service_desc:
-              "Creating high-resolution product images that highlight features and quality, with studio lighting and professional styling for e-commerce and marketing materials.",
+              "Our corporate photography sessions are intended to elegantly and professionally capture the spirit of your company. We visually represent your company's values, atmosphere, and professionalism through everything from team interactions and leadership portraits to behind-the-scenes operations and office culture. These images support internal brand identity, draw in top talent, and increase client trust. Whether it's formal, creative, or dynamic, we make sure every shot captures the essence of your brand and works well on digital platforms, presentations, and marketing collateral.",
             hover_image: hover_img,
           },
           {
-            service_name: "Corporate Videos",
+            service_name: " Product Shoot",
             service_desc:
-              "Producing professional corporate videos including testimonials, training content and company profiles with polished scripting, filming and editing.",
+              "Our speciality is producing visually striking product photography and videos that accurately showcase the features, functionality, and design of your product. Our photo shoots are designed to make your products stand out, whether they are for social media, catalogues, e-commerce, or advertising. We take pictures that convey quality and usefulness in addition to aesthetic appeal by utilising expert lighting, imaginative angles, and well-styled setups. In a crowded market, we want to increase consumer interest, encourage conversions, and visually enhance your brand's offerings.",
             hover_image: hover_img2,
           },
           {
-            service_name: "Commercial Photography",
+            service_name: "Food Photography",
             service_desc:
-              "Capturing striking images for advertising campaigns with tailored lighting, composition and art direction for maximum visual impact.",
+              "With artistic accuracy, our food photography captures the flavours, textures, and freshness of your dishes. We create images that make your culinary creations enticing, making them ideal for food brands, cafés, restaurants, and cloud kitchens. To arouse your audience's emotions and appetite, we concentrate on colourful compositions, eye-catching styling, and tantalising close-ups. You can create a powerful food brand and draw in hungry customers with these images, which are perfect for menus, websites, social media, and advertising campaigns.",
             hover_image: hover_img3,
           },
           {
-            service_name: "Drone Videography",
+            service_name: "Commercial Shoot",
             service_desc:
-              "Providing stunning aerial footage for real estate, events and promotional content captured by licensed drone operators.",
+              "The purpose of commercial shoots is to use excellent, ad-ready images to market your company, service, or product. We design, plan, and implement impactful visuals that emotionally engage your target audience, whether they are for digital billboards, TV, internet advertisements, or social campaigns. Our team makes sure that every frame has a strategic marketing purpose, from creative direction and scripting to shooting and post-production. These photo shoots are designed to increase brand recognition, sway consumer choices, and produce quantifiable business outcomes.",
             hover_image: hover_img4,
           },
         ],
@@ -698,23 +722,23 @@ const ServicesData = [
     process_cards: [
       {
         title: "Creative Briefing",
-        desc: "Defining project objectives, audience and key messages.",
+        desc: "The project begins with understanding your vision while defining the objectives and target market and essential points. The initial phase ensures that your brand objectives match the visual outcome of the project.",
       },
       {
         title: "Pre-Production",
-        desc: "Scripting, storyboarding and planning all shoot details.",
+        desc: "Our team develops detailed scripts and storyboards and shot lists in addition to arranging locations and talent and scheduling. The planning phase establishes the foundation for a smooth and productive shooting process.",
       },
       {
         title: "Production",
-        desc: "Professional filming with proper lighting and equipment.",
+        desc: "Our team uses high-quality cameras together with advanced lighting and audio equipment to create exceptional visual content. The direction of each scene is done with precision to achieve both visual consistency and narrative power.",
       },
       {
         title: "Post-Production",
-        desc: "Editing, color correction and final mastering.",
+        desc: "Our editors use professional editing techniques along with colour grading and sound design and visual enhancements to finalize the video. The final product receives expert refinement to achieve both visual appeal and professional quality.",
       },
       {
         title: "Delivery",
-        desc: "Providing optimized files for all platforms.",
+        desc: "We deliver the final content in optimized formats for web, social media, broadcast, and other platforms. Timely delivery and quality assurance ensure you're ready to go live with confidence.",
       },
     ],
     quote:
@@ -893,8 +917,10 @@ description_2: "In order to help you remain competitive in a changing market, ou
     category: "Logistics Solutions",
     heading_1: "Optimized Supply Chain Solutions",
     description_1:
-      "We design and implement logistics strategies that streamline operations, reduce costs and improve service levels through intelligent network design, transportation optimization and technology integration.",
+      "We specialize in developing complete logistics strategies that help businesses achieve operational efficiency and market competitiveness. Our solutions adapt to individual client requirements to minimize operational expenses while shortening delivery times and improving service quality.",
     img_1: image_1,
+     description_2:
+      "Our solutions transform basic supply chains into agile, data-driven ecosystems through intelligent network design and transportation optimization and seamless technology integration. Our team ensures that all components of your logistics framework operate harmoniously through their expertise in inventory management, route planning, and last-mile delivery.",
     img_2: image_2,
     sub_service: [
       {
@@ -903,15 +929,15 @@ description_2: "In order to help you remain competitive in a changing market, ou
           "End-to-end supply chain solutions tailored to your product characteristics, customer requirements and business objectives.",
         all_services: [
           {
-            service_name: "Supply Chain Management",
+            service_name: "OTR (Over-the-Road)",
             service_desc:
-              "Comprehensive oversight and optimization of your entire supply network from procurement to distribution for maximum efficiency.",
+              "Our highway network enables efficient long-distance transportation, which delivers your shipments promptly and reliably between starting and ending points.",
             hover_image: hover_img,
           },
           {
-            service_name: "Warehousing",
+            service_name: "Drayage",
             service_desc:
-              "Improving storage efficiency, inventory accuracy and picking processes through optimized warehouse layout and management systems.",
+              "Our company provides essential short-haul transportation services between ports, rail yards, and warehouses to maintain supply chain efficiency through fast and accurate operations.",
             hover_image: hover_img2,
           },
           {
@@ -948,23 +974,23 @@ description_2: "In order to help you remain competitive in a changing market, ou
     process_cards: [
       {
         title: "Current State Analysis",
-        desc: "Mapping existing processes and performance.",
+        desc: "Our team conducts a thorough examination of your current logistics system to determine both successful elements and limiting factors.",
       },
       {
         title: "Opportunity Assessment",
-        desc: "Identifying improvement areas through data.",
+        desc: "Our data analysis reveals both existing gaps and unexplored potential within your supply chain operations.",
       },
       {
         title: "Solution Design",
-        desc: "Developing optimized network strategies.",
+        desc: "Our team creates flexible logistics models that precisely match your business objectives",
       },
       {
         title: "Implementation",
-        desc: "Executing changes with minimal disruption.",
+        desc: "Our team of experts executes the strategy with exactness and rapidity while maintaining complete continuity.",
       },
       {
         title: "Continuous Improvement",
-        desc: "Monitoring and refining strategies.",
+        desc: "Our real-time tracking system combined with agile adjustments enables your logistics operations to stay ahead of demand through continuous improvement.",
       },
     ],
     quote:
