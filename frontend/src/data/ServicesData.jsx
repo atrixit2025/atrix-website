@@ -215,6 +215,7 @@ const ServicesData = [
     description_1:
       "Beyond aesthetic appeal, we design and develop high-performance websites and web applications that offer flawless operation, remarkable speed, and tangible business impact. Every project we take on is informed by our in-depth knowledge of contemporary user behavior, new developments in digital technology, and our clients’ particular goals. Our team creates secure, scalable, and responsive platforms that draw in visitors and turn them into devoted clients by fusing creativity with cutting-edge technical know-how.",
     img_1: image_1,
+    heading_2: "Engineering excellence behind every interface",
 
       description_2:
       "We ensure that every digital product, from enterprise-level web solutions to dynamic single-page apps, is precisely and purposefully engineered. We focus heavily on optimizing user journeys—ensuring intuitive navigation, fast load times, mobile responsiveness, and accessible design. Our solutions are designed to satisfy the highest requirements for usability, performance, and cross-browser compatibility while reflecting your brand identity. ",
@@ -513,8 +514,13 @@ const ServicesData = [
     category: "Visual Effects",
     heading_1: "Cutting-Edge Visual Effects",
     description_1:
-      "Modern storytelling depends on visual effects as its fundamental power, which our studio enhances through its advanced capabilities. Our state-of-the-art visual effects services unite creative vision with modern technological capabilities to enhance your content. Our team of expert VFX artists uses their precision and artistic skills to transform your imaginative concepts into realistic visual creations, whether you need dramatic cinematic sequences, hyper-realistic CGI environments, or subtle emotional depth enhancements. Our team uses leading-edge tools and methods to merge digital components with live-action footage, which produces realistic and emotionally powerful visuals. Every frame we create combines dynamic particle effects with explosive simulations and detailed 3D modeling and compositing techniques to deliver captivating visuals that enhance your brand narrative. Our mission extends beyond visual impact to assist you in creating a narrative that both moves audiences deeply and remains in their minds after the screen goes dark.",
+      "Modern storytelling depends on visual effects as its fundamental power, which our studio enhances through its advanced capabilities. Our state-of-the-art visual effects services unite creative vision with modern technological capabilities to enhance your content. Our team of expert VFX artists uses their precision and artistic skills to transform your imaginative concepts into realistic visual creations, whether you need dramatic cinematic sequences, hyper-realistic CGI environments, or subtle emotional depth enhancements.",
+   
     img_1: image_1,
+    heading_2: "Crafted to Captivate",
+
+     description_2:
+      "  Our team uses leading-edge tools and methods to merge digital components with live-action footage, which produces realistic and emotionally powerful visuals. Every frame we create combines dynamic particle effects with explosive simulations and detailed 3D modeling and compositing techniques to deliver captivating visuals that enhance your brand narrative. Our mission extends beyond visual impact to assist you in creating a narrative that both moves audiences deeply and remains in their minds after the screen goes dark.",
     img_2: image_2,
     sub_service: [
       {
@@ -661,6 +667,7 @@ const ServicesData = [
     description_1:
       "At Atrix, we're experts at creating stunning images and videos that vividly convey your brand. Our team creates content that not only looks amazing but also perfectly fits your marketing objectives by fusing strategic messaging with cinematic techniques.",
     img_1: image_1,
+        heading_2: "Creating visuals that build trust",
     description_2:
       "We make sure every frame conveys value, trust, and professionalism, whether you're showcasing your goods, summarising your services, or sharing the backstory of your company. Our visual content, which ranges from corporate films and promotional videos to product photography and event coverage, is made to captivate viewers, strengthen your brand, and produce outcomes on digital media.",
     img_2: image_2,
@@ -790,6 +797,7 @@ const ServicesData = [
     description_1:
       "We are experts in hiring people strategically, which goes beyond simply covering open positions. Our approach is designed to satisfy your company's particular hiring requirements, ensuring that you will not only find exceptional talent but also create a long-lasting, sustainable workforce. We collaborate closely with you to get your company's culture, goals, and future vision, ensuring the candidates we offer adjust together with your vital targets. ",
     img_1: image_1,
+    heading_2: " Smart Staffing Solutions",
 description_2: "In order to help you remain competitive in a changing market, our staffing solutions are made for both your immediate needs and your long-term expansion. Our expertise in identifying, screening, and assigning highly qualified workers enables your company to grow effectively, sustain output, and experience continuous success.",
 
     img_2: image_2,
@@ -919,6 +927,7 @@ description_2: "In order to help you remain competitive in a changing market, ou
     description_1:
       "We specialize in developing complete logistics strategies that help businesses achieve operational efficiency and market competitiveness. Our solutions adapt to individual client requirements to minimize operational expenses while shortening delivery times and improving service quality.",
     img_1: image_1,
+        heading_2: "Intelligent Logistics Network Design",
      description_2:
       "Our solutions transform basic supply chains into agile, data-driven ecosystems through intelligent network design and transportation optimization and seamless technology integration. Our team ensures that all components of your logistics framework operate harmoniously through their expertise in inventory management, route planning, and last-mile delivery.",
     img_2: image_2,
