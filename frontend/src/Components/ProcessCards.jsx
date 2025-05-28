@@ -45,7 +45,7 @@ const ProcessCards = ({ secData, targetRef }) => {
                 <div className="relative z-10 h-auto">
                   {isActive ? (
                     <h3 className="text-3xl font-bold mb-1 mt-2">
-                      Hello World
+                       {item.title}
                     </h3>
                   ) : (
                     <h3 className="absolute -bottom-85 left-6 right-20 transform -rotate-90 origin-bottom-left text-xl font-extrabold w-[350px] uppercase">
